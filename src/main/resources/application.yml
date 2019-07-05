@@ -1,0 +1,70 @@
+server:
+    port: 8080
+spring:
+    freemarker:
+        template-loader-path:
+        - /templates/
+        - file:./templates/
+        cache: false
+        settings:
+            classic_compatible: true #处理空值
+            template_update_delay: 0
+            datetime_format: yyyy-MM-dd HH:mm
+            number_format: 0.##
+    datasource:
+        url: jdbc:mysql://10.192.0.190:3306/mxwi?useSSL=false&characterEncoding=utf8
+        username: root
+        password: Cosmo_123
+        #type: mysql
+        # 采购信息库
+        dbtype: mysql
+        dbuser: root
+        dbpwd: Cosmo_123
+        dbip: 192.168.9.215   # 10.192.0.190     #
+        dbport: 3306
+        dbname: info_sys
+        #pid: 5899
+        path: project/reports/wechat
+        fid:
+        
+    #springboot 集成hibernate 2019.07.04  miki
+    jpa:
+        database: mysql
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate.format_sql: true
+            hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+            hibernate.cache.use_second_level_cache: false
+            hibernate.search.default.directory_provider: filesystem
+            hibernate.search.default.indexBase: ./indexes
+            hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+        open-in-view: true
+
+    servlet:
+        multipart:
+            max-file-size: 5MB
+    # 2019.07.04  miki  配置springboot访问jsp页面
+    mvc:
+        view:
+          prefix: /WEB-INF/jsp/
+          suffix: .jsp
+    
+    site:
+        store:
+            root: /data/sharehoo
+            # 存储模式, 可选值 absolute / relative
+            repo: relative
+
+            # 是否开启资源域名
+            domain: false
+
+            # ---------------------------------
+            # 资源域名, resource.domain = true 是有效
+            # 配置域名, 将域名的根目录指向 store.root 配置的地址
+            # ---------------------------------
+            host: http://localhost:8080/wechat
+
+logging:
+  file: /../../idp/logs/dip/dip.log #${catalina.home}/../../idp/logs/dip/dip.log
