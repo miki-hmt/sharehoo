@@ -195,6 +195,35 @@
 		    <scope>provided</scope>
 		</dependency>
 		
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
+	<dependency>
+	    <groupId>org.apache.solr</groupId>
+	    <artifactId>solr-solrj</artifactId>
+	    <version>4.10.3</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-core -->
+	<dependency>
+	    <groupId>org.apache.solr</groupId>
+	    <artifactId>solr-core</artifactId>
+	    <version>4.10.3</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+	<dependency>
+	    <groupId>net.sf.json-lib</groupId>
+	    <artifactId>json-lib</artifactId>
+	    <version>2.4</version>
+	</dependency>
+
+		
+	<!-- https://mvnrepository.com/artifact/org.json/json -->
+	<dependency>
+	    <groupId>org.json</groupId>
+	    <artifactId>json</artifactId>
+	    <version>20160810</version>
+	</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -235,11 +264,11 @@
             <url>http://192.168.9.214:8081/repository/cosmosource/</url>
         </repository> -->
 		<!-- 北京公司Cosmosource Maven Repository -->
-        <repository>
+        <!-- <repository>
             <id>Cosmosource</id>
             <name>Team Repository</name>
             <url>http://192.168.0.179:8888/nexus/content/groups/public/</url>
-        </repository>
+        </repository> -->
 		
 	
         <!-- Alibaba Maven Repository -->
