@@ -207,6 +207,12 @@
 	    <groupId>org.apache.solr</groupId>
 	    <artifactId>solr-core</artifactId>
 	    <version>4.10.3</version>
+	    <exclusions>  
+        <exclusion>  
+            <artifactId>jdk.tools</artifactId>  	<!-- 派出jdk1.6的tool工具jar包依赖 	2019.07.08	miki-->
+            <groupId>jdk.tools</groupId>  
+        </exclusion>  
+    </exclusions>
 	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
@@ -223,6 +229,12 @@
 	    <artifactId>json</artifactId>
 	    <version>20160810</version>
 	</dependency>
+	
+	<dependency>
+           <groupId>sun.jdk</groupId>
+           <artifactId>tools</artifactId>
+           <version>1.8</version>
+   	</dependency>
 		
 	</dependencies>
 
