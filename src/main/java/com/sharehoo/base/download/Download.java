@@ -4,10 +4,11 @@ import java.net.*;
 
 import javax.annotation.Resource;
 import javax.servlet.*;  
-import javax.servlet.http.*;  
-import javax.servlet.annotation.*;  
+import javax.servlet.http.*;
 
-import jiabin.service.SourceService;
+import com.sharehoo.service.shop.SourceService;
+
+import javax.servlet.annotation.*;  
   
 @WebServlet(name = "download", urlPatterns = { "/download" })  
 public class Download extends HttpServlet {  

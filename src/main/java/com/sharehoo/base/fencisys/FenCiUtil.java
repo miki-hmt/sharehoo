@@ -5,14 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import jiabin.fencisys.ChineseAndEnglish;
-import jiabin.fencisys.GenerateDictionary;
-import jiabin.fencisys.ImportCorpus;
-import jiabin.fencisys.Segmentation;
-
 public class FenCiUtil {
 	
-	public static List EnFnCi(String key) throws IOException{
+	public static List<String> EnFnCi(String key) throws IOException{
 		String filename = "dic.txt";
 		HashMap hm = new HashMap();
 		HashMap len = new HashMap();

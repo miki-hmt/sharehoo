@@ -4,10 +4,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import com.sun.image.codec.jpeg.JPEGCodec;

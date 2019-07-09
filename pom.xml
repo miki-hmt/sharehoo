@@ -209,8 +209,12 @@
 	    <version>4.10.3</version>
 	    <exclusions>  
         <exclusion>  
-            <artifactId>jdk.tools</artifactId>  	<!-- 派出jdk1.6的tool工具jar包依赖 	2019.07.08	miki-->
+            <artifactId>jdk.tools</artifactId>  	<!-- 排除jdk1.6的tool工具jar包依赖 	2019.07.08	miki-->
             <groupId>jdk.tools</groupId>  
+        </exclusion>  
+        <exclusion>  
+            <artifactId>guava</artifactId>  	<!-- 派除jdk1.6的tool工具jar包依赖 	2019.07.08	miki-->
+            <groupId>com.google.guava</groupId>  
         </exclusion>  
     </exclusions>
 	</dependency>
@@ -235,7 +239,33 @@
            <artifactId>tools</artifactId>
            <version>1.8</version>
    	</dependency>
-		
+   	
+	<dependency>
+           <groupId>com.miki.third.jdk</groupId>
+           <artifactId>rt</artifactId>
+           <version>1.1</version>
+   	</dependency>
+	<dependency>
+           <groupId>com.miki.third.jdk</groupId>
+           <artifactId>jce</artifactId>
+           <version>1.1</version>
+   	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+	<dependency>
+	    <groupId>redis.clients</groupId>
+	    <artifactId>jedis</artifactId>
+	    <version>2.9.0</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>fastjson</artifactId>
+	    <version>1.2.7</version>
+	</dependency>
+	
+	
 	</dependencies>
 
 	<build>
