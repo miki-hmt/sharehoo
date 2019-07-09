@@ -3,6 +3,8 @@ package com.sharehoo.util.forum;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+import com.sharehoo.interceptor.OnlineCounter;
+
 
 /**
  * 

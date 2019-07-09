@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import jiabin.fencisys.ChineseAndEnglish;
-import jiabin.fencisys.CnUtil;
-import jiabin.fencisys.GenerateDictionary;
-import jiabin.fencisys.GenerateDictionary1;
-import jiabin.fencisys.ImportCorpus;
-import jiabin.fencisys.Segmentation;
+import com.sharehoo.base.fencisys.ChineseAndEnglish;
+import com.sharehoo.base.fencisys.CnUtil;
+import com.sharehoo.base.fencisys.GenerateDictionary1;
+import com.sharehoo.base.fencisys.Segmentation;
 
 public class FenCiUtil {
 

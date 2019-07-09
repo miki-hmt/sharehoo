@@ -14,14 +14,16 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UploadAction extends ActionSupport implements ServletRequestAware {
+import net.sf.json.JSONObject;
+
+public class UploadAction {			//extends ActionSupport implements ServletRequestAware
 
 	/**
 	 * 2018.07.15 miki实现ckeditor4.10文本编辑器上传图片功能
 	 */
 	private static final long serialVersionUID = 1L;
 	private HttpServletRequest request;
-	private HttpServletResponse response = ServletActionContext.getResponse(); 
+	/*private HttpServletResponse response = ServletActionContext.getResponse(); 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -51,18 +53,18 @@ public class UploadAction extends ActionSupport implements ServletRequestAware {
     private String uploadContentType;   //文件类型  
     private String uploadFileName;       //文件名  
     
-    /** 
+    *//** 
      * 图片上传 
      * @return 
      * @throws Exception 
      * Exception异常与io异常的区别：io异常只针对于上传过程中的异常，exception是ioexception的父类
-     */  
+     *//*  
     public String execute() throws Exception{  
         
     	
-    	/* 3. 读取水印配置信息   **3**
+    	 3. 读取水印配置信息   **3**
 		 * 把配置文件内容加载到prop中
-		 */
+		 
 		Properties props = new Properties();
 		try {
 			props.load(this.getClass().getClassLoader().getResourceAsStream("resource.properties"));
@@ -125,9 +127,9 @@ public class UploadAction extends ActionSupport implements ServletRequestAware {
         is.close();    
         os.close();       
         
-        /* miki	2018.07.28
+         miki	2018.07.28
          * 服务器图片上传路径E:/eclipse与项目文件/Soft/apache-tomcat-7.0.55/webapps/Forum/images/topicImage/	
-         */
+         
         
         String content=props.getProperty("WATER_NARK_CONTENT");
         String water_path=props.getProperty("WATER_MARK_PATH");
@@ -165,7 +167,7 @@ public class UploadAction extends ActionSupport implements ServletRequestAware {
     }  
     public void setUploadFileName(String uploadFileName) {  
         this.uploadFileName = uploadFileName;  
-    }
+    }*/
 
 
 }  

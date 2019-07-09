@@ -4,8 +4,11 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -91,35 +94,35 @@ public final static void pressImage(String pressImg, String targetImg,
  * @param y
  */
 
-public static void pressText(String pressText, String targetImg,
-        String fontName, int fontStyle, int color, int fontSize, int x,
-        int y) {
-    try {
-        File _file = new File(targetImg);
-        Image src = ImageIO.read(_file);
-        int wideth = src.getWidth(null);
-        int height = src.getHeight(null);
-        BufferedImage image = new BufferedImage(wideth, height,
-                BufferedImage.TYPE_INT_RGB);
-        Graphics g = image.createGraphics();
-        g.drawImage(src, 0, 0, wideth, height, null);
-        
-        g.setColor(Color.RED);
-        g.setFont(new Font(fontName, Font.ITALIC, fontSize));	//字体设为斜体  	2017.05.28
+	public static void pressText(String pressText, String targetImg, String fontName, int fontStyle, int color,
+			int fontSize, int x, int y) {
+		try {
+			File _file = new File(targetImg);
+			Image src = ImageIO.read(_file);
+			int wideth = src.getWidth(null);
+			int height = src.getHeight(null);
+			BufferedImage image = new BufferedImage(wideth, height, BufferedImage.TYPE_INT_RGB);
+			Graphics g = image.createGraphics();
+			g.drawImage(src, 0, 0, wideth, height, null);
 
-        g.drawString(pressText, wideth - fontSize - x, height - fontSize
-                / 2 - y);
-        g.dispose();
-        FileOutputStream out = new FileOutputStream(targetImg);
-        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-        encoder.encode(image);
-        out.close();
-    } catch (Exception e) {
-        System.out.println(e);
-    }
-}
+			g.setColor(Color.RED);
+			g.setFont(new Font(fontName, Font.ITALIC, fontSize)); // 字体设为斜体 2017.05.28
 
-public static void main(String[] args) {
-    pressText("sharehoo.cn","e:/water.jpg","宋体",1,2,25, 160, 200);
-}
+			g.drawString(pressText, wideth - fontSize - x, height - fontSize / 2 - y);
+			g.dispose();
+			FileOutputStream out = new FileOutputStream(targetImg);
+			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+			encoder.encode(image);
+			out.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public static void main(String[] args) {
+		pressText("sharehoo.cn", "D://aqiyiVideo//ddc.png", "宋体", 1, 2, 25, 160, 200);
+	}
+	/*public static void main(String[] args) {
+		pressText("sharehoo.cn", "D://aqiyiVideo//ddc.png", "宋体", 1, 2, 25, 160, 200);
+	}*/
 }
