@@ -1,7 +1,11 @@
 server:
     port: 8080
+forum:
+   leavemessage:
+        SECRET_TOPIC: 40
 spring:
     freemarker:
+        HTML_GEN_PATH: E:/eclipseMars2Workspace/freemarker/topic/
         template-loader-path:
         - /templates/
         - file:./templates/
