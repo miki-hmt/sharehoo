@@ -17,7 +17,6 @@ import com.sharehoo.service.shop.ShopService;
 @Service("shopService")
 public class ShopServiceImpl implements ShopService {
 	
-	@Resource private SessionFactory sessionFactory;
 	@Resource	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
 	private BaseDAO<Shop> baseDAO;
 	@Override
@@ -66,20 +65,16 @@ public class ShopServiceImpl implements ShopService {
 	public List<Shop> getRichShops() {
 		// TODO Auto-generated method stub
 		String hql = "from Shop as shop order by shop.douNum desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(6);
-		return query.list();
+		
+		return baseDAO.findTopN(hql, null, 6);
 	}
 
 	@Override
 	public List<Shop> getNewShops() {
 		// TODO Auto-generated method stub
 		String hql = "from Shop as shop order by shop.registerTime desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(3);
-		return query.list();
+		
+		return baseDAO.findTopN(hql, null, 3);
 	}
 
 	@Override
@@ -137,9 +132,7 @@ public class ShopServiceImpl implements ShopService {
 	public List<Shop> getShopListByDownNum() {
 		// TODO Auto-generated method stub
 		String hql = "from Shop as shop order by shop.downNum desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(5);
-		return query.list();
+		
+		return baseDAO.findTopN(hql, null, 5);
 	}
 }

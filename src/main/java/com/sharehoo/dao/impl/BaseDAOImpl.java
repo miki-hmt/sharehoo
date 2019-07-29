@@ -3,50 +3,36 @@ package com.sharehoo.dao.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.hibernate.query.NativeQuery;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import com.sharehoo.dao.BaseDAO;
 import com.sharehoo.entity.forum.PageBean;
 
-/*2016.11.15
- * @Repository注解便属于最先引入的一批，它用于将数据访问层 (DAO 层 ) 的类标识为 Spring Bean。
- * 具体只需将该注解标注在 DAO类上即可。同时，为了让 Spring 能够扫描类路径中的类并识别出 @Repository 注解，
- * 需要在 XML 配置文件中启用Bean 的自动扫描功能，这可以通过<context:component-scan/>实现
- * */
+public class BaseDAOImpl<T> extends SimpleJpaRepository<T, Integer> implements BaseDAO<T>{
 
-@Repository("baseDAO")
-@SuppressWarnings("all")    
+	private static final int BATCH_SIZE = 500;
 
-/*
- * java.lang.SuppressWarnings是J2SE 5.0中标准的Annotation之一。可以标注在类、字段、方法、参数、构造方法，以及局部变量上。
- * 作用：告诉编译器忽略指定的警告，不用在编译完成后出现警告信息。
- *使用：
- *  */
-public class BaseDaoImpl<T> implements BaseDAO<T> {
+    private EntityManager entityManager;
+    
+    public BaseDAOImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager em) {
+        super(entityInformation, em);
+        this.entityManager = em;
 
-	private SessionFactory sessionFactory;
+    }
 
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-       //spring2.5引入autowired注释，它可以完成对类成员变量，方法及构造函数进行标注，完成自动装配的工作，
-	   // 通过使用此方法来消除set，get方法
-	@Autowired
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	private Session getCurrentSession() {
-		return sessionFactory.getCurrentSession();
-	}
-
-	public Serializable save(T o) {
-		return this.getCurrentSession().save(o);
-	}
+    public BaseDAOImpl(Class<T> domainClass, EntityManager em) {
+        super(domainClass, em);
+        this.entityManager = em;
+    }
+    
+    private Session getCurrentSession(){
+        return entityManager.unwrap(Session.class);
+    }
 
 	public void delete(T o) {
 		this.getCurrentSession().delete(o);
@@ -61,11 +47,11 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 	}
 
 	public List<T> find(String hql) {
-		return this.getCurrentSession().createQuery(hql).list();
+		return this.getCurrentSession().createNativeQuery(hql).list();
 	}
 
 	public List<T> find(String hql, Object[] param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		NativeQuery<T> q = this.getCurrentSession().createNativeQuery(hql);
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
 				q.setParameter(i, param[i]);
@@ -75,7 +61,7 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 	}
 
 	public List<T> find(String hql, List<Object> param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		NativeQuery<T> q = this.getCurrentSession().createNativeQuery(hql);
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
 				q.setParameter(i, param.get(i));
@@ -85,7 +71,7 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 	}
 
 	public List<T> find(String hql, Object[] param, PageBean pageBean) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		NativeQuery<T> q = this.getCurrentSession().createNativeQuery(hql);
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
 				q.setParameter(i, param[i]);
@@ -95,7 +81,7 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 	}
 
 	public List<T> find(String hql, List<Object> param, PageBean pageBean) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		NativeQuery<T> q = this.getCurrentSession().createNativeQuery(hql);
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
 				q.setParameter(i, param.get(i));
@@ -131,7 +117,7 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 	}
 
 	public Long count(String hql, Object[] param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		NativeQuery<T> q = this.getCurrentSession().createNativeQuery(hql);
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
 				q.setParameter(i, param[i]);
@@ -142,7 +128,7 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 
 	//计算数量
 	public Long count(String hql, List<Object> param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		NativeQuery<T> q = this.getCurrentSession().createNativeQuery(hql);
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
 				q.setParameter(i, param.get(i));
@@ -156,7 +142,7 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 	}
 
 	public Integer executeHql(String hql, Object[] param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		NativeQuery<T> q = this.getCurrentSession().createNativeQuery(hql);
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
 				q.setParameter(i, param[i]);
@@ -166,7 +152,7 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 	}
 
 	public Integer executeHql(String hql, List<Object> param) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		NativeQuery<T> q = this.getCurrentSession().createNativeQuery(hql);
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
 				q.setParameter(i, param.get(i));
@@ -181,7 +167,7 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 	}
 
 	public Integer executeSql(String sql) {
-		Query q = this.getCurrentSession().createSQLQuery(sql);
+		NativeQuery<T> q = this.getCurrentSession().createSQLQuery(sql);
 		return q.executeUpdate();
 	}
 
@@ -190,7 +176,7 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 		
 	@Override
 	public List<T> findTopN(String hql, List<Object> param, int N) {
-		Query q = this.getCurrentSession().createQuery(hql);
+		NativeQuery<T> q = this.getCurrentSession().createNativeQuery(hql);
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
 				q.setParameter(i, param.get(i));
@@ -200,5 +186,4 @@ public class BaseDaoImpl<T> implements BaseDAO<T> {
 		q.setMaxResults(N);
 		return q.list();
 	}
-
 }

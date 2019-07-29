@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.BaseDAOImpl;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Section;
 import com.sharehoo.service.forum.SectionService;

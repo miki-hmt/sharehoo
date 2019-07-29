@@ -21,6 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
  * project：
  *
  */
+//2019.07.29	miki	使用JPA注解配置映射关系
 @Entity
 @Table(name="t_me")
 public class Me implements Serializable{

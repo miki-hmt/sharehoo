@@ -16,8 +16,6 @@ import com.sharehoo.service.ExchangeService;
 @Service("exchangeService")
 public class ExchangeServiceImpl implements ExchangeService {
 	
-	@Resource private SessionFactory sessionFactory;
-	
 	@Resource
 	private BaseDAO<Exchange> baseDAO;
 	

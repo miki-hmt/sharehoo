@@ -1,5 +1,6 @@
 package com.sharehoo.service.impl.forum;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
@@ -25,16 +27,13 @@ import com.sharehoo.service.forum.CritiqueService;
 @Service("critiqueService")
 public class CritiqueServiceImpl implements CritiqueService {
 	
-	@Resource 
-	private SessionFactory sessionFactory;
-	
-	@Resource
+	@Autowired
 	private BaseDAO<Critique> baseDAO;
 	
 	@Override
 	public void save(Critique critique) {
 		// TODO Auto-generated method stub
-		baseDAO.merge(critique);
+		baseDAO.save(critique);
 	}
 
 	@Override
@@ -46,13 +45,11 @@ public class CritiqueServiceImpl implements CritiqueService {
 	@Override
 	public List<Critique> getListByUserId(int userId) {
 		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
 		String hql = "from Critique as critique where critique.notice like ? and critique.user.id=:userId order by critique.time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, "1");
-		query.setInteger("userId", userId);
-		query.setFirstResult(0);
-		query.setMaxResults(16);
-		return query.list();
+		param.add("1");
+		param.add(userId);
+		return baseDAO.findTopN(hql, param, 16);
 	}
 
 	@Override
@@ -105,34 +102,33 @@ public class CritiqueServiceImpl implements CritiqueService {
 	@Override
 	public List<Critique> getArticleCritiquesByAid(int articleId) {
 		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
 		String hql = "from Critique as critique where critique.notice like ? and critique.article.id=:articleId order by critique.time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, "2");
-		query.setInteger("articleId", articleId);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
-		return query.list();
+		param.add("2");
+		param.add(articleId);
+		return baseDAO.findTopN(hql, param, 10);
 	}
 
 	@Override
 	public List<Critique> getPhListByUserId(int userId) {
 		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
 		String hql="from Critique as critique where critique.notice like ? and critique.user.id=:userId order by critique.time desc";
-		Query query=sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, "3");
-		query.setInteger("userId", userId);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
-		return query.list();
+		param.add("3");
+		param.add(userId);
+		
+		return baseDAO.findTopN(hql, param, 10);
 	}
 
 	@Override
 	public List<Critique> getReplyListByAid(int aid) {
 		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
 		String hql="from Critique as critique where critique.notice like ? and critique.article.id=:aid order by critique.time desc";
-		Query query=sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, "4");
-		query.setInteger("aid", aid);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
-		return query.list();
+		param.add("3");
+		param.add(aid);
+
+		return baseDAO.findTopN(hql, param, 10);
 	}
 
 	@Override

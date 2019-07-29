@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 /*
  * 2017.07,31 miki 店铺资源所属分类
  */
-
+//2019.07.29	miki	使用JPA注解配置映射关系
 @Entity
 @Table(name="t_category")
 public class Category implements Serializable{

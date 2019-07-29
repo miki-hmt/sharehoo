@@ -2,6 +2,11 @@ package com.sharehoo.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
 import com.sharehoo.entity.forum.PageBean;
 
 /**
@@ -10,15 +15,17 @@ import com.sharehoo.entity.forum.PageBean;
  * @author ss
  * 
  */
-public interface BaseDAO<T> {
-
+@NoRepositoryBean
+public interface BaseDAO<T> extends JpaRepository<T, Integer>, JpaSpecificationExecutor<T>,PagingAndSortingRepository<T, Integer>{
+	
+	
 	/**
 	 * 保存一个对象
 	 * 
 	 * @param o
 	 * @return
 	 */
-	public Serializable save(T o);
+	//public Serializable save(T o);
 
 	/**
 	 * 删除一个对象
@@ -185,5 +192,6 @@ public interface BaseDAO<T> {
 	public Integer executeSql(String sql);
 	
 	public List<T> findTopN(String hql, List<Object> param, int N);
+
 
 }

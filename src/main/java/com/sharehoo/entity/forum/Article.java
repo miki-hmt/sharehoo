@@ -21,7 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
  * project:文章实体
  *
  */
-
+//使用JPA注解配置映射关系
 @Entity
 @Table(name="t_article")
 public class Article implements Serializable{

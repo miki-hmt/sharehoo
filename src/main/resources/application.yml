@@ -16,9 +16,9 @@ spring:
             datetime_format: yyyy-MM-dd HH:mm
             number_format: 0.##
     datasource:
-        url: jdbc:mysql://10.192.0.190:3306/mxwi?useSSL=false&characterEncoding=utf8
+        url: jdbc:mysql://127.0.0.1:3306/db_forum?useSSL=false&characterEncoding=utf8
         username: root
-        password: Cosmo_123
+        password: root
         #type: mysql
         # 采购信息库
         dbtype: mysql
@@ -35,8 +35,8 @@ spring:
     jpa:
         database: mysql
         show-sql: true
-        hibernate:
-            ddl-auto: update
+        #hibernate:
+            #ddl-auto: validate   #暂时用不到
         properties:
             hibernate.format_sql: true
             hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -44,6 +44,7 @@ spring:
             hibernate.search.default.directory_provider: filesystem
             hibernate.search.default.indexBase: ./indexes
             hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+            current_session_context_class: org.springframework.orm.hibernate4.SpringSessionContext
         open-in-view: true
 
     servlet:

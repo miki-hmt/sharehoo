@@ -20,9 +20,11 @@ import com.sharehoo.util.forum.StringUtil;
 public class SearchServiceImpl implements SearchService {
 	
 	@Resource
-	private SessionFactory sessionFactory;
-	@Resource
 	private BaseDAO<Search> baseDAO;
+	@Resource
+	private BaseDAO<Source> sourceDAO;
+	@Resource
+	private BaseDAO<Shop> shopDAO;
 	
 	@Override
 	public void save(Search search) {
@@ -40,13 +42,11 @@ public class SearchServiceImpl implements SearchService {
 	public Search getlast() {
 		// TODO Auto-generated method stub
 		String hql = "from Search order by id desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(1);
-		if(query.list().size()==0){
+		List<Search> list = baseDAO.findTopN(hql, null, 1);
+		if(list.size()==0){
 			return null;
 		}
-		Search search = (Search) query.list().get(0);
+		Search search = (Search) list.get(0);
 		return search;
 	}
 	
@@ -54,33 +54,31 @@ public class SearchServiceImpl implements SearchService {
 			@Override
 			public List<Source> getSRankByWeek(String time) {
 				// TODO Auto-generated method stub
+				List<Object> params = new LinkedList<Object>();
 				String hql = "from Source as s where s.id in (select o.source.id from Operate o where o.operate_time > str_to_date(?, '%Y-%m-%d %H') and type like '%download%') order by s.downNum desc";
-				Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, time);
-				query.setFirstResult(0);
-				query.setMaxResults(10);
-				return query.list();
+				params.add(time);
+				
+				return sourceDAO.findTopN(hql, params, 10);
 			}
 
 	//2017.12.28 16:47得到用户虎豆增长数量周排行
 	@Override
 	public List<Shop> getURankByWeek(String time) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql = " from Shop as p where p.id in (select o.shop.id from Operate o where o.operate_time > str_to_date(?, '%Y-%m-%d %H') and type like '%sell%') order by p.douNum desc ";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, time);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
-		return query.list();
+		params.add(time);
+		return shopDAO.findTopN(hql, params, 10);
 	}
 
 	//2017.12.28 16:47得到用户每周上传数量周排行
 	@Override
 	public List<Source> getUploadRankByWeek(String time) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql=" from Source as s where s.upload_time > str_to_date(?, '%Y-%m-%d %H') group by s.shop.id order by count(*) desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, time);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
-		return query.list();
+		params.add(time);
+		return sourceDAO.findTopN(hql, params, 10);
 	}
 
 	@Override
@@ -104,32 +102,31 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public List<Source> getSRankByMonth(String time) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql = "from Source as s where s.id in (select o.source.id from Operate o where o.operate_time > str_to_date(?, '%Y-%m') and type like '%download%') order by s.downNum desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, time);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
-		return query.list();
+		params.add(time);
+		
+		return sourceDAO.findTopN(hql, params, 10);
 	}
 	//2017.12.30 13:47得到用户每月虎豆数量月排行
 	@Override
 	public List<Shop> getURankByMonth(String time) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql = " from Shop as p where p.id in (select o.shop.id from Operate o where o.operate_time > str_to_date(?, '%Y-%m') and type like '%sell%') order by p.douNum desc ";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, time);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
-		return query.list();
+		params.add(time);
+		return shopDAO.findTopN(hql, params, 10);
 	}
 
 	//2017.12.30 13:47得到用户每月上传数量月排行
 	@Override
 	public List<Source> getUploadRankByMonth(String time) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql=" from Source as s where s.upload_time > str_to_date(?, '%Y-%m') group by s.shop.id order by count(*) desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, time);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
-		return query.list();
+		params.add(time);
+		return sourceDAO.findTopN(hql, params, 10);
+		
 	}
 	
 	@Override

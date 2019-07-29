@@ -24,8 +24,9 @@ import org.hibernate.annotations.GenericGenerator;
  * project:相册实体
  *
  */
-@Entity
-@Table(name="t_album")
+//使用JPA注解配置映射关系
+@Entity		//告诉JPA这是一个实体类（和数据表映射的类）
+@Table(name="t_album")		//@Table来指定和哪个数据表对应;如果省略默认表名就是user；
 public class Album implements Serializable{
 	
 	private int id;			//相册id

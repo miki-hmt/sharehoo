@@ -17,8 +17,7 @@ public class TypeServiceImpl implements TypeService {
 	
 	@Resource
 	private BaseDAO<Type> baseDAO;
-	@Resource 
-	private SessionFactory sessionFactory;
+	
 	@Override
 	public void save(Type type) {
 		// TODO Auto-generated method stub
@@ -35,8 +34,8 @@ public class TypeServiceImpl implements TypeService {
 	public List<Type> getTypeList() {
 		// TODO Auto-generated method stub
 		String hql = "from Type";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		return query.list();
+		
+		return baseDAO.find(hql);
 	}
 
 	@Override

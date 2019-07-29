@@ -18,8 +18,6 @@ import com.sharehoo.service.forum.ReplyService;
 @Service("replyService")
 public class ReplyServiceImpl implements ReplyService {
 	
-	@Resource 
-	private SessionFactory sessionFactory;
 	@Resource
 	private BaseDAO<Reply> baseDAO;
 	
@@ -133,11 +131,11 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public List<Reply> getsonListByRid(int rid) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql = "from Reply as reply where reply.title like ? order by reply.publishTime desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, "%"+rid+"%");
-		query.setFirstResult(0);
-		query.setMaxResults(6);
-		return query.list();
+		params.add("%"+rid+"%");
+		
+		return baseDAO.findTopN(hql, params, 6);
 	}
 
 	@Override

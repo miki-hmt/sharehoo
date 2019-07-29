@@ -17,9 +17,6 @@ import com.sharehoo.service.forum.CommentService;
 @Service("commentService")
 public class CommentServiceImpl implements CommentService {
 	
-	@Resource 
-	private SessionFactory sessionFactory;
-	
 	@Resource
 	private BaseDAO<Comment> baseDAO;
 	
@@ -66,16 +63,15 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public Comment getCommentByUserSourceId(int sourceId,int userId) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql = "from Comment as comment where comment.user.id=:userId and comment.source.id=:sourceId ";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setInteger("userId", userId);
-		query.setInteger("sourceId", sourceId);
-		query.setFirstResult(0);
-		query.setMaxResults(1);
-		if(query.list().size()==0){
+		params.add(userId);
+		params.add(sourceId);
+		List<Comment> findTopN = baseDAO.findTopN(hql, params, 1);
+		if(findTopN.size()==0){
 			return null;
 		}
-		Comment comment = (Comment) query.list().get(0);
+		Comment comment = findTopN.get(0);
 		return comment;
 
 	}

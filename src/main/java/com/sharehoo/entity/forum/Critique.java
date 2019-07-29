@@ -22,6 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
  * project:评论实体(根据类型的不同分为文章评论，相册评论，留言
  *
  */
+//2019.07.29	miki	使用JPA注解配置映射关系
 @Entity
 @Table(name="t_critique")
 public class Critique implements Serializable{

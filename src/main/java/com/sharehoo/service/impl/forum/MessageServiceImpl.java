@@ -17,8 +17,6 @@ import com.sharehoo.service.MessageService;
 public class MessageServiceImpl implements MessageService {
 	
 	@Resource
-	private SessionFactory sessionFactory;
-	@Resource
 	BaseDAO<Message> baseDAO;
 	@Override
 	public void saveMessage(Message message) {
@@ -69,12 +67,10 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> getAdminMesList(int shopId) {
 		// TODO Auto-generated method stub
+		List<Object> param = new LinkedList<Object>();
 		String hql = "from Message as message where message.shop.id=:shopId and message.type like '%handle%' and status=0 order by message.time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setInteger("shopId", shopId);
-		query.setFirstResult(0);
-		query.setMaxResults(3);
-		return query.list();
+		param.add(shopId);
+		return baseDAO.findTopN(hql, param, 3);
 	}
 
 }

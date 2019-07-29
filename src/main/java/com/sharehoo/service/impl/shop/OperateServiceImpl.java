@@ -19,8 +19,6 @@ public class OperateServiceImpl implements OperateService {
 	
 	@Resource
 	private BaseDAO<Operate> baseDAO;
-	@Resource 
-	private SessionFactory sessionFactory;
 	@Override
 	public void save(Operate operate) {
 		// TODO Auto-generated method stub
@@ -77,12 +75,11 @@ public class OperateServiceImpl implements OperateService {
 	@Override
 	public List<Operate> getSignListByUserId(int userId) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql = "from Operate as operate where operate.user.id=:userId and operate.type like '%sign%' order by operate.operate_time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setInteger("userId", userId);
-		query.setFirstResult(0);
-		query.setMaxResults(7);
-		return query.list();
+		params.add(userId);
+		
+		return baseDAO.findTopN(hql, params, 7);
 	}
 
 	@Override

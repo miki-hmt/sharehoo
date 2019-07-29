@@ -17,8 +17,7 @@ import com.sharehoo.util.forum.StringUtil;
 
 @Service("noticeService")
 public class NoticeServiceImpl implements NoticeService {
-	@Resource 
-	private SessionFactory sessionFactory;
+	
 	@Resource
 	private BaseDAO<Notice> baseDAO;
 	
@@ -65,10 +64,8 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<Notice> findDownLoadNoticeList() {
 		// TODO Auto-generated method stub
 		String hql = "from Notice as notice where notice.state=0 order by notice.pubDate desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(5);
-		return query.list();
+		
+		return baseDAO.findTopN(hql, null, 5);
 
 	}
 	

@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.BaseDAOImpl;
+import com.sharehoo.dao.impl.forum.TopicDao;
 import com.sharehoo.dao.jedis.JedisClient;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Topic;
@@ -28,10 +30,9 @@ import net.sf.json.JsonConfig;
 @Service("topicService")
 public class TopicServiceImpl implements TopicService {
 
-	@Resource	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
+	@Autowired	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
 	private BaseDAO<Topic> baseDAO;
-	@Resource 
-	private SessionFactory sessionFactory;
+	
 	@Autowired
 	private JedisClient jedisClient;
 	@Override
@@ -411,6 +412,7 @@ public class TopicServiceImpl implements TopicService {
 		// TODO Auto-generated method stub
 		String hql="";
 		List<Topic> ycList=new ArrayList<>();
+		List<Object> param = new LinkedList<Object>();
 		Properties prop = new Properties();
 		String jsonData="";
 		try {
@@ -465,11 +467,8 @@ public class TopicServiceImpl implements TopicService {
 		}else{
 			hql= "from Topic as topic where topic.section.id=:sectionId order by topic.publishTime desc";
 		}
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setInteger("sectionId",sectionId);
-		query.setFirstResult(0);
-		query.setMaxResults(10);
-		ycList=query.list();
+		param.add(sectionId);
+		ycList = baseDAO.findTopN(hql, param, 10);
 		
 		switch(sectionId){
 		
@@ -763,11 +762,11 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public List<Topic> getNewsList(int count) {
 		// TODO Auto-generated method stub
+		List<Object> param = new LinkedList<Object>();
 		String hql = "from Topic as topic where topic.title not like '1' order by topic.publishTime desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(count);
-		return query.list();
+		param.add("1");
+
+		return baseDAO.findTopN(hql, param, count);
 	}
 
 	@Override

@@ -27,8 +27,6 @@ import com.sharehoo.util.forum.StringUtil;
 @Service("articleService")
 public class ArticleServiceImpl implements ArticleService {
 	
-	@Resource private SessionFactory sessionFactory;
-	
 	@Resource
 	private BaseDAO<Article> baseDAO;
 	
@@ -226,12 +224,11 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Article> getHotByUserId(int userId) {
 		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
 		String hql = "from Article as article where article.user.id=:userId order by article.count desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setInteger("userId", userId);
-		query.setFirstResult(0);
-		query.setMaxResults(9);
-		return query.list();
+		
+		param.add(userId);
+		return baseDAO.findTopN(hql, param, 10);
 	}
 	
 	/*
@@ -245,43 +242,40 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Article> getRecommendsByUserId(int userId) {
 		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
 		String hql = "from Article as article where article.notice like ? and article.user.id=:userId order by article.time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, "recommendArticles");
-		query.setInteger("userId", userId);
-		query.setFirstResult(0);
-		query.setMaxResults(9);
-		return query.list();
+		param.add(userId);
+		return baseDAO.findTopN(hql, param, 10);
 	}
 
 	@Override
 	public Article getBefore(int articleId, int userId) {
 		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
 		String hql = "from Article as article where article.id<:articleId and article.user.id=:userId order by article.id desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setInteger("articleId", articleId);
-		query.setInteger("userId", userId);
-		query.setFirstResult(0);
-		query.setMaxResults(1);
-		if(query.list().size()==0){
+		param.add(articleId);
+		param.add(userId);
+		List<Article> list = baseDAO.find(hql, param);
+		
+		if(list.size()==0){
 			return null;
 		}
-		Article article = (Article) query.list().get(0);
+		Article article = list.get(0);
 		return article;
 	}
 
 	@Override
 	public Article getAfter(int articleId, int userId) {
 		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
 		String hql = "from Article as article where article.id>:id and article.user.id=:userId order by article.id asc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setInteger("id", articleId);
-		query.setInteger("userId", userId);
-		query.setFirstResult(0);
-		query.setMaxResults(1);
-		if(query.list().size()==0){
+		param.add(articleId);
+		param.add(userId);
+		List<Article> list = baseDAO.find(hql, param);
+		if(list.size()==0){
 			return null;
 		}
-		Article article = (Article) query.list().get(0);
+		Article article = list.get(0);
 		return article;
 	}
 

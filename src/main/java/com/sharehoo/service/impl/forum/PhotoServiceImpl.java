@@ -16,7 +16,7 @@ import com.sharehoo.service.forum.PhotoService;
 
 @Service("photoService")
 public class PhotoServiceImpl implements PhotoService {
-	@Resource private SessionFactory sessionFactory;
+	
 	@Resource
 	private BaseDAO<Photo> baseDAO; 
 	@Override
@@ -42,10 +42,11 @@ public class PhotoServiceImpl implements PhotoService {
 	@Override
 	public List<Photo> getPhotosByAlbumId(int aid) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql = "from Photo as photo where photo.notice like ? and photo.album.id=:aid order by photo.time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, "1");
-		query.setInteger("aid", aid);
-		return query.list();
+		params.add("1");
+		params.add(aid);
+		return baseDAO.find(hql, params);
 	}
 
 	@Override

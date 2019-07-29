@@ -18,9 +18,6 @@ import com.sharehoo.service.shop.CollectService;
 public class CollectServiceImpl implements CollectService {
 	
 	@Resource
-	private SessionFactory sessionFactory;
-	
-	@Resource
 	private BaseDAO<Collect> baseDAO;
 	
 	@Override
@@ -94,10 +91,8 @@ public class CollectServiceImpl implements CollectService {
 	public List<Collect> getCollectsByCollectCount() {
 		// TODO Auto-generated method stub
 		String sql = "select *,count(*) from t_collect group by source_id order by count(*) desc ";
-		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Collect.class);
-		query.setFirstResult(0);
-		query.setMaxResults(5);
-		return query.list();
+		
+		return baseDAO.findTopN(sql, null, 5);
 	}
 
 	@Override

@@ -6,9 +6,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.BaseDAOImpl;
 import com.sharehoo.entity.forum.Album;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.service.forum.AlbumService;
@@ -16,8 +19,7 @@ import com.sharehoo.service.forum.AlbumService;
 @Service("albumService")
 public class AlbumServiceImpl implements AlbumService {
 	
-	@Resource private SessionFactory sessionFactory;
-	@Resource	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
+	@Autowired
 	private BaseDAO<Album> baseDAO;
 	@Override
 	public void save(Album album) {
@@ -53,7 +55,7 @@ public class AlbumServiceImpl implements AlbumService {
 	@Override
 	public Album getAlbumById(int id) {
 		// TODO Auto-generated method stub
-		return baseDAO.get(Album.class, id);
+		return baseDAO.getOne(id);
 	}
 
 }

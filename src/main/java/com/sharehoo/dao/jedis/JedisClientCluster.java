@@ -1,7 +1,17 @@
 package com.sharehoo.dao.jedis;
 
+
 import redis.clients.jedis.JedisCluster;
 
+/**
+* @ClassName: JedisClientCluster  
+* @Description: TODO(如是使用的是redis集群配置，则使用该service，将JedisClientPool的service注解去除)  
+* @author miki
+* @date 2019年7月29日 下午7:32:21  
+*
+ */
+
+//@Service
 public class JedisClientCluster implements JedisClient {
 	
 	private JedisCluster jedisCluster;

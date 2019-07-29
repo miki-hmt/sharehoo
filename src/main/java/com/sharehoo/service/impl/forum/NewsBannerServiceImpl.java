@@ -19,8 +19,6 @@ import com.sharehoo.service.forum.NewsBannerService;
 public class NewsBannerServiceImpl implements NewsBannerService {
 	
 	@Resource
-	private SessionFactory sessionFactory;
-	@Resource
 	private BaseDAO<NewsBanner> baseDAO;
 	@Override
 	public void saveNewsBanner(NewsBanner newsBanner) {
@@ -50,10 +48,8 @@ public class NewsBannerServiceImpl implements NewsBannerService {
 	public List<NewsBanner> findNewsBannerListByType() {
 		// TODO Auto-generated method stub
 		String hql = "from NewsBanner as nb where nb.type like '%download%' and nb.notice like '%1%' order by nb.news_time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(5);
-		return query.list();
+		
+		return baseDAO.findTopN(hql, null, 5);
 	}
 
 	@Override
@@ -82,20 +78,16 @@ public class NewsBannerServiceImpl implements NewsBannerService {
 	public List<NewsBanner> findRecommendBannerListByType() {
 		// TODO Auto-generated method stub
 		String hql = "from NewsBanner as nb where nb.type like '%recommend%' and nb.notice like '%1%' order by nb.news_time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(4);
-		return query.list();
+		
+		return baseDAO.findTopN(hql, null, 5);
 	}
 
 	@Override
 	public List<NewsBanner> findSectionTopicBannerListByType() {
 		// TODO Auto-generated method stub
 		String hql = "from NewsBanner as nb where nb.type like '%topicBanner%' and nb.notice like '%1%' order by nb.news_time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(5);
-		return query.list();
+		
+		return baseDAO.findTopN(hql, null, 5);
 	}
 
 }

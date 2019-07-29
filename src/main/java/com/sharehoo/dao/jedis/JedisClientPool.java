@@ -1,8 +1,10 @@
 package com.sharehoo.dao.jedis;
 
+import org.springframework.stereotype.Service;
+
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-
+@Service
 public class JedisClientPool implements JedisClient {
 	
 	private JedisPool jedisPool;

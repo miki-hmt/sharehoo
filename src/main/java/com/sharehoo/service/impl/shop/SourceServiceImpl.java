@@ -18,8 +18,6 @@ import com.sharehoo.util.forum.StringUtil;
 
 @Service("sourceService")
 public class SourceServiceImpl implements SourceService {
-	@Resource
-	private SessionFactory sessionFactory;
 	
 	@Resource	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
 	private BaseDAO<Source> baseDAO;
@@ -104,10 +102,8 @@ public class SourceServiceImpl implements SourceService {
 	public List<Source> getNewSources() {
 		// TODO Auto-generated method stub
 		String hql = "from Source as source order by source.upload_time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(5);
-		return query.list();
+		
+		return baseDAO.findTopN(hql, null, 5);
 	}
 	
 	/*
@@ -117,35 +113,31 @@ public class SourceServiceImpl implements SourceService {
 	public List<Source> getGoodSources() {
 		// TODO Auto-generated method stub
 		String hql = "from Source as source where source.good=1 order by source.upload_time desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(5);
-		return query.list();
+		
+		return baseDAO.findTopN(hql, null, 5);
 	}
 
 	@Override
 	public List<Source> getSourcesByshopId(int shopId) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql = "from Source as source where source.shop.id=:shopId order by source.downNum desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setInteger("shopId", shopId);
-		query.setFirstResult(0);
-		query.setMaxResults(5);
-		return query.list();
+		params.add(shopId);
+		
+		return baseDAO.findTopN(hql, params, 5);
 	}
 
 	@Override
 	public Source getnewSourceByShopId(int shopId) {
 		// TODO Auto-generated method stub
+		List<Object> params = new LinkedList<Object>();
 		String hql = "from Source as source where source.shop.id=:shopId order by source.upload_time desc ";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setInteger("shopId", shopId);
-		query.setFirstResult(0);
-		query.setMaxResults(1);
-		if(query.list().size()==0){
+		params.add(shopId);
+		List<Source> list = baseDAO.findTopN(hql, params, 1);
+		if(list.size()==0){
 			return null;
 		}
-		Source source = (Source) query.list().get(0);
+		Source source = (Source) list.get(0);
 		return source;
 	}
 
@@ -358,11 +350,11 @@ public class SourceServiceImpl implements SourceService {
 		@Override
 		public List<Source> getSRankByWeek(String time) {
 			// TODO Auto-generated method stub
+			List<Object> params = new LinkedList<Object>();
 			String hql = "from Source as s where s.id in (select o.source.id from Operate o where o.operate_time > str_to_date(?, '%Y-%m-%d %H') and type like '%download%') order by s.downNum desc";
-			Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(0, time);
-			query.setFirstResult(0);
-			query.setMaxResults(9);
-			return query.list();
+			params.add(time);
+			
+			return baseDAO.findTopN(hql, params, 9);
 		}
 
 		

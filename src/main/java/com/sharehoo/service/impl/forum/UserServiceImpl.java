@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.BaseDAOImpl;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.service.forum.UserService;
@@ -20,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
 	@Resource	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
 	private BaseDAO<User> baseDAO;
-	@Resource private SessionFactory sessionFactory;
 	@Override
 	public void saveUser(User user) {
 		baseDAO.merge(user);
@@ -208,10 +208,8 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUserListByScroe() {
 		// TODO Auto-generated method stub
 		String hql = "from User as user where user.status=1 order by user.score desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(20);
-		return query.list();
+		List<Object> param = new LinkedList<Object>();
+		return baseDAO.findTopN(hql, param, 20);
 	}
 
 	
