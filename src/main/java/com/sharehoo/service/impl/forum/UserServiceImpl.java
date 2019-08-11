@@ -7,10 +7,12 @@ import javax.annotation.Resource;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
 import com.sharehoo.dao.impl.BaseDAOImpl;
+import com.sharehoo.dao.impl.forum.UserDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.service.forum.UserService;
@@ -19,8 +21,8 @@ import com.sharehoo.util.forum.StringUtil;
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 
-	@Resource	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
-	private BaseDAO<User> baseDAO;
+	@Autowired	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
+	private UserDao baseDAO;
 	@Override
 	public void saveUser(User user) {
 		baseDAO.merge(user);

@@ -35,8 +35,8 @@ spring:
     jpa:
         database: mysql
         show-sql: true
-        #hibernate:
-            #ddl-auto: validate   #暂时用不到
+        hibernate:
+            ddl-auto: none   #暂时用不到
         properties:
             hibernate.format_sql: true
             hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -46,7 +46,13 @@ spring:
             hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
             current_session_context_class: org.springframework.orm.hibernate4.SpringSessionContext
         open-in-view: true
-
+    redis: 
+        host: 127.0.0.1
+        port: 6379   
+        timeout: 0    
+    data:
+        solr:
+          host: http://localhost:8081/solr/collection1       
     servlet:
         multipart:
             max-file-size: 5MB

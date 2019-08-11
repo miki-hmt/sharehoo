@@ -8,9 +8,11 @@ import javax.annotation.Resource;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.ReplyDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Reply;
 import com.sharehoo.service.forum.ReplyService;
@@ -18,8 +20,8 @@ import com.sharehoo.service.forum.ReplyService;
 @Service("replyService")
 public class ReplyServiceImpl implements ReplyService {
 	
-	@Resource
-	private BaseDAO<Reply> baseDAO;
+	@Autowired
+	private ReplyDao baseDAO;
 	
 	@Override
 	public Reply findLastReplyByTopicId(int topicId) {

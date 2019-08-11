@@ -31,7 +31,7 @@ import net.sf.json.JsonConfig;
 public class TopicServiceImpl implements TopicService {
 
 	@Autowired	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
-	private BaseDAO<Topic> baseDAO;
+	private TopicDao baseDAO;
 	
 	@Autowired
 	private JedisClient jedisClient;

@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
 import com.sharehoo.dao.impl.BaseDAOImpl;
+import com.sharehoo.dao.impl.forum.SectionDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Section;
 import com.sharehoo.service.forum.SectionService;
@@ -17,8 +19,8 @@ import com.sharehoo.util.forum.StringUtil;
 @Service("sectionService")
 public class SectionServiceImpl implements SectionService {
 
-	@Resource
-	private BaseDAO<Section> baseDAO;
+	@Autowired
+	private SectionDao baseDAO;
 	
 	@Override
 	public void saveSection(Section section) {

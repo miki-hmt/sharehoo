@@ -7,9 +7,12 @@ import javax.annotation.Resource;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.BaseDAOImpl;
+import com.sharehoo.dao.impl.forum.NewsBannerDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.NewsBanner;
 import com.sharehoo.service.forum.NewsBannerService;
@@ -18,8 +21,8 @@ import com.sharehoo.service.forum.NewsBannerService;
 
 public class NewsBannerServiceImpl implements NewsBannerService {
 	
-	@Resource
-	private BaseDAO<NewsBanner> baseDAO;
+	@Autowired
+	private NewsBannerDao baseDAO;
 	@Override
 	public void saveNewsBanner(NewsBanner newsBanner) {
 		// TODO Auto-generated method stub
