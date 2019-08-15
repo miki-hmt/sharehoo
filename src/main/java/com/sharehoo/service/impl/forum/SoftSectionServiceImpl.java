@@ -7,8 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sharehoo.dao.BaseDAO;
-import com.sharehoo.dao.impl.BaseDAOImpl;
+import com.sharehoo.dao.impl.forum.SoftSectionDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.SoftSection;
 import com.sharehoo.service.forum.SoftSectionService;
@@ -18,7 +17,7 @@ import com.sharehoo.util.forum.StringUtil;
 public class SoftSectionServiceImpl implements SoftSectionService {
 	
 	@Resource
-	private BaseDAO<SoftSection> baseDAO;
+	private SoftSectionDao baseDAO;
 	
 	/**
 	 * 

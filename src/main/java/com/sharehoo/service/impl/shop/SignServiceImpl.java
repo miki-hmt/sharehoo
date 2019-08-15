@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.SignDao;
 import com.sharehoo.entity.shop.Sign;
 import com.sharehoo.service.shop.SignService;
 
@@ -15,7 +16,7 @@ import com.sharehoo.service.shop.SignService;
 public class SignServiceImpl implements SignService {
 	
 	@Resource
-	private BaseDAO<Sign> baseDAO;
+	private SignDao baseDAO;
 	
 	@Override
 	public void saveSign(Sign sign) {

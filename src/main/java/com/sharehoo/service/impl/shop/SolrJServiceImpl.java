@@ -6,8 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +24,11 @@ import com.sharehoo.util.forum.E3Result;
 public class SolrJServiceImpl implements SolrJService {
 	
 	@Autowired
-	private SolrServer solrServer;
+	private SolrClient solrServer;
 	@Resource
 	private SourceService sourceService;
 	
-	@Autowired
-	private SearchDao searchDao;
+	private SearchDao searchDao = new SearchDao();
 	
 	@Override
 	public E3Result importAllItems() {

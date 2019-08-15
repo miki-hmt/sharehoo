@@ -37,6 +37,8 @@ spring:
         show-sql: true
         hibernate:
             ddl-auto: none   #暂时用不到
+            naming: 
+              physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   #2019.08.14 驼峰命名字段时，不让jpa大写转小写字段      
         properties:
             hibernate.format_sql: true
             hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

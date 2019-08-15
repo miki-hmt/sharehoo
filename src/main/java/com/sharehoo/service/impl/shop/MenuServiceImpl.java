@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.MenuDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Menu;
 import com.sharehoo.service.MenuService;
@@ -16,7 +16,7 @@ import com.sharehoo.service.MenuService;
 public class MenuServiceImpl implements MenuService {
 	
 	@Resource
-	private BaseDAO<Menu> baseDAO;
+	private MenuDao baseDAO;
 	@Override
 	public void save(Menu menu) {
 		// TODO Auto-generated method stub

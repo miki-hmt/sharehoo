@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.CritiqueDao;
 import com.sharehoo.entity.forum.Critique;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.service.forum.CritiqueService;
@@ -28,7 +29,7 @@ import com.sharehoo.service.forum.CritiqueService;
 public class CritiqueServiceImpl implements CritiqueService {
 	
 	@Autowired
-	private BaseDAO<Critique> baseDAO;
+	private CritiqueDao baseDAO;
 	
 	@Override
 	public void save(Critique critique) {

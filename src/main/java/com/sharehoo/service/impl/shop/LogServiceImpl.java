@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.LogDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Log;
 import com.sharehoo.service.LogService;
@@ -16,7 +17,7 @@ import com.sharehoo.service.LogService;
 public class LogServiceImpl implements LogService {
 	
 	@Resource
-	private BaseDAO<Log> baseDAO;
+	private LogDao baseDAO;
 	@Override
 	public void save(Log log) {
 		// TODO Auto-generated method stub

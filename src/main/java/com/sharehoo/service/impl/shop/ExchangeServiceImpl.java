@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.ExchangeDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Exchange;
 import com.sharehoo.service.ExchangeService;
@@ -17,7 +18,7 @@ import com.sharehoo.service.ExchangeService;
 public class ExchangeServiceImpl implements ExchangeService {
 	
 	@Resource
-	private BaseDAO<Exchange> baseDAO;
+	private ExchangeDao baseDAO;
 	
 	@Override
 	public void addLog(Exchange exchange) {

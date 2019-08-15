@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.NoticeDao;
 import com.sharehoo.entity.forum.Notice;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.service.forum.NoticeService;
@@ -19,7 +20,7 @@ import com.sharehoo.util.forum.StringUtil;
 public class NoticeServiceImpl implements NoticeService {
 	
 	@Resource
-	private BaseDAO<Notice> baseDAO;
+	private NoticeDao baseDAO;
 	
 	@Override
 	public void saveNotice(Notice notice) {

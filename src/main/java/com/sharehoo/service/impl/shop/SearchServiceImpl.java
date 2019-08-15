@@ -10,6 +10,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.SearchDao;
+import com.sharehoo.dao.shop.ShopDao;
+import com.sharehoo.dao.shop.SourceDao;
 import com.sharehoo.entity.shop.Search;
 import com.sharehoo.entity.shop.Shop;
 import com.sharehoo.entity.shop.Source;
@@ -20,11 +23,11 @@ import com.sharehoo.util.forum.StringUtil;
 public class SearchServiceImpl implements SearchService {
 	
 	@Resource
-	private BaseDAO<Search> baseDAO;
+	private com.sharehoo.dao.shop.SearchDao baseDAO;
 	@Resource
-	private BaseDAO<Source> sourceDAO;
+	private SourceDao sourceDAO;
 	@Resource
-	private BaseDAO<Shop> shopDAO;
+	private ShopDao shopDAO;
 	
 	@Override
 	public void save(Search search) {

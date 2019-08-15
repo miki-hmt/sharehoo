@@ -191,36 +191,48 @@
 		<dependency>
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>javax.servlet-api</artifactId>
-		    <version>3.1.0</version>
-		    <scope>provided</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jsp-api</artifactId>
+		    <version>2.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		
 	<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-solr</artifactId>
         </dependency>	
 		
 		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
-	<dependency>
+	<!-- <dependency>
 	    <groupId>org.apache.solr</groupId>
 	    <artifactId>solr-solrj</artifactId>
 	    <version>4.10.3</version>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-core -->
+	https://mvnrepository.com/artifact/org.apache.solr/solr-core
 	<dependency>
 	    <groupId>org.apache.solr</groupId>
 	    <artifactId>solr-core</artifactId>
 	    <version>4.10.3</version>
 	    <exclusions>  
         <exclusion>  
-            <artifactId>jdk.tools</artifactId>  	<!-- 排除jdk1.6的tool工具jar包依赖 	2019.07.08	miki-->
+            <artifactId>jdk.tools</artifactId>  	排除jdk1.6的tool工具jar包依赖 	2019.07.08	miki
             <groupId>jdk.tools</groupId>  
         </exclusion>  
         <exclusion>  
-            <artifactId>guava</artifactId>  	<!-- 派除jdk1.6的tool工具jar包依赖 	2019.07.08	miki-->
+            <artifactId>guava</artifactId>  	派除jdk1.6的tool工具jar包依赖 	2019.07.08	miki
             <groupId>com.google.guava</groupId>  
         </exclusion>  
     </exclusions>
-	</dependency>
+	</dependency> -->
 	
 	<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 	<dependency>

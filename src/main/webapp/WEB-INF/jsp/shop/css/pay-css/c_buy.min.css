@@ -1,0 +1,37 @@
+.software_intro .bor_bac{margin-top:20px}
+.cb_tit{width:100%;border-bottom:1px solid #eee}
+.cb_tit h4{padding:0 20px;position:relative;font-size:18px;line-height:49px;color:#333}
+.cb_tit span{display:inline-block;position:absolute;right:20px;top:0;font-size:14px;line-height:49px;color:#333}
+.cb_buy_con{padding:27px 20px 30px;border-bottom:1px solid #eee}
+.cb_buy_con .c_buy_choose{display:block;padding-bottom:18px;font-size:16px;line-height:20px;color:#333;text-align:center}
+.cb_buy_con .c_buy_choose em{display:inline-block;margin-right:10px;font-size:20px;font-weight:bold;line-height:20px;color:#e4393c}
+.cb_buy_con .cbuy_list{padding-bottom:39px}
+.cb_buy_con .cbuy_list .cbuy_item{width:354px;height:208px;padding:19px 20px 0;margin-right:30px;background:url("../images/c_num.png") no-repeat #f3f3f3;border:1px solid #f3f3f3;box-sizing:border-box}
+.cb_buy_con .cbuy_list .cbuy_item:first-child{background-position:0 0}
+.cb_buy_con .cbuy_list .cbuy_item:nth-child(2){background-position:0 -208px}
+.cb_buy_con .cbuy_list .cbuy_item:last-child{margin-right:0;background-position:0 -416px}
+.cb_buy_con .cbuy_list .cbuy_item span{display:block;line-height:20px;text-align:center}
+.cb_buy_con .cbuy_list .cbuy_item .cbuy_sel{padding-bottom:108px}
+.cb_buy_con .cbuy_list .cbuy_item .cbuy_sel .c_num_sel{font-size:18px;font-weight:bold;color:#e4393c}
+.cb_buy_con .cbuy_list .cbuy_item .c_much{padding-bottom:5px;font-size:16px;color:#333}
+.cb_buy_con .cbuy_list .cbuy_item .c_tips{font-size:14px;color:#666}
+.cb_buy_con .cbuy_list .cbuy_item .mark{color:#e4393c}
+.cb_buy_con .cbuy_list .cbuy_cur{position:relative;border:1px solid #f05d53}
+.cb_buy_con .cbuy_list .cbuy_cur:before{display:block;width:20px;height:20px;content:"";background:url("../images/c_num_selected.png") no-repeat center;position:absolute;right:0;bottom:0}
+.cb_buy_con .payment{position:relative;text-align:center}
+.cb_buy_con .payment .wechat_payment,.cb_buy_con .payment .zhifubao_payment,.cb_buy_con .payment .erweima_out{position:relative;display:inline-block;width:200px;height:220px;padding:15px}
+.cb_buy_con 
+.payment 
+.wechat_payment img,
+.cb_buy_con 
+.payment 
+.zhifubao_payment img,
+.cb_buy_con 
+.payment 
+.erweima_out img{display:block;width:180px;height:190px;max-width:190px;border:0;margin:0 auto;}
+.cb_buy_con .payment .wechat_payment .pay_icon,.cb_buy_con .payment .zhifubao_payment .pay_icon,.cb_buy_con .payment .erweima_out .pay_icon{display:block;width:40px;height:40px;position:absolute;left:50%;margin-left:-20px;bottom:71px;z-index:99}
+.cb_buy_con .payment .wechat_payment .pay_icon img,.cb_buy_con .payment .zhifubao_payment .pay_icon img,.cb_buy_con .payment .erweima_out .pay_icon img{display:block;width:40px;height:40px;max-width:40px;border:0}
+.cb_buy_con .payment .wechat_payment{border:1px solid #95d689}.cb_buy_con .payment .zhifubao_payment{margin-left:53px;border:1px solid #7fd4f6}
+.cb_buy_con .payment .erweima_out{border:1px solid #7fd4f6}
+.cb_buy_con .payment .out_tips{display:block;padding-top:10px;font-size:16px;line-height:24px;color:#333}
+.cb_buy_con .payment .out_tips a{display:inline-block;color:#23acdb;text-decoration:underline}.cb_buy_con .payment .out_con{display:none}.intro_contact{padding:28px 20px 25px}.intro_contact .tips_tit{display:block;padding-bottom:10px;font-size:16px;line-height:20px;color:#333}.intro_contact p.tips{font-size:14px;line-height:24px;color:#666}.intro_contact p.tips .mark_link{color:#23acdb;text-decoration:underline}

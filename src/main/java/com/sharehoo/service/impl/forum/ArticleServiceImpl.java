@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.ArticleDao;
 import com.sharehoo.entity.forum.Article;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.service.forum.ArticleService;
@@ -28,7 +29,7 @@ import com.sharehoo.util.forum.StringUtil;
 public class ArticleServiceImpl implements ArticleService {
 	
 	@Resource
-	private BaseDAO<Article> baseDAO;
+	private ArticleDao baseDAO;
 	
 	@Override
 	public void saveArticle(Article article) {

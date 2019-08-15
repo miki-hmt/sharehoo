@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.ZoneDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Zone;
 import com.sharehoo.service.forum.ZoneService;
@@ -17,7 +18,7 @@ import com.sharehoo.util.forum.StringUtil;
 public class ZoneServiceImpl implements ZoneService {
 
 	@Resource
-	private BaseDAO<Zone> baseDAO;
+	private ZoneDao baseDAO;
 	
 	@Override
 	public void saveZone(Zone zone) {

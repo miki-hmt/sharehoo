@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
@@ -21,7 +21,7 @@ import com.sharehoo.entity.forum.TopicSearchResult;
 public class TopicSearchDao {
 	
 	@Autowired
-	private SolrServer topicSolrServer;
+	private SolrClient topicSolrServer;
 		
 	public TopicSearchResult search(SolrQuery query)throws Exception{
 			

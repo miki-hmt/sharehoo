@@ -4,24 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.sharehoo.entity.shop.SearchItem;
 import com.sharehoo.entity.shop.SearchResult;
 
 
-	
-@Repository
 public class SearchDao {
-	
+	//**************** 2019.08.14	miki springboot版本使用要将 SolrServer改为 SolrClient
 	@Autowired
-	private SolrServer solrServer;
+	private SolrClient solrServer;
 		
 	public SearchResult search(SolrQuery query)throws Exception{
 			

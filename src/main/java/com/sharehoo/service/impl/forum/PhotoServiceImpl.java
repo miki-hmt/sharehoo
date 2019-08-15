@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.PhotoDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Photo;
 import com.sharehoo.service.forum.PhotoService;
@@ -18,7 +19,7 @@ import com.sharehoo.service.forum.PhotoService;
 public class PhotoServiceImpl implements PhotoService {
 	
 	@Resource
-	private BaseDAO<Photo> baseDAO; 
+	private PhotoDao baseDAO; 
 	@Override
 	public void save(Photo photo) {
 		// TODO Auto-generated method stub

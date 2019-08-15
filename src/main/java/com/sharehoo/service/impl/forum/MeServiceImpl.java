@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.MeDao;
 import com.sharehoo.entity.forum.Me;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.service.forum.MeService;
@@ -16,7 +17,7 @@ import com.sharehoo.util.forum.StringUtil;
 @Service("meService")
 public class MeServiceImpl implements MeService {
 	@Resource
-	private BaseDAO<Me> baseDAO;
+	private MeDao baseDAO;
 	
 	@Override
 	public void save(Me me) {

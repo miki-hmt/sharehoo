@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.TypeDao;
 import com.sharehoo.entity.shop.Type;
 import com.sharehoo.service.TypeService;
 
@@ -16,7 +17,7 @@ import com.sharehoo.service.TypeService;
 public class TypeServiceImpl implements TypeService {
 	
 	@Resource
-	private BaseDAO<Type> baseDAO;
+	private TypeDao baseDAO;
 	
 	@Override
 	public void save(Type type) {

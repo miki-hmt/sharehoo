@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+
+.login_main_newone{width:280px;height:202px;background:url(../images/index/login.jpg) no-repeat center center;float:left}
+.request_sub_newone{width:264px;height:45px;background:url(../images/index/login_sub_06.png) no-repeat center
+ center;border:none;margin:100px 0 0 3px;cursor:pointer;display:block}
+.login_sub_newone{width:262px;height:43px;background:url(../images/index/login_sub2_06.jpg) no-repeat center center; border:none;margin:5px 0 0 4px;cursor:pointer;display:block}

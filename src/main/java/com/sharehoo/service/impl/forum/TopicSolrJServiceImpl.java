@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import com.sharehoo.util.forum.E3Result;
 public class TopicSolrJServiceImpl implements TopicSolrJService {
 	
 	@Autowired
-	private SolrServer topicSolrServer;
+	private SolrClient topicSolrServer;
 	@Resource
 	private SourceService sourceService;
 	

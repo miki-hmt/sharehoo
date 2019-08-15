@@ -5,11 +5,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
-import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.CollectDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Collect;
 import com.sharehoo.service.shop.CollectService;
@@ -18,7 +16,7 @@ import com.sharehoo.service.shop.CollectService;
 public class CollectServiceImpl implements CollectService {
 	
 	@Resource
-	private BaseDAO<Collect> baseDAO;
+	private CollectDao baseDAO;
 	
 	@Override
 	public void save(Collect collect) {

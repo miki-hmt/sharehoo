@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.FocusDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Focus;
 import com.sharehoo.service.shop.FocusService;
@@ -16,7 +16,7 @@ import com.sharehoo.service.shop.FocusService;
 public class FocusServiceImpl implements FocusService {
 	
 	@Resource
-	private BaseDAO<Focus> baseDAO;
+	private FocusDao baseDAO;
 	
 	@Override
 	public void save(Focus focus) {

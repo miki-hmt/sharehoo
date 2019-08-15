@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.SourceDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Source;
 import com.sharehoo.service.shop.SourceService;
@@ -20,7 +21,7 @@ import com.sharehoo.util.forum.StringUtil;
 public class SourceServiceImpl implements SourceService {
 	
 	@Resource	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
-	private BaseDAO<Source> baseDAO;
+	private SourceDao baseDAO;
 	@Override
 	public void save(Source source) {
 		// TODO Auto-generated method stub

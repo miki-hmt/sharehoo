@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.OperateDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Operate;
 import com.sharehoo.service.shop.OperateService;
@@ -18,7 +19,7 @@ import com.sharehoo.service.shop.OperateService;
 public class OperateServiceImpl implements OperateService {
 	
 	@Resource
-	private BaseDAO<Operate> baseDAO;
+	private OperateDao baseDAO;
 	@Override
 	public void save(Operate operate) {
 		// TODO Auto-generated method stub

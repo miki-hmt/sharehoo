@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.MessageDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Message;
 import com.sharehoo.service.MessageService;
@@ -17,7 +18,7 @@ import com.sharehoo.service.MessageService;
 public class MessageServiceImpl implements MessageService {
 	
 	@Resource
-	BaseDAO<Message> baseDAO;
+	MessageDao baseDAO;
 	@Override
 	public void saveMessage(Message message) {
 		// TODO Auto-generated method stub

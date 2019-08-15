@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.ShopDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Shop;
 import com.sharehoo.service.shop.ShopService;
@@ -18,7 +19,7 @@ import com.sharehoo.service.shop.ShopService;
 public class ShopServiceImpl implements ShopService {
 	
 	@Resource	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
-	private BaseDAO<Shop> baseDAO;
+	private ShopDao baseDAO;
 	@Override
 	public void save(Shop shop) {
 		// TODO Auto-generated method stub

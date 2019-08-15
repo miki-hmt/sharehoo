@@ -7,8 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sharehoo.dao.BaseDAO;
-import com.sharehoo.dao.impl.BaseDAOImpl;
+import com.sharehoo.dao.impl.forum.SoftDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Soft;
 import com.sharehoo.service.forum.SoftService;
@@ -24,7 +23,7 @@ import com.sharehoo.util.forum.StringUtil;
 @Service("softService")
 public class SoftServiceImpl implements SoftService {
 	@Resource
-	private BaseDAO<Soft> baseDAO;
+	private SoftDao baseDAO;
 	
 	@Override
 	public void saveSoft(Soft soft) {

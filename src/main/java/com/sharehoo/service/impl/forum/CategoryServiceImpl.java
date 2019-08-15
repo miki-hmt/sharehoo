@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.CategoryDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Category;
 import com.sharehoo.service.forum.CategoryService;
@@ -16,7 +17,7 @@ import com.sharehoo.util.forum.StringUtil;
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
 	@Resource
-	private BaseDAO<Category> baseDAO;
+	private CategoryDao baseDAO;
 	
 	@Override
 	public void save(Category category) {

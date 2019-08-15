@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.CdkDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Cdk;
 import com.sharehoo.service.shop.CdkService;
@@ -16,7 +17,7 @@ import com.sharehoo.util.forum.StringUtil;
 @Service("cdkService")
 public class CdkServiceImpl implements CdkService {
 	@Resource
-	private BaseDAO<Cdk> baseDao;
+	private CdkDao baseDao;
 
 	@Override
 	public void add(Cdk cdk) {

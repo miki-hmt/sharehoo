@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
 import com.sharehoo.dao.impl.BaseDAOImpl;
+import com.sharehoo.dao.impl.forum.AlbumDao;
 import com.sharehoo.entity.forum.Album;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.service.forum.AlbumService;
@@ -20,7 +21,7 @@ import com.sharehoo.service.forum.AlbumService;
 public class AlbumServiceImpl implements AlbumService {
 	
 	@Autowired
-	private BaseDAO<Album> baseDAO;
+	private AlbumDao baseDAO;
 	@Override
 	public void save(Album album) {
 		// TODO Auto-generated method stub

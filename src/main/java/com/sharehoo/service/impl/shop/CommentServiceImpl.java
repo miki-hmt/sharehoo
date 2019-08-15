@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.shop.CommentDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Comment;
 import com.sharehoo.service.forum.CommentService;
@@ -18,7 +19,7 @@ import com.sharehoo.service.forum.CommentService;
 public class CommentServiceImpl implements CommentService {
 	
 	@Resource
-	private BaseDAO<Comment> baseDAO;
+	private CommentDao baseDAO;
 	
 	@Override
 	public void save(Comment comment) {

@@ -5,13 +5,14 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sharehoo.dao.BaseDAO;
+import com.sharehoo.dao.impl.forum.LevelDao;
 import com.sharehoo.entity.shop.Level;
 import com.sharehoo.service.LevelService;
 
 @Service("levelService")
 public class LevelServiceImpl implements LevelService {
 	@Resource
-	private BaseDAO<Level> baseDAO;
+	private LevelDao baseDAO;
 	@Override
 	public void save(Level level) {
 		// TODO Auto-generated method stub
