@@ -3,6 +3,7 @@
  */
 package com.sharehoo.config.lang;
 
+import java.text.SimpleDateFormat;
 
 /**
  * @author langhsu
@@ -10,8 +11,14 @@ package com.sharehoo.config.lang;
  */
 public interface Consts {
 	String MTONS_CONFIG = "/mtons.properties";
-
-	/**
+	
+	public static final String CKEDITOR_UPLOAD_PATH = "/../sharehoo-responsitory/ckupload/"; 
+	public static final String SHOP_CKEDITOR_UPLOAD_PATH = "/../sharehoo-responsitory/ckupload/shop"; 
+	public static final String FORUM_CKEDITOR_UPLOAD_PATH = "/../sharehoo-responsitory/ckupload/forum"; 
+	public static final SimpleDateFormat SDF_YYYYMM = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	/*
 	 * 默认头像
 	 */
 	String AVATAR = "/assets/images/ava/default.png";

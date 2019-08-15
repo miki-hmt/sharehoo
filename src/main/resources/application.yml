@@ -3,6 +3,22 @@ server:
 forum:
    leavemessage:
         SECRET_TOPIC: 40
+   topic:
+        #index.jsp--topics--count 2018.08.10
+        NEW_TOPIC: 13
+        YUAN_TOPIC: 15
+        CHU_TOPIC: 15
+        RECOMMEND: 15
+        
+        #topic--secret--count 2018.11.29
+        SECRET_TOPIC: 40
+        #solr_search.jsp--source--count 2018.08.17
+        SEARCH_RESULT_ROWS: 10
+        SEARCH_TOPIC_RESULT_ROWS: 15
+   #sharehoo---water marker 2018.08.21
+   WATER_MARK_PATH: C:/apache-tomcat-7.0.55/webapps/Forum/images/topicImage/
+   WATER_NARK_CONTENT: sharehoo社区
+   
 spring:
     freemarker:
         HTML_GEN_PATH: E:/eclipseMars2Workspace/freemarker/topic/
