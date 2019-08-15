@@ -1,0 +1,289 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>JavaScript 浏览器检测</title>
+</head>
+
+<body class="browserscripting">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+
+<h2>JavaScript 基础</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/js/index.asp" title="JavaScript 教程">JS 教程</a></li>
+<li><a href="js_intro.asp.htm" tppabs="http://www.w3school.com.cn/js/js_intro.asp" title="JavaScript 简介">JS 简介</a></li>
+<li><a href="js_howto.asp.htm" tppabs="http://www.w3school.com.cn/js/js_howto.asp" title="JavaScript 实现">JS 实现</a></li>
+<li><a href="js_whereto.asp.htm" tppabs="http://www.w3school.com.cn/js/js_whereto.asp" title="JavaScript 放置">JS 放置</a></li>
+<li><a href="js_statements.asp.htm" tppabs="http://www.w3school.com.cn/js/js_statements.asp" title="JavaScript 语句">JS 语句</a></li>
+<li><a href="js_comments.asp.htm" tppabs="http://www.w3school.com.cn/js/js_comments.asp" title="JavaScript 注释">JS 注释</a></li>
+<li><a href="js_variables.asp.htm" tppabs="http://www.w3school.com.cn/js/js_variables.asp" title="JavaScript 变量">JS 变量</a></li>
+<li><a href="js_operators.asp.htm" tppabs="http://www.w3school.com.cn/js/js_operators.asp" title="JavaScript 运算符">JS 运算符</a></li>
+<li><a href="js_comparisons.asp.htm" tppabs="http://www.w3school.com.cn/js/js_comparisons.asp" title="JavaScript 比较">JS 比较</a></li>
+<li><a href="js_if_else.asp.htm" tppabs="http://www.w3school.com.cn/js/js_if_else.asp" title="JavaScript If...Else">JS If...Else</a></li>
+<li><a href="js_switch.asp.htm" tppabs="http://www.w3school.com.cn/js/js_switch.asp" title="JavaScript Switch">JS Switch</a></li>
+<li><a href="js_popup.asp.htm" tppabs="http://www.w3school.com.cn/js/js_popup.asp" title="JavaScript 消息框">JS 消息框</a></li>
+<li><a href="js_functions.asp.htm" tppabs="http://www.w3school.com.cn/js/js_functions.asp" title="JavaScript 函数">JS 函数</a></li>
+<li><a href="js_loop_for.asp.htm" tppabs="http://www.w3school.com.cn/js/js_loop_for.asp" title="JavaScript For Loop">JS For Loop</a></li>
+<li><a href="js_loop_while.asp.htm" tppabs="http://www.w3school.com.cn/js/js_loop_while.asp" title="JavaScript While Loop">JS While Loop</a></li>
+<li><a href="js_break.asp.htm" tppabs="http://www.w3school.com.cn/js/js_break.asp" title="JavaScript Break Loops">JS Break Loops</a></li>
+<li><a href="js_loop_for_in.asp.htm" tppabs="http://www.w3school.com.cn/js/js_loop_for_in.asp" title="JavaScript For...In">JS For...In</a></li>
+<li><a href="js_events.asp.htm" tppabs="http://www.w3school.com.cn/js/js_events.asp" title="JavaScript 事件">JS 事件</a></li>
+<li><a href="js_try_catch.asp.htm" tppabs="http://www.w3school.com.cn/js/js_try_catch.asp" title="JavaScript Try...Catch">JS Try...Catch</a></li>
+<li><a href="js_throw.asp.htm" tppabs="http://www.w3school.com.cn/js/js_throw.asp" title="JavaScript Throw">JS Throw</a></li>
+<li><a href="js_onerror.asp.htm" tppabs="http://www.w3school.com.cn/js/js_onerror.asp" title="JavaScript onerror">JS onerror</a></li>
+<li><a href="js_special_characters.asp.htm" tppabs="http://www.w3school.com.cn/js/js_special_characters.asp" title="JavaScript 特殊字符">JS 特殊字符</a></li>
+<li><a href="js_guidelines.asp.htm" tppabs="http://www.w3school.com.cn/js/js_guidelines.asp" title="JavaScript 指导方针">JS 指导方针</a></li>
+</ul>
+
+<h2>JavaScript 对象</h2>
+<ul>
+<li><a href="js_obj_intro.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_intro.asp" title="JavaScript 对象简介">JS 对象简介</a></li>
+<li><a href="js_obj_string.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_string.asp" title="JavaScript 字符串对象">JS 字符串</a></li>
+<li><a href="js_obj_date.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_date.asp" title="JavaScript 日期对象">JS 日期</a></li>
+<li><a href="js_obj_array.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_array.asp" title="JavaScript 数组对象">JS 数组</a></li>
+<li><a href="js_obj_boolean.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_boolean.asp" title="JavaScript 逻辑对象">JS 逻辑</a></li>
+<li><a href="js_obj_math.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_math.asp" title="JavaScript 算数对象">JS 算数</a></li>
+<li><a href="js_obj_regexp.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_regexp.asp" title="JavaScript RegExp 对象">JS RegExp</a></li>
+<li><a href="js_obj_htmldom.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_htmldom.asp" title="JavaScript HTML DOM">JS HTML DOM</a></li>
+</ul>
+
+<h2>JavaScript 高级</h2>
+<ul>
+<li><a href="js_browser.asp.htm" tppabs="http://www.w3school.com.cn/js/js_browser.asp" title="JavaScript 浏览器">JS 浏览器</a></li>
+<li><a href="js_cookies.asp.htm" tppabs="http://www.w3school.com.cn/js/js_cookies.asp" title="JavaScript Cookies">JS Cookies</a></li>
+<li><a href="js_form_validation.asp.htm" tppabs="http://www.w3school.com.cn/js/js_form_validation.asp" title="JavaScript 验证">JS 验证</a></li>
+<li><a href="js_animation.asp.htm" tppabs="http://www.w3school.com.cn/js/js_animation.asp" title="JavaScript 动画">JS 动画</a></li>
+<li><a href="js_image_maps.asp.htm" tppabs="http://www.w3school.com.cn/js/js_image_maps.asp" title="JavaScript 图像地图">JS 图像地图</a></li>
+<li><a href="js_timing.asp.htm" tppabs="http://www.w3school.com.cn/js/js_timing.asp" title="JavaScript 计时">JS 计时</a></li>
+<li><a href="js_objects.asp.htm" tppabs="http://www.w3school.com.cn/js/js_objects.asp" title="JavaScript 创建对象">JS 创建对象</a></li>
+<li><a href="js_summary.asp.htm" tppabs="http://www.w3school.com.cn/js/js_summary.asp" title="JavaScript 教程总结">JS 总结</a></li>
+</ul>
+
+<h2>实例/测验</h2>
+<ul>
+<li><a href="../example/jseg_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/jseg_examples.asp" title="JS 实例">JS 实例</a></li>
+<li><a href="../example/jsrf_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/jsrf_examples.asp" title="JS 对象实例">JS 对象实例</a></li>
+<li><a href="js_quiz.asp.htm" tppabs="http://www.w3school.com.cn/js/js_quiz.asp" title="JS 测验">JS 测验</a></li>
+</ul>
+
+<h2>JS 参考手册</h2>
+<ul>
+<li><a href="js_reference.asp.htm" tppabs="http://www.w3school.com.cn/js/js_reference.asp" title="JavaScript 对象">JS 对象</a></li>
+<li><a href="../htmldom/htmldom_reference.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/htmldom_reference.asp" title="JavaScript HTML DOM">JS HTML DOM</a></li>
+</ul>
+
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>JavaScript 浏览器检测</h1>
+
+<div id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="js_obj_htmldom.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_htmldom.asp">Previous Page</a></li>
+
+<li class="next"><a href="js_cookies.asp.htm" tppabs="http://www.w3school.com.cn/js/js_cookies.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div class="example">
+<h2>实例</h2>
+<dl>
+<dt><a href="../tiy/t.asp-f=jseg_browser.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=jseg_browser">检测浏览器及版本</a></dt>
+<dd>使用 JavaScript 检测关于访问者的浏览器名称及其版本。</dd>
+
+<dt><a href="../tiy/t.asp-f=jseg_browserdetails.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=jseg_browserdetails">检测浏览器的更多信息</a></dt>
+<dd>使用 JavaScript 检测关于访问者浏览器的更多信息。</dd>
+
+<dt><a href="../tiy/t.asp-f=hdom_navigator.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=hdom_navigator">检测浏览器的全部信息</a></dt>
+<dd>使用 JavaScript 检测关于访问者浏览器的全部信息。</dd>
+
+<dt><a href="../tiy/t.asp-f=jseg_browser2.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=jseg_browser2">根据浏览器类型提醒用户</a></dt>
+<dd>使用 JavaScript 检测关于访问者的浏览器名称及其版本，然后根据这些信息生成不同内容的警告框。</dd>
+</dl>
+</div>
+
+<div>
+<h2>浏览器检测</h2>
+<p>本教程中几乎所有的代码均可在任何支持 JavaScript 的浏览器中运行。不过个别的代码无法运行于特定的浏览器，特别是老式的浏览器。</p>
+<p>所以，有些时候对访问者的浏览器类型及版本进行检测是很有帮助的，然后可在此基础上为访问者提供合适的信息。</p>
+<p>要做到这一点，最好的办法是使你的网页变得足够聪明，这样的话它就可以不同的方式对待不同类型的浏览器。</p>
+<p>JavaScript 包含一个名为 Navigator 的对象，它就可以完成上述的任务。</p>
+<p>Navigator 包含了有关访问者浏览器的信息，包括浏览器类型、版本等等。</p>
+</div>
+
+<div>
+<h2>Navigator 对象</h2>
+<p>JavaScript Navigator 对象包含了有关访问者浏览器的所有信息。接下来我们学习 Navigator 对象的两个属性。</p>
+<dl class="define">
+<dt>appName</dt>
+<dd>保存浏览器类型</dd>
+<dt>appVersion</dt>
+<dd>存有浏览器的版本信息（其他信息中的一项）</dd>
+</dl>
+<h3>实例</h3>
+<pre>&lt;html&gt;
+
+&lt;body&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+var browser=<code>navigator.appName</code>
+var b_version=<code>navigator.appVersion</code>
+var version=parseFloat(b_version)
+
+document.write(&quot;Browser name: &quot;+ browser)
+document.write(&quot;&lt;br /&gt;&quot;)
+document.write(&quot;Browser version: &quot;+ version)
+&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</pre>
+<p>上面例子中的 browser 变量存有浏览器的名称，比如，&quot;Netscape&quot; 或者 &quot;Microsoft Internet Explorer&quot;。</p>
+<p>上面例子中的 appVersion 属性返回的字符串所包含的信息不止是版本号而已，但是现在我们只关注版本号。我们使用一个名为 parseFloat() 的函数会抽取字符串中类似十进制数的一段字符并将之返回，这样我们就可以从字符串中抽出版本号信息了。</p>
+<p class="important"><span>重要事项</span>：在 IE 5.0 及以后版本中，版本号是不正确的！在 IE 5.0 和 IE 6.0 中，微软为 appVersion 字符串赋的值是 4.0。怎么会出现这样的错误呢？无论如何，我们需要清楚的是，JavaScript 在 IE6、IE5 和 IE4 中的获得的版本号是相同的。</p>
+<h3>实例</h3>
+<p>下面的脚本会根据访问者的浏览器类型显示不同的警告。</p>
+<pre>&lt;html&gt;
+
+&lt;head&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+function detectBrowser()
+{
+<code>var browser=navigator.appName
+var b_version=navigator.appVersion
+var version=parseFloat(b_version)
+
+if ((browser==&quot;Netscape&quot;||browser==&quot;Microsoft Internet Explorer&quot;)
+&amp;&amp; (version&gt;=4))
+  {alert(&quot;Your browser is good enough!&quot;)}
+else
+  {alert(&quot;It's time to upgrade your browser!&quot;)}</code>
+  }
+&lt;/script&gt;
+
+&lt;/head&gt;
+
+&lt;body onload=&quot;detectBrowser()&quot;&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</pre>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="js_obj_htmldom.asp.htm" tppabs="http://www.w3school.com.cn/js/js_obj_htmldom.asp">Previous Page</a></li>
+
+<li class="next"><a href="js_cookies.asp.htm" tppabs="http://www.w3school.com.cn/js/js_cookies.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div>
+
+<div id="tools">
+<h5 id="tools_reference"><a href="js_reference.asp.htm" tppabs="http://www.w3school.com.cn/js/js_reference.asp">JavaScript 参考手册</a></h5>
+<h5 id="tools_example"><a href="../example/jseg_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/jseg_examples.asp">JavaScript 实例</a></h5>
+<h5 id="tools_quiz"><a href="js_quiz.asp.htm" tppabs="http://www.w3school.com.cn/js/js_quiz.asp">JavaScript 测验</a></h5>
+</div>
+
+<div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

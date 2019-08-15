@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeTabIndex()
+{
+document.getElementById('check3').tabIndex="1"
+document.getElementById('check1').tabIndex="3"
+}
+</script>
+</head>
+
+<body>
+<p>Try navigating the links on this page by
+using your "tab" button on you keyboard</p>
+
+<form><input type="checkbox" id="check1" tabIndex="1" /><br />
+<input type="checkbox" id="check2" tabIndex="2" /><br />
+<input type="checkbox" id="check3" tabIndex="3" /><br />
+
+<input type="button" onclick="changeTabIndex()"
+value="Change tabIndex" />
+</form>
+
+</body>
+</html>

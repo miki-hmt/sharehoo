@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript">
+function alertDefaultSelected()
+{
+  var x=document.getElementById("mySelect").selectedIndex;
+  var y=document.getElementsByTagName("option");
+  alert("Is " + y[x].text + " selected by default? " + y[x].defaultSelected);
+}
+</script>
+</head>
+<body>
+
+<form>
+Select your favorite fruit:
+<select id="mySelect">
+  <option>Apple</option>
+  <option>Orange</option>
+  <option selected="selected">Pineapple</option>
+  <option>Banana</option>
+</select>
+<br />
+<br />
+<input type="button" onclick="alertDefaultSelected()" value="Is the chosen fruit selected by default?">
+</form>
+
+</body>
+</html>

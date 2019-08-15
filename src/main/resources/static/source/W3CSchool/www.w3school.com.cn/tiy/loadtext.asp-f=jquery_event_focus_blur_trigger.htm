@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("input").focus(function(){
+    $("input").css("background-color","#FFFFCC");
+  });
+  $("input").blur(function(){
+    $("input").css("background-color","#D6D6FF");
+  });
+  $("#btn1").click(function(){
+    $("input").focus();
+  });  
+  $("#btn2").click(function(){
+    $("input").blur();
+  }); 
+});
+</script>
+</head>
+<body>
+Enter your name: <input type="text" />
+<p>请在上面的输入域中点击，使其获得焦点，然后在输入域外面点击，使其失去焦点。</p>
+<p><button id="btn1">触发输入域的 focus 事件</button></p>
+<p><button id="btn2">触发输入域的 blur 事件</button></p>
+</body>
+</html>

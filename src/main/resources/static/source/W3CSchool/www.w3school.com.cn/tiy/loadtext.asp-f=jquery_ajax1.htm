@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#b01").click(function(){
+  $('#myDiv').load('../jquery/test1.txt.htm'/*tpa=http://www.w3school.com.cn/jquery/test1.txt*/);
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+<button id="b01" type="button">Change Content</button>
+
+</body>
+</html>

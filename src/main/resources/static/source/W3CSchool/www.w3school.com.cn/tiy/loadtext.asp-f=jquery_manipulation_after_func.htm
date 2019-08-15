@@ -1,0 +1,21 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").after(function(n){
+      return "<p>The p element above has index " + n + "</p>";
+    });
+  });
+});
+</script>
+</head>
+
+<body>
+<h1>This is a heading</h1>
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+<button>在每个 p 元素后插入内容</button>
+</body>
+</html>

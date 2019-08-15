@@ -1,0 +1,26 @@
+<html>
+<head>
+<script type="text/javascript">
+function delCell()
+  {
+  document.getElementById('tr2').deleteCell(0)
+  }
+</script>
+</head>
+<body>
+
+<table border="1">
+<tr id="tr1">
+<th>Firstname</th>
+<th>Lastname</th>
+</tr>
+<tr id="tr2">
+<td>Peter</td>
+<td>Griffin</td>
+</tr>
+</table>
+<br />
+<input type="button" onclick="delCell()" value="Delete cell">
+
+</body>
+</html>

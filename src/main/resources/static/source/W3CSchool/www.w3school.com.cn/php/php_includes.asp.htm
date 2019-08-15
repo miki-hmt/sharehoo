@@ -1,0 +1,375 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>PHP 引用文件</title>
+</head>
+
+<body class="serverscripting">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>PHP 基础</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/php/index.asp" title="PHP 教程">PHP 教程</a></li>
+<li><a href="php_intro.asp.htm" tppabs="http://www.w3school.com.cn/php/php_intro.asp" title="PHP简介">PHP 简介</a></li>
+<li><a href="php_install.asp.htm" tppabs="http://www.w3school.com.cn/php/php_install.asp" title="PHP 安装">PHP 安装</a></li>
+<li><a href="php_syntax.asp.htm" tppabs="http://www.w3school.com.cn/php/php_syntax.asp" title="PHP 语法">PHP 语法</a></li>
+<li><a href="php_variables.asp.htm" tppabs="http://www.w3school.com.cn/php/php_variables.asp" title="PHP 变量">PHP 变量</a></li>
+<li><a href="php_string.asp.htm" tppabs="http://www.w3school.com.cn/php/php_string.asp" title="PHP 字符串">PHP 字符串</a></li>
+<li><a href="php_operators.asp.htm" tppabs="http://www.w3school.com.cn/php/php_operators.asp" title="PHP 运算符">PHP 运算符</a></li>
+<li><a href="php_if_else.asp.htm" tppabs="http://www.w3school.com.cn/php/php_if_else.asp" title="PHP If...Else 语句">PHP If...Else</a></li>
+<li><a href="php_switch.asp.htm" tppabs="http://www.w3school.com.cn/php/php_switch.asp" title="PHP Switch 语句">PHP Switch</a></li>
+<li><a href="php_arrays.asp.htm" tppabs="http://www.w3school.com.cn/php/php_arrays.asp" title="PHP 数组">PHP 数组</a></li>
+<li><a href="php_looping.asp.htm" tppabs="http://www.w3school.com.cn/php/php_looping.asp" title="PHP 循环">PHP 循环</a></li>
+<li><a href="php_functions.asp.htm" tppabs="http://www.w3school.com.cn/php/php_functions.asp" title="PHP 函数">PHP 函数</a></li>
+<li><a href="php_forms.asp.htm" tppabs="http://www.w3school.com.cn/php/php_forms.asp" title="PHP 表单和用户输入">PHP 表单</a></li>
+<li><a href="php_get.asp.htm" tppabs="http://www.w3school.com.cn/php/php_get.asp" title="PHP $_GET">PHP $_GET</a></li>
+<li><a href="php_post.asp.htm" tppabs="http://www.w3school.com.cn/php/php_post.asp" title="PHP $_POST">PHP $_POST</a></li>
+</ul>
+
+<h2>PHP 高级</h2>
+<ul>
+<li><a href="php_date.asp.htm" tppabs="http://www.w3school.com.cn/php/php_date.asp" title="">PHP 日期</a></li>
+<li><a href="php_includes.asp.htm" tppabs="http://www.w3school.com.cn/php/php_includes.asp" title="">PHP 引用</a></li>
+<li><a href="php_file.asp.htm" tppabs="http://www.w3school.com.cn/php/php_file.asp" title="">PHP 文件</a></li>
+<li><a href="php_file_upload.asp.htm" tppabs="http://www.w3school.com.cn/php/php_file_upload.asp" title="">PHP 文件上传</a></li>
+<li><a href="php_cookies.asp.htm" tppabs="http://www.w3school.com.cn/php/php_cookies.asp" title="">PHP Cookies</a></li>
+<li><a href="php_sessions.asp.htm" tppabs="http://www.w3school.com.cn/php/php_sessions.asp" title="">PHP Sessions</a></li>
+<li><a href="php_mail.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mail.asp" title="">PHP E-mail</a></li>
+<li><a href="php_secure_mail.asp.htm" tppabs="http://www.w3school.com.cn/php/php_secure_mail.asp" title="">PHP 安全 E-mail</a></li>
+<li><a href="php_error.asp.htm" tppabs="http://www.w3school.com.cn/php/php_error.asp" title="">PHP Error</a></li>
+<li><a href="php_exception.asp.htm" tppabs="http://www.w3school.com.cn/php/php_exception.asp" title="">PHP Exception</a></li>
+<li><a href="php_filter.asp.htm" tppabs="http://www.w3school.com.cn/php/php_filter.asp" title="">PHP Filter</a></li>
+</ul>
+
+<h2>PHP 数据库</h2>
+<ul class="small">
+<li><a href="php_mysql_intro.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mysql_intro.asp" title="">MySQL 简介</a></li>
+<li><a href="php_mysql_connect.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mysql_connect.asp" title="">MySQL Connect</a></li>
+<li><a href="php_mysql_create.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mysql_create.asp" title="">MySQL Create</a></li>
+<li><a href="php_mysql_insert.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mysql_insert.asp" title="">MySQL Insert</a></li>
+<li><a href="php_mysql_select.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mysql_select.asp" title="">MySQL Select</a></li>
+<li><a href="php_mysql_where.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mysql_where.asp" title="">MySQL Where</a></li>
+<li><a href="php_mysql_order_by.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mysql_order_by.asp" title="">MySQL Order By</a></li>
+<li><a href="php_mysql_update.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mysql_update.asp" title="">MySQL Update</a></li>
+<li><a href="php_mysql_delete.asp.htm" tppabs="http://www.w3school.com.cn/php/php_mysql_delete.asp" title="">MySQL Delete</a></li>
+<li><a href="php_db_odbc.asp.htm" tppabs="http://www.w3school.com.cn/php/php_db_odbc.asp" title="">PHP ODBC</a></li>
+</ul>
+
+<h2>PHP XML</h2>
+<ul class="small">
+<li><a href="php_xml_parser_expat.asp.htm" tppabs="http://www.w3school.com.cn/php/php_xml_parser_expat.asp" title="">XML Expat Parser</a></li>
+<li><a href="php_xml_dom.asp.htm" tppabs="http://www.w3school.com.cn/php/php_xml_dom.asp" title="">XML DOM</a></li>
+<li><a href="php_xml_simplexml.asp.htm" tppabs="http://www.w3school.com.cn/php/php_xml_simplexml.asp" title="">XML SimpleXML</a></li>
+</ul>
+
+<h2>PHP 和 AJAX</h2>
+<ul class="small">
+<li><a href="php_ajax_intro.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ajax_intro.asp" title="AJAX 简介">AJAX 简介</a></li>
+<li><a href="php_ajax_xmlhttprequest.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ajax_xmlhttprequest.asp" title="AJAX XMLHttpRequest">XMLHttpRequest</a></li>
+<li><a href="php_ajax_suggest.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ajax_suggest.asp" title="PHP 和 AJAX 请求">AJAX Suggest</a></li>
+<li><a href="php_ajax_xml.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ajax_xml.asp" title="PHP 和 AJAX XML 实例">AJAX XML</a></li>
+<li><a href="php_ajax_database.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ajax_database.asp" title="PHP 和 AJAX MySQL 数据库实例">AJAX Database</a></li>
+<li><a href="php_ajax_responsexml.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ajax_responsexml.asp" title="PHP 和 AJAX responseXML 实例">AJAX responseXML</a></li>
+<li><a href="php_ajax_livesearch.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ajax_livesearch.asp" title="PHP 和 AJAX Live Search">AJAX Live Search</a></li>
+<li><a href="php_ajax_rss_reader.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ajax_rss_reader.asp" title="PHP 和 AJAX RSS 阅读器">AJAX RSS Reader</a></li>
+<li><a href="php_ajax_poll.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ajax_poll.asp" title="PHP 和 AJAX 投票">AJAX Poll</a></li>
+</ul>
+
+<h2>PHP 参考手册</h2>
+<ul class="small">
+<li><a href="php_ref_array.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_array.asp" title="PHP Array 函数">PHP Array</a></li>
+<li><a href="php_ref_calendar.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_calendar.asp" title="PHP Calendar 函数">PHP Calendar</a></li>
+<li><a href="php_ref_date.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_date.asp" title="PHP Date / Time 函数">PHP Date</a></li>
+<li><a href="php_ref_directory.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_directory.asp" title="PHP Directory 函数">PHP Directory</a></li>
+<li><a href="php_ref_error.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_error.asp" title="PHP Error 和 Logging 函数">PHP Error</a></li>
+<li><a href="php_ref_filesystem.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_filesystem.asp" title="PHP Filesystem 函数">PHP Filesystem</a></li>
+<li><a href="php_ref_filter.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_filter.asp" title="PHP Filter 函数">PHP Filter</a></li>
+<li><a href="php_ref_ftp.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_ftp.asp" title="PHP FTP 函数">PHP FTP</a></li>
+<li><a href="php_ref_http.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_http.asp" title="PHP HTTP 函数">PHP HTTP</a></li>
+<li><a href="php_ref_libxml.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_libxml.asp" title="PHP libxml 函数">PHP LibXML</a></li>
+<li><a href="php_ref_mail.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_mail.asp" title="PHP Mail 函数">PHP Mail</a></li>
+<li><a href="php_ref_math.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_math.asp" title="PHP Math 函数">PHP Math</a></li>
+<li><a href="php_ref_mysql.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_mysql.asp" title="PHP MySQL 函数">PHP MySQL</a></li>
+<li><a href="php_ref_simplexml.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_simplexml.asp" title="PHP SimpleXML 函数">PHP SimpleXML</a></li>
+<li><a href="php_ref_string.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_string.asp" title="PHP String 函数">PHP String</a></li>
+<li><a href="php_ref_xml.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_xml.asp" title="PHP XML Parser 函数">PHP XML</a></li>
+<li><a href="php_ref_zip.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_zip.asp" title="PHP Zip File 函数">PHP Zip</a></li>
+<li><a href="php_ref_misc.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref_misc.asp" title="PHP 杂项函数">PHP 杂项</a></li>
+</ul>
+
+<h2>PHP 测验</h2>
+<ul>
+<li>PHP Quiz</li>
+</ul>
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>PHP 引用文件</h1>
+
+<div  id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="php_date.asp.htm" tppabs="http://www.w3school.com.cn/php/php_date.asp">Previous Page</a></li>
+
+<li class="next"><a href="php_file.asp.htm" tppabs="http://www.w3school.com.cn/php/php_file.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div id="intro">
+<p><strong>服务器端引用 (SSI) 用于创建可在多个页面重复使用的函数、页眉、页脚或元素。</strong></p>
+</div>
+
+<div>
+<h2>服务器端引用（Server Side Includes）</h2>
+
+<p>通过 include() 或 require() 函数，您可以在服务器执行 PHP 文件之前在该文件中插入一个文件的内容。除了它们处理错误的方式不同之外，这两个函数在其他方面都是相同的。include() 函数会生成一个警告（但是脚本会继续执行），而 require() 函数会生成一个致命错误（fatal error）（在错误发生后脚本会停止执行）。</p>
+
+<p>这两个函数用于创建可在多个页面重复使用的函数、页眉、页脚或元素。</p>
+<p>这会为开发者节省大量的时间。这意味着您可以创建供所有网页引用的标准页眉或菜单文件。当页眉需要更新时，您只更新一个包含文件就可以了，或者当您向网站添加一张新页面时，仅仅需要修改一下菜单文件（而不是更新所有网页中的链接）。</p>
+</div>
+
+<div>
+<h2>include() 函数</h2>
+
+<p>include() 函数可获得指定文件中的所有文本，并把文本拷贝到使用 include 函数的文件中。</p>
+
+<h3>例子 1</h3>
+
+<p>假设您拥有一个标准的页眉文件，名为 &quot;header.php&quot;。如需在页面中引用这个页眉文件，请使用 include() 函数，就像这样：</p>
+
+<pre>&lt;html&gt;
+&lt;body&gt;
+
+<code>&lt;?php include(&quot;header.php&quot;); ?&gt;</code>
+
+&lt;h1&gt;Welcome to my home page&lt;/h1&gt;
+
+&lt;p&gt;Some text&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<h3>例子 2</h3>
+
+<p>现在，假设我们有一个在所有页面上使用的标准菜单文件。请看下面这个 &quot;menu.php&quot;：</p>
+
+<pre>&lt;html&gt;
+&lt;body&gt;
+
+&lt;a href=&quot;http://www.w3school.com.cn/default.php&quot;&gt;Home&lt;/a&gt; |
+&lt;a href=&quot;http://www.w3school.com.cn/about.php&quot;&gt;About Us&lt;/a&gt; | 
+&lt;a href=&quot;http://www.w3school.com.cn/contact.php&quot;&gt;Contact Us&lt;/a&gt;</pre>
+
+<p>三个文件，&quot;default.php&quot;、&quot;about.php&quot; 以及 &quot;contact.php&quot; 都引用了 &quot;menu.php&quot; 文件。这是 &quot;default.php&quot; 中的代码：</p>
+
+<pre><code>&lt;?php include(&quot;menu.php&quot;); ?&gt;</code>
+
+&lt;h1&gt;Welcome to my home page&lt;/h1&gt;
+
+&lt;p&gt;Some text&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>如果您在浏览器中查看 &quot;default.php&quot; 的源代码，应该类似这样：</p>
+
+<pre>&lt;html&gt;
+&lt;body&gt;
+
+&lt;a href=&quot;default.php&quot;&gt;Home&lt;/a&gt; |
+&lt;a href=&quot;about.php&quot;&gt;About Us&lt;/a&gt; | 
+&lt;a href=&quot;contact.php&quot;&gt;Contact Us&lt;/a&gt;
+
+&lt;h1&gt;Welcome to my home page&lt;/h1&gt;
+&lt;p&gt;Some text&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>同时，当然，我们也将用相同的方法处理 &quot;about.php&quot; 和 &quot;contact.php&quot;。通过使用引用文件，在您需要重命名链接、更改链接顺序或向站点添加另一张网页时，只要简单地更新 &quot;menu.php&quot; 文件中的文本即可。</p>
+</div>
+
+<div>
+<h2>require() 函数</h2>
+
+<p>require() 函数与 include() 相同，不同的是它对错误的处理方式。</p>
+
+<p>include() 函数会生成一个警告（但是脚本会继续执行），而 require() 函数会生成一个致命错误（fatal error）（在错误发生后脚本会停止执行）。</p>
+
+<p>如果在您通过 include() 引用文件时发生了错误，会得到类似下面这样的错误消息：</p>
+
+<h3>PHP 代码：</h3>
+
+<pre>&lt;html&gt;
+&lt;body&gt;
+
+&lt;?php
+include(&quot;wrongFile.php&quot;);
+echo &quot;Hello World!&quot;;
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<h3>错误消息：</h3>
+
+<pre>Warning: include(wrongFile.php) [function.include]:
+failed to open stream:
+No such file or directory in C:\home\website\test.php on line 5
+
+Warning: include() [function.include]:
+Failed opening 'wrongFile.php' for inclusion
+(include_path='.;C:\php5\pear')
+in C:\home\website\test.php on line 5
+
+Hello World!</pre>
+
+<p>请注意，echo 语句依然被执行了！这是因为警告不会中止脚本的执行。</p>
+
+<p>现在，让我们使用 require() 函数运行相同的例子。</p>
+
+<h3>PHP 代码：</h3>
+
+<pre>&lt;html&gt;
+&lt;body&gt;
+
+&lt;?php
+require(&quot;wrongFile.php&quot;);
+echo &quot;Hello World!&quot;;
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<h3>错误消息：</h3>
+
+<pre>Warning: require(wrongFile.php) [function.require]:
+failed to open stream:
+No such file or directory in C:\home\website\test.php on line 5
+
+Fatal error: require() [function.require]:
+Failed opening required 'wrongFile.php'
+(include_path='.;C:\php5\pear')
+in C:\home\website\test.php on line 5</pre>
+
+<p>由于在致命错误发生后终止了脚本的执行，因此 echo 语句不会执行。</p>
+
+<p><strong>正因为在文件不存在或被重命名后脚本不会继续执行，因此我们推荐使用 require() 而不是 include()。</strong></p>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="php_date.asp.htm" tppabs="http://www.w3school.com.cn/php/php_date.asp">Previous Page</a></li>
+
+<li class="next"><a href="php_file.asp.htm" tppabs="http://www.w3school.com.cn/php/php_file.asp">Next Page</a></li>
+</ul>
+
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div>
+
+<div id="tools">
+<h5 id="tools_reference"><a href="php_ref.asp.htm" tppabs="http://www.w3school.com.cn/php/php_ref.asp">PHP 参考手册</a></h5>
+<h5 id="tools_quiz"><a href="php_quiz.asp.htm" tppabs="http://www.w3school.com.cn/php/php_quiz.asp">PHP 测验</a></h5>
+</div>
+
+<div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

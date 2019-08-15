@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    $("body").append($("p").detach());
+  });
+ $("p").click(function(){
+    $(this).animate({fontSize:"+=1px"})
+  });
+});
+</script>
+</head>
+<body>
+<p>在本段落移动之后，试着点击该段落，请注意它保留了 click 事件。</p>
+<button>移动 p 元素</button>
+</body>
+</html>

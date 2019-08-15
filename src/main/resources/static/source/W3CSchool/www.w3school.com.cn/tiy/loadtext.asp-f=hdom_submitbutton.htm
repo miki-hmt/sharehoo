@@ -1,0 +1,21 @@
+<html>
+<head>
+<script type="text/javascript">
+function alertId()
+  {
+  var txt="Id: " + document.getElementById("submit1").id
+  txt=txt + ", type: " + document.getElementById("submit1").type
+  txt=txt + ", value: " + document.getElementById("submit1").value
+  alert(txt)
+  document.getElementById("submit1").disabled=true
+  }
+</script>
+</head>
+<body>
+
+<form>
+<input type="submit" id="submit1" value="Submit values" onclick="alertId()" />
+</form>
+
+</body>
+</html>

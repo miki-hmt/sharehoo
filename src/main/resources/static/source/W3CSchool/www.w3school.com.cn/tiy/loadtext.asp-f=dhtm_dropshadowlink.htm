@@ -1,0 +1,46 @@
+<html>
+<head>
+<style>
+a
+{
+color:black;
+height:25;
+font:bold;
+text-decoration:none;
+}
+</style>
+<script type="text/javascript">
+var i
+function dropshadow()
+{
+i=0
+interval=setInterval("makedropshadow(myLink)",10)
+}
+
+function back()
+{
+clearInterval(interval)
+document.getElementById('myLink').style.filter=false
+}
+
+function makedropshadow()
+{
+i++
+if (i<7)
+	{
+	document.getElementById('myLink').style.filter="dropshadow(offx=" + i + ")"
+	document.getElementById('myLink').style.filter="dropshadow(offy=" + i + ")"
+	}
+else if (window.interval)
+	{
+	clearInterval(interval)
+	}
+}
+</script>
+</head>
+
+<body>
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" id="myLink" onmouseover="dropshadow()" onmouseout="back()">请把鼠标移动到链接上</a>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<html>
+<head>
+
+<script type="text/javascript">
+function moveleft()
+{
+document.getElementById('header').style.position="absolute"
+document.getElementById('header').style.left="0"
+}
+
+function moveback()
+{
+document.getElementById('header').style.position="relative"
+}
+</script>
+</head>
+<body>
+
+<h1 id="header" 
+onmouseover="moveleft()"
+onmouseout="moveback()">
+请把鼠标移动到文本上</h1>
+
+</body>
+</html>

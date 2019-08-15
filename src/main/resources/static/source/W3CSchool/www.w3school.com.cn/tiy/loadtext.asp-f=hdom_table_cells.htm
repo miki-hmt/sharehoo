@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+function cell()
+  {
+  var x=document.getElementById('myTable').rows[0].cells;
+  alert(x[0].innerHTML);
+  }
+</script>
+</head>
+<body>
+
+<table id="myTable" border="1">
+<tr>
+<td>cell 1</td>
+<td>cell 2</td>
+</tr>
+<tr>
+<td>cell 3</td>
+<td>cell 4</td>
+</tr>
+</table>
+<br />
+<input type="button" onclick="cell()" value="显示第一个单元">
+
+</body>
+</html>

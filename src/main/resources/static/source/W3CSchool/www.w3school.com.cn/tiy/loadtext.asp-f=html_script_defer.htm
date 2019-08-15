@@ -1,0 +1,17 @@
+<html>
+<body>
+
+<script type="text/javascript" defer="defer">
+alert(document.getElementById("p1").firstChild.nodeValue);
+</script>
+
+<p>上面的脚本会从下面的段落中请求信息。通常，这是做不到的，因为在段落加载之前，脚本已经运行过了。</p>
+
+<p id="p1">Hello World!</p>
+
+<p>然而，defer 属性规定了脚本必须在页面加载完毕后执行。这样，脚本就可以从段落中请求数据了。</p>
+
+<p><b>注释：</b>该属性只能在 Internet Explorer 中运行。</p>
+
+</body>
+</html>

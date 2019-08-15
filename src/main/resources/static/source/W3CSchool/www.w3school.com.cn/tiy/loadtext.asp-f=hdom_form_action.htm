@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeAction()
+{
+var x=document.getElementById("myForm")
+alert("Original action: " + x.action)
+x.action="../htmldom/index.asp.htm"/*tpa=http://www.w3school.com.cn/htmldom/index.asp*/
+alert("New action: " + x.action)
+x.submit()
+}
+</script>
+</head>
+<body>
+
+<form id="myForm" action="http://www.w3school.com.cn/i/eg_smile.gif">
+名称：<input type="text" value="米老鼠" />
+<input type="button" onclick="changeAction()"
+value="改变 action 属性并提交表单" />
+</form>
+
+</body>
+</html>

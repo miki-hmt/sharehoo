@@ -1,0 +1,33 @@
+<html>
+<head>
+<script type="text/javascript">
+function access()
+{
+document.getElementById('myName').accessKey="n"
+document.getElementById('myPwd').accessKey="p"
+document.getElementById('ie').accessKey="i"
+document.getElementById('fx').accessKey="f"
+document.getElementById('myButton').accessKey="b"
+}
+</script>
+</head>
+
+<body onload="access()">
+<form>
+姓名：<input id="myName" type="text" />
+<br />
+密码：<input id="myPwd" type="password" />
+<br /><br />
+选择您喜欢的浏览器：
+<br />
+<input type="radio" name="browser" id="ie" value="Internet Explorer">Internet Explorer<br />
+<input type="radio" name="browser" id="fx" value="Firefox">Firefox
+<br /><br />
+<input type="button" value="点击我！" id="myButton" />
+</form>
+
+<p>（请使用 Alt + <i>accesskey</i> 为不同的表单字段赋予焦点。）
+</p>
+</body>
+
+</html>

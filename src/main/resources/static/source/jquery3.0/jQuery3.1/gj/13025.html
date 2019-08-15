@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.isNumeric()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.isNumeric()<span class="g-bg-red margin-l-5">1.7+</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.isNumeric( value )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Boolean</code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>确定它的参数是否是一个JavaScript数字。
+</p>
+<ul class="signatures">
+	<li class="signature" id="jQuery-isNumeric-value">
+		<h4 class="name">
+			<span class="version-details">V : 1.7</span>jQuery.isNumeric(
+							value )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>value</strong> 
+				</div>
+				<div>
+					类型: Anything
+				</div>
+				<div>
+					用于测试的值。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>$.isNumeric()</code>方法检查它的参数是否能代表一个数值。如果是这样，则返回<code>true</code>。否则返回<code>false</code>。该参数可以是任何类型。（手册网注：jQuery 3.0之前，这个方法会强制转换参数为<code>Number</code>，转换后的值类型如果是如果是<code>Number</code>，也会返回<code>true</code>）
+	</p>
+	<p>
+		在jQuery 3.0中，<code>$.isNumeric()</code>方法只有接收<code>number</code>类型的参数时候，或者是可以被强制为有限数值的 <code>string</code>类型的参数，才会返回<code>true</code>，在其他情况下，返回<code>false</code>。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">以下是使用 $.isNumeric 检测各种输入类型的示例。</span> 
+</p>
+<pre class="prettyprint lang-js">// true (numeric)
+$.isNumeric( "-10" )
+$.isNumeric( "0" )
+$.isNumeric( 0xFF )
+$.isNumeric( "0xFF" )
+$.isNumeric( "8e5" )
+$.isNumeric( "3.1415" )
+$.isNumeric( +10 )
+$.isNumeric( 0144 )
+ 
+// false (non-numeric)
+$.isNumeric( "-0x42" )
+$.isNumeric( "7.2acdgs" )
+$.isNumeric( "" )
+$.isNumeric( {} )
+$.isNumeric( NaN )
+$.isNumeric( null )
+$.isNumeric( true )
+$.isNumeric( Infinity )
+$.isNumeric( undefined )</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8208" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<html>
+<head>
+<script type="text/javascript">
+function newColor(color)
+{
+document.getElementById('x').style.background=color
+}
+</script>
+</head>
+<body>
+
+<p>本例演示如何改变 textarea 的背景颜色。</p>
+<p>请把鼠标移动到下面的三个表格单元上，背景颜色将会改变：</p>
+
+<table width="100%"><tr>
+<td bgcolor="red" onmouseover="newColor('red')">&nbsp;</td>
+<td bgcolor="blue" onmouseover="newColor('blue')">&nbsp;</td>
+<td bgcolor="green" onmouseover="newColor('green')">&nbsp;</td>
+</tr></table>
+
+<form>
+<textarea id="x" rows="5" cols="20">
+This example can not be edited
+because our editor uses a textarea
+for input,
+and your browser does not allow
+a textarea inside a textarea.
+</textarea>
+</form>
+
+</body>
+</html>

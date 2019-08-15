@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("img").error(function(){
+    $("img").replaceWith("<p>Missing image!</p>");
+  });
+  $("button").click(function(){
+    $("img").error();
+  });
+});
+</script>
+</head>
+<body>
+<img src="../i/eg_tulip.jpg" tppabs="http://www.w3school.com.cn/i/eg_tulip.jpg" />
+<p>如果上面的图像没有正确地加载，会被替换为一段 "Missing image!" 的文本。</p>
+<button>触发图像的 error 事件</button>
+</body>
+</html>

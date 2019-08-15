@@ -1,0 +1,27 @@
+<html>
+<head>
+
+<script type="text/javascript">
+txtsize=0
+maxsize=100
+
+function writemsg()
+{
+if (txtsize<maxsize)
+	{
+	document.getElementById('msg').style.fontSize=txtsize
+	txtsize++
+	timer=setTimeout("writemsg()",10)
+	}
+}
+
+function stoptimer()
+{
+clearTimeout(timer)
+}
+</script>
+</head>
+<body onload="writemsg()" onunload="stoptimer()">
+<p id="msg">W3School.com.cn!</p>
+</body>
+</html>

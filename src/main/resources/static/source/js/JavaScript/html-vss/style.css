@@ -1,0 +1,47 @@
+BODY
+{
+    MARGIN-RIGHT: 0px
+}
+DIV
+{
+    BACKGROUND: white;
+    COLOR: black;
+    FONT-FAMILY: Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt
+}
+TD
+{
+    BACKGROUND-COLOR: #eeeeee
+}
+.clsItemsShow
+{
+    LIST-STYLE: url(images/arrowstop.gif)
+}
+.clsShowHide
+{
+    CURSOR: hand;
+    LIST-STYLE: url(images/blueplus.gif)
+}
+.clsStyleCheck
+{
+    MARGIN-LEFT: 15px;
+    MARGIN-TOP: 5px
+}
+.clsHeading
+{
+    CURSOR: hand
+}
+.clsMainTable
+{
+    BACKGROUND-COLOR: white;
+    MARGIN: 0px;
+    PADDING-BOTTOM: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-RIGHT: 0px;
+    PADDING-TOP: 0px
+}
+.clsSelected
+{
+    BACKGROUND-COLOR: #eeeeee;
+    CURSOR: hand
+}

@@ -1,0 +1,970 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>CSS 参考手册</title>
+</head>
+
+<body class="html">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>CSS 基础</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/css/index.asp" title="CSS 教程">CSS 教程</a></li>
+<li><a href="css_intro.asp.htm" tppabs="http://www.w3school.com.cn/css/css_intro.asp" title="CSS 简介">CSS 简介</a></li>
+<li><a href="css_syntax_01.asp.htm" tppabs="http://www.w3school.com.cn/css/css_syntax_01.asp" title="CSS 基础语法">CSS 基础语法</a></li>
+<li><a href="css_syntax_02.asp.htm" tppabs="http://www.w3school.com.cn/css/css_syntax_02.asp" title="CSS 高级语法">CSS 高级语法</a></li>
+<li><a href="css_syntax_03.asp.htm" tppabs="http://www.w3school.com.cn/css/css_syntax_03.asp" title="CSS 派生选择器">CSS 派生选择器</a></li>
+<li><a href="css_syntax_04.asp.htm" tppabs="http://www.w3school.com.cn/css/css_syntax_04.asp" title="CSS id 选择器">CSS id 选择器</a></li>
+<li><a href="css_syntax_05.asp.htm" tppabs="http://www.w3school.com.cn/css/css_syntax_05.asp" title="CSS 类选择器">CSS 类选择器</a></li>
+<li><a href="css_howto.asp.htm" tppabs="http://www.w3school.com.cn/css/css_howto.asp" title="CSS How To">CSS How To</a></li>
+<li><a href="css_background.asp.htm" tppabs="http://www.w3school.com.cn/css/css_background.asp" title="CSS 背景">CSS 背景</a></li>
+<li><a href="css_text.asp.htm" tppabs="http://www.w3school.com.cn/css/css_text.asp" title="CSS 文本">CSS 文本</a></li>
+<li><a href="css_font.asp.htm" tppabs="http://www.w3school.com.cn/css/css_font.asp" title="CSS 字体">CSS 字体</a></li>
+<li><a href="css_list.asp.htm" tppabs="http://www.w3school.com.cn/css/css_list.asp" title="CSS 列表">CSS 列表</a></li>
+<li><a href="css_table.asp.htm" tppabs="http://www.w3school.com.cn/css/css_table.asp" title="CSS 表格">CSS 表格</a></li>
+<li><a href="css_outline.asp.htm" tppabs="http://www.w3school.com.cn/css/css_outline.asp" title="CSS 轮廓">CSS 轮廓</a></li>
+</ul>
+
+<h2>CSS 框模型</h2>
+<ul>
+<li><a href="css_boxmodel.asp.htm" tppabs="http://www.w3school.com.cn/css/css_boxmodel.asp" title="CSS 框模型">CSS 框模型概述</a></li>
+<li><a href="css_padding.asp.htm" tppabs="http://www.w3school.com.cn/css/css_padding.asp" title="CSS 内边距">CSS 内边距</a></li>
+<li><a href="css_border.asp.htm" tppabs="http://www.w3school.com.cn/css/css_border.asp" title="CSS 边框">CSS 边框</a></li>
+<li><a href="css_margin.asp.htm" tppabs="http://www.w3school.com.cn/css/css_margin.asp" title="CSS 外边距">CSS 外边距</a></li>
+<li><a href="css_margin_collapsing.asp.htm" tppabs="http://www.w3school.com.cn/css/css_margin_collapsing.asp" title="CSS 外边距合并">CSS 外边距合并</a></li>
+</ul>
+
+<h2>CSS 定位</h2>
+<ul>
+<li><a href="css_positioning.asp.htm" tppabs="http://www.w3school.com.cn/css/css_positioning.asp" title="CSS 定位概述">CSS 定位概述</a></li>
+<li><a href="css_positioning_relative.asp.htm" tppabs="http://www.w3school.com.cn/css/css_positioning_relative.asp" title="CSS 相对定位">CSS 相对定位</a></li>
+<li><a href="css_positioning_absolute.asp.htm" tppabs="http://www.w3school.com.cn/css/css_positioning_absolute.asp" title="CSS 绝对定位">CSS 绝对定位</a></li>
+<li><a href="css_positioning_floating.asp.htm" tppabs="http://www.w3school.com.cn/css/css_positioning_floating.asp" title="CSS 浮动">CSS 浮动</a></li>
+</ul>
+
+<h2>CSS 高级</h2>
+<ul>
+<li><a href="css_dimension.asp.htm" tppabs="http://www.w3school.com.cn/css/css_dimension.asp" title="CSS 尺寸">CSS 尺寸</a></li>
+<li><a href="css_classification.asp.htm" tppabs="http://www.w3school.com.cn/css/css_classification.asp" title="CSS 分类">CSS 分类</a></li>
+<li><a href="css_pseudo_classes.asp.htm" tppabs="http://www.w3school.com.cn/css/css_pseudo_classes.asp" title="CSS 伪类">CSS 伪类</a></li>
+<li><a href="css_pseudo_elements.asp.htm" tppabs="http://www.w3school.com.cn/css/css_pseudo_elements.asp" title="CSS 伪元素">CSS 伪元素</a></li>
+<li><a href="css_mediatypes.asp.htm" tppabs="http://www.w3school.com.cn/css/css_mediatypes.asp" title="CSS 媒介类型">CSS 媒介类型</a></li>
+<li><a href="css_dont.asp.htm" tppabs="http://www.w3school.com.cn/css/css_dont.asp" title="CSS Don't">CSS Don't</a></li>
+<li><a href="css_summary.asp.htm" tppabs="http://www.w3school.com.cn/css/css_summary.asp" title="CSS 总结">CSS 总结</a></li>
+</ul>
+
+<h2>CSS 实例</h2>
+<ul>
+<li><a href="../example/csse_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/csse_examples.asp" title="CSS实例">CSS 实例</a></li>
+</ul>
+
+<h2>参考手册</h2>
+<ul>
+<li><a href="css_reference.asp.htm" tppabs="http://www.w3school.com.cn/css/css_reference.asp" title="CSS2参考手册">CSS2 参考手册</a></li>
+<li><a href="css_ref_print.asp.htm" tppabs="http://www.w3school.com.cn/css/css_ref_print.asp" title="CSS2打印">CSS2 打印</a></li>
+<li><a href="css_ref_aural.asp.htm" tppabs="http://www.w3school.com.cn/css/css_ref_aural.asp" title="CSS2听觉">CSS2 听觉</a></li>
+<li><a href="css_units.asp.htm" tppabs="http://www.w3school.com.cn/css/css_units.asp" title="CSS2单位">CSS2 单位</a></li>
+</ul>
+
+<h2>CSS Quiz</h2>
+<ul>
+<li><a href="css_quiz.asp.htm" tppabs="http://www.w3school.com.cn/css/css_quiz.asp" title="CSS 测验">CSS 测验</a></li>
+</ul>
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS 参考手册</h1>
+
+<div id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="../example/csse_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/csse_examples.asp">Previous Page</a></li>
+
+<li class="next"><a href="css_ref_print.asp.htm" tppabs="http://www.w3school.com.cn/css/css_ref_print.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div id="intro">
+<p><strong>请点击表格中属性列的链接，可以查看相关属性的详细信息。</strong></p>
+</div>
+
+<div>
+<h2>CSS 属性组：</h2>
+<ul>
+<li><a href="#background">背景</a></li>
+<li><a href="#text">文本</a></li>
+<li><a href="#font">字体</a></li>
+<li><a href="#border">边框和轮廓</a></li>
+<li><a href="#margin">外边距</a></li>
+<li><a href="#padding">内边距</a></li>
+<li><a href="#list">列表</a></li>
+<li><a href="#generatedcontent">内容生成</a></li>
+<li><a href="#dimension">尺寸</a></li>
+<li><a href="#positioning">定位</a></li>
+<li><a href="#print">打印</a></li>
+<li><a href="#table">表格</a></li>
+<li><a href="#pseudoclasses">伪类</a></li>
+<li><a href="#pseudoelements">伪元素</a></li>
+</ul>
+</div>
+
+
+<div>
+<h2>提示和注释：</h2>
+<p class="note"><span>属性：</span>“属性” 列指向语法、实例、浏览器支持等内容。</p>
+<p class="note"><span>CSS：</span>&quot;CSS&quot; 列指示属性是在哪个 CSS 版本中定义的（CSS1 还是 CSS2）。</p>
+<p class="tip"><span>提示：</span>W3School 的 CSS 参考手册定期在所有主流浏览器中进行测试。最后测试时间：2009 年 10 月 8 日。</p>
+</div>
+
+
+<div id="background">
+
+<h2>CSS 背景属性（Background）</h2>
+
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_background.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_background.asp">background</a></td>
+    <td>在一个声明中设置所有的背景属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_background-attachment.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_background-attachment.asp">background-attachment</a></td>
+    <td>设置背景图像是否固定或者随着页面的其余部分滚动。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_background-color.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_background-color.asp">background-color</a></td>
+    <td>设置元素的背景颜色。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_background-image.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_background-image.asp">background-image</a></td>
+    <td>设置元素的背景图像。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_background-position.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_background-position.asp">background-position</a></td>
+    <td>设置背景图像的开始位置。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_background-repeat.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_background-repeat.asp">background-repeat</a></td>
+    <td>设置是否及如何重复背景图像。</td>
+    <td>1</td>
+  </tr>
+</table>
+</div>
+
+
+
+<div id="border">
+<h2>CSS 边框属性（Border 和 Outline）</h2>
+
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_border.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border.asp">border</a></td>
+    <td>在一个声明中设置所有的边框属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-bottom.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-bottom.asp">border-bottom</a></td>
+    <td>在一个声明中设置所有的下边框属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-bottom_color.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-bottom_color.asp">border-bottom-color</a></td>
+    <td>设置下边框的颜色。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-bottom_style.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-bottom_style.asp">border-bottom-style</a></td>
+    <td>设置下边框的样式。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-bottom_width.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-bottom_width.asp">border-bottom-width</a></td>
+    <td>设置下边框的宽度。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-color.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-color.asp">border-color</a></td>
+    <td>设置四条边框的颜色。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-left.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-left.asp">border-left</a></td>
+    <td>在一个声明中设置所有的左边框属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-left_color.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-left_color.asp">border-left-color</a></td>
+    <td>设置左边框的颜色。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-left_style.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-left_style.asp">border-left-style</a></td>
+    <td>设置左边框的样式。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-left_width.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-left_width.asp">border-left-width</a></td>
+    <td>设置左边框的宽度。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-right.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-right.asp">border-right</a></td>
+    <td>在一个声明中设置所有的右边框属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-right_color.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-right_color.asp">border-right-color</a></td>
+    <td>设置右边框的颜色。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-right_style.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-right_style.asp">border-right-style</a></td>
+    <td>设置右边框的样式。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-right_width.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-right_width.asp">border-right-width</a></td>
+    <td>设置右边框的宽度。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-style.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-style.asp">border-style</a></td>
+    <td>设置四条边框的样式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-top.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-top.asp">border-top</a></td>
+    <td>在一个声明中设置所有的上边框属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-top_color.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-top_color.asp">border-top-color</a></td>
+    <td>设置上边框的颜色。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-top_style.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-top_style.asp">border-top-style</a></td>
+    <td>设置上边框的样式。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-top_width.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-top_width.asp">border-top-width</a></td>
+    <td>设置上边框的宽度。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_border-width.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_border-width.asp">border-width</a></td>
+    <td>设置四条边框的宽度。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_outline.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_outline.asp">outline</a></td>
+    <td>在一个声明中设置所有的轮廓属性。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_outline-color.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_outline-color.asp">outline-color</a></td>
+    <td>设置轮廓的颜色。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_outline-style.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_outline-style.asp">outline-style</a></td>
+    <td>设置轮廓的样式。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_outline-width.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_outline-width.asp">outline-width</a></td>
+    <td>设置轮廓的宽度。</td>
+    <td>2</td>
+  </tr>
+</table>
+</div>
+
+<div id="text">
+<h2>CSS 文本属性（Text）</h2>
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_text_color.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_text_color.asp">color</a></td>
+    <td>设置文本的颜色。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_text_direction.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_text_direction.asp">direction</a></td>
+    <td>规定文本的方向 / 书写方向。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_text_letter-spacing.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_text_letter-spacing.asp">letter-spacing</a></td>
+    <td>设置字符间距。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_dim_line-height.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_dim_line-height.asp">line-height</a></td>
+    <td>设置行高。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_text_text-align.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_text_text-align.asp">text-align</a></td>
+    <td>规定文本的水平对齐方式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_text_text-decoration.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_text_text-decoration.asp">text-decoration</a></td>
+    <td>规定添加到文本的装饰效果。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_text_text-indent.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_text_text-indent.asp">text-indent</a></td>
+    <td>规定文本块首行的缩进。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>text-shadow</td>
+    <td>规定添加到文本的阴影效果。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_text_text-transform.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_text_text-transform.asp">text-transform</a></td>
+    <td>控制文本的大小写。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_unicode-bidi.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_unicode-bidi.asp">unicode-bidi</a></td>
+    <td>设置文本方向。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_text_white-space.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_text_white-space.asp">white-space</a></td>
+    <td>规定如何处理元素中的空白。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_text_word-spacing.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_text_word-spacing.asp">word-spacing</a></td>
+    <td>设置单词间距。</td>
+    <td>1</td>
+  </tr>
+</table>
+</div>
+
+<div id="font">
+<h2>CSS 字体属性（Font）</h2>
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_font_font.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_font_font.asp">font</a></td>
+    <td>在一个声明中设置所有字体属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_font_font-family.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_font_font-family.asp">font-family</a></td>
+    <td>规定文本的字体系列。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_font_font-size.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_font_font-size.asp">font-size</a></td>
+    <td>规定文本的字体尺寸。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_font_font-size-adjust.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_font_font-size-adjust.asp">font-size-adjust</a></td>
+    <td>为元素规定 aspect 值。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_font_font-stretch.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_font_font-stretch.asp">font-stretch</a></td>
+    <td>收缩或拉伸当前的字体系列。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_font_font-style.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_font_font-style.asp">font-style</a></td>
+    <td>规定文本的字体样式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_font_font-variant.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_font_font-variant.asp">font-variant</a></td>
+    <td>规定文本的字体样式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_font_weight.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_font_weight.asp">font-weight</a></td>
+    <td>规定字体的粗细。</td>
+    <td>1</td>
+  </tr>
+</table>
+</div>
+
+
+<div id="margin">
+<h2>CSS 外边距属性（Margin）</h2>
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_margin.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_margin.asp">margin</a></td>
+    <td>在一个声明中设置所有外边距属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_margin-bottom.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_margin-bottom.asp">margin-bottom</a></td>
+    <td>设置元素的下外边距。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_margin-left.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_margin-left.asp">margin-left</a></td>
+    <td>设置元素的左外边距。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_margin-right.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_margin-right.asp">margin-right</a></td>
+    <td>设置元素的右外边距。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_margin-top.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_margin-top.asp">margin-top</a></td>
+    <td>设置元素的上外边距。</td>
+    <td>1</td>
+  </tr>
+</table>
+</div>
+
+
+<div id="padding">
+<h2>CSS 内边距属性（Padding）</h2>
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_padding.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_padding.asp">padding</a></td>
+    <td>在一个声明中设置所有内边距属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_padding-bottom.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_padding-bottom.asp">padding-bottom</a></td>
+    <td>设置元素的下内边距。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_padding-left.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_padding-left.asp">padding-left</a></td>
+    <td>设置元素的左内边距。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_padding-right.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_padding-right.asp">padding-right</a></td>
+    <td>设置元素的右内边距。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_padding-top.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_padding-top.asp">padding-top</a></td>
+    <td>设置元素的上内边距。</td>
+    <td>1</td>
+  </tr>
+</table>
+</div>
+
+
+<div id="list">
+<h2>CSS 列表属性（List）</h2>
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_list-style.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_list-style.asp">list-style</a></td>
+    <td>在一个声明中设置所有的列表属性。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_list-style-image.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_list-style-image.asp">list-style-image</a></td>
+    <td>将图象设置为列表项标记。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_list-style-position.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_list-style-position.asp">list-style-position</a></td>
+    <td>设置列表项标记的放置位置。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_list-style-type.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_list-style-type.asp">list-style-type</a></td>
+    <td>设置列表项标记的类型。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>marker-offset</td>
+    <td>&nbsp;</td>
+    <td>2</td>
+  </tr>
+</table>
+</div>
+
+
+<div id="generatedcontent">
+<h2>内容生成（Generated Content）</h2>
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_gen_content.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_gen_content.asp">content</a></td>
+    <td>与 :before 以及 :after 伪元素配合使用，来插入生成内容。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_gen_counter-increment.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_gen_counter-increment.asp">counter-increment</a></td>
+    <td>递增或递减一个或多个计数器。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_gen_counter-reset.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_gen_counter-reset.asp">counter-reset</a></td>
+    <td>创建或重置一个或多个计数器。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_gen_quotes.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_gen_quotes.asp">quotes</a></td>
+    <td>设置嵌套引用的引号类型。</td>
+    <td>2</td>
+  </tr>
+</table>
+</div>
+
+
+
+<div id="dimension">
+<h2>CSS 尺寸属性（Dimension）</h2>
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_dim_height.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_dim_height.asp">height</a></td>
+    <td>设置元素高度。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_dim_max-height.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_dim_max-height.asp">max-height</a></td>
+    <td>设置元素的最大高度。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_dim_max-width.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_dim_max-width.asp">max-width</a></td>
+    <td>设置元素的最大宽度。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_dim_min-height.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_dim_min-height.asp">min-height</a></td>
+    <td>设置元素的最小高度。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_dim_min-width.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_dim_min-width.asp">min-width</a></td>
+    <td>设置元素的最小宽度。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_dim_width.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_dim_width.asp">width</a></td>
+    <td>设置元素的宽度。</td>
+    <td>1</td>
+  </tr>
+</table>
+</div>
+
+
+
+<div id="positioning">
+
+<h2>CSS 定位属性（Positioning）</h2>
+
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_pos_bottom.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pos_bottom.asp">bottom</a></td>
+    <td>设置定位元素下外边距边界与其包含块下边界之间的偏移。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_class_clear.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_class_clear.asp">clear</a></td>
+    <td>规定元素的哪一侧不允许其他浮动元素。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pos_clip.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pos_clip.asp">clip</a></td>
+    <td>剪裁绝对定位元素。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_class_cursor.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_class_cursor.asp">cursor</a></td>
+    <td>规定要显示的光标的类型（形状）。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_class_display.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_class_display.asp">display</a></td>
+    <td>规定元素应该生成的框的类型。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_class_float.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_class_float.asp">float</a></td>
+    <td>规定框是否应该浮动。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pos_left.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pos_left.asp">left</a></td>
+    <td>设置定位元素左外边距边界与其包含块左边界之间的偏移。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pos_overflow.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pos_overflow.asp">overflow</a></td>
+    <td>规定当内容溢出元素框时发生的事情。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_class_position.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_class_position.asp">position</a></td>
+    <td>规定元素的定位类型。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pos_right.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pos_right.asp">right</a></td>
+    <td>设置定位元素右外边距边界与其包含块右边界之间的偏移。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pos_top.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pos_top.asp">top</a></td>
+    <td>设置定位元素的上外边距边界与其包含块上边界之间的偏移。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pos_vertical-align.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pos_vertical-align.asp">vertical-align</a></td>
+    <td>设置元素的垂直对齐方式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_class_visibility.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_class_visibility.asp">visibility</a></td>
+    <td>规定元素是否可见。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pos_z-index.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pos_z-index.asp">z-index</a></td>
+    <td>设置元素的堆叠顺序。</td>
+    <td>2</td>
+  </tr>
+</table>
+</div>
+
+
+<div id="print">
+<h2>CSS 打印属性（Print）</h2>
+
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td>orphans</td>
+    <td>设置当元素内部发生分页时必须在页面底部保留的最少行数。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_print_page-break-after.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_print_page-break-after.asp" title="CSS page-break-after 属性">page-break-after</a></td>
+    <td>设置元素后的分页行为。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td class="no_wrap"><a href="pr_print_page-break-before.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_print_page-break-before.asp" title="CSS page-break-before 属性">page-break-before</a></td>
+    <td>设置元素前的分页行为。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_print_page-break-inside.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_print_page-break-inside.asp" title="CSS page-break-inside 属性">page-break-inside</a></td>
+    <td>设置元素内部的分页行为。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>widows</td>
+    <td>设置当元素内部发生分页时必须在页面顶部保留的最少行数。</td>
+    <td>2</td>
+  </tr>
+</table>
+</div>
+
+
+<div id="table">
+<h2>CSS 表格属性（Table）</h2>
+
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+
+  <tr>
+    <td><a href="pr_tab_border-collapse.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_tab_border-collapse.asp" title="">border-collapse</a></td>
+    <td>规定是否合并表格边框。</td>
+    <td>2</td>
+  </tr>
+
+  <tr>
+    <td><a href="pr_tab_border-spacing.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_tab_border-spacing.asp" title="">border-spacing</a></td>
+    <td>规定相邻单元格边框之间的距离。</td>
+    <td>2</td>
+  </tr>
+
+  <tr>
+    <td><a href="pr_tab_caption-side.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_tab_caption-side.asp" title="">caption-side</a></td>
+    <td>规定表格标题的位置。</td>
+    <td>2</td>
+  </tr>
+
+  <tr>
+    <td><a href="pr_tab_empty-cells.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_tab_empty-cells.asp" title="">empty-cells</a></td>
+    <td>规定是否显示表格中的空单元格上的边框和背景。</td>
+    <td>2</td>
+  </tr>
+
+  <tr>
+    <td><a href="pr_tab_table-layout.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_tab_table-layout.asp" title="">table-layout</a></td>
+    <td>设置用于表格的布局算法。</td>
+    <td>2</td>
+  </tr>
+</table>
+</div>
+
+
+<div id="pseudoclasses">
+<h2>CSS 伪类（Pseudo-classes）</h2>
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_pseudo_active.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_active.asp">:active</a></td>
+    <td>向被激活的元素添加样式。</td>
+    <td>1</td>
+  </tr>
+	<tr>
+    <td><a href="pr_pseudo_focus.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_focus.asp">:focus</a></td>
+    <td>向拥有键盘输入焦点的元素添加样式。</td>
+    <td>2</td>
+  </tr>
+	<tr>
+    <td><a href="pr_pseudo_hover.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_hover.asp">:hover</a></td>
+    <td>当鼠标悬浮在元素上方时，向元素添加样式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pseudo_link.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_link.asp">:link</a></td>
+    <td>向未被访问的链接添加样式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pseudo_visited.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_visited.asp">:visited</a></td>
+    <td>向已被访问的链接添加样式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pseudo_first-child.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_first-child.asp">:first-child</a></td>
+    <td>向元素的第一个子元素添加样式。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pseudo_lang.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_lang.asp">:lang</a></td>
+    <td>向带有指定 lang 属性的元素添加样式。</td>
+    <td>2</td>
+  </tr>
+</table>
+</div>
+
+
+<div id="pseudoelements">
+
+<h2>CSS 伪元素（Pseudo elements）</h2>
+
+<table class="dataintable">
+  <tr>
+    <th style="width:30%;">属性</th>
+    <th style="width:65%;">描述</th>
+    <th style="width:5%;">CSS</th>
+  </tr>
+  <tr>
+    <td><a href="pr_pseudo_first-letter.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_first-letter.asp">:first-letter</a></td>
+    <td>向文本的第一个字母添加特殊样式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pseudo_first-line.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_first-line.asp">:first-line</a></td>
+    <td>向文本的首行添加特殊样式。</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pseudo_before.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_before.asp">:before</a></td>
+    <td>在元素之前添加内容。</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><a href="pr_pseudo_after.asp.htm" tppabs="http://www.w3school.com.cn/css/pr_pseudo_after.asp">:after</a></td>
+    <td>在元素之后添加内容。</td>
+    <td>2</td>
+  </tr>
+</table>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="../example/csse_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/csse_examples.asp">Previous Page</a></li>
+
+<li class="next"><a href="css_ref_print.asp.htm" tppabs="http://www.w3school.com.cn/css/css_ref_print.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div>
+
+<div id="tools">
+<h5 id="tools_reference"><a href="css_reference.asp.htm" tppabs="http://www.w3school.com.cn/css/css_reference.asp">CSS 参考手册</a></h5>
+<h5 id="tools_example"><a href="../example/csse_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/csse_examples.asp">CSS 实例</a></h5>
+<h5 id="tools_quiz"><a href="css_quiz.asp.htm" tppabs="http://www.w3school.com.cn/css/css_quiz.asp">CSS 测验</a></h5>
+</div>
+
+<div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

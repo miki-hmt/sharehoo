@@ -1,0 +1,33 @@
+<html>
+<head>
+<script type="text/javascript">
+function insertOption()
+  {
+  var y=document.createElement('option');
+  y.text='Kiwi'
+  var x=document.getElementById("mySelect");
+  try
+    {
+    x.add(y,null); // standards compliant
+    }
+  catch(ex)
+    {
+    x.add(y); // IE only
+    }
+  }
+</script>
+</head>
+<body>
+
+<form>
+<select id="mySelect">
+  <option>Apple</option>
+  <option>Pear</option>
+  <option>Banana</option>
+  <option>Orange</option>
+</select>
+<input type="button" onclick="insertOption()" value="Insert option" />
+</form>
+
+</body>
+</html>

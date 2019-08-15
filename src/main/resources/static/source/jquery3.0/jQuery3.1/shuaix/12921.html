@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>filter()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">filter()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.filter( selector )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>筛选元素集合中匹配表达式 或 通过传递函数测试的 那些元素集合。
+</p>
+<ul class="signatures">
+	<li class="signature" id="filter-selector">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.filter( selector )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: Selector
+				</div>
+				<div>
+					一个用于匹配元素的选择器字符串。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="filter-functionindex">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.filter( function(index)
+            )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>function(index)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					一个函数用作测试集合中的每个元素。<code>this</code> 是当前DOM元素。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="filter-element">
+		<h4 class="name">
+			<span class="version-details">V : 1.4</span>.filter( element )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>element</strong> 
+				</div>
+				<div>
+					类型: Element
+				</div>
+				<div>
+					一个或多个DOM元素来匹配当前元素集合。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="filter-jQuery-object">
+		<h4 class="name">
+			<span class="version-details">V : 1.4</span>.filter( jQuery object )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>jQuery object</strong> 
+				</div>
+				<div>
+					类型: Object
+				</div>
+				<div>
+					现有jQuery对象，用于进一步筛选当前元素集合。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		如果一个jQuery对象表示一个DOM元素的集合，<code>.filter()</code>方法构造了一个新的jQuery对象的子集。所提供的选择器是对每个元素进行测试;这个选择器匹配的所有元素将包含在结果中。
+	</p>
+	<p>
+		考虑一个页面上一个简单的列表：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;ul&gt;
+  &lt;li&gt;list item 1&lt;/li&gt;
+  &lt;li&gt;list item 2&lt;/li&gt;
+  &lt;li&gt;list item 3&lt;/li&gt;
+  &lt;li&gt;list item 4&lt;/li&gt;
+  &lt;li&gt;list item 5&lt;/li&gt;
+  &lt;li&gt;list item 6&lt;/li&gt;
+&lt;/ul&gt;</pre>
+	</div>
+	<p>
+		我们可以在列表项目上设置此方法：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').filter(':even').css('background-color', 'red');</pre>
+	</div>
+	<p>
+		该调用的结果是1，3，和5项的背景变为红色，因为他们匹配这个选择器（记得:even 和 :odd使用基于0的索引）。
+	</p>
+	<h4 id="using-filter-function">
+		Using a Filter Function（使用过滤函数）
+	</h4>
+	<p>
+		这种方法的第二种形式允许我们使用一个函数，而不是一个选择器来过滤元素，对于每个元素，如果函数返回<code>true</code> ，该元素将被包含在筛选集合中;否则，将被排除在外。假设我们有一个HTML片段：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;list&lt;/strong&gt; item 1 -
+    one strong tag&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;list&lt;/strong&gt; item &lt;strong&gt;2&lt;/strong&gt; -
+    two &lt;span&gt;strong tags&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;list item 3&lt;/li&gt;
+  &lt;li&gt;list item 4&lt;/li&gt;
+  &lt;li&gt;list item 5&lt;/li&gt;
+  &lt;li&gt;list item 6&lt;/li&gt;
+&lt;/ul&gt;</pre>
+	</div>
+	<p>
+		我们可以选择列表项，然后过滤它们的内容：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').filter(function(index) {
+  return $('strong', this).length == 1;
+}).css('background-color', 'red');</pre>
+	</div>
+	<p>
+		此代码只有第一个列表项将改变，因为它仅包含一个<code>&lt;strong&gt;</code>标签。过滤函数中的<code>this</code>是依次指向每个DOM元素。过滤函数中传入的 index 参数代表匹配的 jQuery 对象集合中 DOM 元素的索引。
+	</p>
+	<p>
+		我们可以利用过滤函数中的 <code>index</code> 参数，该参数是从 0 开始的索引值，此索引值代表未经过滤的匹配元素集合中的元素位置：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').filter(function(index) {
+  return index % 3 == 2;
+}).css('background-color', 'red');</pre>
+	</div>
+	<p>
+		这对代码将会导致第三和第六列表项背景变为红色，因为它使用模运算符（ <code>%</code> ）选择每一个项目和<code>index</code>值，除以3时，余<code>2</code> 。
+	</p>
+	<p>
+		<strong>注意:</strong> 当一个CSS选择器字符串被传递给 <code>.filter()</code>时，在过滤过程中，文字和注释节点将始终从得到的jQuery对象中被删除。
+当提供一个特定的节点或节点的数组时，只有当它匹配过滤数组中节点之一的时候，文本或注释节点将被包含在得到的jQuery对象中。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">改变所有 div 的颜色，然后为含有 "middle" 样式的 div 添加边框。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { width:60px; height:60px; margin:5px; float:left;
+        border:2px white solid;}
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div&gt;&lt;/div&gt;
+ 
+  &lt;div class="middle"&gt;&lt;/div&gt;
+  &lt;div class="middle"&gt;&lt;/div&gt;
+  &lt;div class="middle"&gt;&lt;/div&gt;
+  &lt;div class="middle"&gt;&lt;/div&gt;
+ 
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+ 
+    $("div").css("background", "#c8ebcc")
+            .filter(".middle")
+            .css("border-color", "red");
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8103" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">C改变所有 div 的颜色，然后为第二个 div (index == 1) 及 id 为 "fourth" 的 div 添加边框。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { width:60px; height:60px; margin:5px; float:left;
+        border:3px white solid; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+  &lt;div id="first"&gt;&lt;/div&gt;
+  &lt;div id="second"&gt;&lt;/div&gt;
+  &lt;div id="third"&gt;&lt;/div&gt;
+ 
+  &lt;div id="fourth"&gt;&lt;/div&gt;
+  &lt;div id="fifth"&gt;&lt;/div&gt;
+  &lt;div id="sixth"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("div").css("background", "#b4b0da")
+            .filter(function (index) {
+                  return index == 1 || $(this).attr("id") == "fourth";
+                })
+            .css("border", "3px double red");
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8102" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+	<p>
+	</p>
+</div>
+<div class="entry-example" id="example-2">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">选择所有的 div，并使用 DOM 元素进行筛选，过滤出 id 为 "unique" 的元素。</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("div").filter( document.getElementById("unique") )</pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">选择所有的 div，并使用 jQuery 对象进行筛选，过滤出 id 为 "unique" 的元素。</span> 
+</p>
+<pre class="prettyprint lang-js">$("div").filter( $("#unique") )</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

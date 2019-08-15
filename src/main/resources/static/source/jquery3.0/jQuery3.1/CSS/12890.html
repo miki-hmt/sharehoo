@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>position()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">position()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.position()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader15" target="_blank">Object</a>{top,left}</code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>获取匹配元素中第一个元素的当前坐标，相对于offset parent的坐标。( 译者注：offset parent指离该元素最近的而且被定位过的祖先元素 )
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="position">
+			<h4 class="name">
+				<span class="version-details">V : 1.2</span>.position()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>.position()</code>方法可以取得元素相对于父元素的偏移位置。与<code><a href="http://www.shouce.ren/api/view/a/12889" class="book-a">.offset()</a></code>不同, <code>.offset()</code>是获得该元素相对于documet的当前坐标
+当把一个新元素放在同一个容器里面另一个元素附近时，用<code>.position()</code>更好用。
+		</p>
+		<p>
+			<code>.position()</code>返回一个包含 <code>top</code> 和 <code>left</code>属性的对象.
+		</p>
+		<blockquote>
+			<p>
+				注意<strong>：</strong>jQuery不支持获取隐藏元素的偏移坐标及所占用的边框，边距和填充的大小
+			</p>
+		</blockquote>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		获取第一段的偏移
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;2nd Paragraph&lt;/p&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>var p = $("p:first");
+var position = p.position();
+$("p:last").html( "left: " + position.left + ", top: " + position.top );</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;left: 15, top: 15&lt;/p&gt;</code></pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8041" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

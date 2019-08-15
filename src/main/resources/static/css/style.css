@@ -1,0 +1,160 @@
+﻿@CHARSET "UTF-8";
+@font-face { 
+  font-family: Jenna Sue; 
+    src: url('../fonts/JennaSue-webfont.eot'); 
+    src: local("Jenna Sue"), url('../fonts/JennaSue-webfont.ttf'); 
+} 
+
+@font-face { 
+  font-family: News Cycle; 
+    src: url('../fonts/NewsCycle-Regular.eot'); 
+    src: local("News Cycle"), url('../fonts/NewsCycle-Regular.ttf'); 
+}
+body {
+	   /*body页面尺寸默认全屏*/
+	margin: 0px;   /*外边距*/
+	padding: 0px;   /*内边距*/
+	background-color:#E9E9E9;
+	  /*background: rgba(0,0,0,.04);全页面背景色浅绿*/                   
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 12pt;
+	font-weight: 300;
+	
+	  /*对帖子的介绍字体颜色设置---“帖子总数：0 精华帖子：0 未回复：0 版主：赵六”2016.08.24*/
+	color: #363636;   
+}
+
+#header {
+	height:172px;
+	background:url(../images/banner/he3.jpg);	  /*更改首页大图kkg31.png*/
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	box-shadow:2px 5px 5px rgba(0,0,0,0.8); 
+}
+
+#header-wrapper
+{
+	border：0px;
+	border-color:red;
+	overflow: hidden;
+	   /*background: #C7EDCC;         大logo底色*/ 
+}
+
+#logo {
+	height:30px;
+	width: 500px;
+	margin: 0 auto;
+	padding: 2em 0em; 
+	text-transform: uppercase;    /*将字符串的第一个字母转换为大写   2016.12.12*/
+}
+
+#logo h1 {
+	font: normal 400% 'Jenna Sue', arial, sans-serif;
+	letter-spacing: 0.10em;
+	font-size: 3em;
+	color: #FFF;
+}
+
+#logo p {
+	letter-spacing: 0.10em;
+	color: #FFF;
+}
+
+#logo a {
+	text-decoration: none;  /*除去logo超链接下划线*/
+	color: #FFF;
+}
+
+
+      /** 菜单 */
+
+#menu-wrapper
+{
+	
+	/*background: #2F94A8;*/
+}
+
+#menu {
+	overflow: auto;           /* 2017.03.24更改，原来为hidden */
+	height: 44px;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 0px 0px 0px 0px;    /*控制 “首页，在线文档申请版主，资源下载”的边框宽度*/
+	list-style: none;
+	line-height: normal;
+	text-align: center;
+}
+
+#menu li {
+	
+	display: inline-block;
+}
+
+#menu a {
+	display: block;
+	letter-spacing: 1px;
+	padding: 10px 20px;
+	text-decoration: none;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 0.80em;
+	font-weight: 600;
+	border: none;
+	color: #FFF;   /*字体颜色*/
+}
+
+                   /*鼠标悬停在banner上的版块时出现阴影效果     2016.12.12 */
+#menu a:hover, #menu .current_page_item a {
+	text-decoration: none;
+	border-radius: 20px;
+	background: gray;
+}
+
+#menu .current_page_item a {
+	border-radius: 20px;
+	background: gray;
+}
+
+
+     /*发帖按钮设置选项*/
+.postBtn{
+	background:url(../images/post.jpg) no-repeat 0 0;
+	width: 80px;
+	height: 33px;
+	padding: 0px;
+}
+
+                       /*首页尾部标签设置*/
+                       
+#footer{width:100%;height:200px;clear:both;margin:0 0 0 0;background:url(../images/footer_bg.gif) repeat-x center top;}
+.footer_content{width:1000px;margin:auto;color:#dfdfdf;}
+.footer_content a{color:#dfdfdf; text-decoration:none;}
+.footer_left{width:270px; float:left; padding:50px 50px 40px 10px;}
+.footer_right{width:330px; float:right; padding:50px 0 40px 0;}
+img.footer_icon{float:right;}
+
+
+.tweets{clear:both; padding:20px 0 0 0; float:left;width:270px;}
+.tweets a{color:#dfdfdf; text-decoration:none; padding:0 0 10px 0; display:block; font-style:italic;}
+.tweets a:hover{text-decoration:underline;}
+.info{clear:both; padding:20px 0 0 0;float:left;width:270px;}
+.info span{color:#30c3ff;}
+.social{border-top:1px #989999 dotted;padding:10px 0 0 0;margin:10px 0 0 0;}
+.social a{padding:0 7px 0 0;}
+.footer_right ul{float:left; width:165px; list-style:none; margin:0px; padding:20px 0 0 0;}
+.footer_right ul li{padding:0px; margin:0px;}
+.footer_right ul li a{background:url(../images/footer_bullet.gif) no-repeat left; padding:0 0 0 10px; line-height:25px;color:#dfdfdf; text-decoration:none;}
+.footer_bottom{clear:both; background:url(../images/footer_border.gif) no-repeat center top; padding:15px 0 0 0;float:left;width:1000px;}
+.footer_bottom_left{float:left;}
+.copyrights{float:left; padding:30px 0 0 5px;}
+
+         
+                       /******************后台管理链接设置***********************/
+         
+.footer_right_links{width:500px; float:right; padding:30px 0 0 0; text-align:right;color:black;}
+.footer_right_links ul{ list-style:none; padding:0px; margin:0px; }
+.footer_right_links ul li{padding:0px; margin:0px;display:inline;}
+.footer_right_links ul li a{padding:0px; margin:0px; padding:0 12px 0 12px;color:#dfdfdf; text-decoration:none;}

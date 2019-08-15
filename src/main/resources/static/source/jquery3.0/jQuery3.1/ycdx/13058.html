@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>deferred.pipe()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">deferred.pipe()<span class="g-bg-red margin-l-5">1.8-</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;deferred.pipe( [doneFilter ] [, failFilter ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Promise</code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong> 用用于过滤 and/or 链式延迟对象的工具方法。
+</p>
+<ul class="signatures">
+	<li class="signature" id="deferred-pipe-doneFilter-failFilter">
+		<h4 class="name">
+			<span class="version-details">V : 1.6</span>deferred.pipe(  [doneFilter ] [, failFilter ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>doneFilter</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					一个函数，或者函数数组，当Deferred（延迟）对象得到解决时被调用。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>failFilter</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					可选的 一个函数，或者函数数组，当Deferred（延迟）对象拒绝时被调用。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="deferred-pipe-doneFilter-failFilter-progressFilter">
+		<h4 class="name">
+			<span class="version-details">V : 1.7</span>deferred.pipe(  [doneFilter ] [, failFilter ] [, progressFilter ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>doneFilter</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					一个函数，或者函数数组，当Deferred（延迟）对象得到解决时被调用。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>failFilter</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					一个函数，或者函数数组，当Deferred（延迟）对象得到拒绝时被调用。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>progressFilter</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					一个可选的函数，当进度通知发送给Deferred（延迟）被调用。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<strong>Deprecation Notice:（推荐使用的注意事项：）</strong>从jQuery 1.8开始,  deferred.pipe() 方法过时. 应该使用<code>deferred.then()</code> 代替它。
+	</p>
+	<p>
+		<code>deferred.pipe()</code>方法返回一个新的promise（允诺），用于过滤状态或通过函数返回的延迟对象的值。<code>doneFilter</code>和<code>failFilter</code>函数过滤原先deferred（延迟）的解决/拒绝的状态和值。<strong>从 jQuery 1.7开始</strong>,该方法还接受一个<code>progressFilter</code>函数，用来过滤任何访问deferred（延迟）的<code>notify</code>或<code>notifyWith</code> 方法。这些过滤器可以随着 pipe promise 的 <code>done()</code>或<code>fail()</code> 回调函数的调用，返回一个新值，或返回其它可见对象(Deferred, Promise, 等等)，这些可见对象传递了自身的解决（resolve) / 拒绝(reject)状态和传递给 pipe promise 回调函数的值。如果将 <code>null</code> 作为过滤函数，或者不指定过滤函数，那么 pipe promise 被受理（resolve)或被拒绝(reject)时，会使用相同的值作为原始值。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例<span class="desc"></span>
+	</h4>
+	<p>
+		<span class="desc">过滤解决值:</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">var defer = $.Deferred(),
+    filtered = defer.pipe(function( value ) {
+      return value * 2;
+    });
+ 
+defer.resolve( 5 );
+filtered.done(function( value ) {
+  alert( "Value is ( 2*5 = ) 10: " + value );
+});</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">过滤拒绝值:</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">var defer = $.Deferred(),
+    filtered = defer.pipe( null, function( value ) {
+      return value * 3;
+    });
+ 
+defer.reject( 6 );
+filtered.fail(function( value ) {
+  alert( "Value is ( 3*6 = ) 18: " + value );
+});</pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">链任务:</span> 
+</p>
+<pre class="prettyprint lang-js">var request = $.ajax( url, { dataType: "json" } ),
+    chained = request.pipe(function( data ) {
+      return $.ajax( url2, { data: { user: data.userId } } );
+    });
+ 
+chained.done(function( data ) {
+  // data retrieved from url2 as provided by the first request
+});</pre></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

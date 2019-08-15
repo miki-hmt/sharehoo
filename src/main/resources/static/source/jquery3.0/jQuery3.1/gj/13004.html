@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.grep()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.grep()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.grep( array, function(elementOfArray, indexInArray) [, invert ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Array</code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>查找满足过滤函数的数组元素。原始数组不受影响。
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V	: 1.0</span><span class="icon-link"></span>jQuery.grep( array, function [, invert ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>array</strong> 
+				</div>
+				<div>
+					Type: ArrayLikeObject
+				</div>
+				<div>
+					用于查询元素的类数组对象.
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>function</strong> 
+				</div>
+				<div>
+					Type: Function( Object elementOfArray, Integer indexInArray )
+                        =&gt; Boolean
+				</div>
+				<div>
+					该函数来处理每项元素的比对。第一个参数是正在被检查的数组的元素，第二个参数是该元素的索引值。该函数应返回一个布尔值。<code>this</code>将是全局的window对象。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>invert</strong> 
+				</div>
+				<div>
+					Type: Boolean
+				</div>
+				<div>
+					如果“invert”为false，或没有提供，函数返回一个“callback”中返回true的所有元素组成的数组。如果“invert”为true，函数返回一个“callback”中返回false的所有元素组成的数组。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>$.grep()</code>方法会删除数组必要的元素，以使所有剩余元素通过过滤函数的检查。该测试是一个函数传递一个数组元素和该数组内这个的索引值。只有当测试返回true，该数组元素将返回到结果数组中。
+	</p>
+	<p>
+		该过滤器的函数将被传递两个参数：当前正在被检查的数组中的元素，及该元素的索引值。该过滤器函数必须返回'true'以包含在结果数组项。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">F过滤出原始数组中值不为 5，并且索引值大于 4 的元素。然后再过滤掉所有值为 9 的元素。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; }
+  p { color:green; margin:0; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;p&gt;&lt;/p&gt;
+  &lt;span&gt;&lt;/span&gt;
+ 
+&lt;script&gt;
+var arr = [ 1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1 ];
+$("div").text(arr.join(", "));
+ 
+arr = jQuery.grep(arr, function(n, i){
+  return (n != 5 &amp;&amp; i &gt; 4);
+});
+$("p").text(arr.join(", "));
+ 
+arr = jQuery.grep(arr, function (a) { return a != 9; });
+$("span").text(arr.join(", "));
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8195" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">过滤出数组中值大于 0 的元素。</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$.grep( [0,1,2], function(n,i){
+   return n &gt; 0;
+ });</pre>
+	</div>
+	<h4>
+		Result:
+	</h4>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">[1, 2]</pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">过滤出数组中值不大于 0 的元素。</span> 
+</p>
+<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$.grep( [0,1,2], function(n,i){
+    return n &gt; 0;
+},true);</pre>
+</div>
+<h4>
+	Result:
+</h4>
+<pre class="prettyprint lang-js">[0]</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

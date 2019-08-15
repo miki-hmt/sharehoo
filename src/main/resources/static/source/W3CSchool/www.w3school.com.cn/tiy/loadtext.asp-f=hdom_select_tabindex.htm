@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript">
+function showTabIndex()
+  {
+  var email=document.getElementById('email').tabIndex;
+  var sex=document.getElementById('sex').tabIndex;
+  document.write("Tab index of email field: " + email);
+  document.write("<br />");
+  document.write("Tab index of dropdown list: " + sex);
+  }
+</script>
+</head>
+<body>
+
+<form>
+Email: <input type="text" id="email" tabindex="1" />
+<br />
+Sex:
+<select id="sex" tabindex="2">
+  <option>Male</option>
+  <option>Female</option>
+</select>
+<br /><br />
+<input type="button" onclick="showTabIndex()" value="Show tabIndex" />
+</form>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>change()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">change()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.change( handler )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong> 为JavaScript 的 "change" 事件绑定一个处理函数，或者触发元素上的 "change" 事件。
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.change( handler )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>handler</strong> 
+				</div>
+				<div>
+					类型: Function( Event eventObject )
+				</div>
+				<div>
+					每当事件触发时执行的一个函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.change(
+            [eventData ], handler )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>eventData</strong> 
+				</div>
+				<div>
+					类型: Anything
+				</div>
+				<div>
+					一个对象，它包含的数据键值对映射将被传递给事件处理程序。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler</strong> 
+				</div>
+				<div>
+					类型: Function( Event eventObject )
+				</div>
+				<div>
+					每当事件触发时执行的一个函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.change()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					这个方法不接受任何参数
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		这个函数的前两个用法是 <code>.bind('change', handler)</code> 的快捷方式，第3个不带参数的用法是 <code>.trigger('change')</code> 的快捷方式。
+	</p>
+	<p>
+		一个元素的值改变的时候将触发<code>change</code>事件。此事件仅限用于<code>&lt;input&gt;</code>元素，<code>&lt;textarea&gt;</code>和<code>&lt;select&gt;</code>元素。对于下拉选择框，复选框和单选按钮，当用户用鼠标作出选择，该事件立即触发，但对于其他类型的input元素，该事件触发将推迟，直到元素失去焦点才会触点。
+	</p>
+	<p>
+		举例来说，请看下面的HTML：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;form&gt;
+  &lt;input class="target" type="text" value="Field 1" /&gt;
+  &lt;select class="target"&gt;
+    &lt;option value="option1" selected="selected"&gt;Option 1&lt;/option&gt;
+    &lt;option value="option2"&gt;Option 2&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+	</div>
+	<p>
+		事件处理函数可以绑定到文本输入和下拉选择框：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('.target').change(function() {
+  alert('Handler for .change() called.');
+});</pre>
+	</div>
+	<p>
+		现在，当下拉菜单中第二个选项被选择，警报提示框显示。如果你改变字段中的文本，然后点击其他地方，警报提示框也会显示。如果该字段失去焦点
+没有改变内容，该事件不会触发。应用不带参数的<code>.change()</code>，我们可以手动触发这个事件：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#other').click(function() {
+  $('.target').change();
+});</pre>
+	</div>
+	<p>
+		这些代码执行后，点击<span class="output">Trigger the handler</span>也弹出警报提示框提醒消息。该信息将显示两次，因为两个表单元素都绑定了<code>change</code>事件处的理函数。
+	</p>
+	<p>
+		从jQuery 1.4开始 <code>change</code>事件在Internet Explorer中是冒泡的，这个事件和其他浏览器中表现是一致的。
+	</p>
+	<div class="warning">
+		<p>
+			<strong>注意: </strong>使用JavaScript改变输入元素的值，例如使用<code>.val()</code>，将不会触发该事件。
+		</p>
+	</div>
+</div>
+<h3>
+	Additional Notes（其他注意事项）:
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			<code>.change()</code>方法只是作为<code>.on( "change", handler )</code>的一个速记写法，移除该事件可以使用<code>.off( "change"
+                    )</code>。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">为 select 元素添加 change 事件，将选中的项目显示在 div 中。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;select name="sweets" multiple="multiple"&gt;
+    &lt;option&gt;Chocolate&lt;/option&gt;
+    &lt;option selected="selected"&gt;Candy&lt;/option&gt;
+ 
+    &lt;option&gt;Taffy&lt;/option&gt;
+    &lt;option selected="selected"&gt;Caramel&lt;/option&gt;
+    &lt;option&gt;Fudge&lt;/option&gt;
+    &lt;option&gt;Cookie&lt;/option&gt;
+ 
+  &lt;/select&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+$("select").change(function () {
+  var str = "";
+  $("select option:selected").each(function () {
+            str += $(this).text() + " ";
+  });
+  $("div").text(str);
+})
+.change();
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<p>
+			<a href="http://www.shouce.ren/study/api/s/8169" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+		</p>
+	</p>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">所有文本输入元素添加一个的有效性测试:</span> 
+</p>
+<pre class="prettyprint lang-js">$("input[type='text']").change( function() {
+  // check input ($(this).val()) for validity here
+});</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>ASP 实例</title>
+</head>
+
+<body class="serverscripting">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>ASP 教程</h2>
+<ul>
+<li><a href="../asp/index.asp.htm" tppabs="http://www.w3school.com.cn/asp/index.asp" title="ASP教程首页">ASP 首页</a></li>
+<li><a href="../asp/asp_intro.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_intro.asp" title="ASP 简介">ASP 简介</a></li>
+<li><a href="../asp/asp_install.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_install.asp" title="如何安装ASP的运行环境">ASP 安装</a></li>
+<li><a href="../asp/asp_syntax.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_syntax.asp" title="ASP 语法">ASP 语法</a></li>
+<li><a href="../asp/asp_variables.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_variables.asp" title="ASP 变量">ASP 变量</a></li>
+<li><a href="../asp/asp_procedures.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_procedures.asp" title="ASP子程序">ASP 程序</a></li>
+<li><a href="../asp/asp_inputforms.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_inputforms.asp" title="ASP 表单">ASP 表单</a></li>
+<li><a href="../asp/asp_cookies.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_cookies.asp" title="ASP Cookies">ASP Cookies</a></li>
+<li><a href="../asp/asp_sessions.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_sessions.asp" title="ASP Session">ASP Session</a></li>
+<li><a href="../asp/asp_applications.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_applications.asp" title="ASP Application">ASP Application</a></li>
+<li><a href="../asp/asp_incfiles.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_incfiles.asp" title="ASP #include">ASP #include</a></li>
+<li><a href="../asp/asp_globalasa.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_globalasa.asp" title="ASP Global.asa">ASP Global.asa</a></li>
+<li><a href="../asp/asp_send_email.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_send_email.asp" title="ASP e-mail">ASP e-mail</a></li>
+</ul>
+
+<h2>ASP 对象</h2>
+<ul class="small">
+<li><a href="../asp/asp_ref_response.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_response.asp" title="ASP Response">ASP Response</a></li>
+<li><a href="../asp/asp_ref_request.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_request.asp" title="ASP Request">ASP Request</a></li>
+<li><a href="../asp/asp_ref_application.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_application.asp" title="ASP Application">ASP Application</a></li>
+<li><a href="../asp/asp_ref_session.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_session.asp" title="ASP Session">ASP Session</a></li>
+<li><a href="../asp/asp_ref_server.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_server.asp" title="ASP Server">ASP Server</a></li>
+<li><a href="../asp/asp_ref_error.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_error.asp" title="ASP Error">ASP Error</a></li>
+<li class="list_apart"><a href="../asp/asp_ref_filesystem.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_filesystem.asp" title="ASP FileSystem">ASP FileSystem</a></li>
+<li><a href="../asp/asp_ref_textstream.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_textstream.asp" title="ASP TextStream">ASP TextStream</a></li>
+<li><a href="../asp/asp_ref_drive.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_drive.asp" title="ASP Drive">ASP Drive</a></li>
+<li><a href="../asp/asp_ref_file.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_file.asp" title="ASP File">ASP File</a></li>
+<li><a href="../asp/asp_ref_folder.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_folder.asp" title="ASP Folder">ASP Folder</a></li>
+<li><a href="../asp/asp_ref_dictionary.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref_dictionary.asp" title="ASP Dictionary">ASP Dictionary</a></li>
+<li><a href="../asp/asp_ado.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ado.asp" title="ASP ADO">ASP ADO</a></li>
+</ul>
+
+<h2>ASP 组件</h2>
+<ul class="small">
+<li><a href="../asp/asp_adrotator.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_adrotator.asp" title="ASP AdRotator">ASP AdRotator</a></li>
+<li><a href="../asp/asp_browser.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_browser.asp" title="ASP BrowserCap">ASP BrowserCap</a></li>
+<li><a href="../asp/asp_contentlinking.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_contentlinking.asp" title="ASP Content Linking">ASP Content Linking</a></li>
+<li><a href="../asp/asp_contentrotator.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_contentrotator.asp" title="ASP Content Rotator">ASP Content Rotator</a></li>
+</ul>
+
+<h2>ASP 教程总结</h2>
+<ul>
+<li><a href="../asp/asp_quickref.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_quickref.asp" title="ASP 快速参考">ASP 快速参考</a></li>
+<li><a href="../asp/asp_summary.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_summary.asp" title="ASP 总结">ASP 总结</a></li>
+</ul>
+
+<h2>实例/测验</h2>
+<ul>
+<li><a href="aspe_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/aspe_examples.asp" title="ASP 实例">ASP 实例</a></li>
+<li><a href="../asp/asp_quiz.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_quiz.asp" title="ASP 测验">ASP 测验</a></li>
+</ul>
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>ASP 实例</h1>
+
+<div  id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="../asp/asp_summary.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_summary.asp">Previous Page</a></li>
+
+<li class="next"><a href="../asp/asp_quiz.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_quiz.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div class="example">
+<h2>基础：</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_text.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_text">用ASP写文本</a></dt>
+<dd>如果使用ASP生成文本。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_formatting.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_formatting">向文本添加HTML</a></dt>
+<dd>如果同时生成HTML标签和纯文本。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>变量：</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_variable.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_variable">声明变量</a></dt>
+<dd>变量用于存储信息。本例演示如何声明变量，为变量赋值，并在程序中使用这个变量</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_array.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_array">声明数组</a></dt>
+<dd>数组用于存储一系列相关的数据项目。本例演示如何声明一个存储名字的数组。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_fornext2.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_fornext2">循环生成HTML标题</a></dt>
+<dd>如何循环生成6个不同的HTML标题。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_vbtime.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_vbtime">使用Vbscript制作基于时间的问候语</a></dt>
+<dd>本例将根据服务器时间向用户显示不同的消息。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_jstime.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_jstime">使用JavaScript制作基于时间的问候语</a></dt>
+<dd>本例同上，只是语法不同而已。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>程序：</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_vbproc.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_vbproc">调用使用VBScript的子程序</a></dt>
+<dd>如何从ASP调用以VBScript编写的子程序。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_jsproc.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_jsproc">调用使用JavaScript的子程序</a></dt>
+<dd>如何从ASP调用以JavaScript编写的子程序。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_vbproc2.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_vbproc2">调用使用VBScript和JavaScript的子程序</a></dt>
+<dd>如何在一个ASP文件中调用以VBScript和JavaScript编写的子程序。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>表单：</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_reqquery.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_reqquery">使用method=&quot;get&quot;的表单</a></dt>
+<dd>如何使用Request.QueryString命令与用户进行交互。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_simpleform.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_simpleform">使用method=&quot;post&quot;的表单</a></dt>
+<dd>如何使用Request.Form命令与用户进行交互。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_radiob.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_radiob">使用单选按钮的表单</a></dt>
+<dd>如何使用Request.Form通过单选按钮与用户进行交互。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Cookie：</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_cookies.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_cookies">Welcome cookie</a></dt>
+<dd>如何创建欢迎cookie。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Response 对象：</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_text.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_text">使用ASP写文本</a></dt>
+<dd>本例演示如何使用ASP来写文本。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_formatting.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_formatting">在ASP中使用HTML标签格式化文本</a></dt>
+<dd>本例演示如何使用ASP将文本和HTML标签结合起来。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_redirect.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_redirect">将用户重定向至不同的URL</a></dt>
+<dd>本例演示如何将用户重定向至另一个的URL。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_randomlink.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_randomlink">显示随机的链接</a></dt>
+<dd>本例演示一个超级链接，当您每次载入页面时，它将显示两个链接中的其中一个。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_buffer.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_buffer">控制缓存</a></dt>
+<dd>本例演示如何控制缓存。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_bufferclear.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_bufferclear">清空缓存</a></dt>
+<dd>本例演示如何清空缓存。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_end.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_end">在处理过程中终止脚本并返回结果</a></dt>
+<dd>本例演示如何在处理过程中中断脚本的运行。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_expires.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_expires">设置在页面失效前把页面在浏览器中缓存多少分钟</a></dt>
+<dd>本例演示如何规定页面在失效前在浏览器中的缓存时间。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_expiresabs.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_expiresabs">设置页面缓存在浏览器中的失效日期或时间</a></dt>
+<dd>本例演示如何规定页面在浏览器中的缓存时间日期或时间</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_isclientconnected.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_isclientconnected">检查用户是否仍然与服务器相连</a></dt>
+<dd>本例演示如何检查用户是否已与服务器断开。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_contenttype.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_contenttype">设置内容类型</a></dt>
+<dd>本例演示如何规定内容的类型。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_charset.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_charset">设置字符集</a></dt>
+<dd>本例演示如何规定字符集的名称。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>QueryString集合 实例</h2>
+
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_simplequerystring.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_simplequerystring">当某用户点击链接时发送查询信息</a></dt>
+<dd>本例演示如何在在链接中向页面发送一些额外的查询信息，并在目标页面中取回这些信息（在本例中是同一个页面）。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_simplereqquery.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_simplereqquery">对QueryString集合的简单应用</a></dt>
+<dd>本例演示QueryString集合如何从表单取回值。此表单使用GET方法，这意外着被发送的信息对用户来说是可见的（在地址中）。GET方法还会限制所发送信息的数量。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_reqquery.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_reqquery">如何使用从表单传来的信息</a></dt>
+<dd>本例演示如何使用从表单那里取回的值。我们会使用QueryString集合。此表单使用GET方法。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_reqquery2.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_reqquery2">来自表单的更多信息</a></dt>
+<dd>本例演示假如输入域包含若干相同的名称的话QueryString会包含什么内容。它将展示如何把这些相同的名称分割开来。它也会展示如何使用count关键词来对&quot;name&quot;属性进行计数。此表单使用GET方法。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Form集合 实例</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_simpleform1.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_simpleform1">一个Form集合的简单应用</a></dt>
+<dd>本例演示Form集合如何从表单取回值。此表单使用POST方法，这意味着发送的信息对用户来说是不可见的，并且对对所发送信息的量没有限制（可发送大量的信息）。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_simpleform.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_simpleform">如何使用来自表单的信息</a></dt>
+<dd>本例演示如何使用从表单取回的信息。我们使用了Form集合。表单使用了POST方法。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_form2.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_form2">来自表单的更多信息</a></dt>
+<dd>本例演示假如若干的输入域使用了相同的名称，Form集合会包含什么信息。它将展示如何把这些相同的名称分割开来。它也会展示如何使用count关键词来对&quot;name&quot;属性进行计数。此表单使用POST方法。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_radiob.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_radiob">带有单选按钮的表单</a></dt>
+<dd>本例演示如何使用Form集合通过单选按钮与用户进行交互。此表单使用POST方法。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_checkboxes.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_checkboxes">带有复选按钮的表单</a></dt>
+<dd>本例演示如何使用Form集合通过复选按钮与用户进行交互。此表单使用POST方法。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>其他实例</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_server.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_server">取得用户信息</a></dt>
+<dd>如何查明访问者的浏览器类型、IP地址等信息</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_servervariables.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_servervariables">取得服务器变量</a></dt>
+<dd>本例演示如何使用ServerVariables集合取得访问者的浏览器类型、IP地址等信息。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_cookies.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_cookies">创建welcome cookie</a></dt>
+<dd>本例演示如何使用Cookies集合创建一个欢迎cookie。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_totalbytes.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_totalbytes">探测用户发送的字节总数</a></dt>
+<dd>本例演示如何使用TotalBytes属性来取得用户在Request对象中发送的字节总数。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Session 对象</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_lcid.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_lcid">设置并返回 LCID</a></dt>
+<dd>本例演示 &quot;LCID&quot; 属性。此属性设置并返回一个指明位置或者地区的整数。类似于日期、时间以及货币等内容都要根据位置或者地区来显示。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_sessionid.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_sessionid">返回SessionID</a></dt>
+<dd>本例演示 &quot;SessionID&quot; 属性。该属性为每位用户返回一个唯一的 id。这个 id 由服务器生成。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_gettimeout.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_gettimeout">session 的超时</a></dt>
+<dd>本例演示 &quot;Timeout&quot; 属性。这个例子设置并返回 session 的超时时间（分钟）。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Server 对象</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_lastmodified.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_lastmodified">此文件最后被修改的时间是？</a></dt>
+<dd>探测文件的最后更新时间。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_textstream.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_textstream">打开并读取某个文本文件</a></dt>
+<dd>本例会打开文件&quot;Textfile.txt&quot;以供读取。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_hitcounter.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_hitcounter">自制的点击计数器</a></dt>
+<dd>本例可从某文件中读取一个数字，并在此数字上累加1，然后将此数写回这个文件。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>FileSystemObject 对象</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_fileexists.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_fileexists">指定的文件存在吗？</a></dt>
+<dd>本例演示如何首先创建FileSystemObject对象，然后使用FileExists方法来探测某文件是否存在。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_folderexists.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_folderexists">指定的文件夹存在吗？</a></dt>
+<dd>本例演示如何使用FolderExists方法探测某文件夹是否存在。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_driveexists.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_driveexists">指定的驱动器存在吗？</a></dt>
+<dd>本例演示如何使用DriveExists方法来探测某个驱动器是否存在。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_getdrivename.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_getdrivename">取得某个指定驱动器的名称</a></dt>
+<dd>本例演示如何使用GetDriveName方法来取得某个指定的驱动器的名称。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_getparentfoldername.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_getparentfoldername">取得某个指定路径的父文件夹的名称</a></dt>
+<dd>本例演示如何使用GetParentFolderName方法来取得某个指定的路径的父文件夹的名称。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_getextensionname.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_getextensionname">取得文件夹扩展名</a></dt>
+<dd>本例演示如何使用GetExtensionName方法来取得指定的路径中的最后一个成分的文件扩展名。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_getfilename.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_getfilename">取得文件名</a></dt>
+<dd>本例演示如何使用GetFileName方法来取得指定的路径中的最后一个成分的文件名。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_getbasename.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_getbasename">取得文件或文件夹的基名称</a></dt>
+<dd>本例演示如何使用GetBaseName方法来返回在指定的路径中文件或者文件夹的基名称。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>TextStream 对象</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_readtextfile.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_readtextfile">读文件</a></dt>
+<dd>本例演示如何使用FileSystemObject的OpenTextFile方法来创建一个TextStream 对象。TextStream 对象的ReadAll方法会从已打开的文本文件中取得内容。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_readpartoftextfile.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_readpartoftextfile">读文本文件中的一个部分</a></dt>
+<dd>本例演示如何仅仅读取一个文本流文件的部分内容。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_readline.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_readline">读文本文件中的一行</a></dt>
+<dd>本例演示如何从一个文本流文件中读取一行内容。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_readlines.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_readlines">读取文本文件的所有行</a></dt>
+<dd>本例演示如何从文本流文件中读取所有的行。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_skip.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_skip">略过文本文件的一部分</a></dt>
+<dd>本例演示如何在读取文本流文件时跳过指定的字符数。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_skipline.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_skipline">略过文本文件的一行</a></dt>
+<dd>本例演示如何在读取文本流文件时跳过一行。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_line.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_line">返回行数</a></dt>
+<dd>本例演示如何返回在文本流文件中的当前行号。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_column.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_column">取得列数</a></dt>
+<dd>本例演示如何取得在文件中当前字符的列号。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Drive 对象</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_availablespace.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_availablespace">取得指定驱动器的可用空间数</a></dt>
+<dd>本例演示如何首先创建一个FileSystemObject对象，然后使用AvailableSpace属性来获得指定驱动器的可用空间。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_freespace.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_freespace">取得指定驱动器的剩余空间容量</a></dt>
+<dd>本例演示如何使用FreeSpace空间属性来取得指定驱动器的剩余空间。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_totalsize.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_totalsize">取得指定驱动器的总容量</a></dt>
+<dd>本例演示如何使用TotalSize属性来获得指定驱动器的总容量。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_driveletter.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_driveletter">取得指定驱动器的驱动器字母</a></dt>
+<dd>本例演示如何使用DriveLetter属性来获得指定驱动器的驱动器字母。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_drivetype.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_drivetype">取得指定驱动器的驱动器类型</a></dt>
+<dd>本例演示如何使用DriveType属性来获得指定驱动器的驱动器类型。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_filesystem.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_filesystem">取得指定驱动器的文件系统信息</a></dt>
+<dd>本例演示如何使用FileSystem来取得指定驱动器的文件系统类型。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_isready.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_isready">驱动器是否已就绪？</a></dt>
+<dd>本例演示如何使用IsReady属性来检查指定的驱动器是否已就绪。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_path.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_path">取得指定驱动器的路径</a></dt>
+<dd>本例演示如何使用Path属性来取得指定驱动器的路径。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_rootfolder.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_rootfolder">取得指定驱动器的根文件夹</a></dt>
+<dd>本例演示如何使用RootFolder属性来取得指定驱动器的根文件夹。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_serialnumber.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_serialnumber">取得指定驱动器的序列号</a></dt>
+<dd>本例演示如何使用Serialnumber属性来取得指定驱动器的序列号。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>File 对象</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_datecreated.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_datecreated">文件何时被创建？</a></dt>
+<dd>本例演示如何首先创建FileSystemObject对象，然后使用File对象的DateCreated属性来取得指定文件被创建的日期和时间。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_datelastmodified.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_datelastmodified">此文件何时被修改？</a></dt>
+<dd>本例演示如何使用DateLastModified属性来取得指定文件被修改的日期和时间。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_datelastaccessed.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_datelastaccessed">此文件何时被访问过？</a></dt>
+<dd>此例演示如何使用DateLastAccessed属性来取得指定文件最后被访问的日期和时间。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_attributes.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_attributes">返回指定文件的属性</a></dt>
+<dd>本例演示如何使用Attributes来返回指定文件的属性。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Dictionary 对象</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_exists.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_exists">指定的键存在吗？</a></dt>
+<dd>本例演示如何受首先创建一个Dictionary对象，然后使用Exists方法来检查指定的键是否存在。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_items.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_items">返回一个所有项目的数组</a></dt>
+<dd>本例演示如何使用Items方法来返回所有项目的一个数组。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_keys.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_keys">返回一个所有键的数组</a></dt>
+<dd>本例演示如何使用Keys方法来返回所有键的一个数组。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_item.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_item">返回某个项目的值</a></dt>
+<dd>本例演示如何使用Item属性来返回某个项目的值。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_key.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_key">设置一个键</a></dt>
+<dd>本例演示如何使用Key属性来在Dictionary对象中设置一个键。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_count.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_count">返回键/项目对的数目</a></dt>
+<dd>本例演示如何使用Count属性来返回键/项目对的数目。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>AdRotator 组件</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_adrotator.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_adrotator">简单的AdRotator实例</a></dt>
+<dd>本例展示：每当用户访问网站或者刷新一次页面，如何使用AdRotator组件来显示一幅不同的广告图像。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_adrotator2.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_adrotator2">AdRotator - 图片链接</a></dt>
+<dd>本例展示：每当用户访问网站或者刷新一次页面，如何使用AdRotator组件来显示一幅不同的广告图像。此外，图片本身就是链接。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Browser Capabilities 组件</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_browsercap.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_browsercap">Browser Capabilities 组件</a></dt>
+<dd>本例演示如何测定每一个访问网站的浏览器的类型、性能以及版本号。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Content Linking 组件</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_contentlinking.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_contentlinking">Content Linking 组件</a></dt>
+<dd>本例会构建一个内容列表。</dd>
+
+<dt><a href="../tiy/s.asp-f=demo_aspe_contentlinking2.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_contentlinking2">Content Linking 组件 2</a></dt>
+<dd>本例使用Content Linking 组件在一个文本文件所列的页面间进行导航。</dd>
+</dl>
+</div>
+
+<div class="example">
+<h2>Content Rotator (ASP 3.0)</h2>
+<dl>
+<dt><a href="../tiy/s.asp-f=demo_aspe_contentrotator.htm" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspe_contentrotator">Content Rotator 组件</a></dt>
+<dd>每当用户访问或者刷新页面时，该组件就会显示不同的HTML内容字符串。</dd>
+</dl>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="../asp/asp_summary.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_summary.asp">Previous Page</a></li>
+
+<li class="next"><a href="../asp/asp_quiz.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_quiz.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div>
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../asp/asp_ref.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_ref.asp">ASP 参考手册</a></h5>
+<h5 id="tools_example"><a href="aspe_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/aspe_examples.asp">ASP 实例</a></h5>
+<h5 id="tools_quiz"><a href="../asp/asp_quiz.asp.htm" tppabs="http://www.w3school.com.cn/asp/asp_quiz.asp">ASP 测验</a></h5>
+</div>
+
+<div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

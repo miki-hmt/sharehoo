@@ -1,0 +1,216 @@
+﻿<!DOCTYPE>  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>蘑菇动起来-html5中文网</title>  
+<!-- 要记得引用jquery-1.4.2.js -->
+<script type="text/javascript" src="./js/jquery-1.4.2.js"></script>  
+<script type="text/javascript" >  
+    //全局变量   
+    var backgroundForestImg = new Image();//森林背景图   
+    var mushroomImg = new Image();//蘑菇 
+	var bearEyesClosedImg = new Image();//闭着眼睛的熊熊 
+    var ctx;//2d画布   
+    var screenWidth;//画布宽度   
+    var screenHeight;//画布高度 
+	var speed = 2;//不变常量,从新开始的速度  
+    var horizontalSpeed = speed;//水平速度,随着熊的碰撞会发生改变
+	var verticalSpeed = -speed;	//垂直速度,开始肯定是要向上飘，所以要负数，随着熊的碰撞会发生改变
+	var bearAngle = 2;//熊旋转的速度
+    //公用 定义一个游戏物体戏对象   
+    function GameObject()   
+    {   
+        this.x = 0;   
+        this.y = 0;   
+        this.image = null;   
+    }   
+       
+    //定义蘑菇Mushroom 继承游戏对象GameObject   
+    function Mushroom() {};   
+    Mushroom.prototype = new GameObject();//游戏对象GameObject   
+    //蘑菇实例   
+    var mushroom = new Mushroom();        //循环描绘物体  
+	 
+	//定义动物熊 Animal 继承 游戏对象GameObject
+	function Animal() {};
+	Animal.prototype = new GameObject();//游戏对象GameObject
+	Animal.prototype.angle = 0;//动物的角度，目前中（即作为动物它在屏幕上旋转退回）
+	//定义熊实例 
+	var animal = new Animal();
+	
+    function GameLoop()   
+    {   
+        //清除屏幕   
+        ctx.clearRect(0, 0, screenWidth, screenHeight);   
+        ctx.save();   
+        //绘制背景   
+        ctx.drawImage(backgroundForestImg, 0, 0);   
+        //绘制蘑菇   
+        ctx.drawImage(mushroom.image, mushroom.x, mushroom.y); 
+		//绘制熊
+		//改变移动动物X和Y位置
+		animal.x += horizontalSpeed;
+		animal.y += verticalSpeed;
+		//改变翻滚角度
+		animal.angle += bearAngle;
+		//以当前熊的中心位置为基准
+   	    ctx.translate(animal.x + (animal.image.width/2), animal.y + (animal.image.height/2));
+		//根据当前熊的角度轮换
+    	ctx.rotate(animal.angle * Math.PI/180);
+		//描绘熊
+	  	ctx.drawImage(animal.image, - (animal.image.width/2), - (animal.image.height/2));
+        ctx.restore();
+		//检测是否碰到边界
+		HasAnimalHitEdge();
+		//检测熊碰撞蘑菇
+		HasAnimalHitMushroom();
+        }   
+    //加载图片   
+    function LoadImages()   
+    {   
+        mushroomImg.src = "images/mushroom.png";//蘑菇   
+        backgroundForestImg.src = "images/forest1.jpg";//森林背景图  
+		bearEyesClosedImg.src = "images/bear_eyesclosed.png";//闭着眼睛的
+		
+		mushroom.image = mushroomImg;   
+		animal.image = bearEyesClosedImg;
+    } 
+	function HasAnimalHitEdge()
+	{
+		//熊碰到右边边界
+		if(animal.x>screenWidth - animal.image.width)
+		{
+			if(horizontalSpeed > 0)//假如向右移动
+				horizontalSpeed =-horizontalSpeed;//改变水平速度方向
+		}
+		//熊碰到左边边界
+		if(animal.x<-10)
+		{
+			if(horizontalSpeed < 0)//假如向左移动
+				horizontalSpeed = -horizontalSpeed;//改变水平速度方向
+		}
+		//熊碰到下面边界
+		if(animal.y>screenHeight - animal.image.height)
+		{
+			//2秒钟后从新开始
+			setTimeout(function(){
+				horizontalSpeed = speed;
+				verticalSpeed = -speed;
+				animal.x = parseInt(screenWidth/2);
+				animal.y = parseInt(screenHeight/2);
+				gameLoop();
+			}, 2000);
+		}
+		//熊碰到上边边界
+		if(animal.y<0)
+		{
+			verticalSpeed = -verticalSpeed;
+		}
+	}
+	//事件处理   
+	function AddEventHandlers()   
+	{   
+		//鼠标移动则蘑菇跟着移动   
+		$("#container").mousemove(function(e){   
+			mushroom.x = e.pageX - (mushroom.image.width/2);   
+		});    
+		   
+	} 
+	//检测2个物体是否碰撞
+	function CheckIntersect(object1, object2, overlap)
+	{
+		//    x-轴                      x-轴
+		//  A1------>B1 C1              A2------>B2 C2
+		//  +--------+   ^              +--------+   ^
+		//  | object1|   | y-轴         | object2|   | y-轴
+		//  |        |   |              |        |   |
+		//  +--------+  D1              +--------+  D2
+		//
+	 	//overlap是重叠的区域值
+		A1 = object1.x + overlap;
+		B1 = object1.x + object1.image.width - overlap;
+		C1 = object1.y + overlap;
+		D1 = object1.y + object1.image.height - overlap;
+	 
+		A2 = object2.x + overlap;
+		B2 = object2.x + object2.image.width - overlap;
+		C2 = object2.y + overlap;
+		D2 = object2.y + object2.image.width - overlap;
+	 
+		//假如他们在x-轴重叠
+		if(A1 > A2 && A1 < B2
+		   || B1 > A2 && B1 < B2)
+		{
+			//判断y-轴重叠
+			if(C1 > C2 && C1 < D1
+		   || D1 > C2 && D1 < D2)
+			{
+				//碰撞
+				return true;
+			}
+	 
+		}
+		return false;
+	}
+	//动物碰撞蘑菇
+	function HasAnimalHitMushroom()
+	{
+		//假如碰撞
+		if(CheckIntersect(animal, mushroom, 5))
+		{
+			//假如碰撞的位置属于蘑菇的左下位置
+			if((animal.x + animal.image.width/2) < (mushroom.x + mushroom.image.width*0.25))
+			{
+				horizontalSpeed = -speed;//反弹
+			}
+			//假如碰撞的位置属于蘑菇的左上位置
+			else if((animal.x + animal.image.width/2) < (mushroom.x + mushroom.image.width*0.5))
+			{
+				//反弹速度减半
+				horizontalSpeed = -speed/2;
+			}
+			//假如碰撞的位置属于蘑菇的右上位置
+			else if((animal.x + animal.image.width/2) < (mushroom.x + mushroom.image.width*0.75))
+			{
+				horizontalSpeed = speed/2;
+			}
+			else
+			{
+				horizontalSpeed = speed;
+			}
+			verticalSpeed = -speed;//改变垂直速度。也即动物向上移动
+	 
+		}
+	}
+    //初始化   
+    $(window).ready(function(){    
+		AddEventHandlers();//添加事件  
+        LoadImages();           
+        ctx = document.getElementById('canvas').getContext('2d'); //获取2d画布      
+        screenWidth = parseInt($("#canvas").attr("width")); //画布宽度 
+        screenHeight = parseInt($("#canvas").attr("height"));   
+		//初始化蘑菇
+        mushroom.x = parseInt(screenWidth/2);// 蘑菇X坐标  
+        mushroom.y = screenHeight - 40;//蘑菇Y坐标   
+		//初始化熊
+		animal.x = parseInt(screenWidth/2);
+		animal.y = parseInt(screenHeight/2); 
+        setInterval(GameLoop, 10);   
+    });   
+ 
+  
+</script>  
+</head>  
+  
+<body>  
+    <div id="container" style="border:1px solid; cursor:none; width:480px; height:320px;">  
+        <canvas id="canvas" width="480" height="320" > 
+        浏览器不支持html5,<a target="_blank" href="http://www.html5china.com/help/browser.html">请下载</a>支持html5的浏览器来观看 
+        </canvas>  
+    </div>  
+<div  class="Copyrights"> 
+   <br />
+    <a href="http://www.html5china.com">由HTML5中文网整理收集，更多精彩请关注 www.HTML5China.com </a>  <br />
+        <script src="http://s15.cnzz.com/stat.php?id=2297124&amp;web_id=2297124" language="JavaScript"></script></div>
+       </body>  
+</html>  

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>:has(selector)</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">:has(selector)</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;has selector
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+	</p>
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a>&lt;Element(s)&gt;</code> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>选择元素其中至少包含指定选择器匹配的一个种元素。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.1.4</span>jQuery( ":has(selector)" )
+			</h4>
+			<p class="argument">
+				<strong>selector: </strong>任何选择器。
+			</p>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			如果表达式 <code>$('div:has(p)')</code> 匹配一个 <code>&lt;div&gt;</code>，那么应有一个<code>&lt;p&gt;</code>存在于 <code>&lt;div&gt;</code> 后代元素中的任何地方，不是直接的子元素也可以。
+		</p>
+	</div>
+	<h3>
+		Additional Notes:
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				因为 <code>:has()</code> 是一个 jQuery 延伸出来的一个选择器 。并且不是的CSS规范的一部分, 使用<code>:has()</code>查询不能充分利用原生DOM提供的<code>querySelectorAll()</code> 方法来提高性能。为了在现代浏览器上获得更佳的性能，请使用<code>$("your-pure-css-selector").has(selector/DOMElement)</code> 代替。
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		给所有包含 p 元素的 div 元素添加一个 text 类
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;div&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;
+&lt;div&gt;Hello again!&lt;/div&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("div:has(p)").addClass("test");</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>[ &lt;div class="test"&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt; ]</code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	给所有含有 p 段落标签的 div 加上一个名为 "test" 的 class。
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;has demo&lt;/title&gt;
+  &lt;style&gt;
+  .test {
+    border: 3px inset red;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;&lt;p&gt;Hello in a paragraph&lt;/p&gt;&lt;/div&gt;
+&lt;div&gt;Hello again! (with no paragraph)&lt;/div&gt;
+ 
+&lt;script&gt;
+$( "div:has(p)" ).addClass( "test" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7921" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

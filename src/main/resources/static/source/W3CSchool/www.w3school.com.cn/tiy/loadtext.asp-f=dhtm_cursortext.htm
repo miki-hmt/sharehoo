@@ -1,0 +1,22 @@
+<html>
+<head>
+<script type="text/javascript">
+function cursor(event)
+{
+document.getElementById('trail').style.visibility="visible"
+document.getElementById('trail').style.position="absolute"
+document.getElementById('trail').style.left=event.clientX+10
+document.getElementById('trail').style.top=event.clientY
+}
+</script>
+</head>
+
+<body onmousemove="cursor(event)">
+
+<h1>请在页面上移动指针</h1>
+
+<span id="trail" style="visibility:hidden">指针文本</span>
+
+</body>
+
+</html>

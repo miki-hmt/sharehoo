@@ -1,0 +1,111 @@
+BODY {
+	font-size: 9pt;
+	font-family: "宋体 黑体";
+	background-color: #FFFFFF; }
+	
+h1, h2, h3, h4, h5 {
+	font-family: "宋体 黑体";	
+	font-weight: bold;
+	color: #000000; }
+	
+h1 {
+	font-size: 12pt;
+	margin-bottom: .5em; }
+	
+h2 {
+	font-size: 12pt;
+	margin-top: 1.5em;
+	margin-bottom: .5em; }
+	
+h3 {
+	font-size: 12pt;
+	margin-top: 1.2em;
+	margin-bottom: .5em}
+	
+h4 {
+	font-size: 12pt;
+	margin-top: 1.2em;
+	margin-bottom: .5em; }
+
+h5 {
+	font-size: 9pt;
+	margin-bottom: .5em; }
+
+P  {
+	font-size: 9pt; font-family: 宋体;
+	color: #000000; }
+
+CODE {
+	font-size: 9pt; font-family: Courier New; }
+
+TH {
+	font-size: 9pt; font: "宋体 黑体"; }
+
+TD {
+	font-size: 9pt; font: "宋体 黑体"; }
+
+A:LINK {
+	color: #0000FF; }
+	
+A:VISITED {
+	color: #660066; }
+	
+A:HOVER {
+	color: #FF9900; }
+	
+.label {
+	font-weight: bold; }
+	
+.tl {
+	margin-bottom: .75em; }
+	
+.atl {
+	padding-left: 1.5em;
+	padding-bottom: .75em; }
+	
+.cfe {
+	font-weight: bold; }
+	
+.mini {
+	font-size: smaller; }
+	
+LI {
+	
+	font-size: 9pt;
+	margin-top: .75em;
+	margin-bottom: .75em; }
+	
+UL {
+	font-size: 9pt;
+	list-style: disc; }
+
+UL UL, OL OL, OL UL, UL OL {
+	font-size: 9pt;
+	margin-top: 1em;
+	margin-bottom: 1em; }
+	
+LI P {
+	font-size: 9pt;
+	margin-top: .5em;
+	margin-bottom: .5em; }
+
+.dt {
+	margin-bottom: -1em; }
+	
+.indent {
+	margin-left: 1.5em; }
+	
+SUP {
+	text-decoration: none;
+	font-size: smaller; }
+
+.EmpB {
+	color: #008000;
+	font-style: normal
+	}
+
+.Emp {
+	color: #008000;
+	font-style: normal }
+.9V  {font-size: 9pt; font-family: 宋体;}
+.footer {font-size: 9pt; font-family: Courier New;}

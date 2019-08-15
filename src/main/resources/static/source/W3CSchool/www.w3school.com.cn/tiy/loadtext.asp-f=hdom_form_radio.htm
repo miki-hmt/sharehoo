@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript">
+function check(browser)
+  {
+  document.getElementById("answer").value=browser
+  }
+</script>
+</head>
+<body>
+
+<p>ÄúÏ²»¶ÄÄ¿îä¯ÀÀÆ÷£¿</p>
+
+<form>
+<input type="radio" name="browser" onclick="check(this.value)" value="Internet Explorer">Internet Explorer<br />
+<input type="radio" name="browser" onclick="check(this.value)" value="Firefox">Firefox<br />
+<input type="radio" name="browser" onclick="check(this.value)" value="Netscape">Netscape<br />
+<input type="radio" name="browser" onclick="check(this.value)" value="Opera">Opera<br />
+<br />
+ÄúÏ²»¶µÄä¯ÀÀÆ÷ÊÇ£º<input type="text" id="answer" size="20">
+</form>
+
+</body>
+</html>

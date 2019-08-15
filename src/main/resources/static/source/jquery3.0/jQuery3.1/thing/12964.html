@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>error()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">error()<span class="g-bg-red margin-l-5">3.0-</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.error( handler(eventObject) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>为 JavaScript 的 "error" 事件绑定一个处理函数。
+</p>
+<ul class="signatures">
+	<li class="signature" id="error-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.error(
+				handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每当事件触发时执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="error-eventData-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.error(
+				[eventData ], handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>eventData</strong> 
+				</div>
+				<div>
+					类型: Anything
+				</div>
+				<div>
+					一个对象，它包含的数据键值对映射将被传递给事件处理程序。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					Type: Function( Event eventObject )
+				</div>
+				<div>
+					每当事件触发时执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		这个方法是 <code>.bind('error', handler)</code> 的快捷方式。
+	</p>
+	<p>
+		<b>从jQuery 1.8 开始</b>， <code>.error()</code> 方法已被宣告过时。使用<code>.on( "error", handler )</code>来代替 将事件处理程序附加到<code>error</code>事件。
+	</p>
+	<p>
+		<code>error</code>事件被发送到元素，比如一张图片被引用，由浏览器加载。如果没有正确载入，这个事件就会被调用。
+	</p>
+	<p>
+		示例，考虑一个简单的图像页面：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;img alt="Book" id="book" /&gt;</pre>
+	</div>
+	<p>
+		事件处理器可以绑定到图像上：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#book')
+  .error(function() {
+    alert('Handler for .error() called.')
+  })
+  .attr("src", "missing.png");</pre>
+	</div>
+	<p>
+		如果图像无法加载（例如，因为目前所提供的URL不存在），警告显示：
+	</p>
+	<p>
+		<span class="output">Handler for .error() called.</span> 
+	</p>
+	<div class="warning">
+		<p>
+			这个事件处理程序<em>必须</em>在浏览器触发<code>error</code>事件之前绑定，这就是为什么示例绑定的处理函数后设置<code>src</code>属性。此外，当页面保存到本地的时候此事件可能无法正确触发。由于<code>error</code>依赖于正常的HTTP状态码，如果URL使用<code>file:</code>协议，它通常不会被触发。
+		</p>
+	</div>
+	<p>
+		注意：一个jQuery的 <code>error</code> 事件处理器不应该附加到 <code>window</code> 对象上。当一个脚本错误的时候，浏览器就会触发 <code>window</code> 的 <code>error</code> 事件。无论如何， <code>window</code> 的 <code>error</code> 事件接收不同的参数和返回值与传统的事件不一样。若要绑定 <code>window</code> 的 <code>error</code> 事件，请使用<code>window.onerror</code>代替。
+	</p>
+</div>
+<h3>
+	Additional Notes（其他注意事项）:
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			<code>.error()</code>方法只是作为<code>.on( "error", handler )</code>的一个速记写法，移除该事件可以使用<code>.off( "error"
+				)</code>。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	要使用其他图片替换所有丢失的图片，您可以使用一个内部更新<code>src</code>属性的回调函数,传递给<code>.error()</code>。注意要确保替换图像存在; 否则<code>error</code> 事件将无限期的触发。
+</p>
+<pre class="prettyprint lang-js">// 如果 missing.png 丢失, 那么将被替换为 replacement.png
+$( "img" )
+  .error(function() {
+    $( this ).attr( "src", "replacement.png" );
+  })
+  .attr( "src", "missing.png" );</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

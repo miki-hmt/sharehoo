@@ -1,0 +1,31 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+<code class="aspcode">&lt;%@ language=&quot;javascript&quot; %&gt;</code>
+&lt;html&gt;
+&lt;body&gt;
+<code class="aspcode">&lt;%
+var d=new Date()
+var h=d.getHours()
+
+Response.Write(&quot;&lt;p&gt;&quot;)
+Response.Write(d + &quot; (Beijing Time)&quot;)
+Response.Write(&quot;&lt;/p&gt;&quot;)
+if (h&lt;12)
+   {
+   Response.Write(&quot;Good Morning!&quot;)
+   }
+else
+   {
+   Response.Write(&quot;Good day!&quot;)
+   }
+%&gt;</code>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

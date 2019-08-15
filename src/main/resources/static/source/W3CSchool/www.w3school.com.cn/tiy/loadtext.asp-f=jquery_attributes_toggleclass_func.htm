@@ -1,0 +1,35 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    $('ul li').toggleClass(function(){
+      return 'listitem_' + $(this).index();
+    });
+  });
+});
+</script>
+<style type="text/css">
+.listitem_1, .listitem_3
+{
+color:red;
+}
+.listitem_0, .listitem_2
+{
+color:blue;
+}
+</style>
+</head>
+
+<body>
+<h1 id="h1">This is a heading</h1>
+<ul>
+<li>Apple</li>
+<li>IBM</li>
+<li>Microsoft</li>
+<li>Google</li>
+</ul>
+<button class="btn1">添加或移除列表项的类</button>
+</body>
+</html>

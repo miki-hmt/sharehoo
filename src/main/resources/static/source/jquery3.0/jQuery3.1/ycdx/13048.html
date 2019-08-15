@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>deferred.done()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">deferred.done()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;deferred.done( doneCallbacks [, doneCallbacks ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Deferred Object</code> 
+	</p>
+</div>
+<p>
+</p>
+<div class="entry-wrapper">
+	<p class="desc">
+		<strong>描述：</strong> 当Deferred（延迟）对象解决时，调用添加处理程序。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="deferred-done-doneCallbacks-doneCallbacks">
+			<h4 class="name">
+				<span class="version-details">V : 1.5</span>deferred.done( doneCallbacks [, doneCallbacks ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>doneCallbacks</strong> 
+					</div>
+					<div>
+						类型: Function()
+					</div>
+					<div>
+						一个函数，或者函数数组，当Deferred（延迟）对象得到解决时被调用。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>doneCallbacks</strong> 
+					</div>
+					<div>
+						类型: Function()
+					</div>
+					<div>
+						可选的一个函数，或者函数数组，当Deferred（延迟）对象得到解决时被调用。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>deferred.done()</code>方法接受一个或多个参数，所有这些都参数可以是一个单一的函数或一个函数数组。当Deferred（延迟）解决时，doneCallbacks被调用。回调是依照他们添加的顺序执行。一旦<code>deferred.done()</code>返回Deferred（延迟）对象，Deferred（延迟）可以链接其它的延迟对象，包括增加额外的<code>.done()</code>方法。当Deferred（延迟）解决，doneCallbacks执行，并且使用提供给<code>resolve</code>或<code>resolveWith</code>方法的参数，依照被添加的顺序调用。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例<span class="desc"></span> 
+	</h4>
+	<p>
+		<span class="desc">一旦<a href="http://www.css88.com/jqapi-1.9/jQuery.get"><code>jQuery.get</code></a> 方法返回一个来自延迟的对象的jqXHR对象，我们可以附加一个成功回调使用<code>.done()</code> 方法。 </span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$.get("test.php").done(function() {
+  alert("$.get succeeded");
+});</pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">当用户点击按钮时，受理延迟对象，触发一系列回调函数：</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+ &lt;button&gt;Go&lt;/button&gt;
+ &lt;p&gt;Ready...&lt;/p&gt;
+ 
+&lt;script&gt;
+/* 3 functions to call when the Deferred object is resolved */
+function fn1() {
+  $("p").append(" 1 ");
+}
+function fn2() {
+  $("p").append(" 2 ");
+}
+function fn3(n) {
+  $("p").append(n + " 3 " + n);
+}
+ 
+/* create a deferred object */
+var dfd = $.Deferred();
+ 
+/* add handlers to be called when dfd is resolved */
+dfd
+/* .done() can take any number of functions or arrays of functions */
+.done( [fn1, fn2], fn3, [fn2, fn1] )
+/* we can chain done methods, too */
+.done(function(n) {
+  $("p").append(n + " we're done.");
+});
+ 
+/* resolve the Deferred object when the button is clicked */
+$("button").bind("click", function() {
+  dfd.resolve("and");
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8257" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

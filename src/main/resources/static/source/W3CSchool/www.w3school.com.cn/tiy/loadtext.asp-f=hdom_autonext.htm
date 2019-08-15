@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript">
+function checkLen(x,y)
+{
+if (y.length==x.maxLength)
+	{
+	var next=x.tabIndex
+	if (next<document.getElementById("myForm").length)
+		{
+		document.getElementById("myForm").elements[next].focus()
+		}
+	}
+}
+</script>
+</head>
+
+<body>
+<p>这段脚本在达到文本框的最大长度时跳到下一个文本框：</p>
+
+<form id="myForm">
+<input size="3" tabindex="1" maxlength="3" onkeyup="checkLen(this,this.value)">
+<input size="2" tabindex="2" maxlength="2" onkeyup="checkLen(this,this.value)">
+<input size="3" tabindex="3" maxlength="3" onkeyup="checkLen(this,this.value)">
+</form>
+</body>
+
+</html>

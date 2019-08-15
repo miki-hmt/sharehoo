@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>keypress()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">keypress()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.keypress( handler(eventObject) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>为 "keypress" 事件绑定一个处理函数，或者触发元素上的 "keypress" 事件。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="keypress-handlereventObject">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.keypress( handler(eventObject) )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>handler(eventObject)</strong> 
+					</div>
+					<div>
+						类型: Function()
+					</div>
+					<div>
+						每次事件触发时会执行的函数。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="keypress-eventData-handlereventObject">
+			<h4 class="name">
+				<span class="version-details">V : 1.4.3</span>.keypress(  [eventData ], handler(eventObject) )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>eventData</strong> 
+					</div>
+					<div>
+						类型: PlainObject
+					</div>
+					<div>
+						一个对象，它包含的数据键值对映射将被传递给事件处理程序。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>handler(eventObject)</strong> 
+					</div>
+					<div>
+						类型: Function()
+					</div>
+					<div>
+						每次事件触发时会执行的函数。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="keypress">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.keypress()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<strong>注意:</strong>：由于<code>keypress</code>事件没有统一的官方规范说明，所以在不同的浏览器，不同的浏览器版本，和不同的平台实际使用这个事件时可能遇到的问题。
+		</p>
+		<p>
+			这个方法的前两个用法是 <code>.bind('keypress', handler)</code> 的快捷方式，第3个不带参数的用法是 <code>.trigger('keypress')</code> 的快捷方式。
+		</p>
+		<p>
+			当浏览器捕获一个元素上键盘输入时，<code>keypress</code>就会发送个元素。这是类似<code>keydown</code>事件，除了当按键被一直按下（即连续插入字符的场合）时的处理。如果用户按下并按住这个键（不松开释放）的时候，<code>keydown</code>事件只触发一次，但是<code>keypress</code>会在每个字符插入的时候都会触发事件。此外，组合键（如Shift）会触发<code>keydown</code>事件，但不会触发<code>keypress</code>事件。
+		</p>
+		<p>
+			<code>keypress</code>事件处理程序可以附加到任何元素，但该事件只是发送到具有焦点的元素上。不同的浏览器中，可获得焦点的元素略有不同，但是表单元素总是能获取焦点，所以对于此事件类型表单元素是最合适的。
+		</p>
+		<p>
+			举个示例，看下面的代码
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;form&gt;
+  &lt;fieldset&gt;
+    &lt;input id="target" type="text" value="Hello there" /&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+		</div>
+		<p>
+			事件处理函数可以绑定在输入框上：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$("#target").keypress(function() {
+  alert("Handler for .keypress() called.");
+});</pre>
+		</div>
+		<p>
+			现在当光标插入点位于表单域并一个键被按下，警告将被显示：
+		</p>
+		<p>
+			<span class="output">Handler for .keypress() called.</span> 
+		</p>
+		<p>
+			如果该键被按下，消息重复。应用不带参数的<code>.keydown()</code>，我们可以手动触发这个事件:
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#other').click(function() {
+  $("#target").keypress();
+});</pre>
+		</div>
+		<p>
+			这些代码执行后，点击<span class="output">Trigger the handler</span>同样警报显示。
+		</p>
+		<p>
+			如果需要任何按键被捕获（例如，要实现网页全局上的快捷键），那么把这个事件附加到<code>document</code>对象上是非常有用的。所有的按键事件都会沿着各自的 DOM 树冒泡到 <code>document</code> 对象上，除非明确停止。
+		</p>
+		<p>
+			要确定哪个键被按下，我们可以检测传递给处理函数的event 对象。而浏览器使用不同的属性来存储这些信息，jQuery的规范了<code>.which</code>属性，以便我们能够可靠地使用它来检索关键代码。
+		</p>
+		<p>
+			值得注意的是<code>keydown</code> 和 <code>keyup</code>提供一个代码，表示哪一个键被按下，而<code>keypress</code>表示被输入哪个字符。例如，按下了小写的 "a"，在 <code>keydown</code>和<code>keyup</code> 中，对应该键的代码是 65，但是对于 <code>keypress</code> 而言，接收到的代码是 97。如果是大写 "A" 的话，则所有的相关事件接收到的代码都是 65。由于这个区别，若想捕获敲击了哪个特殊键的话，例如，方向键，使用 <code>.keydown()</code>或<code>.keyup()</code> 更好。
+		</p>
+	</div>
+	<h3>
+		Additional Notes（其他注意事项）:
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				<code>.keypress()</code>方法只是作为<code>.on( "keypress", handler )</code>的一个速记写法，移除该事件可以使用<code>.off(
+                            "keypress"
+                            )</code>。
+			</li>
+		</ul>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h3 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+</header>
+	<p>
+		<span class="desc">在文本框中按下某个键时，显示 event 对象。注意：输出 event 对象时，要依赖一个简单的 $.print() 插件 (http://api.jquery.com/scripts/events.js)。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+fieldset { margin-bottom: 1em; }
+input { display: block; margin-bottom: .25em; }
+#print-output {
+  width: 100%;
+}
+.print-output-line {
+  white-space: pre;
+  padding: 5px;
+  font-family: monaco, monospace;
+  font-size: .7em;
+}
+ 
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form&gt;
+  &lt;fieldset&gt;
+    &lt;label for="target"&gt;Type Something:&lt;/label&gt;
+    &lt;input id="target" type="text" /&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;
+&lt;button id="other"&gt;
+  Trigger the handler
+&lt;/button&gt;
+&lt;script src="http://api.jquery.com/resources/events.js"&gt;&lt;/script&gt;
+ 
+&lt;script&gt;
+var xTriggered = 0;
+$("#target").keypress(function(event) {
+  if ( event.which == 13 ) {
+     event.preventDefault();
+   }
+   xTriggered++;
+   var msg = "Handler for .keypress() called " + xTriggered + " time(s).";
+  $.print( msg, "html" );
+  $.print( event );
+});
+ 
+$("#other").click(function() {
+  $("#target").keypress();
+});&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8176" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

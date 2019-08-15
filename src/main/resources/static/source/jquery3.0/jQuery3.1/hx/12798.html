@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.extend()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.extend()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.extend( target [, object1 ] [, objectN ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>将两个或更多对象的内容合并到第一个对象。
+</p>
+<ul class="signatures">
+	<li class="signature" id="jQuery-extend-target-object1-objectN">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>jQuery.extend( target [, object1 ] [, objectN ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>target</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader15">Object</a> 
+				</div>
+				<div>
+					一个对象，如果附加的对象被传递给这个方法将那么它将接收新的属性，如果它是唯一的参数将扩展jQuery的命名空间。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>object1</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader15">Object</a> 
+				</div>
+				<div>
+					一个对象，它包含额外的属性合并到第一个参数
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>objectN</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader15">Object</a> 
+				</div>
+				<div>
+					包含额外的属性合并到第一个参数
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="jQuery-extend-deep-target-object1-objectN">
+		<h4 class="name">
+			<span class="version-details">V : 1.1.4</span>jQuery.extend(  [deep ], target, object1 [, objectN ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>deep</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader14">Boolean</a> 
+				</div>
+				<div>
+					如果是true，合并成为递归（又叫做深拷贝）。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>target</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader15">Object</a> 
+				</div>
+				<div>
+					对象扩展。这将接收新的属性。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>object1</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader15">Object</a> 
+				</div>
+				<div>
+					一个对象，它包含额外的属性合并到第一个参数.
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>objectN</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader15">Object</a> 
+				</div>
+				<div>
+					包含额外的属性合并到第一个参数
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		当我们提供两个或多个对象给<code>$.extend()</code>，对象的所有属性都添加到目标对象（target参数）。
+	</p>
+	<p>
+		如果只有一个参数提供给<code>$.extend()</code>，这意味着目标参数被省略。在这种情况下，jQuery对象本身被默认为目标对象。这样，我们可以在jQuery的命名空间下添加新的功能。这对于插件开发者希望向 jQuery 中添加新函数时是很有用的。
+	</p>
+	<p>
+		请记住，目标对象（第一个参数）将被修改，并且将通过<code>$.extend()</code>返回。然而，如果我们想保留原对象，我们可以通过传递一个空对象作为目标对象：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var object = $.extend({}, object1, object2);</pre>
+	</div>
+	<p>
+		在默认情况下，通过<code>$.extend()</code>合并操作不是递归的;如果第一个对象的属性本身是一个对象或数组，那么它将完全用第二个对象相同的key重写一个属性。这些值不会被合并。可以通过检查下面示例中 banana 的值，就可以了解这一点。然而，如果将 <code>true</code> 作为该函数的第一个参数，那么会在对象上进行递归的合并。
+	</p>
+	<p>
+		<strong>警告</strong>:不支持第一个参数传递 <code>false</code> 。
+	</p>
+	<p>
+		未定义的属性不会被复制。然而，从对象原型的继承属性<em>将</em>被复制。如果属性（Properties）是一个通过构造函数<code>new MyCustomObject(args)</code>定义的，或JavaScript中内置类型，如Date 或 RegExp，是不会重新创建的，并且将被当作普通的对象出在返回的对象或数组中。
+	</p>
+	<p>
+		若设置了 <code>deep</code> 参数，对象和数组也会被合并进来，但是对象包裹的原始类型，比如String, Boolean, 和 Number是不会被合并进来的。
+	</p>
+	<p>
+		若要满足其它不同于该行为的需求，编写自定义的扩展方法代替。或者使用其他库，比如<a href="http://lodash.com" target="_blank">lodash</a> 
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">合并两个对象，并修改第一个对象。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;jQuery.extend demo&lt;/title&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div id="log"&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+var object1 = {
+  apple: 0,
+  banana: { weight: 52, price: 100 },
+  cherry: 97
+};
+var object2 = {
+  banana: { price: 200 },
+  durian: 100
+};
+ 
+// Merge object2 into object1
+$.extend( object1, object2 );
+ 
+// Assuming JSON.stringify - not available in IE&lt;8
+$( "#log" ).append( JSON.stringify( object1 ) );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8023" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">采用递归方式合并两个对象，并修改第一个对象。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;jQuery.extend demo&lt;/title&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div id="log"&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+var object1 = {
+  apple: 0,
+  banana: { weight: 52, price: 100 },
+  cherry: 97
+};
+var object2 = {
+  banana: { price: 200 },
+  durian: 100
+};
+ 
+// Merge object2 into object1, recursively
+$.extend( true, object1, object2 );
+ 
+// Assuming JSON.stringify - not available in IE&lt;8
+$( "#log" ).append( JSON.stringify( object1 ) );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8024" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div>
+<h4>
+	实例<span class="desc"></span>
+</h4>
+<p>
+	<span class="desc">合并 defaults 和 options 对象，并且不修改 defaults 对象。这是常用的插件开发模式。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;jQuery.extend demo&lt;/title&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div id="log"&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+var defaults = { validate: false, limit: 5, name: "foo" };
+var options = { validate: true, name: "bar" };
+ 
+// Merge defaults and options, without modifying defaults
+var settings = $.extend( {}, defaults, options );
+ 
+// Assuming JSON.stringify - not available in IE&lt;8
+$( "#log" ).append( "&lt;div&gt;&lt;b&gt;defaults -- &lt;/b&gt;" + JSON.stringify( defaults ) + "&lt;/div&gt;" );
+$( "#log" ).append( "&lt;div&gt;&lt;b&gt;options -- &lt;/b&gt;" + JSON.stringify( options ) + "&lt;/div&gt;" );
+$( "#log" ).append( "&lt;div&gt;&lt;b&gt;settings -- &lt;/b&gt;" + JSON.stringify( settings ) + "&lt;/div&gt;" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<a href="http://www.shouce.ren/study/api/s/8025" target="_blank" class="btn btn-sm btn-success">运行一下</a><br /></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

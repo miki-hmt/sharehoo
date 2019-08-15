@@ -1,0 +1,326 @@
+﻿#main{
+    width: 100%;
+    height:500px;
+
+}
+#topDiv{
+    width: 100%;
+    height: 50px;  /*2017.05.10  原来为60px  */
+    background: rgba(72, 82, 94, 1);
+    position:fixed;
+    top:0;
+    z-index: 1000;
+}
+.ul_top{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width:70%;
+    height: 60px;
+    /*background: #ff0000;*/
+    float: left;
+    margin-left: 0px;
+}
+.ul_top li{
+    float: left;
+}
+.ul_top li a{
+    text-decoration: none;
+}
+.ul_top li span{
+    font-size: 30px;
+}
+.ul_top li:nth-child(1){
+    width: 160px;
+    height: 50px;
+    background: #B6241F;
+    padding-top: 10px;
+    font-size: 15px;
+    padding-left: 30px;
+    font-family: "楷体";
+    font-weight: bold;
+    color: white;
+}
+.ul_top li:nth-child(1) span{
+    font-size: 15px;
+}
+.ul_top li:nth-child(n+2){
+    width: 115px;
+    height: 50px;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+	margin-top:5px;
+    padding-top: 10px;
+    /*border-left:1px solid white;*/
+    padding-left: 15px;
+    /*margin-left: 10px;*/
+}
+.ul_top li:nth-child(n+2) a{
+    font-size: 20px;
+    color: #497383;
+    font-family: "楷体";
+
+}
+.ul_top li:nth-child(n+2) a:hover{
+    color: yellow;
+}
+.ul_top li:nth-child(n+2):hover{
+    cursor: pointer;
+    background: rgba(100, 136, 232, 0.48);
+}
+#rightDiv{
+    width: 100%;
+    height: 100%;
+    background: white;
+    float: right;
+    border-left:10px solid black;
+    position: fixed;
+    right:-100%;
+    -webkit-transition: all 2s;
+    -moz-transition: all 2s;
+    top:60px;
+    z-index: 100;
+}
+
+#miki:hover{
+	 right: -146px;
+    cursor: pointer;
+    background: rgba(0, 0, 0,0.5);
+}
+#rightDiv:hover{
+    right: -146px;
+    cursor: pointer;
+    background: rgba(0, 0, 0,0.5);
+    /*background-size: 100%;*/
+}
+#rightDiv header{
+    width: 100%;
+    height: 50px;
+    background: rgba(130,171,255,0.5);
+
+}
+#rightDiv header p{
+    margin-left: 36%;
+    padding-top: 10px;
+    font-size: 30px;
+    color: white;
+    font-family: "楷体";
+    font-weight: bold;
+}
+
+#leftDiv{
+    width: 100%;
+    height: 100%;
+    margin-top:60px;
+    -webkit-perspective: 800;
+    -moz-perspective: 800;
+    -moz-perspective-origin: 50% 250px;
+}
+#right_1{
+    width: 90px;  /*  原来为137px  2017.05.10  */
+    height: 750px;
+    position: fixed;
+    top: 0px;
+    margin-top: 60px;
+    background: rgba(0, 0, 0, 0.8);
+
+}
+#right_1 ul{
+    margin: 0;padding: 0;
+    list-style-type:none;
+    width: 137px;
+    height:700px;
+}
+#right_1 ul li a{
+    text-decoration:none;
+}
+#right_1 ul li a span{
+    color: white;
+    font-size: 10px;
+    -webkit-transition:all 1s;
+    -moz-transition:all 1s;
+}
+#right_1 ul li:nth-child(1) a span:hover{
+    color: orange;
+}
+#right_1 ul li:nth-child(2) a span:hover{
+    color: red;
+}
+#right_1 ul li:nth-child(3) a span:hover{
+    color: blue;
+}
+#right_1 ul li:nth-child(4) a span:hover{
+    color: yellow;
+}
+#right_1 ul li:nth-child(5) a span:hover{
+    color:red;
+}
+#right_1 ul li:nth-child(6) a span:hover{
+    color:green;
+}
+#right_1 ul li:nth-child(7) a span:hover{
+    color:orange;
+}
+#right_1 ul li:hover{
+    background-color: #9660ff;
+    cursor: pointer;
+}
+#right_1 ul li{
+    width: 60px;
+    height: 50px;
+    padding-left:30px ;
+    padding-top:20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    -webkit-transition:all 1s;
+    -moz-transition:all 1s;
+}
+#right_1 ul li:hover{
+    background-color: rgba(111, 192, 178,0.2);
+    cursor: pointer;
+}
+#meDiv{
+    width: 600px;
+    height: 160px;
+    /*background: #ff0000;*/
+    margin-left: 30%;
+    margin-top: 18%;
+}
+.lableMiss{
+    font-size: 40px;
+    font-family: "楷体";
+    margin-left: 170px;
+    color: white;
+}
+.input_in{
+    width: 240px;
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 20px;
+    margin-left: 150px;
+    margin-top: 20px;
+    border: 2px solid #5f9ea0;
+    -webkit-box-shadow: 0 0 3px 1px #5f9ea0;
+    -moz-box-shadow: 0 0 3px 1px #5f9ea0;
+    float: left;
+}
+#in_ease span{
+    float: left;
+    font-size: 25px;
+    margin-top:5px ;
+    margin-left: 7px;
+    color: white;
+}
+
+#in_ease:hover{
+
+    cursor: pointer;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+}
+#in_ease{
+    float: left;
+    width: 40px;
+    height: 40px;
+    border:5px solid #5f9ea0;
+    margin-top: 16px;
+    -wbekit-border-radius: 45px;
+    -moz-border-radius: 45px;
+    margin-left: 10px;
+    border-radius: 45px;
+    -webkit-transition:all 1s;
+    -moz-transition:all 1s;
+    background: #6495ed;
+    -webkit-box-shadow: 0 0 5px 1px #6495ed;
+    -moz-box-shadow: 0 0 5px 1px #6495ed;
+}
+#text_Div{
+    width: 700px;
+    height: 60%;
+    margin-left: 15%;
+    margin-top: 100px;
+}
+.p_1{
+    font-size: 28px;
+    color: white;
+    font-family: "楷体";
+
+
+}
+#cava{
+    width: 230px;
+    height: 230px;
+    position: absolute;
+    top: 80px;
+    right: 50px;
+    -webkit-border-radius: 400px;
+    -moz-border-radius: 400px;
+    border-radius: 230px;
+    border: 20px solid white;
+    -webkit-box-shadow:0 5px 5px 2px #8c8c8c;
+    -moz-box-shadow:0 5px 5px 2px #8c8c8c;
+    -webkit-box-shadow: inset 0 0px 10px 5px #36373a;
+    -moz-box-shadow: inset 0 0px 10px 5px #36373a;
+    background:#C68140;
+}
+#missyou{
+    width: 120px;
+    height: 38px;
+    position: absolute;
+    top: 135px;
+    right: 120px;
+}
+#missyou label{
+    font-size: 20px;
+    font-family: "楷体";
+    font-weight: bold;
+    color: white;
+}
+#login{
+    width: 100%;
+    height: 100%;
+    background:white;
+    position: fixed;
+    top: 60px;
+    left: 137px;
+    /*-webkit-transition:all 1s;*/
+    visibility: hidden;
+}
+
+@-moz-keyframes myanimation{
+    from{
+        top:-680px;
+    }
+    to{
+        top:60px;
+    }
+}
+@-webkit-keyframes myanimation{
+    /*from{*/
+        /*top:-680px;*/
+        /*opacity: 0;*/
+    /*}*/
+    /*to{*/
+        /*top:60px;*/
+        /*opacity: 1;*/
+    /*}*/
+    0%{
+        opacity: 0;
+    }
+    20%{
+        opacity: 0.2;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    80%{
+        opacity: 0.7;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+#login:hover{
+    /*top: 0;*/
+    cursor: pointer;
+}

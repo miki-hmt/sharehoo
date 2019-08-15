@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+newel=xmlDoc.createElement("edition");
+newtext=xmlDoc.createTextNode("first");
+newel.appendChild(newtext);
+
+x=xmlDoc.getElementsByTagName("book")[0];
+x.appendChild(newel);
+
+//Output title and edition
+document.write(x.getElementsByTagName("title")[0].childNodes[0].nodeValue);
+document.write(" - Edition: ");
+document.write(x.getElementsByTagName("edition")[0].childNodes[0].nodeValue);
+</script>
+</body>
+</html>

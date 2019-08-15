@@ -1,0 +1,28 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+function Car() {
+  var oTempCar = new Object;
+  oTempCar.color = "blue";
+  oTempCar.doors = 4;
+  oTempCar.mpg = 25;
+  oTempCar.showColor = function() {
+    document.write(this.color);
+  };
+
+  return oTempCar;
+}
+
+var oCar1 = new Car();
+var oCar2 = new Car();
+
+document.write(oCar1.showColor());
+document.write("<br />")
+document.write(oCar2.showColor());
+
+</script>
+
+</body>
+</html>

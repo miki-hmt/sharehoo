@@ -1,0 +1,309 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<script type="text/javascript" src="jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#b01").click(function(){
+  $('#myDiv').load('test1.txt.htm'/*tpa=http://www.w3school.com.cn/jquery/test1.txt*/);
+  })
+})
+</script>
+
+<style type="text/css">
+div#maincontent div#myDiv {
+	margin:0;
+	border-style:none;
+	bo
+	}
+div#maincontent button {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:red;
+	}
+
+div#maincontent div#myDiv h3 {
+	margin:0;
+	color:#aaa;
+	}
+
+div#maincontent div#myDiv p {
+	color:#aaa;
+	}
+</style>
+
+<title>jQuery AJAX 函数</title>
+</head>
+
+<body class="browserscripting">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>jQuery 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/jquery/index.asp" title="jQuery 教程">jQuery 教程</a></li>
+<li><a href="jquery_intro.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_intro.asp" title="jQuery 简介">jQuery 简介</a></li>
+<li><a href="jquery_syntax.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_syntax.asp" title="jQuery 语法">jQuery 语法</a></li>
+<li><a href="jquery_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_selectors.asp" title="jQuery 选择器">jQuery 选择器</a></li>
+<li><a href="jquery_events.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_events.asp" title="jQuery 事件">jQuery 事件</a></li>
+<li><a href="jquery_effects.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_effects.asp" title="jQuery 效果">jQuery 效果</a></li>
+<li><a href="jquery_callback.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_callback.asp" title="jQuery Callback">jQuery Callback</a></li>
+<li><a href="jquery_html.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_html.asp" title="jQuery HTML">jQuery HTML</a></li>
+<li><a href="jquery_css.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_css.asp" title="jQuery CSS">jQuery CSS</a></li>
+<li><a href="jquery_ajax.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ajax.asp" title="jQuery AJAX 函数">jQuery AJAX</a></li>
+<li><a href="jquery_examples.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_examples.asp" title="jQuery 实例">jQuery 实例</a></li>
+</ul>
+
+<h2>jQuery 参考手册</h2>
+<ul>
+<li><a href="jquery_ref_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_selectors.asp" title="jQuery 参考手册 - 选择器">jQuery 选择器</a></li>
+<li><a href="jquery_ref_events.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_events.asp" title="jQuery 参考手册 - 事件">jQuery 事件</a></li>
+<li><a href="jquery_ref_effects.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_effects.asp" title="jQuery 参考手册 - 效果">jQuery 效果</a></li>
+<li><a href="jquery_ref_manipulation.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_manipulation.asp" title="jQuery 参考手册 - 文档操作">jQuery 文档操作</a></li>
+<li><a href="jquery_ref_attributes.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_attributes.asp" title="jQuery 参考手册 - 属性">jQuery 属性</a></li>
+<li><a href="jquery_ref_css.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_css.asp" title="jQuery 参考手册 - CSS">jQuery CSS</a></li>
+</ul>
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>jQuery AJAX 函数</h1>
+
+<div id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="jquery_css.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_css.asp">Previous Page</a></li>
+
+<li class="next"><a href="jquery_examples.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_examples.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div id="intro">
+<p><strong>jQuery 拥有供 AJAX 开发的丰富函数（方法）库。</strong></p>
+</div>
+
+<div>
+<h2>jQuery AJAX 实例</h2>
+
+<div id="myDiv"><h3>通过 AJAX 来改变文本</h3></div>
+
+<button id="b01" type="button">Change Content</button>
+
+<p><a href="../tiy/t.asp-f=jquery_ajax1.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=jquery_ajax1">TIY</a></p>
+
+<p>上面的例子摘自我们的 <a href="../ajax/index.asp.htm" tppabs="http://www.w3school.com.cn/ajax/index.asp" title="AJAX 教程">AJAX 教程</a>，但使用 jQuery 进行了修改。</p>
+</div>
+
+
+<div>
+<h2>什么是 AJAX？</h2>
+
+<p>AJAX = Asynchronous JavaScript and XML.</p>
+
+<p>AJAX 是一种创建快速动态网页的技术。</p>
+
+<p>AJAX 通过在后台与服务器交换少量数据的方式，允许网页进行异步更新。这意味着有可能在不重载整个页面的情况下，对网页的一部分进行更新。</p>
+
+<p>您可以在我们的 <a href="../ajax/index.asp.htm" tppabs="http://www.w3school.com.cn/ajax/index.asp" title="AJAX 教程">AJAX 教程</a> 中学习更多有关 AJAX 的知识。</p>
+</div>
+
+
+<div>
+<h2>AJAX 和 jQuery</h2>
+
+<p>jQuery 提供了供 AJAX 开发的丰富函数（方法）库。</p>
+
+<p>通过 jQuery AJAX，使用 HTTP Get 和 HTTP Post，您都可以从远程服务器请求 TXT、HTML、XML 或 JSON。</p>
+
+<p><em>而且您可以直接把远程数据载入网页的被选 HTML 元素中！</em></p>
+</div>
+
+
+<div>
+<h2>写的更少，做的更多</h2>
+
+<p>jQuery 的 load 函数是一种简单的（但很强大的）AJAX 函数。它的语法如下：</p>
+
+<pre>$(selector).load(url,data,callback)</pre>
+
+<p>请使用<em>选择器</em>来定义要改变的 HTML 元素，使用 <em>url 参数</em>来指定您的数据的 web 地址。</p>
+
+<p><a href="../tiy/t.asp-f=jquery_ajax1.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=jquery_ajax1">TIY</a></p>
+
+<p>只有当您希望向服务器发送数据，才需要使用 data 参数。只有当您需要在完毕之后触发一个函数时，您才需要使用 callback 参数。</p>
+</div>
+
+
+<div>
+<h2>Low Level AJAX</h2>
+
+<p><em>$.ajax(options)</em> 是低层级 AJAX 函数的语法。</p>
+
+<p>$.ajax 提供了比高层级函数更多的功能，但是同时也更难使用。</p>
+
+<p>option 参数设置的是 name|value 对，定义 url 数据、密码、数据类型、过滤器、字符集、超时以及错误函数。</p>
+
+<p><a href="../tiy/t.asp-f=jquery_ajax2.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=jquery_ajax2">TIY</a></p>
+</div>
+
+
+<div>
+<h2>jQuery AJAX 请求</h2>
+
+<table class="dataintable">
+<tr>
+<th>请求</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>$(selector).load(url,data,callback)</td>
+<td>把远程数据加载到被选的元素中</td>
+</tr>
+
+<tr>
+<td>$.ajax(options)</td>
+<td>把远程数据加载到 XMLHttpRequest 对象中</td>
+</tr>
+
+<tr>
+<td>$.get(url,data,callback,type)</td>
+<td>使用 HTTP GET 来加载远程数据</td>
+</tr>
+
+<tr>
+<td>$.post(url,data,callback,type)</td>
+<td>使用 HTTP POST 来加载远程数据</td>
+</tr>
+
+<tr>
+<td>$.getJSON(url,data,callback)</td>
+<td>使用 HTTP GET 来加载远程 JSON 数据</td>
+</tr>
+
+<tr>
+<td>$.getScript(url,callback)</td>
+<td>加载并执行远程的 JavaScript 文件</td>
+</tr>
+</table>
+
+<p>(selector) <a href="jquery_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_selectors.asp" title="jQuery 选择器">jQuery 元素选择器语法</a></p>
+
+<p>(url) 被加载的数据的 URL（地址）</p>
+
+<p>(data) 发送到服务器的数据的键/值对象</p>
+
+<p>(callback) 当数据被加载时，所执行的函数</p>
+
+<p>(type) 被返回的数据的类型 (html,xml,json,jasonp,script,text)</p>
+
+<p>(options) 完整 AJAX 请求的所有键/值对选项</p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="jquery_css.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_css.asp">Previous Page</a></li>
+
+<li class="next"><a href="jquery_examples.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_examples.asp">Next Page</a></li>
+</ul>
+
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div><div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

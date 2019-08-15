@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript">
+function selectOrange()
+  {
+  document.getElementById("orange").selected=true;
+  }
+</script>
+</head>
+
+<body>
+<form>
+请选择您喜欢的水果：
+<select>
+  <option id="apple">苹果</option>
+  <option id="orange">桔子</option>
+  <option id="pineapple" selected="selected">菠萝</option>
+  <option id="banana">香蕉</option>
+</select>
+<br /><br />
+<input type="button" onclick="selectOrange()" value="选择桔子">
+</form>
+</body>
+</html>

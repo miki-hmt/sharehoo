@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript">
+function getName()
+  {
+  alert(document.getElementById("mySelect").name)
+  }
+</script>
+</head>
+<body>
+
+<form>
+<select name="mySelect" id="mySelect">
+  <option>Apple</option>
+  <option>Pear</option>
+  <option>Banana</option>
+  <option>Orange</option>
+</select>
+<input type="button" onclick="getName()" value="Alert the name of the dropdown list">
+</form>
+
+</body>
+</html>

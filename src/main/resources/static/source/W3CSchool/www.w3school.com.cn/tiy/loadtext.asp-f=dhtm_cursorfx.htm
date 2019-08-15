@@ -1,0 +1,53 @@
+<html>
+<head>
+
+<script type="text/javascript">
+var i=0
+txt=new Array("trailA","trailB","trailC")
+
+function cursor(interval)
+{
+pos=i*8+5
+if (interval=='first')
+	{
+	i=0
+	}
+if (i==0)
+	{
+	xpos=event.clientX
+	ypos=event.clientY
+	document.all(txt[i]).style.visibility="visible"
+	document.all(txt[i]).style.position="absolute"
+	document.all(txt[i]).style.left=xpos+5
+	document.all(txt[i]).style.top=ypos+5
+	}
+else
+	{	
+	document.all(txt[i]).style.visibility="visible"
+	document.all(txt[i]).style.position="absolute"
+	document.all(txt[i]).style.left=xpos+pos
+	document.all(txt[i]).style.top=ypos+pos
+	}
+if (i==txt.length)
+	{
+	i=i
+	}
+else
+	{
+	i++
+	}
+setTimeout("cursor('next')",10)
+}
+</script>
+
+</head>
+<body onmousemove="cursor('first')">
+
+<h1>请在页面上移动指针</h1>
+
+<span id="trailA" style="visibility:hidden">W</span>
+<span id="trailB" style="visibility:hidden">3</span>
+<span id="trailC" style="visibility:hidden">S</span>
+
+</body>
+</html>

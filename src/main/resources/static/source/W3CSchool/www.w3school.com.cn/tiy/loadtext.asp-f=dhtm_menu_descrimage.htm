@@ -1,0 +1,65 @@
+<html>
+<head>
+<style>
+table
+{
+background:black;
+}
+a
+{
+text-decoration:none;
+color:#000000;
+}
+th
+{
+width:200px;
+background:#FF8080;
+}
+td
+{
+font:bold;
+background:#ADD8E6;
+}
+</style>
+<script type="text/javascript">
+function gettip(image)
+{
+document.getElementById('tip').innerHTML="<img src='" + image + "' />"
+}
+function reset()
+{
+document.getElementById('tip').innerHTML=" "
+}
+</script>
+</head>
+
+<body>
+<b>请把鼠标移动到链接上，就可以看到它们的 logo：</b><br />
+<table width="400px">
+<tr>
+<th>
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" 
+onmouseover="gettip('../i/w3school_logo_black.gif'/*tpa=http://www.w3school.com.cn/i/w3school_logo_black.gif*/)"
+onmouseout="reset()">W3School.com.cn</a>
+</th>
+<td rowspan="3" id="tip" align="center" valign="center"> </td>
+</tr>
+<tr>
+<th>
+<a href="javascript:if(confirm('http://www.microsoft.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.microsoft.com/'" tppabs="http://www.microsoft.com/"
+onmouseover="gettip('../i/eg_logo_microsoft.gif'/*tpa=http://www.w3school.com.cn/i/eg_logo_microsoft.gif*/)"
+onmouseout="reset()">Internet Explorer</a>
+</th>
+</tr>
+</tr>
+<tr>
+<th>
+<a href="javascript:if(confirm('http://my.netscape.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://my.netscape.com/'" tppabs="http://my.netscape.com/"
+onmouseover="gettip('../i/eg_logo_netscape.gif'/*tpa=http://www.w3school.com.cn/i/eg_logo_netscape.gif*/)"
+onmouseout="reset()">Netscape Navigator</a>
+</th>
+</tr>
+</table>
+</body>
+
+</html>

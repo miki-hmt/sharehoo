@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+x=xmlDoc.getElementsByTagName('book');
+
+//set textContent
+for(i=0;i<x.length;i++)
+{
+x.item(i).attributes[0].textContent="TOO_OLD";
+}
+  
+//output textContent
+for(i=0;i<x.length;i++)
+{
+document.write(x.item(i).attributes[0].textContent);
+document.write("<br />");
+}
+
+</script>
+</body>
+</html>

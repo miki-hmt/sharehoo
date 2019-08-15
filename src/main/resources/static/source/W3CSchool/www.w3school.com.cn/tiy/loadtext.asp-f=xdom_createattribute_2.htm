@@ -1,0 +1,30 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+x=xmlDoc.getElementsByTagName("title");
+
+for (i=0;i<x.length;i++)
+{
+newatt=xmlDoc.createAttribute("edition");
+newatt.value="first";
+x[i].setAttributeNode(newatt);
+}
+
+//Output all "edition" attribute values
+for (i=0;i<x.length;i++)
+{
+document.write(x[i].childNodes[0].nodeValue);
+document.write(" - Edition: ");
+document.write(x[i].getAttribute("edition"));
+document.write("<br />");
+}
+</script>
+</body>
+</html>

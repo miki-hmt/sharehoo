@@ -1,0 +1,31 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    $("input:checkbox").val(function(){
+      return "check_" + $(this).val();
+    });
+  });
+  $(":checkbox").click(function(){
+    alert($(this).val());
+  });
+});
+</script>
+</head>
+
+<body>
+I have a bike:
+<input type="checkbox" name="vehicle" value="bike" />
+<br />
+I have a car:
+<input type="checkbox" name="vehicle" value="car" />
+<br />
+I have an airplane:
+<input type="checkbox" name="vehicle" value="airplane" />
+<br />
+<button>改变所有复选框的值</button>
+<p>点击复选框，可以看到当前的值。</p>
+</body>
+</html>

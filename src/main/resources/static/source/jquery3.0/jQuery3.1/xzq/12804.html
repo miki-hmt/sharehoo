@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>selector1,selector2,selectorN</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">selector1,selector2,selectorN</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;multiple selector
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a>&lt;Element(s)&gt;</code> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>将每一个选择器匹配到的元素合并后一起返回。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( "selector1, selector2, selectorN" )
+			</h4>
+			<p class="argument">
+				<strong>selector1: </strong>任何有效的选择
+			</p>
+			<p class="argument">
+				<strong>selector2: </strong>其他有效的选择
+			</p>
+			<p class="argument">
+				<strong>selectorN: </strong>更多有效的选择只要你喜欢。
+			</p>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			您可以指定任何数量的选择器组合成一个单一的结果。这个多个表达组合是一种有效的方法来选择不同的元素。因为他们将按在文件的顺序，DOM元素的顺序在返回的jQuery对象中可能不相同。另一种选择器组合是 <a href="http://www.shouce.ren/api/view/a/12941" class="book-a">.add()</a> 方法。
+		</p>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		找到匹配任意一个类的元素。
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;div&gt;div&lt;/div&gt;
+&lt;p class="myClass"&gt;p class="myClass"&lt;/p&gt;
+&lt;span&gt;span&lt;/span&gt;
+&lt;p class="notMyClass"&gt;p class="notMyClass"&lt;/p&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("div,span,p.myClass")</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>[ &lt;div&gt;div&lt;/div&gt;, &lt;p class="myClass"&gt;p class="myClass"&lt;/p&gt;, &lt;span&gt;span&lt;/span&gt; ]</code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	查找任何匹配下面三个选择器的元素。
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;multiple demo&lt;/title&gt;
+  &lt;style&gt;
+  div, span, p {
+    width: 126px;
+    height: 60px;
+    float: left;
+    padding: 3px;
+    margin: 2px;
+    background-color: #eee;
+    font-size: 14px;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;div&lt;/div&gt;
+&lt;p class="myClass"&gt;p class="myClass"&lt;/p&gt;
+&lt;p class="notMyClass"&gt;p class="notMyClass"&lt;/p&gt;
+&lt;span&gt;span&lt;/span&gt;
+ 
+&lt;script&gt;
+$( "div, span, p.myClass" ).css( "border", "3px solid red" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7897" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	Show the order in the jQuery object.
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;multiple demo&lt;/title&gt;
+  &lt;style&gt;
+  b {
+    color: red;
+    font-size: 16px;
+    display: block;
+    clear:left;
+  }
+  div, span, p {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 10px;
+    background-color: blue;
+    padding: 3px;
+    color: white;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;span&gt;span&lt;/span&gt;
+&lt;p&gt;p&lt;/p&gt;
+&lt;p&gt;p&lt;/p&gt;
+&lt;div&gt;div&lt;/div&gt;
+&lt;span&gt;span&lt;/span&gt;
+&lt;p&gt;p&lt;/p&gt;
+&lt;div&gt;div&lt;/div&gt;
+&lt;b&gt;&lt;/b&gt;
+ 
+&lt;script&gt;
+var list = $( "div, p, span" )
+  .map( function() {
+    return this.tagName;
+  })
+  .get()
+  .join( ", " );
+$( "b" ).append( document.createTextNode( list ) );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7899" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

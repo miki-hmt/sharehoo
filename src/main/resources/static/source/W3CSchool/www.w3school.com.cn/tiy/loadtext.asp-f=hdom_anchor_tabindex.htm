@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeTabIndex()
+{
+document.getElementById('1').tabIndex="3"
+document.getElementById('2').tabIndex="2"
+document.getElementById('3').tabIndex="1"
+}
+</script>
+</head>
+<body>
+<p><a id="1" href="../index.htm" tppabs="http://www.w3school.com.cn/">1</a></p>
+<p><a id="2" href="../index.htm" tppabs="http://www.w3school.com.cn/">2</a></p>
+<p><a id="3" href="../index.htm" tppabs="http://www.w3school.com.cn/">3</a></p>
+
+<input type="button" onclick="changeTabIndex()"
+value="Change TabIndex" />
+
+<p>Try navigating the links by using the "Tab" button on you keyboard before and after pushing the "Change TabIndex" button.</p>
+
+</body>
+</html>

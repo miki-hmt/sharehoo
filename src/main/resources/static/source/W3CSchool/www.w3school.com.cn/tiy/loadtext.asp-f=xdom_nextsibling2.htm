@@ -1,0 +1,34 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+<script type="text/javascript">
+//check if the next sibling node is an element node
+function get_nextsibling(n)
+{
+var x=n.nextSibling;
+while (x.nodeType!=1)
+  {
+  x=x.nextSibling;
+  }
+return x;
+}
+
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+var x=xmlDoc.getElementsByTagName("title")[0];
+document.write(x.nodeName);
+document.write(" = ");
+document.write(x.childNodes[0].nodeValue);
+
+var y=get_nextsibling(x);
+
+document.write("<br />Next sibling: ");
+document.write(y.nodeName);
+document.write(" = ");
+document.write(y.childNodes[0].nodeValue);
+</script>
+</body>
+</html>

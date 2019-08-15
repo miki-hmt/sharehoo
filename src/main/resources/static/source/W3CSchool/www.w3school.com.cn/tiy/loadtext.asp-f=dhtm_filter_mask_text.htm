@@ -1,0 +1,75 @@
+<html>
+<head>
+<style>
+div
+{
+width:160px;
+height:120px;
+}
+img
+{
+position:relative;
+}
+span
+{
+width:100%;
+position:absolute;
+top:0px;
+left:0px;
+}
+</style>
+<script type="text/javascript">
+mouseover=true
+function coordinates()
+{
+if (!moveMe)
+	{
+	return
+	}
+if (event.srcElement.id=="moveMe")
+	{
+	mouseover=true
+	pleft=document.getElementById('moveMe').style.pixelLeft
+	ptop=document.getElementById('moveMe').style.pixelTop
+	xcoor=event.clientX
+	ycoor=event.clientY
+	document.onmousemove=moveImage
+	}
+}
+
+function moveImage()
+{
+if (mouseover&&event.button==1)
+	{
+	document.getElementById('moveMe').style.pixelLeft=pleft+event.clientX-xcoor
+	document.getElementById('moveMe').style.pixelTop=ptop+event.clientY-ycoor
+	return false
+	}
+}
+
+function mouseup()
+{
+mouseover=false
+}
+
+document.onmousedown=coordinates
+document.onmouseup=mouseup
+</script>
+
+</head>
+<body>
+<span>请移动这个图形：</span>
+<h1>www.W3School.com.cn</h1>
+<p>
+Can you read this text?<br>
+Pretty cool effect!<br>
+W3school DHTML Section<br>
+Can you read this text?<br>
+Pretty cool effect!<br>
+W3school DHTML Section
+</p> 
+<div style="position:absolute;left:0;top:20;filter:mask(color=#000000);width:300;height:200">
+<img id="moveMe" src="../i/eg_smile.gif" tppabs="http://www.w3school.com.cn/i/eg_smile.gif" />
+</div>
+</body>
+</html>

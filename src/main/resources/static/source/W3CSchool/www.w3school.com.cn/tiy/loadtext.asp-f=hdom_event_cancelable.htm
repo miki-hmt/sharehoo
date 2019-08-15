@@ -1,0 +1,16 @@
+<html>
+<head>
+<script type="text/javascript">
+function isEventCancelable(event)
+  { 
+  alert(event.cancelable);
+  }
+</script>
+</head>
+
+<body onmousedown="isEventCancelable(event)">
+
+<p>Click somewhere in the document. An alert box will tell if the event is a cancelable event.</p>
+
+</body>
+</html>

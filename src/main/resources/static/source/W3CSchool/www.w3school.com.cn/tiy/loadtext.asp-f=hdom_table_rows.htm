@@ -1,0 +1,30 @@
+<html>
+<head>
+<script type="text/javascript">
+function showRow()
+  {
+  alert(document.getElementById('myTable').rows[0].innerHTML)
+  }
+</script>
+</head>
+<body>
+
+<table id="myTable" border="1">
+<tr>
+<td>Row1 cell1</td>
+<td>Row1 cell2</td>
+</tr>
+<tr>
+<td>Row2 cell1</td>
+<td>Row2 cell2</td>
+</tr>
+<tr>
+<td>Row3 cell1</td>
+<td>Row3 cell2</td>
+</tr>
+</table>
+<br />
+<input type="button" onclick="showRow()" value="显示第一行的 innerHTML">
+
+</body>
+</html>

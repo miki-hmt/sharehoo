@@ -1,0 +1,32 @@
+<html>
+<head>
+<script type="text/javascript">
+function sameInfo()
+{
+for (i=0; i<document.myForm1.option.length; i++)
+	{
+	document.myForm2.option[i].value=document.myForm1.option[i].value
+	}
+}
+</script>
+</head>
+<body>
+
+<form name="myForm1">
+名：<input type="text" name="option"><br />
+姓：<input type="text" name="option"><br />
+地址：<input type="text" name="option"><br />
+电邮：<input type="text" name="option"><br />
+<br />
+<input type="button" onclick="sameInfo()" value="与上面的信息相同"><br />
+</form>
+
+<form name="myForm2">
+名：<input type="text" name="option"><br />
+姓：<input type="text" name="option"><br />
+地址：<input type="text" name="option"><br />
+电邮：<input type="text" name="option"><br />
+</form>
+
+</body>
+</html>

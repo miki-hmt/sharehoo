@@ -1,0 +1,15 @@
+<html>
+<body>
+
+<script type="text/javascript">
+var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+xmlDoc.async="false";
+xmlDoc.load("../example/xdom/note_error.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/note_error.xml*/);
+
+document.write("Error code: " + xmlDoc.parseError.errorCode);
+document.write("<br />Error reason: " + xmlDoc.parseError.reason);
+document.write("<br />Error line: " + xmlDoc.parseError.line);
+</script>
+
+</body>
+</html>

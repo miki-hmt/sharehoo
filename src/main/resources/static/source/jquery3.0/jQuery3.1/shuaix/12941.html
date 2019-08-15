@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>add()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">add()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.add( selector )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>创建一个新的jQuery对象 ，元素添加到匹配的元素集合中。
+</p>
+<ul class="signatures">
+	<li class="signature" id="add-selector">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.add( selector )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: Selector
+				</div>
+				<div>
+					一个字符串表示的选择器表达式，找到更多的元素添加到匹配的元素集合。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="add-elements">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.add( elements )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>elements</strong> 
+				</div>
+				<div>
+					类型: Element
+				</div>
+				<div>
+					一个或多个元素添加到匹配的元素集合。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="add-html">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.add( html )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>html</strong> 
+				</div>
+				<div>
+					类型: HTML
+				</div>
+				<div>
+					HTML片段添加到匹配的元素集合。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="add-jQuery-object">
+		<h4 class="name">
+			<span class="version-details">V : 1.3.2</span>.add( jQuery object )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>jQuery object</strong> 
+				</div>
+				<div>
+					类型: jQuery object
+				</div>
+				<div>
+					一个现有的jQuery对象添加到匹配的元素集合。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="add-selector-context">
+		<h4 class="name">
+			<span class="version-details">V : 1.4</span>.add( selector, context )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: Selector
+				</div>
+				<div>
+					一个字符串表示的选择器表达式，找到更多的元素添加到匹配的元素集合。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>context</strong> 
+				</div>
+				<div>
+					类型: Element
+				</div>
+				<div>
+					指定选择器查找元素所在的上下文;
+类似<code>$(selector, context)</code>方法的context（上下文)参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		鉴于一个jQuery对象，表示一个DOM元素的集合，<code>.add()</code>方法通过传递这些元素组合到该方法构造一个新的jQuery对象。<code>.add()</code>的参数可以几乎接受任何的<code>$()</code>，包括一个jQuery选择器表达式，DOM元素，或HTML片段引用。
+	</p>
+	<p>
+		不要假设此方法会按照传递给<code>.add()</code>方法的参数的顺序添加到已经存在的集合中。如果所有元素都属于同一个文档，<code>.add()</code>方法所返回的集合将会按照元素在文档中出现的位置进行排序；也就是说，按照每个元素在文档中出现的顺序。如果集合中包含不同文档或不属于任何文档的元素，那么排序是不确定的。要创建一个包含定义良好元素顺序和无顺序开销的的jQuery对象，请使用<code>$(array_of_DOM_elements)</code>。
+	</p>
+	<p>
+		他更新的元素集合，可以使用以下面的链式调用，或分配给一个变量供以后使用。例如：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$("p").add("div").addClass("widget");
+var pdiv = $("p").add("div");</pre>
+	</div>
+	<p>
+		下面将不会保存添加的元素，因为在<code>.add()</code>方法创建一个新集合，并保持原集合PDIV不变：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var pdiv = $("p");
+pdiv.add("div");  // WRONG, pdiv will not change</pre>
+	</div>
+	<p>
+		考虑一个面页中简单的列表和它之后的段落：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;ul&gt;
+  &lt;li&gt;list item 1&lt;/li&gt;
+  &lt;li&gt;list item 2&lt;/li&gt;
+  &lt;li&gt;list item 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;a paragraph&lt;/p&gt;</pre>
+	</div>
+	<p>
+		我们可以选择列表，然后通过使用一个选择器或引用的DOM元素本身作为<code>.add()</code>方法的参数，将段落添加到列表中：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').add('p').css('background-color', 'red');</pre>
+	</div>
+	<p>
+		或者:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').add(document.getElementsByTagName('p')[0])
+  .css('background-color', 'red');</pre>
+	</div>
+	<p>
+		该调用的结果是四个元素的红色背景。使用片一个HTML段作为 <code>.add()</code>方法的参数（如在第三个版本），我们可以在动态的创建额外的元素，添加这些元素到匹配的元素集合中。例如，我们可以改变新创建的段落和列表项的背景：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').add('&lt;p id="new"&gt;new paragraph&lt;/p&gt;')
+  .css('background-color', 'red');</pre>
+	</div>
+	<p>
+		虽然已经创建新的段落，并且改变其背景颜色，但是它仍然没有出现在页面上。要想在页面上显示该段落，我们需要在链式方式中使用 jQuery 的插入方法。
+	</p>
+	<p>
+		在jQuery 1.4结果从.add()将总是返回文档顺序（而不是一个简单的串联）。
+	</p>
+	<p>
+		<strong>注意:</strong> 要使用<code>.add()</code>相反的方法，
+您可以使用<code>.not( elements | selector )</code> 从jQuery返回中移除元素，
+或使用<code>.end()</code>返回到添加之前的选择（集合）。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">查找所有的 div，并且添加一个边框。然后将所有的段落添加到 jQuery 对象中，并将它们的背景色变成黄色。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+ div { width:60px; height:60px; margin:10px; float:left; }
+ p { clear:left; font-weight:bold; font-size:16px;
+     color:blue; margin:0 10px; padding:2px; }
+ &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div&gt;&lt;/div&gt;
+ 
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+ 
+  &lt;p&gt;Added this... (notice no border)&lt;/p&gt;
+&lt;script&gt;
+ 
+$("div").css("border", "2px solid red")
+        .add("p")
+        .css("background", "yellow");
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8144" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+	<p>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">根据给定的表达式，向匹配的元素集合中添加一些元素。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;&lt;span&gt;Hello Again&lt;/span&gt;
+&lt;script&gt;$("p").add("span").css("background", "yellow");&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8143" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+	<p>
+	</p>
+</div>
+<div class="entry-example" id="example-2">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">动态的向匹配的元素集合中添加一些元素。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+&lt;script&gt;$("p").clone().add("&lt;span&gt;Again&lt;/span&gt;").appendTo(document.body);&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8142" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+	<p>
+	</p>
+</div>
+<div class="entry-example" id="example-3">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">向匹配的元素集合中添加一些元素对象。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;&lt;span id="a"&gt;Hello Again&lt;/span&gt;
+&lt;script&gt;$("p").add(document.getElementById("a")).css("background", "yellow");&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8141" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+	<p>
+	</p>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">以下示例展示了如何向一个已经存在的集合中添加元素。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;&lt;span id="a"&gt;Hello Again&lt;/span&gt;
+&lt;script&gt;var collection = $("p");
+// capture the new collection
+collection = collection.add(document.getElementById("a"));
+collection.css("background", "yellow");&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8140" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

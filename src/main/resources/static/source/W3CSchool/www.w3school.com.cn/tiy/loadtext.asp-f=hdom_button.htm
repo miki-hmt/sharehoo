@@ -1,0 +1,21 @@
+<html>
+<head>
+<script type="text/javascript">
+function alertId()
+  {
+  var txt="Id: " + document.getElementById("myButton").id
+  txt=txt + ", type: " + document.getElementById("myButton").type
+  txt=txt + ", value: " + document.getElementById("myButton").value
+  alert(txt)
+  document.getElementById("myButton").disabled=true
+  }
+</script>
+</head>
+<body>
+
+<form>
+<input type="button" value="Click me!" id="myButton" onclick="alertId()" />
+</form>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+function whichElement(e)
+{
+var targ
+if (!e) var e = window.event
+if (e.target) targ = e.target
+else if (e.srcElement) targ = e.srcElement
+if (targ.nodeType == 3) // defeat Safari bug
+   targ = targ.parentNode
+var tname
+tname=targ.tagName
+alert("You clicked on a " + tname + " element.")
+}
+</script>
+</head>
+
+<body onmouseup="whichElement(event)">
+<p>Click somewhere in the document. An alert box will alert the tag name of the element you clicked on.</p>
+
+<h3>This is a header</h3>
+<p>This is a paragraph</p>
+<img src="../i/eg_mouse2.jpg" tppabs="http://www.w3school.com.cn/i/eg_mouse2.jpg"  alt="Ball" />
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+<script type="text/javascript">
+
+var xmlHttp=null;
+
+function showHint(str)
+{
+if (str.length==0)
+  { 
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+try
+  {// Firefox, Opera 8.0+, Safari, IE7
+  xmlHttp=new XMLHttpRequest();
+  }
+catch(e)
+  {// Old IE
+  try
+    {
+    xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  catch(e)
+    {
+    alert ("Your browser does not support XMLHTTP!");
+    return;  
+    }
+  }
+var url="/ajax/gethint.asp?q=" + str;
+url=url+"&sid="+Math.random();
+xmlHttp.open("GET",url,false);
+xmlHttp.send(null);
+document.getElementById("txtHint").innerHTML=xmlHttp.responseText;
+}
+</script> 
+</head>
+<body><form> 
+First Name:
+<input type="text" id="txt1"
+onkeyup="showHint(this.value)">
+</form><p>Suggestions: <span id="txtHint"></span></p> </body>
+</html>

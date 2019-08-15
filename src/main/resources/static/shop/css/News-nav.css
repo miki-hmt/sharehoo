@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+.news-nav {
+	border-bottom: 2px solid #e1e1e1;
+	background-color: #fff;
+	margin-bottom: 15px;
+}
+.news-nav .container {
+	text-align: left;
+	width: 960px;
+	margin: 0 auto;
+}
+.nav-bar {
+  font-size: 16px;
+  color: #727272;
+  float: left;
+}
+.nav-bar a {
+	display: inline-block;
+	padding: 15px 5px;
+	line-height: 20px;
+	margin-right: 20px;
+	color: #727272;
+	text-decoration: none;
+	font-family: "Microsoft YaHei";
+}
+.nav-bar .doc {
+	color: #c00;
+}
+.nav-bar .current {
+	border-bottom: 2px solid #dc3c00;
+	margin-bottom: -2px;
+	background: transparent;
+}
+.nav-bar a:hover{
+  margin-bottom: -2px;
+  background: transparent;
+  border-bottom: 2px solid #dc3c00;
+}
+.clearfix {}
+
+.clearfix:after {
+	content: '.';
+	height: 0;
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.search-download {
+	float: right;
+	margin-top: 11px;
+}
+.search-download input {
+	border: 1px solid #ddd;
+	border-right: none;
+	height: 26px;
+	line-height: 22px;
+	padding: 0 10px;
+	margin-right: -4px;
+	width: 229px;
+	width: 210px\9;
+}
+.search-download input:focus {
+	border: 1px solid #ddd;
+	border-right: none;
+	outline: 0;
+}
+.search-download .download-search-bth {
+	background: url( http://c.csdnimg.cn/public/common/toolbar/images/f_icon.png ) no-repeat 0 -189px;
+	display: inline-block;
+	border: 1px solid #ddd;
+	border-left: none;
+	width: 20px;
+	height: 26px;
+	vertical-align: middle;
+	padding-right: 2px;
+}

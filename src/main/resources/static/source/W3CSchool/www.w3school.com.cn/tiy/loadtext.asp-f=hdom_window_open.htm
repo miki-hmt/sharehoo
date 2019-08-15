@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript">
+function winTest()
+  {
+  var txt1 = "This is a new window.";
+  var txt2 = "This is a test.";
+  win.document.open("text/html","replace");
+  win.document.writeln(txt1);
+  win.document.write(txt2);
+  win.document.close();
+  }
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+var win=window.open('','','width=200,height=200');
+winTest();
+</script>
+
+</body>
+</html>

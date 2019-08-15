@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript">
+function disableResize()
+  {
+  parent.document.getElementById("leftFrame").noResize=true
+  parent.document.getElementById("rightFrame").noResize=true
+  }
+function enableResize()
+  {
+  parent.document.getElementById("leftFrame").noResize=false
+  parent.document.getElementById("rightFrame").noResize=false
+  }
+</script>
+</head>
+
+<body>
+<input type="button" onClick="disableResize()" value="不能调整" />
+<input type="button" onClick="enableResize()" value="可以调整" />
+<p>请尝试去调整框架的尺寸。</p>
+</body>
+
+</html>

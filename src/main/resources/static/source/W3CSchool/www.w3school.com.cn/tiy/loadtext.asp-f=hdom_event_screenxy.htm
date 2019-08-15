@@ -1,0 +1,21 @@
+<html>
+<head>
+
+<script type="text/javascript">
+function coordinates(event)
+{
+x=event.screenX
+y=event.screenY
+alert("X=" + x + " Y=" + y)
+}
+
+</script>
+</head>
+<body onmousedown="coordinates(event)">
+
+<p>
+在文档中点击某个位置。消息框会提示出指针相对于屏幕的 x 和 y 坐标。
+</p>
+
+</body>
+</html>

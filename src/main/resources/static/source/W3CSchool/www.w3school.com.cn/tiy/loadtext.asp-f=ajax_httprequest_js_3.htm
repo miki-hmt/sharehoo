@@ -1,0 +1,54 @@
+<html>
+<head>
+<script type="text/javascript">
+var xmlhttp;
+function loadXMLDoc(url)
+{
+xmlhttp=null;
+if (window.XMLHttpRequest)
+  {// all modern browsers
+  xmlhttp=new XMLHttpRequest();
+  }
+else if (window.ActiveXObject)
+  {// for IE5, IE6
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+if (xmlhttp!=null)
+  {
+  xmlhttp.onreadystatechange=state_Change;
+  xmlhttp.open("GET",url,true);
+  xmlhttp.send(null);
+  }
+else
+  {
+  alert("Your browser does not support XMLHTTP.");
+  }
+}
+
+function state_Change()
+{
+if (xmlhttp.readyState==4)
+  {// 4 = "loaded"
+  if (xmlhttp.status==200)
+    {// 200 = "OK"
+    document.getElementById('p1').innerHTML="This file was last modified on: " + xmlhttp.getResponseHeader('Last-Modified');
+    }
+  else
+    {
+    alert("Problem retrieving data:" + xmlhttp.statusText);
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<p id="p1">
+The getResponseHeader() function returns a header from a resource.
+Headers contain file information like length,
+server-type, content-type, date-modified, etc.</p>
+
+<button onclick="loadXMLDoc('../example/ajax/test_xmlhttp.txt'/*tpa=http://www.w3school.com.cn/example/ajax/test_xmlhttp.txt*/)">Get "Last-Modified"</button>
+
+</body>
+</html>

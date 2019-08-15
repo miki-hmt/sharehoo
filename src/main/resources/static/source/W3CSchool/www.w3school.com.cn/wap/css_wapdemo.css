@@ -1,0 +1,97 @@
+body
+{
+background-color:#EEEEDD;
+font-size:70%;
+}
+
+body, p, h1, h2, h3
+{
+font-family: verdana,helvetica,arial,sans-serif;
+}
+
+h1 {font-size:160%;}
+
+
+table.mobil
+{
+background:url("../i/ct_nokia7110.jpg"/*tpa=http://www.w3school.com.cn/i/ct_nokia7110.jpg*/);
+position:relative;
+z-index:0;
+height:418px;
+}
+
+table.mobildisplay
+{
+height:100%;
+}
+
+td.navbutton
+{
+position:absolute;
+top:260px;
+left:20px;
+}
+
+.scroll
+{
+position:absolute;
+top:272px;
+left:75px;
+}
+
+#backdisplay
+{
+text-align:right;
+}
+
+fieldset
+{
+text-align:right;
+}
+
+input.wapdemo
+{
+height:17px;
+font-size:10px;
+background-color:rgb(162,199,165);
+}
+
+td.outset
+{
+background-color:#000000;
+color:#FFFFFF;
+text-align:center;
+}
+
+td.display
+{
+vertical-align:top;
+font-size:10px;
+font-family:verdana;
+}
+
+td.carddisplay
+{
+vertical-align:top;
+font-size:9px;
+font-family:verdana;
+position:absolute;
+width:135px;
+top:150px;
+clip:rect(0 135 80 0);
+}
+
+td.source
+{
+border: inset 2px;
+background-color:#FFFFFF;
+font-family:"Courier New",monospace;
+font-size:110%;
+margin-left: 0;
+margin-bottom: 0;
+
+
+
+}
+
+

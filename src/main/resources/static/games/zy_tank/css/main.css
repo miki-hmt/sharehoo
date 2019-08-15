@@ -1,0 +1,90 @@
+.mapBorder{position:absolute;left:0;top:0;z-index:9999;width:520px;height:520px;}
+.mapBorder span{width:40px;height:40px;overflow:hidden;display:block; float:left;}
+	#divMap
+	{
+		position:absolute;background:#000; 
+		border:10px outset #C65D05;
+		width:540px;height:540px;
+	}
+
+	.steel
+	{
+		background:url(../img/steel.gif) ;
+	}
+	.tod
+	{
+		background:url(../img/tod.gif) ;
+	}
+	.wall
+	{
+		background:url(../img/wall.gif) ;
+	}
+	.river
+	{
+		background:url(../img/sea.gif) ; 
+	}
+	.podium
+	{
+		background:url(../img/podium.gif) ;
+	}
+	.itank{
+		background:url(../img/itank.gif) no-repeat ;   
+		position:absolute;
+		width:40px;
+		height:40px;
+		overflow:hidden;
+		z-index:100;
+		left:20px;
+		top:240px;
+	}
+	.etank{
+		background:url(../img/etank.gif) no-repeat;   
+		position:absolute;
+		width:40px;
+		height:40px;
+		overflow:hidden;
+		z-index:100;
+
+	}
+	.bomb
+	{
+		background:url(../img/ball.gif) no-repeat;   
+		position:absolute;
+		width:40px;
+		height:40px;
+		overflow:hidden;
+		left:-9000px;
+	}
+	.explode
+	{
+		position:absolute;
+		width:60px;
+		height:60px;
+		overflow:hidden;
+		background:url(../img/explode.gif) no-repeat 0 0;
+		z-index:10000;
+	}
+
+	
+	.cellwidth
+	{
+		width:40px;
+		height:40px;
+	}
+	body
+	{
+		background:black;
+		margin:0px;
+		padding:0px;
+	}
+	#debugInfo
+	{
+		color:white;
+		background-color:blue;
+		position:absolute;
+		left:700px;
+		top:100px;
+		overflow:auto;
+		width:400px;
+		height:300px;
+	}

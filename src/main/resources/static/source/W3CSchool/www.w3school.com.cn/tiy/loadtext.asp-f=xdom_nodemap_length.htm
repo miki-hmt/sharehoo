@@ -1,0 +1,17 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+var x=xmlDoc.getElementsByTagName('book');
+
+document.write("Number of attributes in the first book element: ");
+document.write(x.item(0).attributes.length);
+
+</script>
+</body>
+</html>

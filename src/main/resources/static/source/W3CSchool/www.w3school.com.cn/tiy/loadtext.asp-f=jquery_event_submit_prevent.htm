@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("form").submit(function(e){
+    e.preventDefault();
+    alert("Submit prevented");
+  });
+});
+</script>
+</head>
+<body>
+<form name="input" action="" method="get">
+First name: 
+<input type="text" name="FirstName" value="Mickey" size="20">
+<br />Last name: 
+<input type="text" name="LastName" value="Mouse" size="20">
+<br />
+<input type="submit" value="Submit">
+</form> 
+</body>
+</html>

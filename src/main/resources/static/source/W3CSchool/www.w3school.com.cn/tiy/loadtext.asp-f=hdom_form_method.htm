@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript">
+function showMethod()
+  {
+  var x=document.getElementById("myForm")
+  alert(x.method)
+  }
+</script>
+</head>
+<body>
+
+<form id="myForm" method="post">
+名称：<input type="text" value="米老鼠" />
+<input type="button" onclick="showMethod()" value="显示 method" />
+</form>
+
+</body>
+</html>

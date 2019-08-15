@@ -1,0 +1,27 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+
+<code class="aspcode">&lt;%  
+response.write(&quot;&lt;p&gt;&quot;)
+response.write(&quot;默认 Timeout 是：&quot; & Session.Timeout & &quot; 分钟。&quot;)
+response.write(&quot;&lt;/p&gt;&quot;)
+
+Session.Timeout=30
+
+response.write(&quot;&lt;p&gt;&quot;)
+response.write(&quot;现在的 Timeout 是 &quot; & Session.Timeout & &quot; 分钟。&quot;)
+response.write(&quot;&lt;/p&gt;&quot;)
+%&gt;</code>
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

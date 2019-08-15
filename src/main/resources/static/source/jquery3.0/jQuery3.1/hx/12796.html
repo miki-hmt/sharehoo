@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>clearQueue()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">clearQueue()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.clearQueue( [queueName ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>从列队中移除所有未执行的项。
+</p>
+<ul class="signatures">
+	<li class="signature" id="clearQueue-queueName">
+		<h4 class="name">
+			<span class="version-details">V : 1.4</span>.clearQueue(  [queueName ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>queueName</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader0">String</a> 
+				</div>
+				<div>
+					一个含有队列名的字符串。默认是<code>fx</code>，标准的效果队列。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		当<code>.clearQueue()</code>方法被访问的时候，所有在这个列队中未执行的函数将被移除 。当不使用参数的时候，<code>.clearQueue()</code>会从标准的动画队列<code>fx</code>中移除剩下的函数。这个方法类似<code>.stop(true)</code>。然而<code>.stop()</code>方法只适用在动画中。<code>.clearQueue()</code>还可以用来移除用<code>.queue()</code>方法添加到普通jQuery列表的任何函数。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<h4>
+	<span class="desc">实例</span>
+</h4>
+<p>
+	<span class="desc">清空列队</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { margin:3px; width:40px; height:40px;
+    position:absolute; left:0px; top:30px;
+    background:green; display:none; }
+div.newcolor { background:blue; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="start"&gt;Start&lt;/button&gt;
+&lt;button id="stop"&gt;Stop&lt;/button&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#start").click(function () {
+ 
+  var myDiv = $("div");
+  myDiv.show("slow");
+  myDiv.animate({left:'+=200'},5000);
+  myDiv.queue(function () {
+    var _this = $(this);
+    _this.addClass("newcolor");
+    _this.dequeue();
+  });
+ 
+  myDiv.animate({left:'-=200'},1500);
+  myDiv.queue(function () {
+    var _this = $(this);
+    _this.removeClass("newcolor");
+    _this.dequeue();
+  });
+  myDiv.slideUp();
+ 
+});
+ 
+$("#stop").click(function () {
+  var myDiv = $("div");
+  myDiv.clearQueue();
+  myDiv.stop();
+});&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8021" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

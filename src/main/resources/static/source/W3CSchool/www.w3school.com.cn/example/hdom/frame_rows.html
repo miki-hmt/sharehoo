@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeRows()
+  {
+  parent.document.getElementById("main").rows="30%,70%"
+  }
+
+function restoreRows()
+  {
+  parent.document.getElementById("main").rows="50%,50%"
+  }
+</script>
+</head>
+<body>
+
+<form>
+<input type="button" onclick="changeRows()" value="Change row size" />
+<input type="button" onclick="restoreRows()" value="Restore row size" />
+</form>
+
+</body>
+</html>

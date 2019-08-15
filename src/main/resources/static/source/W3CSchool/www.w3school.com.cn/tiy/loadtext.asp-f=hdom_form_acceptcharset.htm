@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript">
+function showCharset()
+{
+var x=document.getElementById("myForm")
+alert(x.acceptCharset)
+}
+</script>
+</head>
+<body>
+
+<form id="myForm" acceptCharset="ISO-8859-1">
+Text: <input type="text" value="Hello World!">
+<input type="button" onclick="showCharset()" value="Show charset">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+This is a test using an XML HTTP request to show a text file.
+If this text shows, it worked!

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>mouseenter()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">mouseenter()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.mouseenter( handler(eventObject) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>为 mouse enters（鼠标进入） 事件绑定一个处理函数，或者触发元素上的 mouse enters（鼠标进入） 事件。
+</p>
+<ul class="signatures">
+	<li class="signature" id="mouseenter-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.mouseenter( handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="mouseenter-eventData-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.mouseenter(  [eventData ], handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>eventData</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一个对象，它包含的数据键值对映射将被传递给事件处理程序。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="mouseenter">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.mouseenter()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					这个方法不接受任何参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		这个方法的前两个用法是 <code>.bind('mouseenter', handler)</code> 的快捷方式，第3个不带参数的用法是 <code>.trigger('mouseenter')</code> 的快捷方式。
+	</p>
+	<p>
+		<code>mouseenter</code>JavaScript事件是Internet Explorer专有的。由于该事件在平时很有用，jQuery的模拟这一事件，以便它可用于所有浏览器。该事件在鼠标移入到元素上时被触发。任何HTML元素都可以接受此事件。
+	</p>
+	<p>
+		举例来说，请看下面的HTML：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div id="outer"&gt;
+  Outer
+  &lt;div id="inner"&gt;
+    Inner
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;
+&lt;div id="log"&gt;&lt;/div&gt;</pre>
+	</div>
+<figure>
+              <img src="../image/58a45d5ebc6b5.png" alt="" /> <figcaption>图1 - 渲染后的HTML插图</figcaption>
+            </figure>
+	<p>
+		这个事件可以绑定到任何元素:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#outer').mouseenter(function() {
+  $('#log').append('&lt;div&gt;Handler for .mouseenter() called.&lt;/div&gt;');
+});</pre>
+	</div>
+	<p>
+		现在当指针在<span class="output">Outer</span> <code>&lt;div&gt;</code>元素上移动时，<span class="output">Handler for .mousedown() called.</span>将被添加到<code>&lt;div id="log"&gt;</code>。我们也可以通过点击其它元素，手动触发另一个元素上的该事件：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#other').click(function() {
+      $('#outer').mouseenter();
+    });</pre>
+	</div>
+	<p>
+		这些代码执行后，点击<span class="output">Trigger the handler</span>同样警报显示。
+	</p>
+	<p>
+		<code>mouseenter</code>事件和<code>mouseover</code>的不同之处是事件的冒泡的方式。如果<code>mouseover</code>在这个示例中使用了，然后当鼠标指针在<span class="output">Inner</span>元素上移动，该处理程序将被触发。这通常是不受欢迎的行为。另一方面, <code>mouseenter</code> 事件只会在绑定它的元素上被调用，而不会在后代节点上被触发。因此，在这个示例中，当鼠标进入<span class="output">Outer</span>元素，而不是<span class="output">Inner</span>元素时，处理器才会被触发。
+	</p>
+</div>
+<h3>
+	Additional Notes（其他注意事项）:
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			<code>.mouseenter()</code>方法只是作为<code>.on( "mouseenter", handler )</code>的一个速记写法，移除该事件可以使用<code>.off(
+                    "mouseenter"
+                    )</code>。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">Show texts when mouseenter and mouseout event triggering. <code>mouseover</code> 当触发 mouseenter 和 mouseout 事件时，显示一段文字。当鼠标移动到绑定 mouseover 事件元素的子元素上时，mouseover 事件同样会被触发。但是，只有在绑定 mouseenter 事件的元素上，才会触发该事件。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div.out {
+width:40%;
+height:120px;
+margin:0 15px;
+background-color:#D6EDFC;
+float:left;
+}
+div.in {
+width:60%;
+height:60%;
+background-color:#FFCC00;
+margin:10px auto;
+}
+p {
+line-height:1em;
+margin:0;
+padding:0;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div class="out overout"&gt;&lt;p&gt;move your mouse&lt;/p&gt;&lt;div class="in overout"&gt;&lt;p&gt;move your mouse&lt;/p&gt;&lt;p&gt;0&lt;/p&gt;&lt;/div&gt;&lt;p&gt;0&lt;/p&gt;&lt;/div&gt;
+ 
+&lt;div class="out enterleave"&gt;&lt;p&gt;move your mouse&lt;/p&gt;&lt;div class="in enterleave"&gt;&lt;p&gt;move your mouse&lt;/p&gt;&lt;p&gt;0&lt;/p&gt;&lt;/div&gt;&lt;p&gt;0&lt;/p&gt;&lt;/div&gt;
+ 
+ 
+&lt;script&gt;
+    var i = 0;
+    $("div.overout").mouseover(function(){
+      $("p:first",this).text("mouse over");
+      $("p:last",this).text(++i);
+    }).mouseout(function(){
+      $("p:first",this).text("mouse out");
+    });
+ 
+    var n = 0;
+    $("div.enterleave").mouseenter(function(){
+      $("p:first",this).text("mouse enter");
+      $("p:last",this).text(++n);
+    }).mouseleave(function(){
+      $("p:first",this).text("mouse leave");
+    });
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8179" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

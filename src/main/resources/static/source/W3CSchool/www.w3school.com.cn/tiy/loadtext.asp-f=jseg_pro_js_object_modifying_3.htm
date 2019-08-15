@@ -1,0 +1,23 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+Array.prototype.indexOf = function (vItem) {
+
+  for (var i=0; i < this.length; i++) {
+    if (vItem == this[i]) {
+	  return i;
+    }
+  }
+
+  return -1;
+}
+
+var aColors = new Array("red", "green", "blue");
+document.write(aColors.indexOf("green"));
+
+</script>
+
+</body>
+</html>

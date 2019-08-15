@@ -1,0 +1,44 @@
+<html>
+<head>
+<style>
+a
+{
+color:black;
+width:150;
+font:bold;
+}
+</style>
+<script type="text/javascript">
+var i
+function glow()
+{
+i=0
+interval=setInterval("makeglow(myLink)",10)
+}
+
+function back()
+{
+clearInterval(interval)
+document.getElementById('myLink').style.filter=false
+}
+
+function makeglow()
+{
+i++
+if (i<5)
+	{
+	document.getElementById('myLink').style.filter="glow(color=#FF00FF,strength=" + i + ")"
+	}
+else if (window.interval)
+	{
+	clearInterval(interval)
+	}
+}
+</script>
+</head>
+
+<body>
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" id="myLink" onmouseover="glow()" onmouseout="back()">请把鼠标移动到链接上</a>
+</body>
+
+</html>

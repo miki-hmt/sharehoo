@@ -1,0 +1,29 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function(){
+  $("#start").click(function(){
+    $("#box").animate({height:300},"slow");
+    $("#box").animate({width:300},"slow");
+    $("#box").queue(function () {
+      $(this).css("background-color","red");  
+      $(this).dequeue();
+    });
+    $("#box").animate({height:100},"slow");
+    $("#box").animate({width:100},"slow");
+  });
+  $("#stop").click(function(){
+    $("#box").clearQueue();
+  });
+});
+</script>
+</head>
+<body>
+
+<p><button id="start">Start Animation</button><button id="stop">Stop Animation</button></p>
+<div id="box" style="background:#98bf21;height:100px;width:100px;position:relative">
+</div>
+ 
+</body>
+</html>

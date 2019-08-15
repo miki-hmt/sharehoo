@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+function showTabIndex()
+  {
+  var r1=document.getElementById('radio1').tabIndex;
+  var r2=document.getElementById('radio2').tabIndex;
+  var r3=document.getElementById('radio3').tabIndex;
+  document.write("Tab index of radio button 1: " + r1);
+  document.write("<br />");
+  document.write("Tab index of radio button 2: " + r2);
+  document.write("<br />");
+  document.write("Tab index of radio button 3: " + r3);
+  }
+</script>
+</head>
+<body>
+
+<form>
+<input type="radio" id="radio1" tabindex="1" /><br />
+<input type="radio" id="radio2" tabindex="2" /><br />
+<input type="radio" id="radio3" tabindex="3" /><br />
+<input type="button" onclick="showTabIndex()" value="Show tabIndex" />
+</form>
+
+</body>
+</html>

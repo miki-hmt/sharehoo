@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>mouseup()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">mouseup()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.mouseup( handler(eventObject) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>为 JavaScript 的 "mouseup" 事件绑定一个处理函数，或者触发元素上的该事件。
+</p>
+<ul class="signatures">
+	<li class="signature" id="mouseup-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.mouseup( handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="mouseup-eventData-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.mouseup(  [eventData ], handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>eventData</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一个对象，它包含的数据键值对映射将被传递给事件处理程序。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="mouseup">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.mouseup()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					这个方法不接受任何参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		这个方法的前两个用法是 <code>.bind('mouseup', handler)</code> 的快捷方式，第3个不带参数的用法是 <code>.trigger('mouseup')</code> 的快捷方式。
+	</p>
+	<p>
+		当鼠标指针在元素内，并且鼠标按键被释放时，<code>mouseup</code>事件就会被触发，任何HTML元素都可以接受此事件。
+	</p>
+	<p>
+		举例来说，请看下面的HTML：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div id="target"&gt;
+  Click here
+&lt;/div&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+	</div>
+<figure>
+                              <img src="../image/58a460373e518.png" alt="" /> <figcaption>图1 - 渲染后的HTML插图</figcaption>
+                            </figure>
+	<p>
+		这个事件处理程序可以绑定到任意 <code>&lt;div&gt;</code>:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#target').mouseup(function() {
+  alert('Handler for .mouseup() called.');
+});</pre>
+	</div>
+	<p>
+		现在，如果我们点击这个元素，警报显示：
+	</p>
+	<p>
+		<span class="output">Handler for .mouseup() called.</span> 
+	</p>
+	<p>
+		我们也可以通过点击其它元素，手动触发另一个元素上的该事件：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#other').click(function() {
+  $('#target').mouseup();
+});</pre>
+	</div>
+	<p>
+		这些代码执行后，点击<span class="output">Trigger the handler</span>同样警报显示。
+	</p>
+	<p>
+		如果用户在一个元素上按下鼠标按键，并且拖动鼠标离开这个元素，然后释放鼠标键，这仍然是算作<code>mouseup</code>事件。在大多数的用户界面，这个动作的顺序被视为一个“取消”的按键，并不作为 <code>click</code> 事件来看待。除非在特殊情况下，我们真正关注的是 <code>mouseup</code> 事件。
+	</p>
+</div>
+<h3>
+	Additional Notes（其他注意事项）:
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			<code>.mouseup()</code>方法只是作为<code>.on( "mouseup", handler )</code>的一个速记写法，移除该事件可以使用<code>.off(
+                "mouseup"
+                )</code>。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">当MouseUp和MouseDown事件触发时显示文本时。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Press mouse and release here.&lt;/p&gt;
+ 
+&lt;script&gt;
+    $("p").mouseup(function(){
+      $(this).append('&lt;span style="color:#F00;"&gt;Mouse up.&lt;/span&gt;');
+    }).mousedown(function(){
+      $(this).append('&lt;span style="color:#00F;"&gt;Mouse down.&lt;/span&gt;');
+    });
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8184" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

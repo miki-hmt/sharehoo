@@ -1,0 +1,32 @@
+<html>
+<head>
+<script type="text/javascript">
+function blinking_header()
+{
+if (!document.getElementById('blink').style.color)
+	{
+	document.getElementById('blink').style.color="red"
+	}
+if (document.getElementById('blink').style.color=="red")
+	{
+	document.getElementById('blink').style.color="black"
+	}
+else
+	{
+	document.getElementById('blink').style.color="red"
+	}
+timer=setTimeout("blinking_header()",100)
+}
+
+function stoptimer()
+{
+clearTimeout(timer)
+}
+</script>
+</head>
+
+<body onload="blinking_header()" onunload="stoptimer()">
+<h1 id="blink">闪动的标题</h1> 
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<html>
+<body>
+<form id="Form1" name="Form1">
+您的姓名：<input type="text">
+</form>
+<form id="Form2" name="Form2">
+您的汽车：<input type="text">
+</form>
+
+<p>
+要访问集合中的项目，你既可以使用项目编号，也可以使用项目名称：
+</p>
+
+<script type="text/javascript">
+document.write("<p>第一个表单名称是：" + document.forms[0].name + "</p>")
+document.write("<p>第一个表单名称是：" + document.getElementById("Form1").name + "</p>")
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeColor(color)
+{
+document.getElementById('x').style.background=color
+}
+</script>
+</head>
+
+<body>
+
+<p>本例演示如何改变文本框的背景颜色。</p>
+<p>请把鼠标移动到下面的三个表格单元上，输入框会改变 background-color：</p>
+
+<table width="100%"><tr>
+<td bgcolor="red" onmouseover="changeColor('red')"> </td>
+<td bgcolor="blue" onmouseover="changeColor('blue')"> </td>
+<td bgcolor="green" onmouseover="changeColor('green')"> </td>
+</tr></table>
+
+<form>
+<input id="x" type="text" value="请把鼠标移动到颜色上面" size="20">
+</form>
+
+</body>
+</html>

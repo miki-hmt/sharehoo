@@ -1,0 +1,561 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="apple-touch-fullscreen" content="YES" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>2014年微信最好玩的测试游戏大全，500万人收藏了，不断更新中...</title>
+<link href="css/commonNew.css" type="text/css" rel="stylesheet"/>
+</head>
+
+<body>
+<script>
+        var imgUrl = "http://wx.9ku.com/ceshi/i/weiIcon.jpg";
+        var lineLink = "http://wx.9ku.com/ceshi/";
+		var shareTitle = '2014年微信最火游戏排行榜，500万人已收藏！';
+        var descContent = '已经有500万人收藏了这个页面，各种有趣的测试小游戏不断更新中...';
+        var appid = '';
+         
+        function shareFriend() {
+            WeixinJSBridge.invoke('sendAppMessage',{
+                "appid": appid,
+                "img_url": imgUrl,
+                "img_width": "144",
+                "img_height": "138",
+                "link": lineLink,
+                "desc": descContent,
+                "title": shareTitle
+            }, function(res) {
+                //_report('send_msg', res.err_msg);
+				setTimeout(function(){location.href="http://wx.9ku.com/ceshi/50/?formlistshare";},1000);
+            })
+        }
+        function shareTimeline() {
+            WeixinJSBridge.invoke('shareTimeline',{
+                "img_url": imgUrl,
+                "img_width": "144",
+                "img_height": "138",
+                "link": lineLink,
+                "desc": descContent,
+                "title": shareTitle
+            }, function(res) {
+                   //_report('timeline', res.err_msg);
+				   setTimeout(function(){location.href="http://wx.9ku.com/ceshi/50/?formlistshare";},1000);
+            });
+        }
+        function shareWeibo() {
+            WeixinJSBridge.invoke('shareWeibo',{
+                "content": descContent,
+                "url": lineLink,
+            }, function(res) {
+                //_report('weibo', res.err_msg);
+				setTimeout(function(){location.href="http://wx.9ku.com/ceshi/?formlistshare";},1000);
+            });
+        }
+        // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            // 发送给好友
+            WeixinJSBridge.on('menu:share:appmessage', function(argv){
+                shareFriend();
+            });
+            // 分享到朋友圈
+            WeixinJSBridge.on('menu:share:timeline', function(argv){
+                shareTimeline();
+            });
+            // 分享到微博
+            WeixinJSBridge.on('menu:share:weibo', function(argv){
+                shareWeibo();
+            });
+        }, false);
+</script>
+
+<div class="wrapper" id="wrapper">
+      <div class="header"><h1>五千万人玩过的微信小游戏</h1></div>
+      <p style="padding:0 10px 5px;">已经有800万人收藏了这个页面，小游戏不断更新中...</p>
+      <div id="adTop"><script src="script/adTop.js"></script></div>
+            
+      <div class="weiList">
+      <ul>      
+       <li><a href="/ceshi/55/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/55.jpg" /></div>
+        <h3 style="color:#00f;">测测你是一夜几次郎</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>郎君，你是我见过最棒的男人，你击败了99%的男人，​奥巴马和金正恩都惊呆了！</p>
+       </a>
+       </li>   
+
+        <li><a href="/ceshi/57/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/57.jpg" /></div>
+        <h3 style="color:#f00;">高智商手机魔术，读心术敢挑战吗？</h3>
+        <i class="iconYouxi">超火</i>
+        <p>微信爆红手机魔术“读心术”，瞬间猜出你所想！</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/56/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/56.jpg" /></div>
+        <h3 style="color:#00f;">一个都不能死</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>坚持了50秒！不行了，我都快变双重人格了！这游戏实在太虐心了！</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/44?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/44.jpg" /></div>
+        <h3>测测你上辈子是什么职业？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我上辈子是丫鬟，真准啊，怪不得我当保姆呢，原来上辈子有工作经验啊！</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/47?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/47.jpg" /></div>
+        <h3 style="color:#00f;">测一测你最像哪位明星？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>原来我与范冰冰最像，性格豪爽，乐观开朗，工作认真，有爱心。</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/21/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/21.jpg" /></div>
+        <h3  style="color:#f00;">智商游戏【小青蛙过河】</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>智商大挑战啊！！！我仅用了10秒，快来挑战我的巅峰吧！</p>
+       </a>
+       </li>  
+             
+      <li><a href="/ceshi/1/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/1.jpg" /></div>
+        <i class="iconCeshi">测试</i>
+        <h3>测测你的人品值多少钱？</h3>
+        <p>我的人品竟然价值值5000块、小四的人品人品才值3块5！</p>
+       </a>
+       </li>
+       
+         <li><a href="/ceshi/3/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/3.jpg" /></div>
+        <h3>测测你五年后会开什么样的车？</h3>
+        <i class="iconTuijian">热门</i>
+        <p>王小二五年后会开保时捷911，尼玛的我竟然才开捷达王！</p>
+       </a>
+       </li>
+       
+              
+       <li><a href="http://m.9ku.com/laoge/500shou.htm?ceshilist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/laoge.jpg" /></div>
+        <h3 style="color:#090;">经典老歌500首</h3>
+        <i class="iconTuijian">推荐</i>
+        <p>经典老歌500首,十亿人听过！编辑部辛苦了，我果断转了...</p>
+       </a>
+       </li>
+              
+       <li><a href="/ceshi/52/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/52.jpg" /></div>
+        <h3>3D版熊出没</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>超华丽跑酷《3D熊出没》，你能跑多远？</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/2/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/2.jpg" /></div>
+        <h3>测一测你今年的关键词是什么？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>来看看你今年的关键词是爱情还是说发大财！TMD，我的竟然是减肥！</p>
+       </a>
+       </li>    
+       
+              
+       <li><a href="/ceshi/25/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/25.jpg" /></div>
+        <h3 style="color:#f00;">测测你未来的小孩什么样！</h3>
+        <i class="iconCeshi">测试</i>
+        <p>原来你未来的小孩是这个样子的呀，快来揭开面纱！摸一摸有惊喜！</p>
+       </a>
+       </li> 
+       
+       <li><a href="/ceshi/4/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/4.jpg" /></div>
+        <h3>测测你的时间都去哪儿了？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我的的时间都去约炮炮了，王尼玛的时间都去打飞机了！</p>
+       </a>
+       </li>
+     
+        <li><a href="/ceshi/46?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/46.jpg" /></div>
+        <h3 style="color:#00f;">测测穿越回古代你会是谁？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我穿越到了明朝，变成了唐伯虎，才华出众，有理想抱负，是位天才画家。</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/48/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/48.jpg" /></div>
+        <h3>经典小游戏，别踩白块儿！</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>玩了一下就停不下来了，可以练习你左右脑的灵活性。</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/28/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/28.jpg" /></div>
+        <h3>测测你二十年后有多少存款？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我二十年后有 房贷3400万 就不能买个小点的洋房！</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/49/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/49.jpg" /></div>
+        <h3>我跳我跳我跳跳跳！</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>创意跳高游戏，快来一起跳。</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/50/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/50.jpg" /></div>
+        <h3 style="color:#00f;">最强眼力，考考你的眼力！</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>不玩《最强眼力》怎么知道自己的眼力原来那么好？</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/51/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/51.jpg" /></div>
+        <h3>密室逃脱</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>变态考反应游戏《密室逃脱》能通关你就能闪子弹了！</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/53/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/53.jpg" /></div>
+        <h3>Flappy 2048</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>比2048和Flappy Bird还要虐心的游戏我已经玩到29933分啦！速度来挑战我！</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/22/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/22.jpg" /></div>
+        <h3 style="color:#f00;">最新IQ智商测试，挑战一下？</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>经过测试我的智商是50分，你也来测一下，比比看谁高！</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/6/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/6.jpg" /></div>
+        <h3 style=" color:#00f;">测一测你未来的身价是多少？</h3>
+        <i class="iconTuijian">热门</i>
+        <p>经鉴定我未来的身价是2套北京8环别墅，8环在哪里？难道是河北小村庄？</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/7/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/7.jpg" /></div>
+        <h3>测测2014年你被啥头彩砸中？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>唉说多了都是泪啊，我的头彩是竟然是方便面没料包！！！</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/8/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/8.jpg" /></div>
+        <h3>测测你2014年的发财关键？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>经测试我的发财关键是遇上贵人，土豪在哪里啊，求抱大腿！</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/9/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/9.jpg" /></div>
+        <h3>测测你五年后的生活状态？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我五年之后的生活状态是有刷不完的信用卡！坑爹啊，为什么是信用卡呢？</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/10/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/10.jpg" /></div>
+        <h3>测测你前世是什么人？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我的前世是居然是将军，隔壁小妹的前世居然是老鸨。。。</p>
+       </a>
+       </li>
+       
+         
+       <li><a href="/ceshi/5/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/5.jpg" /></div>
+        <h3>测一测你是哪种青年？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>王尼美经鉴定是位愤青型文艺青年，经鉴定我是位有为青年！</p>
+       </a>
+       </li>
+       
+       
+       <li><a href="/ceshi/11/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/11.jpg" /></div>
+        <h3>测测你靠什么能出人头地？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我居然要靠美色出人头地，刚才照了下镜子，看来我得去趟韩国了。。。</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/12/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/12.jpg" /></div>
+        <h3>测马年后你在哪个方面可以“拨云见日”</h3>
+        <i class="iconCeshi">测试</i>
+        <p>说好的马年后会财富发展 多方涌入，这都半年过去了怎么还是月光呢。。。</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/13/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/13.jpg" /></div>
+        <h3>测测你2014年最走什么运？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>累觉不爱，测来测去我竟然都是走狗屎运，上哪里找狗屎走运呢？</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/14/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/14.jpg" /></div>
+        <h3>测测你下半生有哪种幸运的好命？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我下半生将会有环游世界，我老婆下半生将会有花不完的人民币？</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/15/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/15.jpg" /></div>
+        <h3>测你毕业了会收获什么？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>屌丝毕业后学会了高超煮泡面技能，我获得了体重和年龄，说好的白富美呢？</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/16/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/16.jpg" /></div>
+        <h3>测测你的爱情到底值多少钱？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>屌丝的爱情值一个钢镚，王二狗的的爱情值结婚证9块！</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/17/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/17.jpg" /></div>
+        <h3>测测你出轨的几率有多少？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>文章都出轨了，经测试我的出轨概率是6% 自制力强的我不可能有这一天的。</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/18/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/18.jpg" /></div>
+        <h3>测一测这辈子你会嫁给谁？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>王尼美的终身伴侣将会是一位阿拉伯王子，玲玲的终身伴侣将会是一位屌丝。。。</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/19/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/19.jpg" /></div>
+        <h3>测你这辈子注定靠什么吃饭？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我这辈子竟然靠异性吃饭，我长得像小白脸吗我。。。</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/20/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/20.jpg" /></div>
+        <h3>测测你将会实现什么美丽的愿望？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我将会实现的愿望是女神陪我吃饭。。。说好的女神在哪里呢？ </p>
+       </a>
+       </li>
+            
+       
+       <li><a href="/ceshi/23/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/23.jpg" /></div>
+        <h3>挑战加法小游戏</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>如此艰难的游戏我居然通关了，你敢来挑战吗？</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/24/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/24.jpg" /></div>
+        <h3>2048，停不下来的智商游戏挑战！</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>我在挑战2048中获得了第一名，你能超越我吗？快来挑战吧！</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/26/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/26.jpg" /></div>
+        <h3>刮刮卡2014年将马上收获什么？！</h3>
+        <i class="iconCeshi">测试</i>
+        <p>2014年马上有钱，快来刮一刮，给你一个惊喜！</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/27/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/27.jpg" /></div>
+        <h3>测测看你有什么弱点？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>才发现我的弱点是没有弱点太TM聪明！聪明到没朋友啊！</p>
+       </a>
+       </li>
+       
+      
+       
+       <li><a href="/ceshi/29/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/29.jpg" /></div>
+        <h3>测试你的装嫩指数？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我的装嫩指数30%，生活中的你有一点小可爱、常常因为搞不清楚状况而惹人笑话。</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/30/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/30.jpg" /></div>
+        <h3>世界上最准的心理年龄测试？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我的您的心理年龄34岁，与我的实际年龄差10岁！原来我早老了！</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/31/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/31.jpg" /></div>
+        <h3>毕业之后，你将要收获什么？？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>太气人了，我毕业之后将收获飙涨的体重!</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/32/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/32.jpg" /></div>
+        <h3>测你未来拥有什么样的房子？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>还不错，我未来还能拥有农村小二楼呢！</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/33/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/33.jpg" /></div>
+        <h3>测测你将来会拥有什么样的车？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>原来我将来会拥有一辆保时捷！太霸气了！</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/34/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/34.jpg" /></div>
+        <h3>测你的微信值多少钱？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我的微信竟然值1000元！太厉害了！</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/35/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/35.jpg" /></div>
+        <h3>测测你在好友眼中的形象？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我在好友眼中的形象是砖家！真的假的啊？难道我知道的太多了要低调啊！</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/36/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/36.jpg" /></div>
+        <h3>测测你今年最大的收获将会会是什么？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我今年最大收获会是“交配交的人“！为什么不是爱情？发大财？再来一瓶？</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/37/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/37.jpg" /></div>
+        <h3>测测你是哪位神仙再世？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我竟然是上辈子是弼马温再世，难道我长的像猴子吗？</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/38/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/38.jpg" /></div>
+        <h3>测测你是一个容易······的人？知足、纠结、害羞？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我是一个容易出轨的人？去你妹的出轨，我连对象还没呢？</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/39?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/39.jpg" /></div>
+        <h3>测测你拥有哪种必杀吸引力？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我的的必杀吸引力是：媚眼勾人！我自己怎么没发现呢？</p>
+       </a>
+       </li>
+       
+        <li><a href="/ceshi/40?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/40.jpg" /></div>
+        <h3>测测你这辈子靠什么发财？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我这辈子靠“潜规则”发财'，看来我要去当演员了啊...</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/41?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/41.jpg" /></div>
+        <h3>测测别人最羡慕你哪一点？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>别人竟然羡慕我水汪汪大眼睛...拜托了，你们能不能不要羡慕我。。。</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/42?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/42.jpg" /></div>
+        <h3>测测你得了什么病？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我是重度网购病患者，远离X宝！再淘宝要剁手了啊。。。</p>
+       </a>
+       </li>
+       
+       <li><a href="/ceshi/43?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/43.jpg" /></div>
+        <h3>测测你将来可以晒什么？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>我将来可以晒太阳，唉，我还以为将来能晒宝马呢。。。</p>
+       </a>
+       </li>
+       
+          <li><a href="/ceshi/54/?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/54.jpg" /></div>
+        <h3>世界杯足球小游戏，OLA快跑</h3>
+        <i class="iconYouxi">游戏</i>
+        <p>我正在玩OLA快跑，获得了一代球王称号，小伙伴快来参与，看看你是啥称号吧！</p>
+       </a>
+       </li>   
+           
+        <li><a href="/ceshi/45?formlist">
+        <div class="t-i"><img src="http://wx.9ku.com/ceshi/i/iconSmall/100/45.jpg" /></div>
+        <h3>测测你会缺什么呢? 缺钱？缺节操？缺钙？</h3>
+        <i class="iconCeshi">测试</i>
+        <p>原来我什么都不缺，单单缺心眼啊！</p>
+       </a>
+       </li>
+       
+       </ul>
+	 </div>
+    </div>
+    
+
+<div id="adBom"><script src="script/adBom.js"></script></div>
+
+<script src="/count.js"></script>
+</body>
+</html>

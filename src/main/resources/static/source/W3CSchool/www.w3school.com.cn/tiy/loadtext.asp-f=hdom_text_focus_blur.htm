@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript">
+function setFocus()
+  {
+  document.getElementById('text1').focus()
+  }
+function loseFocus()
+  {
+  document.getElementById('text1').blur()
+  }
+</script>
+</head>
+<body>
+
+<form>
+<input type="text" id="text1" />
+<br />
+<input type="button" onclick="setFocus()" value="设置焦点" />
+<input type="button" onclick="loseFocus()" value="失去焦点" />
+</form>
+
+</body>
+</html>

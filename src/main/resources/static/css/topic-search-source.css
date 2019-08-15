@@ -1,0 +1,167 @@
+﻿@CHARSET "UTF-8";
+.bb{
+	background-color:#F5F5F5;
+	width:100%;
+}
+.ll{
+	width:90%;
+	/* margin:0px auto;  整体基于电脑版面居中方式 */
+	
+}
+.banner{
+	background-color:#F5F5F5;
+	width:1004px;
+	height:100px;
+	margin:0px auto;   /*整体基于电脑版面居中方式           2016.12.14*/
+	text-align:center;
+}
+.ban{
+	margin-top:10px;
+	margin-left:101px;
+	width:181px;
+	height:81px;
+	background:url(../images/aa.png);
+	position:absolute;     /*阻止搜索框被挤到下面 */
+}
+.search{
+	width:752px;
+	height:100px;
+	margin-left:210px;
+	
+}
+.search a{
+	text-decoration:none;
+	color:red;
+}
+.kk{
+	margin:0px auto;
+	background-color:#B6241F;
+	width:80%;
+	height:40px;
+	box-shadow:2px 5px 5px rgba(0,0,0,0.8);
+}
+.k1{
+	margin:0px auto;
+	width:90%;/*1070*/
+}
+
+      /*网页body里的左边部分内容        2016.12.13*/
+.b0{
+	width:210px;
+	border:1px solid #75B401;
+	margin:0px auto;         /*整体基于电脑版面居中方式           2016.12.14*/
+	margin-top:10px;
+	position:absolute;/*绝对定位，防止将右边的版块挤下去*/
+	
+}
+
+.b0 a{
+	color:black;
+	text-decoration:none;
+	font-size:10pt;
+	list-style:none;
+}
+.b0 a:hover{
+	color:red;
+}
+.a01 li{
+	list-style:none;
+	text-decoration:none;
+}
+.bd{
+	margin-left:10px;
+	font-size:8pt;
+}
+.bd img{
+	width:17px;
+	height:17px;
+}
+.a0{
+	color:gray;
+	width:209px;
+	border-bottom:1px solid  #75B401;
+	background-color: #E4F3E0;
+	height:40px;
+}
+
+.frame{
+	color:gray;
+	width:770px;
+	height:160px;
+	border:1px solid #47B031;
+	float:right;
+	margin-top:10px;
+}
+.frame img{
+	width:18px;
+	height:18px;
+}
+.frame a{
+	color:#444444;;
+	text-decoration:none;
+	font-size:10pt;
+}
+.frame a:hover{
+	color:red;
+}
+#frame{
+	color:gray;
+	width:770px;
+	/* height:320px; */
+	border:1px solid silver;
+	float:right;                            /*margin-left:406px;*/
+	margin-top:10px;
+}
+#frame img{
+	width:40px;
+	height:40px;
+}
+#frame a{
+	color:#444444;
+	text-decoration:none;
+	font-size:10pt;
+	
+}
+#frame a:hover{
+	color:red;
+}
+.b1{
+	width:769px;
+	height:35px;
+	background-color:#E4F3E0;
+	border-right:1px solid #47B031; /*只显示右边线*/
+	border-bottom:1px solid #47B031;/*只显示下边线*/
+}
+#b2{
+	width:769px;
+	/* height:35px; */
+	background-color:#E4F3E0;
+	border-bottom:1px solid #75B401;
+}
+.nav{
+	font-size:15px;
+	color:white;
+	font-weight:bold;
+	overflow:auto;
+	margin-top:0px;
+}
+.nav li{
+	margin-top:9px;
+	float:left;
+	margin-right:3.9%;  /* 2017.04.09  首页版块列表更改块元素之间的距离    */
+	list-style:none;
+	text-decoration:none;
+}
+.nav li a{
+	color:white;
+	list-style:none;
+	text-decoration:none;
+}
+.nav li a:hover{
+	border-radius: 40px;
+	background: gray;
+}
+
+
+
+

@@ -1,0 +1,50 @@
+<html>
+<body>
+
+<script type="text/javascript">
+var xmlDoc=null;
+if (window.ActiveXObject)
+{// code for IE
+xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+}
+else if (document.implementation.createDocument)
+{// code for Mozilla, Firefox, Opera, etc.
+xmlDoc=document.implementation.createDocument("","",null);
+}
+else
+{
+alert('Your browser cannot handle this script');
+}
+if (xmlDoc!=null) 
+{
+xmlDoc.async=false;
+xmlDoc.load("../example/xmle/cd_catalog.xml.htm"/*tpa=http://www.w3school.com.cn/example/xmle/cd_catalog.xml*/);
+var x=xmlDoc.getElementsByTagName("CD");
+
+document.write("<table border='1'>");
+document.write("<thead>");
+document.write("<tr><th>Artist</th><th>Title</th></tr>");
+document.write("</thead>");
+
+document.write("<tfoot>");
+document.write("<tr><th colspan='2'>This is my CD collection</th></tr>");
+document.write("</tfoot>");
+
+for (var i=0;i<x.length;i++)
+{ 
+document.write("<tr>");
+document.write("<td>");
+document.write(x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue);
+document.write("</td>");
+
+document.write("<td>");
+document.write(x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue);
+document.write("</td>");
+document.write("</tr>");
+}
+document.write("</table>");
+}
+</script>
+
+</body>
+</html>

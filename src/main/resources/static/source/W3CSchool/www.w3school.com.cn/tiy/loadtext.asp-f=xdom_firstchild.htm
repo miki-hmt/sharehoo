@@ -1,0 +1,38 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+<script type="text/javascript">
+//check if the first node is an element node
+function get_firstchild(n)
+{
+var x=n.firstChild;
+while (x.nodeType!=1)
+  {
+  x=x.nextSibling;
+  }
+return x;
+}
+
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+var x=xmlDoc.documentElement;
+var firstNode=get_firstchild(x);
+
+for (var i=0;i<firstNode.childNodes.length;i++)
+{ 
+if (firstNode.childNodes[i].nodeType==1)
+  { 
+  //Process only element nodes
+  document.write(firstNode.childNodes[i].nodeName);
+  document.write(" = ");
+  document.write(firstNode.childNodes[i].childNodes[0].nodeValue);
+  document.write("<br />");
+  } 
+}
+
+</script>
+</body>
+</html>

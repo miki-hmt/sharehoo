@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeText()
+  {
+  var x=document.getElementById("mySelect")
+  x.options[x.selectedIndex].text="Melon"
+  }
+</script>
+</head>
+<body>
+
+<form>
+Select your favorite fruit:
+<select id="mySelect">
+  <option>Apple</option>
+  <option>Orange</option>
+  <option>Pineapple</option>
+  <option>Banana</option>
+</select>
+<br /><br />
+<input type="button" onclick="changeText()" value="Set text of selected option">
+</form>
+
+</body>
+</html>
+

@@ -1,0 +1,1 @@
+This is another text file that is shown in the textarea - WITHOUT re-loading the page! This is how the XML HTTP request object works!

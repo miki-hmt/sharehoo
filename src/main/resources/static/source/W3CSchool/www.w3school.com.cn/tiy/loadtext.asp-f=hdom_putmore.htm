@@ -1,0 +1,33 @@
+<html>
+<head>
+<script type="text/javascript">
+function moveNumbers()
+{
+var no=document.getElementById("no")
+var option=no.options[no.selectedIndex].text
+var txt=document.getElementById("result").value
+txt=txt + option
+document.getElementById("result").value=txt
+}
+</script>
+</head>
+
+<body>
+<form>
+ÇëÑ¡ÔñÊý×Ö£º<br />
+<select id="no">
+	<option>0</option>
+	<option>1</option>
+	<option>2</option>
+	<option>3</option>
+	<option>4</option>
+	<option>5</option>
+	<option>6</option>
+	<option>7</option>
+	<option>8</option>
+	<option>9</option>
+</select>
+<input type="button" onclick="moveNumbers()" value="-->"> 
+<input type="text" id="result" size="20">
+</form>
+</body>

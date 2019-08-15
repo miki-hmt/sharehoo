@@ -1,0 +1,8 @@
+1：
+把源码上传到自己的空间
+2：
+打开weidao文件夹下js.htm，推荐用EditPlus或者DW。
+3：
+第457行，把http://game.vbaitong.com/quiz.htm替换成你的微信公众号引导关注页面链接。
+第491和510行，把http://wx.vbaitong.com/game/weidao/替换成你自己的游戏链接。
+ 

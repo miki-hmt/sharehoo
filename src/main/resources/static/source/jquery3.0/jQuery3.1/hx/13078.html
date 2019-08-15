@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery([sel,[context]])</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery([sel,[context]])</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery( selector [, context ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>接受一个包含一个CSS选择器的字符串，用于匹配的一组元素。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="jQuery-selector-context">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( selector [, context ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>selector</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader35" target="_blank">selector</a> 
+					</div>
+					<div>
+						一个包含CSS选择器的字符串
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>context</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader37" target="_blank">Element</a>, <code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+					</div>
+					<div>
+						一个DOM 元素、文档或 作为上下文（context）的jQuery 对象。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="jQuery-element">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( element )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>element</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader37" target="_blank">Element</a> 
+					</div>
+					<div>
+						一个用于封装成jQuery对象的DOM元素。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="jQuery-elementArray">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( elementArray )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>elementArray</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a> 
+					</div>
+					<div>
+						一个用于封装成jQuery对象的DOM元素数组。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="jQuery-object">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( object )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>object</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader25" target="_blank">PlainObject</a> 
+					</div>
+					<div>
+						一个普通的对象包装在一个jQuery对象。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="jQuery-jQuery-object">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( jQuery object )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>jQuery object</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader25" target="_blank">PlainObject</a> 
+					</div>
+					<div>
+						一个用于克隆的jQuery对象。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="jQuery">
+			<h4 class="name">
+				<span class="version-details">V : 1.4</span>jQuery()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<p>
+		在上文列出的第一个公式中，<code>jQuery()</code> — 这个也可以写成 <code>$()</code> — 通过提供的选择器检索任何DOM元素并且通过这些元素创建一个新的jQuery对象：
+	</p>
+<pre class="prettyprint lang-js">$( "div.foo" );</pre>
+	<p>
+	</p>
+	<p>
+		如果提供的选择器没有相匹配的，新的jQuery对象是“空”;即，它不包含任何元素，<code><a href="http://www.shouce.ren/api/view/a/12786" class="book-a">.length</a></code>属性为0。
+	</p>
+	<h4 id="selector-context">
+		Selector Context(上下文选择器)
+	</h4>
+	<p>
+		默认情况下,选择器是从文档根节点开始执行搜索。然而,可以给<code>$()</code>函数传递一个用于上下文检索的第二个可选参数(手册网注：第二个上下文参数用于来指定选择器查找的范围)。 举个示例，如果在一个回调函数中我们希望为一个元素做一个检索， 我们可以限制搜索的范围:
+	</p>
+<pre class="prettyprint lang-js">$( "div.foo" ).click(function() {
+  $(  "span", this ).addClass( "bar" );
+});</pre>
+	<p>
+	</p>
+	<p>
+		由于我们限制这个span选择器的上下文为 <code>this</code>, 只有在点击元素里的span将会被附加样式。
+	</p>
+	<p>
+		在jQuery内部，选择器上下文是使用<code>.find()</code>方法的，所以 <code>$('span', this)</code> 等价于<code>$(this).find('span')</code>。
+	</p>
+	<h4 id="using-dom-elements">
+		Using DOM elements(使用DOM节点)
+	</h4>
+	<p>
+		这个函数的第二个和第三个的方式，我们用其他一些方式已找到的一个或多个DOM元素，来创建一个jQuery对象。和其他大多数 
+jQuery 
+参数选项不一样，元素不是根据他们在DOM中得顺序排序的（手册网注：可以这么理解：当传递一个数组时候，jQuery对象的元素顺序和元素在数组的顺序是一样的;其他大多数传递的参数选项，jQuery对象的元素顺序根据他们在DOM中的顺序排序的）
+ 。元素将从数组中被原样复制，并且如果他们已经是jQuery集合，将不会被解开。
+	</p>
+	<p>
+		请注意，虽然这种方式可以传递文本节点和注释节点给一个jQuery集合，但是大多数操作不会支持他们。少数几个支持的操作将在他们的API文档页面中有一个明确的说明。
+	</p>
+	<p>
+		一个常见的用途就是单一DOM元素构建的集合可以通过一个回调函数传递<code>this</code>关键字调用这个元素的jQuery方法  ：
+	</p>
+<pre class="prettyprint lang-js">$( "div.foo" ).click(function() {
+  $(this).slideUp();
+});</pre>
+	<p>
+	</p>
+	<p>
+		这个示例，当点击使得这些元素隐藏的时候使用了滑动动画。因为事件处理通过 <code>this</code> 关键字，接收到了被点击的元素，但是该元素是原生的 DOM 元素，所以需要通过 $() 函数，将它转换成 jQuery 对象，然后就可以在该 jQuery 对象上调用 jQuery 方法了。
+	</p>
+	<p>
+		当一个Ajax请求返回XML数据时，我们可以使用 <code>$()</code> 方法去把他包含在jQuery对象中，我们可以很容易的工作。一旦这样做了之后，我们可以使用<code>.find()</code>和其他DOM遍历方法在XML结构中检索特定元素。
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.post( "url.xml", function(data) {
+  var $child = $(data).find("child");
+})</pre>
+	</div>
+	<h4 id="cloning-jquery-objects">
+		Cloning jQuery Objects(克隆jQuery对象)
+	</h4>
+	<p>
+		当一个jQuery对象作为一个参数传递给<code>$()</code>方法时，这个对象的一个克隆对象将被创建。这个新的jQuery对象引用同一DOM元素。
+	</p>
+	<h4 id="returning-empty-set">
+		Returning an Empty Set(返回一个空集合)
+	</h4>
+	<p>
+		在jQuery 1.4中，如果你传递给<code>jQuery()</code>方法一个<em>空参数</em>，一个空的jQuery设置将被返回（<code><a href="http://www.shouce.ren/api/view/a/12786" class="book-a">.length</a></code>属性为0）。  在以前的jQuery版本中，一个包含整个文档节点的集合将被返回。
+	</p>
+	<h4 id="working-with-plain-objects">
+		Working With Plain Objects（使用普通的对象）
+	</h4>
+	<p>
+		目前，只支持包裹在jQuery中的普通的JavaScript对象是：<code>.data()</code>,<code>.prop()</code>,<code>.bind()</code>, <code>.unbind()</code>, <code>.trigger()</code> 和 <code>.triggerHandler()</code>。使用<code>.data()</code>（或者任何返回<code>.data()</code>的方法），在一个普通的对象会产生一个新的属性的名为jQuery{randomNumber}（如jQuery123456789）。
+	</p>
+<pre class="prettyprint lang-js">// define a plain object
+var foo = {foo: "bar", hello: "world"};
+ 
+// Pass it to the jQuery function
+var $foo = $( foo );
+ 
+// test accessing property values
+var test1 = $foo.prop( "foo" ); // bar
+ 
+// test setting property values
+$foo.prop( "foo", "foobar" );
+var test2 = $foo.prop( "foo" ); // foobar
+ 
+// test using .data() as summarized above
+$foo.data( "keyName", "someValue");
+console.log( $foo ); // will now contain a jQuery{randomNumber} property
+ 
+// test binding an event name and triggering
+$foo.bind( "eventName", function () {
+  console.log("eventName was called");
+});
+ 
+$foo.trigger( "eventName" ); // logs "eventName was called"</pre>
+	<p>
+	</p>
+	<p>
+		如果<code>.trigger( "eventName" )</code>被使用，它会在这个对象上搜寻一个“eventName的”属性，并且尝试任何附加在jQuery上的处理器执行完成后执行。它不检查该属性是否是一个函数。为了避免这种情况，<code>.triggerHandler( "eventName" )</code>应代替使用。
+	</p>
+<pre class="prettyprint lang-js">$foo.triggerHandler( "eventName" ); // also logs "eventName was called"</pre>
+	<p>
+	</p>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		找到所有 p 元素，并且这些元素都必须是 div 元素的子元素。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("div &gt; p");</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		设置页面背景色。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$(document.body).css( "background", "black" );</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		隐藏一个表单中所有元素。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$(myForm.elements).hide()</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		在文档的第一个表单中，查找所有的单选按钮(即: type 值为 radio 的 input 元素)。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("input:radio", document.forms[0]);</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		在一个由 AJAX 返回的 XML 文档中，查找所有的 div 元素。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("div", xml.responseXML);</code></pre>
+</div>
+<h4>
+	实例:
+</h4>
+<p>
+	查找所有 div 下的 p 元素，并为它们加上边框。
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;jQuery demo&lt;/title&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p&gt;one&lt;/p&gt;
+&lt;div&gt;&lt;p&gt;two&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;three&lt;/p&gt;
+ 
+&lt;script&gt;
+$( "div &gt; p" ).css( "border", "1px solid gray" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<a href="http://www.shouce.ren/study/api/s/7962" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

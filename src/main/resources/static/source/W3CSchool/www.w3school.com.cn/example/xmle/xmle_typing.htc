@@ -1,0 +1,24 @@
+<attach for="window" event="onload" handler="beginTyping" />
+<method name="type" />
+
+<script type="text/javascript">
+var i,text1,text2,textLength,t
+
+function beginTyping()
+{
+i=0
+text1=element.innerText
+textLength=text1.length
+element.innerText=""
+text2=""
+t=window.setInterval(element.id+".type()",speed)
+}
+
+function type()
+{
+text2=text2+text1.substring(i,i+1)
+element.innerText=text2
+i=i+1
+if (i==textLength){clearInterval(t)}
+}
+</script>

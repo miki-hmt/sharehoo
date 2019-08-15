@@ -1,0 +1,31 @@
+body{margin:0}  
+        .popBox  
+        {  
+            width:500px;  
+            -webkit-border-radius: 0.5em;   
+            -moz-border-radius: 0.5em;  
+            border-radius: 0.5em;  
+            box-shadow:2px 3px 0 rgba(190,190,190,0.3);  
+            -webkit-box-shadow: 2px 3px 0 rgba(190,190,190,0.3);  
+            -moz-box-shadow: 2px 3px 0 rgba(190,190,190,0.3);  
+            text-align:center;  
+            padding-bottom:20px;  
+            background-color: #fff;  
+			background:url(../images/popWindow_rw1.png);
+            z-index: 101;  
+            font-family:Microsoft YaHei, Verdana,Arial,Helvetica,sans-serif;  
+            font-size: 13px;  
+        }  
+        .popBox h3  
+        {  
+            height:30px;  
+            line-height:30px;  
+            font-size:18px;  
+            text-align: center;  
+            margin:0 0 20px 0;  
+            background-color:#AB3738;  
+            color:#fff;  
+            border-radius: 0.35em 0.35em 0 0;  
+            padding-left:15px;  
+            cursor:move;  
+        }  

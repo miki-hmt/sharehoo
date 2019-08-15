@@ -1,0 +1,406 @@
+.mod_banner {
+  width: 960px;
+  height: 90px;
+  margin: 10px auto 0;
+  border: solid 1px #e5e5e5;
+  background: #fff;
+}
+.mod_searchTag {
+  width: 960px;
+  margin: 10px auto 0;
+  border: solid 1px #e5e5e5;
+  background: #fff;
+}
+.mod_searchTag .searchTag {
+  padding: 15px 20px 5px;
+}
+.mod_searchTag .searchTag .searchList li {
+  float: left;
+  margin: 2px 15px 15px 15px;
+}
+.mod_searchTag .searchTag .searchList li:first-child {
+  margin: 2px 15px 15px 0;
+}
+.mod_searchTag .searchTag .searchList li a {
+  color: #333;
+  font-size: 14px;
+  position: relative;
+  padding: 2px 5px;
+}
+.mod_searchTag .searchTag .searchList li a:hover {
+  color: #c00;
+}
+.mod_searchTag .searchTag .searchList li .cur_tag {
+  background: #c00;
+  color: #fff;
+}
+.mod_searchTag .searchTag .searchList li .cur_tag:hover {
+  color: #fff;
+}
+.mod_searchTag .searchTag .searchList li .cur_tag span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 50%;
+  bottom: -5px;
+  margin-left: -5px;
+  border-bottom: 0;
+  border-left: solid 5px transparent;
+  border-right: solid 5px transparent;
+  border-top: solid 5px #c00;
+}
+.mod_searchTag .searchTag .sub_search {
+  display: none;
+  width: auto;
+  background: #f8f8f8;
+  border: solid 1px #efefef;
+  border-radius: 5px;
+  padding-right: 20px;
+  margin-bottom: 15px;
+}
+.mod_searchTag .searchTag .sub_search a {
+  display: inline-block;
+  margin: 10px 0 10px 20px;
+}
+.mod_searchTag .searchTag .sub_search .cur {
+  color: #c00;
+}
+.filter_t {
+  height: 45px;
+  border-bottom: solid 1px #e5e5e4;
+  padding: 0 20px;
+  font-size: 14px;
+  color: #666;
+  line-height: 45px;
+}
+.filter_t strong {
+  font-weight: normal;
+}
+.filter_t label a {
+  display: inline-block;
+  margin-right: 25px;
+  color: #666;
+}
+.filter_t label a em {
+  font-weight: normal;
+}
+.filter_t label a .filter_cur {
+  color: #c00;
+}
+.filter_t label a img {
+  margin-left: 5px;
+}
+.filter_list {
+  padding: 30px;
+  overflow: hidden;
+}
+.filter_list .filterList {
+  width: 435px;
+  float: left;
+  margin-right: 28px;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: solid 1px #f0f0f0;
+}
+.filter_list .filterList:nth-child(even) {
+  margin-right: 0;
+}
+.filter_list .filterList:last-child,
+.filter_list .filterList:nth-last-child(2) {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.filter_list .filterList dt {
+  width: 100px;
+  height: 128px;
+  float: left;
+  border: solid 1px #e5e5e5;
+  padding: 5px;
+}
+.filter_list .filterList dt a img {
+  width: 100%;
+  height: 100%;
+  max-width: 92px;
+  max-height: 128px;
+}
+.filter_list .filterList dd {
+  margin-left: 110px;
+}
+.filter_list .filterList dd h5 a {
+  font-size: 14px;
+  color: #333;
+  line-height: 24px;
+}
+.filter_list .filterList dd .author {
+  padding: 15px 0;
+}
+.filter_list .filterList dd .filter_b label {
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 20px;
+}
+.filter_list .filterList dd .filter_b label:first-child {
+  margin-left: 0;
+}
+.filter_list .filterList dd .filter_b label .fa {
+  color: #666;
+  margin-right: 12px;
+}
+.filter_list .filterList dd .filter_b label span {
+  color: #333;
+}
+.filter_list .filterList dd .filter_b label em {
+  color: #f05e53;
+}
+.page-nav {
+  overflow: hidden;
+  height: auto;
+}
+.page-nav a {
+  color: #333;
+}
+.csdn-pagination {
+  vertical-align: middle;
+  width: 960px;
+  margin: 0 auto;
+  text-align: right;
+}
+.csdn-pagination {
+  clear: both;
+  margin: 20px auto;
+  display: table;
+  font-size: 12px;
+  padding-top: 5px;
+}
+.csdn-pagination .btn {
+  padding: 3px 7px;
+  margin: 0 -1px;
+  height: 22px;
+  min-width: 22px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #f8f8f8;
+  line-height: 15px;
+  margin-left: 5px;
+}
+.csdn-pagination .text {
+  color: #999;
+}
+.csdn-pagination .text em {
+  display: inline-block;
+  margin-right: 10px;
+  color: #666;
+}
+.csdn-pagination .text .btn .caret {
+  margin-left: 20px;
+}
+.csdn-pagination input {
+  width: 30px;
+  height: 22px;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+.csdn-pagination .btn:hover {
+  border-color: #c00;
+  background-color: #f8f8f8;
+  color: #333;
+}
+.csdn-pagination .page-nav span,
+.csdn-pagination .page-nav a,
+.csdn-pagination .page-nav input {
+  margin-right: 5px;
+  border-radius: 3px;
+/*color #333*/
+}
+.csdn-pagination .page-nav input.text {
+  border: 1px solid #ccc;
+  padding: 3px 4px;
+  text-align: center;
+  line-height: 0;
+}
+.csdn-pagination .active,
+.csdn-pagination .active:hover {
+  border-color: #c00;
+  background-color: #c00;
+  color: #fff;
+  cursor: default;
+}
+.mod_position {
+  width: 960px;
+  margin: 10px auto;
+}
+.mod_position a {
+  font-size: 14px;
+  color: #333;
+  display: inline-block;
+}
+.mod_position em {
+  display: inline-block;
+  margin: 0 5px;
+}
+.book_l {
+  width: 750px;
+}
+.book_l .book_l_t {
+  border: solid 1px #e5e5e5;
+  background: #fff;
+  padding: 35px 20px;
+}
+.book_l .book_l_t .book_l_c dt {
+  float: left;
+}
+.book_l .book_l_t .book_l_c dt img {
+  width: 136px;
+  height: 100%;
+  max-width: 140px;
+  max-height: 180px;
+}
+.book_l .book_l_t .book_l_c dd {
+  margin-left: 160px;
+  padding-top: 15px;
+}
+.book_l .book_l_t .book_l_c dd h4 {
+  font-size: 16px;
+  color: #333;
+}
+.book_l .book_l_t .book_l_c dd p {
+  padding: 15px 0 0 0;
+  font-size: 14px;
+  color: #666;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b {
+  padding-top: 30px;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_l {
+  float: left;
+  width: 205px;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_l a {
+  display: inline-block;
+  width: 65px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  margin-right: 10px;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_l a:last-child {
+  margin-right: 0;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_l .probation_read {
+  background: #fea75a;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_l .readily {
+  background: #8bc43f;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_l .book_download {
+  background: #127cc6;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_r {
+  width: 280px;
+  float: right;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_r label {
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 20px;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_r label:first-child {
+  margin-left: 0;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_r label .fa {
+  color: #666;
+  margin-right: 12px;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_r label span {
+  color: #333;
+}
+.book_l .book_l_t .book_l_c dd .book_l_b .book_l_b_r label em {
+  color: #f05e53;
+}
+.book_l .book_l_intro {
+  border: solid 1px #e5e5e5;
+  background: #fff;
+  margin-top: 10px;
+}
+.book_l .book_l_intro .book_l_intro_t {
+  height: 45px;
+  border-bottom: solid 1px #dcdcdc;
+}
+.book_l .book_l_intro .book_l_intro_t span {
+  display: inline-block;
+  margin-left: 20px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 15px;
+  color: #005ea7;
+  cursor: pointer;
+}
+.book_l .book_l_intro .book_l_intro_t .cur_intro {
+  background: #c00;
+  border-radius: 3px;
+  margin-top: 10px;
+  color: #fff;
+}
+.book_l .book_l_intro .book_l_intro_c .book_intro {
+  display: none;
+  padding: 15px 20px;
+}
+.book_l .book_l_intro .book_l_intro_c .book_intro .boot_intro_title {
+  margin: 20px 0 10px;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+.book_l .book_l_intro .book_l_intro_c .book_intro .boot_intro_con {
+  color: #666;
+  line-height: 24px;
+  padding-bottom: 12px;
+}
+.book_r {
+  width: 200px;
+  border: solid 1px #e5e5e5;
+  background: #fff;
+}
+.book_r .book_r_t {
+  height: 45px;
+  line-height: 45px;
+  padding-left: 20px;
+  font-size: 16px;
+  color: #333;
+  border-bottom: solid 1px #e5e5e5;
+}
+.book_r .book_r_c {
+  padding: 10px 20px;
+}
+.book_r .book_r_c .book_r_list li em {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.book_r .book_r_c .book_r_list li a {
+  display: inline-block;
+  line-height: 26px;
+  vertical-align: middle;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.book_r .book_r_c .book_r_list li a:hover {
+  color: #c00;
+}
+.filter_main {
+  width: 960px;
+  margin: 10px auto 0;
+  background: #fff;
+  border: solid 1px #e5e5e5;
+}
+.book_detail {
+  width: 960px;
+  margin: 0 auto 10px;
+  overflow: hidden;
+}

@@ -1,0 +1,34 @@
+<html>
+<body>
+<script type="text/javascript">
+text="<bookstore>"
+text=text+"<book>";
+text=text+"<title>Harry Potter</title>";
+text=text+"<author>J K. Rowling</author>";
+text=text+"<year>2005</year>";
+text=text+"</book>";
+text=text+"</bookstore>";
+
+try //Internet Explorer
+  {
+  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+  xmlDoc.async="false";
+  xmlDoc.loadXML(text);
+  }
+catch(e)
+  {
+  try //Firefox, Mozilla, Opera, etc.
+    {
+    parser=new DOMParser();
+    xmlDoc=parser.parseFromString(text,"text/xml");
+    }
+  catch(e) {alert(e.message)}
+  }
+try 
+  {
+  document.write("xmlDoc 已加载，可以使用。");
+  }
+catch(e) {alert(e.message)}
+</script>
+</body>
+</html>

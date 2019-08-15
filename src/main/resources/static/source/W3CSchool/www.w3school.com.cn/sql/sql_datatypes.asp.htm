@@ -1,0 +1,804 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>SQL 数据类型</title>
+</head>
+
+<body class="serverscripting">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>SQL 基础</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/sql/index.asp" title="SQL 教程">SQL 首页</a></li>
+<li><a href="sql_intro.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_intro.asp" title="SQL 简介">SQL 简介</a></li>
+<li><a href="sql_syntax.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_syntax.asp" title="SQL 语法">SQL 语法</a></li>
+<li><a href="sql_select.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_select.asp" title="SQL SELECT 语句">SQL select</a></li>
+<li><a href="sql_distinct.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_distinct.asp" title="SQL SELECT DISTINCT 语句">SQL distinct</a></li>
+<li><a href="sql_where.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_where.asp" title="SQL WHERE 子句">SQL where</a></li>
+<li><a href="sql_and_or.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_and_or.asp" title="SQL AND &amp; OR">SQL AND &amp; OR</a></li>
+<li><a href="sql_orderby.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_orderby.asp" title="SQL ORDER BY 语句">SQL Order By</a></li>
+<li><a href="sql_insert.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_insert.asp" title="SQL INSERT INTO 语句">SQL insert</a></li>
+<li><a href="sql_update.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_update.asp" title="SQL UPDATE 语句">SQL update</a></li>
+<li><a href="sql_delete.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_delete.asp" title="SQL DELETE 语句">SQL delete</a></li>
+</ul>
+
+<h2>SQL 高级</h2>
+<ul>
+<li><a href="sql_top.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_top.asp" title="SQL TOP 子句">SQL Top</a></li>
+<li><a href="sql_like.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_like.asp" title="SQL LIKE 运算符">SQL Like</a></li>
+<li><a href="sql_wildcards.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_wildcards.asp" title="SQL 通配符">SQL 通配符</a></li>
+<li><a href="sql_in.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_in.asp" title="SQL IN">SQL In</a></li>
+<li><a href="sql_between.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_between.asp" title="SQL BETWEEN">SQL Between</a></li>
+<li><a href="sql_alias.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_alias.asp" title="SQL Alias（别名）">SQL Aliases</a></li>
+<li><a href="sql_join.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_join.asp" title="SQL JOIN">SQL Join</a></li>
+<li><a href="sql_join_inner.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_join_inner.asp" title="SQL INNER JOIN 关键字">SQL Inner Join</a></li>
+<li><a href="sql_join_left.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_join_left.asp" title="SQL LEFT JOIN 关键字">SQL Left Join</a></li>
+<li><a href="sql_join_right.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_join_right.asp" title="SQL RIGHT JOIN 关键字">SQL Right Join</a></li>
+<li><a href="sql_join_full.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_join_full.asp" title="SQL FULL JOIN 关键字">SQL Full Join</a></li>
+<li><a href="sql_union.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_union.asp" title="SQL UNION 和 UNION ALL">SQL Union</a></li>
+<li><a href="sql_select_into.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_select_into.asp" title="SQL SELECT INTO 语句">SQL Select Into</a></li>
+<li><a href="sql_create_db.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_create_db.asp" title="SQL CREATE DATABASE 语句">SQL Create DB</a></li>
+<li><a href="sql_create_table.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_create_table.asp" title="SQL CREATE TABLE 语句">SQL Create Table</a></li>
+<li><a href="sql_constraints.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_constraints.asp" title="SQL 约束">SQL Constraints</a></li>
+<li><a href="sql_notnull.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_notnull.asp" title="SQL NOT NULL 约束">SQL Not Null</a></li>
+<li><a href="sql_unique.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_unique.asp" title="SQL UNIQUE 约束">SQL Unique</a></li>
+<li><a href="sql_primarykey.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_primarykey.asp" title="SQL PRIMARY KEY 约束">SQL Primary Key</a></li>
+<li><a href="sql_foreignkey.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_foreignkey.asp" title="SQL FOREIGN KEY 约束">SQL Foreign Key</a></li>
+<li><a href="sql_check.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_check.asp" title="SQL CHECK 约束">SQL Check</a></li>
+<li><a href="sql_default.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_default.asp" title="SQL DEFAULT 约束">SQL Default</a></li>
+<li><a href="sql_create_index.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_create_index.asp" title="SQL CREATE INDEX 语句">SQL Create Index</a></li>
+<li><a href="sql_drop.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_drop.asp" title="SQL 撤销索引、表以及数据库">SQL Drop</a></li>
+<li><a href="sql_alter.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_alter.asp" title="SQL ALTER TABLE">SQL Alter</a></li>
+<li><a href="sql_autoincrement.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_autoincrement.asp" title="SQL AUTO INCREMENT 字段">SQL Increment</a></li>
+<li><a href="sql_view.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_view.asp" title="SQL VIEW（视图）">SQL View</a></li>
+<li><a href="sql_dates.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_dates.asp" title="SQL Date 函数">SQL Date</a></li>
+<li><a href="sql_null_values.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_null_values.asp" title="SQL NULL 值">SQL Nulls</a></li>
+<li><a href="sql_isnull.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_isnull.asp" title="SQL NULL 函数">SQL isnull()</a></li>
+<li><a href="sql_datatypes.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_datatypes.asp" title="SQL 数据类型">SQL 数据类型</a></li>
+<li><a href="sql_server.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_server.asp" title="SQL 服务器 - RDBMS">SQL 服务器</a></li>
+</ul>
+
+<h2>SQL 函数</h2>
+<ul class="small">
+<li><a href="sql_functions.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_functions.asp" title="SQL 函数">SQL functions</a></li>
+<li><a href="sql_func_avg.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_avg.asp" title="SQL AVG() 函数">SQL avg()</a></li>
+<li><a href="sql_func_count.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_count.asp" title="SQL COUNT() 函数">SQL count()</a></li>
+<li><a href="sql_func_first.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_first.asp" title="SQL FIRST() 函数">SQL first()</a></li>
+<li><a href="sql_func_last.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_last.asp" title="SQL LAST() 函数">SQL last()</a></li>
+<li><a href="sql_func_max.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_max.asp" title="SQL MAX() 函数">SQL max()</a></li>
+<li><a href="sql_func_min.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_min.asp" title="SQL MIN() 函数">SQL min()</a></li>
+<li><a href="sql_func_sum.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_sum.asp" title="SQL SUM() 函数">SQL sum()</a></li>
+<li><a href="sql_groupby.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_groupby.asp" title="SQL GROUP BY 语句">SQL Group By</a></li>
+<li><a href="sql_having.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_having.asp" title="SQL HAVING 子句">SQL Having</a></li>
+<li><a href="sql_func_ucase.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_ucase.asp" title="SQL UCASE() 函数">SQL ucase()</a></li>
+<li><a href="sql_func_lcase.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_lcase.asp" title="SQL LCASE() 函数">SQL lcase()</a></li>
+<li><a href="sql_func_mid.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_mid.asp" title="SQL MID() 函数">SQL mid()</a></li>
+<li><a href="sql_func_len.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_len.asp" title="SQL LEN() 函数">SQL len()</a></li>
+<li><a href="sql_func_round.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_round.asp" title="SQL ROUND() 函数">SQL round()</a></li>
+<li><a href="sql_func_now.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_now.asp" title="SQL NOW() 函数">SQL now()</a></li>
+<li><a href="sql_func_format.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_func_format.asp" title="SQL FORMAT() 函数">SQL format()</a></li>
+</ul>
+
+<h2>SQL 总结</h2>
+<ul>
+<li><a href="sql_quickref.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_quickref.asp" title="SQL 快速参考">SQL 快速索引</a></li>
+<li><a href="sql_summary.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_summary.asp" title="我们已经学习了 SQL，下一步学习什么呢？">SQL 总结</a></li>
+</ul>
+
+<h2>实例/测验</h2>
+<ul>
+<li><a href="sql_quiz.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_quiz.asp" title="SQL 测验">SQL 测验</a></li>
+</ul>
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SQL 数据类型</h1>
+
+<div id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="sql_isnull.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_isnull.asp">Previous Page</a></li>
+
+<li class="next"><a href="sql_server.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_server.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+
+<div>
+<p><strong>Microsoft Access、MySQL 以及 SQL Server 所使用的数据类型和范围。</strong></p>
+</div>
+
+
+<div>
+<h2>Microsoft Access 数据类型</h2>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:65%">描述</th>
+<th style="width:15%">存储</th>
+</tr>
+
+<tr>
+<td>Text</td>
+<td>用于文本或文本与数字的组合。最多 255 个字符。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Memo</td>
+<td>
+<p>Memo 用于更大数量的文本。最多存储 65,536 个字符。</p>
+<p>注释：无法对 memo 字段进行排序。不过它们是可搜索的。</p>
+</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Byte</td>
+<td>允许 0 到 255 的数字。</td>
+<td>1 字节</td>
+</tr>
+
+<tr>
+<td>Integer</td>
+<td>允许介于 -32,768 到 32,767 之间的数字。</td>
+<td>2 字节</td>
+</tr>
+
+<tr>
+<td>Long</td>
+<td>允许介于 -2,147,483,648 与 2,147,483,647 之间的全部数字</td>
+<td>4 字节</td>
+</tr>
+
+<tr>
+<td>Single</td>
+<td>单精度浮点。处理大多数小数。</td>
+<td>4 字节</td>
+</tr>
+
+<tr>
+<td>Double</td>
+<td>双精度浮点。处理大多数小数。</td>
+<td>8 字节</td>
+</tr>
+
+<tr>
+<td>Currency</td>
+<td>
+<p>用于货币。支持 15 位的元，外加 4 位小数。</p>
+<p>提示：您可以选择使用哪个国家的货币。</p>
+</td>
+<td>8 字节</td>
+</tr>
+
+<tr>
+<td>AutoNumber</td>
+<td>AutoNumber 字段自动为每条记录分配数字，通常从 1 开始。</td>
+<td>4 字节</td>
+</tr>
+
+<tr>
+<td>Date/Time</td>
+<td>用于日期和时间</td>
+<td>8 字节</td>
+</tr>
+
+<tr>
+<td>Yes/No</td>
+<td>
+<p>逻辑字段，可以显示为 Yes/No、True/False 或 On/Off。</p>
+<p>在代码中，使用常量 True 和 False （等价于 1 和 0）</p>
+<p>注释：Yes/No 字段中不允许 Null 值</p>
+</td>
+<td>1 比特</td>
+</tr>
+
+<tr>
+<td>Ole Object</td>
+<td>可以存储图片、音频、视频或其他 BLOBs (Binary Large OBjects)</td>
+<td>最多 1GB</td>
+</tr>
+
+<tr>
+<td>Hyperlink</td>
+<td>包含指向其他文件的链接，包括网页。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Lookup Wizard</td>
+<td>允许你创建一个可从下列列表中进行选择的选项列表。</td>
+<td>4 字节</td>
+</tr>
+</table>
+</div>
+
+
+<div>
+<h2>MySQL 数据类型</h2>
+
+<p>在 MySQL 中，有三种主要的类型：文本、数字和日期/时间类型。</p>
+
+
+<h3>Text 类型：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:80%">描述</th>
+</tr>
+
+<tr>
+<td>CHAR(size)</td>
+<td>保存固定长度的字符串（可包含字母、数字以及特殊字符）。在括号中指定字符串的长度。最多 255 个字符。</td>
+</tr>
+
+<tr>
+<td>VARCHAR(size)</td>
+<td>
+<p>保存可变长度的字符串（可包含字母、数字以及特殊字符）。在括号中指定字符串的最大长度。最多 255 个字符。</p>
+<p>注释：如果值的长度大于 255，则被转换为 TEXT 类型。</p>
+</td>
+</tr>
+
+<tr>
+<td>TINYTEXT</td>
+<td>存放最大长度为 255 个字符的字符串。</td>
+</tr>
+
+<tr>
+<td>TEXT</td>
+<td>存放最大长度为 65,535 个字符的字符串。</td>
+</tr>
+
+<tr>
+<td>BLOB</td>
+<td>用于 BLOBs (Binary Large OBjects)。存放最多 65,535 字节的数据。</td>
+</tr>
+
+<tr>
+<td>MEDIUMTEXT</td>
+<td>存放最大长度为 16,777,215 个字符的字符串。</td>
+</tr>
+
+<tr>
+<td>MEDIUMBLOB</td>
+<td>用于 BLOBs (Binary Large OBjects)。存放最多 16,777,215 字节的数据。</td>
+</tr>
+
+<tr>
+<td>LONGTEXT</td>
+<td>存放最大长度为 4,294,967,295 个字符的字符串。</td>
+</tr>
+
+<tr>
+<td>LONGBLOB</td>
+<td>用于 BLOBs (Binary Large OBjects)。存放最多 4,294,967,295 字节的数据。</td>
+</tr>
+
+<tr>
+<td class="no_wrap">ENUM(x,y,z,etc.)</td>
+<td>
+<p>允许你输入可能值的列表。可以在 ENUM 列表中列出最大 65535 个值。如果列表中不存在插入的值，则插入空值。</p>
+<p>注释：这些值是按照你输入的顺序存储的。</p>
+<p>可以按照此格式输入可能的值：ENUM('X','Y','Z')</p>
+</td>
+</tr>
+
+<tr>
+<td>SET</td>
+<td>与 ENUM 类似，SET 最多只能包含 64 个列表项，不过 SET 可存储一个以上的值。</td>
+</tr>
+</table>
+
+
+<h3>Number 类型：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:80%">描述</th>
+</tr>
+
+<tr>
+<td>TINYINT(size)</td>
+<td>-128 到 127 常规。0 到 255 无符号*。在括号中规定最大位数。</td>
+</tr>
+
+<tr>
+<td>SMALLINT(size)</td>
+<td>-32768 到 32767 常规。0 到 65535 无符号*。在括号中规定最大位数。</td>
+</tr>
+
+<tr>
+<td>MEDIUMINT(size)</td>
+<td>-8388608 到 8388607 普通。0 to 16777215 无符号*。在括号中规定最大位数。</td>
+</tr>
+
+<tr>
+<td>INT(size)</td>
+<td>-2147483648 到 2147483647 常规。0 到 4294967295 无符号*。在括号中规定最大位数。</td>
+</tr>
+
+<tr>
+<td>BIGINT(size)</td>
+<td>-9223372036854775808 到 9223372036854775807 常规。0 到 18446744073709551615 无符号*。在括号中规定最大位数。</td>
+</tr>
+
+<tr>
+<td>FLOAT(size,d)</td>
+<td>带有浮动小数点的小数字。在括号中规定最大位数。在 d 参数中规定小数点右侧的最大位数。</td>
+</tr>
+
+<tr>
+<td>DOUBLE(size,d)</td>
+<td>带有浮动小数点的大数字。在括号中规定最大位数。在 d 参数中规定小数点右侧的最大位数。</td>
+</tr>
+
+<tr>
+<td>DECIMAL(size,d)</td>
+<td>作为字符串存储的 DOUBLE 类型，允许固定的小数点。</td>
+</tr>
+</table>
+
+<p>* 这些整数类型拥有额外的选项 UNSIGNED。通常，整数可以是负数或正数。如果添加 UNSIGNED 属性，那么范围将从 0 开始，而不是某个负数。</p>
+
+
+<h3>Date 类型：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:80%">描述</th>
+</tr>
+
+
+<tr>
+<td>DATE()</td>
+<td>
+<p>日期。格式：YYYY-MM-DD</p>
+<p>注释：支持的范围是从 '1000-01-01' 到 '9999-12-31'</p>
+</td>
+</tr>
+
+<tr>
+<td>DATETIME()</td>
+<td>
+<p>*日期和时间的组合。格式：YYYY-MM-DD HH:MM:SS</p>
+<p>注释：支持的范围是从 '1000-01-01 00:00:00' 到 '9999-12-31 23:59:59'</p>
+</td>
+</tr>
+
+<tr>
+<td class="no_wrap">TIMESTAMP()</td>
+<td>
+<p>*时间戳。TIMESTAMP 值使用 Unix 纪元('1970-01-01 00:00:00' UTC) 至今的描述来存储。格式：YYYY-MM-DD HH:MM:SS</p>
+<p>注释：支持的范围是从 '1970-01-01 00:00:01' UTC 到 '2038-01-09 03:14:07' UTC</p>
+</td>
+</tr>
+
+<tr>
+<td>TIME()</td>
+<td>
+时间。格式：HH:MM:SS
+注释：支持的范围是从 '-838:59:59' 到 '838:59:59'
+</td>
+</tr>
+
+<tr>
+<td>YEAR()</td>
+<td>
+<p>2 位或 4 位格式的年。</p>
+<p>注释：4 位格式所允许的值：1901 到 2155。2 位格式所允许的值：70 到 69，表示从 1970 到 2069。</p>
+</td>
+</tr>
+</table>
+
+<p>* 即便 DATETIME 和 TIMESTAMP 返回相同的格式，它们的工作方式很不同。在 INSERT 或 UPDATE 查询中，TIMESTAMP 自动把自身设置为当前的日期和时间。TIMESTAMP 也接受不同的格式，比如 YYYYMMDDHHMMSS、YYMMDDHHMMSS、YYYYMMDD 或 YYMMDD。</p>
+</div>
+
+
+<div>
+<h2>SQL Server 数据类型</h2>
+
+<h3>Character 字符串：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:65%">描述</th>
+<th style="width:15%">存储</th>
+</tr>
+
+<tr>
+<td>char(n)</td>
+<td>固定长度的字符串。最多 8,000 个字符。</td>
+<td>n</td>
+</tr>
+
+<tr>
+<td>varchar(n)</td>
+<td>可变长度的字符串。最多 8,000 个字符。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>varchar(max)</td>
+<td>可变长度的字符串。最多 1,073,741,824 个字符。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>text</td>
+<td>可变长度的字符串。最多 2GB 字符数据。</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+
+
+<h3>Unicode 字符串：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:65%">描述</th>
+<th style="width:15%">存储</th>
+</tr>
+
+<tr>
+<td>nchar(n)</td>
+<td>固定长度的 Unicode 数据。最多 4,000 个字符。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>nvarchar(n)</td>
+<td>可变长度的 Unicode 数据。最多 4,000 个字符。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>nvarchar(max)</td>
+<td>可变长度的 Unicode 数据。最多 536,870,912 个字符。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>ntext</td>
+<td>可变长度的 Unicode 数据。最多 2GB 字符数据。</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+
+
+<h3>Binary 类型：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:65%">描述</th>
+<th style="width:15%">存储</th>
+</tr>
+
+<tr>
+<td>bit</td>
+<td>允许 0、1 或 NULL</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>binary(n)</td>
+<td>固定长度的二进制数据。最多  8,000 字节。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>varbinary(n)</td>
+<td>可变长度的二进制数据。最多  8,000 字节。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>varbinary(max)</td>
+<td>可变长度的二进制数据。最多  2GB 字节。</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>image</td>
+<td>可变长度的二进制数据。最多 2GB。</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+
+
+<h3>Number 类型：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:65%">描述</th>
+<th style="width:15%">存储</th>
+</tr>
+
+
+<tr>
+<td>tinyint</td>
+<td>允许从 0 到 255 的所有数字。</td>
+<td>1 字节</td>
+</tr>
+
+<tr>
+<td>smallint</td>
+<td>允许从 -32,768  到 32,767 的所有数字。</td>
+<td>2 字节</td>
+</tr>
+
+<tr>
+<td>int</td>
+<td>允许从 -2,147,483,648 到 2,147,483,647 的所有数字。</td>
+<td>4 字节</td>
+</tr>
+
+<tr>
+<td>bigint</td>
+<td>允许介于 -9,223,372,036,854,775,808 和 9,223,372,036,854,775,807 之间的所有数字。</td>
+<td>8 字节</td>
+</tr>
+
+<tr>
+<td>decimal(p,s)</td>
+<td>
+<p>固定精度和比例的数字。允许从 -10^38 +1 到 10^38 -1 之间的数字。</p>
+<p>p 参数指示可以存储的最大位数（小数点左侧和右侧）。p 必须是 1 到 38 之间的值。默认是 18。</p>
+<p>s 参数指示小数点右侧存储的最大位数。s 必须是 0 到 p 之间的值。默认是 0。</p>
+</td>
+<td>5-17 字节</td> 
+</tr>
+
+<tr>
+<td>numeric(p,s)</td>
+<td>
+<p>固定精度和比例的数字。允许从 -10^38 +1 到 10^38 -1 之间的数字。</p>
+<p>p 参数指示可以存储的最大位数（小数点左侧和右侧）。p 必须是 1 到 38 之间的值。默认是 18。</p>
+<p>s 参数指示小数点右侧存储的最大位数。s 必须是 0 到 p 之间的值。默认是 0。</p>
+</td>
+<td>5-17 字节</td>
+</tr>
+
+<tr>
+<td>smallmoney</td>
+<td>介于 -214,748.3648 和 214,748.3647 之间的货币数据。</td>
+<td>4 字节</td>
+</tr>
+
+<tr>
+<td>money</td>
+<td>介于 -922,337,203,685,477.5808 和 922,337,203,685,477.5807 之间的货币数据。</td>
+<td>8 字节</td>
+</tr>
+
+<tr>
+<td>float(n)</td>
+<td>
+从 -1.79E + 308 到 1.79E + 308 的浮动精度数字数据。
+参数 n 指示该字段保存 4 字节还是 8 字节。float(24) 保存 4 字节，而 float(53) 保存 8 字节。n 的默认值是 53。
+</td>
+<td>4 或 8 字节</td>
+</tr>
+
+<tr>
+<td>real</td>
+<td>从 -3.40E + 38 到 3.40E + 38 的浮动精度数字数据。</td>
+<td>4 字节</td>
+</tr>
+</table>
+
+
+<h3>Date 类型：</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:65%">描述</th>
+<th style="width:15%">存储</th>
+</tr>
+
+<tr>
+<td>datetime</td>
+<td>从 1753 年 1 月 1 日 到 9999 年 12 月 31 日，精度为 3.33 毫秒。</td>
+<td>8 bytes</td>
+</tr>
+
+<tr>
+<td>datetime2</td>
+<td>从 1753 年 1 月 1 日 到 9999 年 12 月 31 日，精度为 100 纳秒。</td>
+<td>6-8 bytes</td>
+</tr>
+
+<tr>
+<td>smalldatetime</td>
+<td>从 1900 年 1 月 1 日 到 2079 年 6 月 6 日，精度为 1 分钟。</td>
+<td>4 bytes</td>
+</tr>
+
+<tr>
+<td>date</td>
+<td>仅存储日期。从 0001 年 1 月 1 日 到 9999 年 12 月 31 日。</td>
+<td>3 bytes</td>
+</tr>
+
+<tr>
+<td>time</td>
+<td>仅存储时间。精度为 100 纳秒。</td>
+<td>3-5 bytes</td>
+</tr>
+
+<tr>
+<td>datetimeoffset</td>
+<td>与 datetime2 相同，外加时区偏移。</td>
+<td>8-10 bytes</td>
+</tr>
+
+<tr>
+<td>timestamp</td>
+<td>存储唯一的数字，每当创建或修改某行时，该数字会更新。timestamp 基于内部时钟，不对应真实时间。每个表只能有一个 timestamp 变量。</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+
+
+<h3>其他数据类型：</h3>
+
+
+<table class="dataintable">
+<tr>
+<th style="width:20%">数据类型</th>
+<th style="width:80%">描述</th>
+</tr>
+
+<tr>
+<td>sql_variant</td>
+<td>存储最多 8,000 字节不同数据类型的数据，除了 text、ntext 以及 timestamp。</td>
+</tr>
+
+<tr>
+<td>uniqueidentifier</td>
+<td>存储全局标识符 (GUID)。</td>
+</tr>
+
+<tr>
+<td>xml</td>
+<td>存储 XML 格式化数据。最多 2GB。</td>
+</tr>
+
+<tr>
+<td>cursor</td>
+<td>存储对用于数据库操作的指针的引用。</td>
+</tr>
+
+<tr>
+<td>table</td>
+<td>存储结果集，供稍后处理。</td>
+</tr>
+</table>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="sql_isnull.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_isnull.asp">Previous Page</a></li>
+
+<li class="next"><a href="sql_server.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_server.asp">Next Page</a></li>
+</ul>
+
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div>
+
+<div id="tools">
+<h5 id="tools_quiz"><a href="sql_quiz.asp.htm" tppabs="http://www.w3school.com.cn/sql/sql_quiz.asp">SQL 测验</a></h5>
+</div>
+
+<div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

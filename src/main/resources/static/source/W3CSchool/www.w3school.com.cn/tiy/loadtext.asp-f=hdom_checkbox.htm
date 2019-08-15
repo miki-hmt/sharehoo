@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript">
+function convertToUcase()
+{
+document.getElementById("fname").value=document.getElementById("fname").value.toUpperCase()
+document.getElementById("lname").value=document.getElementById("lname").value.toUpperCase()
+}
+</script>
+</head>
+
+<body>
+<form name="form1">
+名：<input type="text" id="fname" size="20" />
+<br /><br />
+姓：<input type="text" id="lname" size="20" />
+<br /><br />
+转换为大写
+<input type="checkBox" onclick="if (this.checked) {convertToUcase()}">
+</form>
+</body>
+
+</html>

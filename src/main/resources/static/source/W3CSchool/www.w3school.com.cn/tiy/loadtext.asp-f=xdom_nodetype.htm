@@ -1,0 +1,33 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+document.write("Nodename: " + xmlDoc.nodeName);
+document.write(" (nodetype: " + xmlDoc.nodeType + ")<br />");
+
+var x=xmlDoc.documentElement;
+
+document.write("Nodename: " + x.nodeName);
+document.write(" (nodetype: " + x.nodeType + ")<br />");
+
+var y=x.childNodes;
+
+for (i=0;i<y.length;i++)
+{
+document.write("Nodename: " + y[i].nodeName);
+document.write(" (nodetype: " + y[i].nodeType + ")<br />");
+for (z=0;z<y[i].childNodes.length;z++)
+  {
+  document.write("Nodename: " + y[i].childNodes[z].nodeName);
+  document.write(" (nodetype: " + y[i].childNodes[z].nodeType + ")<br />");
+  }
+}
+</script>
+</body>
+</html>

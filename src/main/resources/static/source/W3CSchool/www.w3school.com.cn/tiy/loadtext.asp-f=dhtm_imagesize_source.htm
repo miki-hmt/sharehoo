@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript">
+function moveover()
+{
+document.getElementById('image').src="../i/eg_bulbon.gif"/*tpa=http://www.w3school.com.cn/i/eg_bulbon.gif*/
+document.getElementById('image').width="100"
+document.getElementById('image').height="180"
+}
+function moveback()
+{
+document.getElementById('image').src="../i/eg_landscape.jpg"/*tpa=http://www.w3school.com.cn/i/eg_landscape.jpg*/
+document.getElementById('image').width="160"
+document.getElementById('image').height="120"
+}
+</script>
+</head>
+
+<body>
+
+<b>请把鼠标移动到图像上：</b><br />
+<img id="image" src="../i/eg_landscape.jpg" tppabs="http://www.w3school.com.cn/i/eg_landscape.jpg"
+onmouseover="moveover()"
+onmouseout="moveback()" width="160" height="120" />
+
+</body>
+</html>
+

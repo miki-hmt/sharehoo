@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>toggleClass()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">toggleClass()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.toggleClass( className )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>为匹配的元素集合中的每个元素上添加或删除一个或多个样式类（class）,取决于这个样式类（class）是否存在或state参数的值。（手册网注：如果存在（不存在）就删除（添加）一个类。）
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V :1.0</span>.toggleClass(
+				className )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>className</strong> 
+					</div>
+					<div>
+						类型: <code>String</code> 
+					</div>
+					<div>
+						用来切换匹配集合中的每个元素的一个或多个样式类名（用空格隔开）。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V :1.3</span>.toggleClass(
+				className, state )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>className</strong> 
+					</div>
+					<div>
+						类型: <code>String</code> 
+					</div>
+					<div>
+						用来切换匹配集合中的每个元素的一个或多个样式类名（用空格隔开）。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>state</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader14" target="_blank">Boolean</a> 
+					</div>
+					<div>
+						一个布尔值（不止是真值/假值），用于判断样式是否应该被添加或移除。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V :1.4</span>.toggleClass(
+				function [, state ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>function</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28" target="_blank">Function</a>( Integer index, String className, Boolean state )
+						=&gt; String
+					</div>
+					<div>
+						一个函数，返回在匹配集合中的每个元素上用来切换的样式类名（class）。接收元素在集合中的索引位置，原先的样式类名，和状态（state）作为参数。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>state</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader14" target="_blank">Boolean</a> 
+					</div>
+					<div>
+						一个布尔值，用来判断样式类添加还是移除的。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<del>在jQuery 1.12/2.2 版本之前， <code>.toggleClass()</code>方法操纵是选定元素的<code>className</code>特性（<em>property</em>），不是<code>class</code>属性（<em>attribute</em>）。一旦特性（<em>property</em>）改变，浏览器就会更新相应地的属性（<em>attribute</em>）。此行为的一个言外之意是，这种方法只适用于HTML DOM语义的文档（例如，不是纯XML文档）。</del> 
+		</p>
+		<p>
+			<del>在jQuery1.12/2.2中，改变了这种行为以改善对XML文档，包括SVG的支持。从这个版本开始，<code>class</code> 属性（<em>attribute</em>）被替换（手册网注：这个版本开始，<code>.addClass()</code>方法操作的是<code>class</code> 属性（<em>attribute</em>），而不是<code>className</code>特性（<em>property</em>））。因此，.<code>.toggleClass()</code>可以在XML或SVG文档中使用。</del> 
+		</p>
+		<p>
+			这个该方法可以接受一个或多个样式类名称作为他的参数。在第一个版本中，如果在匹配的元素集合中的每个元素上存在该样式类就会被移除；如果某个元素没有这个样式类就会加上这个样式类。举个示例： 我们可以应用 <code>.toggleClass()</code> 在简单的 <code>&lt;div&gt;</code>上：
+		</p>
+		<div class="syntaxhighlighter xml">
+<pre class="prettyprint lang-js">&lt;div class="tumble"&gt;Some text.&lt;/div&gt;</pre>
+		</div>
+		<p>
+			第一次我们应用 <code>$('div.tumble').toggleClass('bounce')</code>, 我们可以得到以下内容:
+		</p>
+		<div class="syntaxhighlighter xml">
+<pre class="prettyprint lang-js">&lt;div class="tumble bounce"&gt;Some text.&lt;/div&gt;</pre>
+		</div>
+		<p>
+			第二次我能同样应用 <code>$('div.tumble').toggleClass('bounce')</code>, 这个 <code>&lt;div&gt;</code> 样式类回归到单独的 <code>tumble</code> 值：
+		</p>
+		<div class="syntaxhighlighter xml">
+<pre class="prettyprint lang-js">&lt;div class="tumble"&gt;Some text.&lt;/div&gt;</pre>
+		</div>
+		<p>
+			应用 <code>.toggleClass('bounce spin')</code>在同一个 <code>&lt;div&gt;</code> 上，结果会在 <code>&lt;div class="tumble bounce spin"&gt;</code> 和 <code>&lt;div class="tumble"&gt;</code>之间交替切换。
+		</p>
+		<p>
+			<code>.toggleClass()</code>的第二个版本使用第二个参数判断样式类是否应该被添加或删除。如果这个参数的值是<code>true</code>，那么这个样式类将被添加;如果这个参数的值是<code>false</code>，那么这个样式类将被移除。本质上是这样的:
+		</p>
+		<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">$( "#foo" ).toggleClass( className, addOrRemove );</pre>
+		</div>
+		<p>
+			is equivalent to:
+		</p>
+		<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">if ( addOrRemove ) {
+  $( "#foo" ).addClass( className );
+} else {
+  $( "#foo" ).removeClass( className );
+}</pre>
+		</div>
+		<p>
+			<strong>As of jQuery 1.4</strong>, if no arguments are passed to <code>.toggleClass()</code>, all class names on the element the first time <code>.toggleClass()</code> is called will be toggled. Also as of jQuery 1.4, the class name to be toggled can be determined by passing in a function.
+		</p>
+		<p>
+			<strong>从 jQuery 1.4 开始</strong>,  如果不将任何参数传递给 <code>.toggleClass()</code> 方法,那么匹配元素上的所有样式会在该方法第一次执行时被移除，第二次执行时被还原，如此往复。同样的，<strong>从 jQuery 1.4 开始</strong>,可以用一个函数作为参数，返回应该显示的样式：
+		</p>
+		<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">$( "div.foo" ).toggleClass(function() {
+  if ( $( this ).parent().is( ".bar" ) ) {
+    return "happy";
+  } else {
+    return "sad";
+  }
+});</pre>
+		</div>
+		<p>
+			如果匹配元素的父级元素有<code>bar</code>样式类名，这个示例将为<code>&lt;div class="foo"&gt;</code>元素切换 <code>happy</code> 样式类； 否则他将切换 <code>sad</code> 样式类 。
+		</p>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		参数class 实例
+	</h4>
+	<p>
+		为匹配的元素切换 'selected' 类
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("p").toggleClass("selected");</code></pre>
+	<h4>
+		参数class,switch 实例
+	</h4>
+	<p>
+		每点击三下加上一次 'highlight' 类
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;strong&gt;jQuery 代码:&lt;/strong&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code> var count = 0;
+  $("p").click(function(){
+      $(this).toggleClass("highlight", count++ % 3 == 0);
+  });</code></pre>
+	<h4>
+		回调函数 实例
+	</h4>
+	<p>
+		根据父元素来设置class属性
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$('div.foo').toggleClass(function() {
+  if ($(this).parent().is('.bar') {
+    return 'happy';
+  } else {
+    return 'sad';
+  }
+});</code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	当点击段落的是有切换 'highlight' 样式类
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;toggleClass demo&lt;/title&gt;
+  &lt;style&gt;
+  p {
+    margin: 4px;
+    font-size: 16px;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+  .blue {
+    color: blue;
+  }
+  .highlight {
+    background: yellow;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p class="blue"&gt;Click to toggle&lt;/p&gt;
+&lt;p class="blue highlight"&gt;highlight&lt;/p&gt;
+&lt;p class="blue"&gt;on these&lt;/p&gt;
+&lt;p class="blue"&gt;paragraphs&lt;/p&gt;
+ 
+&lt;script&gt;
+$( "p" ).click(function() {
+  $( this ).toggleClass( "highlight" );
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7979" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<h4>
+	实例
+</h4>
+<p>
+	每当第三次点击段落的时候添加 "highlight" 样式类, 第一次和第二次点击的时候移除 "highlight" 样式类
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;toggleClass demo&lt;/title&gt;
+  &lt;style&gt;
+  p {
+    margin: 4px;
+    font-size: 16px;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+  .blue {
+    color: blue;
+  }
+  .highlight {
+    background: red;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p class="blue"&gt;Click to toggle (&lt;span&gt;clicks: 0&lt;/span&gt;)&lt;/p&gt;
+&lt;p class="blue highlight"&gt;highlight (&lt;span&gt;clicks: 0&lt;/span&gt;)&lt;/p&gt;
+&lt;p class="blue"&gt;on these (&lt;span&gt;clicks: 0&lt;/span&gt;)&lt;/p&gt;
+&lt;p class="blue"&gt;paragraphs (&lt;span&gt;clicks: 0&lt;/span&gt;)&lt;/p&gt;
+ 
+&lt;script&gt;
+var count = 0;
+$( "p" ).each(function() {
+  var $thisParagraph = $( this );
+  var count = 0;
+  $thisParagraph.click(function() {
+    count++;
+    $thisParagraph.find( "span" ).text( "clicks: " + count );
+    $thisParagraph.toggleClass( "highlight", count % 3 === 0 );
+  });
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7980" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<h4>
+	实例
+</h4>
+<p>
+	Toggle the class name(s) indicated on the buttons for each div.
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;toggleClass demo&lt;/title&gt;
+  &lt;style&gt;
+  .wrap &gt; div {
+    float: left;
+    width: 100px;
+    margin: 1em 1em 0 0;
+    padding-left: 3px;
+    border: 1px solid #abc;
+  }
+  div.a {
+    background-color: aqua;
+  }
+  div.b {
+    background-color: burlywood;
+  }
+  div.c {
+    background-color: cornsilk;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div class="buttons"&gt;
+  &lt;button&gt;toggle&lt;/button&gt;
+  &lt;button class="a"&gt;toggle a&lt;/button&gt;
+  &lt;button class="a b"&gt;toggle a b&lt;/button&gt;
+  &lt;button class="a b c"&gt;toggle a b c&lt;/button&gt;
+  &lt;a href="#"&gt;reset&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class="wrap"&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div class="b"&gt;&lt;/div&gt;
+  &lt;div class="a b"&gt;&lt;/div&gt;
+  &lt;div class="a c"&gt;&lt;/div&gt;
+&lt;/div&gt;
+ 
+&lt;script&gt;
+var cls = [ "", "a", "a b", "a b c" ];
+var divs = $( "div.wrap" ).children();
+var appendClass = function() {
+  divs.append(function() {
+    return "&lt;div&gt;" + ( this.className || "none" ) + "&lt;/div&gt;";
+  });
+};
+ 
+appendClass();
+ 
+$( "button" ).on( "click", function() {
+  var tc = this.className || undefined;
+  divs.toggleClass( tc );
+  appendClass();
+});
+ 
+$( "a" ).on( "click", function( event ) {
+  event.preventDefault();
+  divs.empty().each(function( i ) {
+    this.className = cls[ i ];
+  });
+  appendClass();
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7981" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p>
+<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.toggleClass( [state ] )<span class="version-details">过时版本: 3.0</span> 
+	</blockquote>
+</h3>
+<p>
+	返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+</p>
+<p>
+</p>
+<div class="entry-wrapper">
+	<p class="desc">
+		<strong>实例</strong> 
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V :1.4</span>.toggleClass(  [state ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>state</strong> 
+					</div>
+					<div>
+						类型: Boolean
+					</div>
+					<div>
+						一个布尔值,用来判断样式类添加还是移除的 。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc-1">
+		<div class="warning">
+			<strong>这个签名（只有这个签名！）在 jQuery 3.0中已经被标记为过时</strong>。
+		</div>
+	</div>
+</div>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<html>
+<body>
+
+<p>VBScripts <b>WeekdayName</b> 函数用于获得 weekday：</p>
+<script type="text/vbscript">
+document.write("<p>")
+document.write(WeekDayName(1))
+document.write("<br />")
+document.write(WeekDayName(2))
+document.write("</p><p>")
+
+document.write("Get the abbreviated name of a weekday:")
+document.write("<br />")
+document.write(WeekDayName(1,true))
+document.write("<br />")
+document.write(WeekDayName(2,true))
+document.write("</p><p>")
+
+document.write("Get the current weekday:")
+document.write("<br />")
+document.write(WeekdayName(weekday(date)))
+document.write("<br />")
+document.write(WeekdayName(weekday(date), true))
+document.write("</p>")
+</script>
+
+</body>
+</html>

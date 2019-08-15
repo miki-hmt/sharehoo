@@ -1,0 +1,13 @@
+*
+/i/eg_banner_htmlref.gif
+http://www.w3school.com.cn/html/html_reference.asp
+Complete HTML 4.0 Reference
+20
+/i/eg_banner_w3school.gif
+http://www.w3school.com.cn/
+Web Tutorials from W3School
+20
+/i/eg_banner_jsref.gif
+http://www.w3school.com.cn/js/js_reference.asp
+JavaScript Reference
+20

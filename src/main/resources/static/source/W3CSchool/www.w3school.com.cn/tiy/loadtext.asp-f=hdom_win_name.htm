@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript">
+function checkWin()
+  {
+  document.write("The new window's name is: " + myWindow.name)
+  }
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+myWindow=window.open('','MyName','width=200,height=100')
+myWindow.document.write("This is 'myWindow'")
+</script>
+
+<input type="button" value="What's the name of 'myWindow'?" onclick="checkWin()">
+
+</body>
+</html>

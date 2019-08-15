@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>removeAttr()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">removeAttr()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.removeAttr( attributeName )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>为匹配的元素集合中的每个元素中移除一个属性（attribute）。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="removeAttr-attributeName">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.removeAttr( attributeName )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>attributeName</strong> 
+					</div>
+					<div>
+						类型: <code>String</code> 
+					</div>
+					<div>
+						要移除的属性名,从1.7版本开始，它可以是一个空格分隔的属性列表。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<p>
+		<code>.removeAttr()</code> 方法使用原生的 JavaScript <code>removeAttribute()</code> 函数,但是它的优点是可以直接在一个 jQuery 对象上调用该方法，并且它解决了跨浏览器的属性名不同的问题。
+	</p>
+	<p>
+		<strong>注意:</strong> Internet Explorer 8， 9 ，和11中，使用<code>.removeAttr()</code>删除一个内联<code>onclick</code> 事件处理程序不会达到预期的效果，为了避免潜在的问题，使用 <code>.prop()</code>代替：
+	</p>
+<pre class="prettyprint lang-js">$element.prop("onclick", null);
+console.log("onclick property: ", $element[0].onclick);</pre>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		将文档中图像的src属性删除
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;img src="test.jpg"/&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("img").removeAttr("src");</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>[ &lt;img /&gt; ]</code></pre>
+</div>
+<p>
+	<strong></strong> 
+</p>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	点击按钮，添加或删除按钮后面 input 元素的 title 属性。
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;removeAttr demo&lt;/title&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;button&gt;Change title&lt;/button&gt;
+&lt;input type="text" title="hello there"&gt;
+&lt;div id="log"&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+(function() {
+  var inputTitle = $( "input" ).attr( "title" );
+  $( "button" ).click(function() {
+    var input = $( this ).next();
+ 
+    if ( input.attr( "title" ) === inputTitle ) {
+      input.removeAttr( "title" )
+    } else {
+      input.attr( "title", inputTitle );
+    }
+ 
+    $( "#log" ).html( "input title is now " + input.attr( "title" ) );
+  });
+})();
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7969" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

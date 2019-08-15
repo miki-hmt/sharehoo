@@ -1,0 +1,24 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+function showColor() {
+  alert(this.color);
+};
+
+var oCar1 = new Object;
+oCar1.color = "red";
+oCar1.showColor = showColor;
+
+var oCar2 = new Object;
+oCar2.color = "blue";
+oCar2.showColor = showColor;
+
+oCar1.showColor();
+oCar2.showColor();
+
+</script>
+
+</body>
+</html>

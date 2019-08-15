@@ -1,0 +1,15 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(document).mousemove(function(e){
+    $("span").text(e.pageX + ", " + e.pageY);
+  });
+});
+</script>
+</head>
+<body>
+<p>鼠标位于坐标： <span></span>.</p>
+</body>
+</html>

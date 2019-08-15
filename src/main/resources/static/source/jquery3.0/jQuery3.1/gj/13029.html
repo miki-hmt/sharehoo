@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>$.fn.jquery</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">$.fn.jquery</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;$.fn.jquery
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>String</code> 
+	</p>
+	<p>
+		代表 jQuery 版本号的字符串。
+	</p>
+	<div class="longdesc">
+		<p>
+			<code>.jquery</code>&nbsp;属性是通过 jQuery 原型赋值的，通过使用它的别名&nbsp;<code>$.fn</code>&nbsp;进行引用。它是一个含有&nbsp;jQuery&nbsp;版本号的字符串，例如 "1.5.0" 或 "1.4.4".
+		</p>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		判断一个对象是否是 jQuery 对象。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre>var a = { what: "A regular JS object" },
+      b = $('body');
+         if ( a.jquery ) { // falsy, since it's undefined
+      alert(' a is a jQuery object! ');
+      }    if ( b.jquery ) { // truthy, since it's a string
+      alert(' b is a jQuery object! ');
+  }</pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		取得页面上当前使用的 jQuery 的版本号。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre>alert( 'You are running jQuery version: ' + $.fn.jquery );</pre>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".btn1").click(function(){
+    $("span").text($("p").height());
+  });
+});
+</script>
+</head>
+<body>
+<p>本段落的高度是 <span>unknown</span> px。</p>
+<button class="btn1">获得高度</button>
+</body>
+</html>

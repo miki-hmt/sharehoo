@@ -1,0 +1,75 @@
+<html>
+<head>
+<style>
+table
+{
+font-size:12;
+background-color:#c0c0c0;
+}
+span
+{
+border:groove 2px;
+padding:3;
+font-family:arial;
+font-size:12;
+width:90;
+height:40;
+background-color:#c0c0c0;
+position:relative;
+top:-15;
+left:-80;
+}
+</style>
+<script type="text/javascript">
+function showmenu(elmnt)
+{
+elmnt.style.left="-10"
+}
+
+function hidemenu(elmnt)
+{
+elmnt.style.left="-80"
+}
+</script>
+</head>
+<body>
+
+<span onmouseover="showmenu(this)" onmouseout="hidemenu(this)">
+<table border="0" width="100%">
+<tr>
+<td width="90%"><a href="../index.html" tppabs="http://www.w3school.com.cn/index.html">HOME</a></td>
+<td rowspan="2">A</td>
+</tr><tr>
+<td><a href="../js/index.asp.htm" tppabs="http://www.w3school.com.cn/js/index.asp">JavaScript</a></td>
+</tr>
+</table>
+</span>
+
+<br />
+
+<span onmouseover="showmenu(this)" onmouseout="hidemenu(this)">
+<table width="100%">
+<tr>
+<td width="90%"><a href="javascript:if(confirm('http://www.microsoft.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.microsoft.com/'" tppabs="http://www.microsoft.com/">Explorer</a></td>
+<td rowspan="2">B</td>
+</tr><tr>
+<td><a href="javascript:if(confirm('http://my.netscape.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://my.netscape.com/'" tppabs="http://my.netscape.com/">Navigator</a></td>
+</tr>
+</table>
+</span>
+
+<br />
+
+<span onmouseover="showmenu(this)" onmouseout="hidemenu(this)">
+<table width="100%">
+<tr>
+<td width="90%"><a href="javascript:if(confirm('http://www.altavista.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.altavista.com/'" tppabs="http://www.altavista.com/">AltaVista</a></td>
+<td rowspan="2">C</td>
+</tr><tr>
+<td><a href="javascript:if(confirm('http://www.yahoo.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yahoo.com/'" tppabs="http://www.yahoo.com/">Yahoo!</a></td>
+</tr>
+</table>
+</span>
+
+</body>
+</html>

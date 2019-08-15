@@ -1,0 +1,15 @@
+/* showcode CSS Document */
+pre	{
+	font-family: "Courier New",monospace;
+	font-size: 13px;
+	}
+
+pre code.aspcode {
+	font-family: "Courier New",monospace;
+	color:#ff0000;
+	}
+
+pre code.jscode {
+	font-family: "Courier New",monospace;
+	color:#0000CC;
+	}

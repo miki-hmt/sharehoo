@@ -1,0 +1,45 @@
+<html>
+<head>
+<style>
+h1
+{
+color:black;
+height:50;
+font:bold;
+}
+</style>
+<script type="text/javascript">
+var i
+function dropshadow()
+{
+i=0
+interval=setInterval("makedropshadow()",10)
+}
+
+function back()
+{
+clearInterval(interval)
+document.getElementById('myHeader').style.filter=false
+}
+
+function makedropshadow()
+{
+i++
+if (i<15)
+	{
+	document.getElementById('myHeader').style.filter="dropshadow(offx=" + i + ")"
+	document.getElementById('myHeader').style.filter="dropshadow(offy=" + i + ")"
+	}
+else if (window.interval)
+	{
+	clearInterval(interval)
+	}
+}
+</script>
+</head>
+
+<body>
+<h1 id="myHeader" onmouseover="dropshadow()" onmouseout="back()">请把鼠标移动到这个标题上</h1>
+</body>
+
+</html>

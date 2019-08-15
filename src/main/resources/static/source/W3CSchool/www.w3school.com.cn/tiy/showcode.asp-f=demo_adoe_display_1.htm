@@ -1,0 +1,36 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+
+<code class="aspcode">&lt;%
+set conn=Server.CreateObject(&quot;ADODB.Connection&quot;)
+conn.Provider=&quot;Microsoft.Jet.OLEDB.4.0&quot;
+conn.Open(Server.Mappath(&quot;/db/northwind.mdb&quot;))
+set rs = Server.CreateObject(&quot;ADODB.recordset&quot;)
+rs.Open &quot;Select * from Customers&quot;, conn
+
+do until rs.EOF
+    for each x in rs.Fields
+       Response.Write(x.name)
+       Response.Write(&quot; = &quot;)
+       Response.Write(x.value & &quot;&lt;br /&gt;&quot;) 
+    next
+    Response.Write(&quot;&lt;br /&gt;&quot;)
+    rs.MoveNext
+loop
+
+rs.close
+conn.close
+%&gt;</code>
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

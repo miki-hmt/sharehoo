@@ -1,0 +1,1 @@
+This is another text file - shown WITHOUT re-loading the page! This is how the XML HTTP request object works!

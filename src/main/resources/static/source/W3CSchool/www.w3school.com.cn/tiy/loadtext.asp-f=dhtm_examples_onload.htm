@@ -1,0 +1,29 @@
+<html>
+<head>
+
+<script type="text/javascript">
+var i=1
+function starttimer()
+{
+document.getElementById('h_one').style.position="relative"
+document.getElementById('h_one').style.left=+i
+document.getElementById('h_two').style.position="relative"
+document.getElementById('h_two').style.top=+i
+i++
+timer=setTimeout("starttimer()",10)
+}
+
+function stoptimer()
+{
+clearTimeout(timer)
+}
+</script>
+
+</head>
+<body onload="starttimer()" onunload="stoptimer()">
+
+<h1 id="h_one">标题一</h1>
+<h1 id="h_two">标题二</h1>
+
+</body>
+</html>

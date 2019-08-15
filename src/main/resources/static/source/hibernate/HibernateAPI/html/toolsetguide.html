@@ -1,0 +1,452 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>&#31532; 20 &#31456; &#24037;&#20855;&#31665;&#25351;&#21335;</TITLE>
+<META content="text/html; charset=ISO-8859-1" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../shared/css/html.css">
+<META name=GENERATOR content="MSHTML 11.00.9431.193"><LINK 
+title="HIBERNATE - &#31526;&#21512;Java&#20064;&#24815;&#30340;&#20851;&#31995;&#25968;&#25454;&#24211;&#25345;&#20037;&#21270;" rel=home href="index.html"><LINK 
+title="HIBERNATE - &#31526;&#21512;Java&#20064;&#24815;&#30340;&#20851;&#31995;&#25968;&#25454;&#24211;&#25345;&#20037;&#21270;" rel=up href="index.html"><LINK 
+title="&#31532;&nbsp;19&nbsp;&#31456;&nbsp;&#25552;&#21319;&#24615;&#33021;&#10;&#9;" rel=previous 
+href="performance.html"><LINK 
+title="&#31532;&nbsp;21&nbsp;&#31456;&nbsp;&#31034;&#20363;&#65306;&#29238;&#23376;&#20851;&#31995;(Parent Child Relationships)" rel=next 
+href="example-parentchild.html"></HEAD>
+<BODY aLink=#0000ff link=#0000ff bgColor=white text=black vLink=#840084>
+<DIV class=navheader>
+<TABLE width="100%" summary="Navigation header">
+  <TBODY>
+  <TR>
+    <TH colSpan=3 align=center>&#31532;&nbsp;20&nbsp;&#31456;&nbsp;&#24037;&#20855;&#31665;&#25351;&#21335;</TH></TR>
+  <TR>
+    <TD width="20%" align=left><A accessKey=p 
+    href="performance.html">&#19978;&#19968;&#39029;</A>&nbsp;</TD>
+    <TH width="60%" align=center>&nbsp;</TH>
+    <TD width="20%" align=right>&nbsp;<A accessKey=n 
+      href="example-parentchild.html">&#19979;&#19968;&#39029;</A></TD></TR></TBODY></TABLE>
+<HR>
+</DIV>
+<DIV lang=zh-cn class=chapter>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title><A name=toolsetguide></A>&#31532;&nbsp;20&nbsp;&#31456;&nbsp;&#24037;&#20855;&#31665;&#25351;&#21335;</H2>
+<P class=title>&#23398;&#20064;<FONT color=#ff0000>QQ&#32676;&#65306;</FONT><FONT color=#ff0000 
+size=5>476133513&nbsp;&nbsp; &#21487;&#20197;&#21152;&#32676;&#19968;&#36215;&#35752;&#35770;&#23398;&#20064;</FONT></P></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#21487;&#20197;&#36890;&#36807;&#19968;&#31995;&#21015;Eclipse&#25554;&#20214;&#12289;&#21629;&#20196;&#34892;&#24037;&#20855;&#21644;Ant&#20219;&#21153;&#26469;&#36827;&#34892;&#19982;Hibernate&#20851;&#32852;&#30340;&#36716;&#25442;&#12290; </P>
+<P>&#38500;&#20102;Ant&#20219;&#21153;&#22806;&#65292;&#24403;&#21069;&#30340;<SPAN class=emphasis><EM>Hibernate Tools</EM></SPAN>&#20063;&#21253;&#21547;&#20102;Eclipse 
+IDE&#30340;&#25554;&#20214;&#65292;&#29992;&#20110;&#19982;&#29616;&#23384;&#25968;&#25454;&#24211;&#30340;&#36870;&#21521;&#24037;&#31243;&#12290; </P>
+<DIV class=itemizedlist>
+<UL type=disc>
+  <LI>
+  <P><SPAN class=emphasis><EM>Mapping Editor:</EM></SPAN> Hibernate 
+  XML&#26144;&#23556;&#25991;&#20214;&#30340;&#32534;&#36753;&#22120;&#65292;&#25903;&#25345;&#33258;&#21160;&#23436;&#25104;&#21644;&#35821;&#27861;&#39640;&#20142;&#12290;&#23427;&#20063;&#25903;&#25345;&#23545;&#31867;&#21517;&#21644;&#23646;&#24615;/&#23383;&#27573;&#21517;&#30340;&#35821;&#20041;&#33258;&#21160;&#23436;&#25104;&#65292;&#27604;&#36890;&#24120;&#30340;XML&#32534;&#36753;&#22120;&#26041;&#20415;&#24471;&#22810;&#12290; </P>
+  <LI>
+  <P><SPAN class=emphasis><EM>Console:</EM></SPAN> 
+  Console&#26159;Eclipse&#30340;&#19968;&#20010;&#26032;&#35270;&#22270;&#12290;&#38500;&#20102;&#23545;&#20320;&#30340;console&#37197;&#32622;&#30340;&#26641;&#29366;&#27010;&#35272;&#65292;&#20320;&#36824;&#21487;&#20197;&#33719;&#24471;&#23545;&#20320;&#25345;&#20037;&#21270;&#31867;&#21450;&#20854;&#20851;&#32852;&#30340;&#20132;&#20114;&#24335;&#35270;&#22270;&#12290;Console&#20801;&#35768;&#20320;&#23545;&#25968;&#25454;&#24211;&#25191;&#34892;HQL&#26597;&#35810;&#65292;&#24182;&#30452;&#25509;&#22312;Eclipse&#20013;&#27983;&#35272;&#32467;&#26524;&#12290; 
+  </P>
+  <LI>
+  <P><SPAN class=emphasis><EM>Development Wizards:</EM></SPAN> &#22312;Hibernate 
+  Eclipse tools&#20013;&#36824;&#25552;&#20379;&#20102;&#20960;&#20010;&#21521;&#23548;&#65307;&#20320;&#21487;&#20197;&#29992;&#21521;&#23548;&#24555;&#36895;&#29983;&#25104;Hibernate 
+  &#37197;&#32622;&#25991;&#20214;&#65288;cfg.xml&#65289;&#65292;&#20320;&#29978;&#33267;&#36824;&#21487;&#20197;&#21516;&#29616;&#23384;&#30340;&#25968;&#25454;&#24211;schema&#20013;&#21453;&#21521;&#24037;&#31243;&#20986;POJO&#28304;&#20195;&#30721;&#19982;Hibernate &#26144;&#23556;&#25991;&#20214;&#12290;&#21453;&#21521;&#24037;&#31243;&#25903;&#25345;&#21487;&#23450;&#21046;&#30340;&#27169;&#29256;&#12290; 
+  </P>
+  <LI>
+  <P><SPAN class=emphasis><EM>Ant Tasks:</EM></SPAN> </P></LI></UL></DIV>
+<P>&#35201;&#24471;&#21040;&#26356;&#22810;&#20449;&#24687;&#65292;&#35831;&#26597;&#38405; <SPAN class=emphasis><EM>Hibernate Tools</EM></SPAN> &#21253;&#21450;&#20854;&#25991;&#26723;&#12290; </P>
+<P>&#21516;&#26102;&#65292;Hibernate&#20027;&#21457;&#34892;&#21253;&#36824;&#38468;&#24102;&#20102;&#19968;&#20010;&#38598;&#25104;&#30340;&#24037;&#20855;&#65288;&#23427;&#29978;&#33267;&#21487;&#20197;&#22312;Hibernate“&#20869;&#37096;”&#24555;&#36895;&#36816;&#34892;&#65289;<SPAN 
+class=emphasis><EM>SchemaExport</EM></SPAN> &#65292;&#20063;&#23601;&#26159; <TT class=literal>hbm2ddl</TT>&#12290; 
+</P>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=toolsetguide-s1></A>20.1.&nbsp;Schema&#33258;&#21160;&#29983;&#25104;&#65288;Automatic schema 
+generation&#65289;</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#21487;&#20197;&#20174;&#20320;&#30340;&#26144;&#23556;&#25991;&#20214;&#20351;&#29992;&#19968;&#20010;Hibernate&#24037;&#20855;&#29983;&#25104;DDL&#12290; 
+&#29983;&#25104;&#30340;schema&#21253;&#21547;&#26377;&#23545;&#23454;&#20307;&#21644;&#38598;&#21512;&#31867;&#34920;&#30340;&#23436;&#25972;&#24615;&#24341;&#29992;&#32422;&#26463;&#65288;&#20027;&#38190;&#21644;&#22806;&#38190;&#65289;&#12290;&#28041;&#21450;&#21040;&#30340;&#26631;&#31034;&#31526;&#29983;&#25104;&#22120;&#25152;&#38656;&#30340;&#34920;&#21644;sequence&#20063;&#20250;&#21516;&#26102;&#29983;&#25104;&#12290; </P>
+<P>&#22312;&#20351;&#29992;&#36825;&#20010;&#24037;&#20855;&#30340;&#26102;&#20505;&#65292;&#20320;<SPAN class=emphasis><EM>&#24517;&#39035;</EM></SPAN> &#36890;&#36807;<TT 
+class=literal>hibernate.dialet</TT>&#23646;&#24615;&#25351;&#23450;&#19968;&#20010;SQL<TT 
+class=literal>&#26041;&#35328;(Dialet)</TT>&#65292;&#22240;&#20026;DDL&#26159;&#19982;&#20379;&#24212;&#21830;&#39640;&#24230;&#30456;&#20851;&#30340;&#12290; </P>
+<P>&#39318;&#20808;&#65292;&#35201;&#23450;&#21046;&#20320;&#30340;&#26144;&#23556;&#25991;&#20214;&#65292;&#26469;&#25913;&#21892;&#29983;&#25104;&#30340;schema&#12290; </P>
+<DIV lang=zh-cn class=sect2>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H3 class=title><A 
+name=toolsetguide-s1-2></A>20.1.1.&nbsp;&#23545;schema&#23450;&#21046;&#21270;(Customizing the 
+schema)</H3></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#24456;&#22810;Hibernate&#26144;&#23556;&#20803;&#32032;&#23450;&#20041;&#20102;&#21487;&#36873;&#30340;<TT class=literal>length</TT>&#12289;<TT 
+class=literal>precision</TT> &#25110;&#32773; <TT 
+class=literal>scale</TT>&#23646;&#24615;&#12290;&#20320;&#21487;&#20197;&#36890;&#36807;&#36825;&#20010;&#23646;&#24615;&#35774;&#32622;&#23383;&#27573;&#30340;&#38271;&#24230;&#12289;&#31934;&#24230;&#12289;&#23567;&#25968;&#28857;&#20301;&#25968;&#12290; </P><PRE class=programlisting>&lt;property name="zip" length="5"/&gt;</PRE><PRE class=programlisting>&lt;property name="balance" precision="12" scale="2"/&gt;</PRE>
+<P>&#26377;&#20123;tag&#36824;&#25509;&#21463;<TT class=literal>not-null</TT>&#23646;&#24615;&#65288;&#29992;&#26469;&#22312;&#34920;&#23383;&#27573;&#19978;&#29983;&#25104;<TT class=literal>NOT 
+NULL</TT>&#32422;&#26463;&#65289;&#21644;<TT class=literal>unique</TT>&#23646;&#24615;&#65288;&#29992;&#26469;&#22312;&#34920;&#23383;&#27573;&#19978;&#29983;&#25104;<TT 
+class=literal>UNIQUE</TT>&#32422;&#26463;&#65289;&#12290; </P><PRE class=programlisting>&lt;many-to-one name="bar" column="barId" not-null="true"/&gt;</PRE><PRE class=programlisting>&lt;element column="serialNumber" type="long" not-null="true" unique="true"/&gt;</PRE>
+<P><TT class=literal>unique-key</TT>&#23646;&#24615;&#21487;&#20197;&#23545;&#25104;&#32452;&#30340;&#23383;&#27573;&#25351;&#23450;&#19968;&#20010;&#21807;&#19968;&#38190;&#32422;&#26463;(unique key 
+constraint)&#12290;&#30446;&#21069;&#65292;<TT class=literal>unique-key</TT>&#23646;&#24615;&#25351;&#23450;&#30340;&#20540;&#22312;&#29983;&#25104;DDL&#26102;<SPAN 
+class=emphasis><EM>&#24182;&#19981;&#20250;</EM></SPAN>&#34987;&#24403;&#20316;&#36825;&#20010;&#32422;&#26463;&#30340;&#21517;&#23383;&#65292;&#23427;&#20204;&#21482;&#26159;&#22312;&#29992;&#26469;&#22312;&#26144;&#23556;&#25991;&#20214;&#20869;&#37096;&#29992;&#20316;&#21306;&#20998;&#30340;&#12290; </P><PRE class=programlisting>&lt;many-to-one name="org" column="orgId" unique-key="OrgEmployeeId"/&gt;
+&lt;property name="employeeId" unique-key="OrgEmployee"/&gt;</PRE>
+<P><TT 
+class=literal>index</TT>&#23646;&#24615;&#20250;&#29992;&#23545;&#24212;&#30340;&#23383;&#27573;&#65288;&#19968;&#20010;&#25110;&#22810;&#20010;&#65289;&#29983;&#25104;&#19968;&#20010;index,&#23427;&#25351;&#20986;&#20102;&#36825;&#20010;index&#30340;&#21517;&#23383;&#12290;&#22914;&#26524;&#22810;&#20010;&#23383;&#27573;&#23545;&#24212;&#30340;index&#21517;&#23383;&#30456;&#21516;&#65292;&#23601;&#20250;&#29983;&#25104;&#21253;&#21547;&#36825;&#20123;&#23383;&#27573;&#30340;index&#12290; 
+</P><PRE class=programlisting>&lt;property name="lastName" index="CustName"/&gt;
+&lt;property name="firstName" index="CustName"/&gt;</PRE>
+<P><TT class=literal>foreign-key</TT>&#23646;&#24615;&#21487;&#20197;&#29992;&#26469;&#35206;&#30422;&#20219;&#20309;&#29983;&#25104;&#30340;&#22806;&#38190;&#32422;&#26463;&#30340;&#21517;&#23383;&#12290; </P><PRE class=programlisting>&lt;many-to-one name="bar" column="barId" foreign-key="FKFooBar"/&gt;</PRE>
+<P>&#24456;&#22810;&#26144;&#23556;&#20803;&#32032;&#36824;&#25509;&#21463;<TT class=literal>&lt;column&gt;</TT>&#23376;&#20803;&#32032;&#12290;&#36825;&#22312;&#23450;&#20041;&#36328;&#36234;&#22810;&#23383;&#27573;&#30340;&#31867;&#22411;&#26102;&#29305;&#21035;&#26377;&#29992;&#12290; </P><PRE class=programlisting>&lt;property name="name" type="my.customtypes.Name"/&gt;
+    &lt;column name="last" not-null="true" index="bar_idx" length="30"/&gt;
+    &lt;column name="first" not-null="true" index="bar_idx" length="20"/&gt;
+    &lt;column name="initial"/&gt;
+&lt;/property&gt;</PRE>
+<P><TT class=literal>default</TT>&#23646;&#24615;&#20026;&#23383;&#27573;&#25351;&#23450;&#19968;&#20010;&#40664;&#35748;&#20540; (&#22312;&#20445;&#23384;&#34987;&#26144;&#23556;&#30340;&#31867;&#30340;&#26032;&#23454;&#20363;&#20043;&#21069;&#65292;&#20320;&#24212;&#35813;&#23558;&#21516;&#26679;&#30340;&#20540;&#36171;&#20110;&#23545;&#24212;&#30340;&#23646;&#24615;)&#12290; 
+</P><PRE class=programlisting>&lt;property name="credits" type="integer" insert="false"&gt;
+    &lt;column name="credits" default="10"/&gt;
+&lt;/property&gt;</PRE><PRE class=programlisting>&lt;version name="version" type="integer" insert="false"&gt;
+    &lt;column name="version" default="0"/&gt;
+&lt;/property&gt;</PRE>
+<P><TT class=literal>sql-type</TT>&#23646;&#24615;&#20801;&#35768;&#29992;&#25143;&#35206;&#30422;&#40664;&#35748;&#30340;Hibernate&#31867;&#22411;&#21040;SQL&#25968;&#25454;&#31867;&#22411;&#30340;&#26144;&#23556;&#12290; </P><PRE class=programlisting>&lt;property name="balance" type="float"&gt;
+    &lt;column name="balance" sql-type="decimal(13,3)"/&gt;
+&lt;/property&gt;</PRE>
+<P><TT class=literal>check</TT>&#23646;&#24615;&#20801;&#35768;&#29992;&#25143;&#25351;&#23450;&#19968;&#20010;&#32422;&#26463;&#26816;&#26597;&#12290; </P><PRE class=programlisting>&lt;property name="foo" type="integer"&gt;
+    &lt;column name="foo" check="foo &gt; 10"/&gt;
+&lt;/property&gt;</PRE><PRE class=programlisting>&lt;class name="Foo" table="foos" check="bar &lt; 100.0"&gt;
+    ...
+    &lt;property name="bar" type="float"/&gt;
+&lt;/class&gt;</PRE>
+<DIV class=table><A name=schemattributes-summary></A>
+<P class=title><B>&#34920;&nbsp;20.1.&nbsp;Summary</B></P>
+<TABLE summary=Summary border=1>
+  <COLGROUP>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH>&#23646;&#24615;(Attribute)</TH>
+    <TH>&#20540;&#65288;Values&#65289;</TH>
+    <TH>&#35299;&#37322;&#65288;Interpretation&#65289;</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD><TT class=literal>length</TT></TD>
+    <TD>&#25968;&#23383;</TD>
+    <TD>&#23383;&#27573;&#38271;&#24230;</TD></TR>
+  <TR>
+    <TD><TT class=literal>precision</TT></TD>
+    <TD>&#25968;&#23383;</TD>
+    <TD>&#31934;&#24230;(decimal precision)</TD></TR>
+  <TR>
+    <TD><TT class=literal>scale</TT></TD>
+    <TD>&#25968;&#23383;</TD>
+    <TD>&#23567;&#25968;&#28857;&#20301;&#25968;(decimal scale)</TD></TR>
+  <TR>
+    <TD><TT class=literal>not-null</TT></TD>
+    <TD><TT class=literal>true|false</TT></TD>
+    <TD>&#25351;&#26126;&#23383;&#27573;&#26159;&#21542;&#24212;&#35813;&#26159;&#38750;&#31354;&#30340;</TD></TR>
+  <TR>
+    <TD><TT class=literal>unique</TT></TD>
+    <TD><TT class=literal>true|false</TT></TD>
+    <TD>&#25351;&#26126;&#26159;&#21542;&#35813;&#23383;&#27573;&#20855;&#26377;&#24799;&#19968;&#32422;&#26463;</TD></TR>
+  <TR>
+    <TD><TT class=literal>index</TT></TD>
+    <TD><TT class=literal>index_name</TT></TD>
+    <TD>&#25351;&#26126;&#19968;&#20010;&#65288;&#22810;&#23383;&#27573;&#65289;&#30340;&#32034;&#24341;(index)&#30340;&#21517;&#23383;</TD></TR>
+  <TR>
+    <TD><TT class=literal>unique-key</TT></TD>
+    <TD><TT class=literal>unique_key_name</TT></TD>
+    <TD>&#25351;&#26126;&#22810;&#23383;&#27573;&#24799;&#19968;&#32422;&#26463;&#30340;&#21517;&#23383;&#65288;&#21442;&#35265;&#19978;&#38754;&#30340;&#35828;&#26126;&#65289;</TD></TR>
+  <TR>
+    <TD><TT class=literal>foreign-key</TT></TD>
+    <TD><TT class=literal>foreign_key_name</TT></TD>
+    <TD>specifies the name of the foreign key constraint generated for an 
+      association, for a <TT class=literal>&lt;one-to-one&gt;</TT>, <TT 
+      class=literal>&lt;many-to-one&gt;</TT>, <TT 
+      class=literal>&lt;key&gt;</TT>, or <TT 
+      class=literal>&lt;many-to-many&gt;</TT> mapping element. Note that <TT 
+      class=literal>inverse="true"</TT> sides will not be considered by <TT 
+      class=literal>SchemaExport</TT>. &#25351;&#26126;&#19968;&#20010;&#22806;&#38190;&#30340;&#21517;&#23383;&#65292;&#23427;&#26159;&#20026;&#20851;&#32852;&#29983;&#25104;&#30340;&#65292;&#25110;&#32773;<TT 
+      class=literal>&lt;one-to-one&gt;</TT>&#65292;<TT 
+      class=literal>&lt;many-to-one&gt;</TT>, <TT 
+      class=literal>&lt;key&gt;</TT>, &#25110;&#32773;<TT 
+      class=literal>&lt;many-to-many&gt;</TT>&#26144;&#23556;&#20803;&#32032;&#12290;&#27880;&#24847;<TT 
+      class=literal>inverse="true"</TT>&#22312;<TT 
+      class=literal>SchemaExport</TT>&#26102;&#20250;&#34987;&#24573;&#30053;&#12290; </TD></TR>
+  <TR>
+    <TD><TT class=literal>sql-type</TT></TD>
+    <TD><TT class=literal>SQL &#23383;&#27573;&#31867;&#22411;</TT></TD>
+    <TD>&#35206;&#30422;&#40664;&#35748;&#30340;&#23383;&#27573;&#31867;&#22411;(&#21482;&#33021;&#29992;&#20110;<TT class=literal>&lt;column&gt;</TT>&#23646;&#24615;&#65289; </TD></TR>
+  <TR>
+    <TD><TT class=literal>default</TT></TD>
+    <TD>SQL&#34920;&#36798;&#24335;</TD>
+    <TD>&#20026;&#23383;&#27573;&#25351;&#23450;&#40664;&#35748;&#20540; </TD></TR>
+  <TR>
+    <TD><TT class=literal>check</TT></TD>
+    <TD>SQL &#34920;&#36798;&#24335;</TD>
+    <TD>&#23545;&#23383;&#27573;&#25110;&#34920;&#21152;&#20837;SQL&#32422;&#26463;&#26816;&#26597; </TD></TR></TBODY></TABLE></DIV>
+<P><TT class=literal>&lt;comment&gt;</TT>&#20803;&#32032;&#21487;&#20197;&#35753;&#20320;&#22312;&#29983;&#25104;&#30340;schema&#20013;&#21152;&#20837;&#27880;&#37322;&#12290; </P><PRE class=programlisting>&lt;class name="Customer" table="CurCust"&gt;
+    &lt;comment&gt;Current customers only&lt;/comment&gt;
+    ...
+&lt;/class&gt;</PRE><PRE class=programlisting>&lt;property name="balance"&gt;
+    &lt;column name="bal"&gt;
+        &lt;comment&gt;Balance in USD&lt;/comment&gt;
+    &lt;/column&gt;
+&lt;/property&gt;</PRE>
+<P>&#32467;&#26524;&#26159;&#22312;&#29983;&#25104;&#30340;DDL&#20013;&#21253;&#21547;<TT class=literal>comment on table</TT> &#25110;&#32773; <TT 
+class=literal>comment on column</TT>&#35821;&#21477;(&#20551;&#33509;&#25903;&#25345;&#30340;&#35805;)&#12290; </P></DIV>
+<DIV lang=zh-cn class=sect2>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H3 class=title><A 
+name=toolsetguide-s1-3></A>20.1.2.&nbsp;&#36816;&#34892;&#35813;&#24037;&#20855;</H3></DIV></DIV>
+<DIV></DIV></DIV>
+<P><TT class=literal>SchemaExport</TT>&#24037;&#20855;&#25226;DDL&#33050;&#26412;&#20889;&#21040;&#26631;&#20934;&#36755;&#20986;&#65292;&#21516;&#26102;/&#25110;&#32773;&#25191;&#34892;DDL&#35821;&#21477;&#12290; </P>
+<P><TT class=literal>java -cp </TT><SPAN 
+class=emphasis><EM>hibernate_classpaths</EM></SPAN> <TT 
+class=literal>org.hibernate.tool.hbm2ddl.SchemaExport</TT> <SPAN 
+class=emphasis><EM>options mapping_files</EM></SPAN> </P>
+<DIV class=table><A name=d0e15398></A>
+<P class=title><B>&#34920;&nbsp;20.2.&nbsp;<TT 
+class=literal>SchemaExport</TT>&#21629;&#20196;&#34892;&#36873;&#39033;</B></P>
+<TABLE summary=SchemaExport&#21629;&#20196;&#34892;&#36873;&#39033; border=1>
+  <COLGROUP>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH>&#36873;&#39033;</TH>
+    <TH>&#35828;&#26126;</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD><TT class=literal>--quiet</TT></TD>
+    <TD>&#19981;&#35201;&#25226;&#33050;&#26412;&#36755;&#20986;&#21040;stdout</TD></TR>
+  <TR>
+    <TD><TT class=literal>--drop</TT></TD>
+    <TD>&#21482;&#36827;&#34892;drop tables&#30340;&#27493;&#39588;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--create</TT></TD>
+    <TD>&#21482;&#21019;&#24314;&#34920;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--text</TT></TD>
+    <TD>&#19981;&#25191;&#34892;&#22312;&#25968;&#25454;&#24211;&#20013;&#36816;&#34892;&#30340;&#27493;&#39588;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--output=my_schema.ddl</TT></TD>
+    <TD>&#25226;&#36755;&#20986;&#30340;ddl&#33050;&#26412;&#36755;&#20986;&#21040;&#19968;&#20010;&#25991;&#20214;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--naming=eg.MyNamingStrategy</TT></TD>
+    <TD>&#36873;&#25321;&#19968;&#20010;&#21629;&#21517;&#31574;&#30053;(<TT class=literal>NamingStrategy</TT>)</TD></TR>
+  <TR>
+    <TD><TT class=literal>--config=hibernate.cfg.xml</TT></TD>
+    <TD>&#20174;XML&#25991;&#20214;&#35835;&#20837;Hibernate&#37197;&#32622;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--properties=hibernate.properties</TT></TD>
+    <TD>&#20174;&#25991;&#20214;&#35835;&#20837;&#25968;&#25454;&#24211;&#23646;&#24615;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--format</TT></TD>
+    <TD>&#25226;&#33050;&#26412;&#20013;&#30340;SQL&#35821;&#21477;&#23545;&#40784;&#21644;&#32654;&#21270;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--delimiter=;</TT></TD>
+    <TD>&#20026;&#33050;&#26412;&#35774;&#32622;&#34892;&#32467;&#26463;&#31526;</TD></TR></TBODY></TABLE></DIV>
+<P>&#20320;&#29978;&#33267;&#21487;&#20197;&#22312;&#20320;&#30340;&#24212;&#29992;&#31243;&#24207;&#20013;&#23884;&#20837;<TT class=literal>SchemaExport</TT>&#24037;&#20855;: </P><PRE class=programlisting>Configuration cfg = ....;
+new SchemaExport(cfg).create(false, true);</PRE></DIV>
+<DIV lang=zh-cn class=sect2>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H3 class=title><A 
+name=toolsetguide-s1-4></A>20.1.3.&nbsp;&#23646;&#24615;(Properties)</H3></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#21487;&#20197;&#36890;&#36807;&#22914;&#19979;&#26041;&#24335;&#25351;&#23450;&#25968;&#25454;&#24211;&#23646;&#24615;: </P>
+<DIV class=itemizedlist>
+<UL type=disc compact>
+  <LI>
+  <P>&#36890;&#36807;<TT class=literal>-D</TT><SPAN 
+  class=emphasis><EM>&lt;property&gt;</EM></SPAN>&#31995;&#32479;&#21442;&#25968;</P>
+  <LI>
+  <P>&#22312;<TT class=literal>hibernate.properties</TT>&#25991;&#20214;&#20013;</P>
+  <LI>
+  <P>&#20301;&#20110;&#19968;&#20010;&#20854;&#23427;&#21517;&#23383;&#30340;properties&#25991;&#20214;&#20013;,&#28982;&#21518;&#29992; <TT 
+class=literal>--properties</TT>&#21442;&#25968;&#25351;&#23450;</P></LI></UL></DIV>
+<P>&#25152;&#38656;&#30340;&#21442;&#25968;&#21253;&#25324;: </P>
+<DIV class=table><A name=d0e15511></A>
+<P class=title><B>&#34920;&nbsp;20.3.&nbsp;SchemaExport &#36830;&#25509;&#23646;&#24615;</B></P>
+<TABLE summary="SchemaExport &#36830;&#25509;&#23646;&#24615;" border=1>
+  <COLGROUP>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH>&#23646;&#24615;&#21517;</TH>
+    <TH>&#35828;&#26126;</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD><TT class=literal>hibernate.connection.driver_class</TT></TD>
+    <TD>jdbc driver class</TD></TR>
+  <TR>
+    <TD><TT class=literal>hibernate.connection.url</TT></TD>
+    <TD>jdbc url</TD></TR>
+  <TR>
+    <TD><TT class=literal>hibernate.connection.username</TT></TD>
+    <TD>database user</TD></TR>
+  <TR>
+    <TD><TT class=literal>hibernate.connection.password</TT></TD>
+    <TD>user password</TD></TR>
+  <TR>
+    <TD><TT class=literal>hibernate.dialect</TT></TD>
+    <TD>&#26041;&#35328;(dialect)</TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV lang=zh-cn class=sect2>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H3 class=title><A name=toolsetguide-s1-5></A>20.1.4.&nbsp;&#20351;&#29992;Ant(Using 
+Ant)</H3></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#20320;&#21487;&#20197;&#22312;&#20320;&#30340;Ant build&#33050;&#26412;&#20013;&#35843;&#29992;<TT class=literal>SchemaExport</TT>: </P><PRE class=programlisting>&lt;target name="schemaexport"&gt;
+    &lt;taskdef name="schemaexport"
+        classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
+        classpathref="class.path"/&gt;
+    
+    &lt;schemaexport
+        properties="hibernate.properties"
+        quiet="no"
+        text="no"
+        drop="no"
+        delimiter=";"
+        output="schema-export.sql"&gt;
+        &lt;fileset dir="src"&gt;
+            &lt;include name="**/*.hbm.xml"/&gt;
+        &lt;/fileset&gt;
+    &lt;/schemaexport&gt;
+&lt;/target&gt;</PRE></DIV>
+<DIV lang=zh-cn class=sect2>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H3 class=title><A 
+name=toolsetguide-s1-6></A>20.1.5.&nbsp;&#23545;schema&#30340;&#22686;&#37327;&#26356;&#26032;(Incremental schema 
+updates)</H3></DIV></DIV>
+<DIV></DIV></DIV>
+<P><TT class=literal>SchemaUpdate</TT>&#24037;&#20855;&#23545;&#24050;&#23384;&#22312;&#30340;schema&#37319;&#29992;"&#22686;&#37327;"&#26041;&#24335;&#36827;&#34892;&#26356;&#26032;&#12290;&#27880;&#24847;<TT 
+class=literal>SchemaUpdate</TT>&#20005;&#37325;&#20381;&#36182;&#20110;JDBC metadata API,&#25152;&#20197;&#23427;&#24182;&#38750;&#23545;&#25152;&#26377;JDBC&#39537;&#21160;&#37117;&#26377;&#25928;&#12290; </P>
+<P><TT class=literal>java -cp </TT><SPAN 
+class=emphasis><EM>hibernate_classpaths</EM></SPAN> <TT 
+class=literal>org.hibernate.tool.hbm2ddl.SchemaUpdate</TT> <SPAN 
+class=emphasis><EM>options mapping_files</EM></SPAN> </P>
+<DIV class=table><A name=d0e15588></A>
+<P class=title><B>&#34920;&nbsp;20.4.&nbsp;<TT 
+class=literal>SchemaUpdate</TT>&#21629;&#20196;&#34892;&#36873;&#39033;</B></P>
+<TABLE summary=SchemaUpdate&#21629;&#20196;&#34892;&#36873;&#39033; border=1>
+  <COLGROUP>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH>&#36873;&#39033;</TH>
+    <TH>&#35828;&#26126;</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD><TT class=literal>--quiet</TT></TD>
+    <TD>&#19981;&#35201;&#25226;&#33050;&#26412;&#36755;&#20986;&#21040;stdout</TD></TR>
+  <TR>
+    <TD><TT class=literal>--text</TT></TD>
+    <TD>&#19981;&#25226;&#33050;&#26412;&#36755;&#20986;&#21040;&#25968;&#25454;&#24211;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--naming=eg.MyNamingStrategy</TT></TD>
+    <TD>&#36873;&#25321;&#19968;&#20010;&#21629;&#21517;&#31574;&#30053; (<TT class=literal>NamingStrategy</TT>)</TD></TR>
+  <TR>
+    <TD><TT class=literal>--properties=hibernate.properties</TT></TD>
+    <TD>&#20174;&#25351;&#23450;&#25991;&#20214;&#35835;&#20837;&#25968;&#25454;&#24211;&#23646;&#24615;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--config=hibernate.cfg.xml</TT></TD>
+    <TD>&#25351;&#23450;&#19968;&#20010; <TT class=literal>.cfg.xml</TT>&#25991;&#20214;</TD></TR></TBODY></TABLE></DIV>
+<P>&#20320;&#21487;&#20197;&#22312;&#20320;&#30340;&#24212;&#29992;&#31243;&#24207;&#20013;&#23884;&#20837;<TT class=literal>SchemaUpdate</TT>&#24037;&#20855;: </P><PRE class=programlisting>Configuration cfg = ....;
+new SchemaUpdate(cfg).execute(false);</PRE></DIV>
+<DIV lang=zh-cn class=sect2>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H3 class=title><A name=toolsetguide-s1-7></A>20.1.6.&nbsp;&#29992;Ant&#26469;&#22686;&#37327;&#26356;&#26032;schema(Using 
+Ant for incremental schema updates)</H3></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#20320;&#21487;&#20197;&#22312;Ant&#33050;&#26412;&#20013;&#35843;&#29992;<TT class=literal>SchemaUpdate</TT>&#65306; </P><PRE class=programlisting>&lt;target name="schemaupdate"&gt;
+    &lt;taskdef name="schemaupdate"
+        classname="org.hibernate.tool.hbm2ddl.SchemaUpdateTask"
+        classpathref="class.path"/&gt;
+    
+    &lt;schemaupdate
+        properties="hibernate.properties"
+        quiet="no"&gt;
+        &lt;fileset dir="src"&gt;
+            &lt;include name="**/*.hbm.xml"/&gt;
+        &lt;/fileset&gt;
+    &lt;/schemaupdate&gt;
+&lt;/target&gt;</PRE></DIV>
+<DIV lang=zh-cn class=sect2>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H3 class=title><A name=toolsetguide-s1-8></A>20.1.7.&nbsp;Schema 
+&#26657;&#39564;</H3></DIV></DIV>
+<DIV></DIV></DIV>
+<P><TT class=literal>SchemaValidator</TT>&#24037;&#20855;&#20250;&#27604;&#36739;&#25968;&#25454;&#24211;&#29616;&#29366;&#26159;&#21542;&#19982;&#26144;&#23556;&#25991;&#26723;“&#21305;&#37197;”&#12290;&#27880;&#24847;&#65292;<TT 
+class=literal>SchemaValidator</TT> &#20005;&#37325;&#20381;&#36182;&#20110;JDBC&#30340;metadata 
+API&#65292;&#22240;&#27492;&#19981;&#26159;&#23545;&#25152;&#26377;&#30340;JDBC&#39537;&#21160;&#37117;&#36866;&#29992;&#12290;&#36825;&#19968;&#24037;&#20855;&#22312;&#27979;&#35797;&#30340;&#26102;&#20505;&#29305;&#21035;&#26377;&#29992;&#12290; </P>
+<P><TT class=literal>java -cp </TT><SPAN 
+class=emphasis><EM>hibernate_classpaths</EM></SPAN> <TT 
+class=literal>org.hibernate.tool.hbm2ddl.SchemaValidator</TT> <SPAN 
+class=emphasis><EM>options mapping_files</EM></SPAN> </P>
+<DIV class=table><A name=d0e15680></A>
+<P class=title><B>&#34920;&nbsp;20.5.&nbsp;<TT 
+class=literal>SchemaValidator</TT>&#21629;&#20196;&#34892;&#21442;&#25968;</B></P>
+<TABLE summary=SchemaValidator&#21629;&#20196;&#34892;&#21442;&#25968; border=1>
+  <COLGROUP>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH>&#36873;&#39033;</TH>
+    <TH>&#25551;&#36848;</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD><TT class=literal>--naming=eg.MyNamingStrategy</TT></TD>
+    <TD>&#36873;&#25321;&#19968;&#20010;&#21629;&#21517;&#31574;&#30053; (<TT class=literal>NamingStrategy</TT>)</TD></TR>
+  <TR>
+    <TD><TT class=literal>--properties=hibernate.properties</TT></TD>
+    <TD>&#20174;&#25991;&#20214;&#20013;&#35835;&#21462;&#25968;&#25454;&#24211;&#23646;&#24615;</TD></TR>
+  <TR>
+    <TD><TT class=literal>--config=hibernate.cfg.xml</TT></TD>
+    <TD>&#25351;&#23450;&#19968;&#20010;<TT class=literal>.cfg.xml</TT>&#25991;&#20214;</TD></TR></TBODY></TABLE></DIV>
+<P>&#20320;&#21487;&#20197;&#22312;&#20320;&#30340;&#24212;&#29992;&#31243;&#24207;&#20013;&#23884;&#20837;<TT class=literal>SchemaValidator</TT>&#65306; </P><PRE class=programlisting>Configuration cfg = ....;
+new SchemaValidator(cfg).validate();</PRE></DIV>
+<DIV lang=zh-cn class=sect2>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H3 class=title><A 
+name=toolsetguide-s1-9></A>20.1.8.&nbsp;&#20351;&#29992;Ant&#36827;&#34892;schema&#26657;&#39564;</H3></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#20320;&#21487;&#20197;&#22312;Ant&#33050;&#26412;&#20013;&#35843;&#29992;<TT class=literal>SchemaValidator</TT>: </P><PRE class=programlisting>&lt;target name="schemavalidate"&gt;
+    &lt;taskdef name="schemavalidator"
+        classname="org.hibernate.tool.hbm2ddl.SchemaValidatorTask"
+        classpathref="class.path"/&gt;
+    
+    &lt;schemavalidator
+        properties="hibernate.properties"&gt;
+        &lt;fileset dir="src"&gt;
+            &lt;include name="**/*.hbm.xml"/&gt;
+        &lt;/fileset&gt;
+    &lt;/schemaupdate&gt;
+&lt;/target&gt;</PRE></DIV></DIV></DIV>
+<DIV class=navfooter>
+<HR>
+
+<TABLE width="100%" summary="Navigation footer">
+  <TBODY>
+  <TR>
+    <TD width="40%" align=left><A accessKey=p 
+    href="performance.html">&#19978;&#19968;&#39029;</A>&nbsp;</TD>
+    <TD width="20%" align=center><A accessKey=u href="index.html">&#19978;&#19968;&#32423;</A></TD>
+    <TD width="40%" align=right>&nbsp;<A accessKey=n 
+      href="example-parentchild.html">&#19979;&#19968;&#39029;</A></TD></TR>
+  <TR>
+    <TD vAlign=top width="40%" align=left>&#31532;&nbsp;19&nbsp;&#31456;&nbsp;&#25552;&#21319;&#24615;&#33021; &nbsp;</TD>
+    <TD width="20%" align=center><A accessKey=h href="index.html">&#36215;&#22987;&#39029;</A></TD>
+    <TD vAlign=top width="40%" 
+      align=right>&nbsp;&#31532;&nbsp;21&nbsp;&#31456;&nbsp;&#31034;&#20363;&#65306;&#29238;&#23376;&#20851;&#31995;(Parent Child 
+    Relationships)</TD></TR></TBODY></TABLE></DIV></BODY></HTML>

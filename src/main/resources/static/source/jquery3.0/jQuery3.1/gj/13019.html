@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.type()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.type()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.type( obj )
+	</blockquote>
+</h3>
+<div class="example">
+	<p>
+		返回值：<code>String</code> 
+	</p>
+	<p>
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>确定JavaScript 对象的类型[[Class]] 。
+</p>
+<ul class="signatures">
+	<li class="signature" id="jQuery-type-obj">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>jQuery.type( obj )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>obj</strong> 
+				</div>
+				<div>
+					类型: Anything
+				</div>
+				<div>
+					用来获取JavaScript数据类型[[Class]]的对象。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		一些用来确定不同类型对象的数据类型。逻辑可以按以下方法确定：
+	</p>
+	<ul>
+		<li>
+			如果对象是undefined或null，则返回相应的“undefined”或“null”。
+			<ul>
+				<li>
+					jQuery.type( undefined ) === "undefined"
+				</li>
+				<li>
+					jQuery.type() === "undefined"
+				</li>
+				<li>
+					jQuery.type( window.notDefined ) === "undefined"
+				</li>
+				<li>
+					jQuery.type( null ) === "null"
+				</li>
+			</ul>
+		</li>
+		<li>
+			如果对象有一个内部的[[Class]]和一个浏览器的内置对象的 [[Class]] 相同，我们返回相应的 [[Class]] 名字。
+       (<a href="http://perfectionkills.com/instanceof-considered-harmful-or-how-to-write-a-robust-isarray/">有关此技术的更多细节。 </a>)
+			<ul>
+				<li>
+					jQuery.type( true ) === "boolean"
+				</li>
+				<li>
+					jQuery.type( 3 ) === "number"
+				</li>
+				<li>
+					jQuery.type( "test" ) === "string"
+				</li>
+				<li>
+					jQuery.type( function(){} ) === "function"
+				</li>
+				<li>
+					jQuery.type( [] ) === "array"
+				</li>
+				<li>
+					jQuery.type( new Date() ) === "date"
+				</li>
+				<li>
+					jQuery.type( new Error() ) === "error" // <strong>as of jQuery 1.9</strong> 
+				</li>
+				<li>
+					jQuery.type( /test/ ) === "regexp"
+				</li>
+			</ul>
+		</li>
+		<li>
+			其他一切都将返回它的类型“object”。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">找出如果该参数是一个正则表达式。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  Is it a RegExp? &lt;b&gt;&lt;/b&gt;
+&lt;script&gt;$("b").append( "" + jQuery.type(/test/) );&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8205" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

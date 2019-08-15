@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>data()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">data()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.data( key, value )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>在匹配元素上存储任意相关数据.
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="data-key-value">
+			<h4 class="name">
+				<span class="version-details">V : 1.2.3</span>.data( key, value )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>key</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081" target="_blank">String</a> 
+					</div>
+					<div>
+						一个字符串，用户存储数据的名称。（译者注：存储的数据名）
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>value</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081" target="_blank">Anything</a> 
+					</div>
+					<div>
+						新的数据值；它可以是任意的Javascript数据类型，除了<code>undefined</code>。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="data-obj">
+			<h4 class="name">
+				<span class="version-details">V : 1.4.3</span>.data( obj )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>obj</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader15">Object</a> 
+					</div>
+					<div>
+						一个用于更新数据的 键/值对
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>.data()</code> 方法允许我们在DOM元素上绑定任意类型的数据,避免了循环引用的内存泄漏风险。
+		</p>
+		<p>
+			我们可以在一个元素上设置不同的值，之后获取这些值：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$("body").data("foo", 52);
+$("body").data("bar", { myType: "test", count: 40 });
+$("body").data({ baz: [ 1, 2, 3 ] });
+ 
+$("body").data("foo"); // 52
+$("body").data(); // { foo: 52, bar: { myType: "test", count: 40 }, baz: [ 1, 2, 3 ] }</pre>
+		</div>
+		<p>
+			在 jQuery 1.4.3 用<code>.data(obj)</code>设置一个元素的数据对象可以扩充元素上原先存储数据。<del>jQuery 自身也通过<code>.data()</code>方法，使用用'events' 和 'handle'名字储存信息，并且存储任意用下划线('_')开头的数据名供内部使用。(手册网注：官方文档中已经删除)</del> 
+		</p>
+		<p>
+			在jQuery1.4.3前(从jQuery 1.4开始)<code>.data()</code>方法完全取代所有的数据,而不是仅仅扩展原有的数据对象。如果你正在使用第三方插件，完全替代元素的数据对象也许是不可取的，因为插件也有可能设置数据。
+		</p>
+		<p>
+			<strong>jQuery 3</strong>改变了此方法的行为，将其调整为<a href="http://www.w3.org/TR/html5/dom.html#dom-dataset" target="_black">Dataset API specifications（数据集 API 规范）</a>。具体来说，jQuery 3 根据 <a href="http://www.w3.org/TR/html5/dom.html#dom-dataset" target="_black">the algorithm of the Dataset API(数据集API的算法)</a> 将使用连字符"-" (U+002D)连接的两个小写ASCII码字符转化为驼峰命名规则。例如 <code>$( "body" ).data( { "my-name": "aValue" } ).data();</code>，这些写将返回 <code>{ myName: "aValue" }</code>。
+		</p>
+		<p>
+			由于浏览器用插件和外部代码相互作用,<code>.data()</code>方法不能在<code>&lt;object&gt;</code>（除非是Flash插件），<code>&lt;applet&gt;</code> 或 <code>&lt;embed&gt;</code>元素上使用。
+		</p>
+	</div>
+	<h3>
+		Additional Notes:（其他注意事项：）
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				注意这个方法目前并不提供在XML文档上跨平台设置数据，作为Internet Explorer不允许通过自定义属性附加数据。
+			</li>
+			<li>
+				<code>undefined</code>不是认可的数据值。比如这样调用<code>.data( "name", undefined )</code> ，将返回 "<code>name</code>"对应的数据， 也就是等同于调用<code>.data( "name" )</code>。
+			</li>
+		</ul>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h3 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+</header>
+	<h4>
+		<span class="desc">实例</span>
+	</h4>
+	<p>
+		<span class="desc">从div元素储存然后找回一个值。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div&gt;
+    The values stored were
+    &lt;span&gt;&lt;/span&gt;
+    and
+    &lt;span&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;script&gt;
+$("div").data("test", { first: 16, last: "pizza!" });
+$("span:first").text($("div").data("test").first);
+$("span:last").text($("div").data("test").last);
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8012" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div>
+<p>
+</p>
+<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.data( key )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader15">Object</a> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong> 返回匹配的元素集合中的第一个元素的给定名称的数据存储的值。 通过.data(name, value)或HTML5 data-* 属性设置
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="data-key">
+			<h4 class="name">
+				<span class="version-details">V : 1.2.3</span>.data( key )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>key</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081" target="_blank">String</a> 
+					</div>
+					<div>
+						存储的数据名.
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="data">
+			<h4 class="name">
+				<span class="version-details">V : 1.4</span>.data()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc-1">
+		<p>
+			<code>.data()</code>方法允许我们在DOM元素上附加任意类型的数据,避免了循环引用的内存泄漏风险。我们可以在一个元素上设置不同的值，并获取这些值：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">alert($('body').data('foo'));
+alert($('body').data());</pre>
+		</div>
+		<p>
+			上面两行会显示先前设置在 <code>body</code>元素上设置的值。若果那个元素上没有设置任何值，那么将返回<code>undefined</code>。
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">alert( $("body").data("foo")); //undefined
+$("body").data("bar", "foobar");
+alert( $("body").data("bar")); //foobar</pre>
+		</div>
+		<p>
+			<strong>jQuery 3</strong>改变了此方法的行为，将其调整为<a href="http://www.w3.org/TR/html5/dom.html#dom-dataset" target="_black">Dataset API specifications（数据集 API 规范）</a>。具体来说，jQuery 3 根据 <a href="http://www.w3.org/TR/html5/dom.html#dom-dataset" target="_black">the algorithm of the Dataset API(数据集API的算法)</a> 将使用连字符"-" (U+002D)连接的两个小写ASCII码字符转化为驼峰命名规则。例如 <code>$( "body" ).data( { "my-name": "aValue" } ).data();</code>，这些写将返回 <code>{ myName: "aValue" }</code>。
+		</p>
+		<p>
+			从jQuery 1.4.3起， <a href="http://ejohn.org/blog/html-5-data-attributes/">HTML 5 data- 属性</a> 将自动被引用到jQuery的数据对象中。嵌入式破折号处理属性（ attributes）的方式在 jQuery 1.6 中已经改变，以使之符合<a href="http://www.w3.org/TR/html5/elements.html#embedding-custom-non-visible-data-with-the-data-attributes">W3C HTML5 规范</a>.
+		</p>
+		<p>
+			举个示例, 给定下面的HTML:
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div data-role="page" data-last-value="43" data-hidden="true" data-options='{"name":"John"}'&gt;&lt;/div&gt;</pre>
+		</div>
+		<p>
+			下面所有的 jQuery 代码都能运行。
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$("div").data("role") === "page";
+$("div").data("lastValue") === 43;
+$("div").data("hidden") === true;
+$("div").data("options").name === "John";</pre>
+		</div>
+		<p>
+			以上代码的第二条语句正确是表述了该元素的<code>data-last-value</code>属性。
+        如果没有传递key参数的数据存储，
+        jQuery将在元素的属性中搜索，
+        将驼峰式字符串转化为中横线字符串，然后在结果前面加上<code>data-</code>。
+        所以，该字符串<code>lastValue</code>将被转换为<code>data-last-value</code>。
+		</p>
+		<p>
+			每次尝试将字符串转换为一个JavaScript值（包括布尔值（booleans），数字（numbers），对象（objects），数组（arrays）和空（null））。如果这样做不会改变值的表示，那么该值将转换为一个数字（number）。例如，“1E02”和“100.000”是等同于数字（数字值100），但将转换它们会改变他们的表示，所以他们被保留为字符串。字符串值“100”被转换为数字100。
+		</p>
+		<p>
+			如果数据(data)属性是一个对象（以“{”开始）或数组（以'['开始），可以用<code>jQuery.parseJSON</code> 将其解析成字符串；它必须遵循<a href="http://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example">有效的JSON的语法</a>，<em>包括带双引号的属性名称</em>。如果该值不能解析为一个JavaScript值，它将被保留为字符串。
+		</p>
+		<p>
+			如果不想将取出的属性值直接当作字符串的话，请使用<code><a href="http://www.shouce.ren/api/view/a/12877" class="book-a">attr()</a></code>方法。
+		</p>
+		<p>
+			data-属性是在第一次使用这个数据属性后不再存取或改变（所有的数据值都在jQuery内部存储）。
+		</p>
+		<p>
+			调用 <code>.data()</code> 时如果不带参数，将会以 JavaScript 对象的形式获取所有数据。这个对象可以安全的存放在变量中，因为一旦这个新对象被提取出来，之后对元素进行的 <code>.data(obj)</code>操作，将不会再影响这个对象。另外，直接操作这个对象会比每次调用 <code>.data()</code> 来设置或获取值要快一些：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var mydata = $("#mydiv").data();
+if ( mydata.count &lt; 9 ) {
+    mydata.count = 43;
+    mydata.status = "embiggened";
+}</pre>
+		</div>
+	</div>
+	<h3>
+		Additional Notes:（其他注意事项：）
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				注意这个方法目前并不提供在XML文档上跨平台设置数据，作为Internet Explorer不允许通过自定义属性附加数据。
+			</li>
+		</ul>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h3 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+</header>
+	<h4>
+		<span class="desc">实例</span>
+	</h4>
+	<p>
+		<span class="desc">获取存放在元素上的名为 "blah" 的数据。</span> 
+	</p>
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { margin:5px; background:yellow; }
+  button { margin:5px; font-size:14px; }
+  p { margin:5px; color:blue; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div&gt;A div&lt;/div&gt;
+  &lt;button&gt;Get "blah" from the div&lt;/button&gt;
+  &lt;button&gt;Set "blah" to "hello"&lt;/button&gt;
+ 
+  &lt;button&gt;Set "blah" to 86&lt;/button&gt;
+  &lt;button&gt;Remove "blah" from the div&lt;/button&gt;
+  &lt;p&gt;The "blah" value of this div is &lt;span&gt;?&lt;/span&gt;&lt;/p&gt;
+&lt;script&gt;
+$("button").click(function(e) {
+  var value;
+ 
+  switch ($("button").index(this)) {
+    case 0 :
+      value = $("div").data("blah");
+      break;
+    case 1 :
+      $("div").data("blah", "hello");
+      value = "Stored!";
+      break;
+    case 2 :
+      $("div").data("blah", 86);
+      value = "Stored!";
+      break;
+    case 3 :
+      $("div").removeData("blah");
+      value = "Removed!";
+      break;
+  }
+ 
+  $("span").text("" + value);
+});
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+</p>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8013" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

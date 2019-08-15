@@ -1,0 +1,26 @@
+<html>
+<head>
+<script type="text/javascript">
+function showEmptyCells()
+{
+document.getElementById('myTable').style.emptyCells="show";
+}
+</script>
+</head>
+<body>
+
+<table border="1" id="myTable">
+<tr>
+<td>100</td>
+<td>200</td>
+</tr>
+<tr>
+<td>300</td>
+<td></td>
+</tr>
+</table>
+
+<input type="button" onclick="showEmptyCells()" value="Show empty cells">
+
+</body>
+</html>

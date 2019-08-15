@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>empty()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">empty()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.empty()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>从DOM中移除集合中匹配元素的所有子节点。
+</p>
+<ul class="signatures">
+	<li class="signature" id="empty">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.empty()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					这个方法不接受任何参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		这个方法不仅移除子元素（和其他后代元素），同样移除元素里的文本。因为，根据说明，元素里任何文本字符串都被看做是该元素的子节点。请看下面的HTML：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="container"&gt;
+  &lt;div class="hello"&gt;Hello&lt;/div&gt;
+  &lt;div class="goodbye"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+	</div>
+	<p>
+		我们可以移除里面的任何元素
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('.hello').empty();</pre>
+	</div>
+	<p>
+		结果文本 <code>Hello</code>文本被删除：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="container"&gt;
+  &lt;div class="hello"&gt;&lt;/div&gt;
+  &lt;div class="goodbye"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+	</div>
+	<p>
+		如果 <code>&lt;div class="hello"&gt;</code>里面包含任何数量的嵌套元素，他们也会被移走。
+	</p>
+	<p>
+		为了避免内存泄漏，jQuery先移除子元素的数据和事件处理函数，然后移除子元素。
+	</p>
+	<p>
+		如果你想删除元素，不破坏他们的数据或事件处理程序（这些绑定的信息还可以在之后被重新添加回来），请使用<code>.detach()</code>代替 。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">移除段落中的所有子节点包括文本</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { background:yellow; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;
+  Hello, &lt;span&gt;Person&lt;/span&gt; &lt;a href="javascript:;"&gt;and person&lt;/a&gt;
+&lt;/p&gt;
+ 
+&lt;button&gt;Call empty() on above paragraph&lt;/button&gt;
+&lt;script&gt;
+  $("button").click(function () {
+    $("p").empty();
+  });
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8092" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

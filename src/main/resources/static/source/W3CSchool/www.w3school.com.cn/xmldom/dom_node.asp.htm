@@ -1,0 +1,565 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>XML DOM - Node 对象</title>
+</head>
+
+<body class="xml">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>XML DOM 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/index.asp" title="XML DOM 教程">DOM 首页</a></li>
+<li><a href="dom_intro.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_intro.asp" title="XML DOM 简介">DOM 简介</a></li>
+<li><a href="dom_nodes.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes.asp" title="XML DOM 节点">DOM 节点</a></li>
+<li><a href="dom_nodetree.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodetree.asp" title="XML DOM 节点树">DOM 节点树</a></li>
+<li><a href="dom_parser.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_parser.asp" title="解析 XML DOM">DOM 解析</a></li>
+<li><a href="dom_loadxmldoc.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_loadxmldoc.asp" title="XML DOM 加载函数">DOM 加载</a></li>
+<li><a href="dom_methods.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_methods.asp" title="XML DOM - 属性和方法">DOM 属性和方法</a></li>
+<li><a href="dom_nodes_access.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_access.asp" title="XML DOM 访问节点">DOM 访问节点</a></li>
+<li><a href="dom_nodes_info.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_info.asp" title="XML DOM 节点信息">DOM 节点信息</a></li>
+<li><a href="dom_nodes_nodelist.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_nodelist.asp" title="XML DOM Node List">DOM 节点列表</a></li>
+<li><a href="dom_nodes_traverse.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_traverse.asp" title="XML DOM 遍历节点树">DOM 遍历节点</a></li>
+<li><a href="dom_mozilla_vs_ie.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_mozilla_vs_ie.asp" title="XML DOM 浏览器差异">DOM 浏览器</a></li>
+<li><a href="dom_nodes_navigate.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_navigate.asp" title="XML DOM 定位节点">DOM 定位节点</a></li>
+</ul>
+
+<h2>节点操作</h2>
+<ul>
+<li><a href="dom_nodes_get.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_get.asp" title="XML DOM 获取节点值">DOM 获取节点</a></li>
+<li><a href="dom_nodes_set.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_set.asp" title="XML DOM 设置节点">DOM 改变节点</a></li>
+<li><a href="dom_nodes_remove.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_remove.asp" title="XML DOM 删除节点">DOM 删除节点</a></li>
+<li><a href="dom_nodes_replace.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_replace.asp" title="XML DOM 替换节点">DOM 替换节点</a></li>
+<li><a href="dom_nodes_create.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_create.asp" title="XML DOM 创建节点">DOM 创建节点</a></li>
+<li><a href="dom_nodes_add.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_add.asp" title="XML DOM 添加节点">DOM 添加节点</a></li>
+<li><a href="dom_nodes_clone.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes_clone.asp" title="XML DOM 添加节点">DOM 克隆节点</a></li>
+<li><a href="dom_httprequest.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_httprequest.asp" title="XMLHttpRequest 对象">DOM HttpRequest</a></li>
+</ul>
+
+<h2>XML DOM 参考手册</h2>
+<ul class="small">
+<li><a href="xmldom_reference.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/xmldom_reference.asp" title="XML DOM 参考手册">DOM 手册目录</a></li>
+<li><a href="dom_nodetype.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodetype.asp" title="XML DOM 节点类型（Node Types）">DOM 节点类型</a></li>
+<li><a href="dom_attribute.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_attribute.asp">DOM Attr</a></li>
+<li><a href="dom_cdatasection.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_cdatasection.asp">DOM CDATASection</a></li>
+<li><a href="dom_characterdata.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_characterdata.asp">DOM CharacterData</a></li>
+<li><a href="dom_css2properties.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_css2properties.asp">DOM CSS2Properties</a></li>
+<li><a href="dom_cssrule.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_cssrule.asp">DOM CSSRule</a></li>
+<li><a href="dom_cssstylerule.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_cssstylerule.asp">DOM CSSStyleRule</a></li>
+<li><a href="dom_cssstylesheet.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_cssstylesheet.asp">DOM CSSStyleSheet</a></li>
+<li><a href="dom_comment.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_comment.asp">DOM Comment</a></li>
+<li><a href="dom_document.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_document.asp">DOM Document</a></li>
+<li><a href="dom_documenttype.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_documenttype.asp">DOM DocumentType</a></li>
+<li><a href="dom_domexception.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_domexception.asp">DOM DOMException</a></li>
+<li><a href="dom_domimplementation.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_domimplementation.asp">DOM Implementation</a></li>
+<li><a href="dom_domparser.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_domparser.asp">DOM DOMParser</a></li>
+<li><a href="dom_element.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_element.asp">DOM Element</a></li>
+<li><a href="dom_event.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_event.asp">DOM Event</a></li>
+<li><a href="dom_htmlcollection.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_htmlcollection.asp">DOM HTMLCollection</a></li>
+<li><a href="dom_htmldocument.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_htmldocument.asp">DOM HTMLDocument</a></li>
+<li><a href="dom_htmlelement.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_htmlelement.asp">DOM HTMLElement</a></li>
+<li><a href="dom_namednodemap.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_namednodemap.asp">DOM NamedNodeMap</a></li>
+<li><a href="dom_node.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_node.asp" title="XML DOM - Node 对象">DOM Node</a></li>
+<li><a href="dom_nodelist.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodelist.asp">DOM NodeList</a></li>
+<li><a href="dom_errors.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_errors.asp">DOM ParseError</a></li>
+<li><a href="dom_processinginstruction.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_processinginstruction.asp">DOM ProcessingInstr</a></li>
+<li><a href="dom_range.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_range.asp">DOM Range</a></li>
+<li><a href="dom_rangeexception.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_rangeexception.asp">DOM RangeException</a></li>
+<li><a href="dom_text.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_text.asp">DOM Text</a></li>
+<li><a href="dom_http.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_http.asp">DOM XMLHttpRequest</a></li>
+<li><a href="dom_xmlserializer.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_xmlserializer.asp">DOM XMLSerializer</a></li>
+<li><a href="dom_xpathexpression.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_xpathexpression.asp">DOM XPathExpression</a></li>
+<li><a href="dom_xpathresult.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_xpathresult.asp">DOM XPathResult</a></li>
+<li><a href="dom_xsltprocessor.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_xsltprocessor.asp">DOM XSLTProcessor</a></li>
+<li class="list_apart"><a href="dom_summary.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_summary.asp" title="你已经学习了XML DOM，下一步呢？">DOM 总结</a></li>
+</ul>
+
+<h2>实例</h2>
+<ul>
+<li><a href="../example/xdom_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/xdom_examples.asp">DOM 实例</a></li>
+<li>DOM 验证器</li>
+</ul>
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XML DOM - Node 对象</h1>
+
+<div  id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="dom_namednodemap.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_namednodemap.asp">Previous Page</a></li>
+
+<li class="next"><a href="dom_nodelist.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodelist.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div id="intro">
+<p><strong>节点对象代表文档树中的一个节点。</strong></p>
+</div>
+
+<div>
+<h2>Node 对象</h2>
+
+<p>Node 对象是整个 DOM 的主要数据类型。</p>
+<p>节点对象代表文档树中的一个单独的节点。</p>
+<p>节点可以是元素节点、属性节点、文本节点，或者也可以是“节点类型”那一节中所介绍的任何一种节点。</p>
+<p>请注意，虽然所有的对象均能继承用于处理父节点和子节点的属性和方法，但是并不是所有的对象都拥有父节点或子节点。例如，文本节点不能拥有子节点，所以向类似的节点添加子节点就会导致 DOM 错误。</p>
+<p><em>IE:</em> Internet Explorer, <em>F:</em> Firefox, <em>O:</em> Opera, <em>W3C:</em> 万维网联盟 (因特网标准)</p>
+</div>
+
+<div>
+<h2>Node 对象的属性</h2>
+<table class="dataintable">
+<tr>
+<th style="width:30%">属性</th>
+<th>描述</th>
+<th>IE</th>
+<th>F</th>
+<th>O</th>
+<th>W3C</th>
+</tr>
+<tr>
+	<td><a href="prop_node_baseuri.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_baseuri.asp">baseURI</a></td>
+	<td>返回节点的绝对基准 URI。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_childnodes.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_childnodes.asp">childNodes</a></td>
+	<td>返回节点到子节点的节点列表。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_firstchild.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_firstchild.asp">firstChild</a></td>
+	<td>返回节点的首个子节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_lastchild.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_lastchild.asp">lastChild</a></td>
+	<td>返回节点的最后一个子节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_localname.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_localname.asp">localName</a></td>
+	<td>返回节点的本地名称。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_namespaceuri.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_namespaceuri.asp">namespaceURI</a></td>
+	<td>返回节点的命名空间 URI。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_nextsibling.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_nextsibling.asp">nextSibling</a></td>
+	<td>返回节点之后紧跟的同级节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_nodename.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_nodename.asp">nodeName</a></td>
+	<td>返回节点的名称，根据其类型。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_nodetype.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_nodetype.asp">nodeType</a></td>
+	<td>返回节点的类型。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_nodevalue.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_nodevalue.asp">nodeValue</a></td>
+	<td>设置或返回节点的值，根据其类型。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_ownerdocument.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_ownerdocument.asp">ownerDocument</a></td>
+	<td>返回节点的根元素（document 对象）。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_parentnode.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_parentnode.asp">parentNode</a></td>
+	<td>返回节点的父节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_prefix.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_prefix.asp">prefix</a></td>
+	<td>设置或返回节点的命名空间前缀。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_previoussibling.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_previoussibling.asp">previousSibling</a></td>
+	<td>返回节点之前紧跟的同级节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_textcontent.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_textcontent.asp">textContent</a></td>
+	<td>设置或返回节点及其后代的文本内容。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="prop_node_text.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_text.asp">text</a></td>
+	<td>返回节点及其后代的文本（IE 独有的属性）。</td>
+	<td>5</td>
+	<td>No</td>
+	<td>No</td>
+	<td>No</td>
+</tr>
+<tr>
+	<td><a href="prop_node_xml.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/prop_node_xml.asp">xml</a></td>
+	<td>返回节点及其后代的 XML（IE 独有的属性）。</td>
+	<td>5</td>
+	<td>No</td>
+	<td>No</td>
+	<td>No</td>
+</tr>
+</table>
+</div>
+
+<div>
+<h2>Node 对象的方法</h2>
+<table class="dataintable">
+<tr>
+<th style="width:30%">方法</th>
+<th>描述</th>
+<th>IE</th>
+<th>F</th>
+<th>O</th>
+<th>W3C</th>
+</tr>
+<tr>
+	<td><a href="met_node_appendchild.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_appendchild.asp">appendChild()</a></td>
+	<td>向节点的子节点列表的结尾添加新的子节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_clonenode.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_clonenode.asp">cloneNode()</a></td>
+	<td>复制节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td class="no_wrap"><a href="met_node_comparedocumentposition.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_comparedocumentposition.asp">compareDocumentPosition()</a></td>
+	<td>对比两个节点的文档位置。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>getFeature(feature,version)</td>
+	<td>返回一个 DOM 对象，此对象可执行带有指定特性和版本的专门的 API。</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>getUserData(key)</td>
+	<td>返回与此节点上的某个键相关联的对象。此对象必须首先通过使用相同的键来调用 setUserData 被设置到此节点。</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_hasattributes.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_hasattributes.asp">hasAttributes()</a></td>
+	<td>判断当前节点是否拥有属性。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_haschildnodes.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_haschildnodes.asp">hasChildNodes()</a></td>
+	<td>判断当前节点是否拥有子节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_insertbefore.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_insertbefore.asp">insertBefore()</a></td>
+	<td>在指定的子节点前插入新的子节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>isDefaultNamespace(URI)</td>
+	<td>返回指定的命名空间 URI 是否为默认。</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_isequalnode.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_isequalnode.asp">isEqualNode()</a></td>
+	<td>检查两个节点是否相等。</td>
+	<td>No</td>
+	<td>No</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_issamenode.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_issamenode.asp">isSameNode()</a></td>
+	<td>检查两个节点是否是相同的节点。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_issupported.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_issupported.asp">isSupported()</a></td>
+	<td>返回当前节点是否支持某个特性。</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_lookupnamespaceuri.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_lookupnamespaceuri.asp">lookupNamespaceURI()</a></td>
+	<td>返回匹配指定前缀的命名空间 URI。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_lookupprefix.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_lookupprefix.asp">lookupPrefix()</a></td>
+	<td>返回匹配指定命名空间 URI 的前缀。</td>
+	<td>No</td>
+	<td>1</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_normalize.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_normalize.asp" title="XML DOM normalize() 方法">normalize()</a></td>
+	<td>合并相邻的Text节点并删除空的Text节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_removechild.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_removechild.asp">removeChild()</a></td>
+	<td>删除（并返回）当前节点的指定子节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_replacechild.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_replacechild.asp">replaceChild()</a></td>
+	<td>用新节点替换一个子节点。</td>
+	<td>5</td>
+	<td>1</td>
+	<td>9</td>
+	<td>Yes</td>
+</tr>
+<tr>
+	<td><a href="met_node_selectnodes.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_selectnodes.asp">selectNodes()</a></td>
+	<td>用一个 XPath 表达式查询选择节点。</td>
+	<td>6</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td><a href="met_node_selectsinglenode.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_selectsinglenode.asp">selectSingleNode()</a></td>
+	<td>查找和 XPath 查询匹配的一个节点。</td>
+	<td>6</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td><a href="met_node_transformnode.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_transformnode.asp">transformNode()</a></td>
+	<td>使用 XSLT 把一个节点转换为一个字符串。</td>
+	<td>6</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td><a href="met_node_transformnodetoobject.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/met_node_transformnodetoobject.asp">transformNodeToObject()</a></td>
+	<td>使用 XSLT 把一个节点转换为一个文档。</td>
+	<td>6</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td>setUserData(key,data,handler)</td>
+	<td>把对象关联到节点上的一个键上。</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>No</td>
+	<td>Yes</td>
+</tr>
+</table>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="dom_namednodemap.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_namednodemap.asp">Previous Page</a></li>
+
+<li class="next"><a href="dom_nodelist.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodelist.asp">Next Page</a></li>
+</ul>
+
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div>
+
+<div id="tools">
+<h5 id="tools_reference"><a href="xmldom_reference.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/xmldom_reference.asp">XML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="../example/xdom_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/xdom_examples.asp">XML DOM 实例</a></h5>
+</div>
+
+<div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

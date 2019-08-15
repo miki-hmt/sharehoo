@@ -1,0 +1,26 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+
+<code class="aspcode">&lt;%
+Dim fs,d,n
+Set fs=Server.CreateObject(&quot;Scripting.FileSystemObject&quot;)
+Set d=fs.GetDrive(&quot;c:&quot;)
+n = &quot;驱动器：&quot; & d
+n = n & &quot;&lt;br&gt;以字节计的总容量：&quot; & d.TotalSize
+Response.Write(n)
+set d=nothing
+set fs=nothing
+%&gt;</code>
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

@@ -1,0 +1,36 @@
+<html>
+<body>
+<script type="text/javascript">
+var xmlDoc;
+// code for IE
+if (window.ActiveXObject)
+{
+xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+}
+// code for Mozilla, Firefox, Opera, etc.
+else if (document.implementation.createDocument)
+{
+xmlDoc=document.implementation.createDocument("","",null);
+}
+else
+{
+alert('Your browser cannot handle this script');
+}
+xmlDoc.async=false;
+xmlDoc.load("../example/xmle/note.xml.htm"/*tpa=http://www.w3school.com.cn/example/xmle/note.xml*/);
+
+var x=xmlDoc.documentElement.childNodes;
+
+for (var i=0;i<x.length;i++)
+{ 
+if (x[i].nodeType==1)
+  { 
+  //Process only element (nodeType 1) nodes
+  document.write(x[i].nodeName + ": ");
+  document.write(x[i].childNodes[0].nodeValue);
+  document.write("<br />");
+  } 
+}
+</script>
+</body>
+</html>

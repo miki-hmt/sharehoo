@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>:nth-child</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">:nth-child</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;nth-child selector
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a>&lt;Element(s)&gt;</code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>选择的他们所有父元素的第n个子元素。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.1.4</span>jQuery( ":nth-child(index/even/odd/equation)" )
+			</h4>
+			<p class="argument">
+				<strong>index: </strong>每个相匹配子元素的索引值，从<code>1</code>开始，也可以是字符串 <code>even</code> 或 <code>odd</code>，或一个方程式( 例如 <code>:nth-child(even)</code>, <code>:nth-child(4n)</code> )。
+			</p>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			因为jQuery的实现<code>:nth-child(n)</code>是严格来自CSS规范，所以<code>n</code>值是“1索引”，也就是说，从1开始计数。对于所有其他选择器表达式，jQuery遵循JavaScript的“0索引”的计数。因此，给定一个单一<code>&lt;ul&gt;</code>包含两个<code>&lt;li&gt;</code>， <code>$('li:nth-child(1)')</code>选择第一个<code>&lt;li&gt;</code>，而<code>$('li:eq(1)')</code>选择第二个。
+		</p>
+		<p>
+			<code>:nth-child(n)</code>伪类很容易混淆<code>:eq(n)</code>，即使两个可能导致完全不同的匹配的元素。用<code>:nth-child(n)</code>时 ，所有子元素都计算在内，不管它们是什么，并且指定的元素被选中仅匹配连接到伪类选择器。而用<code>:eq(n)</code>时，只有与这个伪类前面的选择相匹配的元素才会被计数（即，成为候选元素），不限于任何其他元素的孩子，而且第（n +1）个一（n是基于0）被选中。
+		</p>
+		<p>
+			这个不寻常的用法，可进一步讨论中找到 <a href="http://www.w3.org/TR/css3-selectors/#nth-child-pseudo">W3C CSS specification</a>.
+		</p>
+看下面一个示例：
+<pre class="prettyprint lang-js">&lt;div class="test"&gt;
+
+&lt;p&gt;A元素&lt;/p&gt;
+
+&lt;p&gt;B元素&lt;/p&gt;
+
+&lt;div&gt;C元素&lt;/div&gt;
+
+&lt;p&gt;D元素&lt;/p&gt;
+
+&lt;/div&gt;</pre>
+		<p>
+			看下面的代码
+		</p>
+<pre class="prettyprint lang-js">$("p:nth-child(2)")//B元素被选中</pre>
+		<div>
+			<code>p:nth-child(2)</code>选择器选择B元素，<code>p:nth-child(2)</code>选择器要满足的条件是：
+			<ul>
+				<li>
+					1、是一个段落p元素；
+				</li>
+				<li>
+					2.是父元素的第二个子元素
+				</li>
+			</ul>
+上述的HTML结构中，<code>&lt;div class="test"&gt;</code>的第二个子元素是p元素，所以满足条件，B元素就被中了。
+		</div>
+		<p>
+			jQuery 1.9新增了<code>:nth-of-type()</code>选择器，和这个<code>:nth-child()</code>比较容易混淆，具体查看<a href="http://www.shouce.ren/api/view/a/12843" class="book-a"><code>:nth-of-type()</code></a>中的比较说明。
+		</p>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		在每个 ul 查找第 2 个li
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;John&lt;/li&gt;
+  &lt;li&gt;Karl&lt;/li&gt;
+  &lt;li&gt;Brandon&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+  &lt;li&gt;Glen&lt;/li&gt;
+  &lt;li&gt;Tane&lt;/li&gt;
+  &lt;li&gt;Ralph&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("ul li:nth-child(2)")</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>[ &lt;li&gt;Karl&lt;/li&gt;,   &lt;li&gt;Tane&lt;/li&gt; ]</code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	查找每个匹配的 ul 中的第二个 li，并将它标记出来。
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;nth-child demo&lt;/title&gt;
+  &lt;style&gt;
+  div {
+    float: left;
+  }
+  span {
+    color: blue;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;John&lt;/li&gt;
+    &lt;li&gt;Karl&lt;/li&gt;
+    &lt;li&gt;Brandon&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Sam&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Glen&lt;/li&gt;
+    &lt;li&gt;Tane&lt;/li&gt;
+    &lt;li&gt;Ralph&lt;/li&gt;
+    &lt;li&gt;David&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+ 
+&lt;script&gt;
+$( "ul li:nth-child(2)" ).append( "&lt;span&gt; - 2nd!&lt;/span&gt;" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7936" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	这个示例展示了刚才提到的两个容易混淆的选择器是如何工作的。注意这里的 :even 和 :odd 会无视它们的父元素，而仅仅把元素列表中的元素每隔一个过滤出来。而 :nth-child 则会计算子元素在各自父元素中的索引值。
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;nth-child demo&lt;/title&gt;
+  &lt;style&gt;
+  button {
+    display: block;
+    font-size: 12px;
+    width: 100px;
+  }
+  div {
+    float: left;
+    margin: 10px;
+    font-size: 10px;
+    border: 1px solid black;
+  }
+  span {
+    color: blue;
+    font-size: 18px;
+  }
+  #inner {
+    color: red;
+  }
+  td {
+    width: 50px;
+    text-align: center;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;
+  &lt;button&gt;:nth-child(even)&lt;/button&gt;
+  &lt;button&gt;:nth-child(odd)&lt;/button&gt;
+  &lt;button&gt;:nth-child(3n)&lt;/button&gt;
+  &lt;button&gt;:nth-child(2)&lt;/button&gt;
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;button&gt;:nth-child(3n+1)&lt;/button&gt;
+  &lt;button&gt;:nth-child(3n+2)&lt;/button&gt;
+  &lt;button&gt;:even&lt;/button&gt;
+  &lt;button&gt;:odd&lt;/button&gt;
+&lt;/div&gt;
+ 
+&lt;div&gt;
+  &lt;table&gt;
+    &lt;tr&gt;&lt;td&gt;John&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Karl&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Brandon&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Benjamin&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;table&gt;
+    &lt;tr&gt;&lt;td&gt;Sam&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;table&gt;
+    &lt;tr&gt;&lt;td&gt;Glen&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Tane&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Ralph&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;David&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Mike&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Dan&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+ 
+&lt;span&gt;tr&lt;span id="inner"&gt;&lt;/span&gt;&lt;/span&gt;
+ 
+&lt;script&gt;
+$( "button" ).click(function() {
+  var str = $( this ).text();
+  $( "tr" ).css( "background", "white" );
+  $( "tr" + str ).css( "background", "#ff0000" );
+  $( "#inner" ).text( str );
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<a href="http://www.shouce.ren/study/api/s/7937" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

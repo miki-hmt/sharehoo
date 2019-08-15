@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+<meta name="apple-touch-fullscreen" content="YES" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="target-densitydpi=320,width=640,user-scalable=no">
+<title>最新IQ智商测试，挑战一下？</title>
+<script src="jquery.js" tppabs="http://wx.9ku.com/ceshi/script/jquery.js"></script>
+<script src="jQueryRotateCompressed.js" tppabs="http://wx.9ku.com/ceshi/script/jQueryRotateCompressed.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+          $("div.select").click(function(){
+            var id = $(this).attr("id");
+            var value = "";
+            var cval = $("div#question").attr("class");
+            if(cval === "first") {
+              $("div#question").attr("class", "second");
+              $("h1#answer1").text(id);
+            } else if(cval === "second"){
+              $("div#question").attr("class", "third");
+              $("h1#answer2").text(id);
+              } else if(cval === "third"){
+              $("div#question").attr("class", "four");
+              $("h1#answer3").text(id);
+            } else if (cval === "four"){
+              if($("h1#answer4").text().length > 0) {
+                alert("请提交您的答案！");
+                return false;
+              }
+              $("h1#answer4").text(id);
+              $("div#submit").show();
+              $("a#link").click();
+            }
+            return false;
+         });
+         $("a#link").click(function(){
+           var text = $("h1.answer").text();
+           var aws = "FHHF";
+           var count = 0;
+           if(text[0] == aws[0]){
+             count += 1;
+           }
+           if(text[1] == aws[1]){
+             count += 1;
+           }
+           if(text[2] == aws[2]){
+             count += 1;
+           }
+ if(text[3] == aws[3]){
+             count += 1;
+           }
+           var fen = Math.round(count/4 * 100)+52;
+           $("div#question").attr("class", "iq_level");
+           $("span#iq_val").text(fen);
+		   $("#infos").html("  经过测试我的智商是"+fen+"，你也来测一下，比比看谁高！");
+           $("div#iq_level").show();
+           $("div#submit").hide();
+           $("div#share").show();
+           return false;
+         });
+         $("#share").click(function(){
+            $("#mask").show();
+            $("#tip").show();
+            
+            return false;
+         });
+         $("#mask").click(function(){
+            if($("#mask").is(":visible")){
+              $("#mask").hide();
+              $("#tip").hide();
+            }
+            return false;
+         });
+       });
+
+      </script>
+      
+ <script type="text/javascript">
+        var dataForWeixin = {
+              appId: "",
+              TLImg: "22.jpg"/*tpa=http://wx.9ku.com/ceshi/i/icon/22.jpg*/,
+              url: "index.htm"/*tpa=http://wx.9ku.com/ceshi/22/*/,
+              title: "最新IQ智商测试，挑战一下？",
+              desc: "赶快来测试一下吧"
+        };
+
+        var onBridgeReady = function(){
+            WeixinJSBridge.on('menu:share:appmessage', function(argv){
+                var infos = $("#infos").text();       
+           
+                WeixinJSBridge.invoke('sendAppMessage', {
+                    "appid": dataForWeixin.appId,
+                    "img_url": dataForWeixin.TLImg,
+                    "img_width": "120",
+                    "img_height": "94",
+                    "link": dataForWeixin.url + '?f=wx_hy_bb',
+                    "title": infos + dataForWeixin.title,
+                    "desc": dataForWeixin.desc 
+                });
+				
+         setTimeout(function () {location.href = "http://wx.9ku.com/ceshi/";}, 1500); 
+         });
+         
+		 WeixinJSBridge.on('menu:share:timeline', function(argv){
+                var infos = $("#infos").text();             
+                WeixinJSBridge.invoke('shareTimeline', {
+                    "appid": dataForWeixin.appId[dataForWeixin.num],
+                    "img_url":dataForWeixin.TLImg,
+                    "img_width": "120",
+                    "img_height": "94",
+                    "link": dataForWeixin.url + '?f=wx_pyq_bb',
+                    "title": infos + dataForWeixin.title,
+                    "desc": dataForWeixin.desc
+                });
+		setTimeout(function () {location.href = "http://wx.9ku.com/ceshi/";}, 1500);  
+            });
+        };
+        if(document.addEventListener){
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        }else if(document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }   
+</script>      
+
+<style type="text/css">
+	  html, body{
+        margin: 0;
+        padding: 0;
+        height: 100%; 
+      }
+      #wrapper {
+        margin: 0 auto 0 auto;
+        width: 640px;
+                                                   
+        background: url("bg22.jpg")/*tpa=http://wx.9ku.com/ceshi/22/i/bg22.jpg*/ no-repeat left top;
+        font-family: "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      }
+      #answer {
+        background: url("number-222.png")/*tpa=http://wx.9ku.com/ceshi/22/i/number-222.png*/ no-repeat left top;
+        margin: 0 auto 0 auto;
+        width: 493px;
+        height: 44px;
+        margin-bottom: 50px;
+      }
+      .first {
+        background: url("iq2122.png")/*tpa=http://wx.9ku.com/ceshi/22/i/iq2122.png*/ no-repeat left top;
+        margin: 0 auto 0 auto;
+        width: 556px;
+        height: 530px;
+      }
+      .second {
+        background: url("iq2222.png")/*tpa=http://wx.9ku.com/ceshi/22/i/iq2222.png*/ no-repeat left top;
+        margin: 0 auto 0 auto;
+        width: 556px;
+        height: 530px;
+      }
+      .third {
+        background: url("iq2322.png")/*tpa=http://wx.9ku.com/ceshi/22/i/iq2322.png*/ no-repeat left top;
+        margin: 0 auto 0 auto;
+        width: 556px;
+        height: 530px;
+      }
+       .four {
+        background: url("iq2422.png")/*tpa=http://wx.9ku.com/ceshi/22/i/iq2422.png*/ no-repeat left top;
+        margin: 0 auto 0 auto;
+        width: 556px;
+        height: 530px;
+      }
+      .iq_level {
+        background: url("iq_level22.png")/*tpa=http://wx.9ku.com/ceshi/22/i/iq_level22.png*/ no-repeat left top;
+        margin: 0 auto 0 auto;
+        width: 556px;
+        height: 420px;
+		overflow: hidden;
+      }
+      #hope {
+        position: absolute;
+        top: 280px;
+        left: 50px;
+      }
+      #content {
+        width: 510px;
+        height: 260px;
+        margin: 0;
+        padding: 10px;
+        background-color: #e1e1e1;
+        border: solid 2px;
+        border-radius: 2px;
+        font-size: 30px; 
+        font-weight: 600;
+        color: #9a9a9a;
+      }
+      #button {
+        position: absolute;
+        top: 540px;
+        left: 100px;
+      }
+
+      #button1 {
+        position: absolute;
+        top: 640px;
+        left: 100px;
+      }
+      #mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        background-color: #333;
+        filter: alpha(Opacity=90);
+        -moz-opacity: 0.9;
+        opacity: 0.9;
+      }
+      #tip {
+        display: none;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      #name{
+        height: 40px;
+        font-size: 32px;
+      }
+	  #ad{
+          margin:0 auto;
+          text-align:center;
+		  width:650px;
+      }
+              </style>
+
+</head>
+<body>
+
+<div id="ceshuResult"></div>
+
+
+<div id="adTop"><script src="adTop.js" tppabs="http://wx.9ku.com/ceshi/script/adTop.js"></script></div>
+
+<div id="wrapper">
+      <div style="padding-top:50px;">
+        <div id="answer">
+          <h1 id="answer1" class="answer" style="color:white; margin-left:36px; margin-top: 2px; float:left;"></h1>
+          <h1 id="answer2" class="answer" style="color:white; margin-left:120px; margin-top: 2px;float:left;"></h1>
+          <h1 id="answer3" class="answer" style="color:white; margin-left:115px; margin-top: 2px;float:left;"></h1>
+          <h1 id="answer4" class="answer" style="color:white; margin-left:120px; margin-top: 2px;float:left;"></h1>
+        </div>
+        <div style="clear:both;">
+        </div>
+      </div>
+      <div id="question" class="first">
+        <div id="" style="height:336px;">
+        <div id="iq_level" style="display:none; margin: 0 auto 0 auto; width:420px; text-align: center;">
+          <h1 style="color:white;">你的IQ智商测试结果是 <span id="iq_val"></span> 分</h1>
+        </div>
+        </div> 
+       
+        <div style="margin: 0 auto 0 auto; width:424px;">
+            <div id="A" class="select" style="height:55px; width:90px; margin-right: 16px; margin-bottom: 53px; cursor:pointer; float:left;">
+            </div>
+            <div id="B" class="select" style="height:55px; width:90px; margin-right: 16px; margin-bottom: 53px; cursor:pointer; float:left;">
+            </div>
+            <div id="C" class="select" style="height:55px; width:90px; margin-right: 16px; margin-bottom: 53px; cursor:pointer; float:left;">
+            </div>
+            <div id="D" class="select" style="height:55px; width:90px; margin-right: 16px; margin-bottom: 53px; cursor:pointer; float:left;">
+            </div>
+            <div id="E" class="select" style="height:55px; width:90px; margin-right: 16px; margin-bottom: 53px; cursor:pointer; float:left;">
+            </div>
+            <div id="F" class="select" style="height:55px; width:90px; margin-right: 16px; margin-bottom: 53px; cursor:pointer; float:left;">
+            </div>
+            <div id="G" class="select" style="height:55px; width:90px; margin-right: 16px; margin-bottom: 53px; cursor:pointer; float:left;">
+            </div>
+            <div id="H" class="select" style="height:55px; width:90px; margin-right: 16px; margin-bottom: 53px; cursor:pointer; float:left;">
+            </div>
+          <div style="clear:both;">
+          </div>
+        </div>
+      </div>
+      <div id="submit" style="margin:0 auto 0 auto; width:200px; display:none;">
+        <a id="link" style="cursor:pointer;">
+          <img src="submit22.jpg" tppabs="http://wx.9ku.com/ceshi/22/i/submit22.jpg" alt="submit"/>
+</a>      </div>
+      <div id="hope">
+      </div>  
+
+      <div id="share" style="margin: 0 auto 0 auto; width:416px; display:none;overflow: hidden; padding: 0px 0px 30px;">
+        <img src="share22.png" tppabs="http://wx.9ku.com/ceshi/22/i/share22.png">
+      </div>
+      <div id="mask" style="display: none;"></div>
+      <div id="tip" style="display: none;"> 
+        <img src="tip-share22.jpg" tppabs="http://wx.9ku.com/ceshi/22/i/tip-share22.jpg">
+      </div>
+    </div>
+<div id="adBom"><script src="adBom.js" tppabs="http://wx.9ku.com/ceshi/script/adBom.js"></script></div>
+<div id="infos" style="display:none"></div>
+<script src="tuijian.js" tppabs="http://wx.9ku.com/ceshi/script/tuijian.js"></script>
+<script src="count.js" tppabs="http://wx.9ku.com/count.js"></script>
+</body>
+</html>

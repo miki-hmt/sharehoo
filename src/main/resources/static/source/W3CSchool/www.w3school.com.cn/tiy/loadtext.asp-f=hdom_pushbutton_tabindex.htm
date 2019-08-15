@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+function showTabIndex()
+{
+var b1=document.getElementById('b1').tabIndex;
+var b2=document.getElementById('b2').tabIndex;
+var b3=document.getElementById('b3').tabIndex;
+
+document.write("Tab index of Button 1: " + b1);
+document.write("<br />");
+document.write("Tab index of Button 2: " + b2);
+document.write("<br />");
+document.write("Tab index of Button 3: " + b3);
+}
+</script>
+</head>
+<body>
+
+<button id="b1" tabIndex="1">Button 1</button><br />
+<button id="b2" tabIndex="2">Button 2</button><br />
+<button id="b3" tabIndex="3">Button 3</button><br />
+<br />
+<input type="button" onclick="showTabIndex()" value="Show tabIndex" />
+
+</body>
+</html>

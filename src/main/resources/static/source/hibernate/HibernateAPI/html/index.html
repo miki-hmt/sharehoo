@@ -1,0 +1,920 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>制作人：Dd，QQ群：198112072,HIBERNATE - 符合Java习惯的关系数据库持久化</TITLE>
+<META content="text/html; charset=UTF-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../shared/css/html.css">
+<META name=GENERATOR content="MSHTML 11.00.9431.193"><LINK 
+title="HIBERNATE - 符合Java习惯的关系数据库持久化" rel=home href="index.html"><LINK title=前言 
+rel=next href="preface.html"></HEAD>
+<BODY aLink=#0000ff link=#0000ff bgColor=white text=black vLink=#840084>
+<DIV class=navheader>
+<TABLE width="100%" summary="Navigation header">
+  <TBODY>
+  <TR>
+    <TH colSpan=3 align=center>制作人：柒夜<FONT color=red>，QQ群：</FONT><FONT 
+      color=#ff0000 size=5>476133513</FONT>，HIBERNATE - 符合Java习惯的关系数据库持久化</TH></TR>
+  <TR>
+    <TD width="20%" align=left>&nbsp;</TD>
+    <TH width="60%" align=center>&nbsp;</TH>
+    <TD width="20%" align=right>&nbsp;<A accessKey=n 
+      href="preface.html">下一页</A></TD></TR></TBODY></TABLE>
+<HR>
+</DIV>
+<DIV lang=zh-cn class=book>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H1 class=title><A name=d0e1></A>HIBERNATE - 符合Java习惯的关系数据库持久化</H1></DIV>
+<DIV>
+<H2 class=subtitle>Hibernate参考文档</H2></DIV>
+<DIV>
+<P class=releaseinfo>3.1.2</P>制作人：<FONT color=red>柒夜，QQ群：</FONT><FONT 
+color=#ff0000 
+size=6>476133513</FONT>，Linux服务器技术，服务器维护，常用环境搭建，(Java)php+msyql+nginx(apache),tomcat配置，java技术交流</DIV></DIV>
+<DIV></DIV>
+<HR>
+</DIV>
+<DIV class=toc>
+<P><B>目录</B></P>
+<DL>
+  <DT><SPAN class=preface><A href="preface.html">前言</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A 
+    href="preface.html#preface-translate-comments-zh-cn">1. 翻译说明</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="preface.html#preface-translate-licence-zh-cn">2. 
+  版权声明</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="tutorial.html">1. Hibernate入门 </A></SPAN>
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="tutorial.html#tutorial-intro">1.1. 前言 
+    </A></SPAN>
+    <DT><SPAN class=sect1><A href="tutorial.html#tutorial-firstapp">1.2. 第一部分 － 
+    第一个Hibernate应用程序 </A></SPAN>
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-firstapp-firstclass">1.2.1. 第一个class 
+      </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-firstapp-mapping">1.2.2. 映射文件 </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-firstapp-configuration">1.2.3. Hibernate配置 
+      </A></SPAN>
+      <DT><SPAN class=sect2><A href="tutorial.html#tutorial-firstapp-ant">1.2.4. 
+      用Ant构建 </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-firstapp-helpers">1.2.5. 启动和辅助类 </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-firstapp-workingpersistence">1.2.6. 加载并存储对象 
+      </A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="tutorial.html#tutorial-associations">1.3. 
+    第二部分 － 关联映射 </A></SPAN>
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-associations-mappinguser">1.3.1. 映射Person类 
+      </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-associations-unidirset">1.3.2. 单向Set-based的关联 
+      </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-associations-working">1.3.3. 使关联工作 
+</A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-associations-valuecollections">1.3.4. 值类型的集合 
+      </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-associations-bidirectional">1.3.5. 双向关联 
+      </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-associations-usingbidir">1.3.6. 使双向连起来 
+      </A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="tutorial.html#tutorial-webapp">1.4. 第三部分 - 
+    EventManager web应用程序</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-webapp-servlet">1.4.1. 
+      编写基本的servlet</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-webapp-processing">1.4.2. 处理与渲染</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="tutorial.html#tutorial-webapp-deploy">1.4.3. 
+部署与测试</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="tutorial.html#tutorial-summary">1.5. 总结 
+    </A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="architecture.html">2. 
+  体系结构(Architecture)</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="architecture.html#architecture-overview">2.1. 
+    概况(Overview)</A></SPAN> 
+    <DT><SPAN class=sect1><A href="architecture.html#architecture-states">2.2. 
+    实例状态</A></SPAN> 
+    <DT><SPAN class=sect1><A href="architecture.html#architecture-jmx">2.3. 
+    JMX整合</A></SPAN> 
+    <DT><SPAN class=sect1><A href="architecture.html#architecture-jca">2.4. 
+    对JCA的支持</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="architecture.html#architecture-current-session">2.5. 
+    上下文相关的（Contextual）Session</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="session-configuration.html">3. 配置 </A></SPAN>
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A 
+    href="session-configuration.html#configuration-programmatic">3.1. 可编程的配置方式 
+    </A></SPAN>
+    <DT><SPAN class=sect1><A 
+    href="session-configuration.html#configuration-sessionfactory">3.2. 
+    获得SessionFactory </A></SPAN>
+    <DT><SPAN class=sect1><A 
+    href="session-configuration.html#configuration-hibernatejdbc">3.3. JDBC连接 
+    </A></SPAN>
+    <DT><SPAN class=sect1><A 
+    href="session-configuration.html#configuration-optional">3.4. 可选的配置属性 
+    </A></SPAN>
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-optional-dialects">3.4.1. 
+      SQL方言 </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-optional-outerjoin">3.4.2. 
+      外连接抓取(Outer Join Fetching) </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-optional-binarystreams">3.4.3. 
+      二进制流 (Binary Streams) </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-optional-cacheprovider">3.4.4. 
+      二级缓存与查询缓存 </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-optional-querysubstitution">3.4.5. 
+      查询语言中的替换 </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-optional-statistics">3.4.6. 
+      Hibernate的统计(statistics)机制 </A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="session-configuration.html#configuration-logging">3.5. 日志 </A></SPAN>
+    <DT><SPAN class=sect1><A 
+    href="session-configuration.html#configuration-namingstrategy">3.6. 
+    实现NamingStrategy </A></SPAN>
+    <DT><SPAN class=sect1><A 
+    href="session-configuration.html#configuration-xmlconfig">3.7. XML配置文件 
+    </A></SPAN>
+    <DT><SPAN class=sect1><A 
+    href="session-configuration.html#configuration-j2ee">3.8. J2EE应用程序服务器的集成 
+    </A></SPAN>
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-optional-transactionstrategy">3.8.1. 
+      事务策略配置 </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-optional-jndi">3.8.2. 
+      JNDI绑定的SessionFactory </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-j2ee-currentsession">3.8.3. 
+      在JTA环境下使用Current Session context (当前session上下文)管理</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="session-configuration.html#configuration-j2ee-jmx">3.8.4. JMX部署 
+      </A></SPAN></DT></DL></DD></DL>
+  <DT><SPAN class=chapter><A href="persistent-classes.html">4. 持久化类(Persistent 
+  Classes)</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A 
+    href="persistent-classes.html#persistent-classes-pojo">4.1. 
+    一个简单的POJO例子</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="persistent-classes.html#persistent-classes-pojo-constructor">4.1.1. 
+      实现一个默认的（即无参数的）构造方法（constructor）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="persistent-classes.html#persistent-classes-pojo-identifier">4.1.2. 
+      提供一个标识属性（identifier property）（可选） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="persistent-classes.html#persistent-classes-pojo-final">4.1.3. 
+      使用非final的类 (可选)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="persistent-classes.html#persistent-classes-pojo-accessors">4.1.4. 
+      为持久化字段声明访问器(accessors)和是否可变的标志(mutators)(可选)</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="persistent-classes.html#persistent-classes-inheritance">4.2. 
+    实现继承（Inheritance）</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="persistent-classes.html#persistent-classes-equalshashcode">4.3. 
+    实现equals()和hashCode()</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="persistent-classes.html#persistent-classes-dynamicmodels">4.4. 
+    动态模型(Dynamic models)</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="persistent-classes.html#persistent-classes-tuplizers">4.5. 
+    元组片断映射(Tuplizers)</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="mapping.html">5. 对象/关系数据库映射基础(Basic O/R 
+  Mapping)</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="mapping.html#mapping-declaration">5.1. 
+    映射定义（Mapping declaration）</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-doctype">5.1.1. Doctype</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-mapping">5.1.2. 
+      hibernate-mapping</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-class">5.1.3. class</A></SPAN> 
+      <DT><SPAN class=sect2><A href="mapping.html#mapping-declaration-id">5.1.4. 
+      id</A></SPAN> 
+      <DD>
+      <DL>
+        <DT><SPAN class=sect3><A 
+        href="mapping.html#mapping-declaration-id-generator">5.1.4.1. 
+        Generator</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="mapping.html#mapping-declaration-id-hilo">5.1.4.2. 高/低位算法（Hi/Lo 
+        Algorithm）</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="mapping.html#mapping-declaration-id-uuid">5.1.4.3. UUID算法（UUID 
+        Algorithm ）</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="mapping.html#mapping-declaration-id-sequences">5.1.4.4. 
+        标识字段和序列（Identity columns and Sequences）</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="mapping.html#mapping-declaration-id-assigned">5.1.4.5. 
+        程序分配的标识符（Assigned Identifiers）</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="mapping.html#mapping-declaration-id-select">5.1.4.6. 
+        触发器实现的主键生成器（Primary keys assigned by triggers）</A></SPAN></DT></DL>
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-compositeid">5.1.5. 
+      composite-id</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-discriminator">5.1.6. 
+      鉴别器（discriminator）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-version">5.1.7. 
+      版本（version）(可选)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-timestamp">5.1.8. timestamp 
+      (可选)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-property">5.1.9. 
+      property</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-manytoone">5.1.10. 
+      多对一（many-to-one）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-onetoone">5.1.11. 一对一</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-naturalid">5.1.12. 
+      自然ID(natural-id)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-component">5.1.13. 组件(component), 
+      动态组件(dynamic-component)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-properties">5.1.14. 
+      properties</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-subclass">5.1.15. 
+      子类(subclass)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-joinedsubclass">5.1.16. 
+      连接的子类(joined-subclass)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-unionsubclass">5.1.17. 
+      联合子类(union-subclass)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-join">5.1.18. 连接(join)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-key">5.1.19. 键(key)</A></SPAN> 
+      <DT><SPAN class=sect2><A href="mapping.html#mapping-column">5.1.20. 
+      字段和规则元素（column and formula elements）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-declaration-import">5.1.21. 
+      引用(import)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-types-anymapping">5.1.22. 
+any</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="mapping.html#mapping-types">5.2. Hibernate 
+    的类型</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-types-entitiesvalues">5.2.1. 
+      实体(Entities)和值(values)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="mapping.html#mapping-types-basictypes">5.2.2. 基本值类型</A></SPAN> 
+      <DT><SPAN class=sect2><A href="mapping.html#mapping-types-custom">5.2.3. 
+      自定义值类型</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="mapping.html#mapping-entityname">5.3. 
+    多次映射同一个类</A></SPAN> 
+    <DT><SPAN class=sect1><A href="mapping.html#mapping-quotedidentifiers">5.4. 
+    SQL中引号包围的标识符</A></SPAN> 
+    <DT><SPAN class=sect1><A href="mapping.html#mapping-alternatives">5.5. 
+    其他元数据(Metadata)</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A href="mapping.html#mapping-xdoclet">5.5.1. 使用 
+      XDoclet 标记</A></SPAN> 
+      <DT><SPAN class=sect2><A href="mapping.html#mapping-annotations">5.5.2. 使用 
+      JDK 5.0 的注解(Annotation)</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="mapping.html#mapping-generated">5.6. 
+    数据库生成属性（Generated Properties）</A></SPAN> 
+    <DT><SPAN class=sect1><A href="mapping.html#mapping-database-object">5.7. 
+    辅助数据库对象(Auxiliary Database Objects)</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="collections.html">6. 
+  集合类(Collections)映射</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="collections.html#collections-persistent">6.1. 
+    持久化集合类(Persistent collections)</A></SPAN> 
+    <DT><SPAN class=sect1><A href="collections.html#collections-mapping">6.2. 
+    集合映射（ Collection mappings ）</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="collections.html#collections-foreignkeys">6.2.1. 集合外键(Collection 
+      foreign keys)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="collections.html#collections-elements">6.2.2. 集合元素（Collection 
+      elements）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="collections.html#collections-indexed">6.2.3. 索引集合类(Indexed 
+      collections)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="collections.html#collections-ofvalues">6.2.4. 值集合于多对多关联(Collections 
+      of values and many-to-many associations)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="collections.html#collections-onetomany">6.2.5. 一对多关联（One-to-many 
+      Associations）</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="collections.html#collections-advancedmappings">6.3. 高级集合映射（Advanced 
+    collection mappings）</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A href="collections.html#collections-sorted">6.3.1. 
+      有序集合（Sorted collections）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="collections.html#collections-bidirectional">6.3.2. 
+      双向关联（Bidirectional associations）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="collections.html#collections-indexedbidirectional">6.3.3. 
+      双向关联，涉及有序集合类</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="collections.html#collections-ternary">6.3.4. 三重关联（Ternary 
+      associations）</A></SPAN> 
+      <DT><SPAN class=sect2><A href="collections.html#collections-idbag">6.3.5. 
+      使用&lt;idbag&gt;</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="collections.html#collections-example">6.4. 
+    集合例子（Collection example）</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="associations.html">7. 关联关系映射</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="associations.html#assoc-intro">7.1. 
+    介绍</A></SPAN> 
+    <DT><SPAN class=sect1><A href="associations.html#assoc-unidirectional">7.2. 
+    单向关联（Unidirectional associations）</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-unidirectional-m21">7.2.1. 多对一(many to 
+      one)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-unidirectional-121">7.2.2. 一对一（one to 
+      one）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-unidirectional-12m">7.2.3. 一对多（one to 
+      many）</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="associations.html#assoc-unidirectional-join">7.3. 
+    使用连接表的单向关联（Unidirectional associations with join tables）</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-unidirectional-join-12m">7.3.1. 一对多(one to 
+      many)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-unidirectional-join-m21">7.3.2. 多对一（many to 
+      one）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-unidirectional-join-121">7.3.3. 一对一（one to 
+      one）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-unidirectional-join-m2m">7.3.4. 多对多（many to 
+      many）</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="associations.html#assoc-bidirectional">7.4. 
+    双向关联（Bidirectional associations）</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-bidirectional-m21">7.4.1. 一对多（one to many) / 
+      多对一（many to one）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-bidirectional-121">7.4.2. 一对一（one to 
+      one）</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="associations.html#assoc-bidirectional-join">7.5. 
+    使用连接表的双向关联（Bidirectional associations with join tables）</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-bidirectional-join-12m">7.5.1. 一对多（one to 
+      many） /多对一（ many to one）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-bidirectional-join-121">7.5.2. 一对一（one to 
+      one）</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="associations.html#assoc-bidirectional-join-m2m">7.5.3. 多对多（many to 
+      many）</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="associations.html#assoc-complex">7.6. 
+    更复杂的关联映射</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="components.html">8. 
+  组件（Component）映射</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A 
+    href="components.html#components-dependentobjects">8.1. 依赖对象（Dependent 
+    objects）</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="components.html#components-incollections">8.2. 在集合中出现的依赖对象 
+    (Collections of dependent objects)</A></SPAN> 
+    <DT><SPAN class=sect1><A href="components.html#components-asmapindex">8.3. 
+    组件作为Map的索引（Components as Map indices ）</A></SPAN> 
+    <DT><SPAN class=sect1><A href="components.html#components-compositeid">8.4. 
+    组件作为联合标识符(Components as composite identifiers)</A></SPAN> 
+    <DT><SPAN class=sect1><A href="components.html#components-dynamic">8.5. 动态组件 
+    （Dynamic components）</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="inheritance.html">9. 继承映射(Inheritance 
+  Mappings)</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="inheritance.html#inheritance-strategies">9.1. 
+    三种策略</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="inheritance.html#inheritance-tableperclass">9.1.1. 每个类分层结构一张表(Table 
+      per class hierarchy)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="inheritance.html#inheritance-tablepersubclass">9.1.2. 每个子类一张表(Table 
+      per subclass)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="inheritance.html#inheritance-tablepersubclass-discriminator">9.1.3. 
+      每个子类一张表(Table per subclass)，使用辨别标志(Discriminator)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="inheritance.html#inheritance-mixing-tableperclass-tablepersubclass">9.1.4. 
+      混合使用“每个类分层结构一张表”和“每个子类一张表”</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="inheritance.html#inheritance-tableperconcrete">9.1.5. 每个具体类一张表(Table 
+      per concrete class)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="inheritance.html#inheritance-tableperconcreate-polymorphism">9.1.6. 
+      Table per concrete class, using implicit polymorphism</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="inheritance.html#inheritace-mixingpolymorphism">9.1.7. 
+      隐式多态和其他继承映射混合使用</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="inheritance.html#inheritance-limitations">9.2. 限制</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="objectstate.html">10. 与对象共事</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="objectstate.html#objectstate-overview">10.1. 
+    Hibernate对象状态(object states)</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="objectstate.html#objectstate-makingpersistent">10.2. 使对象持久化</A></SPAN> 
+
+    <DT><SPAN class=sect1><A href="objectstate.html#objectstate-loading">10.3. 
+    装载对象</A></SPAN> 
+    <DT><SPAN class=sect1><A href="objectstate.html#objectstate-querying">10.4. 
+    查询</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="objectstate.html#objectstate-querying-executing">10.4.1. 
+      执行查询</A></SPAN> 
+      <DD>
+      <DL>
+        <DT><SPAN class=sect3><A 
+        href="objectstate.html#objectstate-querying-executing-iterate">10.4.1.1. 
+        迭代式获取结果(Iterating results)</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="objectstate.html#objectstate-querying-executing-tuples">10.4.1.2. 
+        返回元组(tuples)的查询</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="objectstate.html#objectstate-querying-executing-scalar">10.4.1.3. 
+        标量(Scalar)结果</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="objectstate.html#objectstate-querying-executing-parameters">10.4.1.4. 
+        绑定参数</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="objectstate.html#objectstate-querying-executing-pagination">10.4.1.5. 
+        分页</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="objectstate.html#objectstate-querying-executing-scrolling">10.4.1.6. 
+        可滚动遍历(Scrollable iteration)</A></SPAN> 
+        <DT><SPAN class=sect3><A 
+        href="objectstate.html#objectstate-querying-executing-named">10.4.1.7. 
+        外置命名查询(Externalizing named queries)</A></SPAN></DT></DL>
+      <DT><SPAN class=sect2><A 
+      href="objectstate.html#objectstate-filtering">10.4.2. 过滤集合</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="objectstate.html#objecstate-querying-criteria">10.4.3. 条件查询(Criteria 
+      queries)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="objectstate.html#objectstate-querying-nativesql">10.4.4. 
+      使用原生SQL的查询</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="objectstate.html#objectstate-modifying">10.5. 
+    修改持久对象</A></SPAN> 
+    <DT><SPAN class=sect1><A href="objectstate.html#objectstate-detached">10.6. 
+    修改脱管(Detached)对象</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="objectstate.html#objectstate-saveorupdate">10.7. 自动状态检测</A></SPAN> 
+    <DT><SPAN class=sect1><A href="objectstate.html#objectstate-deleting">10.8. 
+    删除持久对象</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="objectstate.html#objectstate-replicating">10.9. 
+    在两个不同数据库间复制对象</A></SPAN> 
+    <DT><SPAN class=sect1><A href="objectstate.html#objectstate-flushing">10.10. 
+    Session刷出(flush)</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="objectstate.html#objectstate-transitive">10.11. 传播性持久化(transitive 
+    persistence)</A></SPAN> 
+    <DT><SPAN class=sect1><A href="objectstate.html#objectstate-metadata">10.12. 
+    使用元数据</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="transactions.html">11. 事务和并发</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="transactions.html#transactions-basics">11.1. 
+    Session和事务范围(transaction scope)</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-basics-uow">11.1.1. 操作单元(Unit of 
+      work)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-basics-apptx">11.1.2. 长对话</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-basics-identity">11.1.3. 
+      关注对象标识(Considering object identity)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-basics-issues">11.1.4. 
+      常见问题</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="transactions.html#transactions-demarcation">11.2. 数据库事务声明</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-demarcation-nonmanaged">11.2.1. 
+      非托管环境</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-demarcation-jta">11.2.2. 
+      使用JTA</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-demarcation-exceptions">11.2.3. 
+      异常处理</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-demarcation-timeout">11.2.4. 
+      事务超时</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="transactions.html#transactions-optimistic">11.3. 乐观并发控制(Optimistic 
+    concurrency control)</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-optimistic-manual">11.3.1. 
+      应用程序级别的版本检查(Application version checking)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-optimistic-longsession">11.3.2. 
+      扩展周期的session和自动版本化</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-optimistic-detached">11.3.3. 
+      脱管对象(deatched object)和自动版本化</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="transactions.html#transactions-optimistic-customizing">11.3.4. 
+      定制自动版本化行为</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="transactions.html#transactions-locking">11.4. 
+    悲观锁定(Pessimistic Locking)</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="transactions.html#transactions-connection-release">11.5. 
+    连接释放模式(Connection Release Modes)</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="events.html">12. 拦截器与事件(Interceptors and 
+  events) </A></SPAN>
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="events.html#objectstate-interceptors">12.1. 
+    拦截器(Interceptors) </A></SPAN>
+    <DT><SPAN class=sect1><A href="events.html#objectstate-events">12.2. 
+    事件系统(Event system) </A></SPAN>
+    <DT><SPAN class=sect1><A href="events.html#objectstate-decl-security">12.3. 
+    Hibernate的声明式安全机制 </A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="batch.html">13. 批量处理（Batch 
+  processing）</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="batch.html#batch-inserts">13.1. 批量插入（Batch 
+    inserts）</A></SPAN> 
+    <DT><SPAN class=sect1><A href="batch.html#batch-update">13.2. 批量更新（Batch 
+    updates）</A></SPAN> 
+    <DT><SPAN class=sect1><A href="batch.html#batch-statelesssession">13.3. 
+    StatelessSession (无状态session)接口</A></SPAN> 
+    <DT><SPAN class=sect1><A href="batch.html#batch-direct">13.4. 
+    DML(数据操作语言)风格的操作(DML-style operations)</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="queryhql.html">14. HQL: 
+  Hibernate查询语言</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-casesensitivity">14.1. 
+    大小写敏感性问题</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-from">14.2. 
+    from子句</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-joins">14.3. 
+    关联(Association)与连接(Join)</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-joins-forms">14.4. 
+    join 语法的形式</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-select">14.5. 
+    select子句</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-aggregation">14.6. 
+    聚集函数</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-polymorphism">14.7. 
+    多态查询</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-where">14.8. 
+    where子句</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-expressions">14.9. 
+    表达式</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-ordering">14.10. order 
+    by子句</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-grouping">14.11. group 
+    by子句</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-subqueries">14.12. 
+    子查询</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-examples">14.13. 
+    HQL示例</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-bulk">14.14. 
+    批量的UPDATE和DELETE</A></SPAN> 
+    <DT><SPAN class=sect1><A href="queryhql.html#queryhql-tipstricks">14.15. 小技巧 
+    &amp; 小窍门</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="querycriteria.html">15. 条件查询(Criteria 
+  Queries) </A></SPAN>
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A 
+    href="querycriteria.html#querycriteria-creating">15.1. 创建一个Criteria 
+    实例</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="querycriteria.html#querycriteria-narrowing">15.2. 限制结果集内容</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="querycriteria.html#querycriteria-ordering">15.3. 结果集排序</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="querycriteria.html#querycriteria-associations">15.4. 关联</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="querycriteria.html#querycriteria-dynamicfetching">15.5. 
+    动态关联抓取</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="querycriteria.html#querycriteria-examples">15.6. 查询示例</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="querycriteria.html#querycriteria-projection">15.7. 
+    投影(Projections)、聚合（aggregation）和分组（grouping）</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="querycriteria.html#querycriteria-detachedqueries">15.8. 
+    离线(detached)查询和子查询</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="querycriteria.html#query-criteria-naturalid">15.9. 根据自然标识查询(Queries by 
+    natural identifier)</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="querysql.html">16. Native SQL查询</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="querysql.html#querysql-creating">16.1. 
+    使用SQLQuery</A></SPAN> 
+    <DT><SPAN class=sect1><A href="querysql.html#querysql-aliasreferences">16.2. 
+    别名和属性引用</A></SPAN> 
+    <DT><SPAN class=sect1><A href="querysql.html#querysql-namedqueries">16.3. 
+    命名SQL查询</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A href="querysql.html#propertyresults">16.3.1. 
+      使用return-property来明确地指定字段/别名</A></SPAN> 
+      <DT><SPAN class=sect2><A href="querysql.html#sp_query">16.3.2. 
+      使用存储过程来查询</A></SPAN> 
+      <DD>
+      <DL>
+        <DT><SPAN class=sect3><A 
+        href="querysql.html#querysql-limits-storedprocedures">16.3.2.1. 
+        使用存储过程的规则和限制</A></SPAN></DT></DL></DD></DL>
+    <DT><SPAN class=sect1><A href="querysql.html#querysql-cud">16.4. 
+    定制SQL用来create，update和delete</A></SPAN> 
+    <DT><SPAN class=sect1><A href="querysql.html#querysql-load">16.5. 
+    定制装载SQL</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="filters.html">17. 过滤数据</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="filters.html#objectstate-filters">17.1. 
+    Hibernate 过滤器(filters)</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="xml.html">18. XML映射</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="xml.html#xml-intro">18.1. 
+    用XML数据进行工作</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A href="xml.html#xml-intro-mapping">18.1.1. 
+      指定同时映射XML和类</A></SPAN> 
+      <DT><SPAN class=sect2><A href="xml.html#xml-onlyxml">18.1.2. 
+      只定义XML映射</A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="xml.html#xml-mapping">18.2. 
+    XML映射元数据</A></SPAN> 
+    <DT><SPAN class=sect1><A href="xml.html#xml-manipulation">18.3. 
+    操作XML数据</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="performance.html">19. 提升性能 </A></SPAN>
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="performance.html#performance-fetching">19.1. 
+    抓取策略(Fetching strategies) </A></SPAN>
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-fetching-lazy">19.1.1. 
+      操作延迟加载的关联</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-fetching-custom">19.1.2. 调整抓取策略（Tuning 
+      fetch strategies） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-fetching-proxies">19.1.3. 
+      单端关联代理（Single-ended association proxies） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-fetching-initialization">19.1.4. 
+      实例化集合和代理（Initializing collections and proxies） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-fetching-batch">19.1.5. 使用批量抓取（Using 
+      batch fetching） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-fetching-subselect">19.1.6. 
+      使用子查询抓取（Using subselect fetching） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-fetching-lazyproperties">19.1.7. 
+      使用延迟属性抓取（Using lazy property fetching） </A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A href="performance.html#performance-cache">19.2. 
+    二级缓存（The Second Level Cache） </A></SPAN>
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-cache-mapping">19.2.1. 缓存映射（Cache 
+      mappings） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-cache-readonly">19.2.2. 
+      策略：只读缓存（Strategy: read only） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-cache-readwrite">19.2.3. 
+      策略:读/写缓存（Strategy: read/write） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-cache-nonstrict">19.2.4. 
+      策略:非严格读/写缓存（Strategy: nonstrict read/write） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-cache-transactional">19.2.5. 
+      策略:事务缓存（transactional） </A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="performance.html#performance-sessioncache">19.3. 管理缓存（Managing the 
+    caches） </A></SPAN>
+    <DT><SPAN class=sect1><A 
+    href="performance.html#performance-querycache">19.4. 查询缓存（The Query Cache） 
+    </A></SPAN>
+    <DT><SPAN class=sect1><A 
+    href="performance.html#performance-collections">19.5. 理解集合性能（Understanding 
+    Collection performance） </A></SPAN>
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-collections-taxonomy">19.5.1. 
+      分类（Taxonomy） </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-collections-mostefficientupdate">19.5.2. 
+      Lists, maps 和sets用于更新效率最高 </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-collections-mostefficentinverse">19.5.3. 
+      Bag和list是反向集合类中效率最高的 </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-collections-oneshotdelete">19.5.4. 
+      一次性删除（One shot delete） </A></SPAN></DT></DL>
+    <DT><SPAN class=sect1><A 
+    href="performance.html#performance-monitoring">19.6. 监测性能（Monitoring 
+    performance） </A></SPAN>
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-monitoring-sf">19.6.1. 监测SessionFactory 
+      </A></SPAN>
+      <DT><SPAN class=sect2><A 
+      href="performance.html#performance-monitoring-metrics">19.6.2. 
+      数据记录（Metrics） </A></SPAN></DT></DL></DD></DL>
+  <DT><SPAN class=chapter><A href="toolsetguide.html">20. 工具箱指南</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A href="toolsetguide.html#toolsetguide-s1">20.1. 
+    Schema自动生成（Automatic schema generation）</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="toolsetguide.html#toolsetguide-s1-2">20.1.1. 对schema定制化(Customizing 
+      the schema)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="toolsetguide.html#toolsetguide-s1-3">20.1.2. 运行该工具</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="toolsetguide.html#toolsetguide-s1-4">20.1.3. 
+      属性(Properties)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="toolsetguide.html#toolsetguide-s1-5">20.1.4. 使用Ant(Using 
+      Ant)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="toolsetguide.html#toolsetguide-s1-6">20.1.5. 
+      对schema的增量更新(Incremental schema updates)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="toolsetguide.html#toolsetguide-s1-7">20.1.6. 用Ant来增量更新schema(Using 
+      Ant for incremental schema updates)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="toolsetguide.html#toolsetguide-s1-8">20.1.7. Schema 校验</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="toolsetguide.html#toolsetguide-s1-9">20.1.8. 
+      使用Ant进行schema校验</A></SPAN></DT></DL></DD></DL>
+  <DT><SPAN class=chapter><A href="example-parentchild.html">21. 示例：父子关系(Parent 
+  Child Relationships)</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A 
+    href="example-parentchild.html#example-parentchild-collections">21.1. 
+    关于collections需要注意的一点</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="example-parentchild.html#example-parentchild-bidir">21.2. 
+    双向的一对多关系(Bidirectional one-to-many)</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="example-parentchild.html#example-parentchild-cascades">21.3. 
+    级联生命周期（Cascading lifecycle）</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="example-parentchild.html#example-parentchild-update">21.4. 
+    级联与未保存值（Cascades and unsaved-value）</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="example-parentchild.html#example-parentchild-conclusion">21.5. 
+    结论</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="example-weblog.html">22. 示例：Weblog 
+  应用程序</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A 
+    href="example-weblog.html#example-weblog-classes">22.1. 持久化类</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="example-weblog.html#example-weblog-mappings">22.2. Hibernate 
+    映射</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="example-weblog.html#example-weblog-code">22.3. Hibernate 
+    代码</A></SPAN></DT></DL>
+  <DT><SPAN class=chapter><A href="example-mappings.html">23. 
+  示例：复杂映射实例</A></SPAN> 
+  <DD>
+  <DL>
+    <DT><SPAN class=sect1><A 
+    href="example-mappings.html#example-mappings-emp">23.1. 
+    Employer（雇主)/Employee(雇员)</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="example-mappings.html#example-mappings-authorwork">23.2. 
+    Author(作家)/Work(作品)</A></SPAN> 
+    <DT><SPAN class=sect1><A 
+    href="example-mappings.html#example-mappings-customerorderproduct">23.3. 
+    Customer(客户)/Order(订单)/Product(产品)</A></SPAN> 
+    <DT><SPAN class=sect1><A href="example-mappings.html#misc">23.4. 
+    杂例</A></SPAN> 
+    <DD>
+    <DL>
+      <DT><SPAN class=sect2><A 
+      href="example-mappings.html#example-mappings-typed-onetone">23.4.1. 
+      "Typed" one-to-one association</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="example-mappings.html#example-mappings-composite-key">23.4.2. 
+      Composite key example</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="example-mappings.html#example-mappings-composite-key-manytomany">23.4.3. 
+      共有组合键属性的多对多(Many-to-many with shared composite key attribute)</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="example-mappings.html#example-mappings-content-discrimination">23.4.4. 
+      Content based discrimination</A></SPAN> 
+      <DT><SPAN class=sect2><A 
+      href="example-mappings.html#example-mappings-association-alternatekeys">23.4.5. 
+      Associations on alternate keys</A></SPAN></DT></DL></DD></DL>
+  <DT><SPAN class=chapter><A href="best-practices.html">24. 最佳实践(Best 
+  Practices)</A></SPAN></DT></DL></DIV></DIV>
+<DIV class=navfooter>
+<HR>
+
+<TABLE width="100%" summary="Navigation footer">
+  <TBODY>
+  <TR>
+    <TD width="40%" align=left>&nbsp;</TD>
+    <TD width="20%" align=center>&nbsp;</TD>
+    <TD width="40%" align=right>&nbsp;<A accessKey=n 
+      href="preface.html">下一页</A></TD></TR>
+  <TR>
+    <TD vAlign=top width="40%" align=left>&nbsp;</TD>
+    <TD width="20%" align=center>&nbsp;</TD>
+    <TD vAlign=top width="40%" 
+align=right>&nbsp;前言</TD></TR></TBODY></TABLE></DIV></BODY></HTML>

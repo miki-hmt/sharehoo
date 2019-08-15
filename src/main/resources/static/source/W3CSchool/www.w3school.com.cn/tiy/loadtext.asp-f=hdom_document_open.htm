@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type="text/javascript">
+function createNewDoc()
+  {
+  var newDoc=document.open("text/html","replace");
+  var txt="<html><body>学习 DOM 非常有趣！</body></html>";
+  newDoc.write(txt);
+  newDoc.close();
+  }
+</script>
+</head>
+
+<body>
+<input type="button" value="打开并写入一个新文档" onclick="createNewDoc()">
+</body>
+
+</html>

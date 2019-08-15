@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    $("img").attr("width",function(n,v){
+      return v-50;
+    });
+  });
+});
+</script>
+</head>
+<body>
+<img src="../i/eg_smile.gif" tppabs="http://www.w3school.com.cn/i/eg_smile.gif" />
+<br />
+<button>¼õÉÙÍ¼ÏñµÄ¿í¶È 50 ÏñËØ</button>
+</body>
+</html>

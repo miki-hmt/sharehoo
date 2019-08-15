@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>serializeArray()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">serializeArray()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.serializeArray()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank"><code>Array&lt;Object&gt;</code></a> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>将用作提交的表单元素的值编译成拥有name和value对象组成的数组。例如[ { name: a value: 1 }, { name: b value: 2 },...]
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="serializeArray">
+			<h4 class="name">
+				<span class="version-details">V : 1.2</span>.serializeArray()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<p>
+		<code>.serializeArray()</code> 方法创建一个对象组成的javascript数组，用来编码成一个JSON一样的字符串。
+        它对表单 和/或 表单控件的 jQuery 集合起作用。该控件可以有以下几种类型：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;form&gt;
+  &lt;div&gt;&lt;input type="text" name="a" value="1" id="a" /&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;input type="text" name="b" value="2" id="b" /&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;input type="hidden" name="c" value="3" id="c" /&gt;&lt;/div&gt;
+  &lt;div&gt;
+    &lt;textarea name="d" rows="8" cols="40"&gt;4&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;div&gt;&lt;select name="e"&gt;
+    &lt;option value="5" selected="selected"&gt;5&lt;/option&gt;
+    &lt;option value="6"&gt;6&lt;/option&gt;
+    &lt;option value="7"&gt;7&lt;/option&gt;
+  &lt;/select&gt;&lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="checkbox" name="f" value="8" id="f" /&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="submit" name="g" value="Submit" id="g" /&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</pre>
+	</div>
+	<p>
+		<code>.serializeArray()</code>方法使用标准的W3C<a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">"successful controls"</a>的标准来检测哪些元素应当包括在内。被禁用的元素不会被包括在内。并且,元素必须含有 <code>name</code> 属性。此外，提交按钮的值也不会被序列化。文件选择元素的数据也不会被序列化。
+	</p>
+	<p>
+		<code>.serializeArray()</code> 方法可以对单独选择的表单控件的jQuery对象进行操作， 比如 <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, 和 <code>&lt;select&gt;</code>。还有个更方便的方法是，直接使用 <code>&lt;form&gt;</code> 标签来进行序列化操作：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('form').submit(function() {
+  console.log($(this).serializeArray());
+  return false;
+});</pre>
+	</div>
+	<p>
+		这将产生以下数据结构(浏览器提供的<code>console.log</code>):
+	</p>
+<pre class="prettyprint lang-js">[
+  {
+    name: "a",
+    value: "1"
+  },
+  {
+    name: "b",
+    value: "2"
+  },
+  {
+    name: "c",
+    value: "3"
+  },
+  {
+    name: "d",
+    value: "4"
+  },
+  {
+    name: "e",
+    value: "5"
+  }
+]</pre>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		取得表单内容并插入到网页中。
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;p id="results"&gt;&lt;b&gt;Results:&lt;/b&gt; &lt;/p&gt;
+&lt;form&gt;
+  &lt;select name="single"&gt;
+    &lt;option&gt;Single&lt;/option&gt;
+    &lt;option&gt;Single2&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;select name="multiple" multiple="multiple"&gt;
+    &lt;option selected="selected"&gt;Multiple&lt;/option&gt;
+    &lt;option&gt;Multiple2&lt;/option&gt;
+    &lt;option selected="selected"&gt;Multiple3&lt;/option&gt;
+  &lt;/select&gt;&lt;br/&gt;
+  &lt;input type="checkbox" name="check" value="check1"/&gt; check1
+  &lt;input type="checkbox" name="check" value="check2" checked="checked"/&gt; check2
+  &lt;input type="radio" name="radio" value="radio1" checked="checked"/&gt; radio1
+  &lt;input type="radio" name="radio" value="radio2"/&gt; radio2
+&lt;/form&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>var fields = $("select, :radio").serializeArray();
+jQuery.each( fields, function(i, field){
+  $("#results").append(field.value + " ");
+});</code></pre>
+</div>
+<h4>
+	描述：
+</h4>
+<p>
+	从表单获取值，遍历并且显示他们
+</p>
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body, select { font-size:14px; }
+  form { margin:5px; }
+  p { color:red; margin:5px; }
+  b { color:blue; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;&lt;b&gt;Results:&lt;/b&gt; &lt;span id="results"&gt;&lt;/span&gt;&lt;/p&gt;
+ 
+  &lt;form&gt;
+    &lt;select name="single"&gt;
+      &lt;option&gt;Single&lt;/option&gt;
+      &lt;option&gt;Single2&lt;/option&gt;
+ 
+    &lt;/select&gt;
+    &lt;select name="multiple" multiple="multiple"&gt;
+      &lt;option selected="selected"&gt;Multiple&lt;/option&gt;
+      &lt;option&gt;Multiple2&lt;/option&gt;
+ 
+      &lt;option selected="selected"&gt;Multiple3&lt;/option&gt;
+    &lt;/select&gt;&lt;br/&gt;
+    &lt;input type="checkbox" name="check" value="check1" id="ch1"/&gt;
+ 
+    &lt;label for="ch1"&gt;check1&lt;/label&gt;
+    &lt;input type="checkbox" name="check" value="check2" checked="checked" id="ch2"/&gt;
+ 
+    &lt;label for="ch2"&gt;check2&lt;/label&gt;
+    &lt;input type="radio" name="radio" value="radio1" checked="checked" id="r1"/&gt;
+ 
+    &lt;label for="r1"&gt;radio1&lt;/label&gt;
+    &lt;input type="radio" name="radio" value="radio2" id="r2"/&gt;
+ 
+    &lt;label for="r2"&gt;radio2&lt;/label&gt;
+  &lt;/form&gt;
+&lt;script&gt;
+  function showValues() {
+    var fields = $(":input").serializeArray();
+    $("#results").empty();
+    jQuery.each(fields, function(i, field){
+      $("#results").append(field.value + " ");
+    });
+  }
+ 
+  $(":checkbox, :radio").click(showValues);
+  $("select").change(showValues);
+  showValues();
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<a href="http://www.shouce.ren/study/api/s/8030" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+<p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+<head>
+<script type="text/javascript">
+cc=0
+function changeimage()
+{
+if (cc==0) 
+{
+cc=1
+document.getElementById('myimage').src="../i/eg_bulbon.gif"/*tpa=http://www.w3school.com.cn/i/eg_bulbon.gif*/
+}
+else
+{
+cc=0
+document.getElementById('myimage').src="../i/eg_bulboff.gif"/*tpa=http://www.w3school.com.cn/i/eg_bulboff.gif*/
+}
+}
+</script>
+</head>
+
+<body>
+
+<img id="myimage" onclick="changeimage()" 
+border="0" src="../i/eg_bulboff.gif" tppabs="http://www.w3school.com.cn/i/eg_bulboff.gif" 
+width="100" height="180" />
+<p>请点击这个灯泡，把它点亮吧！</p>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.ajaxTransport()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.ajaxTransport()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.ajaxTransport( dataType, handler(options, originalOptions, jqXHR) )
+	</blockquote>
+</h3>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>创建一个对象，用于处理Ajax数据的实际传输。
+</p>
+<ul class="signatures">
+	<li class="signature" id="jQuery-ajaxTransport-dataType-handleroptions--originalOptions--jqXHR">
+		<h4 class="name">
+			<span class="version-details">V : 1.5</span>jQuery.ajaxTransport( dataType, handler(options, originalOptions, jqXHR) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>dataType</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader0">String</a> 
+				</div>
+				<div>
+					一个字符串，标识使用的数据类型
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler(options, originalOptions, jqXHR)</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28">Function</a>()
+				</div>
+				<div>
+					一个处理程序，使用第一个参数中提供的数据类型返回新的传输（transport）对象。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<p>
+	传输（transport）是一个对象，它提供了两种方法，<code>send</code> 和 <code>abort</code>，内部使用由<code>$.ajax()</code>发出请求。传输（transport）是最高级的方法用来增强<code>$.ajax()</code>并且应仅作为当预过滤器（prefilters）和转换器（converters）无法满足你的需求的时候的最后的手段。
+</p>
+<p>
+	由于每个请求需要有自己的传输（transport）对象实例，传输不能直接注册。因此，你应该提供一个函数代替返回传输（transport）。
+</p>
+<p>
+	传输（transports）工厂注册使用<code>$.ajaxTransport()</code>。一个典型的注册看起来像这样：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.ajaxTransport( dataType, function( options, originalOptions, jqXHR ) {
+  if( /* transportCanHandleRequest */ ) {
+    return {
+      send: function( headers, completeCallback ) {
+        // Send code
+      },
+      abort: function() {
+        // Abort code
+      }
+    };
+  }
+});</pre>
+</div>
+<p>
+	以下的情况下:
+</p>
+<ul>
+	<li>
+		<code>options</code> 是请求的选项
+	</li>
+	<li>
+		<code>originalOptions</code> 值作为提供给Ajax方法未经修改的选项，因此，没有<code>ajaxSettings</code>设置中的默认值
+	</li>
+	<li>
+		<code>jqXHR</code> 是请求的jqXHR对象
+	</li>
+	<li>
+		<code>headers</code> 是一个请求头信息（键 - 值）对象，该传输（transport）都可以发送，如果它支持
+	</li>
+	<li>
+		<code>completeCallback</code> 是回调用于该请求Ajax的完成通知
+	</li>
+</ul>
+<p>
+	<code>completeCallback</code> 具有以下签名：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">function( status, statusText, responses, headers ) {}</pre>
+</div>
+<p>
+	以下的情况下:
+</p>
+<ul>
+	<li>
+		<code>status</code> 是响应的HTTP状态代码，像200是一个典型的成功，或404是没有找到资源。
+	</li>
+	<li>
+		<code>statusText</code> 是响应状态文本。
+	</li>
+	<li>
+		<code>responses</code> （可选）是一个对象，它包含数据类型/值（dataType/value）包含响应运输提供的所有格式。（例如，一个原生的XMLHttpRequest对象设置reponses为<code>{ xml: XMLData, text: textData }</code> ，这样响应是一个XML文档)
+	</li>
+	<li>
+		<code>headers</code> （可选）是一个字符串，其中包含所有的响应信息头，如果运输对它们的访问（类似于<code>XMLHttpRequest.getAllResponseHeaders()</code>提供的方法）。
+	</li>
+</ul>
+<p>
+	就像预过滤器（prefilters），一个传输（transport）的工厂函数可以被连接到一个特定的 dataType（数据类型）：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.ajaxTransport( "script", function( options, originalOptions, jqXHR ) {
+    /* Will only be called for script requests */
+});</pre>
+</div>
+<p>
+	面的示例演示小的图像怎样传输实现：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.ajaxTransport( "image", function( s ) {
+ 
+  if ( s.type === "GET" &amp;&amp; s.async ) {
+ 
+    var image;
+ 
+    return {
+ 
+      send: function( _ , callback ) {
+ 
+        image = new Image();
+ 
+        function done( status ) {
+          if ( image ) {
+            var statusText = ( status == 200 ) ? "success" : "error",
+            tmp = image;
+            image = image.onreadystatechange = image.onerror = image.onload = null;
+            callback( status, statusText, { image: tmp } );
+          }
+        }
+ 
+        image.onreadystatechange = image.onload = function() {
+          done( 200 );
+        };
+        image.onerror = function() {
+          done( 404 );
+        };
+ 
+        image.src = s.url;
+      },
+ 
+      abort: function() {
+        if ( image ) {
+          image = image.onreadystatechange = image.onerror = image.onload = null;
+        }
+      }
+    };
+  }
+});</pre>
+</div>
+<h4 id="handling-custom-data-types">
+	Handling Custom Data Types（处理自定义数据类型）
+</h4>
+<p>
+	jQuery的Ajax实现了一套标准的数据类型，比如text, json, xml, 和 html。
+</p>
+<p>
+	在 <code><a href="http://www.shouce.ren/api/view/a/12874" class="book-a">$.ajaxSetup()</a></code> 中使用<code>converters</code>选项
+来增加或修改数据类型使用<code>$.ajax()</code>转换策略。
+</p>
+<p>
+	未更改的 jQuery 代码
+本身包含一个列表的默认转换器，这有力地说明了可以如何使用它们：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">// List of data converters
+// 1) key format is "source_type destination_type"
+//    (a single space in-between)
+// 2) the catchall symbol "*" can be used for source_type
+converters: {
+ 
+  // Convert anything to text
+  "* text": window.String,
+ 
+  // Text to html (true = no transformation)
+  "text html": true,
+ 
+  // Evaluate text as a json expression
+  "text json": jQuery.parseJSON,
+ 
+  // Parse text as xml
+  "text xml": jQuery.parseXML
+}</pre>
+</div>
+<p>
+	当你在<code>$.ajaxSetup()</code>全局的指定一个<code>converters</code> 选项，或者每次调用<code>$.ajax()</code>,这个对象将映射到默认的转换器，覆盖您所指定的那些，让其他不变。
+</p>
+<p>
+	例如，jQuery代码使用<code>$.ajaxSetup()</code>添加一个“text script”转换器:
+</p>
+<pre class="prettyprint lang-js">jQuery.ajaxSetup({
+  accepts: {
+    script: "text/javascript, application/javascript"
+  },
+  contents: {
+    script: /javascript/
+  },
+  converters: {
+    "text script": jQuery.globalEval
+  }
+});</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

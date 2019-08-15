@@ -1,0 +1,32 @@
+<html>
+<head>
+<script type="text/javascript">
+function blinklink()
+{
+if (!document.getElementById('blink').style.color)
+	{
+	document.getElementById('blink').style.color="red"
+	}
+if (document.getElementById('blink').style.color=="red")
+	{
+	document.getElementById('blink').style.color="black"
+	}
+else
+	{
+	document.getElementById('blink').style.color="red"
+	}
+timer=setTimeout("blinklink()",100)
+}
+
+function stoptimer()
+{
+clearTimeout(timer)
+}
+</script>
+</head>
+
+<body onload="blinklink()" onunload="stoptimer()">
+<a id="blink" href="../index.html" tppabs="http://www.w3school.com.cn/index.html">иак╦╣да╢╫с</a> 
+</body>
+
+</html>

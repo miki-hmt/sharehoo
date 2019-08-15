@@ -1,0 +1,22 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+document.write("removeChild() 方法执行前 book 节点的数目：");
+document.write(xmlDoc.getElementsByTagName("book").length);
+document.write("<br />");
+
+x=xmlDoc.getElementsByTagName("book")[0]
+x.parentNode.removeChild(x);
+
+document.write("removeChild() 方法执行后 book 节点的数目：");
+document.write(xmlDoc.getElementsByTagName("book").length);
+
+</script>
+</body>
+</html>

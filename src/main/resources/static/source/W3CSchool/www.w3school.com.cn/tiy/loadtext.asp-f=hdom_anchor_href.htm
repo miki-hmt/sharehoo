@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeLink()
+{
+document.getElementById('myAnchor').innerHTML="访问 W3School"
+document.getElementById('myAnchor').href="../index.htm"/*tpa=http://www.w3school.com.cn/*/
+document.getElementById('myAnchor').target="_blank"
+}
+</script>
+</head>
+
+<body>
+<a id="myAnchor" href="javascript:if(confirm('http://www.microsoft.com/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.microsoft.com/'" tppabs="http://www.microsoft.com/">访问 Microsoft</a>
+<input type="button" onclick="changeLink()" value="改变链接">
+<p>在本例中，我们改变超链接的文本和 URL。我们也改变 target 属性。target 属性的默认设置是 "_self"，这意味着会在相同的窗口中打开链接。通过把 target 属性设置为 "_blank"，链接将在新窗口中打开。</p>
+</body>
+
+</html>

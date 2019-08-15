@@ -1,0 +1,42 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;form action=&quot;/example/aspe/demo_aspe_form2.asp&quot; method=&quot;post&quot;&gt;
+First name:
+&lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;Donald&quot; /&gt;
+&lt;br /&gt;
+Last name:
+&lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;Duck&quot; /&gt;
+&lt;br /&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+&lt;/form&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;来自上面的表单的信息：&lt;/p&gt;
+<code class="aspcode">&lt;%
+If Request.Form(&quot;name&quot;)&lt;&gt;&quot;&quot; Then
+      Response.Write(&quot;&lt;p&gt;&quot;)
+      Response.Write(&quot;name=&quot; & Request.Form(&quot;name&quot;))
+      Response.Write(&quot;&lt;/p&gt;&lt;p&gt;&quot;)
+      Response.Write(&quot;name 属性的数目：&quot;)
+      Response.Write(Request.Form(&quot;name&quot;).Count)
+      Response.Write(&quot;&lt;/p&gt;&lt;p&gt;&quot;)
+      Response.Write(&quot;First name=&quot; & Request.Form(&quot;name&quot;)(1))
+      Response.Write(&quot;&lt;/p&gt;&lt;p&gt;&quot;) 
+      Response.Write(&quot;Last name=&quot; & Request.Form(&quot;name&quot;)(2))
+      Response.Write(&quot;&lt;/p&gt;&quot;) 
+End if
+%&gt;</code>
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

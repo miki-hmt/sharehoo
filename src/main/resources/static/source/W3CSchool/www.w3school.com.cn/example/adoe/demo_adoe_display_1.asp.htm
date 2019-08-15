@@ -1,0 +1,7 @@
+<html>
+<body>
+
+CustomerID = Nokia<br />CompanyName = Nokia Corporation<br />ContactName = Olli-Pekka Kallasvuo<br />Address = P.O. Box 226, FIN-00045 Nokia Group, Finland<br />City = Helsinki<br />PostalCode = none<br />Country = Finland<br /><br />CustomerID = Google<br />CompanyName = Google, Inc.<br />ContactName = Larry Page<br />Address = 1600 Amphitheatre Parkway Mountain View, CA  94043<br />City = Mountain View<br />PostalCode = 94043<br />Country = USA<br /><br />CustomerID = SONY<br />CompanyName = Sony Corporation of America<br />ContactName = Kazuo Hirai<br />Address = Park Ridge, NJ 07656<br />City = Park Ridge<br />PostalCode = 07656<br />Country = USA<br /><br />CustomerID = APPLE<br />CompanyName = Apple Computer, Inc.<br />ContactName = Steven Jobs<br />Address = 1 Infinite Loop Cupertino, CA 95014<br />City = Cupertino<br />PostalCode = 95014<br />Country = USA<br /><br />CustomerID = BAIDU<br />CompanyName = BAIDU, Inc<br />ContactName = Li YanHong<br />Address = Lixiang guoji dasha,No 58, beisihuanxilu<br />City = Beijing<br />PostalCode = 100080<br />Country = China<br /><br />CustomerID = Canon<br />CompanyName = Canon USA, Inc.<br />ContactName = Tsuneji Uchida<br />Address = One Canon Plaza Lake Success, NY 11042<br />City = New York<br />PostalCode = 11042<br />Country = USA<br /><br />
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+
+<code class="aspcode">&lt;%
+Set fs=Server.CreateObject(&quot;Scripting.FileSystemObject&quot;)
+
+If (fs.FileExists(&quot;c:\windows\cursors\xxx.cur&quot;))=true Then 
+
+Response.Write(&quot;文件 c:\windows\cursors\xxx.cur 存在。&quot;)
+
+Else
+      Response.Write(&quot;文件 c:\windows\cursors\xxx.cur 不存在。&quot;)
+End If
+
+set fs=nothing
+%&gt;</code>
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

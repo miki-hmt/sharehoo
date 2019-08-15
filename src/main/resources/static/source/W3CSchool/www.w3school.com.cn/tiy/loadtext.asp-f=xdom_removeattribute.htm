@@ -1,0 +1,22 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+x=xmlDoc.getElementsByTagName('book');
+
+document.write(x[0].getAttribute('category'));
+document.write("<br />");
+
+x[0].removeAttribute('category');
+
+document.write(x[0].getAttribute('category'));
+
+</script>
+</body>
+</html>

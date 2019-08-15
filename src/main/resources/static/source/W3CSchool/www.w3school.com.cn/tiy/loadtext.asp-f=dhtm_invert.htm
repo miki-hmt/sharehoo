@@ -1,0 +1,28 @@
+<html>
+<head>
+<style>
+img
+{
+filter:invert()
+}
+</style>
+<script type="text/javascript">
+function getFilter()
+{
+document.getElementById('myImage').style.filter="invert()"
+}
+
+function noFilter()
+{
+document.getElementById('myImage').style.filter=false
+}
+</script>
+</head>
+
+<body>
+<p>本例演示如何动态地插入反转滤镜。</p>
+<b>请把鼠标移动到图像上：</b><br />
+<img id="myImage" src="../i/eg_landscape.jpg" tppabs="http://www.w3school.com.cn/i/eg_landscape.jpg" onmouseover="noFilter()" onmouseout="getFilter()" />
+</body>
+
+</html>

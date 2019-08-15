@@ -1,0 +1,19 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+var str = "Visit W3School, W3School is a place to study web technology."; 
+var patt = new RegExp("W3School","g");
+var result;
+
+while ((result = patt.exec(str)) != null)  {
+  document.write(result);
+  document.write("<br />");
+  document.write(patt.lastIndex);
+  document.write("<br />");
+ }
+</script>
+
+</body>
+</html>

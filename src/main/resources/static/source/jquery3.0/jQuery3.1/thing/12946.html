@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>ready()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">ready()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.ready( handler )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>当DOM准备就绪时，指定一个函数来执行。
+</p>
+<ul class="signatures">
+	<li class="signature" id="ready-handler">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.ready( handler )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>handler</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					当DOM准备就绪时，执行的一个函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>.ready()</code>方法提供了一种方法，使得一旦页面的文档对象模型（DOM）变为安全的操纵，就立即运行JavaScript代码。这往往是执行与页面的用户视图或交互之前需要任务的好时机，例如添加事件处理程序和初始化插件。当多个函数通过连续调用添加到该方法中，它们根据它们被添加的DOM准备就绪的顺序执行。在jQuery
+ 3.0中，jQuery保证了在一个处理程序中的异常发生，不会妨碍后续添加的处理程序的执行。
+	</p>
+	<p>
+		大多数浏览器提供了 <code>DOMContentLoaded</code> 事件形式的<a href="http://caniuse.com/#search=DOMContentLoaded">类似功能</a>。
+然而，jQuery的 <code>.ready()</code> 方法的不同之处在于它是一个重要并且有效的方法：在代码调用<code>.ready( handler )</code>之前，如果 DOM 已经准备就绪并且浏览器已经触发<code>DOMContentLoaded</code>，<code>handler</code>处理函数仍然会被执行。 相反，如果 <code>DOMContentLoaded</code> 事件侦听器在这个事件触发后才被添加进来，那么这个<code>DOMContentLoaded</code> 事件的处理程序将永远不会被执行。
+	</p>
+	<p>
+		浏览器还提供了 <code>window</code> 对象上的<code>load</code>事件。当这个事件触发时候，表明该网页上的所有资源已加载，包括图像。此事件可以使用jQuery的<code>$( window ).on( "load", handler )</code>监听。当代码依赖加载的资源情况下，（例如，必需知道图像的尺寸时），那么代码应放置在一个 <code>load</code>事件的处理程序中。
+	</p>
+	<p>
+		值得注意的是，虽然 DOM 准备就绪（ready）总是在页面被完全加载之前，但是在已经生效执行的 <code>.ready()</code> 处理程序代码中绑定<code>load</code>事件侦听器，通常是<em>不安全的</em>。例如，在页面加载后，可以使用一些方法动态加载脚本，如<code>$.getScript()</code> 。虽然动态加载的脚本中的 <code>.ready()</code> 处理程序始终会被执行，
+但是在动态加载脚本中的 <code>window</code> 的 <code>load</code> 事件已经触发过了，所以那些<code>load</code> 事件监听器将永远不会运行。
+	</p>
+	<p>
+		jQuery提供了几种方法来绑定函数，当DOM已准备就绪时，绑定的函数将会运行。以下所有语法是等价的：
+	</p>
+	<ul>
+		<li>
+			<code>$( handler )</code> 
+		</li>
+		<li>
+			<code>$( document ).ready( handler )</code> 
+		</li>
+		<li>
+			<code>$( "document" ).ready( handler )</code> 
+		</li>
+		<li>
+			<code>$( "img" ).ready( handler )</code> 
+		</li>
+		<li>
+			<code>$().ready( handler )</code> 
+		</li>
+	</ul>
+	<p>
+		在jQuery 3.0 中，只建议使用第一种语法（手册网注：即 <code>$( handler )</code>）;
+其他语法仍然能正常工作，但已被标记为弃用（手册网注：将来的某个版本会被删除）。这是因为，这些选择器跟<code>.ready()</code>方法的行为没有任何关系，这是低效的，并可能导致对该方法行为不正确的假设。例如，第三条语法中，<code>"document"</code>选择器其实什么也没选择。第四语法表示等待文档（ <code>document</code> ）准备就绪，但从代码上看，它暗示（错误地）等待图像（<code>"img"</code>）准备就绪。
+	</p>
+	<p>
+		还有 <code>$(document).on( "ready", handler )</code>,<em>从jQuery 1.8开始已被标记为弃用，在jQuery 3.0中已经被删除</em>。请注意，如果附加此事件之前，DOM 已经准备就绪，该处理程序<em>将不被执行</em>。
+	</p>
+	<p>
+		<code>.ready()</code> 方法通常用于一个匿名函数：
+	</p>
+	<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">$( document ).ready(function() {
+  // Handler for .ready() called.
+});</pre>
+	</div>
+	<p>
+		这等价于调用推荐的方式：
+	</p>
+	<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">$(function() {
+  // Handler for .ready() called.
+});</pre>
+	</div>
+	<h4>
+		在 jQuery 对象别名 上使用
+	</h4>
+	<p>
+		当<code>$</code>快捷方式不再可用时，<code>$.noConflict()</code>可以用于避免命名空间冲突。然而，传递给<code>.ready()</code> 的处理函数可以传递一个引用<code>jQuery</code>对象的参数。这使得处理程序中能够使用jQuery对象，例如，用作<code>$</code>,这样就可以不用关心它的别名：
+	</p>
+	<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">jq2 = jQuery.noConflict();
+jq2(function( $ ) {
+  // 在这个代码块中可以像往常一样使用 $ ;实际的jQuery 对象是 jq2 
+});</pre>
+	</div>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">显示当DOM加载的信息。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;p { color:red; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+  $(document).ready(function () {
+  $("p").text("The DOM is now loaded and can be manipulated.");
+});
+  &lt;/script&gt;
+ 
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Not loaded yet.&lt;/p&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8151" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

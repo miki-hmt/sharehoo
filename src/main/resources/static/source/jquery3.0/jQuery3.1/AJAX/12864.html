@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.getJSON()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.getJSON()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.getJSON( url [, data ] [, success(data, textStatus, jqXHR) ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader39" target="_blank">XMLHttpRequest</a> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>使用一个HTTP GET请求从服务器加载JSON编码的数据。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="jQuery-getJSON-url-data-successdata--textStatus--jqXHR">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery.getJSON(
+            url [, data ] [, success(data, textStatus, jqXHR) ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>url</strong> 
+					</div>
+					<div>
+						类型: String
+					</div>
+					<div>
+						一个包含发送请求的URL字符串
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>data</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader25" target="_blank" class="book-a">PlainObject</a> or String
+					</div>
+					<div>
+						一个普通的对象或字符串，用来发送请求给服务器。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>success</strong> 
+					</div>
+					<div>
+						Type: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28" target="_blank" class="book-a">Function</a>( PlainObject data, String textStatus, jqXHR jqXHR )
+					</div>
+					<div>
+						当请求成功后执行的回调函数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			这是一个Ajax函数的缩写，这相当于:
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.ajax({
+  dataType: "json",
+  url: url,
+  data: data,
+  success: success
+});</pre>
+		</div>
+		<p>
+			数据会被附加到一个查询字符串的URL中，发送到服务器。如果该值的<code>data</code>参数是一个普通的对象，它会转换为一个字符串并使用URL编码，然后才追加到URL中。
+		</p>
+		<p>
+			大多数情况下都会指定一个请求成功后的回调函数：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.getJSON('ajax/test.json', function(data) {
+  var items = [];
+ 
+  $.each(data, function(key, val) {
+    items.push('&lt;li id="' + key + '"&gt;' + val + '&lt;/li&gt;');
+  });
+ 
+  $('&lt;ul/&gt;', {
+    'class': 'my-new-list',
+    html: items.join('')
+  }).appendTo('body');
+});</pre>
+		</div>
+		<p>
+			这个示例，当然遵循JSON文件的结构：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">{
+  "one": "Singular sensation",
+  "two": "Beady little eyes",
+  "three": "Little birds pitch by my doorstep"
+}</pre>
+		</div>
+		<p>
+			使用这种结构，这个示例遍历请求的数据，建立了一个无序列表，并追加到body。
+		</p>
+		<p>
+			在<code>success</code>回调中传入返回的数据，通常是一个JavaScript对象或数组所定义的JSON结构，使用<a href="http://www.shouce.ren/api/view/a/13014" class="book-a"><code>$.parseJSON()</code></a>方法解析。它（<code>success</code>回调）也传入了响应状态文本。
+		</p>
+		<p>
+			<strong>在jQuery 1.5，</strong>，在<code>success</code>回调函数接收一个“jqXHR”对象 （ 在<strong>jQuery 1.4</strong>中 ，它收到的是<code>XMLHttpRequest</code>对象）。然而，由于JSONP形式和跨域的GET请求不使用<abbr title="XmlHttpRequest">XHR</abbr>，在这些情况下， <code>jqXHR</code>和<code>textStatus</code>参数传递给success（成功）回调是 undefined 。
+		</p>
+		<div class="warning">
+			<p>
+				<strong>重要提示：</strong> 从jQuery 
+1.4开始，如果JSON文件包含一个语法错误，该请求通常会静静的失败。因此应该避免频繁手工编辑JSON数据。JSON语法规则比JavaScript对象字面量表示法更加严格。例如，所有在JSON中的字符串，无论是属性或值，必须用双引号括起来，更多JSON细节信息请参阅<a href="http://json.org/">http://json.org/</a> 。
+			</p>
+		</div>
+		<h4 id="jsonp">
+			JSONP
+		</h4>
+		<p>
+			如果URL包含字符串“callback=?”（或类似的参数，取决于服务器端 API 是如何定义的），这个请求被视为JSONP形式请求。更多<code>jsonp</code>数据类型的细节讨论，请参阅<a href="http://www.shouce.ren/api/view/a/12861" class="book-a"><code>$.ajax()</code></a>。
+		</p>
+		<h4 id="jqxhr-object">
+			The jqXHR Object（jqXHR 对象）
+		</h4>
+		<p>
+			<strong>从jQuery 1.5开始</strong>，所有jQuery的Ajax方法都返回一个<code>XMLHTTPRequest</code>对象的超集。这个通过<code>$.getJSON()</code>方法返回的jQuery XHR对象，或“jqXHR，”实现了 Promise 接口，使它拥有 Promise 的所有属性，方法和行为。<code>jqXHR.done()</code> (表示成功), <code>jqXHR.fail() (表示错误)</code>, 和 <code>jqXHR.always()</code> (表示完成, 无论是成功或错误；在jQuery 1.6 中添加) 方法接受一个函数参数，用来请求终止时被调用。关于这个函数接收参数的详细信息，请参阅 <a href="http://www.shouce.ren/api/view/a/12861" class="book-a">jqXHR Object</a> 文档中的 $.ajax() 章节。
+		</p>
+		<p>
+			Promise 接口也允许jQuery的Ajax方法, 包括 <code>$.getJSON()</code>, 在一个单独的请求中关联到 <code>.success()</code>, <code>.complete()</code>, 和 <code>.error()</code> 回调函数， 甚至允许你在请求已经结束后，指派回调函数。如果该请求已经完成，则回调函数会被立刻调用。
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">// Assign handlers immediately after making the request,
+// and remember the jqxhr object for this request
+var jqxhr = $.getJSON("example.json", function() {
+  alert("success");
+})
+.success(function() { alert("second success"); })
+.error(function() { alert("error"); })
+.complete(function() { alert("complete"); });
+ 
+// perform other work here ...
+ 
+// Set another completion function for the request above
+jqxhr.complete(function(){ alert("second complete"); });</pre>
+		</div>
+		<h4>
+			Deprecation Notice(弃用通知)
+		</h4>
+		<p>
+			jQuery 1.5中引进的 <code>jqXHR.success()</code>,<code>jqXHR.error()</code>,<code>jqXHR.complete()</code>回调方法<del>在jQuery 1.5中引进， <strong>在jQuery 1.8中不赞成使用，已经过时</strong>。他们最终将被取消（移除），你的代码应该为次做好准备，</del> 从jQuery 3.0开始被删除，你可以使用<code>jqXHR.done()</code>, <code>jqXHR.fail()</code>, 和 <code>jqXHR.always()</code>代替。
+		</p>
+	</div>
+	<h3>
+		Additional Notes:（其他注意事项：）
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				由于浏览器的安全限制，大多数“Ajax”的要求，均采用<a title="维基百科上的同源策略" href="http://en.wikipedia.org/wiki/Same_origin_policy">同一起源的政策</a> ;即无法从不同的域，子域或协议中正确接收数据。
+			</li>
+			<li>
+				Script和JSONP形式请求不受同源策略的限制。
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		从 Flickr JSONP API 载入 4 张最新的关于猫的图片。
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;div id="images"&gt;&lt;/div&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&amp;tagmode=any&amp;format
+=json&amp;jsoncallback=?", function(data){
+  $.each(data.items, function(i,item){
+    $("&lt;img/&gt;").attr("src", item.media.m).appendTo("#images");
+    if ( i == 3 ) return false;
+  });
+});</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		从 test.js 载入 JSON 数据并显示 JSON 数据中一个 name 字段数据。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$.getJSON("test.js", function(json){
+  alert("JSON Data: " + json.users[3].name);
+});</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		从 test.js 载入 JSON 数据，附加参数，显示 JSON 数据中一个 name 字段数据。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$.getJSON("test.js", { name: "John", time: "2pm" }, function(json){
+  alert("JSON Data: " + json.users[3].name);
+});</code></pre>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

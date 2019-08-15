@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="CHM Editor">
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="ExWindow Styles" value="0x200">
+	<param name="Window Styles" value="0x800025">
+	<param name="Font" value="MS Sans Serif,9,0">
+</OBJECT>
+<UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="正则表达式(regular expression)">
+    <param name="Local" value="1.htm">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="前言_索引">
+    <param name="Local" value="2.htm">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="1. 引子">
+    <param name="Local" value="3.htm">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="2. 正则表达式的历史">
+    <param name="Local" value="4.htm">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="3. 正则表达式定义">
+    <param name="Local" value="5.htm">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="4. 各种操作符的运算优先级">
+    <param name="Local" value="6.htm">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="5. 全部符号解释">
+    <param name="Local" value="7.htm">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="6. 部分例子">
+    <param name="Local" value="8.htm">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="7. 正则表达式匹配规则">
+    <param name="Local" value="9.htm">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="8. 参考文献">
+    <param name="Local" value="10.htm">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+</UL>
+</BODY></HTML>

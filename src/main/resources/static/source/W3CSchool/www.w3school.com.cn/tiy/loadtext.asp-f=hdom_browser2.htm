@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript">
+function detectBrowser()
+{
+var browser=navigator.appName
+var b_version=navigator.appVersion
+var version=parseFloat(b_version)
+if ((browser=="Netscape"||browser=="Microsoft Internet Explorer") && (version>=4))
+  {alert("您的浏览器已经很棒了！")}
+else
+  {alert("您的浏览器需要升级了！")}
+}
+</script>
+</head>
+
+<body onload="detectBrowser()">
+</body>
+
+</html>

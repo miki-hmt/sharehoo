@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript">
+function setFocus()
+  {
+  document.getElementById('button1').focus()
+  }
+function removeFocus()
+  {
+  document.getElementById('button1').blur()
+  }
+</script>
+</head>
+<body>
+
+<form>
+<input type="button" id="button1" value="Button1" />
+<br /><br />
+<input type="button" onclick="setFocus()" value="Set focus" />
+<input type="button" onclick="removeFocus()" value="Remove focus" />
+</form>
+
+</body>
+</html>

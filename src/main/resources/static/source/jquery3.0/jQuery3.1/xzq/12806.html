@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>parent &gt; child</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">parent &gt; child</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;child selector
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a>&lt;Element(s)&gt;</code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>选择所有指定“parent”元素中指定的"child"的直接子元素。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( "parent &gt; child" )
+			</h4>
+			<p class="argument">
+				<strong>parent: </strong>任何有效的选择器。
+			</p>
+			<p class="argument">
+				<strong>child: </strong>用来筛选子元素的选择器。
+			</p>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<del>作为一个CSS选择器，这个子元素组合器被Safari, Firefox, Opera, Chrome, 和 
+Internet Explorer 7 及以上版本等现代浏览器支持，但尤其不被Internet 
+Explorer6及以下版本支持。然而在jQuery中，这个选择器（与其他所有选择器）能在所有支持的浏览器中工作，包括IE6。</del> 
+		</p>
+		<p>
+			这个子元素组合选择器(E <strong>&gt;</strong> F)被认为是后代组合选择器(E F)的一个更具体的形式，但是他们有所不同，子元素组合选择器(E <strong>&gt;</strong> F)它只会选择第一级的后代。
+		</p>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		匹配表单中所有的子级input元素。
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;form&gt;
+  &lt;label&gt;Name:&lt;/label&gt;
+  &lt;input name="name" /&gt;
+  &lt;fieldset&gt;
+      &lt;label&gt;Newsletter:&lt;/label&gt;
+      &lt;input name="newsletter" /&gt;
+ &lt;/fieldset&gt;
+&lt;/form&gt;
+&lt;input name="none" /&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("form &gt; input")</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>[ &lt;input name="name" /&gt; ]</code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	为无序列表 &lt;ul class="topnav"&gt;的所有直接子元素加上边框。
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;child demo&lt;/title&gt;
+  &lt;style&gt;
+  body {
+    font-size: 14px;
+  }
+  	&lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;ul class="topnav"&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2
+    &lt;ul&gt;
+    &lt;li&gt;Nested item 1&lt;/li&gt;
+    &lt;li&gt;Nested item 2&lt;/li&gt;
+    &lt;li&gt;Nested item 3&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;
+ 
+&lt;script&gt;
+$( "ul.topnav &gt; li" ).css( "border", "3px double red" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7901" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

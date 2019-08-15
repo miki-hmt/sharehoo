@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript">
+function removeOption()
+  {
+  var x=document.getElementById("mySelect")
+  x.remove(x.selectedIndex)
+  }
+</script>
+</head>
+<body>
+
+<form>
+<select id="mySelect">
+  <option>苹果</option>
+  <option>桃子</option>
+  <option>香蕉</option>
+  <option>桔子</option>
+</select>
+<input type="button" onclick="removeOption()" value="删除被选的选项">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>&#31532; 15 &#31456;  &#26465;&#20214;&#26597;&#35810;(Criteria Queries)</TITLE>
+<META content="text/html; charset=ISO-8859-1" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../shared/css/html.css">
+<META name=GENERATOR content="MSHTML 11.00.9431.193"><LINK 
+title="HIBERNATE - &#31526;&#21512;Java&#20064;&#24815;&#30340;&#20851;&#31995;&#25968;&#25454;&#24211;&#25345;&#20037;&#21270;" rel=home href="index.html"><LINK 
+title="HIBERNATE - &#31526;&#21512;Java&#20064;&#24815;&#30340;&#20851;&#31995;&#25968;&#25454;&#24211;&#25345;&#20037;&#21270;" rel=up href="index.html"><LINK 
+title="&#31532;&nbsp;14&nbsp;&#31456;&nbsp;HQL: Hibernate&#26597;&#35810;&#35821;&#35328;" rel=previous 
+href="queryhql.html"><LINK title="&#31532;&nbsp;16&nbsp;&#31456;&nbsp;Native SQL&#26597;&#35810;" rel=next 
+href="querysql.html"></HEAD>
+<BODY aLink=#0000ff link=#0000ff bgColor=white text=black vLink=#840084>
+<DIV class=navheader>
+<TABLE width="100%" summary="Navigation header">
+  <TBODY>
+  <TR>
+    <TH colSpan=3 align=center>&#31532;&nbsp;15&nbsp;&#31456;&nbsp; &#26465;&#20214;&#26597;&#35810;(Criteria Queries) 
+    </TH></TR>
+  <TR>
+    <TD width="20%" align=left><A accessKey=p 
+    href="queryhql.html">&#19978;&#19968;&#39029;</A>&nbsp;</TD>
+    <TH width="60%" align=center>&nbsp;</TH>
+    <TD width="20%" align=right>&nbsp;<A accessKey=n 
+      href="querysql.html">&#19979;&#19968;&#39029;</A></TD></TR></TBODY></TABLE>
+<HR>
+</DIV>
+<DIV lang=zh-cn class=chapter>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title><A name=querycriteria></A>&#31532;&nbsp;15&nbsp;&#31456;&nbsp; &#26465;&#20214;&#26597;&#35810;(Criteria 
+Queries) </H2>
+<P class=title>&#23398;&#20064;<FONT color=#ff0000>QQ&#32676;&#65306;</FONT><FONT color=#ff0000 
+size=5>476133513&nbsp;&nbsp; &#21487;&#20197;&#21152;&#32676;&#19968;&#36215;&#35752;&#35770;&#23398;&#20064;</FONT></P></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#20855;&#26377;&#19968;&#20010;&#30452;&#35266;&#30340;&#12289;&#21487;&#25193;&#23637;&#30340;&#26465;&#20214;&#26597;&#35810;API&#26159;Hibernate&#30340;&#29305;&#33394;&#12290; </P>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=querycriteria-creating></A>15.1.&nbsp;&#21019;&#24314;&#19968;&#20010;<TT class=literal>Criteria</TT> 
+&#23454;&#20363;</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P><TT class=literal>org.hibernate.Criteria</TT>&#25509;&#21475;&#34920;&#31034;&#29305;&#23450;&#25345;&#20037;&#31867;&#30340;&#19968;&#20010;&#26597;&#35810;&#12290;<TT 
+class=literal>Session</TT>&#26159; <TT class=literal>Criteria</TT>&#23454;&#20363;&#30340;&#24037;&#21378;&#12290; </P><PRE class=programlisting>Criteria crit = sess.createCriteria(Cat.class);
+crit.setMaxResults(50);
+List cats = crit.list();</PRE></DIV>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=querycriteria-narrowing></A>15.2.&nbsp;&#38480;&#21046;&#32467;&#26524;&#38598;&#20869;&#23481;</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#19968;&#20010;&#21333;&#29420;&#30340;&#26597;&#35810;&#26465;&#20214;&#26159;<TT class=literal>org.hibernate.criterion.Criterion</TT> 
+&#25509;&#21475;&#30340;&#19968;&#20010;&#23454;&#20363;&#12290;<TT class=literal>org.hibernate.criterion.Restrictions</TT>&#31867; 
+&#23450;&#20041;&#20102;&#33719;&#24471;&#26576;&#20123;&#20869;&#32622;<TT class=literal>Criterion</TT>&#31867;&#22411;&#30340;&#24037;&#21378;&#26041;&#27861;&#12290; </P><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.like("name", "Fritz%") )
+    .add( Restrictions.between("weight", minWeight, maxWeight) )
+    .list();</PRE>
+<P>&#32422;&#26463;&#21487;&#20197;&#25353;&#36923;&#36753;&#20998;&#32452;&#12290; </P><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.like("name", "Fritz%") )
+    .add( Restrictions.or(
+        Restrictions.eq( "age", new Integer(0) ),
+        Restrictions.isNull("age")
+    ) )
+    .list();</PRE><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.in( "name", new String[] { "Fritz", "Izi", "Pk" } ) )
+    .add( Restrictions.disjunction()
+        .add( Restrictions.isNull("age") )
+    	.add( Restrictions.eq("age", new Integer(0) ) )
+    	.add( Restrictions.eq("age", new Integer(1) ) )
+    	.add( Restrictions.eq("age", new Integer(2) ) )
+    ) )
+    .list();</PRE>
+<P>Hibernate&#25552;&#20379;&#20102;&#30456;&#24403;&#22810;&#30340;&#20869;&#32622;criterion&#31867;&#22411;(<TT class=literal>Restrictions</TT> &#23376;&#31867;), 
+&#20294;&#26159;&#23588;&#20854;&#26377;&#29992;&#30340;&#26159;&#21487;&#20197;&#20801;&#35768;&#20320;&#30452;&#25509;&#20351;&#29992;SQL&#12290; </P><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.sqlRestriction("lower({alias}.name) like lower(?)", "Fritz%", Hibernate.STRING) )
+    .list();</PRE>
+<P><TT class=literal>{alias}</TT>&#21344;&#20301;&#31526;&#24212;&#24403;&#34987;&#26367;&#25442;&#20026;&#34987;&#26597;&#35810;&#23454;&#20307;&#30340;&#21015;&#21035;&#21517;&#12290; </P>
+<P><TT class=literal>Property</TT>&#23454;&#20363;&#26159;&#33719;&#24471;&#19968;&#20010;&#26465;&#20214;&#30340;&#21478;&#22806;&#19968;&#31181;&#36884;&#24452;&#12290;&#20320;&#21487;&#20197;&#36890;&#36807;&#35843;&#29992;<TT 
+class=literal>Property.forName()</TT> &#21019;&#24314;&#19968;&#20010;<TT class=literal>Property</TT>&#12290; </P><PRE class=programlisting>Property age = Property.forName("age");
+List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.disjunction()
+        .add( age.isNull() )
+    	.add( age.eq( new Integer(0) ) )
+    	.add( age.eq( new Integer(1) ) )
+    	.add( age.eq( new Integer(2) ) )
+    ) )
+    .add( Property.forName("name").in( new String[] { "Fritz", "Izi", "Pk" } ) )
+    .list();</PRE></DIV>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=querycriteria-ordering></A>15.3.&nbsp;&#32467;&#26524;&#38598;&#25490;&#24207;</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#20320;&#21487;&#20197;&#20351;&#29992;<TT class=literal>org.hibernate.criterion.Order</TT>&#26469;&#20026;&#26597;&#35810;&#32467;&#26524;&#25490;&#24207;&#12290; </P><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.like("name", "F%")
+    .addOrder( Order.asc("name") )
+    .addOrder( Order.desc("age") )
+    .setMaxResults(50)
+    .list();</PRE><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .add( Property.forName("name").like("F%") )
+    .addOrder( Property.forName("name").asc() )
+    .addOrder( Property.forName("age").desc() )
+    .setMaxResults(50)
+    .list();</PRE></DIV>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=querycriteria-associations></A>15.4.&nbsp;&#20851;&#32852;</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#20320;&#21487;&#20197;&#20351;&#29992;<TT class=literal>createCriteria()</TT>&#38750;&#24120;&#23481;&#26131;&#30340;&#22312;&#20114;&#30456;&#20851;&#32852;&#30340;&#23454;&#20307;&#38388;&#24314;&#31435; &#32422;&#26463;&#12290; </P><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.like("name", "F%") )
+    .createCriteria("kittens")
+        .add( Restrictions.like("name", "F%") )
+    .list();</PRE>
+<P>&#27880;&#24847;&#31532;&#20108;&#20010; <TT class=literal>createCriteria()</TT>&#36820;&#22238;&#19968;&#20010;&#26032;&#30340; <TT 
+class=literal>Criteria</TT>&#23454;&#20363;&#65292;&#35813;&#23454;&#20363;&#24341;&#29992;<TT class=literal>kittens</TT> &#38598;&#21512;&#20013;&#30340;&#20803;&#32032;&#12290; </P>
+<P>&#25509;&#19979;&#26469;&#65292;&#26367;&#25442;&#24418;&#24577;&#22312;&#26576;&#20123;&#24773;&#20917;&#19979;&#20063;&#26159;&#24456;&#26377;&#29992;&#30340;&#12290; </P><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .createAlias("kittens", "kt")
+    .createAlias("mate", "mt")
+    .add( Restrictions.eqProperty("kt.name", "mt.name") )
+    .list();</PRE>
+<P>(<TT class=literal>createAlias()</TT>&#24182;&#19981;&#21019;&#24314;&#19968;&#20010;&#26032;&#30340; <TT 
+class=literal>Criteria</TT>&#23454;&#20363;&#12290;) </P>
+<P><TT class=literal>Cat</TT>&#23454;&#20363;&#25152;&#20445;&#23384;&#30340;&#20043;&#21069;&#20004;&#27425;&#26597;&#35810;&#25152;&#36820;&#22238;&#30340;kittens&#38598;&#21512;&#26159; <SPAN 
+class=emphasis><EM>&#27809;&#26377;</EM></SPAN>&#34987;&#26465;&#20214;&#39044;&#36807;&#28388;&#30340;&#12290;&#22914;&#26524;&#20320;&#24076;&#26395;&#21482;&#33719;&#24471;&#31526;&#21512;&#26465;&#20214;&#30340;kittens&#65292; &#20320;&#24517;&#39035;&#20351;&#29992;<TT 
+class=literal>ResultTransformer</TT>&#12290; </P><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .createCriteria("kittens", "kt")
+        .add( Restrictions.eq("name", "F%") )
+    .setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP)
+    .list();
+Iterator iter = cats.iterator();
+while ( iter.hasNext() ) {
+    Map map = (Map) iter.next();
+    Cat cat = (Cat) map.get(Criteria.ROOT_ALIAS);
+    Cat kitten = (Cat) map.get("kt");
+}</PRE></DIV>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=querycriteria-dynamicfetching></A>15.5.&nbsp;&#21160;&#24577;&#20851;&#32852;&#25235;&#21462;</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#20320;&#21487;&#20197;&#20351;&#29992;<TT class=literal>setFetchMode()</TT>&#22312;&#36816;&#34892;&#26102;&#23450;&#20041;&#21160;&#24577;&#20851;&#32852;&#25235;&#21462;&#30340;&#35821;&#20041;&#12290; </P><PRE class=programlisting>List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.like("name", "Fritz%") )
+    .setFetchMode("mate", FetchMode.EAGER)
+    .setFetchMode("kittens", FetchMode.EAGER)
+    .list();</PRE>
+<P>&#36825;&#20010;&#26597;&#35810;&#21487;&#20197;&#36890;&#36807;&#22806;&#36830;&#25509;&#25235;&#21462;<TT class=literal>mate</TT>&#21644;<TT class=literal>kittens</TT>&#12290; &#26597;&#30475;<A 
+title="19.1.&nbsp;&#10;&#9;&#9;&#9;&#25235;&#21462;&#31574;&#30053;(Fetching strategies)&#10;&#9;&#9;" 
+href="performance.html#performance-fetching">&#31532;&nbsp;19.1&nbsp;&#33410; “ &#25235;&#21462;&#31574;&#30053;(Fetching 
+strategies) ”</A>&#21487;&#20197;&#33719;&#24471;&#26356;&#22810;&#20449;&#24687;&#12290; </P></DIV>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=querycriteria-examples></A>15.6.&nbsp;&#26597;&#35810;&#31034;&#20363;</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P><TT class=literal>org.hibernate.criterion.Example</TT>&#31867;&#20801;&#35768;&#20320;&#36890;&#36807;&#19968;&#20010;&#32473;&#23450;&#23454;&#20363; &#26500;&#24314;&#19968;&#20010;&#26465;&#20214;&#26597;&#35810;&#12290; 
+</P><PRE class=programlisting>Cat cat = new Cat();
+cat.setSex('F');
+cat.setColor(Color.BLACK);
+List results = session.createCriteria(Cat.class)
+    .add( Example.create(cat) )
+    .list();</PRE>
+<P>&#29256;&#26412;&#23646;&#24615;&#12289;&#26631;&#35782;&#31526;&#21644;&#20851;&#32852;&#34987;&#24573;&#30053;&#12290;&#40664;&#35748;&#24773;&#20917;&#19979;&#20540;&#20026;null&#30340;&#23646;&#24615;&#23558;&#34987;&#25490;&#38500;&#12290; </P>
+<P>&#20320;&#21487;&#20197;&#33258;&#34892;&#35843;&#25972;<TT class=literal>Example</TT>&#20351;&#20043;&#26356;&#23454;&#29992;&#12290; </P><PRE class=programlisting>Example example = Example.create(cat)
+    .excludeZeroes()           //exclude zero valued properties
+    .excludeProperty("color")  //exclude the property named "color"
+    .ignoreCase()              //perform case insensitive string comparisons
+    .enableLike();             //use like for string comparisons
+List results = session.createCriteria(Cat.class)
+    .add(example)
+    .list();</PRE>
+<P>&#20320;&#29978;&#33267;&#21487;&#20197;&#20351;&#29992;examples&#22312;&#20851;&#32852;&#23545;&#35937;&#19978;&#25918;&#32622;&#26465;&#20214;&#12290; </P><PRE class=programlisting>List results = session.createCriteria(Cat.class)
+    .add( Example.create(cat) )
+    .createCriteria("mate")
+        .add( Example.create( cat.getMate() ) )
+    .list();</PRE></DIV>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=querycriteria-projection></A>15.7.&nbsp;&#25237;&#24433;(Projections)&#12289;&#32858;&#21512;&#65288;aggregation&#65289;&#21644;&#20998;&#32452;&#65288;grouping&#65289;</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P><TT class=literal>org.hibernate.criterion.Projections</TT>&#26159; <TT 
+class=literal>Projection</TT> &#30340;&#23454;&#20363;&#24037;&#21378;&#12290;&#25105;&#20204;&#36890;&#36807;&#35843;&#29992; <TT 
+class=literal>setProjection()</TT>&#24212;&#29992;&#25237;&#24433;&#21040;&#19968;&#20010;&#26597;&#35810;&#12290; </P><PRE class=programlisting>List results = session.createCriteria(Cat.class)
+    .setProjection( Projections.rowCount() )
+    .add( Restrictions.eq("color", Color.BLACK) )
+    .list();</PRE><PRE class=programlisting>List results = session.createCriteria(Cat.class)
+    .setProjection( Projections.projectionList()
+        .add( Projections.rowCount() )
+        .add( Projections.avg("weight") )
+        .add( Projections.max("weight") )
+        .add( Projections.groupProperty("color") )
+    )
+    .list();</PRE>
+<P>&#22312;&#19968;&#20010;&#26465;&#20214;&#26597;&#35810;&#20013;&#27809;&#26377;&#24517;&#35201;&#26174;&#24335;&#30340;&#20351;&#29992; "group by" &#12290;&#26576;&#20123;&#25237;&#24433;&#31867;&#22411;&#23601;&#26159;&#34987;&#23450;&#20041;&#20026;<SPAN class=emphasis><EM> 
+&#20998;&#32452;&#25237;&#24433;</EM></SPAN>&#65292;&#20182;&#20204;&#20063;&#20986;&#29616;&#22312;SQL&#30340;<TT class=literal>group by</TT>&#23376;&#21477;&#20013;&#12290; </P>
+<P>&#20320;&#21487;&#20197;&#36873;&#25321;&#25226;&#19968;&#20010;&#21035;&#21517;&#25351;&#27966;&#32473;&#19968;&#20010;&#25237;&#24433;&#65292;&#36825;&#26679;&#21487;&#20197;&#20351;&#25237;&#24433;&#20540;&#34987;&#32422;&#26463;&#25110;&#25490;&#24207;&#25152;&#24341;&#29992;&#12290;&#19979;&#38754;&#26159;&#20004;&#31181;&#19981;&#21516;&#30340;&#23454;&#29616;&#26041;&#24335;&#65306; </P><PRE class=programlisting>List results = session.createCriteria(Cat.class)
+    .setProjection( Projections.alias( Projections.groupProperty("color"), "colr" ) )
+    .addOrder( Order.asc("colr") )
+    .list();</PRE><PRE class=programlisting>List results = session.createCriteria(Cat.class)
+    .setProjection( Projections.groupProperty("color").as("colr") )
+    .addOrder( Order.asc("colr") )
+    .list();</PRE>
+<P><TT class=literal>alias()</TT>&#21644;<TT class=literal>as()</TT>&#26041;&#27861;&#31616;&#20415;&#30340;&#23558;&#19968;&#20010;&#25237;&#24433;&#23454;&#20363;&#21253;&#35013;&#21040;&#21478;&#22806;&#19968;&#20010; 
+&#21035;&#21517;&#30340;<TT class=literal>Projection</TT>&#23454;&#20363;&#20013;&#12290;&#31616;&#32780;&#35328;&#20043;&#65292;&#24403;&#20320;&#28155;&#21152;&#19968;&#20010;&#25237;&#24433;&#21040;&#19968;&#20010;&#25237;&#24433;&#21015;&#34920;&#20013;&#26102; &#20320;&#21487;&#20197;&#20026;&#23427;&#25351;&#23450;&#19968;&#20010;&#21035;&#21517;&#65306; </P><PRE class=programlisting>List results = session.createCriteria(Cat.class)
+    .setProjection( Projections.projectionList()
+        .add( Projections.rowCount(), "catCountByColor" )
+        .add( Projections.avg("weight"), "avgWeight" )
+        .add( Projections.max("weight"), "maxWeight" )
+        .add( Projections.groupProperty("color"), "color" )
+    )
+    .addOrder( Order.desc("catCountByColor") )
+    .addOrder( Order.desc("avgWeight") )
+    .list();</PRE><PRE class=programlisting>List results = session.createCriteria(Domestic.class, "cat")
+    .createAlias("kittens", "kit")
+    .setProjection( Projections.projectionList()
+        .add( Projections.property("cat.name"), "catName" )
+        .add( Projections.property("kit.name"), "kitName" )
+    )
+    .addOrder( Order.asc("catName") )
+    .addOrder( Order.asc("kitName") )
+    .list();</PRE>
+<P>&#20320;&#20063;&#21487;&#20197;&#20351;&#29992;<TT class=literal>Property.forName()</TT>&#26469;&#34920;&#31034;&#25237;&#24433;&#65306; </P><PRE class=programlisting>List results = session.createCriteria(Cat.class)
+    .setProjection( Property.forName("name") )
+    .add( Property.forName("color").eq(Color.BLACK) )
+    .list();</PRE><PRE class=programlisting>List results = session.createCriteria(Cat.class)
+    .setProjection( Projections.projectionList()
+        .add( Projections.rowCount().as("catCountByColor") )
+        .add( Property.forName("weight").avg().as("avgWeight") )
+        .add( Property.forName("weight").max().as("maxWeight") )
+        .add( Property.forName("color").group().as("color" )
+    )
+    .addOrder( Order.desc("catCountByColor") )
+    .addOrder( Order.desc("avgWeight") )
+    .list();</PRE></DIV>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=querycriteria-detachedqueries></A>15.8.&nbsp;&#31163;&#32447;(detached)&#26597;&#35810;&#21644;&#23376;&#26597;&#35810;</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P><TT class=literal>DetachedCriteria</TT>&#31867;&#20351;&#20320;&#22312;&#19968;&#20010;session&#33539;&#22260;&#20043;&#22806;&#21019;&#24314;&#19968;&#20010;&#26597;&#35810;&#65292;&#24182;&#19988;&#21487;&#20197;&#20351;&#29992;&#20219;&#24847;&#30340; <TT 
+class=literal>Session</TT>&#26469;&#25191;&#34892;&#23427;&#12290; </P><PRE class=programlisting>DetachedCriteria query = DetachedCriteria.forClass(Cat.class)
+    .add( Property.forName("sex").eq('F') );
+    
+Session session = ....;
+Transaction txn = session.beginTransaction();
+List results = query.getExecutableCriteria(session).setMaxResults(100).list();
+txn.commit();
+session.close();</PRE>
+<P><TT class=literal>DetachedCriteria</TT>&#20063;&#21487;&#20197;&#29992;&#20197;&#34920;&#31034;&#23376;&#26597;&#35810;&#12290;&#26465;&#20214;&#23454;&#20363;&#21253;&#21547;&#23376;&#26597;&#35810;&#21487;&#20197;&#36890;&#36807; <TT 
+class=literal>Subqueries</TT>&#25110;&#32773;<TT class=literal>Property</TT>&#33719;&#24471;&#12290; </P><PRE class=programlisting>DetachedCriteria avgWeight = DetachedCriteria.forClass(Cat.class)
+	.setProjection( Property.forName("weight").avg() );
+session.createCriteria(Cat.class)
+	.add( Property.forName("weight).gt(avgWeight) )
+	.list();</PRE><PRE class=programlisting>DetachedCriteria weights = DetachedCriteria.forClass(Cat.class)
+	.setProjection( Property.forName("weight") );
+session.createCriteria(Cat.class)
+	.add( Subqueries.geAll("weight", weights) )
+	.list();</PRE>
+<P>&#29978;&#33267;&#30456;&#20114;&#20851;&#32852;&#30340;&#23376;&#26597;&#35810;&#20063;&#26159;&#26377;&#21487;&#33021;&#30340;&#65306; </P><PRE class=programlisting>DetachedCriteria avgWeightForSex = DetachedCriteria.forClass(Cat.class, "cat2")
+	.setProjection( Property.forName("weight").avg() )
+	.add( Property.forName("cat2.sex").eqProperty("cat.sex") );
+session.createCriteria(Cat.class, "cat")
+	.add( Property.forName("weight).gt(avgWeightForSex) )
+	.list();</PRE></DIV>
+<DIV lang=zh-cn class=sect1>
+<DIV class=titlepage>
+<DIV>
+<DIV>
+<H2 class=title style="CLEAR: both"><A 
+name=query-criteria-naturalid></A>15.9.&nbsp;&#26681;&#25454;&#33258;&#28982;&#26631;&#35782;&#26597;&#35810;(Queries by natural 
+identifier)</H2></DIV></DIV>
+<DIV></DIV></DIV>
+<P>&#23545;&#22823;&#22810;&#25968;&#26597;&#35810;&#65292;&#21253;&#25324;&#26465;&#20214;&#26597;&#35810;&#32780;&#35328;&#65292;&#22240;&#20026;&#26597;&#35810;&#32531;&#23384;&#30340;&#22833;&#25928;(invalidation)&#21457;&#29983;&#24471;&#22826;&#39057;&#32321;&#65292;&#26597;&#35810;&#32531;&#23384;&#19981;&#26159;&#38750;&#24120;&#39640;&#25928;&#12290;&#28982;&#32780;&#65292;&#26377;&#19968;&#31181;&#29305;&#21035;&#30340;&#26597;&#35810;&#65292;&#21487;&#20197;&#36890;&#36807;&#19981;&#21464;&#30340;&#33258;&#28982;&#38190;&#20248;&#21270;&#32531;&#23384;&#30340;&#22833;&#25928;&#31639;&#27861;&#12290;&#22312;&#26576;&#20123;&#24212;&#29992;&#20013;&#65292;&#36825;&#31181;&#31867;&#22411;&#30340;&#26597;&#35810;&#27604;&#36739;&#24120;&#35265;&#12290;&#26465;&#20214;&#26597;&#35810;API&#23545;&#36825;&#31181;&#29992;&#20363;&#25552;&#20379;&#20102;&#29305;&#21035;&#35268;&#32422;&#12290; 
+</P>
+<P>&#39318;&#20808;&#65292;&#20320;&#24212;&#35813;&#23545;&#20320;&#30340;entity&#20351;&#29992;<TT class=literal>&lt;natural-id&gt;</TT>&#26469;&#26144;&#23556;&#33258;&#28982;&#38190;&#65292;&#28982;&#21518;&#25171;&#24320;&#31532;&#20108;&#32423;&#32531;&#23384;&#12290; 
+</P><PRE class=programlisting>&lt;class name="User"&gt;
+    &lt;cache usage="read-write"/&gt;
+    &lt;id name="id"&gt;
+        &lt;generator class="increment"/&gt;
+    &lt;/id&gt;
+    &lt;natural-id&gt;
+        &lt;property name="name"/&gt;
+        &lt;property name="org"/&gt;
+    &lt;/natural-id&gt;
+    &lt;property name="password"/&gt;
+&lt;/class&gt;</PRE>
+<P>&#27880;&#24847;,&#27492;&#21151;&#33021;&#23545;&#20855;&#26377;<SPAN class=emphasis><EM>mutable</EM></SPAN>&#33258;&#28982;&#38190;&#30340;entity&#24182;&#19981;&#36866;&#29992;&#12290; </P>
+<P>&#28982;&#21518;&#65292;&#25171;&#24320;Hibernate &#26597;&#35810;&#32531;&#23384;&#12290; </P>
+<P>&#29616;&#22312;&#65292;&#25105;&#20204;&#21487;&#20197;&#29992;<TT class=literal>Restrictions.naturalId()</TT>&#26469;&#20351;&#29992;&#26356;&#21152;&#39640;&#25928;&#30340;&#32531;&#23384;&#31639;&#27861;&#12290; </P><PRE class=programlisting>session.createCriteria(User.class)
+    .add( Restrictions.naturalId()
+        .set("name", "gavin")
+        .set("org", "hb") 
+    ).setCacheable(true)
+    .uniqueResult();</PRE></DIV></DIV>
+<DIV class=navfooter>
+<HR>
+
+<TABLE width="100%" summary="Navigation footer">
+  <TBODY>
+  <TR>
+    <TD width="40%" align=left><A accessKey=p 
+    href="queryhql.html">&#19978;&#19968;&#39029;</A>&nbsp;</TD>
+    <TD width="20%" align=center><A accessKey=u href="index.html">&#19978;&#19968;&#32423;</A></TD>
+    <TD width="40%" align=right>&nbsp;<A accessKey=n 
+      href="querysql.html">&#19979;&#19968;&#39029;</A></TD></TR>
+  <TR>
+    <TD vAlign=top width="40%" align=left>&#31532;&nbsp;14&nbsp;&#31456;&nbsp;HQL: 
+      Hibernate&#26597;&#35810;&#35821;&#35328;&nbsp;</TD>
+    <TD width="20%" align=center><A accessKey=h href="index.html">&#36215;&#22987;&#39029;</A></TD>
+    <TD vAlign=top width="40%" align=right>&nbsp;&#31532;&nbsp;16&nbsp;&#31456;&nbsp;Native 
+      SQL&#26597;&#35810;</TD></TR></TBODY></TABLE></DIV></BODY></HTML>

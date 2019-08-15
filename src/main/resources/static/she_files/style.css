@@ -1,0 +1,10 @@
+/*
+  auther:f7
+  date:2013.06
+*/
+#plugin-newspush a,
+#plugin-newspush-close { background:url("../img/sprites.png") no-repeat;}
+#plugin-newspush { height:48px; background:#cceeff; border:1px solid #8bc6e4; text-align:left; font:18px/48px "Microsoft Yahei", simhei; float:left; position:relative;}
+#plugin-newspush a { color:#2c27ff; text-decoration:none; padding-left:52px; background-position:0 -50px; display:block; height:48px; overflow:hidden; float:left; display:inline; margin-right:45px;}
+#plugin-newspush a:hover { color:#f00; text-decoration:none;}
+#plugin-newspush-close { cursor:pointer; width:36px; height:36px; position:absolute; right:1px; top:6px; background-position:0 -100px;}

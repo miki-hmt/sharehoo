@@ -1,0 +1,364 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>SMIL Media 元素</title>
+</head>
+
+<body class="multimedia">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>SMIL 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/smil/index.asp" title="SMIL 教程">SMIL 首页</a></li>
+<li><a href="smil_intro.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_intro.asp" title="SMIL 简介">SMIL 简介</a></li>
+<li><a href="smil_files.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_files.asp" title="SMIL 文件">SMIL 文件</a></li>
+<li><a href="smil_html.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_html.asp" title="SMIL In HTML">SMIL HTML</a></li>
+<li><a href="smil_xhtml.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_xhtml.asp" title="XHTML+SMIL">SMIL XHTML</a></li>
+<li><a href="smil_timing.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_timing.asp" title="SMIL Timing">SMIL Timing</a></li>
+<li><a href="smil_seq.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_seq.asp" title="SMIL Sequence">SMIL Sequence</a></li>
+<li><a href="smil_parallel.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_parallel.asp" title="SMIL in Parallel">SMIL Parallel</a></li>
+<li><a href="smil_transition.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_transition.asp" title="SMIL Transition">SMIL Transition</a></li>
+<li><a href="smil_media.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_media.asp" title="SMIL Media 元素">SMIL Media</a></li>
+<li><a href="smil_reference.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_reference.asp" title="SMIL 参考手册">SMIL 参考</a></li>
+</ul>
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SMIL Media 元素</h1>
+
+<div id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="smil_transition.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_transition.asp">Previous Page</a></li>
+
+<li class="next"><a href="smil_reference.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_reference.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div id="intro">
+<p><strong>SMIL 使用媒介元素来描述内容。</strong></p>
+</div>
+
+<div>
+<h2>Media 元素</h2>
+
+<p>可使用下面的媒介元素在 SMIL 文档中包括媒介对象：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:25%;">元素</th>
+<th style="width:60%;">描述</th>
+<th style="width:15%;">Ver</th>
+</tr>
+
+<tr>
+<td>&lt;animation&gt;</td>
+<td>定义动画。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>&lt;audio&gt;</td>
+<td>定义音频片断。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>&lt;brush&gt;</td>
+<td>定义笔刷。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>&lt;img&gt;</td>
+<td>定义图像。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>&lt;param&gt;</td>
+<td>定义参数。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>&lt;ref&gt;</td>
+<td>定义一般的媒介引用。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>&lt;text&gt;</td>
+<td>定义文本。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>&lt;textstream&gt;</td>
+<td>定义文本流。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>&lt;video&gt;</td>
+<td>定义视频。</td>
+<td>1</td>
+</tr>
+</table>
+</div>
+
+<div>
+<h2>Media 属性</h2>
+
+<p>必须使用 src 属性中的引用（URL）来包括 SMIL 文档中的每个媒介对象。src 属性是最常用在媒介元素的属性。</p>
+
+<p>type 属性用于定义媒介类型。如果 type 属性被忽略，则应用程序依赖由服务器告知的类型信息。开发者不应该依靠文件类型扩展名来定义文件类型。</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:25%;">属性</th>
+<th style="width:60%;">描述</th>
+<th style="width:15%;">Ver</th>
+</tr>
+
+<tr>
+<td>erase</td>
+<td>定义计时完成后该元素的行为。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>src</td>
+<td>定义媒介对象的源。</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>type</td>
+<td>定义媒介类型。</td>
+<td>1</td>
+</tr>
+</table>
+
+<p>如需完整的 SMIL 元素和属性列表，请访问 <a href="smil_reference.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_reference.asp" title="SMIL 参考手册">W3School SMIL 参考手册</a>。</p>
+</div>
+
+<div>
+<h2>&lt;animation&gt; 元素</h2>
+
+<p>&lt;animation&gt; 元素定义了对动画对象的引用，该对象是以矢量图型或其他各式存储的。</p>
+
+<p>不应把 &lt;animation&gt; 元素与 &lt;animate&gt; 元素相混淆。&lt;animation&gt; 元素通过引用定义了动画对象。而 &lt;animate&gt; 元素定义了其他元素的动画显示。</p>
+</div>
+
+<div>
+<h2>&lt;audio&gt; 元素</h2>
+
+<p>&lt;audio&gt; 元素定义了对音频对象的引用，该对象是以被录制的音频存储的。</p>
+
+<h3>实例：</h3>
+
+<pre>&lt;html xmlns:t=&quot;urn:schemas-microsoft-com:time&quot;&gt;
+&lt;head&gt;
+  &lt;?import namespace=&quot;t&quot; implementation=&quot;#default#time2&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;t:audio
+src=&quot;liar.wav&quot;
+repeatCount=&quot;indefinite&quot;
+type=&quot;wav&quot; /&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p><a href="../tiy/t.asp-f=smil_audio.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=smil_audio">TIY</a></p>
+</div>
+
+<div>
+<h2>&lt;brush&gt; 元素</h2>
+
+<p>&lt;brush&gt; 元素定义了填充颜色或填充模式。</p>
+
+<p>该元素定义了代替媒介对象的着色颜色或模式。</p>
+</div>
+
+<div>
+<h2>&lt;img&gt; 元素</h2>
+
+<p>&lt;img&gt; 元素定义了对图像对象的引用，该对象以 JPG 或其他图像格式存储。</p>
+
+<h3>实例：</h3>
+
+<pre>&lt;img src=&quot;myimage.gif&quot; type=&quot;GIF&quot; /&gt;</pre>
+</div>
+
+<div>
+<h2>&lt;param&gt; 元素</h2>
+
+<p>&lt;param&gt; 元素为任何其他媒介元素定义参数。</p>
+
+<h3>实例：</h3>
+
+<pre>&lt;param name=&quot;color&quot; value=&quot;red&quot; /&gt;</pre>
+</div>
+
+<div>
+<h2>&lt;ref&gt; 元素</h2>
+
+<p>&lt;ref&gt; 元素定义了对一般的媒介元素的引用。</p>
+
+<p>可在媒介类型未被良好定义的情况下使用 &lt;ref&gt; 元素。</p>
+</div>
+
+<div>
+<h2>&lt;text&gt; 元素</h2>
+
+<p>&lt;text&gt; 元素定义了对文本对象的引用，该对象被存储为文本。</p>
+</div>
+
+<div>
+<h2>&lt;textstream&gt; 元素</h2>
+
+<p>&lt;textstream&gt; 元素定义了对存储为文本流的文本对象的引用。</p>
+</div>
+
+<div>
+<h2>&lt;video&gt; 元素</h2>
+
+<p>&lt;video&gt; 元素定义了对视频对象的引用，该对象被存储为录制的视频。</p>
+
+<h3>例子:</h3>
+
+<pre>&lt;html xmlns:t=&quot;urn:schemas-microsoft-com:time&quot;&gt;
+&lt;head&gt;
+  &lt;?import namespace=&quot;t&quot; implementation=&quot;#default#time2&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;t:video
+src=&quot;http://www.ananova.com/about/vap_windows_check.wmv&quot;
+repeatCount=&quot;indefinite&quot;
+type=&quot;wmv&quot; /&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p><a href="../tiy/t.asp-f=smil_video.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=smil_video">TIY</a></p>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="smil_transition.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_transition.asp">Previous Page</a></li>
+
+<li class="next"><a href="smil_reference.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_reference.asp">Next Page</a></li>
+</ul>
+
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div>
+
+<div id="tools">
+<h5 id="tools_reference"><a href="smil_reference.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_reference.asp">SMIL 参考手册</a></h5>
+</div>
+
+<div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

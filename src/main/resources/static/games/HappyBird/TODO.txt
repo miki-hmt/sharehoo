@@ -1,0 +1,4 @@
+1.background music
+2.notify player when a level cleared
+3.multiply birds and display in top-left corner
+4.notify player when all level cleared

@@ -1,0 +1,50 @@
+<html>
+<head>
+<script type="text/javascript">
+var xmlhttp;
+function loadXMLDoc(url)
+{
+xmlhttp=null;
+if (window.XMLHttpRequest)
+  {// code for Firefox, Opera, IE7, etc.
+  xmlhttp=new XMLHttpRequest();
+  }
+else if (window.ActiveXObject)
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+if (xmlhttp!=null)
+  {
+  xmlhttp.onreadystatechange=state_Change;
+  xmlhttp.open("GET",url,true);
+  xmlhttp.send(null);
+  }
+else
+  {
+  alert("Your browser does not support XMLHTTP.");
+  }
+}
+
+function state_Change()
+{
+if (xmlhttp.readyState==4)
+  {// 4 = "loaded"
+  if (xmlhttp.status==200)
+    {// 200 = "OK"
+    document.getElementById('T1').innerHTML=xmlhttp.responseText;
+    }
+  else
+    {
+    alert("Problem retrieving data:" + xmlhttp.statusText);
+    }
+  }
+}
+</script>
+</head>
+
+<body onload="loadXMLDoc('../example/ajax/test_xmlhttp.txt'/*tpa=http://www.w3school.com.cn/example/ajax/test_xmlhttp.txt*/)">
+<div id="T1" style="border:1px solid black;height:40;width:300;padding:5"></div><br />
+<button onclick="loadXMLDoc('../example/ajax/test_xmlhttp2.txt'/*tpa=http://www.w3school.com.cn/example/ajax/test_xmlhttp2.txt*/)">Click</button>
+</body>
+
+</html>

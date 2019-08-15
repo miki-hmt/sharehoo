@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".btn1").click(function(){
+    $("#span1").text($(window).height());
+    $("#span2").text($(document).height());
+  });
+});
+</script>
+</head>
+<body>
+<p>窗口的高度是 <span id="span1">unknown</span> px。</p>
+<p>文档的高度是 <span id="span2">unknown</span> px。</p>
+<button class="btn1">获得高度</button>
+<p>在本例中，窗口和文档的高度是相同的，因为它们在 iframe 中显示。</p>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript">
+function preferedBrowser()
+{
+prefer=document.forms[0].browsers.value
+alert("您浏览器互联网时喜欢使用 " + prefer)
+}
+</script>
+</head>
+
+<body>
+
+<form>
+请选择您喜欢的浏览器：
+<select id="browsers" onchange="preferedBrowser()">
+<option value="Internet Explorer">Internet Explorer
+<option value="Netscape">Netscape
+</select>
+</form>
+
+</body>
+</html>

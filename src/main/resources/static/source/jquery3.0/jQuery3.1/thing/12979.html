@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>scroll()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">scroll()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.scroll( handler(eventObject) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>为 JavaScript 的 "scroll" 事件绑定一个处理函数，或者触发元素上的该事件。
+</p>
+<ul class="signatures">
+	<li class="signature" id="scroll-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.scroll( handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="scroll-eventData-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.scroll(  [eventData ], handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>eventData</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一个对象，它包含的数据键值对映射将被传递给事件处理程序。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="scroll">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.scroll()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					这个方法不接受任何参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		这个函数的前两个用法是 <code>.bind('scroll', handler)</code> 的快捷方式，第3个不带参数的用法是 <code>.trigger('scroll')</code> 的快捷方式。
+	</p>
+	<p>
+		当用户在元素内执行了滚动操作，就会在这个元素上触发<code>scroll</code>事件。它适用于<code>window</code>对象，但也可以是可滚动frames与CSS <code>overflow</code>属性设置为<code>scroll</code>的元素（或<code>auto</code>时，元素的显示高度小于其内容高度）。
+	</p>
+	<p>
+		举例来说，请看下面的HTML：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div id="target" style="overflow: scroll; width: 200px; height: 100px;"&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+  sed do eiusmod tempor incididunt ut labore et dolore magna
+  aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+  ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  Duis aute irure dolor in reprehenderit in voluptate velit
+  esse cillum dolore eu fugiat nulla pariatur. Excepteur
+  sint occaecat cupidatat non proident, sunt in culpa qui
+  officia deserunt mollit anim id est laborum.
+&lt;/div&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;
+&lt;div id="log"&gt;&lt;/div&gt;</pre>
+	</div>
+	<p>
+		<p>
+			<a href="http://www.shouce.ren/study/api/s/8186" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+		</p>
+	</p>
+	<p>
+		通过样式定义，使目标元素足够小以至它可以滚动：
+	</p>
+<figure>
+                                 <img src="../image/58a4614fc2f7c.png" alt="" /> <figcaption>图1 - 渲染后的HTML插图</figcaption>
+                               </figure>
+	<p>
+		<code>scroll</code>事件处理函数可以绑定到这个元素：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#target').scroll(function() {
+  $('#log').append('&lt;div&gt;Handler for .scroll() called.&lt;/div&gt;');
+});</pre>
+	</div>
+	<p>
+		现在，当用户向上或向下滚动文本时，从而向 <code>&lt;div id="log"&gt;&lt;/div&gt;</code> 中追加了如下信息：：
+	</p>
+	<p>
+		<span class="output">Handler for .scroll() called.</span> 
+	</p>
+	<p>
+		我们可以调用不带参数的 <code>.scroll()</code> 方法，手动触发这个事件：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#other').click(function() {
+  $('#target').scroll();
+});</pre>
+	</div>
+	<p>
+		这些代码执行后，点击 <span class="output">Trigger the handler</span> 同样警报显示。
+	</p>
+	<p>
+		每当元素的滚动位置的变化时，该元素就会触发<code>scroll</code>事件，不管什么原因。鼠标点击或拖动滚动条，拖动里面的元素，按箭头键，或使用鼠标的滚轮都可能导致触发此事件。
+	</p>
+</div>
+<h3>
+	Additional Notes（其他注意事项）:
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			<code>.select()</code>方法只是作为<code>.on( "select", handler )</code>的一个速记写法，移除该事件可以使用<code>.off(
+                        "select"
+                        )</code>。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">在页面滚动时触发一系列动作：</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; }
+  p { color:green; }
+  span { color:red; display:none; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div&gt;Try scrolling the iframe.&lt;/div&gt;
+  &lt;p&gt;Paragraph - &lt;span&gt;Scroll happened!&lt;/span&gt;&lt;/p&gt;
+&lt;script&gt;
+$("p").clone().appendTo(document.body);
+$("p").clone().appendTo(document.body);
+$("p").clone().appendTo(document.body);
+$(window).scroll(function () {
+  $("span").css("display", "inline").fadeOut("slow");
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8185" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h1&gt;这是页面 1&lt;/h1&gt;
+
+<code class="aspcode">&lt;%
+Set nl=Server.CreateObject(&quot;MSWC.NextLink&quot;)
+If (nl.GetListIndex(&quot;/example/aspe/links2.txt&quot;)&gt;1) Then
+%&gt;</code>
+&lt;a href=&quot;<code class="aspcode">&lt;%Response.Write(nl.GetPreviousURL(&quot;/example/aspe/links2.txt&quot;))%&gt;</code>&quot;&gt;
+上一页
+&lt;/a&gt;
+<code class="aspcode">&lt;%End If%&gt;</code>
+
+&lt;a href=&quot;<code class="aspcode">&lt;%Response.Write(nl.GetNextURL(&quot;/example/aspe/links2.txt&quot;))%&gt;</code>&quot;&gt;
+下一页
+&lt;/a&gt;
+
+&lt;p&gt;本例使用 Content Linking 组件
+对文本文件中的 URL 进行导航。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/example/aspe/links2.txt&quot;&gt;查看 links2.txt&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

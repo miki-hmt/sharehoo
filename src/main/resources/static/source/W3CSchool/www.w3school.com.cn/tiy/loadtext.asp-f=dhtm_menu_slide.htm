@@ -1,0 +1,81 @@
+<html>
+<head>
+<style>
+body{font-family:arial;}
+table{background:black;position:absolute;}
+a{color:black;text-decoration:none;font:bold}
+a:hover{color:#606060}
+td.menu{background:lightblue}
+
+table.topnav
+{
+font-size:80%;
+top:0;
+left:0;
+}
+
+table.menu
+{
+font-size:100%;
+bottom:0;
+z-index:-1;
+
+}
+</style>
+<script type="text/javascript">
+var i=0
+var intHide
+
+function show()
+{
+if (i>-100)
+	{
+	i=i-1
+	document.all("menu").style.bottom=i
+	}
+}
+
+function showmenu()
+{
+clearInterval(intHide)
+intShow=setInterval("show()",10)
+}
+
+function hide()
+{
+if (i<0)
+	{
+	i=i+1
+	document.all("menu").style.bottom=i
+	}
+}
+
+function hidemenu()
+{
+clearInterval(intShow)
+intHide=setInterval("hide()",10)
+}
+</script>
+</head>
+<body>
+
+<table class="topnav" width="150">
+ <tr bgcolor="#FF8080">
+  <td onmouseover="showmenu()" onmouseout="hidemenu()">
+   <a href="../i/eg_landscape.jpg" tppabs="http://www.w3school.com.cn/i/eg_landscape.jpg"> MENU</a><br />
+   <table class="menu" id="menu" width="100%">
+   <tr><td class="menu"><a href="../html/index.asp.htm" tppabs="http://www.w3school.com.cn/html/index.asp">HTML</a></td></tr>
+   <tr><td class="menu"><a href="../xhtml/index.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/index.asp">XHTML</a></td></tr>
+   <tr><td class="menu"><a href="../css/index.asp.htm" tppabs="http://www.w3school.com.cn/css/index.asp">CSS</a></td></tr>
+   <tr><td class="menu"><a href="../xml/index.asp.htm" tppabs="http://www.w3school.com.cn/xml/index.asp">XML</a></td></tr>
+   <tr><td class="menu"><a href="../xsl/index.asp.htm" tppabs="http://www.w3school.com.cn/xsl/index.asp">XSL</a></td></tr>
+   </table>
+  </td>
+ </tr>
+</table>
+
+<br />
+<p>请把鼠标移动到 MENU 上，就可以看到菜单的选项。</p>
+
+</body>
+</html>

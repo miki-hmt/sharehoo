@@ -1,0 +1,387 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>ASP.NET 2.0 - 新特性</title>
+</head>
+
+<body class="dotnet">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>ASP.NET 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/index.asp" title="ASP.NET教程">ASP.NET 首页</a></li>
+<li><a href="aspnet_intro.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_intro.asp" title="ASP.NET 简介">ASP.NET 简介</a></li>
+<li><a href="aspnet_vsasp.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_vsasp.asp" title="ASP 与 ASP.NET 之间的差异">ASP.NET vs ASP</a></li>
+<li><a href="aspnet_pages.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_pages.asp" title="ASP.NET - Web 页面">ASP.NET 页面</a></li>
+<li><a href="aspnet_controls.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_controls.asp" title="ASP.NET - 服务器控件">ASP.NET 控件</a></li>
+<li><a href="aspnet_events.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_events.asp" title="ASP.NET - 事件">ASP.NET 事件</a></li>
+</ul>
+
+<h2>ASP.NET 窗体</h2>
+<ul>
+<li><a href="aspnet_forms.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_forms.asp" title="ASP.NET Web 窗体">ASP.NET 窗体</a></li>
+<li><a href="aspnet_viewstate.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_viewstate.asp" title="ASP.NET - 维持 ViewState">ASP.NET ViewState</a></li>
+<li><a href="aspnet_textbox.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_textbox.asp" title="ASP .NET - TextBox 控件">asp:TextBox</a></li>
+<li><a href="aspnet_button.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_button.asp" title="ASP.NET - Button 控件">asp:Button</a></li>
+</ul>
+
+<h2>ASP.NET 绑定</h2>
+<ul>
+<li><a href="aspnet_databinding.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_databinding.asp" title="ASP.NET - 数据绑定">数据绑定</a></li>
+<li><a href="aspnet_arraylist.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_arraylist.asp" title="ASP NET - ArrayList 对象">ArrayList</a></li>
+<li><a href="aspnet_hashtable.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_hashtable.asp" title="ASP.NET - Hashtable 对象">Hashtable</a></li>
+<li><a href="aspnet_sortedlist.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_sortedlist.asp" title="ASP.NET - SortedList 对象">SortedList</a></li>
+<li><a href="aspnet_xml.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_xml.asp" title="ASP .NET - XML 文件">XML 文件</a></li>
+<li><a href="aspnet_repeater.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_repeater.asp" title="ASP.NET - Repeater 控件">asp:Repeater</a></li>
+<li><a href="aspnet_datalist.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_datalist.asp" title="ASP.NET - DataList 控件">asp:DataList</a></li>
+</ul>
+
+<h2>ASP.NET 数据库</h2>
+<ul>
+<li><a href="aspnet_dbconnection.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_dbconnection.asp" title="ASP.NET - 数据库连接">数据库连接</a></li>
+</ul>
+
+<h2>ASP.NET 2.0</h2>
+<ul>
+<li><a href="aspnet_newfeatures.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_newfeatures.asp" title="ASP.NET 2.0 - 新特性">2.0 新特性</a></li>
+<li><a href="aspnet_masterpages.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_masterpages.asp" title="ASP.NET 2.0 - 母版页（Master Pages）">2.0 母版页</a></li>
+<li><a href="aspnet_navigation.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_navigation.asp" title="ASP.NET 2.0 - 导航（Navigation）">2.0 导航</a></li>
+</ul>
+
+<h2>参考手册</h2>
+<ul>
+<li><a href="aspnet_refhtmlcontrols.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_refhtmlcontrols.asp" title="HTML 服务器控件">HTML 控件</a></li>
+<li><a href="aspnet_refwebcontrols.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_refwebcontrols.asp" title="Web 服务器控件">Web 控件</a></li>
+<li><a href="aspnet_refvalidationcontrols.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_refvalidationcontrols.asp" title="Validation 服务器控件">Validation 控件</a></li>
+</ul>
+
+<h2>实例</h2>
+<ul>
+<li>ASP.NET 实例</li>
+</ul>
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>ASP.NET 2.0 - 新特性</h1>
+
+<div id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="aspnet_dbconnection.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_dbconnection.asp">Previous Page</a></li>
+
+<li class="next"><a href="aspnet_masterpages.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_masterpages.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div id="intro">
+<p><strong>通过增加若干新的特性，ASP.NET 2.0 对 ASP.NET 进行了改进。</strong></p>
+</div>
+
+<div>
+<h2>ASP.NET 2.0 中的改进</h2>
+
+<p>ASP.NET 2.0 的设计目的是为了使 web 开发更容易，更快捷。</p>
+
+<p>ASP.NET 2.0 的设计目标：</p>
+<ul>
+<li>消除 70% 的代码量，以提高生产力</li>
+<li>为所有类型的设备使用相同的控件</li>
+<li>提供更快更好的 web 服务器平台</li>
+<li>简化编译和安装</li>
+<li>简化 web 应用程序的管理</li>
+</ul>
+</div>
+
+<div>
+<h2>ASP.NET 2.0 中的新特性</h2>
+
+<p>ASP.NET 2.0 中的某些新特性是：</p>
+
+<ul>
+<li>母版页(Master Pages)、主题以及 Web 部件</li>
+<li>针对导航的标准控件</li>
+<li>针对安全的标准控件
+<li>角色、个性化和国际化服务</li>
+<li>改进并简化的数据访问控件</li>
+<li>对 XML 标准的完整支持，比如 XHTML、XML 以及 WSDL</li>
+<li>改进的编译和部署（安装）</li>
+<li>改进的站点管理</li>
+<li>新的改进的开发工具</li>
+</ul>
+<p>下面开始描述这些新特性。</p>
+</div>
+
+<div>
+<h2>母版页(Master Pages)</h2>
+
+<p>过去，ASP.NET 没有能力为一个完整的站点应用一致的外观或观感。</p>
+
+<p>ASP.NET 2.0 中的 Master Pages 解决了这个问题。</p>
+
+<p>master page 是一套应用到其他页面的模版，带有共享的布局和功能性。master page 为内容页面定义了占位符。而结果页面是 master page 和内容页面的组合（合并）。</p>
+
+<p><a href="aspnet_masterpages.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_masterpages.asp">阅读更多有关 master page 的内容</a>。</p>
+</div>
+
+<div>
+<h2>主题（Themes）</h2>
+
+<p>主题是另一项 ASP.NET 2.0 的特性。主题，或皮肤，允许开发者为 web 应用程序创建定制的外观。</p>
+
+<p>ASP.NET 2.0 主题的设计目标：</p>
+
+<ul>
+<li>使站点外观的定制变得容易</li>
+<li>允许主题被应用到控件、页面以及整个站点</li>
+<li>允许定制所有可见的元素</li>
+</ul>
+</div>
+
+<div>
+<h2>Web 部件（Web Parts）</h2>
+
+<p>ASP.NET 2.0 的 Web 部件能够为站点提供一致的外观，同时仍然允许用户定制样式和内容。</p>
+
+<p>新控件：</p>
+
+<ul>
+<li>Zone 控件 - 页面上内容一致的区域
+<li>Web part 控件 - 每个 zone 的内容区域
+</ul>
+</div>
+
+<div>
+<h2>导航（Navigation）</h2>
+
+<p>ASP.NET 2.0 拥有内建的导航控件，比如：</p>
+
+<ul>
+<li>Site Maps</li>
+<li>Dynamic HTML menus</li>
+<li>Tree Views</li>
+</ul>
+</div>
+
+<div>
+<h2>安全（Security）</h2>
+
+<p>对于保护机密以及个人的信息来说，安全性非常重要。</p>
+
+<p>在 ASP.NET 2.0，已经添加了下面这些控件：</p>
+
+<ul>
+<li>Login 控件，提供登录功能</li>
+<li>LoginStatus 控件，控制登录状态</li>
+<li>LoginName 控件，显示当前用户名</li>
+<li>LoginView 控件，根据登录状态提供不同的视图</li>
+<li>CreateUser wizard，进行用户帐户的创建</li>
+<li>PasswordRecovery 控件，提供“忘记密码”功能</li>
+</ul>
+</div>
+
+<div>
+<h2>角色和个性化（Roles and Personalization）</h2>
+
+<p>因特网社区越来越流行。</p>
+
+<p>ASP.NET 2.0 拥有可存储用户细节信息的个性化特性。该特性为自定义用户（以及用户组）的属性的提供了便捷的方法。</p>
+</div>
+
+<div>
+<h2>国际化（Internationalization）</h2>
+
+<p>当您拥有更庞大的受众时，通过不同的语言服务用户是很重要的。</p>
+
+<p>ASP.NET 2.0 已经改进了对多语言的支持。</p>
+</div>
+
+<div>
+<h2>数据访问（Data Access）</h2>
+
+<p>许多网站都是靠数据驱动的，它们使用数据库或 XML 文件作为数据源。</p>
+
+<p>在使用 ASP.NET 的过程中，相关代码，以及相同的的代码经常被重复使用在不同的网页中。</p>
+
+<p>ASP.NET 2.0 的一个核心目标，就是简化了数据源的使用。</p>
+
+<p>ASP.NET 2.0 拥有新的数据控件，无需太多编程以及深入的数据库连接方面的知识。</p>
+</div>
+
+<div>
+<h2>Mobility Support</h2>
+
+<p>移动设备的问题是屏幕的尺寸以及显示能力。</p>
+
+<p>在 ASP.NET 中，微软的移动因特网套件 (Microsoft Mobile Internet Toolkit，MMIT) 提供了这方面的支持。</p>
+
+<p>在 ASP.NET 2.0 中，不再需要 MMIT，因为所有的控件都内建了移动支持。</p>
+</div>
+
+<div>
+<h2>图像（Images）</h2>
+
+<p>ASP.NET 2.0 拥有用于处理图像的新控件：</p>
+
+<ul>
+<li>ImageMap 控件 - 图像映射支持</li>
+<li>DynamicImage 控件  - 对不同浏览器的图像支持</li>
+</ul>
+
+<p>这些空间对移动设备上更优化的图像显示非常重要，比如手持电脑和移动电话。</p>
+</div>
+
+<div>
+<h2>自动编译（Automatic Compilation）</h2>
+
+<p>ASP.NET 2.0 提供了自动编译。所有同一目录中的文件会在首次运行时进行编译，包含对 WSDL 以及 XSD 文件的支持。</p>
+</div>
+
+<div>
+<h2>已编译的部署方式（安装）以及源代码保护</h2>
+
+<p>ASP.NET 2.0 同时提供了预编译（pre-compilation）。能够对整个站点进行预编译。这就提供了一种部署（上传到服务器）已编译应用程序的简易方法，同时由于只有已编译的文件能够进行部署，源代码也受到了保护。</p>
+</div>
+
+<div>
+<h2>站点管理（Site Management）</h2>
+
+<p>ASP.NET 2.0 有三种配置管理站点的新特性：</p>
+
+<ul>
+<li>新的本地管理控制台</li>
+<li>新的可编程管理功能 (API)</li>
+<li>新的基于 web 的管理工具</li>
+</ul>
+</div>
+
+<div>
+<h2>开发工具（Development Tools）</h2>
+
+<p>Visual Studio 2005 的核心设计特性包括：</p>
+
+<ul>
+<li>对以上所描述的特性的支持</li>
+<li>从任何地点上传文件（FTP、文件系统、Front Page....）</li>
+<li>没有项目文件，允许代码在 Visual Studio 之外使用</li>
+<li>整合了网站管理工具</li>
+<li>没有“构建”步骤 - 首次运行时进行编译的能力</li>
+</ul>
+
+<p>而对于没有能力使用 Visual Studio.NET 的非企业开发者来说，<em>Visual Web Developer</em> 是一个新的免费的  ASP.NET 2.0 工具。</p>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="aspnet_dbconnection.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_dbconnection.asp">Previous Page</a></li>
+
+<li class="next"><a href="aspnet_masterpages.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_masterpages.asp">Next Page</a></li>
+</ul>
+
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div>
+
+<div id="tools">
+<h5 id="tools_reference"><a href="aspnet_reference.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_reference.asp">ASP.NET 参考手册</a></h5>
+</div>
+
+<div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

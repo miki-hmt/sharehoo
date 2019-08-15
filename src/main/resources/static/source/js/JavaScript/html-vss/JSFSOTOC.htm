@@ -1,0 +1,795 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0045)file://\\lang4\vbadocs\vba_vss\temp\sst14.htm --><HTML><HEAD><TITLE>JScript 运行时库参考</TITLE><!--Helium-sbrk-->
+<META name=VI60_defaultClientScript content=VBScript><LINK rel=STYLESHEET 
+type=text/css href="../html-vss/msdnie4a.css">
+<META name=MS-HKWD content="Run-Time Library reference">
+<META name=MS-HKWD content="Run-Time Library">
+<META name=MS-HAID content=jsfsotoc>
+<META name=CATEGORY content="Language Reference">
+<META name=MS.LOCALE content=ZH-CN>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META name=PRODUCT content=JScript>
+<META name=TECHNOLOGY content=SCRIPTING>
+<META name=Description content="JScript Run-Time Library Reference">
+<META name=Keywords content="Run-Time Library reference; Run-Time Library">
+<SCRIPT language=JavaScript>
+<!--
+function msieversion()
+{
+	var ua = window.navigator.userAgent
+	var msie = ua.indexOf ( "MSIE " )
+	if ( msie > 0 )		// is Microsoft Internet Explorer; return version number
+		return parseInt ( ua.substring ( msie+5, ua.indexOf ( ".", msie ) ) )
+	else
+		return 0	// is other browser
+}
+window.IEVersion = msieversion();
+
+
+// This part decides if it is IE4 then sends it to the correct page for it
+// Else sends it to the plane jane, stale cookie page.
+
+if (window.IEVersion < 4){
+  location.href = "../html-vss/jsfsotocalt.htm"
+  }
+document.onclick = showDetails
+document.onmouseover = doDocumentOnMouseOver ;
+document.onmouseout = doDocumentOnMouseOut ;
+
+// CHANGE HEADLINE COLOR ONMOUSEOVER
+
+function doDocumentOnMouseOver() {
+	var eSrc = window.event.srcElement ;
+    if (eSrc.className == "clsHeading") 
+	{ eSrc.style.color= "#0033CC" }
+
+  }
+
+// CHANGE HEADLINE COLOR ONMOUSEOUT
+function doDocumentOnMouseOut() {
+    var eSrc = window.event.srcElement ;
+    if (eSrc.className == "clsHeading") 
+		{ eSrc.style.color= "#000000" }
+  }
+var lastId = 0;
+function showDetails() {
+
+	if (window.event.srcElement.className == "clsHeading") 
+	{
+		var idString = window.event.srcElement.id
+		var idNumber = idString.substr((idString.length-1))
+		var eSrc = window.event.srcElement.parentElement
+		
+		if (lastId == idNumber) 
+		{
+			/*	If the current display mode is none then change it to display the 
+				selected blurb and hisde the explanation
+			*/		
+			if (window["idBlurb" + idNumber].style.display == 'none') 
+			{
+				// Change the image to be a minus
+				window["img" + idNumber].src ="blueminus.gif"; 
+				window["idBlurb" + idNumber].style.display = 'block';
+				explanation.style.display = 'none';
+			}
+			else 
+			{
+				// Change the image to be a plus
+				window["img" + idNumber].src ="blueplus.gif"; 
+				window["idBlurb" + idNumber].style.display = 'none';
+				explanation.style.display = 'block'	;
+			}	
+				
+		}
+		else 
+		{
+			if (lastId != 0) 
+				{
+					window["img" + lastId].src ="blueplus.gif"
+					window["idBlurb" + lastId].style.display = 'none';
+										
+				}
+			window["img" + idNumber].src ="blueminus.gif"; 
+			explanation.style.display = 'none'
+			window["idBlurb" + idNumber].style.display = 'block'
+		}		
+
+		lastId=idNumber
+	}
+	window.event.cancelBubble=true
+}
+-->
+</SCRIPT>
+
+<META name=GENERATOR content="MSHTML 11.00.9431.193"></HEAD>
+<BODY leftMargin=20 link=#0033cc topMargin=0 bgColor=#ffffff text=#000000 
+vLink=#666666>
+<P><FONT size=2 face="Verdana, Arial, Helvetica"><BR>JScript 
+<P class=title>学习<FONT color=#ff0000>QQ群：</FONT><FONT color=#ff0000 
+size=5>476133513&nbsp;&nbsp; 可以加群一起讨论学习</FONT></P>
+<P><BR>
+<HR>
+<BR>
+<H1><FONT size=2><B>Scripting 运行时库参考</B></FONT></H1>
+<TABLE class=clsMainTable height="100%" cellSpacing=0 cellPadding=0 width="100%" 
+border=0>
+  <TBODY>
+  <TR>
+    <TD id=Main class=clsMainTable height="100%" vAlign=top width="30%">
+      <DIV>
+      <P id=heading1 title=单击查阅信息列表 class=clsHeading><IMG id=img1 
+      class=clsHeading src="blueplus.gif" width=18 
+height=23><!>&nbsp;特性信息<!></P>
+      <P id=heading2 title=单击查阅字母顺序的关键字列表 class=clsHeading><IMG id=img2 
+      class=clsHeading src="blueplus.gif" width=18 height=23><!>&nbsp;字母顺序的关键字列表<!></P>
+      <P id=heading3 title=单击查阅方法列表 class=clsHeading><IMG id=img3 
+      class=clsHeading src="blueplus.gif" width=18 height=23><!>&nbsp;方法<!></P>
+      <P id=heading4 title=单击查阅对象列表 class=clsHeading><IMG id=img4 
+      class=clsHeading src="blueplus.gif" width=18 height=23><!>&nbsp;对象<!></P>
+      <P id=heading5 title=单击查阅属性列表 class=clsHeading><IMG id=img5 
+      class=clsHeading src="blueplus.gif" width=18 
+      height=23><!>&nbsp;属性<!></P></DIV></TD>
+    <TD id=Contents class=clsMainTable height="100%" vAlign=top width="60%">
+      <DIV id=explanation style="BACKGROUND-COLOR: #eeeeee"><!>&nbsp;<!> 
+      <P>
+      <CENTER><B><!>欢迎使用 Scripting 运行时库参考<!></B></CENTER>
+      <P>通过对信息进行分组，可以使您方便地研究 Scripting 运行时库的各个主题。
+      <P>可以在“字母顺序的关键字列表”中找到按照字母顺序排列的 Scripting 
+      运行时库的所有主题。如果只需要查看某一个主题（例如对象），则有对该主题进行详细说明的章节可供查阅。 
+      <P>如何操作呢？单击左边任意一个标题，即可显示该标题所包含的项目列表。再从该列表中选择想要查看的主题。打开所选主题之后，就能够很容易地连接到其他相关章节。
+      <P>请尽情浏览脚本运行时库参考的各个部分，您会发现脚本运行时库参考有多么丰富<BR></P></DIV>
+      <DIV id=idBlurb1 style="DISPLAY: none">
+      <TABLE style="FONT-SIZE: 10pt" cellSpacing=2 cellPadding=0 width="100%" 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD width="33%"><B><!>特性<!></B><BR></TD>
+          <TD><B><!>描述<!></B></TD></TR>
+        <TR vAlign=top>
+          <TD width="33%"><A class=clsTOCItem 
+            href="../html/jsgrprun-timefeatures.htm"><!>Microsoft Scripting 
+运行时特性<!></A><BR></TD>
+          <TD><!>目前 Microsoft Scripting 
+运行时库中的特性列表<!></TD></TR></TBODY></TABLE></DIV>
+      <DIV id=idBlurb2 style="DISPLAY: none">
+      <TABLE style="FONT-SIZE: 10pt" cellSpacing=2 cellPadding=2 width="100%" 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD width="33%"><B><!>语言元素<!></B><BR></TD>
+          <TD><B><!>描述<!></B></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthadddictionary.htm"><!>Add 方法 (Dictionary)<!></A></TD>
+          <TD><!>向 <B>Dictionary</B> 对象中添加主键和项目对。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthaddfolders.htm"><!>Add 方法 
+          (Folders)<!></A></TD>
+          <TD><!>向 <B>Folders</B> 集合中添加新的 <B>Folder</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproatEndOfLine.htm"><!>AtEndOfLine 
+          属性<!></A></TD>
+          <TD><!>如果在 <B>TextStream</B>文件中文件指针紧接在 end-of-line 标志之前则返回 
+            <B>True</B> ；如果不是则返回 <B>False</B>。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproatEndOfStream.htm"><!>AtEndOfStream 
+            属性<!></A></TD>
+          <TD><!>如果在 <B>TextStream</B> 文件中文件指针到达文件尾则返回 <B>True</B> ；如果不是则返回 
+            <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproAttributes.htm"><!>Attributes 属性<!></A></TD>
+          <TD><!>设置或返回文件或文件夹的属性。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproAvailableSpace.htm"><!>AvailableSpace 属性<!></A></TD>
+          <TD><!>向用户返回指定驱动器或网络共享上的可用空间大小。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthBuildPath.htm"><!>BuildPath 方法<!></A></TD>
+          <TD><!>将一个名称追加到已有的路径后。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthclose.htm"><!>Close 方法<!></A></TD>
+          <TD><!>关闭打开的 <B>TextStream</B> 文件。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsprocolumn.htm"><!>Column 属性<!></A></TD>
+          <TD><!>返回 <B>TextStream</B> 文件中当前字符所在的列号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsprocompareMode.htm"><!>CompareMode 
+          属性<!></A></TD>
+          <TD><!>设置和返回在 <B>Dictionary</B> 对象中对字符串键进行比较的比较方式。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthCopy.htm"><!>Copy 方法<!></A></TD>
+          <TD><!>将指定文件或文件夹从一个位置复制到另一个位置。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthCopyFile.htm"><!>CopyFile 方法<!></A></TD>
+          <TD><!>将一个或多个文件从一个位置复制到另一个位置。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthCopyFolder.htm"><!>CopyFolder 方法<!></A></TD>
+          <TD><!>将文件夹从一个位置完全复制到另一个位置。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsprocount.htm"><!>Count 属性<!></A></TD>
+          <TD><!>返回集合或 <B>Dictionary</B> 对象中的项目数。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthCreateFolder.htm"><!>CreateFolder 
+          方法<!></A></TD>
+          <TD><!>创建文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthcreateTextFile.htm"><!>CreateTextFile 方法<!></A></TD>
+          <TD><!>创建指定的文件名并返回可用于读写该文件的 <B>TextStream</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDateCreated.htm"><!>DateCreated 
+          属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹创建的日期和时间。<!></TD></TR>
+        <TR>
+          <TD><A href="../html/jsproDateLastAccessed.htm"><!>DateLastAccessed 
+            属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹最后一次访问的日期和时间。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDateLastModified.htm"><!>DateLastModified 
+            属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹最后一次修改的日期和时间。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthDelete.htm"><!>Delete 方法<!></A></TD>
+          <TD><!>删除指定的文件或文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthDeleteFile.htm"><!>DeleteFile 方法<!></A></TD>
+          <TD><!>删除指定文件。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthDeleteFolder.htm"><!>DeleteFolder 
+          方法<!></A></TD>
+          <TD><!>删除指定文件夹及其内容。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjDictionary.htm"><!>Dictionary 对象<!></A></TD>
+          <TD><!>存储数据键和项目对的对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjDrive.htm"><!>Drive 对象<!></A></TD>
+          <TD><!>提供了对特定磁盘驱动器或网络共享的属性的访问。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDrive.htm"><!>Drive 属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹所在驱动器的驱动器号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthDriveExists.htm"><!>DriveExists 
+          方法<!></A></TD>
+          <TD><!>如果指定驱动器存在则返回 <B>True</B> ；否则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDriveLetter.htm"><!>DriveLetter 
+          属性<!></A></TD>
+          <TD><!>返回本地物理驱动器或网络共享的驱动器号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jscolDrives.htm"><!>Drives 集合<!></A></TD>
+          <TD><!>包含所有可用驱动器的只读集合。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDrives.htm"><!>Drives 属性<!></A></TD>
+          <TD><!>返回一个 <B>Drives</B> 集合，由所有本地机器上可用的 <B>Drive</B> 对象组成 
+。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDriveType.htm"><!>DriveType 属性<!></A></TD>
+          <TD><!>返回说明指定驱动器类型的值。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthexists.htm"><!>Exists 方法<!></A></TD>
+          <TD><!>如果 <B>Dictionary</B> 对象中存在指定键则返回 <B>True</B> ，否则返回 
+            <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjFile.htm"><!>File 对象<!></A></TD>
+          <TD><!>提供了对文件所有属性的访问。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthFileExists.htm"><!>FileExists 方法<!></A></TD>
+          <TD><!>如果指定文件存在则返回 <B>True</B> ；否则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jscolFiles.htm"><!>Files 集合<!></A></TD>
+          <TD><!>文件夹中所有 <B>File</B> 对象的集合。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproFiles.htm"><!>Files 属性<!></A></TD>
+          <TD><!>返回一个 <B>Files</B> 集合，由所有包含在指定文件夹中的 <B>File</B> 
+            对象组成，包括那些设置了隐藏和系统文件属性的文件。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjFileSystem.htm"><!>FileSystemObject 
+            对象<!></A></TD>
+          <TD><!>提供了对计算机文件系统的访问。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproFileSystem.htm"><!>FileSystem 属性<!></A></TD>
+          <TD><!>返回指定驱动器所使用的文件系统类型。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjFolder.htm"><!>Folder 对象<!></A></TD>
+          <TD><!>提供了对文件夹所有属性的访问。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jscolFolders.htm"><!>Folders 集合<!></A></TD>
+          <TD><!>包含在一个 <B>Folder</B> 对象中的所有 <B>Folder</B> 对象的集合。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthFolderExists.htm"><!>FolderExists 
+          方法<!></A></TD>
+          <TD><!>如果指定文件夹存在则返回 <B>True</B> ;否则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproFreeSpace.htm"><!>FreeSpace 属性<!></A></TD>
+          <TD><!>向用户返回指定驱动器或网络共享上可用空间的大小。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A 
+            href="../html/jsmthGetAbsolutePathName.htm"><!>GetAbsolutePathName 
+方法<!></A></TD>
+          <TD><!>根据所提供的路径说明返回完整明确的路径。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetBaseName.htm"><!>GetBaseName 
+          方法<!></A></TD>
+          <TD><!>根据提供的路径说明返回一个字符串，包含文件或文件夹的基本名称（不包括任何文件扩展名）。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetDrive.htm"><!>GetDrive 方法<!></A></TD>
+          <TD><!>返回相应于指定路径中驱动器的 <B>Drive</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetDriveName.htm"><!>GetDriveName 
+          方法<!></A></TD>
+          <TD><!>根据指定路径返回包含驱动器名称的字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetExtensionName.htm"><!>GetExtensionName 
+            方法<!></A></TD>
+          <TD><!>返回一个字符串，包含路径中最后成分的扩展名。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetFile.htm"><!>GetFile 方法<!></A></TD>
+          <TD><!>返回相应于指定路径中文件的 <B>File</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetFileName.htm"><!>GetFileName 
+          方法<!></A></TD>
+          <TD><!>返回指定路径中的最后文件名或文件夹名，该路径不能是驱动器说明。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetFileVersion.htm">GetFileVersion 
+          方法</A></TD>
+          <TD>返回指定文件的版本号码。</TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetFolder.htm"><!>GetFolder 方法<!></A></TD>
+          <TD><!>返回相应于指定路径中文件夹的 <B>Folder</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A 
+            href="../html/jsmthGetParentFolderName.htm"><!>GetParentFolderName 
+方法<!></A></TD>
+          <TD><!>返回一个字符串，包含指定路径中最后文件或文件夹的父文件夹名。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetSpecialFolder.htm"><!>GetSpecialFolder 
+            方法<!></A></TD>
+          <TD><!>返回指定的特殊文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetTempName.htm"><!>GetTempName 
+          方法<!></A></TD>
+          <TD><!>返回一个随机生成的临时文件或文件夹名称。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproIsReady.htm"><!>IsReady 属性<!></A></TD>
+          <TD><!>如果指定驱动器已就绪则返回 <B>True</B> ；否则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproIsRootFolder.htm"><!>IsRootFolder 
+          属性<!></A></TD>
+          <TD><!>如果指定文件夹是根文件夹则返回 <B>True</B> ；否则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproitem.htm"><!>Item 属性<!></A></TD>
+          <TD><!>根据 <B>Dictionary</B> 对象中指定的 <I>key</I> 设置或返回 <I>item</I> 
+          。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthitems.htm"><!>Items 方法<!></A></TD>
+          <TD><!>返回包含 <B>Dictionary</B> 对象中所有项目的数组。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsprokey.htm"><!>Key 属性<!></A></TD>
+          <TD><!>在 <B>Dictionary</B> 对象中设置 <I>key</I> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthkeys.htm"><!>Keys 方法<!></A></TD>
+          <TD><!>返回包含了 <B>Dictionary</B> 对象中全部已有键的数组。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproline.htm"><!>Line 属性<!></A></TD>
+          <TD><!>返回 <B>TextStream</B> 文件中的当前行号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthMove.htm"><!>Move 方法<!></A></TD>
+          <TD><!>将指定文件或文件夹从一个位置移动到另一个位置。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthMoveFile.htm"><!>MoveFile 方法<!></A></TD>
+          <TD><!>从一个位置向另一个位置移动一个或多个文件。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthMoveFolder.htm"><!>MoveFolder 方法<!></A></TD>
+          <TD><!>从一个位置向另一个位置移动一个或多个文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproName.htm"><!>Name 属性<!></A></TD>
+          <TD><!>设置或返回指定文件或文件夹的名称。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthOpenAsTextStream.htm"><!>OpenAsTextStream 
+            方法<!></A></TD>
+          <TD><!>打开指定文件并返回可用于读、写或追加该文件的 <B>TextStream</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthopenTextFile.htm"><!>OpenTextFile 
+          方法<!></A></TD>
+          <TD><!>打开指定文件并返回可用于读、写或追加该文件的 <B>TextStream</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproParentFolder.htm"><!>ParentFolder 
+          属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹的父文件夹对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproPath.htm"><!>Path 属性<!></A></TD>
+          <TD><!>返回指定文件、文件夹或驱动器的路径。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthread.htm"><!>Read 方法<!></A></TD>
+          <TD><!>从 <B>TextStream</B> 文件中读取指定数量的字符并返回结果字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthreadAll.htm"><!>ReadAll 方法<!></A></TD>
+          <TD><!>读取整个 <B>TextStream</B> 文件并返回结果字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthreadline.htm"><!>ReadLine 方法<!></A></TD>
+          <TD><!>从 <B>TextStream</B> 文件中读取整行（在 newline 
+          字符前，但不包括它）并返回结果字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthremove.htm"><!>Remove 方法<!></A></TD>
+          <TD><!>从 <B>Dictionary</B> 对象中删除一对键和项目。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthremoveAll.htm"><!>RemoveAll 方法<!></A></TD>
+          <TD><!>删除 <B>Dictionary</B> 对象中的所有键和项目对。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproRootFolder.htm"><!>RootFolder 属性<!></A></TD>
+          <TD><!>返回表示指定驱动器上根文件夹的 <B>Folder</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproSerialNumber.htm"><!>SerialNumber 
+          属性<!></A></TD>
+          <TD><!>返回用于唯一标识驱动器卷的数字序列号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproShareName.htm"><!>ShareName 属性<!></A></TD>
+          <TD><!>返回指定驱动器的网络共享名。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproShortName.htm"><!>ShortName 属性<!></A></TD>
+          <TD><!>返回一些程序使用的短名称，这些短名称由需要以前的 8.3 命名规范的程序使用。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproShortPath.htm"><!>ShortPath 属性<!></A></TD>
+          <TD><!>返回一些程序使用的短路径，这些短路径名由要以前的 8.3 命名规范的程序使用。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproSize.htm"><!>Size 属性<!></A></TD>
+          <TD><!>以字节为单位返回指定文件或文件夹的大小。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthskip.htm"><!>Skip 方法<!></A></TD>
+          <TD><!>在读取 <B>TextStream</B> 文件时掠过指定数目的字符。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthskipLine.htm"><!>SkipLine 方法<!></A></TD>
+          <TD><!>在读取 <B>TextStream</B> 文件时掠过下一行。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproSubFolders.htm"><!>SubFolders 属性<!></A></TD>
+          <TD><!>返回由指定文件夹中包含的所有文件夹组成的 <B>Folders</B> 集合，包括那些设置了隐藏和系统文件属性的文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjTextStream.htm"><!>TextStream 对象<!></A></TD>
+          <TD><!>便于对文件的顺序访问。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproTotalSize.htm"><!>TotalSize 属性<!></A></TD>
+          <TD><!>以字节为单位返回驱动器或网络共享的总共空间大小。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproType.htm"><!>Type 属性<!></A></TD>
+          <TD><!>返回关于文件或文件夹类型的信息。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproVolumeName.htm"><!>VolumeName 属性<!></A></TD>
+          <TD><!>设置或返回指定驱动器的卷号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthwrite.htm"><!>Write 方法<!></A></TD>
+          <TD><!>向 <B>TextStream</B> 文件中写入指定字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthwriteBlankLines.htm"><!>WriteBlankLines 方法<!></A></TD>
+          <TD><!>向 <B>TextStream</B> 文件中写入指定数量的 newline 字符。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthWriteLine.htm"><!>WriteLine 方法<!></A></TD>
+          <TD><!>向 <B>TextStream</B> 文件中写入指定字符串和 newline 
+      字符。<!></TD></TR></TBODY></TABLE></DIV>
+      <DIV id=idBlurb3 style="DISPLAY: none">
+      <TABLE style="FONT-SIZE: 10pt" cellSpacing=2 cellPadding=0 width="100%" 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD width="33%"><B><!>语言元素<!></B><BR></TD>
+          <TD><B><!>描述<!></B></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthadddictionary.htm"><!>Add 方法 (Dictionary)<!></A></TD>
+          <TD><!>向 <B>Dictionary</B> 对象中添加一对键和项目。 <!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthaddfolders.htm"><!>Add 方法 
+          (Folders)<!></A></TD>
+          <TD><!>向 <B>Folders</B> 集合中添加新的 <B>Folder</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthBuildPath.htm"><!>BuildPath 方法<!></A></TD>
+          <TD><!>在已有路径后追加一个名称。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthclose.htm"><!>Close 方法<!></A></TD>
+          <TD><!>关闭打开的 <B>TextStream</B> 文件。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthCopy.htm"><!>Copy 方法<!></A></TD>
+          <TD><!>将指定文件或文件夹从一个位置复制到另一个位置。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthCopyFile.htm"><!>CopyFile 方法<!></A></TD>
+          <TD><!>从一个位置向另一个位置复制一个或多个文件。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthCopyFolder.htm"><!>CopyFolder 方法<!></A></TD>
+          <TD><!>从一个位置向另一个位置复制整个文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthCreateFolder.htm"><!>CreateFolder 
+          方法<!></A></TD>
+          <TD><!>创建文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthcreateTextFile.htm"><!>CreateTextFile 方法<!></A></TD>
+          <TD><!>创建指定的文件名并返回可用于读写该文件的 <B>TextStream</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthDelete.htm"><!>Delete 方法<!></A></TD>
+          <TD><!>删除指定文件或文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthDeleteFile.htm"><!>DeleteFile 方法<!></A></TD>
+          <TD><!>删除指定文件。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthDeleteFolder.htm"><!>DeleteFolder 
+          方法<!></A></TD>
+          <TD><!>删除指定文件夹及其内容。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthDriveExists.htm"><!>DriveExists 
+          方法<!></A></TD>
+          <TD><!>如果指定驱动器存在则返回 <B>True</B> ；如果不存在则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthexists.htm"><!>Exists 方法<!></A></TD>
+          <TD><!>如果 <B>Dictionary</B> 对象中存在指定键则返回 <B>True</B> ，否则返回 
+            <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthFileExists.htm"><!>FileExists 方法<!></A></TD>
+          <TD><!>如果指定文件存在则返回 <B>True</B> ；否则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthFolderExists.htm"><!>FolderExists 
+          方法<!></A></TD>
+          <TD><!>如果指定文件夹存在则返回 <B>True</B> ;否则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A 
+            href="../html/jsmthGetAbsolutePathName.htm"><!>GetAbsolutePathName 
+方法<!></A></TD>
+          <TD><!>根据所提供的路径说明返回完整明确的路径。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetBaseName.htm"><!>GetBaseName 
+          方法<!></A></TD>
+          <TD><!>根据提供的路径说明返回一个字符串，包含文件或文件夹的基本名称（不包括任何文件扩展名）。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetDrive.htm"><!>GetDrive 方法<!></A></TD>
+          <TD><!>返回相应于指定路径中驱动器的 <B>Drive</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetDriveName.htm"><!>GetDriveName 
+          方法<!></A></TD>
+          <TD><!>根据指定路径返回包含驱动器名称的字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetExtensionName.htm"><!>GetExtensionName 
+            方法<!></A></TD>
+          <TD><!>返回一个字符串，包含路径中最后成分的名称。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetFile.htm"><!>GetFile 方法<!></A></TD>
+          <TD><!>返回相应于指定路径中文件的 <B>File</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetFileName.htm"><!>GetFileName 
+          方法<!></A></TD>
+          <TD><!>返回指定路径中的最后文件名或文件夹名，该路径不能是驱动器说明。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetFileVersion.htm">GetFileVersion 
+          方法</A></TD>
+          <TD>返回指定文件的版本号码。</TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetFolder.htm"><!>GetFolder 方法<!></A></TD>
+          <TD><!>返回相应于指定路径中文件夹的 <B>Folder</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A 
+            href="../html/jsmthGetParentFolderName.htm"><!>GetParentFolderName 
+方法<!></A></TD>
+          <TD><!>返回一个字符串，包含指定路径中最后文件或文件夹的父文件夹名。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetSpecialFolder.htm"><!>GetSpecialFolder 
+            方法<!></A></TD>
+          <TD><!>返回指定的特殊文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthGetTempName.htm"><!>GetTempName 
+          方法<!></A></TD>
+          <TD><!>返回一个随机生成的临时文件或文件夹名称。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthitems.htm"><!>Items 方法<!></A></TD>
+          <TD><!>返回包含 <B>Dictionary</B> 对象中所有项目的数组。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthkeys.htm"><!>Keys 方法<!></A></TD>
+          <TD><!>返回包含了 <B>Dictionary</B> 对象中全部已有键的数组。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthMove.htm"><!>Move 方法<!></A></TD>
+          <TD><!>将指定文件或文件夹从一个位置移动到另一个位置。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthMoveFile.htm"><!>MoveFile 方法<!></A></TD>
+          <TD><!>从一个位置向另一个位置移动一个或多个文件。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthMoveFolder.htm"><!>MoveFolder 方法<!></A></TD>
+          <TD><!>从一个位置向另一个位置移动一个或多个文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthOpenAsTextStream.htm"><!>OpenAsTextStream 
+            方法<!></A></TD>
+          <TD><!>打开指定文件并返回可用于读、写或追加该文件的 <B>TextStream</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthopenTextFile.htm"><!>OpenTextFile 
+          方法<!></A></TD>
+          <TD><!>打开指定文件并返回可用于读、写或追加该文件的 <B>TextStream</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthread.htm"><!>Read 方法<!></A></TD>
+          <TD><!>从 <B>TextStream</B> 文件中读取指定数量的字符并返回结果字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthreadAll.htm"><!>ReadAll 方法<!></A></TD>
+          <TD><!>读取整个 <B>TextStream</B> 文件并返回结果字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthreadline.htm"><!>ReadLine 方法<!></A></TD>
+          <TD><!>从 <B>TextStream</B> 文件中读取整行（在 newline 
+          字符前，但不包括它）并返回结果字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthremove.htm"><!>Remove 方法<!></A></TD>
+          <TD><!>从 <B>Dictionary</B> 对象中删除一个键和项目对。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthremoveAll.htm"><!>RemoveAll 方法<!></A></TD>
+          <TD><!>删除 <B>Dictionary</B> 对象中的所有键和项目对。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthskip.htm"><!>Skip 方法<!></A></TD>
+          <TD><!>在读取 <B>TextStream</B> 文件时掠过指定数目的字符。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthskipLine.htm"><!>SkipLine 方法<!></A></TD>
+          <TD><!>在读取 <B>TextStream</B> 文件时掠过下一行。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthwrite.htm"><!>Write 方法<!></A></TD>
+          <TD><!>向 <B>TextStream</B> 文件中写入指定字符串。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthwriteBlankLines.htm"><!>WriteBlankLines 方法<!></A></TD>
+          <TD><!>向 <B>TextStream</B> 文件中写入指定数量的 newline 字符。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsmthWriteLine.htm"><!>WriteLine 方法<!></A></TD>
+          <TD><!>向 <B>TextStream</B> 文件中写入指定字符串和 newline 
+      字符。<!></TD></TR></TBODY></TABLE></DIV>
+      <DIV id=idBlurb4 style="DISPLAY: none">
+      <TABLE style="FONT-SIZE: 10pt" cellSpacing=2 cellPadding=2 width="100%" 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD width="33%"><B><!>语言元素<!></B><BR></TD>
+          <TD><B><!>描述<!></B></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjDictionary.htm"><!>Dictionary 对象<!></A></TD>
+          <TD><!>存储数据键和项目对的对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jscolDrives.htm"><!>Drive 对象<!></A></TD>
+          <TD><!>提供了对特定磁盘驱动器或网络共享的属性的访问。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jscolDrives.htm"><!>Drives 集合<!></A></TD>
+          <TD><!>包含所有可用驱动器的只读集合。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjFile.htm"><!>File 对象<!></A></TD>
+          <TD><!>提供了对文件所有属性的访问。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jscolFiles.htm"><!>Files 集合<!></A></TD>
+          <TD><!>文件夹中所有 <B>File</B> 对象的集合。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjFileSystem.htm"><!>FileSystemObject 
+            对象<!></A></TD>
+          <TD><!>提供了对计算机文件系统的访问。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjFolder.htm"><!>Folder 对象<!></A></TD>
+          <TD><!>提供了对文件夹所有属性的访问。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jscolFolders.htm"><!>Folders 集合<!></A></TD>
+          <TD><!>包含在一个 <B>Folder</B> 对象中的所有 <B>Folder</B> 对象的集合。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsobjTextStream.htm"><!>TextStream 对象<!></A></TD>
+          <TD><!>便于对文件的顺序访问。<!></TD></TR></TBODY></TABLE></DIV>
+      <DIV id=idBlurb5 style="DISPLAY: none">
+      <TABLE style="FONT-SIZE: 10pt" cellSpacing=2 cellPadding=2 width="100%" 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD width="33%"><B><!>语言元素<!></B><BR></TD>
+          <TD><B><!>描述<!></B></TD></TR>
+        <TR vAlign=top>
+          <TD width="33%"><A 
+            href="../html/jsproatEndOfLine.htm"><!>AtEndOfLine 属性<!></A></TD>
+          <TD><!>如果在 <B>TextStream</B>文件中文件指针紧接在 end-of-line 标志之前则返回 
+            <B>True</B> ；否则返回 <B>False</B>。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproatEndOfStream.htm"><!>AtEndOfStream 
+            属性<!></A></TD>
+          <TD><!>如果在 <B>TextStream</B> 文件中文件指针到达文件尾则返回 <B>True</B> ；否则返回 
+            <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproAttributes.htm"><!>Attributes 属性<!></A></TD>
+          <TD><!>设置或返回文件或文件夹的属性。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproAvailableSpace.htm"><!>AvailableSpace 属性<!></A></TD>
+          <TD><!>向用户返回指定驱动器或网络共享上的可用空间大小。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsprocolumn.htm"><!>Column 属性<!></A></TD>
+          <TD><!>返回 <B>TextStream</B> 文件中当前字符所在的列号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsprocompareMode.htm"><!>CompareMode 
+          属性<!></A></TD>
+          <TD><!>设置和返回在 <B>Dictionary</B> 对象中对字符串键进行比较的比较方式。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsprocount.htm"><!>Count 属性<!></A></TD>
+          <TD><!>返回集合或 <B>Dictionary</B> 对象中的项目数。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDateCreated.htm"><!>DateCreated 
+          属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹创建的日期和时间。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDateLastAccessed.htm"><!>DateLastAccessed 
+            属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹最后一次访问的日期和时间。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDateLastModified.htm"><!>DateLastModified 
+            属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹最后一次修改的日期和时间。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDrive.htm"><!>Drive 属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹所在驱动器的驱动器号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDriveLetter.htm"><!>DriveLetter 
+          属性<!></A></TD>
+          <TD><!>返回本地物理驱动器或网络共享的驱动器号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDrives.htm"><!>Drives 属性<!></A></TD>
+          <TD><!>返回一个 <B>Drives</B> 集合，由所有本地机器上可用的 <B>Drive</B> 对象组成 
+。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproDriveType.htm"><!>DriveType 属性<!></A></TD>
+          <TD><!>返回说明指定驱动器类型的值。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproFiles.htm"><!>Files 属性<!></A></TD>
+          <TD><!>返回一个 <B>Files</B> 集合，由所有包含在指定文件夹中的 <B>File</B> 
+            对象组成，包括那些设置了隐藏和系统文件属性的文件。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproFileSystem.htm"><!>FileSystem 属性<!></A></TD>
+          <TD><!>返回指定驱动器所使用的文件系统类型。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproFreeSpace.htm"><!>FreeSpace 属性<!></A></TD>
+          <TD><!>向用户返回指定驱动器或网络共享上可用空间的大小。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproIsReady.htm"><!>IsReady 属性<!></A></TD>
+          <TD><!>如果指定驱动器已就绪则返回 <B>True</B> ；否则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproIsRootFolder.htm"><!>IsRootFolder 
+          属性<!></A></TD>
+          <TD><!>如果指定文件夹是根文件夹则返回 <B>True</B> ；否则返回 <B>False</B> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproitem.htm"><!>Item 属性<!></A></TD>
+          <TD><!>根据 <B>Dictionary</B> 对象中指定的 <I>key</I> 设置或返回 <I>item</I> 
+          。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsprokey.htm"><!>Key 属性<!></A></TD>
+          <TD><!>在 <B>Dictionary</B> 对象中设置 <I>key</I> 。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproline.htm"><!>Line 属性<!></A></TD>
+          <TD><!>返回 <B>TextStream</B> 文件中的当前行号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproName.htm"><!>Name 属性<!></A></TD>
+          <TD><!>设置或返回指定文件或文件夹的名称。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproParentFolder.htm"><!>ParentFolder 
+          属性<!></A></TD>
+          <TD><!>返回指定文件或文件夹的父文件夹对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproPath.htm"><!>Path 属性<!></A></TD>
+          <TD><!>返回指定文件、文件夹或驱动器的路径。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproRootFolder.htm"><!>RootFolder 属性<!></A></TD>
+          <TD><!>返回表示指定驱动器上根文件夹的 <B>Folder</B> 对象。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproSerialNumber.htm"><!>SerialNumber 
+          属性<!></A></TD>
+          <TD><!>返回用于唯一标识驱动器卷的数字序列号。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproShareName.htm"><!>ShareName 属性<!></A></TD>
+          <TD><!>返回指定驱动器的网络共享名。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproShortName.htm"><!>ShortName 属性<!></A></TD>
+          <TD><!>返回一些程序使用的短名称，这些短名由需要以前的 8.3 命名规范的程序使用。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproShortPath.htm"><!>ShortPath 属性<!></A></TD>
+          <TD><!>返回一些程序使用的短路径，这些短路径由需要以前的 8.3 文件名规范的程序使用。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproSize.htm"><!>Size 属性<!></A></TD>
+          <TD><!>以字节为单位返回指定文件或文件夹的大小。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproSubFolders.htm"><!>SubFolders 属性<!></A></TD>
+          <TD><!>返回由指定文件夹中包含的所有文件夹组成的 <B>Folders</B> 集合，包括那些设置了隐藏和系统文件属性的文件夹。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproTotalSize.htm"><!>TotalSize 属性<!></A></TD>
+          <TD><!>以字节为单位返回驱动器或网络共享的总共空间大小。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproType.htm"><!>Type 属性<!></A></TD>
+          <TD><!>返回关于文件或文件夹类型的信息。<!></TD></TR>
+        <TR vAlign=top>
+          <TD><A href="../html/jsproVolumeName.htm"><!>VolumeName 属性<!></A></TD>
+          <TD><!>设置或返回指定驱动器的卷号。<!></TD></TR></TBODY></TABLE></DIV></TD></TR></TBODY></TABLE>
+<P>
+<HR>
+
+<P><FONT face="Verdana, Arial, Helvetica"><!--COPYRIGHT BEGIN--><A 
+href="../html/../HTML/jscopy.htm">&copy; 2000 Microsoft Corporation 
+版权所有。保留所有权利。使用规定。<BR><!--COPYRIGHT END--><BR></FONT></P></A></FONT></BODY></HTML>

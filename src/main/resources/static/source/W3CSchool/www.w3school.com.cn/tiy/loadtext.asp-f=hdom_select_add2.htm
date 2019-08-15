@@ -1,0 +1,37 @@
+<html>
+<head>
+<script type="text/javascript">
+function insertBeforeSelected()
+  {
+  var x=document.getElementById("mySelect");
+  if (x.selectedIndex>=0)
+    {
+    var y=document.createElement('option');
+    y.text='Kiwi';
+    var sel=x.options[x.selectedIndex];  
+    try
+      {
+      x.add(y,sel); // standards compliant
+      }
+    catch(ex)
+      {
+      x.add(y,x.selectedIndex); // IE only
+      }
+    }
+  }
+</script>
+</head>
+<body>
+
+<form>
+<select id="mySelect">
+  <option>Apple</option>
+  <option>Pear</option>
+  <option>Banana</option>
+  <option>Orange</option>
+</select>
+<input type="button" onclick="insertBeforeSelected()" value="Insert option before selected" />
+</form>
+
+</body>
+</html>

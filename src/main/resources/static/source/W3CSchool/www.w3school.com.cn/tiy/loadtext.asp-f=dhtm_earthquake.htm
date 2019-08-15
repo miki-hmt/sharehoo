@@ -1,0 +1,29 @@
+<html>
+<head>
+<script>
+function startEQ()
+{
+richter=5
+parent.moveBy(0,richter)
+parent.moveBy(0,-richter)
+parent.moveBy(richter,0)
+parent.moveBy(-richter,0)
+timer=setTimeout("startEQ()",10)
+}
+function stopEQ()
+{
+clearTimeout(timer)
+}
+</script>
+</head>
+<body>
+
+<form>
+<input type="button" onclick="startEQ()" value="开始地震">
+<br />
+<br />
+<input type="button" onclick="stopEQ()" value="停止地震">
+</form>
+
+</body>
+</html>

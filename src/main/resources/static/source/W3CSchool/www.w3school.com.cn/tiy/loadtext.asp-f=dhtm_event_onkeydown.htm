@@ -1,0 +1,22 @@
+<html>
+<head>
+<script type="text/javascript">
+function writeMessage()
+{
+document.forms[0].mySecondInput.value=document.forms[0].myInput.value
+}
+</script>
+</head>
+
+<body>
+
+<p>当键盘按键被按下时，会发生 onkeydown 事件。</p>
+<form>
+请输入您的名字：
+<input type="text" name="myInput" onkeydown="writeMessage()" size="20">
+<input type="text" name="mySecondInput" size="20">
+</select>
+</form>
+
+</body>
+</html>

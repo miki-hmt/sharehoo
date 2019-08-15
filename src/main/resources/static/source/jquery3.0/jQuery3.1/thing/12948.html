@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>off()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">off()<span class="g-bg-red margin-l-5">1.7+</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.off( events [, selector ] [, handler ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>移除一个事件处理函数。
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.7</span>.off(
+            events [, selector ] [, handler ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>events</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					一个或多个空格分隔的事件类型和可选的命名空间，或仅仅是命名空间，比如"click", "keydown.myPlugin", 或者 ".myPlugin"。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					一个选择器，当绑定事件处理程序时匹配最初传递给 <code>.on()</code>的那个。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler</strong> 
+				</div>
+				<div>
+					类型: Function( Event eventObject )
+				</div>
+				<div>
+					以前附加的事件处理函数，或特殊值<code>false</code>。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.7</span>.off( events [,
+            selector ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>events</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一个对象的字符串键所代表的一个或多个空格分隔的事件类型和可选的命名空间，值表示先前事件绑定的处理函数。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					一个选择器，当绑定事件处理程序时匹配最初传递给 <code>.on()</code>的那个。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.7</span>.off( event )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>event</strong> 
+				</div>
+				<div>
+					类型: Event
+				</div>
+				<div>
+					一个<code>jQuery
+                    .Event</code> 对象.
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.7</span>.off()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					这个方法不接受任何参数
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>off()</code> 方法移除用<code>.on()</code>绑定的事件处理程序。有关详细信息，请参阅该网页上delegated和directly绑定事件。可以通过提供组合的事件名，名字空间，选择器或处理函数来移除绑定在元素上指定的事件处理函数。<strong>当有多个过滤参数时，只有与这些参数完全匹配的事件处理函数才会被移除。</strong> 
+	</p>
+	<p>
+		如果一个简单的事件名称，比如提供<code>"click"</code>，那么<em>所有</em> 这种类型的事件（包括直接和委派）从元素上被移除。对于写插件，或者基于大型代码而编程时，最好是通过名字空间进行事件绑定或移除操作，这样就不会意外的移除其它代码添加的事件处理函数。在一个特定的命名空间中的所有类型的事件，可以从一个元素中删除，只是提供了一个命名空间，比如 <code>".myPlugin"</code>。在移除事件处理时，至少要提供名字空间或事件名。
+	</p>
+	<p>
+		要删除特定的委派事件处理程序，需要提供一个<code>selector</code> 的参数。该选择器字符串必须与之前通过 <code>.on()</code> 进行事件处理绑定时使用的选择器相一致。若要移除元素上所有的代理事件，而不移除任何非代理事件，请使用特殊值 "**"。
+	</p>
+	<p>
+		处理程序也可以删除<code>handler</code>参数指定名称的函数。当jQuery的绑定一个事件处理程序，它分配一个唯一的ID给处理函数。函数用<code>jQuery.proxy()</code>代理或类似有相同的唯一ID机制（代理函数），因此，通过代理处理程序<code>.off</code> 可能会删除比预期更多的处理程序。在这些情况下，最好是附加和移除事件处理程序，使用命名空间。
+	</p>
+	<p>
+		和<code>.on()</code>一样，你可以传递一个 <code>events</code>参数明确的指定而不是用<code>events</code> 和 <code>handler</code>作为单独参数。键是事件类型及可选的名字空间，值是绑定的处理函数，或者是特殊值<code>false</code>。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">为有颜色的按钮添加并移除事件处理。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+button { margin:5px; }
+button#theone { color:red; background:yellow; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="theone"&gt;Does nothing...&lt;/button&gt;
+&lt;button id="bind"&gt;Add Click&lt;/button&gt;
+&lt;button id="unbind"&gt;Remove Click&lt;/button&gt;
+&lt;div style="display:none;"&gt;Click!&lt;/div&gt;
+&lt;script&gt;
+function aClick() {
+  $("div").show().fadeOut("slow");
+}
+$("#bind").click(function () {
+  $("body").on("click", "#theone", aClick)
+    .find("#theone").text("Can Click!");
+});
+$("#unbind").click(function () {
+  $("body").off("click", "#theone", aClick)
+    .find("#theone").text("Does nothing...");
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<p>
+			<a href="http://www.shouce.ren/study/api/s/8155" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+		</p>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">移除所有段落上的事件：</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("p").off()</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-2">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">R移除所有段落上的代理事件：</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("p").off( "click", "**" )</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-3">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">通过传入的第三个参数，仅移除先前绑定的事件处理函数：</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">var foo = function () {
+  // code to handle some kind of event
+};
+ 
+// ... now foo will be called when paragraphs are clicked ...
+$("body").on("click", "p", foo);
+ 
+// ... foo will no longer be called.
+$("body").off("click", "p", foo); </pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">通过指定名字空间，解除绑定表单上所有的代理事件：</span> 
+</p>
+<pre class="prettyprint lang-js">var validate = function () {
+  // code to validate form entries
+};
+ 
+// delegate events under the ".validator" namespace
+$("form").on("click.validator", "button", validate);
+ 
+$("form").on("keypress.validator", "input[type='text']", validate);
+ 
+// remove event handlers in the ".validator" namespace
+ 
+$("form").off(".validator");</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

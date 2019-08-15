@@ -1,0 +1,21 @@
+<html>
+
+<head>
+<script type="text/javascript">
+function writeMessage()
+{
+document.forms[0].mySecondInput.value=document.forms[0].myInput.value
+}
+</script>
+</head>
+
+<body>
+<p>当键盘按键上升时，会发生 onkeyup 事件。</p>
+<form>
+请编写一条消息：<br />
+<input type="text" name="myInput" onkeyup="writeMessage()" size="20">
+<input type="text" name="mySecondInput" size="20">
+</form>
+</body>
+
+</html>

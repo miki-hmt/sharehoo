@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeCols()
+  {
+  parent.document.getElementById("main").cols="30%,70%"
+  }
+function restoreCols()
+  {
+  parent.document.getElementById("main").cols="50%,50%"
+  }
+</script>
+</head>
+<body>
+
+<input type="button" onclick="changeCols()" value="Change column size" />
+<input type="button" onclick="restoreCols()" value="Restore column size" />
+
+</body>
+</html>

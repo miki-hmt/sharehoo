@@ -1,0 +1,28 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+function StringBuffer () {
+  this._strings_ = new Array();
+}
+
+StringBuffer.prototype.append = function(str) {
+  this._strings_.push(str);
+};
+
+StringBuffer.prototype.toString = function() {
+  return this._strings_.join("");
+};
+
+var buffer = new StringBuffer ();
+buffer.append("hello ");
+buffer.append("world");
+var result = buffer.toString();
+
+document.write(buffer);
+
+</script>
+
+</body>
+</html>

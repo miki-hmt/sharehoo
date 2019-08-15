@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript">
+function createCaption()
+{
+var x=document.getElementById('myTable').createTHead()
+x.innerHTML="我的表格标题"
+}
+</script>
+</head>
+<body>
+
+<table id="myTable" border="1">
+<tr>
+<td>Row1 cell1</td>
+<td>Row1 cell2</td>
+</tr>
+<tr>
+<td>Row2 cell1</td>
+<td>Row2 cell2</td>
+</tr>
+</table>
+<br />
+<input type="button" onclick="createCaption()"
+value="创建标题">
+
+</body>
+</html>

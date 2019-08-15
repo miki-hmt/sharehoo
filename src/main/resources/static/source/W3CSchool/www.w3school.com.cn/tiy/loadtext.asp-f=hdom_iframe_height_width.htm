@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeSize()
+{
+document.getElementById("frame1").height="300";
+document.getElementById("frame1").width="300";
+}
+function restoreSize()
+{
+document.getElementById("frame1").height="200";
+document.getElementById("frame1").width="200";
+}
+</script>
+</head>
+
+<body>
+<iframe src="../example/hdom/frame_a.html" tppabs="http://www.w3school.com.cn/example/hdom/frame_a.html" id="frame1" height="200" width="200"></iframe>
+<br /><br />
+
+<input type="button" onclick="changeSize()" value="Change size" />
+<input type="button" onclick="restoreSize()" value="Restore size" />
+
+</body>
+</html>

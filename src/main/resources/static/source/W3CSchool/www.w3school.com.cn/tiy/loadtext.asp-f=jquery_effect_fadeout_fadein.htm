@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".btn1").click(function(){
+  $("p").fadeOut()
+  });
+  $(".btn2").click(function(){
+  $("p").fadeIn();
+  });
+});
+</script>
+</head>
+<body>
+<p>This is a paragraph.</p>
+<button class="btn1">Hide</button>
+<button class="btn2">Show</button>
+</body>
+</html>

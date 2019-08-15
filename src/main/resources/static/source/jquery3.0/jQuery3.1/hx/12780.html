@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery 3.1 参考手册 速查表</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery 3.1 参考手册 速查表</h1>
+	<hr>
+		<style type="text/css"> #content.a1 h1,#content.a1 h2,#content.a1 h3,#content.a1 ul,#content.a1 li {font-size: 12px;font-weight: normal;padding:0;margin:0;list-style:none;font-family:Verdana, Tahoma, arial, sans-serif, "宋体";line-height: 16px;}
+#content.a1 h1 {overflow:hidden;zoom:1;}
+#content.a1 h2 {border-radius:3px;border-left: 3px solid #5cb85c;border-bottom: 3px solid #5cb85c;padding: 2px 5px;font-weight: 600}
+#content.a1 h3 {color: #666;padding-top: 2px;}
+#content.a1 ul {margin:0 0 5px 10px;}
+#content.a1 ul ul {margin:0 0 0 10px;}
+#content.a1 > div{float:left;width: 220px;overflow:hidden;margin-right: 2px; height: 1230px; }
+#content.a1 a:hover {color:white!important;background:#5cb85c;padding: 2px;font-weight: 600}
+#content.a1 > div > div:hover{background:#f8f8f8;}
+#content.a1 ul li ul li{color: #4070AA;}
+#content.a1 sup{ color:#CC3300; font-family:icon;line-height: 8px;}
+#content.a1 #fk{color:#900; float:right;}
+#content.a1 #fk:hover{ color:#FFF; background-color:#900;}
+del,del a{ color:#999!important;}
+#content.a1 h1,#content.a1 #footer{width:1246px;}
+#content.a1 h1 > span{ float:left;}
+#content.a1 em{ font-style:normal;}
+/*@media only screen and (min-width: 150px) and (max-width:378px){
+	#content.a1 h1,#content.a1 #footer{width:206px;}
+	#content.a1 h1 em{ display:none;}
+	#content.a1 > div{ height:auto;}
+	#content.a1 > div > div{ float:left; width: 206px; margin-right: 2px;}
+}
+@media only screen and (min-width: 442px) and (max-width:650px){
+	#content.a1 h1,#content.a1 #footer{width:414px;}
+	#content.a1 h1 em{ display:none;}
+	#content.a1 > div{ height:auto;}
+	#content.a1 > div > div{ float:left; width: 206px; margin-right: 2px;}
+}
+@media only screen and (min-width: 648px) and (max-width:858px){
+	#content.a1 h1,#content.a1 #footer{width:622px;}
+	#content.a1 .col-6,#content.a1 .col-5,#content.a1 .col-4{ height:auto;}
+	#content.a1 .col-6 > div,#content.a1 .col-5 > div,#content.a1 .col-4 > div{ float:left; width: 206px; margin-right: 2px;}
+}
+@media only screen and (min-width: 856px) and (max-width:1064px){
+	#content.a1 h1,#content.a1 #footer{width:830px;}
+	#content.a1 .col-6,#content.a1 .col-5{ float:none; overflow:visible; width:auto;height:auto;}
+	#content.a1 .col-6 > div,#content.a1 .col-5 > div{ float:left; width: 206px; margin-right: 2px;}
+}
+@media only screen and (min-width: 1062px) and (max-width:1268px){
+	#content.a1 h1,#content.a1 #footer{width:1038px;}
+	#content.a1 .col-6{ width:auto; height:auto;}
+	#content.a1 .col-6 > div{ float:left; width: 206px; margin-right: 2px;}
+}*/
+</style>
+<div id="content" class="a1">
+	<div class="col-1">
+		<div id="core">
+			<h2 id="articleHeader0">
+				核心
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader1">
+						jQuery 核心函数
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../核心/12780.html">jQuery([sel,[context]])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12781.html">jQuery(html,[ownerDoc])</a><sup>1.8*</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12782.html">jQuery(callback)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12783.html">jQuery.holdReady(hold)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader2">
+						jQuery 对象访问
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../核心/12784.html">each(callback)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12785.html">size()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12786.html">length</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12787.html">selector</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12788.html">context</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12789.html">get([index])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12790.html">index([selector|element])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader3">
+						数据缓存
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../核心/12791.html">data([key],[value])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12792.html">removeData([name|list])</a><sup>1.7*</sup> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../核心/12793.html">$.data(ele,[key],[val])</a></del><sup>1.8-</sup> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader4">
+						队列控制
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../核心/12794.html">queue(e,[q])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12795.html">dequeue([queueName])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12796.html">clearQueue([queueName])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader5">
+						插件机制
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../核心/12797.html">jQuery.fn.extend(object)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../核心/12798.html">jQuery.extend(object)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader6">
+						多库共存
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../核心/12799.html">jQuery.noConflict([ex])</a> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div id="attributes">
+			<h2 id="articleHeader7">
+				属性
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader8">
+						属性
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../属性/12877.html">attr(name|pro|key,val|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../属性/12878.html">removeAttr(name)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../属性/12879.html">prop(n|p|k,v|f)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../属性/12880.html">removeProp(name)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader9">
+						CSS 类
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../属性/12881.html">addClass(class|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../属性/12882.html">removeClass([class|fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../属性/12883.html">toggleClass(class|fn[,sw])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader10">
+						HTML代码/文本/值
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../属性/12884.html">html([val|fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../属性/12885.html">text([val|fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../属性/12886.html">val([val|fn|arr])</a> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div id="css">
+			<h2 id="articleHeader11">
+				CSS
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader12">
+						CSS
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../CSS/12887.html">css(name|pro|[,val|fn])</a><sup>1.9*</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../CSS/12888.html">jQuery.cssHooks</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader13">
+						位置
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../CSS/12889.html">offset([coordinates])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../CSS/12890.html">position()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../CSS/12891.html">scrollTop([val])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../CSS/12892.html">scrollLeft([val])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader14">
+						尺寸
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../CSS/12893.html">height([val|fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../CSS/12894.html">width([val|fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../CSS/12895.html">innerHeight()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../CSS/12896.html">innerWidth()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../CSS/12897.html">outerHeight([soptions])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../CSS/12898.html">outerWidth([options])</a> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-2">
+		<div id="selectors">
+			<h2 id="articleHeader15">
+				选择器
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader16">
+						基本
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../选择器/12800.html">#id</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12801.html">element</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12802.html">.class</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12803.html">*</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12804.html">selector1,selector2,selectorN</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader17">
+						层级
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../选择器/12805.html">ancestor descendant</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12806.html">parent >  child</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12807.html">prev + next</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12808.html">prev ~ siblings</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader18">
+						基本
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../选择器/12809.html">:first</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12810.html">:not(selector)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12811.html">:even</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12812.html">:odd</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12813.html">:eq(index)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12814.html">:gt(index)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12815.html">:lang</a><sup>1.9+</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12816.html">:last</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12817.html">:lt(index)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12818.html">:header</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12819.html">:animated</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12820.html">:focus</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12821.html">:root</a><sup>1.9+</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12822.html">:target</a><sup>1.9+</sup> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader19">
+						内容
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../选择器/12823.html">:contains(text)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12824.html">:empty</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12825.html">:has(selector)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12826.html">:parent</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader20">
+						可见性
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../选择器/12827.html">:hidden</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12828.html">:visible</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader21">
+						属性
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../选择器/12829.html">[attribute]</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12830.html">[attribute=value]</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12831.html">[attribute!=value]</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12832.html">[attribute^=value]</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12833.html">[attribute$=value]</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12834.html">[attribute*=value]</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/13079.html">[attribute~=value]</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/13080.html">[attribute|=value]</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12835.html">[attrSel1][attrSel2][attrSelN]</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader22">
+						子元素
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../选择器/12836.html">:first-child</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12837.html">:first-of-type</a><sup>1.9+</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12838.html">:last-child</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12839.html">:last-of-type</a><sup>1.9+</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12840.html">:nth-child</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12841.html">:nth-last-child()</a><sup>1.9+</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12842.html">:nth-last-of-type()</a><sup>1.9+</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12843.html">:nth-of-type()</a><sup>1.9+</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12844.html">:only-child</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12845.html">:only-of-type</a><sup>1.9+</sup> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader23">
+						表单
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../选择器/12846.html">:input</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12847.html">:text</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12848.html">:password</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12849.html">:radio</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12850.html">:checkbox</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12851.html">:submit</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12852.html">:image</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12853.html">:reset</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12854.html">:button</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12855.html">:file</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader24">
+						表单对象属性
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../选择器/12856.html">:enabled</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12857.html">:disabled</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12858.html">:checked</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../选择器/12859.html">:selected</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader25">
+						混淆选择器
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../CSS/12860.html">$.escapeSelector(selector)</a><sup>3.0+</sup> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-3">
+		<div id="manipulation">
+			<h2 id="articleHeader26">
+				文档处理
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader27">
+						内部插入
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../文档处理/12899.html">append(content|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12900.html">appendTo(content)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12901.html">prepend(content|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12902.html">prependTo(content)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader28">
+						外部插入
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../文档处理/12903.html">after(content|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12904.html">before(content|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12905.html">insertAfter(content)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12906.html">insertBefore(content)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader29">
+						包裹
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../文档处理/12907.html">wrap(html|ele|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12908.html">unwrap()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12909.html">wrapAll(html|ele)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12910.html">wrapInner(html|ele|fn)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader30">
+						替换
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../文档处理/12911.html">replaceWith(content|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12912.html">replaceAll(selector)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader31">
+						删除
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../文档处理/12913.html">empty()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12914.html">remove([expr])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../文档处理/12915.html">detach([expr])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader32">
+						复制
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../文档处理/12916.html">clone([Even[,deepEven]])</a> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div id="traversing">
+			<h2 id="articleHeader33">
+				筛选
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader34">
+						过滤
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../筛选/12917.html">eq(index|-index)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12918.html">first()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12919.html">last()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12920.html">hasClass(class)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12921.html">filter(expr|obj|ele|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12922.html">is(expr|obj|ele|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12923.html">map(callback)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12924.html">has(expr|ele)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12925.html">not(expr|ele|fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12926.html">slice(start,[end])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader35">
+						查找
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../筛选/12927.html">children([expr])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12928.html">closest(e|o|e)</a><sup>1.7*</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12929.html">find(e|o|e)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12930.html">next([expr])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12931.html">nextall([expr])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12932.html">nextUntil([e|e][,f])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12933.html">offsetParent()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12934.html">parent([expr])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12935.html">parents([expr])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12936.html">parentsUntil([e|e][,f])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12937.html">prev([expr])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12938.html">prevall([expr])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12939.html">prevUntil([e|e][,f])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12940.html">siblings([expr])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader36">
+						串联
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../筛选/12941.html">add(e|e|h|o[,c])</a><sup>1.9*</sup> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../筛选/12942.html">andSelf()</a></del><sup>1.8-</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12943.html">addBack()</a><sup>1.9+</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12944.html">contents()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../筛选/12945.html">end()</a> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-4">
+		<div id="events">
+			<h2 id="articleHeader37">
+				事件
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader38">
+						页面载入
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../事件/12946.html">ready(fn)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader39">
+						事件处理
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../事件/12947.html">on(eve,[sel],[data],fn)</a><sup>1.7+</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12948.html">off(eve,[sel],[fn])</a><sup>1.7+</sup> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../事件/12949.html">bind(type,[data],fn)</a></del><sup>3.0-</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12950.html">one(type,[data],fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12951.html">trigger(type,[data])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12952.html">triggerHandler(type, [data])</a> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../事件/12953.html">unbind(t,[d|f])</a></del><sup>3.0-</sup> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader40">
+						事件委派
+					</h3>
+					<ul>
+						<li>
+							<del><a class="book-a" href="../事件/12954.html">live(type,[data],fn)</a></del><sup>1.7-</sup> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../事件/12955.html">die(type,[fn])</a></del><sup>1.7-</sup> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../事件/12956.html">delegate(s,[t],[d],fn)</a> </del><sup>3.0-</sup> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../事件/12957.html">undelegate([s,[t],fn])</a> </del><sup>3.0-</sup> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader41">
+						事件切换
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../事件/12958.html">hover([over,]out)</a> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../事件/12959.html">toggle([spe],[eas],[fn])</a></del><sup>1.9-</sup> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader42">
+						事件
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../事件/12960.html">blur([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12961.html">change([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12962.html">click([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12963.html">dblclick([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12964.html">error([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12965.html">focus([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12966.html">focusin([data],fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12967.html">focusout([data],fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12968.html">keydown([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12969.html">keypress([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12970.html">keyup([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12971.html">mousedown([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12972.html">mouseenter([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12973.html">mouseleave([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12974.html">mousemove([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12975.html">mouseout([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12976.html">mouseover([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12977.html">mouseup([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12978.html">resize([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12979.html">scroll([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12980.html">select([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12981.html">submit([[data],fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../事件/12982.html">unload([[data],fn])</a> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div id="effects">
+			<h2 id="articleHeader43">
+				效果
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader44">
+						基本
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../效果/12983.html">show([s,[e],[fn]])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12984.html">hide([s,[e],[fn]])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader45">
+						滑动
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../效果/12985.html">slideDown([s],[e],[fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12986.html">slideUp([s,[e],[fn]])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12987.html">slideToggle([s],[e],[fn])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader46">
+						淡入淡出
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../效果/12988.html">fadeIn([s],[e],[fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12989.html">fadeOut([s],[e],[fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12990.html">fadeTo([[s],o,[e],[fn]])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12991.html">fadeToggle([s,[e],[fn]])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader47">
+						自定义
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../效果/12992.html">animate(p,[s],[e],[fn])</a><sup>1.8*</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12993.html">stop([c],[j])</a><sup>1.7*</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12994.html">delay(d,[q])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12995.html">finish([queue])</a><sup>1.9+</sup> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader48">
+						设置
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../效果/12996.html">jQuery.fx.off</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../效果/12997.html">jQuery.fx.interval</a> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-5">
+		<div id="ajax">
+			<h2 id="articleHeader49">
+				ajax
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader50">
+						ajax 请求
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../AJAX/12861.html">$.ajax(url,[settings])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12862.html">load(url,[data],[callback])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12863.html">$.get(url,[data],[fn],[type])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12864.html">$.getJSON(url,[data],[fn])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12865.html">$.getScript(url,[callback])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12866.html">$.post(url,[data],[fn],[type])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader51">
+						ajax 事件
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../AJAX/12867.html">ajaxComplete(callback)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12868.html">ajaxError(callback)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12869.html">ajaxSend(callback)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12870.html">ajaxStart(callback)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12871.html">ajaxStop(callback)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12872.html">ajaxSuccess(callback)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader52">
+						其它
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../AJAX/12873.html">$.ajaxPrefilter([type],fn)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12874.html">$.ajaxSetup([options])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12875.html">serialize()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../AJAX/12876.html">serializearray()</a> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div id="utilities">
+			<h2 id="articleHeader53">
+				工具
+			</h2>
+			<ul>
+				<li>
+					<h3 id="articleHeader54">
+						浏览器及特性检测
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../工具/12998.html">$.support</a> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../工具/12999.html">$.browser</a></del><sup>1.9-</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13000.html">$.browser.version</a> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../工具/13001.html">$.boxModel</a></del> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader55">
+						数组和对象操作
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../工具/13002.html">$.each(object,[callback])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13003.html">$.extend([d],tgt,obj1,[objN])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13004.html">$.grep(array,fn,[invert])</a> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../工具/13005.html">$.sub()</a></del><sup>1.9-</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13006.html">$.when(deferreds)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13007.html">$.makeArray(obj)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13008.html">$.map(arr|obj,callback)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13009.html">$.inArray(val,arr,[from])</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13010.html">$.toArray()</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13011.html">$.merge(first,second)</a> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../工具/13012.html">$.unique(array)</a></del><sup>3.0-</sup> 
+						</li>
+/
+						<li>
+							<a class="book-a" href="../工具/13013.html">jQuery.uniqueSort(array)<sup>3.0+</sup></a> 
+						</li>
+						<li>
+							<del><a class="book-a" href="../工具/13014.html">$.parseJSON(json)</a></del><sup>3.0-</sup> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13015.html">$.parseXML(data)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader56">
+						函数操作
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../工具/13016.html">$.noop</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13017.html">$.proxy(function,context)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader57">
+						测试操作
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../工具/13018.html">$.contains(c,c)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13019.html">$.type(obj)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13020.html">$.isarray(obj)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13021.html">$.isFunction(obj)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13022.html">$.isEmptyObject(obj)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13023.html">$.isPlainObject(obj)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13024.html">$.isWindow(obj)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13025.html">$.isNumeric(value)</a><sup>1.7+</sup> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader58">
+						字符串操作
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../工具/13026.html">$.trim(str)</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader59">
+						URL
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../工具/13027.html">$.param(obj,[traditional])</a> 
+						</li>
+					</ul>
+				</li>
+				<li>
+					<h3 id="articleHeader60">
+						插件编写
+					</h3>
+					<ul>
+						<li>
+							<a class="book-a" href="../工具/13028.html">$.error(message)</a> 
+						</li>
+						<li>
+							<a class="book-a" href="../工具/13029.html">$.fn.jquery</a> 
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-6">
+		<div id="Eventobject">
+			<h2 id="articleHeader61">
+				事件对象
+			</h2>
+			<ul>
+				<li>
+					<a class="book-a" href="../事件对象/13030.html">eve.currentTarget</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13031.html">eve.data</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13032.html">eve.delegateTarget</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13033.html">eve.isDefaultPrevented()</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13034.html">eve.isImmediatePropag...()</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13035.html">eve.isPropagationStopped()</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13036.html">eve.namespace</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13037.html">eve.pageX</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13038.html">eve.pageY</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13039.html">eve.preventDefault()</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13040.html">eve.relatedTarget</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13041.html">eve.result</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13042.html">eve.stopImmediatePro...()</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13043.html">eve.stopPropagation()</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13044.html">eve.target</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13045.html">eve.timeStamp</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13046.html">eve.type</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../事件对象/13047.html">eve.which</a> 
+				</li>
+			</ul>
+		</div>
+		<div id="Deferred">
+			<h2 id="articleHeader62">
+				延迟对象
+			</h2>
+			<ul>
+				<li>
+					<a class="book-a" href="../延迟对象/13048.html">def.done(d,[d])</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13049.html">def.fail(failCallbacks)</a> 
+				</li>
+				<li>
+					<del><a class="book-a" href="../延迟对象/13050.html">def.isRejected()</a></del><sup>1.7-</sup> 
+				</li>
+				<li>
+					<del><a class="book-a" href="../延迟对象/13051.html">def.isResolved()</a></del><sup>1.7-</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13052.html">def.reject(args)</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13053.html">def.rejectWith(c,[a])</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13054.html">def.resolve(args)</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13055.html">def.resolveWith(c,[a])</a> 
+				</li>
+				<li>
+					<del><a class="book-a" href="../延迟对象/13056.html">def.then(d[,f][,p])</a></del><sup>1.8*</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13057.html">def.promise([ty],[ta])</a> 
+				</li>
+				<li>
+					<del><a class="book-a" href="../延迟对象/13058.html">def.pipe([d],[f],[p])</a></del><sup>1.8-</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13059.html">def.always(al,[al])</a> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13060.html">def.notify(args)</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13061.html">def.notifyWith(c,[a])</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13062.html">def.progress(proCal)</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../延迟对象/13063.html">def.state()</a><sup>1.7+</sup> 
+				</li>
+			</ul>
+		</div>
+		<div id="Callbacks">
+			<h2 id="articleHeader63">
+				回调函数
+			</h2>
+			<ul>
+				<li>
+					<a class="book-a" href="../回调函数/13064.html">cal.add(callbacks)</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13065.html">cal.disable()</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13066.html">cal.empty()</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13067.html">cal.fire(arguments)</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13068.html">cal.fired()</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13069.html">cal.fireWith([c] [,a])</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13070.html">cal.has(callback)</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13071.html">cal.lock()</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13072.html">cal.locked()</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13073.html">cal.remove(callbacks)</a><sup>1.7+</sup> 
+				</li>
+				<li>
+					<a class="book-a" href="../回调函数/13074.html">$.callbacks(flags)</a><sup>1.7+</sup> 
+				</li>
+			</ul>
+		</div>
+		<p>
+		</p>
+		<h2 id="articleHeader64">
+			附录
+		</h2>
+		<ul>
+			<li>
+				<a class="book-a" href="../附录/13075.html">正则表达式</a> 
+			</li>
+			<li>
+				<a class="book-a" href="../附录/13076.html">HTML5速查表</a> 
+			</li>
+			<li>
+				<a href="https://oscarotero.com/jquery/" target="_blank">参考资料</a> 
+			</li>
+		</ul>
+		<p>
+		</p>
+		<p>
+		</p>
+	</div>
+</div>
+
+<div class="clearfix">
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	if(1062 <= $(window).width() && $(window).width()<= 1268){ $("#content.a1 h1,#content.a1 #footer").css({"width":"1038px"}); $("#content.a1 .col-6").css({"width":"auto","height":"auto"}); } if(856 <= $(window).width() && $(window).width()<= 1064){ $("#content.a1 h1,#content.a1 #footer").css({"width":"830px"}); $("#content.a1 .col-6,#content.a1 .col-5").css({"width":"auto","overflow":"visible","width":"auto","height":"auto"}); $("#content.a1 .col-6 > div,#content.a1 .col-5 > div").css({"float":"left","width":"206px","margin-right":"2px"});
+	}
+	if(648 <= $(window).width() && $(window).width()<= 858){ $("#content.a1 h1,#content.a1 #footer").css({"width":"622px"}); $("#content.a1 .col-6,#content.a1 .col-5,#content.a1 .col-4").css({"height":"auto"}); $("#content.a1 .col-6 > div,#content.a1 .col-5 > div,#content.a1 .col-4 > div").css({"float":"left","width":"206px","margin-right":"2px"});
+	}
+	if(442 <= $(window).width() && $(window).width()<= 650){ $("#content.a1 h1,#content.a1 #footer").css({"width":"414px"}); $("#content.a1 h1 em").css({"display":"none"}); $("#content.a1 > div").css({"height":"auto"});
+		$("#content.a1 > div > div").css({"float":"left","width":"206px","margin-right":"2px"});
+	}
+	if(150 <= $(window).width() && $(window).width()<= 378){ $("#content.a1 h1,#content.a1 #footer").css({"width":"206px"}); $("#content.a1 h1 em").css({"display":"none"}); $("#content.a1 > div").css({"height":"auto"});
+		$("#content.a1 > div > div").css({"float":"left","width":"206px","margin-right":"2px"});
+	}
+});
+</script></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

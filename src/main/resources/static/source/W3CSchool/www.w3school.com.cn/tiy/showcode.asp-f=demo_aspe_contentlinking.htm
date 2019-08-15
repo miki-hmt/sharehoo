@@ -1,0 +1,43 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;p&gt;下面的例子构建了一个内容列表：&lt;/p&gt;
+
+<code class="aspcode">&lt;%
+dim c
+dim i
+set nl=server.createobject(&quot;MSWC.Nextlink&quot;)
+c = nl.GetListCount(&quot;/example/aspe/links.txt&quot;)
+i = 1
+%&gt;</code>
+&lt;ul&gt;
+<code class="aspcode">&lt;%do while (i &lt;= c) %&gt;</code>
+&lt;li&gt;&lt;a href=&quot;<code class="aspcode">&lt;%=nl.GetNthURL(&quot;/example/aspe/links.txt&quot;, i)%&gt;</code>&quot;&gt;
+<code class="aspcode">&lt;%=nl.GetNthDescription(&quot;/example/aspe/links.txt&quot;, i)%&gt;</code>&lt;/a&gt;
+<code class="aspcode">&lt;%
+i = (i + 1)
+loop
+%&gt;</code>
+&lt;/ul&gt;
+
+&lt;p&gt;文本文件包含页面 URL 的列表和链接描述。
+每行文本针对一个页面。
+请注意，URL 和描述必须由 TAB 字符分隔。
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href=&quot;/example/aspe/links.txt&quot;&gt;查看 links.txt&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE>zy_坦克大战（整合架构版本） </TITLE>
+<link rel=stylesheet href="css/main.css" />
+
+
+<script src="js/Debug.js"></script>
+<script src="js/Common.js"></script>
+
+<script src="js/Explode.js"></script>
+<script src="js/TankObject.js"></script>
+<script src="js/HitTestObject.js"></script>
+<script src="js/Mover.js"></script>
+<script src="js/Bomb.js"></script>
+<script src="js/Tank.js"></script>
+<script src="js/Barrier.js"></script>
+<script src="js/Goods.js"></script>
+<script src="js/Frame.js"></script>
+
+<script>
+window.onload=function(){
+//实现部分
+        var GameLoad = new GameLoader();
+        GameLoad.Begin();
+}
+</script>
+ </HEAD>
+
+ <BODY>
+      <!--地图容器-->
+				<div id="divMap">
+                </div>
+				<div id="debugInfo">
+				</div>
+ </BODY>
+</HTML>

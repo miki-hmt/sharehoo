@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".btn1").click(function(){
+    $("p").wrap("<div></div>");
+  });
+});
+</script>
+<style type="text/css">
+div{background-color:yellow;}
+</style>
+</head>
+<body>
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+<button class="btn1">用 div 包裹每个段落</button>
+</body>
+</html>

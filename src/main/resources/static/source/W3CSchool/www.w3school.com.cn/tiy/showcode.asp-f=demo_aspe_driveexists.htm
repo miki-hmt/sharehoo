@@ -1,0 +1,34 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+&lt;html&gt;
+&lt;body&gt;
+<code class="aspcode">&lt;%
+Set fs=Server.CreateObject(&quot;Scripting.FileSystemObject&quot;)
+
+if fs.driveexists(&quot;c:&quot;) = true then
+      Response.Write(&quot;驱动器 c: 存在。&quot;)
+Else
+      Response.Write(&quot;驱动器 c: 不存在。&quot;)
+End If
+
+Response.write(&quot;&lt;br&gt;&quot;)
+
+if fs.driveexists(&quot;g:&quot;) = true then
+      Response.Write(&quot;驱动器 g: 存在。&quot;)
+Else
+      Response.Write(&quot;驱动器 g: 不存在。&quot;)
+End If
+
+set fs=nothing
+%&gt;</code>
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

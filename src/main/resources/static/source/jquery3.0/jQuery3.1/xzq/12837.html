@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>:first-of-type</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">:first-of-type<span class="g-bg-red margin-l-5">1.9+</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;first-of-type selector
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>选择所有相同的元素名称的第一个兄弟元素。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.9</span>jQuery( ":first-of-type" )
+			</h4>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>:first-of-type</code> 选择器匹配元素，在文档树中，相同的父元素并且在其他相同的元素名称之前。
+		</p>
+		<h3>
+			<blockquote>
+				实例
+			</blockquote>
+		</h3>
+	</div>
+	<p>
+	</p>
+</div>
+<div class="example">
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;div id="n1"&gt;
+    &lt;div id="n2" class="abc"&gt;
+        &lt;label id="n3"&gt;label1&lt;/label&gt;
+        &lt;span id="n4"&gt;span1&lt;/span&gt;
+        &lt;span id="n5" class="abc"&gt;span2&lt;/span&gt;
+        &lt;span id="n6"&gt;span3&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id="n7"&gt;
+        &lt;span id="n8" class="abc"&gt;span1&lt;/span&gt;
+        &lt;span id="n9"&gt;span2&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("span:first-of-type");</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>//n4虽然不是n2的第一个子元素，但它是n2所有span类型子元素中的第一个，因此可以匹配
+[&lt;span id="n4"&gt;span1&lt;/span&gt;,&lt;span id="n8" class="abc"&gt;span1&lt;/span&gt;]</code></pre>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;div id="n1"&gt;
+    &lt;div id="n2" class="abc"&gt;
+        &lt;label id="n3"&gt;label1&lt;/label&gt;
+        &lt;span id="n4"&gt;span1&lt;/span&gt;
+        &lt;span id="n5" class="abc"&gt;span2&lt;/span&gt;
+        &lt;span id="n6"&gt;span3&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id="n7"&gt;
+        &lt;span id="n8" class="abc"&gt;span1&lt;/span&gt;
+        &lt;span id="n9"&gt;span2&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$(".abc:first-of-type");</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>//.abc可以匹配id分别为n2、n5、n8的3个元素，n2是n1所有div类型子元素中的第一个，n8是n7所有span类型子元素中的第一个，但n5不是n2所有span类型子元素中的第一个，因此不能匹配n5。
+[&lt;div id="n2" class="abc"&gt;,&lt;span id="n8" class="abc"&gt;span1&lt;/span&gt;]</code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	在每一个匹配的div中查找第一个span，给它添加一个类。
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;first-of-type demo&lt;/title&gt;
+  &lt;style&gt;
+  span.fot {
+    color: red;
+    font-size: 120%;
+    font-style: italic;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;
+  &lt;span&gt;Corey,&lt;/span&gt;
+  &lt;span&gt;Yehuda,&lt;/span&gt;
+  &lt;span&gt;Adam,&lt;/span&gt;
+  &lt;span&gt;Todd&lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;b&gt;Nobody,&lt;/b&gt;
+  &lt;span&gt;Jörn,&lt;/span&gt;
+  &lt;span&gt;Scott,&lt;/span&gt;
+  &lt;span&gt;Timo&lt;/span&gt;
+&lt;/div&gt;
+ 
+&lt;script&gt;
+$( "span:first-of-type" ).addClass( "fot" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7933" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

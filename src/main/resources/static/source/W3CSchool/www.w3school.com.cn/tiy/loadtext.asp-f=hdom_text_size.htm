@@ -1,0 +1,21 @@
+<html>
+<head>
+<script type="text/javascript">
+function maxLen()
+  {
+  var txt="Size=" + document.getElementById("name").size
+  var txt=txt + " and Max length=" + document.getElementById("name").maxLength
+  alert(txt)
+  }
+</script>
+</head>
+<body>
+
+<form>
+Name: <input type="text" id="name" value="Mickey Mouse" size="20" maxlength="30" />
+<br /><br />
+<input type="button" onclick="maxLen()" value="Alert size and maxLength" />
+</form>
+
+</body>
+</html>

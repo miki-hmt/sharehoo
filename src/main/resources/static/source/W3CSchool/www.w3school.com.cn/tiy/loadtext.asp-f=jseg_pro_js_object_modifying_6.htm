@@ -1,0 +1,25 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+Function.prototype.originalToString = Function.prototype.toString;
+
+Function.prototype.toString = function() {
+  if (this.originalToString().length > 100) {
+    return "Function too long to display.";
+  } else {
+    return this.originalToString();
+  }
+};
+
+function sayHi() {
+  alert("hi");
+}
+
+document.write(sayHi.toString());
+
+</script>
+
+</body>
+</html>

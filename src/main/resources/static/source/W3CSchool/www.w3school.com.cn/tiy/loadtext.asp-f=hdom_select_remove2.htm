@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+function removeLastOption()
+  {
+  var x=document.getElementById("mySelect")
+  if (x.length>0)
+    {
+    x.remove(x.length-1);
+    }
+  }
+</script>
+</head>
+<body>
+
+<form>
+<select id="mySelect">
+  <option>Apple</option>
+  <option>Pear</option>
+  <option>Banana</option>
+  <option>Orange</option>
+</select>
+<input type="button" onclick="removeLastOption()" value="Remove last option">
+</form>
+
+</body>
+</html>

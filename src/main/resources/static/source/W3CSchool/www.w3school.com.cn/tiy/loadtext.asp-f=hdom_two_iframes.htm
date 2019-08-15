@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeSource()
+{
+document.getElementById("frame1").src="../example/hdom/frame_c.html"/*tpa=http://www.w3school.com.cn/example/hdom/frame_c.html*/
+document.getElementById("frame2").src="../example/hdom/frame_d.html"/*tpa=http://www.w3school.com.cn/example/hdom/frame_d.html*/
+}
+</script>
+</head>
+
+<body>
+<iframe src="../example/hdom/frame_a.html" tppabs="http://www.w3school.com.cn/example/hdom/frame_a.html" id="frame1"></iframe>
+<iframe src="../example/hdom/frame_b.html" tppabs="http://www.w3school.com.cn/example/hdom/frame_b.html" id="frame2"></iframe>
+<br /><br />
+<input type="button" onclick="changeSource()" value="改变两个框架的 source">
+
+</body>
+</html>

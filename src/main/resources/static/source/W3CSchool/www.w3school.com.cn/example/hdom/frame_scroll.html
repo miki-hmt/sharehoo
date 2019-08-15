@@ -1,0 +1,22 @@
+<html>
+<head>
+<script type="text/javascript">
+function enableScrolling()
+  {
+  parent.document.getElementById("leftFrame").scrolling="yes"
+  parent.document.getElementById("rightFrame").scrolling="yes"
+  }
+function disableScrolling()
+  {
+  parent.document.getElementById("leftFrame").scrolling="no"
+  parent.document.getElementById("rightFrame").scrolling="no"
+  }
+</script>
+</head>
+
+<body>
+<input type="button" onClick="enableScrolling()" value="滚动条" />
+<input type="button" onClick="disableScrolling()" value="没有滚动条" />
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript">
+function alertIndex()
+  {
+  var x=document.getElementById("mySelect").selectedIndex;
+  var y=document.getElementsByTagName("option");
+  alert(y[x].text + " has the index of: " + y[x].index);
+  }
+</script>
+</head>
+<body>
+
+<form>
+请选择您喜欢的水果：
+<select id="mySelect">
+  <option>苹果</option>
+  <option>桃子</option>
+  <option>香蕉</option>
+  <option>桔子</option>
+</select>
+<br />
+<br />
+<input type="button" onclick="alertIndex()" value="显示被选水果的 index">
+</form>
+
+</body>
+</html>

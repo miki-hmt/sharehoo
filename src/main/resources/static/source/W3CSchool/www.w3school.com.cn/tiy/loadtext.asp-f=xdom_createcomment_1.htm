@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+newComment=xmlDoc.createComment("Revised March 2008");
+
+x=xmlDoc.getElementsByTagName("book")[0];
+x.appendChild(newComment);
+
+document.write(x.lastChild.nodeValue);
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>length</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">length</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;length
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader6" target="_blank">Number</a> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>在jQuery对象中元素的数量。
+	</p>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			目前匹配的元素数量。.<a href="http://www.shouce.ren/api/view/a/12785" class="book-a">size()</a>方法将返回相同的数字。
+		</p>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h2 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h2>
+</header>
+	<h4>
+		<span class="desc">实例</span>
+	</h4>
+	<p>
+		<span class="desc">计算 div 数量，点击后会增加一个 div。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { cursor:pointer; }
+  div { width:50px; height:30px; margin:5px; float:left;
+        background:green; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;$(document.body).click(function () {
+  $(document.body).append($("&lt;div&gt;"));
+  var n = $("div").length;
+  $("span").text("There are " + n + " divs." +
+                 "Click to add more.");
+}).trigger('click'); // trigger the click to start&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8001" target="_blank" class="btn btn-sm btn-success">运行一下<br />
+</a> 
+	</p>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

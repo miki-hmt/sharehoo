@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>mousemove()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">mousemove()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.mousemove( handler(eventObject) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>为 JavaScript 的 "mousemove" 事件绑定一个处理函数，或者触发元素上的该事件。
+</p>
+<ul class="signatures">
+	<li class="signature" id="mousemove-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.mousemove( handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="mousemove-eventData-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.mousemove(  [eventData ], handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>eventData</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一个对象，它包含的数据键值对映射将被传递给事件处理程序。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="mousemove">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.mousemove()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					这个方法不接受任何参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		这个方法的前两个用法是 <code>.bind('mousemove', handler)</code> 的快捷方式，第3个不带参数的用法是 <code>.trigger('mousemove')</code> 的快捷方式。
+	</p>
+	<p>
+		当鼠标指针在元素内移动时，<code>mousemove</code>事件就会被触发，任何HTML元素都可以接受此事件。
+	</p>
+	<p>
+		举例来说，请看下面的HTML：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div id="target"&gt;
+  Move here
+&lt;/div&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;
+&lt;div id="log"&gt;&lt;/div&gt;</pre>
+	</div>
+	<p class="image">
+		<img src="../image/58a45e880b03a.png" alt="" /> 
+	</p>
+	<p>
+		这个事件可以绑定到目标元素:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$("#target").mousemove(function(event) {
+  var msg = "Handler for .mousemove() called at ";
+  msg += event.pageX + ", " + event.pageY;
+  $("#log").append("&lt;div&gt;" + msg + "&lt;/div&gt;");
+});</pre>
+	</div>
+	<p>
+		现在当鼠标指针在目标元素中移动时，以下信息将被添加到 &lt;div id="log"&gt;:
+	</p>
+	<p>
+		<span class="output">Handler for .mousemove() called at (399, 48)</span> <br />
+<span class="output">Handler for .mousemove() called at (398, 46)</span> <br />
+<span class="output">Handler for .mousemove() called at (397, 44)</span> <br />
+<span class="output">Handler for .mousemove() called at (396, 42)</span> 
+	</p>
+	<p>
+		使用不带参数的<code>.mousemove()</code>，我们可以手动触发这个事件:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$("#other").click(function() {
+  $("#target").mousemove();
+});</pre>
+	</div>
+	<p>
+		在执行完上述代码之后，点击 Trigger 按钮同样会追加如下信息：
+	</p>
+	<p>
+		<span class="output">Handler for .mousemove() called at (undefined, undefined)</span> 
+	</p>
+	<p>
+		当跟踪鼠标移动时，我们通常需要知道实际的鼠标指针的位置。event 对象传递给处理程序包含了一些有关鼠标的坐标信息。比如<code>.clientX</code>, <code>.offsetX</code>, 和 <code>.pageX</code>属性是有效的，但对他们的支持不同浏览器。幸运的是，jQuery的规范了<code>.pageX</code>和<code>.pageY</code>属性，以便他们能够在所有浏览器上使用。这些属性提供了鼠标指针位置相对于页面的左上角的X和Y坐标，例如上面示例输出显示的坐标值。
+	</p>
+	<p>
+		我们必须记住， <code>mousemove</code>事件是当鼠标指针移动时触发的，即使是一个像素。这意味着多个事件在短时间内被触发。如果处理器做任何重大的处理，或者如果该事件存在多个处理函数，这可能造成浏览器的严重的性能问题。因此，优化<code>mousemove</code>处理程序尽可能，这一点很重要，当不再需要他们时应尽快解除绑定。
+	</p>
+	<p>
+		一个常见的模式是在<code>mousedown</code>处理器内部绑定<code>mousemove</code>处理器，并在一个相应<code>mouseup</code>处理函数解除绑定。要实现这一系列事件，请记住，与 <code>mouseup</code> 事件相比，<code>mouseup</code> 事件可能会被发送到不同的 HTML 元素上。由于这个原因，<code>mouseup</code> 事件通常应该绑定在更高的 DOM 树中，例如 <code>&lt;body&gt;</code>。
+	</p>
+</div>
+<h3>
+	Additional Notes（其他注意事项）:
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			<code>.mousemove()</code>方法只是作为<code>.on( "mousemove", handler )</code>的一个速记写法，移除该事件可以使用<code>.off(
+                            "mousemove"
+                            )</code>。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">当在黄色的 div 移动鼠标时，显示鼠标指针的坐标。坐标是相对于窗口的，在该例中，窗口指的是 iframe。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { width:220px; height:170px; margin: 10px 50px 10px 10px;
+      background:yellow; border:2px groove; float:right; }
+p { margin:0; margin-left:10px; color:red; width:220px;
+    height:120px; padding-top:70px;
+    float:left; font-size:14px; }
+span { display:block; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;
+  &lt;span&gt;Move the mouse over the div.&lt;/span&gt;
+  &lt;span&gt;&amp;nbsp;&lt;/span&gt;
+&lt;/p&gt;
+ 
+&lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+$("div").mousemove(function(e){
+  var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
+  var clientCoords = "( " + e.clientX + ", " + e.clientY + " )";
+  $("span:first").text("( e.pageX, e.pageY ) : " + pageCoords);
+  $("span:last").text("( e.clientX, e.clientY ) : " + clientCoords);
+});
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8181" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

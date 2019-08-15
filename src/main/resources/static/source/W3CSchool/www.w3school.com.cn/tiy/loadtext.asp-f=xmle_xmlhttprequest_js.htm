@@ -1,0 +1,70 @@
+<html>
+<head>
+<script type="text/javascript">
+var xmlhttp
+
+function loadXMLDoc(url)
+{
+xmlhttp=null
+// code for Mozilla, etc.
+if (window.XMLHttpRequest)
+  {
+  xmlhttp=new XMLHttpRequest()
+  }
+// code for IE
+else if (window.ActiveXObject)
+  {
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP")
+  }
+if (xmlhttp!=null)
+  {
+  xmlhttp.onreadystatechange=state_Change
+  xmlhttp.open("GET",url,true)
+  xmlhttp.send(null)
+  }
+else
+  {
+  alert("Your browser does not support XMLHTTP.")
+  }
+}
+
+function state_Change()
+{
+// if xmlhttp shows "loaded"
+if (xmlhttp.readyState==4)
+  {
+  // if "OK"
+  if (xmlhttp.status==200)
+  {
+  alert("XML data OK")
+  document.getElementById('A1').innerHTML=xmlhttp.status
+  document.getElementById('A2').innerHTML=xmlhttp.statusText
+  document.getElementById('A3').innerHTML=xmlhttp.responseText
+  }
+  else
+  {
+  alert("Problem retrieving XML data:" + xmlhttp.statusText)
+  }
+  }
+}
+
+</script>
+</head>
+
+<body onload="loadXMLDoc('../example/xmle/note.xml.htm'/*tpa=http://www.w3school.com.cn/example/xmle/note.xml*/)">
+<h2>Using the HttpRequest Object</h2>
+
+<p><b>status:</b>
+<span id="A1"></span>
+</p>
+
+<p><b>status text:</b>
+<span id="A2"></span>
+</p>
+
+<p><b>response:</b>
+<br><span id="A3"></span>
+</p>
+
+</body>
+</html>

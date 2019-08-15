@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.noConflict()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.noConflict()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.noConflict( [removeAll ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader15" target="_blank">Object</a> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>放弃jQuery控制<code>$</code> 变量。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="jQuery-noConflict-removeAll">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery.noConflict(  [removeAll ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>removeAll</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader14">Boolean</a> 
+					</div>
+					<div>
+						一个布尔值，判断是否从全局作用域中内去除所有jQuery变量(包括jQuery本身)。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			很多javascript库使用<code> $</code> 作为一个函数或者变量名，正如jquery做的一样。在jQuery下 <code> $</code>只是<code>jQuery</code>的一个别名，所以不使用<code> $</code>所有功能都是有效的。如果我们需要同时使用jQuery和其他javascript库，我们可以使用 <code>$.noConflict()</code>把<code> $</code>的控制权交给其他库。旧引用的<code>$</code> 被保存在jQuery的初始化; <code>noConflict()</code> 简单的恢复它们。
+		</p>
+		<p>
+			如果由于某种原因，加载两个版本的jQuery（这是不推荐），
+第二个版本中调用<code>$.noConflict(true)</code> 将返回全局的jQuery变量给第一个版本。
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;script type="text/javascript" src="other_lib.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  $.noConflict();
+  // Code that uses other library's $ can follow here.
+&lt;/script&gt;</pre>
+		</div>
+		<p>
+			这里有个技巧对于解决冲突特别有效。<code>.ready()</code> 方法可以给 jQuery 对象取个别名，这样就能够在传给 <code>.ready()</code> 的回调函数的内部继续使用 $ 而不用担心冲突（手册网注：原因：.ready()是一个闭包）：
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;script type="text/javascript" src="other_lib.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  $.noConflict();
+  jQuery(document).ready(function($) {
+    // Code that uses jQuery's $ can follow here.
+  });
+  // Code that uses other library's $ can follow here.
+&lt;/script&gt;</pre>
+		</div>
+		<p>
+			如果必要的话，我们可以释放<code>jQuery</code>名字，传递<code>true</code>作为一个参数给这个方法。 这不是必须的，如果我们必须这样做的话（举个示例，如果我们在同一个页面上使用多个版本的jQuery库）， 我们必须考虑到大多数插件依靠<code>jQuery</code>存在的变量,这种情况下，可能导致插件不能正常操作。
+		</p>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h3 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+</header>
+	<div class="entry-example" id="example-0">
+		<h4>
+			实例<span class="desc"></span>
+		</h4>
+		<p>
+			<span class="desc">将$引用的对象映射回原始的对象。</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">jQuery.noConflict();
+// Do something with jQuery
+jQuery("div p").hide();
+// Do something with another library's $()
+$("content").style.display = 'none';</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-1">
+		<h4>
+			实例
+		</h4>
+		<p>
+			<span class="desc">恢复使用别名$，然后创建并执行一个函数，在这个函数的作用域中仍然将$作为jQuery的别名来使用。在这个函数中，原来的$对象是无效的。这个函数对于大多数不依赖于其他库的插件都十分有效。 </span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">jQuery.noConflict();
+(function($) {
+  $(function() {
+    // more code using $ as alias to jQuery
+  });
+})(jQuery);
+// other code using $ as an alias to the other library</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-2">
+		<h4>
+			实例<span class="desc"></span>
+		</h4>
+		<p>
+			<span class="desc">你可以通过jQuery.noConflict() ready约束为一小段代码</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">var j = jQuery.noConflict();
+// Do something with jQuery
+j("div p").hide();
+// Do something with another library's $()
+$("content").style.display = 'none';</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-3">
+		<h4>
+			实例<br />
+		</h4>
+		<p>
+			<span class="desc">创建一个新的别名用以在接下来的库中使用jQuery对象。</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">var dom = {};
+dom.query = jQuery.noConflict(true);</pre>
+		</div>
+		<h4>
+			Result:
+		</h4>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">// Do something with the new jQuery
+dom.query("div p").hide();
+// Do something with another library's $()
+$("content").style.display = 'none';
+// Do something with another version of jQuery
+jQuery("div &gt; p").hide();</pre>
+		</div>
+	</div>
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">Load two versions of jQuery (not recommended). Then, restore jQuery's globally scoped variables to the first loaded jQuery.</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+	</div>
+</div>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;jQuery.noConflict demo&lt;/title&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div id="log"&gt;
+  &lt;h3&gt;Before $.noConflict(true)&lt;/h3&gt;
+&lt;/div&gt;
+&lt;script src="https://code.jquery.com/jquery-1.6.2.js"&gt;&lt;/script&gt;
+ 
+&lt;script&gt;
+var $log = $( "#log" );
+ 
+$log.append( "2nd loaded jQuery version ($): " + $.fn.jquery + "&lt;br&gt;" );
+ 
+// Restore globally scoped jQuery variables to the first version loaded
+// (the newer version)
+ 
+jq162 = jQuery.noConflict( true );
+ 
+$log.append( "&lt;h3&gt;After $.noConflict(true)&lt;/h3&gt;" );
+$log.append( "1st loaded jQuery version ($): " + $.fn.jquery + "&lt;br&gt;" );
+$log.append( "2nd loaded jQuery version (jq162): " + jq162.fn.jquery + "&lt;br&gt;" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<a href="http://www.shouce.ren/study/api/s/7963" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

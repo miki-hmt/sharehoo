@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type="text/javascript">
+function disable()
+{
+if (event.button == 2)
+{
+alert("对不起，不允许在页面上使用右键。\n现在您无法查看源代码，\n也不能盗取图像。")
+}
+}
+
+</script>
+</head>
+<body onmousedown="disable()">
+<p>在页面点击鼠标右键可以触发该事件。</p>
+<p>请注意，这个事件无法保证别人不会查看页面源代码或者盗取图片。</p>
+</body>
+</html>

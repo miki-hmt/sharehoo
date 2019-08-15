@@ -1,0 +1,41 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+//check if first child node is an element node
+function get_firstchild(n)
+{
+var x=n.firstChild;
+while (x.nodeType!=1)
+  {
+  x=x.nextSibling;
+  }
+return x;
+}
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+//create a title element and a text node
+var newNode=xmlDoc.createElement("title");
+var newText=xmlDoc.createTextNode("Giada's Family Dinners");
+//add the text node to the title node,
+newNode.appendChild(newText);
+
+//replace the first child node with the new node
+var x=xmlDoc.getElementsByTagName("book")[0];
+x.replaceChild(newNode,get_firstchild(x));
+
+//output all titles
+var y=xmlDoc.getElementsByTagName("title");
+for (i=0;i<y.length;i++)
+{
+document.write(y[i].childNodes[0].nodeValue);
+document.write("<br />");
+}
+
+</script>
+</body>
+</html>

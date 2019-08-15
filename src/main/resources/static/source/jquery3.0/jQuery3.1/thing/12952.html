@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>triggerHandler()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">triggerHandler()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.triggerHandler( eventType [, extraParameters ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>为一个事件执行附加到元素的所有处理程序。
+</p>
+<ul class="signatures">
+	<li class="signature" id="triggerHandler-eventType-extraParameters">
+		<h4 class="name">
+			<span class="version-details">V : 1.2</span>.triggerHandler(
+                eventType [, extraParameters ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>eventType</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					以后包含JavaScript事件类型的字符串，比如<code>click</code> 或 <code>submit</code>。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>extraParameters</strong> 
+				</div>
+				<div>
+					类型: Array 或者 PlainObject
+				</div>
+				<div>
+					传递给事件处理程序的额外参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V	: 1.3</span>.triggerHandler( event [, extraParameters ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>event</strong> 
+				</div>
+				<div>
+					类型: Event
+				</div>
+				<div>
+					一个 <code>jQuery
+                        .Event</code> 对象.
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>extraParameters</strong> 
+				</div>
+				<div>
+					类型: Array or PlainObject
+				</div>
+				<div>
+					传递给事件处理程序的额外参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc">
+	<p>
+		<code>.triggerHandler( eventType )</code> 可以执行所有jQuery绑定的事件类型的处理函数。它同样可以执行元素上调用的<code>on{eventType}()</code>类型的任何方法（手册网注：例如，元素上<code>onclick</code>等方法）。这个方法的行为与 <code>.trigger()</code> 相似，不同之处有如下几点：
+	</p>
+	<ul>
+		<li>
+			<code>.triggerHandler( "event" )</code>方法被触发时不会调用元素上的 <code>.event()</code>。
+                这意味着在表单上触发 <code>.triggerHandler( "submit" )</code>将不会调用表单上的<code>.submit()</code>。（手册网注：可以理解为<code>.triggerHandler()</code> 方法并不会触发事件的默认行为。(例如，表单提交)。）
+		</li>
+		<li>
+			<code>.trigger()</code> 会影响所有与 jQuery 对象相匹配的元素，而 <code>.triggerHandler()</code> 仅影响第一个匹配到的元素。
+		</li>
+		<li>
+			使用 <code>.triggerHandler()</code> 触发的事件，并不会在 DOM 树中向上冒泡。&nbsp;如果它们不是由目标元素直接触发的，那么它就不会进行任何处理。
+		</li>
+		<li>
+			与普通的方法返回 jQuery 对象(这样就能够使用链式用法)相反，<code>.triggerHandler()</code> 返回最后一个处理的事件的返回值。如果没有触发任何事件，会返回 <code>undefined</code>。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">如果您使用 .triggerHandler() 触发 focus 事件，那么它只会触发绑定了该事件的处理函数，而浏览器的默认 focus 动作是不会被触发的。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="old"&gt;.trigger("focus")&lt;/button&gt;
+&lt;button id="new"&gt;.triggerHandler("focus")&lt;/button&gt;&lt;br/&gt;&lt;br/&gt;
+ 
+&lt;input type="text" value="To Be Focused"/&gt;
+&lt;script&gt;
+ 
+$("#old").click(function(){
+$("input").trigger("focus");
+});
+$("#new").click(function(){
+$("input").triggerHandler("focus");
+});
+$("input").focus(function(){
+$("&lt;span&gt;Focused!&lt;/span&gt;").appendTo("body").fadeOut(1000);
+});
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8161" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

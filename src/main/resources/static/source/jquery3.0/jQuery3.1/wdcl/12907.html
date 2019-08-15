@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>wrap()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">wrap()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.wrap( wrappingElement )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong> 在集合中匹配的每个元素周围包裹一个HTML结构。
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V ： 1
+                    .0</span>.wrap(
+                wrappingElement )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>wrappingElement</strong> 
+				</div>
+				<div>
+					类型: Selector 或 htmlString 或 Element 或 jQuery
+				</div>
+				<div>
+					一个选择器，元素，HTML字符串，或jQuery对象指定的html结构环绕包裹的匹配元素。
+                    当你传递一个包含多个元素一个jQuery集合，
+                    或选择器的匹配多个元素时，
+                    第一元素将被使用。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.4</span>.wrap( function )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>function</strong> 
+				</div>
+				<div>
+					类型: Function( Integer index )
+                        =&gt; String 或 jQuery
+				</div>
+				<div>
+					一个回调函数，返回用于包裹匹配元素的 HTML 内容或 jQuery 对象。接受的 index 参数表示匹配元素在集合中的索引位置。该函数内的 <code>this</code> 指向集合中的当前元素。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>.wrap()</code>函数可以接受任何字符串或对象，可以传递给<code>$()</code>工厂函数来指定一个DOM结构。这种结构可以嵌套了好几层深，但应该只包含一个核心的元素。每个匹配的元素都会被这种结构包裹。该方法返回原始的元素集，以便之后使用链式方法。
+	</p>
+	<p>
+		<del>参数可以是string或者对象只要能形成DOM结构，可以是嵌套的，但是结构只包含一个最里层元素。这个结构会包在每个匹配元素外层。该方法返回没被包裹过的元素的jQuery对象用来链接其他函数。</del> 
+	</p>
+	<p>
+		考虑下面的HTML：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="container"&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+	</div>
+	<p>
+		使用<code>.wrap()</code>, 我们可以在inner <code>&lt;div&gt;</code>外层插入一个HTML结构。
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('.inner').wrap('&lt;div class="new" /&gt;');</pre>
+	</div>
+	<p>
+		结果如下：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="container"&gt;
+  &lt;div class="new"&gt;
+    &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="new"&gt;
+    &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+	</div>
+	<p>
+		该方法的第二种用法允许我们用函数做参数，改函数返回一个DOM元素，jQuery对象，或者HTML片段，用来包住匹配元素。例如：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('.inner').wrap(function() {
+  return '&lt;div class="' + $(this).text() + '" /&gt;';
+});</pre>
+	</div>
+	<p>
+		结果如下：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="container"&gt;
+  &lt;div class="Hello"&gt;
+    &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="Goodbye"&gt;
+    &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+	</div>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">在所有段落外包一个div</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+ 
+  div { border: 2px solid blue; }
+  p { background:yellow; margin:4px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;cruel&lt;/p&gt;
+  &lt;p&gt;World&lt;/p&gt;
+&lt;script&gt;$("p").wrap("&lt;div&gt;&lt;/div&gt;");&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8077" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">Wraps a newly created tree of objects 
+around the spans.  Notice anything in between the spans gets left out 
+like the &lt;strong&gt; (red text) in this example.  Even the white 
+space between spans is left out.  Click View Source to see the original 
+html.</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+ 
+  div { border:2px blue solid; margin:2px; padding:2px; }
+  p { background:yellow; margin:2px; padding:2px; }
+  strong { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;span&gt;Span Text&lt;/span&gt;
+  &lt;strong&gt;What about me?&lt;/strong&gt;
+  &lt;span&gt;Another One&lt;/span&gt;
+&lt;script&gt;$("span").wrap("&lt;div&gt;&lt;div&gt;&lt;p&gt;&lt;em&gt;&lt;b&gt;&lt;/b&gt;&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;");&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8076" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+	<p>
+	</p>
+</div>
+<div class="entry-example" id="example-2">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">Wrap a new div around all of the paragraphs.</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+ 
+  div { border: 2px solid blue; }
+  p { background:yellow; margin:4px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;cruel&lt;/p&gt;
+  &lt;p&gt;World&lt;/p&gt;
+&lt;script&gt;$("p").wrap(document.createElement("div"));&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8075" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+	<p>
+	</p>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">Wrap a jQuery object double depth div 
+around all of the paragraphs.  Notice it doesn't move the object but 
+just clones it to wrap around its target.</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+ 
+  div { border: 2px solid blue; margin:2px; padding:2px; }
+  .doublediv { border-color:red; }
+  p { background:yellow; margin:4px; font-size:14px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+  &lt;p&gt;cruel&lt;/p&gt;
+  &lt;p&gt;World&lt;/p&gt;
+  &lt;div class="doublediv"&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script&gt;$("p").wrap($(".doublediv"));&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8074" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

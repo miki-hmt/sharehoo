@@ -1,0 +1,28 @@
+html, body {
+	background: url(../images/title_bg.png) 50% 0 no-repeat, url(../images/bg_repeat.png) 50% 0 repeat-y #889ba7;
+	margin: 0;
+	font-family: 'Josefin Sans', arial, serif;
+	color: #111;	
+}
+
+#canvas{
+	position:relative;
+}
+
+#page {
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+	text-shadow: 0 1px 5px rgba(60,60,60,.6);
+}
+
+header {
+	height: 88px;
+	padding-top: 36px;
+	margin-bottom: 50px;
+	font-family: "Rock Salt", Arial, sans-serif;
+	font-size: 14px;
+	text-shadow: 0 1px 0 rgba(200,200,200,.5);
+	color: #121;
+}
+

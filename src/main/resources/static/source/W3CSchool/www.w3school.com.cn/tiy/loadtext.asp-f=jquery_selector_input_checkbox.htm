@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".btn1").click(function(){
+    $(":checkbox").hide();
+  });
+});
+</script>
+</head>
+<body>
+<form action="">
+I have a bike:
+<input type="checkbox" name="vehicle" value="Bike" />
+<br />
+I have a car:
+<input type="checkbox" name="vehicle" value="Car" />
+<br />
+I have an airplane:
+<input type="checkbox" name="vehicle" value="Airplane" />
+</form>
+<button class="btn1">Hide Checkboxes</button>
+</body>
+</html>

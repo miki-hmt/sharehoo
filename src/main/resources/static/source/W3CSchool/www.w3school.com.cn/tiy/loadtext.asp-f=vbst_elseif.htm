@@ -1,0 +1,25 @@
+<html>
+
+<head>
+<script type="text/vbscript">
+function greeting()
+i=hour(time)
+If i = 10 then
+	document.write("Just started...!")
+elseif i = 11 then
+	document.write("Hungry!")
+elseif i = 12 then
+	document.write("Ah, lunch-time!")
+elseif i = 16 then
+	document.write("Time to go home!")
+else
+	document.write("Unknown")
+end if
+end function
+</script>
+</head>
+
+<body onload="greeting()">
+</body>
+
+</html>

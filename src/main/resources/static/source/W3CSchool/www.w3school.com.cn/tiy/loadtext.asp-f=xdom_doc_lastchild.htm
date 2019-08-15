@@ -1,0 +1,26 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+<script type="text/javascript">
+//check if the last node is an element node
+function get_lastchild(n)
+{
+var x=n.lastChild;
+while (x.nodeType!=1)
+  {
+  x=x.previousSibling;
+  }
+return x;
+}
+
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+var x=get_lastchild(xmlDoc);
+document.write("Nodename: " + x.nodeName);
+document.write(" (nodetype: " + x.nodeType + ")");
+</script>
+</body>
+</html>

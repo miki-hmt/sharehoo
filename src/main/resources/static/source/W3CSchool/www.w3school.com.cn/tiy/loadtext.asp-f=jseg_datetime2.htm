@@ -1,0 +1,23 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+function checkTime(i)
+{
+if (i<10) 
+  {i="0" + i}
+  return i
+}
+
+var d = new Date()
+document.write(checkTime(d.getHours()))
+document.write(".")
+document.write(checkTime(d.getMinutes()))
+document.write(".")
+document.write(checkTime(d.getSeconds()))
+
+</script>
+
+</body>
+</html>

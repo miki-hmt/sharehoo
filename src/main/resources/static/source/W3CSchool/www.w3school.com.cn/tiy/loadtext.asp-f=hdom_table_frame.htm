@@ -1,0 +1,31 @@
+<html>
+<head>
+<script type="text/javascript">
+function aboveFrames()
+  {
+  document.getElementById('myTable').frame="above"
+  }
+function belowFrames()
+  {
+  document.getElementById('myTable').frame="below"
+  }
+</script>
+</head>
+<body>
+
+<table id="myTable">
+<tr>
+<td>100</td>
+<td>200</td>
+</tr>
+<tr>
+<td>300</td>
+<td>400</td>
+</tr>
+</table>
+<br />
+<input type="button" onclick="aboveFrames()" value="显示上边框">
+<input type="button" onclick="belowFrames()" value="显示下边框">
+
+</body>
+</html>

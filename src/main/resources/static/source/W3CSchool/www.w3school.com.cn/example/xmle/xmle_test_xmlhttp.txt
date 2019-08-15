@@ -1,0 +1,2 @@
+This is a test of using an XML HTTP request to show a text file.
+If this text is inside a textarea, it worked!

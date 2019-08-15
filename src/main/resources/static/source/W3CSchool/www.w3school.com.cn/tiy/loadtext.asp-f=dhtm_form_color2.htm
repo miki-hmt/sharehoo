@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeColor(color)
+{
+document.getElementById('x').style.color=color
+}
+</script>
+</head>
+
+<body>
+
+<p>本例演示如何改变文本框的文本颜色。</p>
+<p>请把鼠标移动到下面的三个表格单元上，文本的颜色将会改变：</p>
+
+<table width="100%"><tr>
+<td bgcolor="red" onmouseover="changeColor('red')"> </td>
+<td bgcolor="blue" onmouseover="changeColor('blue')"> </td>
+<td bgcolor="green" onmouseover="changeColor('green')"> </td>
+</tr></table>
+
+<form>
+<input id="x" type="text" value="请把鼠标移动到颜色上面" size="20">
+</form>
+
+</body>
+</html>

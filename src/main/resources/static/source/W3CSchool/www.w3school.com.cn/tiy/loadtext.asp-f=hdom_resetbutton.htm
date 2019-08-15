@@ -1,0 +1,21 @@
+<html>
+<head>
+<script type="text/javascript">
+function alertId()
+  {
+  var txt="Id: " + document.getElementById("reset1").id
+  txt=txt + ", type: " + document.getElementById("reset1").type
+  txt=txt + ", value: " + document.getElementById("reset1").value
+  alert(txt)
+  document.getElementById("reset1").disabled=true
+  }
+</script>
+</head>
+<body>
+
+<form>
+<input type="reset" id="reset1" value="Reset values" onclick="alertId()" />
+</form>
+
+</body>
+</html>

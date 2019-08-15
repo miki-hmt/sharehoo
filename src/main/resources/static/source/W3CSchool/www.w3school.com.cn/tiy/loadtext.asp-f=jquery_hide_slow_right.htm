@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+  $("p").hide(1000,function(){
+    alert("The paragraph is now hidden");
+    });
+  });
+});
+</script>
+</head>
+<body>
+<button type="button">Hide</button>
+<p>This is a paragraph with little content.</p>
+</body>
+</html>

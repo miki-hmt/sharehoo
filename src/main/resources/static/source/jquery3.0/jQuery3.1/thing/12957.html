@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>undelegate()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">undelegate()<span class="g-bg-red margin-l-5">3.0-</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.undelegate()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong> 删除当前选择器匹配的所有元素的事件处理程序，根据一组特定根元素的集合。
+</p>
+<ul class="signatures">
+	<li class="signature" id="undelegate">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.2</span>.undelegate()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					This method does not accept any arguments.
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="undelegate-selector-eventType">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.2</span>.undelegate( selector, eventType )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					选择器字符串，用于过滤器触发事件的元素。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>eventType</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					一个包含一个或多个用空格隔开的JavaScript事件类型的字符串，比如"click"或"keydown"。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="undelegate-selector-eventType-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.2</span>.undelegate( selector, eventType, handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					选择器字符串，用于过滤器触发事件的元素。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>eventType</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					一个包含一个或多个用空格隔开的JavaScript事件类型的字符串，比如"click"或"keydown"。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每当事件触发时执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="undelegate-selector-events">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.undelegate( selector, events )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					选择器字符串，用于过滤器触发事件的元素。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>events</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一个或多个事件类型和以前绑定的函数组成的一个对象，用来以解除他们（处理程序）。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="undelegate-namespace">
+		<h4 class="name">
+			<span class="version-details">V : 1.6</span>.undelegate( namespace )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>namespace</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					一个字符串，其中包含一个命名空间，以解除所有事件。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		在jQuery 3.0中，<code>.undelegate()</code>已被标记为弃用。从jQuery 1.7开始，它已经被.off()方法取代。所以我们不建议使用该方法。
+	</p>
+	<p>
+		<code>.undelegate</code>是用来移除使用.delegate()的方式已经绑定的事件处理程序。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">可以绑定和取消绑定事件的彩色按钮。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+button { margin:5px; }
+button#theone { color:red; background:yellow; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="theone"&gt;Does nothing...&lt;/button&gt;
+&lt;button id="bind"&gt;Bind Click&lt;/button&gt;
+&lt;button id="unbind"&gt;Unbind Click&lt;/button&gt;
+&lt;div style="display:none;"&gt;Click!&lt;/div&gt;
+&lt;script&gt;
+function aClick() {
+  $("div").show().fadeOut("slow");
+}
+$("#bind").click(function () {
+  $("body").delegate("#theone", "click", aClick)
+    .find("#theone").text("Can Click!");
+});
+$("#unbind").click(function () {
+  $("body").undelegate("#theone", "click", aClick)
+    .find("#theone").text("Does nothing...");
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8165" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+	<p>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">解除绑定的所有段落都从委托的事件:</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("p").undelegate()</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-2">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">解除绑定的所有段落的所有委托点击事件:</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("p").undelegate( "click" )</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-3">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">为了undelegate只是一个以前绑定的处理程序，通过在作为第三个参数的函数：</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">var foo = function () {
+  // code to handle some kind of event
+};
+ 
+// ... now foo will be called when paragraphs are clicked ...
+$("body").delegate("p", "click", foo);
+ 
+ 
+// ... foo will no longer be called.
+$("body").undelegate("p", "click", foo); </pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">为了拆散他们的命名空间的所有委托事件：</span> 
+</p>
+<pre class="prettyprint lang-js">var foo = function () {
+  // code to handle some kind of event
+};
+ 
+// delegate events under the ".whatever" namespace
+$("form").delegate(":button", "click.whatever", foo);
+ 
+$("form").delegate("input[type='text']", "keypress.whatever", foo);
+ 
+// unbind all events delegated under the ".whatever" namespace
+ 
+$("form").undelegate(".whatever");</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

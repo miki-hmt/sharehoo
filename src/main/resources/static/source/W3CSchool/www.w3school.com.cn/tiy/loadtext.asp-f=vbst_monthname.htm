@@ -1,0 +1,28 @@
+<html>
+<body>
+
+<p>VBScripts <b>MonthName</b> 函数用于获得 month：</p>
+<script type="text/vbscript">
+document.write("<p>")
+document.write(MonthName(1))
+document.write("<br />")
+document.write(MonthName(2))
+document.write("</p><p>")
+
+document.write("Here is how you get the abbreviated name of a month:")
+document.write("<br />")
+document.write(MonthName(1,true))
+document.write("<br />")
+document.write(MonthName(2,true))
+document.write("</p><p>")
+
+document.write("Here is how you get the current month:")
+document.write("<br />")
+document.write(MonthName(month(date)))
+document.write("<br />")
+document.write(MonthName(month(date), true))
+document.write("</p>")
+</script>
+
+</body>
+</html>

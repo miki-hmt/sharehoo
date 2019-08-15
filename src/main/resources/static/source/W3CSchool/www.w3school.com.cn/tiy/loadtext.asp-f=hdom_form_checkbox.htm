@@ -1,0 +1,32 @@
+<html>
+<head>
+<script type="text/javascript">
+function createOrder()
+{
+coffee=document.forms[0].coffee
+txt=""
+for (i=0;i<coffee.length;++ i)
+{
+if (coffee[i].checked)
+{
+txt=txt + coffee[i].value + " "
+}
+}
+document.getElementById("order").value="您订购的咖啡带有： " + txt
+}
+</script>
+</head>
+
+<body>
+<p>你喜欢怎么喝咖啡？</p>
+<form>
+<input type="checkbox" name="coffee" value="奶油">加奶油<br />
+<input type="checkbox" name="coffee" value="糖块">加糖块<br />
+<br />
+<input type="button" onclick="createOrder()" value="发送订单">
+<br /><br />
+<input type="text" id="order" size="50">
+</form>
+</body>
+
+</html>

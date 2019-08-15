@@ -1,0 +1,85 @@
+﻿<!DOCTYPE>  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>蘑菇动起来-html5中文网</title>  
+<!-- 要记得引用jquery-1.4.2.js -->
+<script type="text/javascript" src="./js/jquery-1.4.2.js"></script>  
+<script type="text/javascript" >  
+    //全局变量   
+    var backgroundForestImg = new Image();//森林背景图   
+    var mushroomImg = new Image();//蘑菇
+    var ctx;//2d画布   
+    var screenWidth;//画布宽度   
+    var screenHeight;//画布高度   
+    
+    //公用 定义一个游戏物体戏对象   
+    function GameObject()   
+    {   
+        this.x = 0;   
+        this.y = 0;   
+        this.image = null;   
+    }   
+       
+    //定义蘑菇Mushroom 继承游戏对象GameObject   
+    function Mushroom() {};   
+    Mushroom.prototype = new GameObject();//游戏对象GameObject   
+    //蘑菇实例   
+    var mushroom = new Mushroom();        //循环描绘物体
+	
+    function gameLoop()   
+    {   
+        //清除屏幕   
+        ctx.clearRect(0, 0, screenWidth, screenHeight);   
+        ctx.save();   
+        //绘制背景   
+        ctx.drawImage(backgroundForestImg, 0, 0);   
+        //绘制蘑菇   
+        ctx.drawImage(mushroom.image, mushroom.x, mushroom.y);   
+        ctx.restore();   
+        }   
+    //加载图片   
+    function loadImages()   
+    {   
+        mushroomImg.src = "images/mushroom.png";//蘑菇   
+        backgroundForestImg.src = "images/forest1.jpg";//森林背景图   
+    }
+	//事件处理   
+	function AddEventHandlers()   
+	{   
+		//鼠标移动则蘑菇跟着移动   
+		$("#container").mousemove(function(e){   
+			mushroom.x = e.pageX - (mushroom.image.width/2);   
+		});    
+		   
+	}  
+  
+    //初始化   
+    $(window).ready(function(){   
+		AddEventHandlers(); 
+        loadImages();           
+        ctx = document.getElementById('canvas').getContext('2d'); //获取2d画布      
+        screenWidth = parseInt($("#canvas").attr("width")); //画布宽度 
+        screenHeight = parseInt($("#canvas").attr("height"));   
+        mushroom.image = mushroomImg;   
+        mushroom.x = parseInt(screenWidth/2);// 蘑菇X坐标  
+        mushroom.y = screenHeight - 40;//蘑菇Y坐标    
+        setInterval(gameLoop, 10);   
+    });   
+ 
+  
+</script>  
+</head>  
+  
+<body>  
+    <div id="container" style="border:1px solid; cursor:none; width:480px; height:320px;">  
+        <canvas id="canvas" width="480" height="320" >  
+        浏览器不支持html5,<a target="_blank" href="">请下载</a>支持html5的浏览器来观看
+        </canvas>  
+    </div> 
+<div  class="Copyrights"> 
+   <br />
+    <a href="http://www.html5china.com">由HTML5中文网整理收集，更多精彩请关注 www.HTML5China.com </a>  <br />
+        <script src="http://s15.cnzz.com/stat.php?id=2297124&amp;web_id=2297124" language="JavaScript"></script></div> 
+       </body>  
+</html>  

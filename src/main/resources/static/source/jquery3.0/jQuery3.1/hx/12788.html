@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>context</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">context<span class="g-bg-red margin-l-5">3.0-</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;context<span class="version-details">版本过时: 1.10, 移除: 3.0</span> 
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader37" target="_blank">Element</a> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>原始的DOM节点的内容传给<code>jQuery()</code>；如果没有东西被传递，那么上下文将可能是该文档（document）。
+	</p>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>.context</code>属性在jQuery 1.10中已经过时，并且，仅为维持支持jQuery的迁移插件（ jQuery Migrate plugin）中得<code>.live()</code> 方法。它可能会在未来的版本中删除，恕不另行通知。
+		</p>
+		<p>
+			<code>.live()</code>方法绑定事件处理器使用此属性，来检测将要使用的元素根节点以实现事件委派。（译者注：<code>.live()</code>方法 在jQuery 1.9中被移除）
+		</p>
+		<p>
+			这个属性的值通常等于文档<code>document</code>,因为如果没有提供这个属性，默认情况下文档document提供给jQuery对象。上下文可能会有所不同，例如，对象是通过一个<code>&lt;iframe&gt;</code>或XML文档内搜索的。
+		</p>
+		<p>
+			需要注意的是
+上下文属性可能只适用于通过<code>jQuery()</code>选择的原始元素，
+因为它是可以让用户将元素添加到集合中，比如通过<code>.add()</code>方法，
+&nbsp;这些可以具有不同的上下文。
+		</p>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h2 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h2>
+</header>
+	<h4>
+		<span class="desc">实例</span>
+	</h4>
+	<p>
+		<span class="desc">确定确切的上下文使用。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { cursor:pointer; }
+  div { width:50px; height:30px; margin:5px; float:left;
+        background:green; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  Context:&lt;ul&gt;&lt;/ul&gt;
+&lt;script&gt;$("ul")
+  .append("&lt;li&gt;" + $("ul").context + "&lt;/li&gt;")
+  .append("&lt;li&gt;" + $("ul", document.body).context.nodeName + "&lt;/li&gt;");
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8003" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

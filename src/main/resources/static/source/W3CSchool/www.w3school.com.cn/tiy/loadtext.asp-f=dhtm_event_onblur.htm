@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript">
+function message()
+{
+alert("这个提示框由 onblur 事件句柄触发")
+}
+</script>
+</head>
+
+<body>
+
+<p>在元素失去焦点时，会发生 onblur 事件。试着在输入框中点击或输入，然后在文档的其他位置点击，这样输入框就会失去焦点。</p>
+<form>
+请输入您的名字：<input type="text" onblur="message()" size="20">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").offsetParent().css("background-color","red");
+  });
+});
+</script>
+</head>
+<body>
+<div style="width:70%;position:absolute;left:100px;top:100px">
+<div style="margin:50px;background-color:yellow">
+<p>点击下面的按钮可以设置本段落的最近的父（祖先）元素的背景色。</p>
+<div>
+</div>
+<button>点击这里</button>
+</body>
+</html>

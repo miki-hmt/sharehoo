@@ -1,0 +1,30 @@
+<html>
+<head>
+<script type="text/javascript">
+function sameInfo()
+{
+for (i=0; i<document.myForm1.option.length; i++)
+	{
+	document.myForm2.option[i].value=document.myForm1.option[i].value
+	}
+}
+</script>
+</head>
+<body>
+
+<form name="myForm1">
+名：<input onkeyup="sameInfo()" type="text" name="option"><br />
+姓：<input onkeyup="sameInfo()" type="text" name="option"><br />
+地址：<input onkeyup="sameInfo()" type="text" name="option"><br />
+电邮：<input onkeyup="sameInfo()" type="text" name="option"><br />
+</form>
+
+<form name="myForm2">
+名：<input type="text" name="option"><br />
+姓：<input type="text" name="option"><br />
+地址：<input type="text" name="option"><br />
+电邮：<input type="text" name="option"><br />
+</form>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+<head>
+<script type="text/javascript">
+onerror=handleErr
+var txt=""
+
+function handleErr(msg,url,l)
+{
+txt="本页中存在错误。\n\n"
+txt+="错误：" + msg + "\n"
+txt+="URL: " + url + "\n"
+txt+="行：" + l + "\n\n"
+txt+="点击“确定”继续。\n\n"
+alert(txt)
+return true
+}
+
+function message()
+{
+adddlert("Welcome guest!")
+}
+</script>
+</head>
+
+<body>
+<input type="button" value="查看消息" onclick="message()" />
+</body>
+
+</html>

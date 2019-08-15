@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>removeProp()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">removeProp()<span class="g-bg-red margin-l-5">1.6+</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.removeProp( propertyName )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>为集合中匹配的元素删除一个属性（property）。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="removeProp-propertyName">
+			<h4 class="name">
+				<span class="version-details">V : 1.6</span>.removeProp( propertyName )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>propertyName</strong> 
+					</div>
+					<div>
+						类型: <code>String</code> 
+					</div>
+					<div>
+						要移除属性的名称.
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>.removeProp()</code>方法用来删除由<a href="http://www.shouce.ren/api/view/a/12879" class="book-a"><code>.prop()</code></a>方法设置的属性集。
+		</p>
+		<p>
+			若尝试移除 DOM 元素或 <code>window</code> 对象上一些内建的 属性（ property ） ，浏览器可能会产生错误。如果真的那么做了，那么 jQuery 首先会将 属性（ property ） 设置成 <code>undefined</code> ，然后忽略任何浏览器产生的错误。一般来说,只需要移除自定义的 属性（ property ） ，而不是移除内建的（原生的）属性（ property ）。
+		</p>
+		<p>
+			<strong>注意:</strong> 不要使用此方法来删除原生的属性（ property ），比如checked, disabled, 或者 selected。这将完全移除该属性，一旦移除，不能再次被添加到元素上。使用<code>.prop()</code>来设置这些属性设置为<code>false</code>代替。
+		</p>
+	</div>
+	<h3>
+		Additional Notes（其他注意事项）:
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				在Internet Explorer之前的版本9，使用<code>.prop()</code>设置DOM元素的属性进行赋值时，若所赋值的类型不是基本类型(number, string, 或 boolean)，而且也没有使用 <code>.removeProp()</code> 方法在 DOM 元素从文档中被移除之前。为了安全的在 DOM 对象上进行赋值而不用担心内存泄露问题，请使用 <code><a href="http://www.shouce.ren/api/view/a/12791" class="book-a">.data()</a></code> 方法 。
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		设置一个段落数字属性，然后将其删除。
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;p&gt; &lt;/p&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>var $para = $("p");
+$para.prop("luggageCode", 1234);
+$para.append("The secret luggage code is: ", String($para.prop("luggageCode")), ". ");
+$para.removeProp("luggageCode");
+$para.append("Now the secret luggage code is: ", String($para.prop("luggageCode")), ". ");</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>The secret luggage code is: 1234. Now the secret luggage code is: undefined. </code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	设置一个段落数字属性，然后将其删除。
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;removeProp demo&lt;/title&gt;
+  &lt;style&gt;
+  img {
+    padding: 10px;
+  }
+  div {
+    color: red;
+    font-size: 24px;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+  &lt;p&gt;&lt;/p&gt;
+ 
+&lt;script&gt;
+para = $( "p" );
+para
+  .prop( "luggageCode", 1234 )
+  .append( "The secret luggage code is: ", String( para.prop( "luggageCode" ) ), ". " )
+  .removeProp( "luggageCode" )
+  .append( "Now the secret luggage code is: ", String( para.prop( "luggageCode" ) ), ". " );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7972" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

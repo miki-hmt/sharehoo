@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>deferred.rejectWith()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">deferred.rejectWith()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;deferred.rejectWith( context [, args ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		拒返回值：<code>Deferred Object</code> 
+	</p>
+	<p>
+	</p>
+	<div class="entry-wrapper">
+		<p class="desc">
+			<strong>描述：</strong> 拒绝Deferred（延迟）对象，并根据给定的 <code>context</code>和<code>args</code>参数调用任何失败回调函数（failCallbacks）。
+		</p>
+		<ul class="signatures">
+			<li class="signature" id="deferred-rejectWith-context-args">
+				<h4 class="name">
+					<span class="version-details">V : 1.5</span>deferred.rejectWith( context [, args ] )
+				</h4>
+				<ul>
+					<li>
+						<div>
+							<strong>context</strong> 
+						</div>
+						<div>
+							类型: Object
+						</div>
+						<div>
+							Context（上下文） 作为 <code>this</code>对象传递给失败回调函数（failCallbacks ）
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>args</strong> 
+						</div>
+						<div>
+							类型: Array
+						</div>
+						<div>
+							传递一个可选的参数数组给失败回调函数（failCallbacks ）
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<div class="longdesc" id="entry-longdesc">
+			<p>
+				通常情况下，只有递延对象（Deferred）的创建者才能调用此方法;
+        您可以通过<code>deferred.promise()</code>返回的受限制的 Promise 对象，来防止其他代码改变递延的状态 。
+			</p>
+			<p>
+				当延迟对象被 rejected 时，任何通过 <code>deferred.then</code>或<code>deferred.fail</code> 添加的 failCallbacks，都会被调用。回调函数的执行顺序和它们被添加的顺序是一样的。传递给 <code>deferred.reject()</code> 的 <code>args</code>参数，会传给每个回调函数。当延迟对象进入 rejected 状态后，再添加的任何 failCallbacks，当它们被添加时，就会被立刻执行，并带上传入给 <code>.reject()</code> 的参数。
+			</p>
+		</div>
+	</div>
+	<p>
+	</p>
+	<div class="longdesc">
+		<p>
+			<a href="http://api.jquery.com/category/deferred-object/"></a> 
+		</p>
+	</div>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

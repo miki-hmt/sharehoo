@@ -1,0 +1,19 @@
+<html>
+<body>
+<script type="text/javascript">
+
+var xmlDoc = new ActiveXObject("Microsoft.XMLDOM")
+xmlDoc.async="false"
+xmlDoc.validateOnParse="false"
+xmlDoc.load("../example/dtde/note_dtd_error.xml.htm"/*tpa=http://www.w3school.com.cn/example/dtde/note_dtd_error.xml*/)
+
+document.write("<br>Error Code: ")
+document.write(xmlDoc.parseError.errorCode)
+document.write("<br>Error Reason: ")
+document.write(xmlDoc.parseError.reason)
+document.write("<br>Error Line: ")
+document.write(xmlDoc.parseError.line)
+
+</script>
+</body>
+</html>

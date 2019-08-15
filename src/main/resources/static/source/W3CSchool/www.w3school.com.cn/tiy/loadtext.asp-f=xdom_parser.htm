@@ -1,0 +1,25 @@
+<html>
+<body>
+<script type="text/javascript">
+try //Internet Explorer
+  {
+  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+  }
+catch(e)
+  {
+  try //Firefox, Mozilla, Opera, etc.
+    {
+    xmlDoc=document.implementation.createDocument("","",null);
+    }
+  catch(e) {alert(e.message)}
+  }
+try 
+  {
+  xmlDoc.async=false;
+  xmlDoc.load("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+  document.write("xmlDoc is loaded, ready for use");
+  }
+catch(e) {alert(e.message)}
+</script>
+</body>
+</html>

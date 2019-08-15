@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8" />
+<title>border-spacing</title>
+<meta name="description" content="CSS3参考手册之: border-spacing" />
+<meta name="keywords" content="border-spacing, css3, css3参考手册" />
+<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+<meta name="robots" content="all" />
+<!--[if lte IE 8]>
+<script src="../../js/html5.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="../../skin/article.css" />
+</head>
+<body>
+<nav id="guide" class="g-mod">
+	<div class="from">
+		<a href="http://css.doyoe.com/" target="_blank">CSS3参考手册</a>
+		<span>&#187;</span>
+		<a href="../index.htm">属性列表</a>
+		<span>&#187;</span>
+		<a href="index.htm" id="category" rel="properties/table" name="border-spacing">表格属性</a>
+		<span>&#187;</span>
+	</div>
+	<div class="to">
+		<span class="label">相关内容：</span>
+		<div class="g-combobox g-transition">
+			<a href="?" class="g-transition target">
+				<strong>其它表格属性</strong>
+				<span>选择其它项<!--[if lte IE 7]><ins>IE7 and earlier, Get to die</ins><![endif]--></span>
+			</a>
+			<div class="g-transition list">
+				<ul>
+					<!-- 插入快速分类导航 -->
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+<header id="hd">
+	<section id="title" class="g-mod">
+		<h1 class="tit">border-spacing</h1>
+		<ul class="info">
+			<li><strong>版本：CSS2</strong></li>
+			<li>媒体：视觉</li>
+		</ul>
+		<!-- 插入浏览器信息 -->
+	</section>
+</header>
+<section id="bd">
+	<section id="syntax" class="g-mod g-attr">
+		<h2 class="tit">语法：</h2>
+		<div class="cont">
+			<p><strong>border-spacing</strong>：<a href="../../values/length/length.htm">&lt;length&gt;</a>{1,2}</p>
+			<p><strong>默认值</strong>：<mark class="defaultvalue">0</mark></p>
+			<p><strong>适用于</strong>：table系元素</p>
+			<p><strong>继承性</strong>：有</p>
+			<p><strong>动画性</strong>：否</p>
+			<p><strong>计算值</strong>：两个绝对长度值</p>
+		</div>
+	</section>
+	<section id="value" class="g-mod g-attr">
+		<h2 class="tit">取值：</h2>
+		<div class="cont">
+			<dl>
+				<dt><a href="../../values/length/length.htm">&lt;length&gt;</a>：</dt>
+				<dd>用长度值来定义行和单元格的边框在横向和纵向上的间距。不允许负值</dd>
+			</dl>
+		</div>
+	</section>
+	<section id="intro" class="g-mod g-attr">
+		<h2 class="tit">说明：</h2>
+		<div class="cont">
+			<strong>设置或检索当表格边框独立时，行和单元格的边框在横向和纵向上的间距</strong>
+			<ul>
+				<li>该属性作用等同于<strong>标签属性cellspacing</strong>(单元格边距)。<code>border-spacing:0</code>等同于<code>cellspacing="0"</code></li>
+				<li>只有当表格边框独立（即 &lt;' <a href="border-collapse.htm">border-collapse</a> '&gt; 属性等于<code class="incode">separate</code>时）此属性才起作用。</li>
+				<li>如果提供全部两个length值时，第一个作用于横向间距，第二个作用于纵向间距。</li>
+				<li>如果只提供一个length值时，这个值将作用于横向和纵向上的间距。</li>
+				<li>对应的脚本特性为<strong>borderSpacing</strong>。</li>
+			</ul>
+		</div>
+	</section>
+	<section id="compatible" class="g-mod g-attr">
+		<h2 class="tit">兼容性：</h2>
+		<div class="cont">
+			<ul class="support-type">
+				<li><span class="support">浅绿</span> = 支持</li>
+				<li><span class="unsupport">红色</span> = 不支持</li>
+				<li><span class="partsupport">粉色</span> = 部分支持</li>
+			</ul>
+			<table class="g-data">
+				<thead>
+					<tr>
+						<th>Values</th>
+						<th>IE</th>
+						<th>Firefox</th>
+						<th>Chrome</th>
+						<th>Safari</th>
+						<th>Opera</th>
+						<th>iOS Safari</th>
+						<th>Android Browser</th>
+						<th>Android Chrome</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td rowspan="2"><strong>Basic Support</strong></td>
+						<td class="unsupport">6.0-7.0</td>
+						<td class="support" rowspan="2">2.0+</td>
+						<td class="support" rowspan="2">4.0+</td>
+						<td class="support" rowspan="2">6.0+</td>
+						<td class="support" rowspan="2">15.0+</td>
+						<td class="support" rowspan="2">6.0+</td>
+						<td class="support" rowspan="2">2.1+</td>
+						<td class="support" rowspan="2">18.0+</td>
+					</tr>
+					<tr>
+						<td class="support">8.0+</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+	<section id="example" class="g-mod g-attr">
+		<h2 class="tit">示例：</h2>
+		<div class="cont">
+			<textarea cols="90" rows="10">
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8" />
+<title>border-spacing_CSS参考手册_web前端开发参考手册系列</title>
+<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+<style>
+h1{font-size:16px;font-family:Arial;}
+.test1,.test3{border-collapse:separate;border-spacing:10px 20px;}
+.test2{border-collapse:collapse;border-spacing:10px 20px;}
+</style>
+</head>
+<body>
+<h1>边框独立时border-spacing生效(IE6/7 是无效的)</h1>
+<table border="1" class="test1">
+<tbody>
+	<tr>
+		<td>独立边框</td>
+		<td>独立边框</td>
+		<td>独立边框</td>
+	</tr>
+	<tr>
+		<td>独立边框</td>
+		<td>独立边框</td>
+		<td>独立边框</td>
+	</tr>
+</tbody>
+</table>
+
+<h1>相邻边被合并时border-spacing无效</h1>
+<table border="1" class="test2">
+<tbody>
+	<tr>
+		<td>合并边框</td>
+		<td>合并边框</td>
+		<td>合并边框</td>
+	</tr>
+	<tr>
+		<td>合并边框</td>
+		<td>合并边框</td>
+		<td>合并边框</td>
+	</tr>
+</tbody>
+</table>
+<h1>边框独立时border-spacing生效（IE6/7 通过标签属性 cellspacing="20" 设置）</h1>
+<table border="1" class="test3" cellspacing="20">
+<tbody>
+	<tr>
+		<td>独立边框</td>
+		<td>独立边框</td>
+		<td>独立边框</td>
+	</tr>
+	<tr>
+		<td>独立边框</td>
+		<td>独立边框</td>
+		<td>独立边框</td>
+	</tr>
+</tbody>
+</table>
+<p>IE6/7下通过标签属性 cellspacing="20" 替代 border-spacing:10px 20px; 设置单元格边距，可能你也注意到了 border-spacing 可以设置两个值，但是标签属性cellspacing只能设一个值，但通常情况下，我们最常用的是设置 cellspacing="0" 清除单元格边距。</p>
+</body>
+</html>
+			</textarea>
+			<p><input type="button" value="运行" class="g-btn g-btn-sure" /></p>
+		</div>
+	</section>
+</section>
+<footer id="ft">
+	<aside id="rights" class="g-mod">
+		<!-- 插入浏览器及版权信息 -->
+	</aside>
+</footer>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/inner.js"></script>
+</body>
+</html>

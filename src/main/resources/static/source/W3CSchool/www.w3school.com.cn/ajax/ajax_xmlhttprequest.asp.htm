@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>AJAX - XMLHttpRequest 对象</title>
+</head>
+
+<body class="browserscripting">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>AJAX 基础</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/ajax/index.asp" title="AJAX 教程">AJAX 首页</a></li>
+<li><a href="ajax_intro.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_intro.asp" title="AJAX 简介">AJAX 简介</a></li>
+<li><a href="ajax_httprequest.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_httprequest.asp" title="AJAX Http 请求">AJAX HTTP 请求</a></li>
+<li><a href="ajax_example.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_example.asp" title="AJAX 实例">AJAX 实例</a></li>
+<li><a href="ajax_browsers.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_browsers.asp" title="AJAX 浏览器支持">AJAX 浏览器支持</a></li>
+<li style="font-size:11px;"><a href="ajax_xmlhttprequest.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_xmlhttprequest.asp" title="AJAX - XMLHttpRequest 对象">AJAX XMLHttpRequest</a></li>
+<li><a href="ajax_server.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_server.asp" title="AJAX - 请求服务器">AJAX 请求服务器</a></li>
+<li><a href="ajax_serverscript.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_serverscript.asp" title="AJAX -服务器端的脚本">AJAX 服务器脚本</a></li>
+</ul>
+
+<h2>AJAX 高级</h2>
+<ul>
+<li><a href="ajax_example_suggest.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_example_suggest.asp" title="AJAX 请求实例">AJAX 请求实例</a></li>
+<li><a href="ajax_source.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_source.asp" title="AJAX 请求 源代码">AJAX 请求源代码</a></li>
+<li><a href="ajax_database.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_database.asp" title="AJAX 数据库实例">AJAX 数据库实例</a></li>
+<li><a href="ajax_xmlfile.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_xmlfile.asp" title="AJAX XML 实例">AJAX XML 实例</a></li>
+<li><a href="ajax_responsexml.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_responsexml.asp" title="AJAX ResponseXML 实例">AJAX ResponseXML</a></li>
+</ul>
+
+<h2>AJAX 实例</h2>
+<ul>
+<li><a href="../example/ajax_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/ajax_examples.asp" title="AJAX 实例">AJAX 实例</a></li>
+</ul>
+
+</div>
+
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>AJAX - XMLHttpRequest 对象</h1>
+
+<div  id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="ajax_browsers.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_browsers.asp">Previous Page</a></li>
+
+<li class="next"><a href="ajax_server.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_server.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div>
+<h2>AJAX - 更多有关 XMLHttpRequest 对象的知识</h2>
+<p>在向服务器发送数据之前，我们有必要解释一下 XMLHttpRequest 对象的三个重要的属性。</p>
+
+<h3>onreadystatechange 属性</h3>
+<p>onreadystatechange 属性存有处理服务器响应的函数。下面的代码定义一个空的函数，可同时对 onreadystatechange 属性进行设置：</p>
+<pre>
+<code>xmlHttp.onreadystatechange=function()</code>
+  {
+  // 我们需要在这里写一些代码
+  }
+</pre>
+
+<h3>readyState 属性</h3>
+<p>readyState 属性存有服务器响应的状态信息。每当 readyState 改变时，onreadystatechange 函数就会被执行。</p>
+<p>这是 readyState 属性可能的值：</p>
+<table class="dataintable">
+<tr>
+<th>状态</th>
+<th>描述</th> 
+</tr>
+
+<tr>
+<td>0</td>
+<td>请求未初始化（在调用 open() 之前）</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>请求已提出（调用 send() 之前）</td>
+</tr>
+
+
+<tr>
+<td>2</td>
+<td>请求已发送（这里通常可以从响应得到内容头部）</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>请求处理中（响应中通常有部分数据可用，但是服务器还没有完成响应）</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>请求已完成（可以访问服务器响应并使用它）</td>
+</tr>
+</table>
+
+<p>我们要向这个 onreadystatechange 函数添加一条 If 语句，来测试我们的响应是否已完成（意味着可获得数据）：</p>
+<pre>
+xmlHttp.onreadystatechange=function()
+  {
+  if(<code>xmlHttp.readyState==4</code>)
+    {
+    // 从服务器的response获得数据
+    }
+  }
+</pre>
+
+<h3>responseText 属性</h3>
+<p>可以通过 responseText 属性来取回由服务器返回的数据。</p>
+
+<p>在我们的代码中，我们将把时间文本框的值设置为等于 responseText：</p>
+<pre>
+xmlHttp.onreadystatechange=function()
+  {
+  if(xmlHttp.readyState==4)
+    {
+    document.myForm.time.value=<code>xmlHttp.responseText</code>;
+    }
+  }
+</pre>
+<p>下一节，我们会介绍如何向服务器请求数据！</p>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="ajax_browsers.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_browsers.asp">Previous Page</a></li>
+
+<li class="next"><a href="ajax_server.asp.htm" tppabs="http://www.w3school.com.cn/ajax/ajax_server.asp">Next Page</a></li>
+</ul>
+
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div><div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

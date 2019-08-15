@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>:checked</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">:checked</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;checked selector
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a>&lt;Element(s)&gt;</code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>匹配所有勾选的元素。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( ":checked" )
+			</h4>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			这个 <code>:checked</code> 选择器适用于复选框 （checkbox） ，单选框（radio button），和<code>select</code>元素的option元素。
+		</p>
+		<p>
+			对于检索<code>select</code>元素选中的选择项（option）, 请使用 <a href="http://www.shouce.ren/api/view/a/12859" class="book-a"><code>:selected</code> 选择器。</a>
+		</p>
+	</div>
+	<p>
+	</p>
+	<div class="longdesc">
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		查找所有选中的复选框元素
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;form&gt;
+  &lt;input type="checkbox" name="newsletter" checked="checked" value="Daily" /&gt;
+  &lt;input type="checkbox" name="newsletter" value="Weekly" /&gt;
+  &lt;input type="checkbox" name="newsletter" checked="checked" value="Monthly" /&gt;
+&lt;/form&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("input:checked")</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>[ &lt;input type="checkbox" name="newsletter" checked="checked" value="Daily" /&gt;, &lt;input type="checkbox" name="newsletter" checked="checked" value="Monthly" /&gt; ]</code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	确定有多少input元素是选中的.
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;checked demo&lt;/title&gt;
+  &lt;style&gt;
+  div {
+    color: red;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;form&gt;
+  &lt;p&gt;
+    &lt;input type="checkbox" name="newsletter" value="Hourly" checked="checked"&gt;
+ 
+    &lt;input type="checkbox" name="newsletter" value="Daily"&gt;
+    &lt;input type="checkbox" name="newsletter" value="Weekly"&gt;
+ 
+    &lt;input type="checkbox" name="newsletter" value="Monthly" checked&gt;
+    &lt;input type="checkbox" name="newsletter" value="Yearly"&gt;
+  &lt;/p&gt;
+&lt;/form&gt;
+&lt;div&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+var countChecked = function() {
+  var n = $( "input:checked" ).length;
+  $( "div" ).text( n + (n === 1 ? " is" : " are") + " checked!" );
+};
+countChecked();
+ 
+$( "input[type=checkbox]" ).on( "click", countChecked );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7957" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<h4>
+	实例
+</h4>
+<p>
+	Identify the checked radio input.
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;checked demo&lt;/title&gt;
+  &lt;style&gt;
+  input, label {
+    line-height: 1.5em;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;form&gt;
+  &lt;div&gt;
+    &lt;input type="radio" name="fruit" value="orange" id="orange"&gt;
+    &lt;label for="orange"&gt;orange&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" name="fruit" value="apple" id="apple"&gt;
+    &lt;label for="apple"&gt;apple&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type="radio" name="fruit" value="banana" id="banana"&gt;
+    &lt;label for="banana"&gt;banana&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div id="log"&gt;&lt;/div&gt;
+&lt;/form&gt;
+ 
+&lt;script&gt;
+$( "input" ).on( "click", function() {
+  $( "#log" ).html( $( "input:checked" ).val() + " is checked!" );
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7958" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p>
+<a href="http://sss" target="_blank" class="btn btn-sm btn-success"></a> 
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

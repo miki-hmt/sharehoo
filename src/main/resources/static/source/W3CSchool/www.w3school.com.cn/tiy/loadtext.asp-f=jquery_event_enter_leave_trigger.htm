@@ -1,0 +1,26 @@
+<html>
+<head>
+<script type="text/javascript" src="../jquery/jquery.js" tppabs="http://www.w3school.com.cn/jquery/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("p").mouseenter(function(){
+    $("p").css("background-color","yellow");
+  });
+  $("p").mouseleave(function(){
+    $("p").css("background-color","#E9E9E4");
+  });
+  $("#btn1").click(function(){
+    $("p").mouseenter();
+  });  
+  $("#btn2").click(function(){
+    $("p").mouseleave();
+  }); 
+});
+</script>
+</head>
+<body>
+<p style="background-color:#E9E9E4">请把鼠标指针移动到段落上。</p>
+<button id="btn1">触发段落的 mouseenter 事件</button><br />
+<button id="btn2">触发段落的 mouseleave 事件</button>
+</body>
+</html>

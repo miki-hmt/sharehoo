@@ -1,0 +1,19 @@
+<html>
+
+<head>
+<script type="text/javascript">
+function upperCase()
+{
+var x=document.getElementById("fname").value
+document.getElementById("fname").value=x.toUpperCase()
+}
+</script>
+</head>
+
+<body>
+
+Enter your name: <input type="text" id="fname" onblur="upperCase()"><br />
+Enter your age: <input type="text" id="age" onblur="alert(this.id)">
+
+</body>
+</html>

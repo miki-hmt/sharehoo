@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript">
+function setFocus()
+  {
+  document.getElementById('check1').focus()
+  }
+function loseFocus()
+  {
+  document.getElementById('check1').blur()
+  }
+</script>
+</head>
+<body>
+
+<form>
+<input type="checkbox" id="check1" />
+<br />
+<input type="button" onclick="setFocus()" value="Set focus" />
+<input type="button" onclick="loseFocus()" value="Lose focus" />
+</form>
+
+</body>
+</html>
+

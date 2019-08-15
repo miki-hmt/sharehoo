@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+xmlDoc=loadXMLDoc("../example/xdom/books_comment.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books_comment.xml*/);
+
+x=xmlDoc.getElementsByTagName("book")[0].childNodes;
+
+for (i=0;i<x.length;i++)
+{ 
+if (x[i].nodeType==8)
+  { 
+  //Process only comment nodes
+  y=x[i].substringData(9,11);
+  document.write(y);
+  document.write("<br />");
+  } 
+}
+</script>
+</body>
+</html>

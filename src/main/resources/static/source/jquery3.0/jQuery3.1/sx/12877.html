@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>attr()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">attr()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.attr( attributeName )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>String</code>
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>获取匹配的元素集合中的第一个元素的属性的值。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="attr-attributeName">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.attr(
+                             attributeName )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>attributeName</strong> 
+					</div>
+					<div>
+						类型: String
+					</div>
+					<div>
+						要获取的属性名称
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>.attr()</code>方法只获取<em>第一个</em>匹配元素的属性值。要获取每个单独的元素的属性值， 我们需要依靠jQuery的 <code>.each()</code>或者<code>.map()</code>方法循环。
+		</p>
+		<p>
+			使用 jQuery的 <code>.attr()</code> 方法得到了一个元素的属性值主要有两个好处：
+		</p>
+		<ol>
+			<li>
+				<strong>方便</strong>：它可以直接被jQuery对象访问并且链式调用其他jQuery方法。
+			</li>
+			<li>
+				<strong>浏览器兼容</strong>：一些属性在不同浏览器中得到不同的值。 甚至在同一个浏览器的不同版本中。 <code>.attr()</code> 方法减少了兼容性问题。
+			</li>
+		</ol>
+		<div class="warning">
+			<p>
+				<strong>注意:</strong> 除少数属性意外，属性值都是字符串，如value和tabindex。
+			</p>
+		</div>
+		<p>
+			<strong>在jQuery 1.6中</strong>,当属性没有被设置时候，<code>.attr()</code>方法将返回<code>undefined</code>。 <del>另外，<code>.attr()</code>不应该用在普通的对象，数组，窗口（window）或文件（document）上。</del> <strong>若要检索和更改DOM属性,比如元素的<code>checked</code>, <code>selected</code>, 或 <code>disabled</code>状态，请使用<a href="http://www.shouce.ren/api/view/a/12879" class="book-a">.prop()</a>方法。</strong> 
+		</p>
+		<h4>
+			Attributes vs. Properties
+		</h4>
+		<p>
+			<em>attributes</em>和<em>properties</em>之间的差异在特定情况下是很重要。<strong>jQuery 1.6之前</strong> ，<code>.attr()</code>方法在取某些 attribute 的值时，会返回
+                         property 的值，这就导致了结果的不一致。<strong>从 jQuery 1.6 开始</strong>， <code>.prop()</code>方法 方法返回 property
+                         的值,而 <code>.attr()</code> 方法返回 attributes 的值。
+		</p>
+		<p>
+			例如, <code>selectedIndex</code>, <code>tagName</code>, <code>nodeName</code>, <code>nodeType</code>, <code>ownerDocument</code>, <code>defaultChecked</code>, 和 <code>defaultSelected</code> 应使用<code>.prop()</code>方法进行取值或赋值。&nbsp;在jQuery1.6之前，这些属性使用<code>.attr()</code>方法取得，但是这并不是元素的<code>attr</code>属性。他们没有相应的属性（attributes），只有特性(property)。
+		</p>
+		<p>
+			例如，考虑一个DOM元素的HTML标记中定义的<code>&lt;input type="checkbox" checked="checked" /&gt;</code> ，并假设它是一个JavaScript变量命名的<code>elem</code> ：
+		</p>
+		<table class="listing">
+			<tbody>
+				<tr>
+					<th>
+						<code>elem.checked</code> 
+					</th>
+					<td>
+						<code>true</code> (Boolean) 将随着复选框状态的改变而改变
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<code>$(elem).prop("checked")</code> 
+					</th>
+					<td>
+						<code>true</code> (Boolean) 将随着复选框状态的改变而改变
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<code>elem.getAttribute("checked")</code> 
+					</th>
+					<td>
+						<code>"checked"</code> (String) 复选框的初始状态;不会改变
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<code>$(elem).attr("checked")</code> <em>(1.6)</em> 
+					</th>
+					<td>
+						<code>"checked"</code> (String) 复选框的初始状态;不会改变
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<code>$(elem).attr("checked")</code> <em>(1.6.1+)</em> 
+					</th>
+					<td>
+						<code>"checked"</code> (String) 将随着复选框状态的改变而改变
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<code>$(elem).attr("checked")</code> <em>(pre-1.6)</em> 
+					</th>
+					<td>
+						<code>true</code> (Boolean) 将随着复选框状态的改变而改变
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>
+			根据<a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.4">W3C的表单规范</a> ，在<code>checked</code>属性是一个<a href="http://www.w3.org/TR/html4/intro/sgmltut.html#h-3.3.4.2"><em>布尔属性</em></a>，
+                         这意味着,如果这个属性（attribute）是目前存在，
+                         即使，该属性没有对应的值，或者被设置为空字符串值，或甚至是"false"，相应的属性（property）为true。
+                         这才是真正的所有布尔属性（attributes）。
+		</p>
+		<p>
+			然而，要记住的最重要的概念是<code>checked</code>特性（attribute）不是对应它<code>checked</code>属性（property）。特性（attribute）实际对应的是<code>defaultChecked</code>属性（property），而且仅用于设置复选框最初的值。<code>checked</code>特性（attribute）值不会因为复选框的状态而改变，而<code>checked</code>属性（property）会因为复选框的状态而改变。因此，
+                         &nbsp;跨浏览器兼容的方法来确定一个复选框是否被选中，是使用该属性（property）：
+		</p>
+		<ul>
+			<li>
+				<code>if ( elem.checked )</code> 
+			</li>
+			<li>
+				<code>if ( $(elem).prop("checked") )</code> 
+			</li>
+			<li>
+				<code>if ( $(elem).is(":checked") )</code> 
+			</li>
+		</ul>
+		<p>
+			对于其他的动态属性，同样是true，比如 <code>selected</code> 和 <code>value</code>.
+		</p>
+	</div>
+	<h3>
+		Additional Notes（其他注意事项）:
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				在Internet Explorer 9之前的版本，使用<a href="http://www.shouce.ren/api/view/a/12879" class="book-a"><code>.prop()</code></a>设置DOM元素的属性进行赋值时，若所赋值的类型不是基本类型(number,
+                             string, 或 boolean)，而且也没有使用 <a href="http://www.shouce.ren/api/view/a/12880" class="book-a"><code>.removeProp()</code></a> 方法在 DOM 元素从文档中被移除之前。为了安全的在 DOM 对象上进行赋值而不用担心内存泄露问题，请使用 <a href="http://www.shouce.ren/api/view/a/12791" class="book-a"><code>.data()</code></a> 方法 。
+			</li>
+		</ul>
+		<h3>
+			<blockquote>
+				示例
+			</blockquote>
+		</h3>
+		<p>
+		</p>
+		<h4>
+			实例
+		</h4>
+		<p>
+			Display the checked attribute and property of a checkbox as it changes.
+		</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;attr demo&lt;/title&gt;
+  &lt;style&gt;
+  p {
+    margin: 20px 0 0;
+  }
+  b {
+    color: blue;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;input id="check1" type="checkbox" checked="checked"&gt;
+&lt;label for="check1"&gt;Check me&lt;/label&gt;
+&lt;p&gt;&lt;/p&gt;
+ 
+&lt;script&gt;
+$( "input" )
+  .change(function() {
+    var $input = $( this );
+    $( "p" ).html( ".attr( 'checked' ): &lt;b&gt;" + $input.attr( "checked" ) + "&lt;/b&gt;&lt;br&gt;" +
+      ".prop( 'checked' ): &lt;b&gt;" + $input.prop( "checked" ) + "&lt;/b&gt;&lt;br&gt;" +
+      ".is( ':checked' ): &lt;b&gt;" + $input.is( ":checked" ) + "&lt;/b&gt;" );
+  })
+  .change();
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+		<p>
+			<a href="http://www.shouce.ren/study/api/s/7964" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+		</p>
+		<p>
+		</p>
+		<h4>
+			实例
+		</h4>
+		<p>
+			在页面的第一个&lt;em&gt;中找到title属性。
+		</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;attr demo&lt;/title&gt;
+  &lt;style&gt;
+  em {
+    color: blue;
+    font-weight: bold;
+  }
+  div {
+    color: red;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p&gt;Once there was a &lt;em title="huge, gigantic"&gt;large&lt;/em&gt; dinosaur...&lt;/p&gt;
+ 
+The title of the emphasis is:&lt;div&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+var title = $( "em" ).attr( "title" );
+$( "div" ).text( title );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+		<p>
+			<a href="http://www.shouce.ren/study/api/s/7965" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+		</p>
+		<p>
+		</p>
+		<p>
+		</p>
+		<h3>
+		</h3>
+	</div>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.attr( attributeName, value )
+	</blockquote>
+</h3>
+<p>
+	返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+</p>
+<p>
+</p>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>设置每一个匹配元素的一个或多个属性。
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.attr( attributeName, value )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>attributeName</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					要设置值的属性名。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>value</strong> 
+				</div>
+				<div>
+					类型: String or Number or Null
+				</div>
+				<div>
+					要设置的属性值。如果为<code>null</code>， 指定的属性将被删除（就像<code>.<a href="http://www.shouce.ren/api/view/a/12878" target="_blank" class="book-a">removeAttr</a>()</code>一样）。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.attr( attributes )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>attributes</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader25" target="_blank">PlainObject</a> 
+				</div>
+				<div>
+					一个要设置的 属性-值 集合对象。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.1</span>.attr( attributeName, function )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>attributeName</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					要设置值的属性名。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>function</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28" target="_blank" class="book-a">Function</a>( Integer index, String attr )
+                                     =&gt; String 或者 Number
+				</div>
+				<div>
+					这个函数返回用来设置的值。<code>this</code>指向当前的元素。接收该元素在集合中索引位置（index）和 原来属性值（attr）作为参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc-1">
+	<p>
+		这个 <code>.attr()</code> 方法 是一个设置属性值的方便而且强大的途径—特别是当设置多个属性或使用值来自函数。 让我们考虑下面的图片：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;img id="greatphoto" src="brush-seller.jpg" alt="brush seller" /&gt;</pre>
+	</div>
+	<h4 id="setting-simple-attr">
+		Setting a simple attribute(设置一个简单的属性)
+	</h4>
+	<p>
+		我们可以通过<code>.attr()</code>方法非常简单的改变 <code>alt</code> 属性并附上新值：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#greatphoto').attr('alt', 'Beijing Brush Seller');</pre>
+	</div>
+	<p>
+		我们可以用同样的方法 <em>添加</em> 一个属性：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#greatphoto') 
+.attr('title', 'Photo by Kelly Clark'); </pre>
+	</div>
+	<h4 id="setting-several-attrs">
+		Setting several attributes at once(一次设置多个属性)
+	</h4>
+	<p>
+		同时改变<code>alt</code> 属性 和 添加 <code>title</code>属性, 我们可以使用一个“名/值”形式的对象 (JavaScript object literal)传递给这个方法。 每个 key-value  对象将增加或者修改一个属性：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#greatphoto').attr({
+  alt: 'Beijing Brush Seller',
+  title: 'photo by Kelly Clark'
+});</pre>
+	</div>
+	<p>
+		当设置多个属性,包裹属性名的引号是可选的。
+	</p>
+	<p>
+		<strong>警告：</strong> 当设置样式名（“class”）属性时，必须使用引号！
+	</p>
+	<div class="warning">
+		<p>
+			<strong>注意:</strong> 试图改变 由<code>document.createElement()</code>创建的<code>input</code> 或 <code>button </code>的<code>type</code>属性，在Internet Explorer 8或更老的版本中将抛出一个例外。
+		</p>
+	</div>
+	<h4 id="computed-attr-values">
+		Computed attribute values(推算属性值)
+	</h4>
+	<p>
+		通过使用一个函数来设置属性， 可以根据该元素上的其它属性值返回最终所需的属性值。例如，我们可以把新的值与现有的值联系在一起：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#greatphoto').attr('title', function(i, val) {
+  return val + ' - photo by Kelly Clark'
+});</pre>
+	</div>
+	<p>
+		当前运用一个函数来计算属性的值，当我们修改了多个元素的属性，特别有用。
+	</p>
+	<p>
+		<strong>注意 </strong>如果setter函数没有返回任何数据（例如：<code>function(index, attr){}</code>)，属性的当前值返回值是undefined，作为一个getter行为。实际上，如果不进行任何更改的setter函数不返回的东西。
+	</p>
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+</div>
+<p>
+</p>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	为页面中全部的 &lt;img&gt;设置一些属性。
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;attr demo&lt;/title&gt;
+  &lt;style&gt;
+  img {
+    padding: 10px;
+  }
+  div {
+    color: red;
+    font-size: 24px;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;img&gt;
+&lt;img&gt;
+&lt;img&gt;
+ 
+&lt;div&gt;&lt;b&gt;Attribute of Ajax&lt;/b&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+$( "img" ).attr({
+  src: "/resources/hat.gif",
+  title: "jQuery",
+  alt: "jQuery Logo"
+});
+$( "div" ).text( $( "img" ).attr( "alt" ) );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7966" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	使第二个后面的按钮disabled
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;attr demo&lt;/title&gt;
+  &lt;style&gt;
+  div {
+    color: blue;
+  }
+  span {
+    color: red;
+  }
+  b {
+    font-weight: bolder;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;Zero-th &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;First &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;Second &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+$( "div" )
+  .attr( "id", function( arr ) {
+    return "div-id" + arr;
+  })
+  .each(function() {
+    $( "span", this ).html( "(id = '&lt;b&gt;" + this.id + "&lt;/b&gt;')" );
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7967" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	通过图片的title属性设置src属性。
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;attr demo&lt;/title&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;img title="hat.gif"&gt;
+ 
+&lt;script&gt;
+$( "img" ).attr( "src", function() {
+  return "/resources/" + this.title;
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<a href="http://www.shouce.ren/study/api/s/7968" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

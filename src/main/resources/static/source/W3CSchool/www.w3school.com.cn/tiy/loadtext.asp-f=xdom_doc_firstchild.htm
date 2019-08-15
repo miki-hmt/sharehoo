@@ -1,0 +1,26 @@
+<html>
+<head>
+<script type="text/javascript" src="../example/xdom/loadxmldoc.js" tppabs="http://www.w3school.com.cn/example/xdom/loadxmldoc.js"> 
+</script>
+</head>
+<body>
+<script type="text/javascript">
+//检查第一个节点是否是 element 节点
+function get_firstchild(n)
+{
+var x=n.firstChild;
+while (x.nodeType!=1)
+  {
+  x=x.nextSibling;
+  }
+return x;
+}
+
+xmlDoc=loadXMLDoc("../example/xdom/books.xml.htm"/*tpa=http://www.w3school.com.cn/example/xdom/books.xml*/);
+
+var x=get_firstchild(xmlDoc);
+document.write("Nodename: " + x.nodeName);
+document.write(" (nodetype: " + x.nodeType + ")");
+</script>
+</body>
+</html>

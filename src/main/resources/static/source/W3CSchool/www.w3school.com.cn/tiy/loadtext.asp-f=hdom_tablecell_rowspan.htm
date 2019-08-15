@@ -1,0 +1,30 @@
+<html>
+<head>
+<script type="text/javascript">
+function changeRowSpan()
+  {
+  document.getElementById("td2").rowSpan="2";
+  }
+</script>
+</head>
+<body>
+
+<table border="1">
+<tr>
+<th>Firstname</th>
+<th>Lastname</th>
+</tr>
+<tr>
+<td id="td1">Peter</td>
+<td id="td2">Griffin</td>
+</tr>
+<tr>
+<td id="td3">Harry</td>
+<td id="td4">Potter</td>
+</tr>
+</table>
+<br />
+<input type="button" onclick=changeRowSpan() value="Change rowspan" />
+
+</body>
+</html>

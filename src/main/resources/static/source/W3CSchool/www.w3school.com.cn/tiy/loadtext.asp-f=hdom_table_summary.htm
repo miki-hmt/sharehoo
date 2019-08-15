@@ -1,0 +1,26 @@
+<html>
+<head>
+<script type="text/javascript">
+function alertSummary()
+  {
+  alert(document.getElementById("table1").summary);
+  }
+</script>
+</head>
+<body>
+
+<table id="table1" border="1" summary="Example table of employees">
+<tr>
+<th>Firstname</th>
+<th>Lastname</th>
+</tr>
+<tr>
+<td>Peter</td>
+<td>Griffin</td>
+</tr>
+</table>
+<br />
+<input type="button" onclick=alertSummary() value="Alert table summary" />
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+<head>
+<script type="text/javascript">
+function parseXML()
+{
+text="<note>";
+text=text+"<to>George</to>";
+text=text+"<from>John</from>";
+text=text+"<heading>Reminder</heading>";
+text=text+"<body>Don't forget the meeting!</body>";
+text=text+"</note>";
+try //Internet Explorer
+  {
+  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+  xmlDoc.async="false";
+  xmlDoc.loadXML(text);
+  }
+catch(e)
+  {
+  try //Firefox, Mozilla, Opera, etc.
+  {
+  parser=new DOMParser();
+  xmlDoc=parser.parseFromString(text,"text/xml");
+  }
+  catch(e)
+  {
+  alert(e.message);
+  return;
+  }
+}
+document.getElementById("to").innerHTML=xmlDoc.getElementsByTagName("to")[0].childNodes[0].nodeValue;
+document.getElementById("from").innerHTML=xmlDoc.getElementsByTagName("from")[0].childNodes[0].nodeValue;
+document.getElementById("message").innerHTML=xmlDoc.getElementsByTagName("body")[0].childNodes[0].nodeValue;
+}
+</script>
+</head>
+
+<body onload="parseXML()">
+<h1>W3Schools Internal Note</h1>
+<p><b>To:</b> <span id="to"></span><br />
+<b>From:</b> <span id="from"></span><br />
+<b>Message:</b> <span id="message"></span>
+</p>
+</body>
+</html>

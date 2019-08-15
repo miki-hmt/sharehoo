@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<style type="text/css">
+body {counter-reset:section;}
+h1 {counter-reset:subsection;}
+h1:before
+{
+counter-increment:section;
+content:"Section " counter(section) ". ";
+}
+h2:before 
+{
+counter-increment:subsection;
+content:counter(section) "." counter(subsection) " ";
+}
+</style>
+</head>
+
+<body>
+
+<p><b>注释：</b>如果已规定 !DOCTYPE，那么 Internet Explorer 8 （以及更高版本）支持 counter-increment 属性。</p>
+
+<h1>HTML tutorials</h1>
+<h2>HTML Tutorial</h2>
+<h2>XHTML Tutorial</h2>
+<h2>CSS Tutorial</h2>
+
+<h1>Scripting tutorials</h1>
+<h2>JavaScript</h2>
+<h2>VBScript</h2>
+
+<h1>XML tutorials</h1>
+<h2>XML</h2>
+<h2>XSL</h2>
+
+</body>
+</html>

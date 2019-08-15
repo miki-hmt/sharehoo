@@ -1,0 +1,28 @@
+<html>
+
+<head><link rel="stylesheet" type="text/css" href="showcode.css" tppabs="http://www.w3school.com.cn/tiy/showcode.css" /></head>
+
+<body>
+
+<pre>
+<code class="aspcode">&lt;%
+dim numvisits
+response.cookies(&quot;NumVisits&quot;).Expires=date+365 
+numvisits=request.cookies(&quot;NumVisits&quot;)
+
+if numvisits=&quot;&quot; then
+   response.cookies(&quot;NumVisits&quot;)=1
+   response.write(&quot;欢迎！这是您第一次访问本页面。&quot;)
+else
+   response.cookies(&quot;NumVisits&quot;)=numvisits+1
+   response.write(&quot;之前，您已经访问过本页面 &quot;)
+   response.write(numvisits & &quot; 次。&quot;)
+end if
+%&gt;</code>
+&lt;html&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</body>

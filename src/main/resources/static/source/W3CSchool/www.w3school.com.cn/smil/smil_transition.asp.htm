@@ -1,0 +1,244 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c3.css" tppabs="http://www.w3school.com.cn/c3.css" />
+
+<title>SMIL Transition</title>
+</head>
+
+<body class="multimedia">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本系列教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本系列教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title=".NET (dotnet) 教程">dot net教程</a></li>
+<li id="m"><a href="../m.asp.htm" tppabs="http://www.w3school.com.cn/m.asp" title="多媒体系列教程">多媒体教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="网站构建手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course">
+<h2>SMIL 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/smil/index.asp" title="SMIL 教程">SMIL 首页</a></li>
+<li><a href="smil_intro.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_intro.asp" title="SMIL 简介">SMIL 简介</a></li>
+<li><a href="smil_files.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_files.asp" title="SMIL 文件">SMIL 文件</a></li>
+<li><a href="smil_html.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_html.asp" title="SMIL In HTML">SMIL HTML</a></li>
+<li><a href="smil_xhtml.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_xhtml.asp" title="XHTML+SMIL">SMIL XHTML</a></li>
+<li><a href="smil_timing.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_timing.asp" title="SMIL Timing">SMIL Timing</a></li>
+<li><a href="smil_seq.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_seq.asp" title="SMIL Sequence">SMIL Sequence</a></li>
+<li><a href="smil_parallel.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_parallel.asp" title="SMIL in Parallel">SMIL Parallel</a></li>
+<li><a href="smil_transition.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_transition.asp" title="SMIL Transition">SMIL Transition</a></li>
+<li><a href="smil_media.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_media.asp" title="SMIL Media 元素">SMIL Media</a></li>
+<li><a href="smil_reference.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_reference.asp" title="SMIL 参考手册">SMIL 参考</a></li>
+</ul>
+</div>
+
+<div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SMIL Transition</h1>
+
+<div id="tpn">
+<ul class="prenext">
+
+<li class="pre"><a href="smil_parallel.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_parallel.asp">Previous Page</a></li>
+
+<li class="next"><a href="smil_media.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_media.asp">Next Page</a></li>
+</ul>
+
+</div>
+
+<div id="intro">
+<p><strong>Transition 能够为元素生成“淡入淡出”以及“擦除”等效果。</strong></p>
+</div>
+
+<div>
+<h2>Transition 属于 SMIL 2.0</h2>
+
+<p>Transition 是 SMIL 2.0 中的新特性。Transition 不属于 SMIL 1.0 规范的组成部分。</p>
+
+<p>Internet Explorer 6 支持基于 SMIL 2.0 规范的 Transition。Transition 由 &lt;transitionfilter&gt; 元素实现。</p>
+</div>
+
+<div>
+<h2>属性</h2>
+
+<p>&lt;transitionfilter&gt; 元素拥有若干元素，最常用的有：</p>
+
+<table class="dataintable">
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+
+<tr>
+<td>type</td>
+<td>定义 transition 滤镜的类型（参阅 transition 滤镜列表）</td>
+<td>type=&quot;clockWipe&quot;</td>
+</tr>
+
+<tr>
+<td>begin</td>
+<td>定义何时开始 transition</td>
+<td>begin=&quot;0s&quot;</td>
+</tr>
+
+<tr>
+<td>mode</td>
+<td>定义 transition 模式</td>
+<td>mode=&quot;in&quot;</td>
+</tr>
+
+<tr>
+<td>from</td>
+<td>定义 transition 的开始值</td>
+<td>from=&quot;0.2&quot;</td>
+</tr>
+
+<tr>
+<td>to</td>
+<td>定义 transition 的结束值</td>
+<td>to=&quot;0.8&quot;</td>
+</tr>
+</table>
+</div>
+
+<div>
+<h2>Transition 滤镜</h2>
+
+<p>可使用下面的 transition 滤镜：</p>
+
+<pre>fade, barnDoorWipe, barWipe, clockWipe, ellipseWipe, fanWipe, irisWipe, 
+pushWipe, slideWipe, snakeWipe, spiralWipe, starWipe </pre>
+</div>
+
+<div>
+<h2>实例：显示 Transition</h2>
+
+<pre>&lt;html xmlns:t=&quot;urn:schemas-microsoft-com:time&quot;&gt;
+&lt;head&gt;
+&lt;?import namespace=&quot;t&quot; implementation=&quot;#default#time2&quot;&gt;
+&lt;style&gt;.t {behavior: url(#default#time2)}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;t:transitionfilter targetelement=&quot;keyb&quot;
+type=&quot;clockWipe&quot;
+begin=&quot;keyb.begin&quot; dur=&quot;2s&quot; /&gt;
+
+&lt;img id=&quot;keyb&quot; class=&quot;t&quot; src=&quot;pic_keyb.jpg&quot; dur=&quot;4s&quot;
+width=&quot;128&quot; height=&quot;107&quot; /&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>在上面的例子中，图像将显示 4 秒钟。Transition 滤镜将用 2 秒钟以 &quot;clockWipe&quot; 的方式把图像显示出来。</p>
+
+<p class="tip"><span>提示：</span>您必须运行 Internet Explorer 6 来显示这个例子。</p>
+
+<p><a href="../tiy/t.asp-f=smil_trans.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=smil_trans">TIY</a></p>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+
+<li class="pre"><a href="smil_parallel.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_parallel.asp">Previous Page</a></li>
+
+<li class="next"><a href="smil_media.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_media.asp">Next Page</a></li>
+</ul>
+
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="searchui">
+<form method="get" id="searchform" action="http://www.google.cn/search">
+<p><label for="searched_content">Search:</label></p>
+<p><input type="hidden" name="sitesearch" value="www.w3school.com.cn" /></p>
+<p>
+<input type="text" name="as_q" class="box"  id="searched_content" title="在此输入搜索内容。" />
+<input type="submit" value="Go" class="button" title="搜索！" />
+</p>
+</form>
+</div>
+
+<div id="tools">
+<h5 id="tools_reference"><a href="smil_reference.asp.htm" tppabs="http://www.w3school.com.cn/smil/smil_reference.asp">SMIL 参考手册</a></h5>
+</div>
+
+<div id="ad">
+<h2>赞助商链接</h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 120x600, sidebar_big */
+google_ad_slot = "9995842720";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div><div id="footer">
+<p>W3School提供的内容仅用于培训。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。当使用本站时，代表您已接受了本站的<a href="../about/about_use.asp.htm" tppabs="http://www.w3school.com.cn/about/about_use.asp" title="关于使用">使用条款</a>和<a href="../about/about_privacy.asp.htm" tppabs="http://www.w3school.com.cn/about/about_privacy.asp" title="关于隐私">隐私条款</a>。</p>
+<p>版权所有，保留一切权利。未经书面许可，不得转载。W3School 简体中文版的所有内容仅供测试，对任何法律问题及风险不承担任何责任。<a href="javascript:if(confirm('http://www.yktz.net/  \n\nThis file was not retrieved by Teleport Pro, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?'))window.location='http://www.yktz.net/'" tppabs="http://www.yktz.net/" title="上海赢科投资有限公司">上海赢科投资公司</a>。</p>
+</div>
+
+</div>
+</body>
+</html>

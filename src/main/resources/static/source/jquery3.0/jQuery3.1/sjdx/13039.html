@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>event.preventDefault()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">event.preventDefault()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>undefined</code> 
+	</p>
+	<p>
+		阻止默认事件行为的触发。
+	</p>
+	<div class="longdesc">
+		<p>
+			例如，在执行这个方法后，如果点击一个锚点，就不会让浏览器跳转到新的 URL 去了。我们可以用 event.isDefaultPrevented() 来确定这个方法是否(在那个事件对象上)调用过了。
+		</p>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		取消点击的默认行为(导航)。。
+	</p>
+	<h5>
+		代码:
+	</h5>
+<pre>&lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  &lt;head&gt;
+    &lt;script src="http://code.jquery.com/jquery-latest.min.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+      &lt;a href="http://jquery.com"&gt;default click action is prevented&lt;/a&gt;
+      &lt;div id="log"&gt;&lt;/div&gt;
+       &lt;script&gt;
+            $("a").click(function(event) {
+               event.preventDefault();
+               $('&lt;div/&gt;').append('default ' + event.type + ' prevented').appendTo('#log');
+             });
+       &lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8249" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

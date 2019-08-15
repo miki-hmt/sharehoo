@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript">
+function alertId()
+  {
+  var txt="Id: " + document.getElementById("male").id
+  txt=txt + ", type: " + document.getElementById("male").type
+  txt=txt + ", value: " + document.getElementById("male").value
+  alert(txt)
+  }
+</script>
+</head>
+<body>
+
+<form>
+Male: <input id="male" type="radio" name="Sex" value="Male" />
+<br />
+Female: <input id="female" type="radio" name="Sex" value="Female" />
+<br /><br />
+<input type="button" value="Alert details" onclick="alertId()" />
+</form>
+
+</body>
+</html>

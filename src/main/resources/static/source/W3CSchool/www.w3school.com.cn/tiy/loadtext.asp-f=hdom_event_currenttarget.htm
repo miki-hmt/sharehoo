@@ -1,0 +1,21 @@
+<html>
+<head>
+
+<script type="text/javascript">
+function getEventTrigger(event)
+  { 
+  x=event.currentTarget; 
+  alert("The id of the triggered element: "
+   + x.id);
+  }
+</script>
+</head>
+
+<body >
+
+<p id="p1" onmousedown="getEventTrigger(event)">
+Click on this paragraph. An alert box will
+show which element triggered the event.</p>
+
+</body>
+</html>

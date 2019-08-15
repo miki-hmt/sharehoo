@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type="text/javascript">
+function getText()
+  {
+  var x=document.getElementById("frame1").contentDocument;
+  alert(x.getElementsByTagName("h3")[0].childNodes[0].nodeValue);
+  }
+</script>
+</head>
+<body>
+
+<iframe src="../example/hdom/frame_a.html" tppabs="http://www.w3school.com.cn/example/hdom/frame_a.html" id="frame1" ></iframe>
+<br /><br />
+<input type="button" onclick="getText()" value="Get text" />
+
+</body>
+</html>

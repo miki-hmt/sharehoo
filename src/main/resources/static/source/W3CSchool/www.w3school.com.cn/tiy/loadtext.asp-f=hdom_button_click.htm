@@ -1,0 +1,21 @@
+<html>
+<head>
+<script type="text/javascript">
+function clickButton()
+  {
+  document.getElementById('button1').click()
+  }
+function alertMsg()
+  {
+  alert("Button 1 was clicked!")
+  }
+</script>
+</head>
+<body onload="clickButton()">
+
+<form>
+<input type="button" id="button1" onclick="alertMsg()" value="Button 1" />
+</form>
+
+</body>
+</html>

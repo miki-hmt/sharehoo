@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>deferred.always()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">deferred.always()<span class="g-bg-red margin-l-5">1.6+</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;deferred.always( alwaysCallbacks [, alwaysCallbacks ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Deferred Object</code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong> 当Deferred（延迟）对象解决或拒绝时，调用添加处理程序。
+</p>
+<ul class="signatures">
+	<li class="signature" id="deferred-always-alwaysCallbacks-alwaysCallbacks">
+		<h4 class="name">
+			<span class="version-details">V : 1.6</span>deferred.always( alwaysCallbacks [, alwaysCallbacks ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>alwaysCallbacks</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					一个函数，或者函数数组，当Deferred（延迟）对象得到解决或拒绝时被调用。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>alwaysCallbacks</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					可选的一个函数，或者函数数组，当Deferred（延迟）对象得到解决或拒绝时被调用。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		参数可以是一个函数或一个函数的数组。当Deferred（延迟）得到解决或者拒绝时，<code> alwaysCallbacks </code>始终都会被执行。由于的<code> deferred.always()</code>返回Deferred（延迟）对象，所以可以链接其它的Deferred（延迟）对象，包括额外的<code>.always()</code>的方法。当Deferred（延迟）得到解决或者拒绝，回调将按他们顺序被执行，并且可以使用传递给如下方法的参数：<code>resolve</code> ， <code>reject</code> ， <code>resolveWith</code>或<code>rejectWith</code>。
+	</p>
+	<p>
+		<strong>注意:</strong> <code>deferred.always()</code>方法接收了<code>Deferred</code>对象<code>.resolve()</code>或<code>.reject()</code>使用的参数， 这往往是非常不同的。
+        为此， 最好的只用它的行为，而不去检查他的参数。
+        &nbsp;在大多数情况下，
+        使用显式 <code>.done()</code> 或 <code>.fail()</code>处理程序，因为他们的参数都是已知的。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">jQuery.get（）方法返回一个来自一个Deferred（延迟）对象的jqXHR对象，我们可以附加一个成功和错误使用deferred.always（）方法的回调。</span> 
+</p>
+<pre class="prettyprint lang-js">$.get("test.php").always( function() {
+  alert("$.get completed with success or error callback arguments");
+} );</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

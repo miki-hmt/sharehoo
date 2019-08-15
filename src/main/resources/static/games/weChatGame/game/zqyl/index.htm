@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+    <meta name="robots" content="index,follow"> 
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
+	<title>最强眼力</title>	
+     <link href="9.css" tppabs="http://wx.9ku.com/ceshi/50/9.css" media="screen" rel="stylesheet" type="text/css">
+    <script>
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    	WeixinJSBridge.call('showOptionMenu');
+    });
+	//new Image().src = 'action.php-id=12'/*tpa=http://wx.9ku.com/game/action.php?id=12*/;
+	var moreGamesLocation = '';
+	function play68_init() {		updateShare(0);}
+	function updateShare(bestScore) {
+		imgUrl = 'http://t2.qpic.cn/mblogpic/6c1d5db929f123ac16c0/2000';
+		//var domains = ['http://wx.9ku.com/ceshi/50/www.lieqicun.com','http://wx.9ku.com/ceshi/50/www.lieqicun.cn','http://wx.9ku.com/ceshi/50/www.lieqicun.net','http://wx.9ku.com/ceshi/50/115.29.44.52'];
+		//var domain = domains[new Date().getTime()%4];
+		lineLink = 'index.htm'/*tpa=http://wx.9ku.com/ceshi/50/*/;
+		descContent = "考考你的眼力！你的眼睛跟得上吗？";
+		updateShareScore(bestScore);appid = '';
+	}	
+	function updateShareScore(bestScore) {
+		if(bestScore > 0) {shareTitle = "我玩《最强眼力》过了" + bestScore + "关，眼都花了！";}
+		else{shareTitle = "不玩《最强眼力》怎么知道自己的眼力原来那么好？";}
+	}
+</script>
+</head>
+  <body class="os-windows osv-6_1 osmv-6" onorientationchange="orentationChanged()">    
+  <div id="adTop"><script src="adTop.js" tppabs="http://wx.9ku.com/ceshi/script/adTop.js"></script></div>
+    <DIV class="main">
+      <div id="frame">
+        <div id="logo" style="display: none; opacity: 0;"></div>
+        <div id="playButton" style="display: none; opacity: 1;"></div>
+        <div id="level" style="display: none;">
+                     <span id="levelLabel">关卡：</span>
+          <span id="levelNum">1</span>
+        </div>
+        <div id="lives" style="display: none;">
+          <div id="hearts"><div class="heart">&nbsp;</div><div class="heart">&nbsp;</div><div class="heart">&nbsp;</div></div>
+                <div id="livesLabel">命：</div>
+        </div>
+        <div id="b" style="display: block;">
+          <div style="display: block;" id="b1"></div>
+          <div style="display: block;" id="b2"></div>
+          <div style="display: block;" id="b3"></div>
+        </div>
+        <canvas height="240" width="320" id="canvas" style="display: block;"></canvas><div id="msg" style="position:relative;display: block; opacity: 1;bottom:50px;"></div>
+      </div>
+	 <div  style="position:relative; display: block; margin: 0px auto;bottom:120px;z-index:20000">
+	 	<a style="font-size: 15px;color: #f00;font-weight: bold;display: block;height: 30px;line-height: 30px;" href="javascript:if(confirm('http://wx.9ku.com/ceshi/51/  \n\n���ļ��޷��� Teleport Ultra ����, ��Ϊ ����һ�����·���ⲿ������Ϊ������ʼ��ַ�ĵ�ַ��  \n\n�����ڷ������ϴ���?'))window.location='http://wx.9ku.com/ceshi/51/'" tppabs="http://wx.9ku.com/ceshi/51/">变态考反应游戏《密室逃脱》能通关你就能闪子弹了！</a>
+	 </div>
+      <script type="text/javascript" src="9.js" tppabs="http://wx.9ku.com/ceshi/50/9.js"></script>
+      
+    </DIV>
+
+        <script src="count.js" tppabs="http://wx.9ku.com/count.js"></script>
+</body>
+</html>

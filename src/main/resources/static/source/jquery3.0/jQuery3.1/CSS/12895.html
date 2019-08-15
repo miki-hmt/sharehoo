@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>innerHeight()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">innerHeight()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.innerHeight()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Integer</code> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>为匹配的元素集合中获取第一个元素的当前计算高度值,包括padding，但是不包括border。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.2.6</span> .innerHeight()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			这个方法返回元素的高度，包括顶部和底部的padding，单位是像素。如果在一组空的元素集合上调用，返回<code>undefined</code>（在jQuery 3.0之前返回<code>null</code>）。
+		</p>
+		<p>
+			这个方法不适用于<code>window</code> 和 <code>document</code>对象，对于这些对象可以使用<code><a href="http://www.shouce.ren/api/view/a/12893" class="book-a">.height()</a></code>代替。
+		</p>
+<figure>
+	              <img src="../image/58a3efc5188f5.png" alt="" /> <figcaption>图1 - 测量内部高度的插图</figcaption>
+	            </figure>
+	</div>
+	<h3>
+		其他注意事项:
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				尺寸相关的API返回的数字，
+    &nbsp;包括 <code>.innerHeight()</code>，在某些情况下可能是小数。你的代码不应该假定它是一个整数。 另外，当页面被用户放大或缩小时，尺寸可能不正确的;浏览器没有公开的API来检测这种情况。
+			</li>
+			<li>
+				当元素或其父元素被隐藏时，<code>.innerHeight()</code>得到的值不能保证准确。要得到准确的值，你应该确保该元素在使用<code>.innerHeight()</code>前可见。jQuery将尝试临时显示，然后再隐藏元素来测量元素尺寸，但这是不可靠的，（即使得到准确的值）也会显著影响页面的性能。这总临时显示然后再隐藏的测量功能，可能在jQuery未来的版本中删除。
+			</li>
+		</ul>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h3>
+		<blockquote>
+			Example
+		</blockquote>
+	</h3>
+</header>
+	<p>
+		<span class="desc">获取段落的innerHeight。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;innerHeight demo&lt;/title&gt;
+  &lt;style&gt;
+  p {
+    margin: 10px;
+    padding: 5px;
+    border: 2px solid #666;
+  }
+  &lt;/style&gt;
+  &lt;script src="//code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p&gt;Hello&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+ 
+&lt;script&gt;
+var p = $( "p:first" );
+$( "p:last" ).text( "innerHeight:" + p.innerHeight() );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8050" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div>
+<p>
+</p>
+<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.innerHeight( value )
+	</blockquote>
+</h3>
+<p>
+	返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+</p>
+<p>
+</p>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong> 为匹配集合中的每个元素设置CSS内部高度。
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.8.0</span> .innerHeight( value )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>value</strong> 
+				</div>
+				<div>
+					类型: <code>String</code>, <code>Number</code> 
+				</div>
+				<div>
+					一个正整数代表的像素值,或是整数和一个可选的附加单位（默认是：“px”）(作为一个字符串)。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.8.0</span> .innerHeight( function )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>function</strong> 
+				</div>
+				<div>
+					Type: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28" target="_blank">Function</a>( Integer index, Number height )
+			=&gt; String 或 Number
+				</div>
+				<div>
+					一个函数用于返回设置内部高度（包括padding，但不包括border）。该函数接受两个参数，index 参数表示元素在集合中的位置，height 参数表示原来的高度。在这个函数中，<code>this</code> 指向元素集合中的当前元素。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc-1">
+	<p>
+		当调用<code>.innerHeight("value")</code>方法的时候，这个“value”参数可以是一个字符串（数字加单位）或者是一个数字。如果这个“value”参数只提供一个数字，jQuery会自动加上像素单位（px）。如果只提供一个字符串，任何有效的CSS尺寸都可以为高度赋值（就像<code>100px</code>, <code>50%</code>, 或者 <code>auto</code>）。注意在现代浏览器中，CSS高度属性不包含padding, border, 或者 margin， 除非<code>box-sizing</code>CSS属性被应用。
+	</p>
+	<p>
+		如果没有给定明确的单位（像'em' 或者 '%'），那么默认情况下"px"会被直接添加上去（手册网注：也理解为"px"是默认单位）。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3>
+	<blockquote>
+		Example
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">每个div首次被点击时改变它的内部高度（和改变其颜色）。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;innerHeight demo&lt;/title&gt;
+  &lt;style&gt;
+div {
+  width: 60px;
+  padding: 10px;
+  height: 70px;
+  float: left;
+  margin: 5px;
+  background: red;
+  cursor: pointer;
+}
+.mod {
+  background: blue;
+  cursor: default;
+}
+  &lt;/style&gt;
+  &lt;script src="//code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;d&lt;/div&gt;
+&lt;div&gt;d&lt;/div&gt;
+&lt;div&gt;d&lt;/div&gt;
+&lt;div&gt;d&lt;/div&gt;
+&lt;div&gt;d&lt;/div&gt;
+ 
+&lt;script&gt;
+var modHeight = 70;
+$( "div" ).one( "click", function() {
+  $( this ).innerHeight( modHeight ).addClass( "mod" );
+  modHeight -= 8;
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<a href="http://www.shouce.ren/study/api/s/8051" target="_blank" class="btn btn-sm btn-success">运行一下</a><br /></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>
