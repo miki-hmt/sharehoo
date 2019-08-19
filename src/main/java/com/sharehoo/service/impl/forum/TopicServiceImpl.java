@@ -348,10 +348,7 @@ public class TopicServiceImpl implements TopicService {
 				}
 			}
 						
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		} catch (Exception e) {}	//2019.08.19	miki 忽略获取redis异常
 		
 		//2018.06.19 如果缓存中存在数据则取出，如果不存在则执行查询
 		StringBuffer hql=null;
@@ -377,21 +374,23 @@ public class TopicServiceImpl implements TopicService {
 				
 		}
 		
-		switch(sectionId){
-		case 21 :
-			
-			jsonData = JSON.toJSONString(ycList);		//2018.06.19 将list转成json字符串
-			jedisClient.hset(token,sectionId+"",jsonData);	//将json字符串放入redis中
-			
-			break;
-		case 11 :
+		try {
+			switch(sectionId){
+			case 21 :
 				
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串	c出谋划策数据
-			jedisClient.hset(advice,sectionId+"",jsonData);	//将json字符串放入redis中
-			
-			break;
+				jsonData = JSON.toJSONString(ycList);		//2018.06.19 将list转成json字符串
+				jedisClient.hset(token,sectionId+"",jsonData);	//将json字符串放入redis中
+				
+				break;
+			case 11 :
+					
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串	c出谋划策数据
+				jedisClient.hset(advice,sectionId+"",jsonData);	//将json字符串放入redis中
+				
+				break;
 
-		}
+			}
+		} catch (Exception e) {}	//写入redis失败可以忽略  2019.08.19	miki
 		
 		if (pageBean!=null) {			
 			
@@ -454,125 +453,107 @@ public class TopicServiceImpl implements TopicService {
 							return ycList;												//2018.06.19 缓存中存在数据，取出，并终止程序向下进行
 						}
 					}								
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				} catch (Exception e) {}	//获取redis中的数据，异常可以忽略	2019.08.19	miki
 		
 		//如果不存在，就先从数据库中读取，然后存入缓存
 				
 		if(sectionId==21 || sectionId==11 || sectionId==1 || sectionId==2 || sectionId==3 || sectionId==4 || 
 				sectionId==7 || sectionId==8 || sectionId==12 || sectionId==13 || sectionId==14 || 
 				sectionId==15 || sectionId==16 || sectionId==18 || sectionId== 19 || sectionId==20 ){					//只针对原创帖子做缓存
-			hql="select topic.id,topic.title,topic.user.nickName,concat(topic.code,''),topic.user.id from Topic as topic where topic.section.id=:sectionId order by topic.publishTime desc";
+			hql="select topic.id,topic.title,topic.user.nickName,concat(topic.code,''),topic.user.id from Topic as topic where topic.section.id=? order by topic.publishTime desc";
 		}else{
-			hql= "from Topic as topic where topic.section.id=:sectionId order by topic.publishTime desc";
+			hql= "from Topic as topic where topic.section.id=? order by topic.publishTime desc";
 		}
 		param.add(sectionId);
 		ycList = baseDAO.findTopN(hql, param, 10);
 		
-		switch(sectionId){
 		
-		case 21 :
-			
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(token,sectionId+"",jsonData);	//将json字符串放入redis中
-			
-			break;
-		case 11 :
-			
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(advice,sectionId+"",jsonData);	//将json字符串放入redis中	
-			
-			break;
-		case 1 :
+		try {
+			switch(sectionId){		
+			case 21 :				
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(token,sectionId+"",jsonData);	//将json字符串放入redis中
+				
+				break;
+			case 11 :			
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(advice,sectionId+"",jsonData);	//将json字符串放入redis中	
+				
+				break;
+			case 1 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(java,sectionId+"",jsonData);	//将json字符串放入redis中				
+				
+				break;
+			case 2 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(ershou,sectionId+"",jsonData);	//将json字符串放入redis中	
 
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(java,sectionId+"",jsonData);	//将json字符串放入redis中
-			
-			
-			break;
-		case 2 :
+				break;
+			case 3 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(say,sectionId+"",jsonData);	//将json字符串放入redis中	
 
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(ershou,sectionId+"",jsonData);	//将json字符串放入redis中	
+				break;
+			case 4 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(money,sectionId+"",jsonData);	//将json字符串放入redis中	
 
-			break;
-		case 3 :
+				break;
+			case 7 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(job,sectionId+"",jsonData);	//将json字符串放入redis中		
 
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(say,sectionId+"",jsonData);	//将json字符串放入redis中	
+				break;
+			case 8 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(web,sectionId+"",jsonData);	//将web前端的json字符串放入redis中		
 
-			break;
-		case 4 :
+				break;		
+			case 12 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(game,sectionId+"",jsonData);	//将游戏开发的json字符串放入redis中		
 
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(money,sectionId+"",jsonData);	//将json字符串放入redis中	
+				break;
+			case 13 :
 
-			break;
-		case 7 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(jingmei,sectionId+"",jsonData);	//将精美小东西的json字符串放入redis中		
 
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(job,sectionId+"",jsonData);	//将json字符串放入redis中		
+				break;
+			case 14 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(music,sectionId+"",jsonData);	//将j音乐心灵的son字符串放入redis中		
 
-			break;
-		case 8 :
+				break;
+			case 15 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(friend,sectionId+"",jsonData);	//将越伴出行json字符串放入redis中	
 
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(web,sectionId+"",jsonData);	//将web前端的json字符串放入redis中		
+				break;
+			case 16 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(bigdata,sectionId+"",jsonData);	//将大数据的json字符串放入redis中		
 
-			break;
-		
-		case 12 :
+				break;
+			case 18 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(wechat,sectionId+"",jsonData);	//将微信小程序开发的json字符串放入redis中	
 
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(game,sectionId+"",jsonData);	//将游戏开发的json字符串放入redis中		
+				break;
+			case 19 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(food,sectionId+"",jsonData);	//将美食美客json字符串放入redis中		
 
-			break;
-		case 13 :
+				break;
+			case 20 :
+				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
+				jedisClient.hset(code,sectionId+"",jsonData);	//将编程语言的json字符串放入redis中		
 
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(jingmei,sectionId+"",jsonData);	//将精美小东西的json字符串放入redis中		
-
-			break;
-		case 14 :
-
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(music,sectionId+"",jsonData);	//将j音乐心灵的son字符串放入redis中		
-
-			break;
-		case 15 :
-
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(friend,sectionId+"",jsonData);	//将越伴出行json字符串放入redis中	
-
-			break;
-		case 16 :
-
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(bigdata,sectionId+"",jsonData);	//将大数据的json字符串放入redis中		
-
-			break;
-		case 18 :
-
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(wechat,sectionId+"",jsonData);	//将微信小程序开发的json字符串放入redis中	
-
-			break;
-		case 19 :
-
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(food,sectionId+"",jsonData);	//将美食美客json字符串放入redis中		
-
-			break;
-		case 20 :
-
-			jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-			jedisClient.hset(code,sectionId+"",jsonData);	//将编程语言的json字符串放入redis中		
-
-			break;
-
-		}
-		
+				break;
+			}
+		} catch (Exception e) {}   //写入redis异常可以忽略	2019.08.19	miki
+				
 		return ycList;
 	}
 	
@@ -764,7 +745,6 @@ public class TopicServiceImpl implements TopicService {
 		// TODO Auto-generated method stub
 		List<Object> param = new LinkedList<Object>();
 		String hql = "from Topic as topic where topic.title not like '1' order by topic.publishTime desc";
-		param.add("1");
 
 		return baseDAO.findTopN(hql, param, count);
 	}

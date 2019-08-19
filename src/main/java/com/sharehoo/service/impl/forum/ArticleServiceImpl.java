@@ -226,7 +226,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<Article> getHotByUserId(int userId) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		String hql = "from Article as article where article.user.id=:userId order by article.count desc";
+		String hql = "from Article as article where article.user.id=? order by article.count desc";
 		
 		param.add(userId);
 		return baseDAO.findTopN(hql, param, 10);
