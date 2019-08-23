@@ -4,10 +4,8 @@ import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Section;
@@ -29,9 +25,7 @@ import com.sharehoo.service.forum.ZoneService;
 import com.sharehoo.util.CxCacheUtil;
 import com.sharehoo.util.forum.DateUtil;
 import com.sharehoo.util.forum.PageUtil;
-import com.sharehoo.util.forum.ResponseUtil;
 import com.sharehoo.util.forum.StringUtil;
-
 import net.sf.json.JSONObject;
 
 @Controller
@@ -74,7 +68,7 @@ public class SectionController {
 	
 	//上传logo文件保存方法实现
 	@RequestMapping("/section/admin/add")
-	public String save(@RequestBody Section section,@RequestParam("file") File logo,@PathVariable("logoFileName") String logoFileName)throws Exception{
+	public String save(@RequestBody Section section,@RequestParam("logo") File logo,@PathVariable("logoFileName") String logoFileName)throws Exception{
 		String basePath = (String)CxCacheUtil.getIntance().getValue(Consts.ROOT_PATH);
 		if (logo != null) {
 
@@ -97,7 +91,7 @@ public class SectionController {
 		section.setId(section.getId());
 		sectionService.saveSection(section);
 		
-		return "save";
+		return "redirect:";
 	}
 	
 	@RequestMapping("/section/admin/delete/{sectionId}")
