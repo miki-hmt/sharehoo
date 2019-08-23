@@ -37,6 +37,19 @@
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 	</dependency>
 	
+	<!-- EHcache缓存 -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+		
+        <!-- guava缓存 -->
+        <dependency>
+        	<groupId>com.google.guava</groupId>
+        	<artifactId>guava</artifactId>
+        	<version>25.1-jre</version>
+        </dependency>
+
 		<!-- jpa集成hibernate框架	2019.07.04	miki -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
