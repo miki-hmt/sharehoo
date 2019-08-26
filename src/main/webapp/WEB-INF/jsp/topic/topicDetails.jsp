@@ -312,14 +312,14 @@ function saveRep(){
 							<a href="javascript:void();" onclick='zan("${status.index+1 }","${reply.id }","${reply.good }")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
 								<span id="good${status.index+1 }">
 									<img alt="" src="${pageContext.request.contextPath}/images/icon/thumbs10.png" style="width: 16px;height: 16px;">
-										[<font id="gd${status.index+1}">${reply.good }</font>]
+										[<font id="gd${status.index+1}" style="font-weight:bold;color:red;">${reply.good }</font>]
 								</span>
 							</a>
 																																									
 							<a href="javascript:void();" onclick='bad("${status.index+1 }","${reply.id }","${reply.bad}")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
 								<span id="bad${status.index+1}">
 									<img alt="" src="${pageContext.request.contextPath}/images/icon/dislike3.png" style="width: 32px;height: 25px;">
-										[<font id="bd${status.index+1}">${reply.bad }</font>]
+										[<font id="bd${status.index+1}"	style="font-weight:bold;color:red;">${reply.bad }</font>]
 								</span>
 							</a>
 																																																																																																					
@@ -347,7 +347,7 @@ function saveRep(){
 															<img alt="" src="${pageContext.request.contextPath}/${sonReply.user.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.user.nickName }</a>&nbsp;回复&nbsp; 
 																<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${sonReply.sonUser.id}" target="_blank">
 																	<img alt="" src="${pageContext.request.contextPath}/${sonReply.sonUser.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.sonUser.nickName}
-																</a>：<pre><code class="language-java hljs">${sonReply.content }</code></pre>
+																</a>：<pre><code class="language-java hljs"	style="background-color:#FFFFFF;color:gray;">${sonReply.content }</code></pre>
 													</td>					
 													<td style="width:21%;">
 														<fmt:formatDate value="${sonReply.publishTime }" pattern="yy-MM-dd HH:mm "/>&nbsp;

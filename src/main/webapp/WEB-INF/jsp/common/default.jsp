@@ -1,6 +1,6 @@
-﻿<%@page import="com.sharehoo.interceptor.OnlineCounter"%>
-<%@page import="com.sharehoo.util.Counter"%>
-<%@page import="com.sharehoo.util.OnlineCounterListener" %>
+﻿<%@page import="jiabin.interceptor.OnlineCounter"%>
+<%@page import="jiabin.util.Counter"%>
+<%@page import="jiabin.util.OnlineCounterListener" %>
 <%@ page language="java" import="java.util.*,java.sql.*" pageEncoding="utf-8" %>
 <%
 String path = request.getContextPath();
@@ -178,7 +178,7 @@ a:hover{
 		    </li>                 
        		</ul>
 </li>
-    <li><a target="_blank" title="" href="Topic_list.action?sectionId=3">就业前景</a></li>
+    <li><a target="_blank" title="" href="Topic_list.action?sectionId=3">资源分享</a></li>
     
     <li><a target="_blank" title="" href="Topic_list.action?sectionId=12">游戏圈</a></li>
     
@@ -418,7 +418,7 @@ a:hover{
 	 <div style="height:120px;border:1px solid silver;border-left:0px;border-right:0px;">
 	  <ul class="paihang" id="rank" style="margin:0; padding:0; border:none; list-style:none;">             
 		   <li>
-			   <em>在线人数</em><a href="Topic_list.action?sectionId=1" target="_blank">：<%=OnlineCounter.getOnline() %></a>
+			   <em>在线人数</em><a href="Topic_list.action?sectionId=1" target="_blank">：${application.onlineCount }</a>
 			   <span><i style="width:22%;"></i></span>        
 		   </li>  
 		                 
@@ -579,7 +579,7 @@ a:hover{
 							
 		<c:forEach items="${sectionList }" var="section"  begin="8" end="11" step="1">
 			<div id="table_m_1371438913403" class="table_m clearfix ih-60 ui-droppable ui-droppable, ui-sortable" style="border: 0px; margin: 0px 0px 10px; padding: 0px; position: relative;">
-				<div class="table_head" style="height: 25px; line-height: 25px; margin-bottom: 5px; background-image: url(./topic/images/daily_tit_bg_10.jpg); background-color: rgb(255, 255, 255); background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
+				<div class="table_head" style="margin-top:-5px;height: 25px; line-height: 25px; margin-bottom: 5px; background-image: url(./topic/images/daily_tit_bg_10.jpg); background-color: rgb(255, 255, 255); background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
 					<a href="Topic_list.action?sectionId=${section.id }" target="_blank">
 						<div class="Tc-18-4">${fn:substring(section.name, 0, 2)}</div>
 						<div class="Tc-18-1">${fn:substring(section.name, 2, 10)}</div>

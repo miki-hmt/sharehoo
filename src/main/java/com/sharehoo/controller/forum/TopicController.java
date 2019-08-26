@@ -332,7 +332,7 @@ public class TopicController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/topic/admin/list")
+	@RequestMapping("/admin/topic/list")
 	public String listAdmin(@PathVariable("page") String page,Model model) throws Exception {
 		if (StringUtil.isEmpty(page)) {
 			page = "1";

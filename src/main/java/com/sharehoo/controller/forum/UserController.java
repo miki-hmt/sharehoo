@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.security.Security;
 import java.text.MessageFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -26,6 +29,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,9 +42,14 @@ import com.sharehoo.base.ipseek.IpSeekUtils;
 import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Reply;
+import com.sharehoo.entity.forum.Section;
 import com.sharehoo.entity.forum.Topic;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.entity.shop.Log;
+import com.sharehoo.service.LogService;
+import com.sharehoo.service.forum.ReplyService;
+import com.sharehoo.service.forum.SectionService;
+import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.UserService;
 import com.sharehoo.util.CxCacheUtil;
 import com.sharehoo.util.forum.DateUtil;
@@ -60,7 +69,14 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private LogService logService;
+	@Autowired
+	private ReplyService replyService;
+	@Autowired
+	private TopicService topicService;
+	@Autowired
+	private SectionService sectionService;
 	/**
 	 * miki
 	 * date:2017.04.14
@@ -421,30 +437,24 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
-	
-	public String login()throws Exception{	
-		HttpServletRequest req=(HttpServletRequest)ServletActionContext.getRequest();
+	@RequestMapping("/user/login")
+	public String login(HttpServletRequest request,@RequestBody User user,@PathVariable("imageCode") String imageCode,@PathVariable("error") String error)throws Exception{	
 		HttpSession session=request.getSession();
-		HttpServletResponse response=ServletActionContext.getResponse();
 		/*
-		 * 2017.05.27
+		 * 2017.05.27 miki
 		 * 将得到的新用户密码加密保存，然后与数据库里的密码作对比，
-		 * 加密字符串后面必须要加上函数.trim(),因为不去掉首尾空格的话，加密的数据会不一致
-		 * miki
+		 * 加密字符串后面必须要加上函数.trim(),因为不去掉首尾空格的话，加密的数据会不一致 
 		 */
-		user.setPassword(new MD5().complie(user.getPassword().trim()));
-		
+		user.setPassword(new MD5().complie(user.getPassword().trim()));		
 		User currentUser=userService.login(user);
 		
 		if(!imageCode.equals(session.getAttribute("sRand"))){
 			error="验证码错误！";			
-			session.setAttribute("error", error);
-			
+			session.setAttribute("error", error);			
 		}else
 			if(currentUser==null){
 			error="用户名或密码错误！";			
-			session.setAttribute("error", error);
-			
+			session.setAttribute("error", error);			
 		}
 		else 
 			if(currentUser.isStatus()==false){
@@ -452,10 +462,9 @@ public class UserController {
 			session.setAttribute("error", error);
 		}else{
 			session.setAttribute("currentUser", currentUser);
-			session.removeAttribute("error");
-			
+			session.removeAttribute("error");		
 			Log log1=new Log();
-			String ip=IpGet.getIp2(req);
+			String ip=IpGet.getIp2(request);
 			
 			String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
 			if(address.equals("[]")){
@@ -485,13 +494,15 @@ public class UserController {
 		if (user.getType()==3) {
 			return "adminLogin";
 		} else {
-			return "login";
+			return "log_result";
 		}
 	}
 	
-	public String loginAdmin()throws Exception{
+	@RequestMapping("/admin/user/login")
+	public String loginAdmin(HttpServletRequest request,@RequestBody User user,@PathVariable("imageCode") String imageCode,
+			@PathVariable("error") String error)throws Exception{
 		HttpSession session=request.getSession();
-		HttpServletRequest req=(HttpServletRequest)ServletActionContext.getRequest();
+		//HttpServletRequest req=(HttpServletRequest)ServletActionContext.getRequest();
 		/*
 		 * 2017.05.27 将得到的新用户密码加密保存，然后与数据库里的密码作对比 加密字符串后面必须要
 		 * 加上函数.trim(),因为不去掉首尾空格的话，加密的数据会不一致 miki
@@ -504,7 +515,7 @@ public class UserController {
 			session.setAttribute("currentUser", currentUser);
 			
 			Log log1=new Log();
-			String ip=IpGet.getIp2(req);
+			String ip=IpGet.getIp2(request);
 			String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
 			if(address.equals("[]")){
 				String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
@@ -524,26 +535,31 @@ public class UserController {
 			
 		}else {
 			error="用户名或密码错误！";
-			return "errorAdmin";
+			return "login";
 		}
-		return "loginAdmin";
+		return "admin/main";
 	}
 	
-	public String logout()throws Exception{
+	@RequestMapping("/user/logout")
+	public String logout(HttpServletRequest request)throws Exception{
 		request.getSession().invalidate();
-		return "logout";
+		return "redirect:home";
 	}
 	
-	public String logout2()throws Exception{
+	@RequestMapping("/admin/user/logout")
+	public String logout2(HttpServletRequest request)throws Exception{
 		request.getSession().invalidate();
-		return "logout2";
+		return "redirect:login";
 	}
 	
-	public String preSave()throws Exception{
+	@RequestMapping("/user/modify")
+	public String preSave(HttpServletRequest request,Model model)throws Exception{
 		HttpSession session=request.getSession();
-		user=(User) session.getAttribute("currentUser");
-		navCode=NavUtil.genNavCode("个人中心");
-		return "modify";
+		User user=(User) session.getAttribute("currentUser");
+		model.addAttribute("user", user);
+		String navCode=NavUtil.genNavCode("个人中心");
+		model.addAttribute("navCode", navCode);
+		return "userCenter/userModify";
 	}
 	
 	
@@ -556,7 +572,8 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
-	public String userCenter()throws Exception{
+	@RequestMapping("/user/center")
+	public String userCenter(HttpServletRequest request,Model model)throws Exception{
 		
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("currentUser");
@@ -566,17 +583,12 @@ public class UserController {
 		 * miki
 		 * 统计未读信息数
 		 */
-		Long count2=replyService.getUnReplyCountByUserId(user.getId());
+		Long count2=replyService.getUnReplyCountByUserId(user.getId());		
+		model.addAttribute("count", count2);
 		
-		/**
-		 * 2017.04.30
-		 * miki
-		 * 后台数据传递到前台的方法*****重要
-		 */
-		ActionContext ct=ActionContext.getContext();
-		ct.put("count", count2);
-		navCode=NavUtil.genNavCode("个人中心");
-		return "userCenter";
+		String navCode=NavUtil.genNavCode("个人中心");
+		model.addAttribute("navCode", navCode);
+		return "userCenter/userHome";
 	}
 	
 	
@@ -588,11 +600,14 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
-	public String getUserInfo()throws Exception{
+	@RequestMapping("/user/info")
+	public String getUserInfo(Model model)throws Exception{
 		
-		navCode=NavUtil.genNavCode("个人中心");
-		mainPage="userCenter/userInfo.jsp";
-		return "userCenter";
+		String navCode=NavUtil.genNavCode("个人中心");
+		model.addAttribute("navCode", navCode);
+		String mainPage="userCenter/userInfo.jsp";
+		model.addAttribute("mainPage", mainPage);
+		return "userCenter/userHome";
 	}
 	
 	
@@ -603,11 +618,14 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
-	public String center()throws Exception{
+	@RequestMapping("/user/main")
+	public String center(HttpServletRequest request,Model model)throws Exception{
 		HttpSession session=request.getSession();
-		user=(User) session.getAttribute("currentUser");
-		navCode=NavUtil.genNavCode("个人中心");
-		return "center";
+		User user=(User) session.getAttribute("currentUser");
+		model.addAttribute("user", user);
+		String navCode=NavUtil.genNavCode("个人中心");
+		model.addAttribute("navCode", navCode);
+		return "userCenter/center";
 	}
 	
 	
@@ -616,26 +634,26 @@ public class UserController {
 	 * 2017.05.12
 	 * 更新个人中心  模帖子版块
 	 */
-	public String topic()throws Exception{
+	@RequestMapping("/user/topic")
+	public String topic(HttpServletRequest request,Model model,@PathVariable("page") String page)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("currentUser");
+		model.addAttribute("user", user);
 		if(user.getId()>0){
 		System.out.println("用户："+user.getId());
 		Long count1=topicService.getTopicCountByUserId(user.getId());
-		/**
-		 * 2017.04.30
-		 * miki
-		 * 后台数据传递到前台的方法*****重要
-		 */
-		ActionContext ct=ActionContext.getContext();
-		ct.put("count1", count1);
-		System.out.println("数量为："+count1);
+		
+		model.addAttribute("count1", count1);
 				
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
 		PageBean pageBean=new PageBean(Integer.parseInt(page),8);
-		TopicList=topicService.findTopicListByUserId(user.getId(), pageBean);
+		List<Topic> TopicList=topicService.findTopicListByUserId(user.getId(), pageBean);
+		model.addAttribute("topicList", TopicList);
+		Map<Topic, Reply> topicLastReply=new HashMap<Topic, Reply>();
+		Map<Topic, Long> topicReplyCount=new HashMap<Topic, Long>();
+		
 		for (Topic topic : TopicList) {
 			Reply reply=replyService.findLastReplyByTopicId(topic.getId());
 			Long replyCount=replyService.getReplyCountByTopicId(topic.getId());
@@ -644,12 +662,17 @@ public class UserController {
 			}
 			topicReplyCount.put(topic, replyCount);
 		}
+		
+		model.addAttribute("topicLastReply", topicLastReply);
+		model.addAttribute("topicReplyCount", topicReplyCount);
+		
 		long topicTotal=topicService.getTopicCountByUserId(user.getId());
-		pageCode=PageUtil.genPagination(request.getContextPath()+"/User_topic.action", topicTotal, Integer.parseInt(page), 8,null);			
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/User_topic.action", topicTotal, Integer.parseInt(page), 8,null);
+		model.addAttribute("pageCode", pageCode);
 	}			
-		navCode=NavUtil.genNavCode("个人中心");
-		//mainPage="userCenter/ucDefault.jsp";
-		return "topic";
+		String navCode=NavUtil.genNavCode("个人中心");
+		model.addAttribute("navCode", navCode);
+		return "userCenter/userTopic";
 	}
 	
 	/**
@@ -657,14 +680,20 @@ public class UserController {
 	 * 2017.05.12
 	 * 更新个人中心  我的问答版块
 	 */
-	public String answer()throws Exception{
+	@RequestMapping("/user/answer")
+	public String answer(HttpServletRequest request,Model model,@PathVariable("page") String page)throws Exception{
 		HttpSession session=request.getSession();
-		user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute("currentUser");
+		model.addAttribute("user", user);
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
 		PageBean pageBean=new PageBean(Integer.parseInt(page),8);
-		TopicList=topicService.getTopicListByUserId(user.getId(), pageBean);
+		List<Topic> TopicList=topicService.getTopicListByUserId(user.getId(), pageBean);
+		model.addAttribute("topicList", TopicList);
+		Map<Topic, Reply> topicLastReply=new HashMap<Topic, Reply>();
+		Map<Topic, Long> topicReplyCount=new HashMap<Topic, Long>();
+		
 		for (Topic topic : TopicList) {
 			Reply reply=replyService.findLastReplyByTopicId(topic.getId());
 			Long replyCount=replyService.getReplyCountByTopicId(topic.getId());
@@ -673,10 +702,14 @@ public class UserController {
 			}
 			topicReplyCount.put(topic, replyCount);
 		}
+		
+		model.addAttribute("topicLastReply", topicLastReply);
+		model.addAttribute("topicReplyCount", topicReplyCount);
+		
 		long topicTotal=topicService.getAnswerCountByUserId(user.getId());
-		pageCode=PageUtil.genPagination(request.getContextPath()+"/User_answer.action", topicTotal, Integer.parseInt(page), 8,null);			
-	
-		return "answer";
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/User_answer.action", topicTotal, Integer.parseInt(page), 8,null);			
+		model.addAttribute("pageCode", pageCode);
+		return "userCenter/answerTopic";
 	}
 	
 	/*
@@ -684,90 +717,86 @@ public class UserController {
 	 * 2017.05.29
 	 * 用户未读信息列表
 	 */
-	public String unReply()throws Exception{
+	@RequestMapping("/user/reply")
+	public String unReply(HttpServletRequest request,Model model,@PathVariable("page") String page)throws Exception{
 		HttpSession session=request.getSession();
-		user=(User) session.getAttribute("currentUser");
-		
+		User user=(User) session.getAttribute("currentUser");
+		model.addAttribute("user", user);
 		/*
 		 * 2017.05.29
 		 * miki
 		 * 统计未读信息数
 		 */
 		Long count2=replyService.getUnReplyCountByUserId(user.getId());
-		
-		/**
-		 * 2017.04.30
-		 * miki
-		 * 后台数据传递到前台的方法*****重要
-		 */
-		ActionContext ct=ActionContext.getContext();
-		ct.put("count", count2);
+		model.addAttribute("count", count2);
 		
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
 		PageBean pageBean=new PageBean(Integer.parseInt(page), 8);
 		
-		unReplyList=replyService.unReplyListByUserId(user.getId(), pageBean);
+		List<Reply> unReplyList=replyService.unReplyListByUserId(user.getId(), pageBean);
+		model.addAttribute("unReplyList", unReplyList);
+		Map<Reply, Topic> to=new HashMap<Reply, Topic>();	//得到所属帖子的信息
+		Map<Reply,User> uu=new HashMap<Reply,User>();	//得到回复人的个人信息
+		
 		for(Reply reply : unReplyList){
 			Topic topic=topicService.findTopicById(reply.getTopic().getId());
-			User user=userService.getUserById(reply.getUser().getId());
 			if(topic!=null){
 				to.put(reply,topic);
 			}
-			if(user!=null){
+			if(null!=userService.getUserById(reply.getUser().getId())){
 				uu.put(reply, user);
 			}	
 		}
+		model.addAttribute("to", to);
+		model.addAttribute("uu", uu);
+		
 		long replyTotal=replyService.getUnReplyCountByUserId(user.getId());
-		pageCode=PageUtil.genPagination(request.getContextPath()+"/User_unReply.action", replyTotal, Integer.parseInt(page), 8,null);			
-		return "un";
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/User_unReply.action", replyTotal, Integer.parseInt(page), 8,null);
+		model.addAttribute("pageCode", pageCode);
+		return "userCenter/userMesg";
 	}
 	
-	
-	public String save()throws Exception{
-		HttpSession session=request.getSession();
+	@RequestMapping("/admin/user/save")
+	public String save(HttpServletRequest request,@RequestBody User user)throws Exception{
 		userService.saveUser(user);
 		//session.setAttribute("currentUser", user);
 		/*navCode=NavUtil.genNavCode("个人中心");
 		mainPage="userCenter/userInfo.jsp";*/
-		return SUCCESS;
+		return "admin/main";
 	}
-	
-	public String list()throws Exception{
-		HttpSession session=request.getSession();
+	@RequestMapping("/admin/user/list")
+	public String list(HttpServletRequest request,@PathVariable("page") String page,Model model)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
-		if (s_user==null) {
-			Object o=session.getAttribute("s_user");
-			if(o!=null){
-				s_user=(User)o;
-			}else{
-				s_user=new User();				
-			}
-		}else{
-			session.setAttribute("s_user", s_user);
-		}
+		
 		PageBean pageBean=new PageBean(Integer.parseInt(page),6);
-		userList=userService.findUserList(s_user, pageBean);
-		sectionList=sectionService.findSectionList(null, null);
-		long total=userService.getUserCount(s_user);
-		pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/User_list.action", total, Integer.parseInt(page), 6,null);
-		mainPage="user.jsp";
-		crumb1="用户管理";
-		return SUCCESS;
+		List<User> userList=userService.findUserList(null, pageBean);
+		model.addAttribute("userList", userList);
+		List<Section> sectionList=sectionService.findSectionList(null, null);
+		model.addAttribute("sectionList", sectionList);
+		long total=userService.getUserCount(null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/User_list.action", total, Integer.parseInt(page), 6,null);
+		model.addAttribute("pageCode", pageCode);
+		String mainPage="user.jsp";
+		model.addAttribute("mainPage", mainPage);
+		String crumb1="用户管理";
+		model.addAttribute("crumb1", crumb1);
+		return "admin/main";
 	}
 	
-	public String deleteUsers()throws Exception{
+	@RequestMapping("/admin/user/deletes")
+	@ResponseBody
+	public JSONObject deleteUsers(HttpServletRequest request,@PathVariable("ids") String ids)throws Exception{
 		JSONObject result=new JSONObject();
 		String[] idsStr=ids.split(",");
 		for (int i = 0; i < idsStr.length; i++) {
 			User u=userService.getUserById(Integer.parseInt(idsStr[i]));
 			if (u.getSectionList().size()>0) {
 				result.put("info", u.getNickName()+"是版主，不能删除！");
-				ResponseUtil.write(ServletActionContext.getResponse(), result);
-				return SUCCESS;
+				return result;
 			}
 		}
 		for (int i = 0; i < idsStr.length; i++) {
@@ -775,26 +804,27 @@ public class UserController {
 			userService.delete(u);
 		}
 		result.put("info", "删除成功！");
-		ResponseUtil.write(ServletActionContext.getResponse(), result);
-		return SUCCESS;
+		return result;
 	}
 	
-	public String delete()throws Exception{
+	@RequestMapping("/admin/user/delete/{userId}")
+	@ResponseBody
+	public JSONObject delete(@PathVariable("userId") int userId)throws Exception{
 		JSONObject result=new JSONObject();
 		User e=userService.getUserById(userId);
 		if(e.getSectionList().size()>0){
 			result.put("info", "此用户是版主，不能删除！");
-			ResponseUtil.write(ServletActionContext.getResponse(), result);
-			return SUCCESS;
+			
+			return result;
 		}else {
 			userService.delete(e);
 			result.put("info", "删除成功！");
-			ResponseUtil.write(ServletActionContext.getResponse(), result);
-			return SUCCESS;
+			return result;
 		}
 	}
-	
-	public String saveUser()throws Exception{
+	@RequestMapping("/admin/user/add/{userId}")
+	@ResponseBody
+	public JSONObject saveUser(@PathVariable("userId") int userId,@RequestBody User user)throws Exception{
 		JSONObject result=new JSONObject();
 		if(userId>0){
 		User user1=userService.getUserById(userId);
@@ -804,13 +834,13 @@ public class UserController {
 		}else{
 			result.put("success", true);
 		}
-		ResponseUtil.write(ServletActionContext.getResponse(), result);
-		return null;
+		return result;
 	}
 	
-	public String modifyPassword()throws Exception{
-		User u=userService.getUserById(user.getId());
-		
+	@RequestMapping("/admin/user/modify/{userId}")
+	@ResponseBody
+	public JSONObject modifyPassword(@RequestBody User user)throws Exception{
+		User u=userService.getUserById(user.getId());	
 		/*
 		 * miki
 		 * 2017.05.27
@@ -820,7 +850,7 @@ public class UserController {
 		userService.saveUser(u);
 		JSONObject result=new JSONObject();
 		result.put("success", true);
-		ResponseUtil.write(ServletActionContext.getResponse(), result);
-		return null;
+
+		return result;
 	}
 }

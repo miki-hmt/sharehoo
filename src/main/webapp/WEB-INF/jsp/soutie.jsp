@@ -30,7 +30,7 @@ p{
 
         <!-- 导入页面头部 -->
 <div class="wrap" style="margin: 0 auto;">
-	<jsp:include page="common/top.jsp"/>
+	<jsp:include page="common/top-search.jsp"/>
 </div>
 <div style="background:#F5F5F5;width: 1200px;margin: 0 auto;">
 <div class="container-fluid">
@@ -39,6 +39,7 @@ p{
 			<div class="span12">
 				<div class="widget-box">
 					<div class="widget-title">
+
 						<c:choose>
           						<c:when test="${curCategory==null }">
           							<h5>搜索结果列表:>>>&nbsp;${query }</h5>
@@ -47,6 +48,7 @@ p{
           							<h5>搜索结果列表:>>>&nbsp;${curCategory }版面>>>&nbsp;${query }</h5>
           						</c:otherwise>
           					</c:choose>
+						
 					</div>
 					<div class="widget-content nopadding">
 						<table class="table table-bordered with-check">
@@ -63,7 +65,7 @@ p{
 									<tr>
 																													
 										<td style="text-align: left;vertical-align: middle;font-size:12pt;">
-										<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://sharehoo.cn/${topic.code }.html">${topic.title }</a></p>
+										<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://sharehoo.cn/${topic.code }.html" target="_blank">${topic.title }</a></p>
 										<p style="font-size: 10px;margin: 5px 0 0 26px;color:gray;">
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<span>${topic.user_name }</span>

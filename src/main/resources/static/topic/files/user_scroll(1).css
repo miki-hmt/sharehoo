@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-#user_scroll{width:960px; overflow:hidden; margin:0 auto; float:left; height:95px;}
+#user_scroll{width:100%; overflow:hidden; margin:0 auto; float:left; height:95px;}
 #user_scroll #user_scroll_ul{ display:none;}
 #user_scroll_list .scroll-t-1{float:left; margin:0 5px 0;}
 #user_scroll_list p{text-align:center; font-size:12px; line-height:28px}

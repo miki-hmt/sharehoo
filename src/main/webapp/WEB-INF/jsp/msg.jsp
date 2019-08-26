@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-<title>IT帮-资讯传播社区--注册流程</title>
+<titleIT帮-资讯传播社区--注册流程</title>
 <style type="text/css">
 	body {
 		font-size: 10pt;

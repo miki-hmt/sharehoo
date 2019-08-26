@@ -127,7 +127,7 @@ function check_up(thisform){
 					<a class=" " href="game2.jsp" target="_blank">H5小游戏</a>			
 					<a href="Topic_leaveList.action" target="_blank">秘密墙<img src="./images/icon/hot.gif"></a>
 					<a href="SoftSection_listpr.action" target="_blank">软件下载</a>
-					<a class=" " href="Topic_details.action?topicId=218" target="blank">社区规则</a>	
+					<a class=" " href="http://sharehoo.cn/154339002942889.html" target="blank">社区规则</a>	
 				</div>
 				
 				<div class="search-download">

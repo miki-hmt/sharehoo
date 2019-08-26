@@ -14,11 +14,7 @@
 <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 
-
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
 <link rel="stylesheet" href="topic/files/index.css">
-
 <link rel="stylesheet" href="topic/files/base(2).css">
 <link rel="stylesheet" href="topic/files/base.css">
 <link rel="stylesheet" href="topic/files/readimg.css">

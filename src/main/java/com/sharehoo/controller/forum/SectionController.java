@@ -37,7 +37,7 @@ public class SectionController {
 	@Autowired
 	private ZoneService zoneService;
 	
-	@RequestMapping("/section/admin/list")
+	@RequestMapping("/admin/section/list")
 	public String list(HttpServletRequest request,@PathVariable("page") String page,Model model)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
@@ -67,7 +67,7 @@ public class SectionController {
 	   
 	
 	//上传logo文件保存方法实现
-	@RequestMapping("/section/admin/add")
+	@RequestMapping("/admin/section/add")
 	public String save(@RequestBody Section section,@RequestParam("logo") File logo,@PathVariable("logoFileName") String logoFileName)throws Exception{
 		String basePath = (String)CxCacheUtil.getIntance().getValue(Consts.ROOT_PATH);
 		if (logo != null) {
@@ -94,7 +94,7 @@ public class SectionController {
 		return "redirect:";
 	}
 	
-	@RequestMapping("/section/admin/delete/{sectionId}")
+	@RequestMapping("/admin/section/delete/{sectionId}")
 	@ResponseBody
 	public JSONObject delete(@PathVariable("sectionId") int sectionId)throws Exception{
 		JSONObject result=new JSONObject();
@@ -105,7 +105,7 @@ public class SectionController {
 		return result;
 	}
 	
-	@RequestMapping("/section/admin/deletes/{ids}")
+	@RequestMapping("/admin/section/deletes/{ids}")
 	@ResponseBody
 	public JSONObject delete1(@PathVariable("ids") String ids)throws Exception{
 		JSONObject result=new JSONObject();

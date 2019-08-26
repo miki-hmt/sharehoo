@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/search_index.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/leave_message_search_index.css">
 <script type="text/javascript">
 
 function reP(){
@@ -125,7 +125,7 @@ function check_up(thisform){
 					<a class=" " href="game2.jsp" target="_blank">H5小游戏</a>			
 					<a href="Topic_leaveList.action" target="_blank">秘密墙<img src="./images/icon/hot.gif"></a>
 					<a href="SoftSection_listpr.action" target="_blank">软件下载</a>
-					<a class=" " href="Topic_details.action?topicId=218" target="blank">社区规则</a>	
+					<a class=" " href="http://sharehoo.cn/154339002942889.html" target="blank">社区规则</a>	
 				</div>
 			<div class="mm-search-download">
 					<form action="" method="post" onsubmit="return check_up(this);" name="download_search">

@@ -10,13 +10,10 @@ CKEDITOR.editorConfig = function( config ) {
 	
 	config.removeButtons = 'Save,About,CreateDiv,Underline,Source,Print,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Iframe,Link,Unlink,Anchor,Table,HorizontalRule,PageBreak,NumberedList,BulletedList,Blockquote,BidiLtr,BidiRtl,Subscript,Superscript,Strike,Underline,TextColor,BGColor,Styles,FontSize';	//2017.05.30  移除不需要的按钮
 	
-	//2019.01.09	除去不用的插件，减少加载消耗时间
-	//,a11yhelp,notification,elementspath,enterkey,entities,popup,listblock,richcombo,list,liststyle,magicline,maximize,newpage,pagebreak,table,tabletools,tableselectionlineutils,widgetselection,widget,notificationaggregator,uploadwidget,
-	config.plugins = 'dialogui,dialog,dialogadvtab,newpage,basicstyles,blockquote,button,toolbar,maximize,clipboard,panelbutton,panel,filetools,filebrowser,floatpanel,colorbutton,colordialog,templates,menu,contextmenu,copyformatting,div,resize,find,fakeobjects,flash,uploadwidget,floatingspace,font,format,horizontalrule,htmlwriter,wysiwygarea,image,indent,indentblock,indentlist,smiley,justify,menubutton,language,link,pastetext,pastefromword,preview,removeformat,selectall,showborders,sourcearea,specialchar,scayt,stylescombo,tab,undo,uploadimage,wsc,codesnippet,simage,imageuploader,markdown,uicolor';
+	config.plugins = 'dialogui,dialog,dialogadvtab,newpage,basicstyles,blockquote,button,toolbar,maximize,clipboard,panelbutton,panel,floatpanel,colorbutton,colordialog,templates,menu,contextmenu,copyformatting,div,resize,find,fakeobjects,flash,floatingspace,font,format,horizontalrule,htmlwriter,wysiwygarea,image,uploadwidget,filetools,filebrowser,indent,indentblock,indentlist,smiley,justify,menubutton,language,link,pastetext,pastefromword,preview,removeformat,selectall,showborders,sourcearea,specialchar,scayt,stylescombo,tab,undo,uploadimage,wsc,codesnippet,simage,imageuploader,markdown,uicolor';
 	config.skin = 'kama';
-	config.image_previewText=' '; //预览区域显示内容
+	config.image_previewText='我们这有矿哦，快来sharehoo.cn'; //预览区域显示内容
 	config.filebrowserImageUploadUrl ="UploadAction.action"; //固定路径 ，文件上传  2017.05.30 
-	config.imageUploadURL ="UploadAction.action"; //固定路径 ，文件上传  2017.05.30 
 	// %REMOVE_END%
 
 	// Define changes to default configuration here. For example:

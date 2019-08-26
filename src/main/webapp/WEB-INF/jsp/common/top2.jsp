@@ -29,22 +29,22 @@ function checkUserLogin(){
 //底部热门标签关键字搜索  2018.08.23 miki
 
 function check_up(thisform){
-	var url="";
-	var key=$.trim(thisform.keywords.value);
-	var category=$.trim(thisform.section_name.value);
-	if(key=="" || category==""){
-		alert("关键字不能为空！");
-	}
-	else{
-		//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
-		key =  encodeURIComponent(key);
-		category = encodeURIComponent(category);
-		url="SearchJ_search.action?keyword="+encodeURIComponent(key)+"&category_name="+encodeURIComponent(category );
-		window.open(url);
-		//var url="shop/SolrJ_searchItemList.action?keyword="+encodeURIComponent(key);
-		//window.location.href=url;
-	}
-	return false;
+		var url="";
+		var key=$.trim(thisform.keywords.value);
+		var category=$.trim(thisform.section_name.value);
+		if(key=="" || category==""){
+			alert("关键字不能为空！");
+		}
+		else{
+			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
+			key =  encodeURIComponent(key);
+			category = encodeURIComponent(category);
+			url="SearchJ_search.action?keyword="+encodeURIComponent(key)+"&category_name="+encodeURIComponent(category );
+			window.open(url);
+			//var url="shop/SolrJ_searchItemList.action?keyword="+encodeURIComponent(key);
+			//window.location.href=url;
+		}
+		return false;
 	}
 </script>
 
@@ -130,7 +130,7 @@ function check_up(thisform){
 					<a class=" " href="game2.jsp" target="_blank">H5小游戏</a>			
 					<a href="Topic_leaveList.action" target="_blank">秘密墙<img src="./images/icon/hot.gif"></a>
 					<a href="SoftSection_listpr.action" target="_blank">软件下载</a>
-					<a class=" " href="Topic_details.action?topicId=218" target="blank">社区规则</a>	
+					<a class=" " href="http://sharehoo.cn/154339002942889.html" target="blank">社区规则</a>	
 				</div>
 
 			<div class="search-download">

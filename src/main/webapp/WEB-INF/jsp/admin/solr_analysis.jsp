@@ -28,6 +28,24 @@ function updateSolr(){
 			);
 	}
 }
+
+function updateTopicSolr(){
+	if(confirm("确定要更新全部索引吗?")){
+		$.post("${pageContext.request.contextPath}/SearchJ_importItenList.action",				
+				function(result){
+					var result=eval('('+result+')');
+					if(result.status==200){
+						alert("更新成功!");
+					}else{
+						alert("更新失败！");
+						window.location.reload(true);
+					}
+				}
+			);
+	}
+}
+
+
  function resetValue(){
 	 $("#id").val("");
 	 $("#zoneName").val("");
@@ -181,6 +199,7 @@ function updateSolr(){
 		
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="updateSolr()">更新索引</button>
+			<button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="updateTopicSolr()">更新topic索引</button>
 		</div>
 	</div>
 	

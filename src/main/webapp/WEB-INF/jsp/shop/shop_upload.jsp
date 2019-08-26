@@ -28,7 +28,7 @@
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/animate.css">
 <style type="text/css">	
-		/*进度条内容 start*/
+		/*2018.11.27	miki	进度条内容 start*/
 		.progressContent{
 			float:center;
 			margin:0 auto;
@@ -38,7 +38,7 @@
 			border-radius:20px;
 			background:#fff;
 			box-shadow:0 0 2em #a4be27;
-			font-size:9px;
+			font-size:10px;
 			line-height:2px;		
 		}
 		.progressBar{	
@@ -59,7 +59,7 @@
 			text-align:left;
 			width:470px;
 			padding:10px;		/*2017.10.09 加上padding，不然div高度会无法控制*/
-			font-size:9px;
+			font-size:10px;
 			line-height:10px;
 		}
 		/*进度条end*/
@@ -219,18 +219,18 @@
                   <label style="width:auto;cursor:pointer;">
                   <img onclick="javascript:loadimage();" title="换一张试试" name="randImage" id="randImage" src="${pageContext.request.contextPath }/image.jsp"  style="margin-left:5px;" border="0">
                   <span class="pull-left"></span><font id="imageErrorInfo" style="float:right;" color="red"></font>
-                  </label><em></em>  
-                  
-                  <!-- 2018.11.27		miki	文件上传进度条设置 -->
+                  </label><em></em>
+
+			<!-- 2018.11.27		miki	文件上传进度条设置 -->
 						<div id="upload_bar">
 			   				
 			   			</div>
-                                                             
+			
                 </li>
                 
                 
                 <li>
-                  <label>资源描述：</label> 
+                  <label>资源描述：</label>
                   		<textarea name="source.description" id="description"  class="ckeditor" cols="50"
                   			max="1000" placeholder="描述不支持HTML标签；详细的资源描述有机会获得我们的推荐，更有利于他人下载，赚取更多积分。如资源描述不清，有可能审核不通过。"></textarea>
                   <em></em>
@@ -314,7 +314,7 @@
     	//表单检验 2017.08.01 miki
     
 		    function checkForm(){
-		    var dom = document.getElementById("txt_userfile");
+			var dom = document.getElementById("txt_userfile");
 			var name=$("#name").val();
 			var sex=$("#txt_userfile").val();
 			var imageCode=$("#imageCode").val();
@@ -329,7 +329,7 @@
 				$("#error").html("*文件不能为空*");
 				return false;
 			}else{
-				if(1000<Math.round((Math.round(dom.files[0].size/1024*100)/100)/1024*100)/100){
+				if(50<Math.round((Math.round(dom.files[0].size/1024*100)/100)/1024*100)/100){
 					$("#error").html("*超出最大上传文件大小*");
 					return false;
 				}
@@ -355,9 +355,10 @@
 				return false;
 			}
 			$("#error").html("");
+
 			createProgress();
 			//getProgress();	//定时刷新
-			setTimeout("getProgressBar()",1000);
+			setTimeout("getProgressBar()",2000);
 			return true;
 		}
     	  
@@ -499,10 +500,8 @@
     		}
     	})
     });
-	
-    
-    
-    <!--2018.11.28	读取文件上传大小回显到表单框中-->
+
+	<!--2018.11.28	读取文件上传大小回显到表单框中-->
     function show_uploadfile()
     {
     	var filename = $('#txt_userfile').val();
@@ -794,7 +793,7 @@
     	$("#pop_add_org").fadeTo("slow",0.8);
     	setTimeout("getProgress()", 500);
     }
-    function getProgress(){']'
+    function getProgress(){
     	$.getJSON("/index.php/upload/get_progress/a618d39e13a528d5e8077a9c53c7562f",
     	function(data){
     		if(data.succ<0){
@@ -880,7 +879,7 @@
 					}
 				}
 			});
-			setTimeout("getProgressBar();",1000);	//间隔一秒
+			setTimeout("getProgressBar();",2000);	//间隔一秒
 			}
 		}
 		//创建进度条
@@ -888,7 +887,7 @@
 			$("#upload_bar").html("");
 			file=document.getElementById("txt_userfile");
 			var divContent="<div class='progressContent'>";
-			divContent=divContent+"<div id='upload_name' class='upload_name'></div><div id='progress' class='progressBar animated rotateIn' align=right></div></div>";
+			divContent=divContent+"<div id='upload_name' class='upload_name'>等待上传..</div><div id='progress' class='progressBar animated rotateIn' align=right>0%</div></div>";
 			$("#upload_bar").html(divContent);
 		}
 	</script>

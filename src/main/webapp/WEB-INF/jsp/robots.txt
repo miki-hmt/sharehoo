@@ -1,0 +1,59 @@
+User-agent: *
+
+Disallow: /admin/
+Disallow: /*Topic_details.action?topicId=*
+Disallow: /*AlbumShow_list.action?userId=*
+Disallow: /*AlbumShow_photo.action?aid=*
+Disallow: /*Topic_list.action?sectionId=*
+Disallow: /*Topic_leaveList.action
+
+
+
+User-agent: Baiduspider
+Disallow: /*Topic_details.action?topicId=*
+Disallow: /*AlbumShow_list.action?userId=*
+Disallow: /*AlbumShow_photo.action?aid=*
+Disallow: /*Topic_list.action?sectionId=*
+Disallow: /*Topic_leaveList.action
+Allow: /*.js*
+Allow: /*.css*
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.gif
+
+
+User-agent: YisouSpider
+Disallow: /*Topic_details.action?topicId=*
+Disallow: /*AlbumShow_list.action?userId=*
+Disallow: /*AlbumShow_photo.action?aid=*
+Disallow: /*Topic_list.action?sectionId=*
+Disallow: /*Topic_leaveList.action
+Allow: /*.js*
+Allow: /*.css*
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.gif
+
+
+User-agent: HaosouSpider	360Spider
+Disallow: /*AlbumShow_list.action?userId=*
+Disallow: /*AlbumShow_photo.action?aid=*
+Disallow: /*Topic_list.action?sectionId=*
+Disallow: /*Topic_leaveList.action
+Allow: /*.js*
+Allow: /*.css*
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.gif
+
+
+User-agent: Googlebot
+Disallow: /*AlbumShow_list.action?userId=*
+Disallow: /*AlbumShow_photo.action?aid=*
+Disallow: /*Topic_list.action?sectionId=*
+Disallow: /*Topic_leaveList.action
+Allow: /*.js*
+Allow: /*.css
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.gif

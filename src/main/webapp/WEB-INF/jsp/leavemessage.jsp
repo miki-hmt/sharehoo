@@ -38,7 +38,7 @@ function checkForm(){
 </head>
 <body>
 <div class="wrap" style="margin: 0 auto;">
-	<jsp:include page="common/top5.jsp"/>
+	<jsp:include page="./common/top5.jsp"/>
 </div>
 <div style="width: 1200px; margin: 0 auto;background-color:#FFFFFF">
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="width: 1200px;" align="center">
@@ -330,14 +330,12 @@ function checkForm(){
 	</table>
 </div>
 <div id="footer" style="width: 1200px; margin: 0 auto;">
-	<jsp:include page="common/footer.jsp"/>
+	<jsp:include page="./common/footer.jsp"/>
 </div>
 	
 </body>
 <script src="js/index.js"></script>
-<script src="bootstrap/js/jquery.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="bootstrap/js/bootstrap.js"></script>
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/emoticon.css" />
 <script src="${pageContext.request.contextPath }/shop/alert/jquery-1.2.6.js" type="text/javascript"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.funkyUI.js"></script>

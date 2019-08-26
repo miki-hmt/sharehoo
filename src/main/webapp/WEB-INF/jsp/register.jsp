@@ -206,7 +206,7 @@ function checkForm(){
 		<jsp:include page="common/top_register.jsp"/>
 	</div>
 	</div>
-	<div class="" align="center" style="width: 1200px; margin:0px auto;background-color:#F8F8F8;">
+	<div class="" align="center" style="width: 1200px; margin:0px auto;background-color:#F8F8F8;background: url(../images/rw_register.png);">
 			<h1 style="margin-bottom: 30px;">欢迎注册
 				<font style="font-size:9pt;">╮(╯▽╰)(**本站采用邮件激活方式注册，请认真填写邮箱!*)</font></h1>
 		<form id="regForm" style="width: 700px;" enctype="multipart/form-data" class="form-horizontal form-inline" method="post" action="User_register.action">
@@ -248,7 +248,7 @@ function checkForm(){
 			
 			<div class="control-group">
 				<div class="controls">
-					<table border=1 cellspacing=0 cellpadding=1 bordercolor=#cccccc height=22 style='display:inline'>
+					<table border=0 cellspacing=0 cellpadding=1 bordercolor=#cccccc height=22 style='display:inline'>
 						<tr align="center" bgcolor="#eeeeee"> 
 							<td width=110 id="pwd_L"><font style="font-size:9pt;"> 弱   -_-|||辣鸡</font> </td>
 							<td width=110 id="pwd_M"><font style="font-size:9pt;"> 中   ╮(╯▽╰)呵呵</font></td>

@@ -251,7 +251,17 @@ function Login(){
 	               <!-- 2017.08.05	当前用户与店铺店主不同一人，积分足够，扣除积分下载 -->
               </c:when>
              
-             
+				
+		<c:when test="${currentShop==null }">
+              	<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
+              		<a href="javascript:void(0)">未激活店铺，无法下载</a>            
+	              </span>
+	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >
+	              	<!-- <a href="/vip_code" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a> -->
+	              	<a href="Shop_userCenter.action" target="_blank">激活店铺</a>
+	              </span>
+              	</c:when>
+				
               	<c:when test="${currentShop.id==shop.id }">
               		<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
               		<a target="_blank" href="javascript:void(0)" onclick="javascript:check(${source.id})">进入下载页</a>             	
@@ -260,8 +270,9 @@ function Login(){
               		<a href="javascript:;" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a>
               </span>
                <!-- 2017.08.05	当前用户与店铺店主不同一人，积分足够，扣除积分下载 -->
-              	</c:when>
-              		<c:when test="${currentShop.douNum>=source.douNum }">
+              	</c:when>		
+				
+              	<c:when test="${currentShop.douNum>=source.douNum }">
               	<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
               		<a href="javascript:void(0)" onclick="javascript:check(${source.id})">进入下载</a>            
 	              </span>

@@ -181,7 +181,7 @@ padding:-4px 0;
 
 		<div class="demo">
 	<a class="control prev"></a><a class="control next abs"></a><!--自定义按钮，移动端可不写-->
-	<div class="slider"><!--主体结构，请用此类名调用插件，此类名可自定义-->
+	<div class="slider" style="border:4px solid white "><!--主体结构，请用此类名调用插件，此类名可自定义-->
 		<ul style="margin:0 0 10px 0px;padding:0">
 			<c:forEach items="${bannerList }" var="banner">
 				<li><a href="${banner.url}" style="overflow:auto"><img src="${pageContext.request.contextPath}/${banner.news_img}" alt="${banner.news_name }" /></a></li>
@@ -193,8 +193,8 @@ padding:-4px 0;
 <script src="${pageContext.request.contextPath}/js/YuxiSlider.jQuery.min.js"></script>
 <script>
 $(".slider").YuxiSlider({
-	width:300, //容器宽度
-	height:170, //容器高度
+	width:290, //容器宽度
+	height:164, //容器高度
 	control:$('.control'), //绑定控制按钮
 	during:4000, //间隔4秒自动滑动
 	speed:800, //移动速度0.8秒

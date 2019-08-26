@@ -27,6 +27,9 @@ public class StartListener implements ServletContextListener{
 		
 		String topicPath = path + Consts.FORUM_CKEDITOR_UPLOAD_PATH +"/"+Consts.SDF_YYYYMM.format(new Date());
 		ct.setAttribute("topicPath", topicPath);
+		
+		String softPath = path + Consts.FORUM_UPLOAD_PATH +"/"+Consts.FORUM_UPLOAD_SOFT_FOLDER +"/" + Consts.SDF_YYYYMM.format(new Date());
+		ct.setAttribute("softPath", softPath);
 	}
 	
 	@Override

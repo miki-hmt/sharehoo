@@ -250,7 +250,7 @@ public class ReplyController {
 		return result;
 	}
 	
-	@RequestMapping("/reply/admin/update")
+	@RequestMapping("/admin/reply/update")
 	public String update(@PathVariable("replyId") int replyId)throws Exception{
 		Reply reply=replyService.findReplyById(replyId);
 		reply.setStatus(1);
