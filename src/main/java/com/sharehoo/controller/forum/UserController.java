@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.code.kaptcha.Constants;
 import com.sharehoo.base.exception.UserException;
 import com.sharehoo.base.ipseek.IpGet;
 import com.sharehoo.base.ipseek.IpSeekUtils;
@@ -284,7 +285,19 @@ public class UserController {
 		return result;
 	}
 	
-	@RequestMapping("/user/check-email")
+	@RequestMapping("/login")
+	public String toLogin()throws Exception{
+		
+		return "login";
+	}
+	
+	@RequestMapping("/home")
+	public String toHome()throws Exception{
+		
+		return "home";
+	}
+	
+	@RequestMapping("/user/email")
 	@ResponseBody
 	public JSONObject existUserWithEmail(@PathVariable("email") String email)throws Exception{
 		boolean exist=userService.existUserWithEmail(email);
@@ -438,7 +451,8 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/user/login")
-	public String login(HttpServletRequest request,@RequestBody User user,@PathVariable("imageCode") String imageCode,@PathVariable("error") String error)throws Exception{	
+	public String login(HttpServletRequest request,User user,@RequestParam(value="imageCode",required = true) String imageCode,
+			@RequestParam(value="error",required = false) String error)throws Exception{	
 		HttpSession session=request.getSession();
 		/*
 		 * 2017.05.27 miki
@@ -448,7 +462,7 @@ public class UserController {
 		user.setPassword(new MD5().complie(user.getPassword().trim()));		
 		User currentUser=userService.login(user);
 		
-		if(!imageCode.equals(session.getAttribute("sRand"))){
+		if(!imageCode.equals(session.getAttribute(Constants.KAPTCHA_SESSION_KEY))){
 			error="验证码错误！";			
 			session.setAttribute("error", error);			
 		}else
@@ -489,7 +503,7 @@ public class UserController {
 			 */
 			Long count2=replyService.getUnReplyCountByUserId(currentUser.getId());
 			session.setAttribute("count", count2);
-			System.out.println("未读信息数目："+count2);
+
 			}
 		if (user.getType()==3) {
 			return "adminLogin";
@@ -544,6 +558,12 @@ public class UserController {
 	public String logout(HttpServletRequest request)throws Exception{
 		request.getSession().invalidate();
 		return "redirect:home";
+	}
+	
+	@RequestMapping("/user/forget")
+	public String toForget(HttpServletRequest request)throws Exception{
+
+		return "userCenter/forget";
 	}
 	
 	@RequestMapping("/admin/user/logout")

@@ -17,7 +17,7 @@ function logout() {
 }
 function login(){
 	var curPage=window.location.href;
-	window.location.href="login.jsp?prePage="+curPage;
+	window.location.href="login?prePage="+curPage;
 }
 function checkUserLogin(){
 	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {

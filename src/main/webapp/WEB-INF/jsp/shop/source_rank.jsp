@@ -408,7 +408,7 @@ function del_my_src(id)
 				$("#del_reason_form input").first().attr("checked",true);
 			}
 	})
-
+}
 
 function edit_my_src(id){
 	$.getJSON("/index.php/upload/get_can_update_count?source_id=" + id + "&random="+Math.random(), function(res){

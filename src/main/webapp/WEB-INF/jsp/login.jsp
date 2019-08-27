@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="renderer" content="webkit">
@@ -9,10 +9,11 @@
 <title>IT帮-资讯传播社区--登陆</title>
 <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <script type="text/javascript" src="login-style/js/jquery-1.12.3.min.js"></script>
-
+<style>
+</style>
 <script type="text/javascript">
 function loadimage(){
-	document.getElementById("randImage").src = "image.jsp?"+Math.random();
+	document.getElementById("randImage").src = "imageCode?"+Math.random();
 }
 
 function checkForm(){
@@ -44,7 +45,7 @@ function checkForm(){
 	<div class="wrapper" id="login_body" style="width:;">
 		<div class="log_ad" style="display:"><a href="javascript:;"></a></div>
 		<div class="login_border" style="padding:8px;">
-		<form method="post" action="User_login.action" onsubmit="return checkForm()" id="login_form">
+		<form method="post" action="user/login" onsubmit="return checkForm()" id="login_form">
 			<div class="login" style="display: block;">
 				<div style="position:absolute; right:30px; top:14px;">
 					<a href="register.jsp" target="_blank">账号注册
@@ -57,14 +58,25 @@ function checkForm(){
 				</ul>
 				<div class="login-body">
 					<div class="login-style" style="display: block;">
-						<dl><dd><input id="txtUser" type="text" name="user.nickName" placeholder="用户名/邮箱/手机号" /></dd></dl>
+						<dl><dd><input id="txtUser" type="text" name="nickName" placeholder="用户名/邮箱/手机号" /></dd></dl>
 						<dl>
-							<dd><input type="password" name="user.password" id="Userpwd" placeholder="请输入您的密码" /></dd>
+							<dd><input type="password" name="password" id="Userpwd" placeholder="请输入您的密码" /></dd>
 						</dl>
 					    <dl id="logincode" style="display: block;">
-						<dd><input type="text" value="${imageCode }" id="txtCode" name="imageCode" style="width: 133px; margin-right: 10px;" placeholder="验证码" /><img id="randImage" src="image.jsp" width="90" height="34" name="randImage" title="点击换一个" style="vertical-align: middle; margin-top: -4px;" onclick="javascript:loadimage();" /></dd>
+						<dd><input type="text" value="${imageCode }" id="txtCode" name="imageCode" style="width: 133px; margin-right: 10px;" placeholder="验证码" />
+						<!-- <div class="mui-content">
+            				<div class="mui-input-row login_input">
+								<div id="verificationCode" class="verificationCode">
+	                    			<canvas width="100" height="40" id="verifyCanvas"></canvas>
+	                    			<img id="code_img">
+	                			</div>
+	                			</div>
+	                			</div> -->
+							<img id="randImage" src="imageCode" width="90" height="34" name="randImage" title="点击换一个" 
+								style="vertical-align: middle; margin-top: -56px;margin-left:177px;" onclick="javascript:loadimage();" />
+							</dd>
 						</dl>
-						<div class="psword" style="margin-top:15px;"><a href="userCenter/forget.jsp" onClick="zhaohui(this)" tabindex="-1" class="right" target="_blank">忘记密码?</a></div>
+						<div class="psword" style="margin-top:15px;"><a href="user/forget" onClick="zhaohui(this)" tabindex="-1" class="right" target="_blank">忘记密码?</a></div>
 						<div class="remember">
 							<input type="checkbox" id="issave" checked /><label for="issave">下次自动登录</label>
 						</div>
@@ -83,7 +95,7 @@ function checkForm(){
 							<input type="checkbox" id="issave1" checked /><label for="issave1">下次自动登录</label>
 						</div>
 						<div class="tishi"></div>
-						<button type="submit" id="dynamicLogon" style="outline:none">登 录</button>
+						<button id="dynamicLogon" style="outline:none" onclick="javascript:login()">登 录</button>
 					</div>
 				</div>
 				<div class="hezuo">
@@ -148,8 +160,20 @@ function checkForm(){
 	</div>
 </div>
 <script type="text/javascript" src="login-style/js/style.js"></script>
+
 <script type="text/javascript">
 
+ function login(){
+	 $.ajax({
+       type: "POST",
+       url: "user/login",
+       data: $("#login_form").serialize(),
+       success: function (data) {}
+   	});
+	 //$.post("user/login", $("#fm").serialize());
+	 alert("保存成功！");
+ }
+ 
 </script>
 </body>
 

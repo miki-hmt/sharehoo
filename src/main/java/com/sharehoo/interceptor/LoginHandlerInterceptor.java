@@ -19,9 +19,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.sharehoo.util.StringEx;
+import com.sharehoo.util.forum.StringUtil;
+
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginHandlerInterceptor extends HandlerInterceptorAdapter {
     private static Logger logger = LoggerFactory.getLogger(LoginHandlerInterceptor.class);
@@ -34,18 +38,48 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter {
         }
         if (null == request || null == response) {
             logger.error("request,rs为null--------------------->");
-        }
-        try {
-            String url = request.getRequestURL().toString();
-            String urlPre = "";
-            if (!StringEx.isNull(url) && url.contains("/dip-web/")) {
-                urlPre = url.substring(0, url.indexOf("/dip-web/"));
-            }
-            url = urlPre + "/dip-web/login.html";
-            
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+        }     
+        HttpSession session=request.getSession();       			
+		
+		if (session!=null&&session.getAttribute("admin")!=null) {		
+			return true; 
+		}
+		 
+		//获取的数据判断不为空，struts执行下一步操作，即获取
+		setGoingURL(request, session, true);
+		return true;
     }
+    
+    
+	/*
+	 * setGoingURL()函数的声明定义
+	 */
+	private void setGoingURL(HttpServletRequest request, HttpSession session, Boolean invocation) {
+
+		//如果refer不为空，直接使用它。如果为空我们分别获得命名空间，action名，以及请求参数，重新构造成一个URL保存在SESSION中
+		String url = request.getHeader("referer");
+		String url2;
+		if (url == null || url.equals("")) {
+			url = "";
+			String path = request.getContextPath();
+			
+			Map<String, String[]> zzMap = request.getParameterMap();
+			if (zzMap != null) {
+				for (String s : zzMap.keySet()) {
+					String[] value = zzMap.get(s);
+					for (String val : value) {
+						url = url + s + "=" + val + "&";
+					}
+				}
+			}
+		}
+		if (url.indexOf("prePage") > 0) {
+			url2 = StringUtil.getParamFromUrl(url);
+			session.setAttribute("prepareGoingTo", url2);
+			session.setAttribute("backGoingTo", url);
+		} else {
+			session.setAttribute("GOING_TO", url);
+		}
+	}
+    
 }

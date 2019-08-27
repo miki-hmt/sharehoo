@@ -52,7 +52,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 // 添加拦截规则
                 .addPathPatterns("/*.html")					//只拦截.html结尾的请求	2019.04.11	miki
                 // 排除拦截
-                .excludePathPatterns("/login");
+                .excludePathPatterns("/login.jsp");
         
         WebMvcConfigurer.super.addInterceptors(registry);
     }

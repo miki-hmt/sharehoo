@@ -304,7 +304,19 @@
 	    <version>1.1.10</version>
 	</dependency>
 	
-	</dependencies>
+	<dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <scope>provided</scope>
+    </dependency>
+	<!--验证码-->
+    <dependency>
+        <groupId>com.github.penggle</groupId>
+        <artifactId>kaptcha</artifactId>
+        <version>2.3.2</version>
+        </dependency>
+        
+   </dependencies>
 
 	<build>
     <plugins>

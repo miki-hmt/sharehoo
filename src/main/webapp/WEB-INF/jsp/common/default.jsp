@@ -1,6 +1,6 @@
-﻿<%@page import="jiabin.interceptor.OnlineCounter"%>
-<%@page import="jiabin.util.Counter"%>
-<%@page import="jiabin.util.OnlineCounterListener" %>
+﻿<%@page import="com.sharehoo.interceptor.OnlineCounter"%>
+<%@page import="com.sharehoo.util.Counter"%>
+<%@page import="com.sharehoo.util.OnlineCounterListener" %>
 <%@ page language="java" import="java.util.*,java.sql.*" pageEncoding="utf-8" %>
 <%
 String path = request.getContextPath();

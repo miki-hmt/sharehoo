@@ -13,10 +13,30 @@ public class E3Result implements Serializable {
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();
-
+    
+    /**
+     * 401.1 – 未授权：登录失败
+     * HTTP 404- 无法找到文件
+		HTTP 405 – 资源被禁止
+		HTTP 406 – 无法接受
+		HTTP 407 – 要求代理身份验证
+		HTTP 410 – 永远不可用
+		HTTP 412 – 先决条件失败
+		HTTP 414 – 请求 – URI 太长
+		HTTP 500 – 内部服务器错误
+		HTTP 500.100 – 内部服务器错误 – ASP 错误
+		HTTP 500-11 服务器关闭
+		HTTP 500-12 应用程序重新启动
+		HTTP 500-13 – 服务器太忙
+		HTTP 500-14 – 应用程序无效
+		HTTP 500-15 – 不允许请求 global.asa
+		Error 501 – 未实现
+		HTTP 502 – 网关错误
+     */
+    
     // 响应业务状态
     private Integer status;
-
+    
     // 响应消息
     private String msg;
 
