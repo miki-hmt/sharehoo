@@ -62,7 +62,7 @@
 	function Login(){	
 		 if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 		var curPage=window.location.href;
-		window.location.href="${pageContext.request.contextPath}/login.jsp?prePage="+curPage;
+		window.location.href="${pageContext.request.contextPath}/login?prePage="+curPage;
 		 }else{
 			  alert("上了还想上嘛？");
 		  }

@@ -3,6 +3,7 @@ package com.sharehoo.service.impl.forum;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -18,7 +19,7 @@ import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.TopicSolrJService;
 import com.sharehoo.service.shop.SourceService;
 import com.sharehoo.util.forum.E3Result;
-
+@Transactional
 @Service("topicSolrJService")
 public class TopicSolrJServiceImpl implements TopicSolrJService {
 	

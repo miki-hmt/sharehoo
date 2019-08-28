@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -24,7 +25,7 @@ import com.sharehoo.util.forum.StringUtil;
  *
  */
 
-
+@Transactional
 @Service("articleService")
 public class ArticleServiceImpl implements ArticleService {
 	

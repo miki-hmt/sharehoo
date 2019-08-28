@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import com.sharehoo.util.forum.StringUtil;
  * project:softService接口功能的实现
  *
  */
+@Transactional
 @Service("softService")
 public class SoftServiceImpl implements SoftService {
 	@Resource

@@ -48,7 +48,7 @@ function checkForm(){
 		<form method="post" action="user/login" onsubmit="return checkForm()" id="login_form">
 			<div class="login" style="display: block;">
 				<div style="position:absolute; right:30px; top:14px;">
-					<a href="register.jsp" target="_blank">账号注册
+					<a href="register" target="_blank">账号注册
 					<em style="width:16px; height:16px; background:#999; float:right; color:#fff; border-radius:100%; text-align:center; line-height:16px; margin:1px 0 0 5px; font-family:'宋体'; font-weight:bold;">&gt;</em>
 					</a>
 				</div>
@@ -144,12 +144,12 @@ function checkForm(){
 			<a href="http://sharehoo.cn/shop/Shop_home.action" rel="nofollow">sharehoo下载频道</a><i>|</i>
 			<a href="http://sharehoo.cn/shop/Source_search.action" rel="nofollow">资源搜索</a><i>|</i>
 			<a href="http://sharehoo.cn/blog/Blog_show.action?userId=21" rel="nofollow">博客</a><i>|</i>
-			<a href="http://sharehoo.cn/Topic_list.action?sectionId=2" rel="nofollow">二手集市</a><i>|</i>
-			<a href="http://sharehoo.cn/Topic_list.action?sectionId=21" rel="nofollow">原创社区</a><i>|</i>
+			<a href="http://sharehoo.cn/topic/section/2" rel="nofollow">二手集市</a><i>|</i>
+			<a href="http://sharehoo.cn/topic/section/21" rel="nofollow">原创社区</a><i>|</i>
 			<a href="http://sharehoo.cn/Topic_leaveList.action" rel="nofollow">吐槽树洞</a><i>|</i>
-			<a href="http://sharehoo.cn/Topic_list.action?sectionId=4" rel="nofollow">集思广益</a><i>|</i>
-			<a href="http://sharehoo.cn/Topic_list.action?sectionId=11" rel="nofollow">发帖求助</a><i>|</i>
-			<a href="http://sharehoo.cn/login.jsp?prePage=http://sharehoo.cn/shop/Shop_home.action" rel="nofollow">我的店铺</a><i>|</i>
+			<a href="http://sharehoo.cn/topic/section/4" rel="nofollow">集思广益</a><i>|</i>
+			<a href="http://sharehoo.cn/topic/section/11" rel="nofollow">发帖求助</a><i>|</i>
+			<a href="http://sharehoo.cn/login?prePage=http://sharehoo.cn/shop/Shop_home.action" rel="nofollow">我的店铺</a><i>|</i>
 		</div>
 		<div class="copy">
 			<p>sharehoo.cn资讯交流平台--专注于程序员开发道路的技术分享，问题解决。

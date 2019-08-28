@@ -6,8 +6,8 @@
 
 CKEDITOR.editorConfig = function( config ) {
 	
-	 config.filebrowserImageUploadUrl = "UploadAction.action"; //固定路径  
-	    config.image_previewText=' '; //预览区域显示内容
+	 config.filebrowserImageUploadUrl= " upload" ; //待会要上传的 
+	 config.image_previewText=' '; //预览区域显示内容
 	
 	
 	// Define changes to default configuration here.

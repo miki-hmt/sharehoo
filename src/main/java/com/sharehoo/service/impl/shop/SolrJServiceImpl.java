@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrClient;
@@ -19,7 +20,7 @@ import com.sharehoo.entity.shop.Source;
 import com.sharehoo.service.SolrJService;
 import com.sharehoo.service.shop.SourceService;
 import com.sharehoo.util.forum.E3Result;
-
+@Transactional
 @Service("solrJService")
 public class SolrJServiceImpl implements SolrJService {
 	

@@ -60,7 +60,7 @@ function validateBuy(){
 	function Login(){	
 		 if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 		var curPage=window.location.href;
-		window.location.href="${pageContext.request.contextPath}/login.jsp?prePage="+curPage;
+		window.location.href="${pageContext.request.contextPath}/login?prePage="+curPage;
 		 }else{
 			  alert("上了还想上嘛？");
 		  }
@@ -82,7 +82,7 @@ function validateBuy(){
 			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
-			<a class=" " href="http://sharehoo.cn/Topic_list.action?sectionId=4" target="_blank">赏金平台</a>
+			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
@@ -97,7 +97,7 @@ function validateBuy(){
 		</div>
 	</div>
 </div>
-<!-- //顶部登录部分js选择器	引入login.jsp文件的js，	2017.09.09 miki -->
+<!-- //顶部登录部分js选择器	引入login文件的js，	2017.09.09 miki -->
 <script type="text/javascript" src="/js/search-service/main.js" charset="utf-8"></script>
 <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>	
 <script type="text/javascript">

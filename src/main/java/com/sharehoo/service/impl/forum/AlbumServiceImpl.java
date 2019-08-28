@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import com.sharehoo.dao.impl.forum.AlbumDao;
 import com.sharehoo.entity.forum.Album;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.service.forum.AlbumService;
-
+@Transactional
 @Service("albumService")
 public class AlbumServiceImpl implements AlbumService {
 	

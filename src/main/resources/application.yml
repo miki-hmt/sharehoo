@@ -50,7 +50,7 @@ spring:
     #springboot 集成hibernate 2019.07.04  miki
     jpa:
         database: mysql
-        show-sql: true
+        show-sql: false
         hibernate:
             ddl-auto: none   #暂时用不到
             naming: 
@@ -93,7 +93,7 @@ spring:
             # 资源域名, resource.domain = true 是有效
             # 配置域名, 将域名的根目录指向 store.root 配置的地址
             # ---------------------------------
-            host: http://localhost:8080/wechat
+            host: http://localhost:8088/sharehoo
 
 logging:
   file: /../../idp/logs/dip/dip.log #${catalina.home}/../../idp/logs/dip/dip.log

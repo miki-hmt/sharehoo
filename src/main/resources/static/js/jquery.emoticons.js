@@ -121,7 +121,7 @@
                     faceHtml += '<div id="face_detail" class="facebox clearfix"><ul>';
 
                     for( i = 0; i < options.emotions.length; i++) {
-                        faceHtml += '<li text=' + options.emotions[i].phrase + ' type=' + i + '><img title=' + options.emotions[i].phrase + ' src="images/emotions/'+ options.emotions[i].url + '"  style="cursor:pointer; position:relative;"   /></li>';
+                        faceHtml += '<li text=' + options.emotions[i].phrase + ' type=' + i + '><img title=' + options.emotions[i].phrase + ' src="../../images/emotions/'+ options.emotions[i].url + '"  style="cursor:pointer; position:relative;"   /></li>';
                     }
                     faceHtml += '</ul></div>';
                     faceHtml += '</div><div class="arrow arrow_t"></div></div>';

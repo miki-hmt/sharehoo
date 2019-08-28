@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import com.sharehoo.dao.shop.ExchangeDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Exchange;
 import com.sharehoo.service.ExchangeService;
-
+@Transactional
 @Service("exchangeService")
 public class ExchangeServiceImpl implements ExchangeService {
 	

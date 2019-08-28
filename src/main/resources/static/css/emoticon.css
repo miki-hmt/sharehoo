@@ -84,7 +84,7 @@ li {
     width: 19px;
 }
 .arrow {
-    background: url("layer_arrow.png") no-repeat scroll 0 0 transparent;
+    background: url("../images/layer_arrow.png") no-repeat scroll 0 0 transparent;
     display: block;
     overflow: hidden;
     position: absolute;

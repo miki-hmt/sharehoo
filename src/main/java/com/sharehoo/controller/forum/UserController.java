@@ -1,6 +1,7 @@
 package com.sharehoo.controller.forum;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Security;
 import java.text.MessageFormat;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.code.kaptcha.Constants;
 import com.sharehoo.base.exception.UserException;
@@ -55,6 +57,7 @@ import com.sharehoo.service.forum.UserService;
 import com.sharehoo.util.CxCacheUtil;
 import com.sharehoo.util.forum.DateUtil;
 import com.sharehoo.util.forum.GaoDeUtil;
+import com.sharehoo.util.forum.IOUtils;
 import com.sharehoo.util.forum.MD5;
 import com.sharehoo.util.forum.NavUtil;
 import com.sharehoo.util.forum.PageUtil;
@@ -78,6 +81,12 @@ public class UserController {
 	private TopicService topicService;
 	@Autowired
 	private SectionService sectionService;
+	
+	@RequestMapping("/register")
+	public String toRegister() {
+		
+		return "register";
+	}
 	/**
 	 * miki
 	 * date:2017.04.14
@@ -86,7 +95,7 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/user/register")
-	public String register(@RequestParam("file") File face,@PathVariable("faceFileName") String faceFileName,
+	public String register(@RequestParam("face") MultipartFile face,@RequestParam("faceFileName") String faceFileName,
 			@RequestBody User user)throws Exception{
 		if (face!=null) {
 			String basePath = (String)CxCacheUtil.getIntance().getValue(Consts.ROOT_PATH);
@@ -95,7 +104,8 @@ public class UserController {
 
 			String imageFile=imageName+"."+faceFileName.split("\\.")[1];
 			File saveFile=new File(realPath,imageFile);
-			FileUtils.copyFile(face, saveFile);
+			IOUtils.cp(face.getInputStream(), new FileOutputStream(saveFile));
+			//FileUtils.copyFile(face, saveFile);
 			user.setFace("images/user/"+imageFile);//原来为"images/user/"   2016.10.12
 		}else{
 			user.setFace("images/user/timg1.jpg");
@@ -202,7 +212,7 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/user/active")
-	public String active(HttpServletRequest request,@PathVariable("activationCode") String activationCode)throws Exception{
+	public String active(HttpServletRequest request,@RequestParam("activationCode") String activationCode)throws Exception{
 		HttpSession session=request.getSession();
 		User user = null;
 		try {
@@ -229,7 +239,7 @@ public class UserController {
 	
 	
 	@RequestMapping("/user/update")	
-	public String modify(@RequestBody User user,@RequestParam("face") File face,@PathVariable("faceFileName") String faceFileName,
+	public String modify(@RequestBody User user,@RequestParam("face") File face,@RequestParam("faceFileName") String faceFileName,
 			HttpServletRequest request)throws Exception{
 		if(null!=user){
 			User old=userService.getUserById(user.getId());
@@ -273,7 +283,7 @@ public class UserController {
 	
 	@RequestMapping("/user/check-name")
 	@ResponseBody
-	public JSONObject existUserWithUserName(@PathVariable("nickName") String nickName)throws Exception{
+	public JSONObject existUserWithUserName(@RequestParam("nickName") String nickName)throws Exception{
 		boolean exist=userService.existUserWithNickName(nickName);
 		JSONObject result=new JSONObject();
 		if (exist) {
@@ -294,12 +304,12 @@ public class UserController {
 	@RequestMapping("/home")
 	public String toHome()throws Exception{
 		
-		return "home";
+		return "redirect:index.html";
 	}
 	
 	@RequestMapping("/user/email")
 	@ResponseBody
-	public JSONObject existUserWithEmail(@PathVariable("email") String email)throws Exception{
+	public JSONObject existUserWithEmail(@RequestParam("email") String email)throws Exception{
 		boolean exist=userService.existUserWithEmail(email);
 		JSONObject result=new JSONObject();
 		if (exist) {
@@ -318,7 +328,7 @@ public class UserController {
 	 */
 	@RequestMapping("/user/truename")
 	@ResponseBody
-	public JSONObject existUserWithTrueName(HttpServletRequest request,@PathVariable("trueName") String trueName)throws Exception{
+	public JSONObject existUserWithTrueName(HttpServletRequest request,@RequestParam("trueName") String trueName)throws Exception{
 		HttpSession session=request.getSession();
 		boolean exist=userService.existUserWithTrueName(trueName);
 		JSONObject result=new JSONObject();
@@ -340,7 +350,7 @@ public class UserController {
 	 */
 	@RequestMapping("/user/find")
 	@ResponseBody
-	public String find(HttpServletRequest request,@PathVariable("trueName") String trueName,@PathVariable("imageCode") String imageCode)throws Exception{
+	public String find(HttpServletRequest request,@RequestParam("trueName") String trueName,@RequestParam("imageCode") String imageCode)throws Exception{
 		HttpSession session1=request.getSession();
 		
 		if(!imageCode.equals(session1.getAttribute("sRand"))){
@@ -461,8 +471,8 @@ public class UserController {
 		 */
 		user.setPassword(new MD5().complie(user.getPassword().trim()));		
 		User currentUser=userService.login(user);
-		
-		if(!imageCode.equals(session.getAttribute(Constants.KAPTCHA_SESSION_KEY))){
+		Object code = session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+		if(!imageCode.equals(String.valueOf(code))){
 			error="验证码错误！";			
 			session.setAttribute("error", error);			
 		}else
@@ -513,8 +523,8 @@ public class UserController {
 	}
 	
 	@RequestMapping("/admin/user/login")
-	public String loginAdmin(HttpServletRequest request,@RequestBody User user,@PathVariable("imageCode") String imageCode,
-			@PathVariable("error") String error)throws Exception{
+	public String loginAdmin(HttpServletRequest request,@RequestBody User user,@RequestParam("imageCode") String imageCode,
+			@RequestParam("error") String error)throws Exception{
 		HttpSession session=request.getSession();
 		//HttpServletRequest req=(HttpServletRequest)ServletActionContext.getRequest();
 		/*
@@ -655,7 +665,7 @@ public class UserController {
 	 * 更新个人中心  模帖子版块
 	 */
 	@RequestMapping("/user/topic")
-	public String topic(HttpServletRequest request,Model model,@PathVariable("page") String page)throws Exception{
+	public String topic(HttpServletRequest request,Model model,@RequestParam("page") String page)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("currentUser");
 		model.addAttribute("user", user);
@@ -701,7 +711,7 @@ public class UserController {
 	 * 更新个人中心  我的问答版块
 	 */
 	@RequestMapping("/user/answer")
-	public String answer(HttpServletRequest request,Model model,@PathVariable("page") String page)throws Exception{
+	public String answer(HttpServletRequest request,Model model,@RequestParam("page") String page)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("currentUser");
 		model.addAttribute("user", user);
@@ -738,7 +748,7 @@ public class UserController {
 	 * 用户未读信息列表
 	 */
 	@RequestMapping("/user/reply")
-	public String unReply(HttpServletRequest request,Model model,@PathVariable("page") String page)throws Exception{
+	public String unReply(HttpServletRequest request,Model model,@RequestParam("page") String page)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("currentUser");
 		model.addAttribute("user", user);
@@ -787,7 +797,7 @@ public class UserController {
 		return "admin/main";
 	}
 	@RequestMapping("/admin/user/list")
-	public String list(HttpServletRequest request,@PathVariable("page") String page,Model model)throws Exception{
+	public String list(HttpServletRequest request,@RequestParam("page") String page,Model model)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
@@ -809,7 +819,7 @@ public class UserController {
 	
 	@RequestMapping("/admin/user/deletes")
 	@ResponseBody
-	public JSONObject deleteUsers(HttpServletRequest request,@PathVariable("ids") String ids)throws Exception{
+	public JSONObject deleteUsers(HttpServletRequest request,@RequestParam("ids") String ids)throws Exception{
 		JSONObject result=new JSONObject();
 		String[] idsStr=ids.split(",");
 		for (int i = 0; i < idsStr.length; i++) {
@@ -827,6 +837,13 @@ public class UserController {
 		return result;
 	}
 	
+	/**
+	* @Title: delete  
+	* @Description: TODO(对于{id}这样的参数必须要用@PathVariable来接收)  
+	* @author miki 
+	* @date 2019年8月27日 下午10:48:06   
+	* @throws
+	 */
 	@RequestMapping("/admin/user/delete/{userId}")
 	@ResponseBody
 	public JSONObject delete(@PathVariable("userId") int userId)throws Exception{
@@ -842,6 +859,14 @@ public class UserController {
 			return result;
 		}
 	}
+	
+	/**
+	* @Title: delete  
+	* @Description: TODO(对于{id}这样的参数必须要用@PathVariable来接收)  
+	* @author miki 
+	* @date 2019年8月27日 下午10:48:06   
+	* @throws
+	 */
 	@RequestMapping("/admin/user/add/{userId}")
 	@ResponseBody
 	public JSONObject saveUser(@PathVariable("userId") int userId,@RequestBody User user)throws Exception{
@@ -857,6 +882,14 @@ public class UserController {
 		return result;
 	}
 	
+	
+	/**
+	* @Title: delete  
+	* @Description: TODO(对于{id}这样的参数必须要用@PathVariable来接收)  
+	* @author miki 
+	* @date 2019年8月27日 下午10:48:06   
+	* @throws
+	 */
 	@RequestMapping("/admin/user/modify/{userId}")
 	@ResponseBody
 	public JSONObject modifyPassword(@RequestBody User user)throws Exception{

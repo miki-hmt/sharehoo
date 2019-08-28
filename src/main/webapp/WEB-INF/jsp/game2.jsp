@@ -199,7 +199,7 @@ a:link{
             <li><img src="images/132.jpg"/><br/><a href="games/fruit/fruit.html"  target="blank">水果忍者</a></li>
             <li><img src="images/tank.jpg"/><br/><a href="games/zy_tank/zy_tank_frameVersion.html"  target="blank">坦克大战</a></li>
             <li><img src="images/mogu.jpg"/><br/><a href="games/mogubeer/index7.html"  target="blank">让蘑菇动起来</a></li>
-            <li><img src="images/1.jpg"/><br/><a href="home.jsp">社区首页</a></li>
+            <li><img src="images/1.jpg"/><br/><a href="home">社区首页</a></li>
             </ul>
     	</div>
     	

@@ -1,7 +1,0 @@
-<html>
-<body>
-
-My name is: Donald Duck
-
-</body>
-</html>

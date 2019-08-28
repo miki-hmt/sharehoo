@@ -49,10 +49,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加拦截器
         registry.addInterceptor(loginInterceptor())
-                // 添加拦截规则
-                .addPathPatterns("/*.html")					//只拦截.html结尾的请求	2019.04.11	miki
-                // 排除拦截
-                .excludePathPatterns("/login.jsp");
+                /// 添加拦截规则
+	        .addPathPatterns("/admin/**")					//只拦截.html结尾的请求	2019.04.11	miki
+	        .addPathPatterns("**/login")						//只拦截.html结尾的请求	2019.04.11	miki
+	        // 排除拦截
+			.excludePathPatterns("/*.html");
         
         WebMvcConfigurer.super.addInterceptors(registry);
     }

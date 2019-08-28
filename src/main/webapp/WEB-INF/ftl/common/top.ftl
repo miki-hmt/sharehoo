@@ -99,12 +99,12 @@ a:hover{
 						w3c文档</a>																															
 				</li>				
 				
-				<li><a href="http://sharehoo.cn/Topic_list.action?sectionId=3" target="blank">社友圈<img src="./images/icon/hot.gif"></a></li>
+				<li><a href="http://sharehoo.cn/topic/section/3" target="blank">社友圈<img src="./images/icon/hot.gif"></a></li>
 				<li><a href="http://sharehoo.cn/game2.jsp" target="blank">h5小游戏</a></li>
 				<li><a href="http://sharehoo.cn/Topic_leaveList.action" target="_blank">秘密墙<img src="./images/icon/hot.gif"></a></li>
 				
 				<li><a href="http://sharehoo.cn/SoftSection_listpr.action" title="可以上传下载有用的资源" target="_blank">软件下载</a></li>
-				<li><a href="http://sharehoo.cn/Topic_details.action?topicId=218" target="blank" title="站长邮箱：1329289117@qq.com"><font >社区规则</font></a></li>	
+				<li><a href="http://sharehoo.cn/${host}/topic/detail/218" target="blank" title="站长邮箱：1329289117@qq.com"><font >社区规则</font></a></li>	
 			</ul>
 		</div>
 		

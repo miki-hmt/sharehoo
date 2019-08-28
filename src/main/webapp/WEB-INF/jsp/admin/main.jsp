@@ -124,7 +124,7 @@ $(function(){
 </head>
 <%
 if(session.getAttribute("currentUser")==null){
-	response.sendRedirect("login.jsp");
+	response.sendRedirect("admin/login");
 	return;
 }
 %>

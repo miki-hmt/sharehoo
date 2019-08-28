@@ -144,7 +144,7 @@ public class IndexController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/index")
+	@RequestMapping("/index.html")
 	public String index(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception{
 		List<Notice> noticeList=noticeService.findNoticeList(null, null);
 		model.addAttribute("noticeList", noticeList);
@@ -229,5 +229,12 @@ public class IndexController {
 		List<Article> countList=articleService.getHotByUserId(21);
 		model.addAttribute("countList", countList);
 		return "index";
+	}
+	
+	
+	@RequestMapping("/h5")
+	public String game() {
+		
+		return "game2";
 	}
 }

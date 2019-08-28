@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>页面中转站</title>
 </head>
 <%
 String going_to=(String)session.getAttribute("GOING_TO");
@@ -12,6 +12,7 @@ String prepareGoingTo=(String)session.getAttribute("prepareGoingTo");
 String backGoingTo=(String)session.getAttribute("backGoingTo");
 
 if(going_to!=null){
+	System.out.println(going_to);
 	response.sendRedirect(going_to);
 }else if(prepareGoingTo!=null){
 	if(session.getAttribute("error")!=null){

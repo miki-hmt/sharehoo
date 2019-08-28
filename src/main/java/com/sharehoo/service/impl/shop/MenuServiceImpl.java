@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import com.sharehoo.dao.shop.MenuDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Menu;
 import com.sharehoo.service.MenuService;
-
+@Transactional
 @Service("menuService")
 public class MenuServiceImpl implements MenuService {
 	

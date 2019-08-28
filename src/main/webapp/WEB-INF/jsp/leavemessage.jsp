@@ -25,7 +25,7 @@ function checkForm(){
 	if('${currentUser.nickName}'==''){
 		alert("请先登陆或注册，再留言！");
 		/* var url="Report_preSave.action?role=0&reportType=1";
-		window.open("login.jsp?url="+url); */
+		window.open("login?url="+url); */
 		return false;
 	}
 	
@@ -321,7 +321,7 @@ function checkForm(){
 				</form>
 				<div class="control-group">
 						<div class="controls">
-							<a href="Topic_preSave2.action?sectionId=17"><Button  class="btn btn-primary " data-dismiss="modal" aria-hidden="true" type="submit">我要留言</Button></a>
+							<a href="topic/leftsecret"><Button  class="btn btn-primary " data-dismiss="modal" aria-hidden="true" type="submit">我要留言</Button></a>
 							<font id="error"></font>
 						</div>
 				</div>

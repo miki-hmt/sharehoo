@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/search_index.css">
+<link rel="stylesheet" href="${host}/shop/css/search_index.css">
 <script type="text/javascript">
 
 function reP(){
@@ -16,7 +16,7 @@ function logout() {
 }
 function login(){
 	var curPage=window.location.href;
-	window.location.href="login.jsp?prePage="+curPage;
+	window.location.href="login?prePage="+curPage;
 }
 function checkUserLogin(){
 	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
@@ -45,15 +45,15 @@ function check_up(thisform){
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>haha</title>
-		<link href="css/style.css" rel="stylesheet" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/common.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/download_index.css">
+		<link href="${host}/css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${host}/common/css/common.css">
+		<link rel="stylesheet" href="${host}/common/css/download_index.css">
 </head>
 <body>
 
 	<div class="header">
 			<div class="header-con">
-				<a class="header-logo" href="#"><img src="${pageContext.request.contextPath}/common/images/logo/logo1.jpg" style="width:40px;height:40px;"><font style="color:white;"></font></a>
+				<a class="header-logo" href="#"><img src="${host}/common/images/logo/logo1.jpg" style="width:40px;height:40px;"><font style="color:white;"></font></a>
 				
 				<c:choose>
 					
@@ -76,26 +76,26 @@ function check_up(thisform){
 												
 						<a href="javascript:checkUserLogin()" style="color:#FFEC24;margin-left:-4px;text-transform:uppercase;">${currentUser.nickName }</a><font style="color:white;font-size:9pt;">|</font>
 						<a href="User_userCenter.action" target="_blank" title="进入个人中心" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">个人中心</font></a><font style="color: white;font-size:9pt;">|</font>				
-						<a href="User_userCenter.action" target="_blank" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">消息</font><img id="news" src="${pageContext.request.contextPath}/common/images/logo/mess.png" style="width:6px;height:24px;display:none;"/></a><font style="color: white;font-size:9pt;">|</font>
+						<a href="User_userCenter.action" target="_blank" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">消息</font><img id="news" src="${host}/common/images/logo/mess.png" style="width:6px;height:24px;display:none;"/></a><font style="color: white;font-size:9pt;">|</font>
 						<a href="javascript:logout()"><font style="color:#FFEC24;margin-left:-4px;">注销</font></a>
 						</font>
 						<c:choose>
 								<c:when test="${(currentUser.face==null||currentUser.face=='')&&currentUser.sex=='男'}">
 								<a href="javascript:checkUserLogin()"style="color:#FFEC24;margin-left:0px;">
 									<img alt=""
-										src="${pageContext.request.contextPath}/images/user/user0.gif"
+										src="${host}/images/user/user0.gif"
 										style="width: 32px; height: 32px;"></a>
 								</c:when>
 								<c:when test="${(currentUser.face==null||currentUser.face=='')&&currentUser.sex=='女'}">
 								<a href="javascript:checkUserLogin()" style="color:#FFEC24;margin-left:0px;">	
 									<img alt=""
-										src="${pageContext.request.contextPath}/images/user/female.gif"
+										src="${host}/images/user/female.gif"
 										style="width: 32px; height: 32px;"></a>
 								</c:when>
 								<c:otherwise>
 								<a href="javascript:checkUserLogin()" style="color:#FFEC24;margin-left:0px;">
 									
-									<img alt="" src="${pageContext.request.contextPath}/${currentUser.face}"
+									<img alt="" src="${host}/${currentUser.face}"
 										style="width: 32px; height: 32px;margin-right:7px;border:1px solid white;"></a>			
 								</c:otherwise>
 							</c:choose>
@@ -103,7 +103,7 @@ function check_up(thisform){
 						</div>
 					</c:when>
 				<c:otherwise>
-				<!-- <a href="login.jsp">登录</a>| -->
+				<!-- <a href="login">登录</a>| -->
 				<div class="header-user">
 					<font style="color:white;font-size:9pt;">
 						<a href="javascript:login()">登录&nbsp;</a>|<a href="register.jsp">&nbsp;注册&nbsp;</a>|
@@ -117,13 +117,13 @@ function check_up(thisform){
 		<div class="news-nav">
 			<div class="container clearfix">
 				<div class="nav-bar">
-					<a href="home.jsp" class="current">首页</a>
-					<a href="http://sharehoo.cn/blog/Blog_show.action?userId=21" target="_blank">博客社区<img src="./images/icon/hot.gif"></a>
-					<a class=" " href="${pageContext.request.contextPath}/shop/Shop_home.action" target="_blank">下载社区<img src="./images/icon/hot.gif"></a>
+					<a href="home" class="current">首页</a>
+					<a href="http://sharehoo.cn/blog/Blog_show.action?userId=21" target="_blank">博客社区<img src="${host}/images/icon/hot.gif"></a>
+					<a class=" " href="${host}/shop/Shop_home.action" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
 					<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html" target="_blank">W3C文档</a>
-					<a href="Topic_list.action?sectionId=3" target="_blank">社友圈<img src="./images/icon/hot.gif"></a>			
+					<a href="topic/section/3" target="_blank">社友圈<img src="${host}/images/icon/hot.gif"></a>			
 					<a class=" " href="game2.jsp" target="_blank">H5小游戏</a>			
-					<a href="Topic_leaveList.action" target="_blank">秘密墙<img src="./images/icon/hot.gif"></a>
+					<a href="Topic_leaveList.action" target="_blank">秘密墙<img src="${host}/images/icon/hot.gif"></a>
 					<a href="SoftSection_listpr.action" target="_blank">软件下载</a>
 					<a class=" " href="http://sharehoo.cn/154339002942889.html" target="blank">社区规则</a>	
 				</div>
@@ -141,7 +141,7 @@ function check_up(thisform){
 				
 		            <!--黑色背景块上面加入logo块  -->
 					<div style="width: 1200px; margin: 0 auto;height:150px;color:white;border:1px solid white;"> 		
-					<h5>-<img src="${pageContext.request.contextPath}/common/images/write.png" style="height:20px;"><a href="#1">注意事项....</a></h5>
+					<h5>-<img src="${host}/common/images/write.png" style="height:20px;"><a href="#1">注意事项....</a></h5>
 					<h6>-*请不要发表危害祖国的非法信息！</h6>
 					<h6>-*请不要发表侵犯个人名誉的信息！</h6>
 					<h6>-*请不要发表不文明内容！</h6>
@@ -162,7 +162,7 @@ $(document).ready(function(){
 		type: "POST",
 		dataType: "json",
 		data: {},
-		url: "Mess_getNews.action",
+		url: "${host}/user/news",
 		success: function(result) {
 			if(result.mes){
 				$("#news").show();

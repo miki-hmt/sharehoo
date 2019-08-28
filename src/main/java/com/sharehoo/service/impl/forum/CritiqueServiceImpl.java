@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -24,7 +25,7 @@ import com.sharehoo.service.forum.CritiqueService;
  * 逻辑层方法功能实现
  *
  */
-
+@Transactional
 @Service("critiqueService")
 public class CritiqueServiceImpl implements CritiqueService {
 	

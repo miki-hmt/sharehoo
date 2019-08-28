@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import com.sharehoo.entity.forum.PageBean;
@@ -47,7 +48,7 @@ public class TopicController {
 	
 	private Logger logger = Logger.getLogger(TopicController.class);
 	private static final long serialVersionUID = 1L;
-	
+	@Autowired
 	private HttpServletRequest request;	
 	@Resource
 	private TopicService topicService;
@@ -72,32 +73,37 @@ public class TopicController {
 	
 	@RequestMapping("/topic/write")
 	// 发帖方法实现
-	public String preSave(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
+	public String preSave(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="sectionId",required=false) int sectionId) throws Exception {
 		HttpSession session = request.getSession();
 		User currentUser = (User) session.getAttribute("currentUser");
 
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
-		if (currentUser == null) {
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+		if (currentUser != null) {
+			request.getRequestDispatcher("/errorlogin").forward(request, response);
 		}
+		if(sectionId==0) {
+			sectionId = 21;
+		}
+		Section curSection = sectionService.findSectionById(sectionId);
+		model.addAttribute("curSection", curSection);
 		List<Section> sectionList = sectionService.findSectionList(null, null);
 		model.addAttribute("sectionList", sectionList);
 		return "topic/topicAdd";
 	}
 	
-	@RequestMapping("/topic/psave2")
+	@RequestMapping("/topic/leftsecret")
 	public String preSave2(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
 		HttpSession session = request.getSession();
 		User currentUser = (User) session.getAttribute("currentUser");
 		
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
-		if (currentUser == null) {
+		if (currentUser != null) {
 			// response.sendRedirect(request.getContextPath()+"/login.jsp");
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			request.getRequestDispatcher("/errorlogin").forward(request, response);
 		}
 		List<Section> sectionList = sectionService.findSectionList(null, null);
 		model.addAttribute("sectionList", sectionList);
-		return "topic/topicAdd";
+		return "topic/leavem";
 	}
 	
 	/**
@@ -115,6 +121,14 @@ public class TopicController {
 		return "redirect:";
 	}
 	
+	
+	/**
+	* @Title: list  
+	* @Description: TODO(对于{id}这样的参数必须要用@PathVariable来接收)  
+	* @author miki 
+	* @date 2019年8月27日 下午10:48:06   
+	* @throws
+	 */
 	@RequestMapping("/topic/modify/{id}")
 	public String update(Model model,@PathVariable("id") int id) throws Exception {
 		Topic topic = topicService.findTopicById(id);	// 获取topicId之后得到tpic对象 2017.04.05，否则页面无法得到topic数据
@@ -144,7 +158,7 @@ public class TopicController {
 		HttpSession session = request.getSession();
 		User currentUser = (User) session.getAttribute("currentUser");
 		if (currentUser == null) {
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			request.getRequestDispatcher("/errorlogin").forward(request, response);
 		}
 		topicService.saveTopic(topic);
 		// 2017.05.01 发帖子实现用户积分+1
@@ -257,8 +271,8 @@ public class TopicController {
 	/*
 	 * 2017.05.04 留言板显示列表
 	 */
-	@RequestMapping("/leavelove/index")
-	public String leaveList(@PathVariable("page") String page,Model model) throws Exception {
+	@RequestMapping("/secret")
+	public String leaveList(@RequestParam(value="page",required = false) String page,Model model) throws Exception {
 		if (StringUtil.isEmpty(page)) {
 			page = "1";
 		}
@@ -273,13 +287,14 @@ public class TopicController {
 	}
 
 	/**
-	 * 2017.04.13
-	 * 
-	 * @return
-	 * @throws Exception 根据版块id显示帖子列表
+	* @Title: list  
+	* @Description: TODO(对于{id}这样的参数必须要用@PathVariable来接收)  
+	* @author miki 
+	* @date 2019年8月27日 下午10:48:06   
+	* @throws
 	 */
 	@RequestMapping("/topic/section/{sectionId}")
-	public String list(@PathVariable("sectionId") int sectionId,@PathVariable("page") String page,Model model) throws Exception {
+	public String list(@PathVariable("sectionId") int sectionId,@RequestParam(value="page",required = false) String page,Model model) throws Exception {
 		
 		List<NewsBanner> bannerList = nbsBannerService.findSectionTopicBannerListByType();
 		model.addAttribute("bannerList", bannerList);
@@ -298,7 +313,7 @@ public class TopicController {
 		model.addAttribute("ptTopicList", ptTopicList);
 		
 		long total = topicService.getPtTopicCountBySectionId(sectionId);
-		String pageCode = PageUtil.genPagination(request.getContextPath() + "/Topic_list.action", total,
+		String pageCode = PageUtil.genPagination(request.getContextPath() + "/", total,
 				Integer.parseInt(page), 20, null);
 		model.addAttribute("pageCode", pageCode);
 		
@@ -333,7 +348,7 @@ public class TopicController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/admin/topic/list")
-	public String listAdmin(@PathVariable("page") String page,Model model) throws Exception {
+	public String listAdmin(@RequestParam(value="page",required = false) String page,Model model) throws Exception {
 		if (StringUtil.isEmpty(page)) {
 			page = "1";
 		}
@@ -364,7 +379,7 @@ public class TopicController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/topic/search")
-	public String search(HttpServletRequest request,HttpServletResponse response,@PathVariable("page") String page,Model model) throws Exception {
+	public String search(HttpServletRequest request,HttpServletResponse response,@RequestParam(value="page",required = false) String page,Model model) throws Exception {
 		if (StringUtil.isEmpty(page)) {
 			page = "1";
 		}
@@ -387,9 +402,17 @@ public class TopicController {
 		return "soutie";
 	}
 	
+	
+	/**
+	* @Title: list  
+	* @Description: TODO(对于{id}这样的参数必须要用@PathVariable来接收)  
+	* @author miki 
+	* @date 2019年8月27日 下午10:48:06   
+	* @throws
+	 */
 	@RequestMapping("/topic/detail/{topicId}")
 	public String details(HttpServletRequest request,HttpServletResponse response,@PathVariable("topicId") int topicId,
-			@PathVariable("page") String page,Model model) throws Exception {
+			@RequestParam(value="page",required = false) String page,Model model) throws Exception {
 		Topic topic = topicService.findTopicById(topicId);
 		model.addAttribute("topic", topic);
 		if (StringUtil.isEmpty(page)) {
@@ -422,13 +445,13 @@ public class TopicController {
 				Integer.parseInt(page), 10, param.toString());
 		model.addAttribute("pageCode", pageCode);
 		
-		return "details";
+		return "topic/topicDetails";
 	}
 
 	// 后台删除，单个操作实现
 	@RequestMapping("/topic/delete")
 	@ResponseBody
-	public JSONObject backDelete(@PathVariable("topicId") int topicId) throws Exception {
+	public JSONObject backDelete(@RequestParam("topicId") int topicId) throws Exception {
 		JSONObject result = new JSONObject();
 		Topic topic = topicService.findTopicById(topicId);
 		topicService.deleteTopic(topic);
@@ -439,7 +462,7 @@ public class TopicController {
 	// topicList页面删除功能实现
 	@RequestMapping("/topic/back-delete")
 	@ResponseBody
-	public JSONObject delete(@PathVariable("topicId") int topicId) throws Exception {
+	public JSONObject delete(@RequestParam("topicId") int topicId) throws Exception {
 		JSONObject result = new JSONObject();
 		if (topicId > 0) {
 			int size = replyService.findReplyListByTopicId(topicId, null).size();
@@ -457,7 +480,7 @@ public class TopicController {
 	// 删除多个操作
 	@RequestMapping("/topic/batch-delete")
 	@ResponseBody
-	public JSONObject batchDelete(@PathVariable("ids") String ids) throws Exception {
+	public JSONObject batchDelete(@RequestParam("ids") String ids) throws Exception {
 		JSONObject result = new JSONObject();
 		String[] idsStr = ids.split(",");
 		for (int i = 0; i < idsStr.length; i++) {

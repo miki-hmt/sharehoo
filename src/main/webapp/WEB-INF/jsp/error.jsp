@@ -7,7 +7,7 @@
 <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 
                          <!-- html页面自动跳转代码  2016.10.06-->
-<meta http-equiv="refresh" content="3; url=home.jsp"/>
+<meta http-equiv="refresh" content="3; url=${host}/home"/>
 
 <title>未登录提示</title>
 <style type="text/css">

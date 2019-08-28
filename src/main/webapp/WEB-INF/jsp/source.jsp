@@ -8,13 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>资源下载区-IT帮-资讯传播社区</title>
 
-<link rel="stylesheet" type="text/css" href="./soft/sectionDetail_files/list.css">
-<link rel="stylesheet" type="text/css" href="./soft/sectionDetail_files/base.css">
-<link rel="stylesheet" type="text/css" href="./soft/sectionDetail_files/keyfile.css">
+<link rel="stylesheet" type="text/css" href="${host}/soft/sectionDetail_files/list.css">
+<link rel="stylesheet" type="text/css" href="${host}/soft/sectionDetail_files/base.css">
+<link rel="stylesheet" type="text/css" href="${host}/soft/sectionDetail_files/keyfile.css">
 
-<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-<link rel="stylesheet" type="text/css" href="css/source.css"/>
-<link href="css/csshake.min.css" rel="stylesheet" type="text/css" />
+<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+<link rel="stylesheet" type="text/css" href="${host}/css/source.css"/>
+<link href="${host}/css/csshake.min.css" rel="stylesheet" type="text/css" />
 
 <style type="text/css" >
 
@@ -79,20 +79,20 @@
 </div>
 <div class="bd">
 
-01.<a href="#" style="font-size:9pt;"><img src="images/dn.png"/>电脑管家<img src="images/icon/hot.png" style="width:11px;height:12px;"></a><br>
-02.<a href="#" style="font-size:9pt;"><img src="images/kla.jpg"/>腾讯扣扣<img src="images/icon/hot.png" style="width:11px;height:12px;"></a><br>
-03.<a href="#" style="font-size:9pt;"><img src="images/hk.jpg"/>微信<img src="images/icon/hot.png" style="width:11px;height:12px;"></a><br>
-04.<a href="#" style="font-size:9pt;"><img src="images/source/pp.png"/>pptv影音播放</a><img src="images/icon/ding.gif" style="width:13px;height:12px;"><br>
-05.<a href="#" style="font-size:9pt;"><img src="images/source/kw.png"/>酷我音乐盒子</a><br>
-06.<a href="#" style="font-size:9pt;"><img src="images/source/bf.png"/>暴风阴影<img src="images/icon/ding.gif" style="width:11px;height:12px;"></a><br>
-07.<a href="#" style="font-size:9pt;"><img src="images/source/aqy.png"/>爱奇艺<img src="images/icon/hot.png" style="width:11px;height:12px;"></a><br>
-08.<a href="#" style="font-size:9pt;"><img src="images/source/uc.png"/>uc浏览器</a><br>
-09.<a href="#" style="font-size:9pt;"><img src="images/source/gg.png"/>谷歌浏览器<img src="images/icon/ding.gif" style="width:11px;height:12px;"></a><br>
-10.<a href="#" style="font-size:9pt;"><img src="images/source/sg.png"/>搜狗输入法</a><br>
-11.<a href="#" style="font-size:9pt;"><img src="images/source/hh.png"/>火狐浏览器<img src="images/icon/ding.gif" style="width:11px;height:12px;"></a><br>
-12.<a href="#" style="font-size:9pt;"><img src="images/source/lol.png"/>英雄联盟<img src="images/icon/hot.png" style="width:11px;height:12px;"></a><br>
-13.<a href="#" style="font-size:9pt;"><img src="images/source/wyy.png"/>网易云</a><br>
-14.<a href="#" style="font-size:9pt;"><img src="images/source/tgp.png"/>tgp游戏平台</a><br>
+01.<a href="#" style="font-size:9pt;"><img src="${host}/images/dn.png"/>电脑管家<img src="${host}/images/icon/hot.png" style="width:11px;height:12px;"></a><br>
+02.<a href="#" style="font-size:9pt;"><img src="${host}/images/kla.jpg"/>腾讯扣扣<img src="${host}/images/icon/hot.png" style="width:11px;height:12px;"></a><br>
+03.<a href="#" style="font-size:9pt;"><img src="${host}/images/hk.jpg"/>微信<img src="${host}/images/icon/hot.png" style="width:11px;height:12px;"></a><br>
+04.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/pp.png"/>pptv影音播放</a><img src="${host}/images/icon/ding.gif" style="width:13px;height:12px;"><br>
+05.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/kw.png"/>酷我音乐盒子</a><br>
+06.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/bf.png"/>暴风阴影<img src="${host}/images/icon/ding.gif" style="width:11px;height:12px;"></a><br>
+07.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/aqy.png"/>爱奇艺<img src="${host}/images/icon/hot.png" style="width:11px;height:12px;"></a><br>
+08.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/uc.png"/>uc浏览器</a><br>
+09.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/gg.png"/>谷歌浏览器<img src="${host}/images/icon/ding.gif" style="width:11px;height:12px;"></a><br>
+10.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/sg.png"/>搜狗输入法</a><br>
+11.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/hh.png"/>火狐浏览器<img src="${host}/images/icon/ding.gif" style="width:11px;height:12px;"></a><br>
+12.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/lol.png"/>英雄联盟<img src="${host}/images/icon/hot.png" style="width:11px;height:12px;"></a><br>
+13.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/wyy.png"/>网易云</a><br>
+14.<a href="#" style="font-size:9pt;"><img src="${host}/images/source/tgp.png"/>tgp游戏平台</a><br>
 </div>
 </div>
 
@@ -127,7 +127,7 @@
             <h2>${softSection.areaName }推荐</h2>
               <ul class="app-list clearfix">
                    <c:forEach items="${good.get(softSection) }" var="soft">
-              		<li><a href="Soft_softDetail.action?softId=${soft.id }" title="${soft.soname }" target="_blank"><img src="${pageContext.request.contextPath}/${soft.logo }" alt="${soft.soname }"><span>${soft.soname }</span></a></li>
+              		<li><a href="Soft_softDetail.action?softId=${soft.id }" title="${soft.soname }" target="_blank"><img src="${host}/${soft.logo }" alt="${soft.soname }"><span>${soft.soname }</span></a></li>
                  
               	</c:forEach>             	            
               </ul>

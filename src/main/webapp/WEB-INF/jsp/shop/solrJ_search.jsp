@@ -52,7 +52,7 @@
 	function Login(){	
 		 if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 		var curPage=window.location.href;
-		window.location.href="${pageContext.request.contextPath}/login.jsp?prePage="+curPage;
+		window.location.href="${pageContext.request.contextPath}/login?prePage="+curPage;
 		 }else{
 			  alert("上了还想上嘛？");
 		  }
@@ -89,7 +89,7 @@
 		</div>
 	</div>
 </div>
-<!-- //顶部登录部分js选择器	引入login.jsp文件的js，	2017.09.09 miki -->
+<!-- //顶部登录部分js选择器	引入login文件的js，	2017.09.09 miki -->
 	
 	<script type="text/javascript" src="/js/search-service/main.js" charset="utf-8"></script>
 	<script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>

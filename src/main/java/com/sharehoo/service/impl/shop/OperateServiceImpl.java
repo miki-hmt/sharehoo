@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -14,7 +15,7 @@ import com.sharehoo.dao.shop.OperateDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Operate;
 import com.sharehoo.service.shop.OperateService;
-
+@Transactional
 @Service("operateService")
 public class OperateServiceImpl implements OperateService {
 	

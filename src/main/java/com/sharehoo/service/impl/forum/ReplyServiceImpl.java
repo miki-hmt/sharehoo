@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -16,7 +17,7 @@ import com.sharehoo.dao.impl.forum.ReplyDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Reply;
 import com.sharehoo.service.forum.ReplyService;
-
+@Transactional
 @Service("replyService")
 public class ReplyServiceImpl implements ReplyService {
 	

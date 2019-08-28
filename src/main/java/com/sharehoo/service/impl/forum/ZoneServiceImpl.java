@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Zone;
 import com.sharehoo.service.forum.ZoneService;
 import com.sharehoo.util.forum.StringUtil;
-
+@Transactional
 @Service("zoneService")
 public class ZoneServiceImpl implements ZoneService {
 

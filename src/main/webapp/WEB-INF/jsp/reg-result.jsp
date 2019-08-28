@@ -72,7 +72,7 @@ google_ad_height = 50;
                         请去邮箱收件箱或垃圾箱查收一下激活邮件<br>
 						&nbsp;点击激活之后<br>
                         <div id="elapseClock" style="display:none"></div>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='http://sharehoo.cn/login.jsp' target="_blank">去登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' id="accept">再想想</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='http://sharehoo.cn/login' target="_blank">去登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' id="accept">再想想</a>
                     </div>
                     <div id="loveu">
                         IT帮-资讯传播，下载社区永远服务于你.<br/>

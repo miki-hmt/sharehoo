@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -14,7 +15,7 @@ import com.sharehoo.dao.impl.forum.PhotoDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Photo;
 import com.sharehoo.service.forum.PhotoService;
-
+@Transactional
 @Service("photoService")
 public class PhotoServiceImpl implements PhotoService {
 	

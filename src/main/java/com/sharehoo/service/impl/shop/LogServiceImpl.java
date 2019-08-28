@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import com.sharehoo.dao.shop.LogDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Log;
 import com.sharehoo.service.LogService;
-
+@Transactional
 @Service("logService")
 public class LogServiceImpl implements LogService {
 	

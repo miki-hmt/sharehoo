@@ -39,7 +39,7 @@ public class MessController {
 		
 	}
 	
-	@RequestMapping("/user/news-num")
+	@RequestMapping("/user/news/nums")
 	@ResponseBody
 	public JSONObject getNewsCount(HttpServletRequest request)throws Exception{
 		JSONObject result=new JSONObject();

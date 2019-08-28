@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -16,7 +17,7 @@ import com.sharehoo.dao.impl.forum.NewsBannerDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.NewsBanner;
 import com.sharehoo.service.forum.NewsBannerService;
-
+@Transactional
 @Service("newsBannerService")
 
 public class NewsBannerServiceImpl implements NewsBannerService {

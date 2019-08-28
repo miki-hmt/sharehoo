@@ -157,12 +157,12 @@ a:hover{
 						w3c文档</a>																															
 				</li>				
 				
-				<li><a href="http://sharehoo.cn/Topic_list.action?sectionId=3" target="blank">社友圈<img src="./images/icon/hot.gif"></a></li>
+				<li><a href="http://sharehoo.cn/topic/section/3" target="blank">社友圈<img src="./images/icon/hot.gif"></a></li>
 				<li><a href="http://sharehoo.cn/game2.jsp" target="blank">h5小游戏</a></li>
 				<li><a href="http://sharehoo.cn/Topic_leaveList.action" target="_blank">秘密墙<img src="./images/icon/hot.gif"></a></li>
 				
 				<li><a href="http://sharehoo.cn/SoftSection_listpr.action" title="可以上传下载有用的资源" target="_blank">软件下载</a></li>
-				<li><a href="http://sharehoo.cn/Topic_details.action?topicId=218" target="blank" title="站长邮箱：1329289117@qq.com"><font >社区规则</font></a></li>	
+				<li><a href="http://sharehoo.cn/${host}/topic/detail/218" target="blank" title="站长邮箱：1329289117@qq.com"><font >社区规则</font></a></li>	
 			</ul>
 		</div>
 		
@@ -240,7 +240,7 @@ a:hover{
 					
 					<tr>
 						<td style="text-align: right;height: 40px;color:gray;font-size:9pt;background-color:#EFF4FB;">
-							&nbsp;<a href="http://sharehoo.cn/Topic_details.action?topicId=${id}" style="font-size: 9pt;margin-right:;color:gray;">发表评论</a>
+							&nbsp;<a href="http://sharehoo.cn/${host}/topic/detail/${id}" style="font-size: 9pt;margin-right:;color:gray;">发表评论</a>
 							&nbsp;&nbsp;&nbsp;<a style="text-align: right;color:gray;font-size:9pt;"> 发表时间:『${topic.publishTime?string("yyyy-MM-dd HH:mm:ss") }』</a>
 						</td>
 					</tr>
@@ -254,7 +254,7 @@ a:hover{
 	
 	<div class="pagination alternate" align="center">
 		<div  class="more">										
-			<a href="http://sharehoo.cn/Topic_details.action?topicId=${id}">↓↓↓点击加载更多回复↓↓↓</a>
+			<a href="http://sharehoo.cn/${host}/topic/detail/${id}">↓↓↓点击加载更多回复↓↓↓</a>
 		</div>				
 	</div>
 	

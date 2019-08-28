@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -17,7 +18,7 @@ import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.service.forum.UserService;
 import com.sharehoo.util.forum.StringUtil;
-
+@Transactional
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 

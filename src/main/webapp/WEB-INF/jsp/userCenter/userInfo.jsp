@@ -88,7 +88,7 @@ setTimeout("tips_pop()",800);//3秒后调用tips_pop()这个函数
                      <!-- 动态消息提醒版块               2016.12.12 -->
 <div class="shake-slow shake-constant shake-constant--hover"  id="winpop">
 	<div class="title">敬爱的论坛小主:${currentUser.nickName }<span class="close" onclick="tips_pop()">X</span></div>
-	<div class="con"><a href="Topic_details.action?topicId=38">您有(1)条未读信息</a></div>
+	<div class="con"><a href="${host}/topic/detail/38">您有(1)条未读信息</a></div>
 </div>
 
 	<table class="table table-bordered table-striped with-check"style="font-size:10pt;">
@@ -204,7 +204,7 @@ setTimeout("tips_pop()",800);//3秒后调用tips_pop()这个函数
 							<tbody>
 								<c:forEach items="${TopicList }" var="topic">
 									<tr>																			
-										<td style="text-align: center;vertical-align: middle;font-size:10pt;"><a href="Topic_details.action?topicId=${topic.id }">${topic.title }</a></td>
+										<td style="text-align: center;vertical-align: middle;font-size:10pt;"><a href="${host}/topic/detail/${topic.id }">${topic.title }</a></td>
 										<td style="text-align: center;vertical-align: middle;width: 110px;vertical-align: middle;font-size:10pt;">
 											${topic.user.nickName }
 										</td>

@@ -20,7 +20,7 @@ public interface Consts {
 	public static final String FORUM_UPLOAD_USER_FOLDER = "/user"; 
 	public static final String FORUM_UPLOAD_SOFT_FOLDER = "/soft"; 
 	public static final String ROOT_PATH = "basePath"; 
-	public static final SimpleDateFormat SDF_YYYYMM = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final SimpleDateFormat SDF_YYYYMM = new SimpleDateFormat("yyyyMM");
 	public static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	/*

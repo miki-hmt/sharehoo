@@ -131,7 +131,7 @@
 							<tbody>
 								<c:forEach items="${TopicList }" var="topic">
 									<tr>																			
-										<td style="text-align: center;vertical-align: middle;font-size:10pt;"><a href="Topic_details.action?topicId=${topic.id }">${topic.title }</a></td>
+										<td style="text-align: center;vertical-align: middle;font-size:10pt;"><a href="${host}/topic/detail/${topic.id }">${topic.title }</a></td>
 										<td style="text-align: center;vertical-align: middle;width: 110px;vertical-align: middle;font-size:10pt;">
 											${topicReplyCount.get(topic) }
 										</td>

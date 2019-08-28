@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -16,7 +17,7 @@ import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Source;
 import com.sharehoo.service.shop.SourceService;
 import com.sharehoo.util.forum.StringUtil;
-
+@Transactional
 @Service("sourceService")
 public class SourceServiceImpl implements SourceService {
 	

@@ -70,8 +70,8 @@ a:hover {color:#FF6600; text-decoration: underline;}
 		<br/>
 		<br/>
 		<br/>
-		<span style="margin-left: 50px;"><a target="_top" href="${pageContext.request.contextPath}/home.jsp">去登录</a></span>
-		<span style="margin-left: 50px;"><a target="_top" href="${pageContext.request.contextPath}/home.jsp">主页</a></span>
+		<span style="margin-left: 50px;"><a target="_top" href="${pageContext.request.contextPath}/home">去登录</a></span>
+		<span style="margin-left: 50px;"><a target="_top" href="${pageContext.request.contextPath}/home">主页</a></span>
 	  </div>
 	</div>
 </div>

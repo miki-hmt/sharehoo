@@ -115,8 +115,8 @@ a:hover{
 <div class="club-nav">
 <div class="logo"><a href="http://sharehoo.cn/" title="IT帮-资讯传播社区" target="_blank"><img src="./images/banner/ti.jpg" style=" width:180px;height:62px;border-left: 0px solid #B6241F;"></a></div>
 <ul id="navMain" class="mainnav">
-    <li><a target="_blank" title="" href="Topic_list.action?sectionId=7">IT面试艺术</a></li>
-    <li><a target="_blank" title="javaWeb-api" href="Topic_list.action?sectionId=21">原创文章</a></li>
+    <li><a target="_blank" title="" href="topic/section/7">IT面试艺术</a></li>
+    <li><a target="_blank" title="javaWeb-api" href="topic/section/21">原创文章</a></li>
     <li><a target="_blank" title="" href="">javaWeb-api</a>
     	
 		 <ul>
@@ -139,54 +139,54 @@ a:hover{
 	<li><a target="_blank" title="" href="#">IT编程/语言</a>
 
 		<ul>	  
-		      <li><a href="Topic_list.action?sectionId=1" target="_blank" title="日有一计，必有所获">后端语言
+		      <li><a href="topic/section/1" target="_blank" title="日有一计，必有所获">后端语言
 		         </a>
 		     </li>
-		    <li><a href="Topic_list.action?sectionId=8"  target="_blank" title="CSS">前端样式
+		    <li><a href="topic/section/8"  target="_blank" title="CSS">前端样式
 		        </a>
 		    </li>
-		     <li><a href="Topic_list.action?sectionId=7"  target="_blank" title="HTML">网页制作
+		     <li><a href="topic/section/7"  target="_blank" title="HTML">网页制作
 		        </a>
 		      </li>
-		     <li><a href="Topic_list.action?sectionId=11"  target="_blank" title="HTML">技术求助
+		     <li><a href="topic/section/11"  target="_blank" title="HTML">技术求助
 		        </a>
 		      </li>         
        		</ul>
 		
 	</li>
-	<li><a target="_blank" title="" href="Topic_list.action?sectionId=16">大数据</a></li>
-    <li><a target="_blank" title="" href="Topic_list.action?sectionId=13">服务运维</a></li>
-    <li><a target="_blank" title="" href="Topic_list.action?sectionId=2">二手市场</a></li>
-    <li><a target="_blank" title="" href="Topic_list.action?sectionId=19">艺术/生活/美</a>
+	<li><a target="_blank" title="" href="topic/section/16">大数据</a></li>
+    <li><a target="_blank" title="" href="topic/section/13">服务运维</a></li>
+    <li><a target="_blank" title="" href="topic/section/2">二手市场</a></li>
+    <li><a target="_blank" title="" href="topic/section/19">艺术/生活/美</a>
 
 		<ul>	  
-		      <li><a href="Topic_list.action?sectionId=19" target="_blank" title="日有一计，必有所获">美食美客
+		      <li><a href="topic/section/19" target="_blank" title="日有一计，必有所获">美食美客
 		         </a>
 		     </li>
-		    <li><a href="Topic_list.action?sectionId=14" target="_blank" title="宁可食无肉，不可居无乐">音乐心灵
+		    <li><a href="topic/section/14" target="_blank" title="宁可食无肉，不可居无乐">音乐心灵
 		        </a>
 		    </li>
-		     <li><a href="Topic_list.action?sectionId=15" target="_blank" title="不吐不快">约伴出游
+		     <li><a href="topic/section/15" target="_blank" title="不吐不快">约伴出游
 		        </a>
 		    </li>  
-			<li><a href="Topic_list.action?sectionId=4" target="_blank" title="生活那些事">吐吐吐嘈
+			<li><a href="topic/section/4" target="_blank" title="生活那些事">吐吐吐嘈
 		        </a>
 		    </li>
 
-			<li><a href="Topic_list.action?sectionId=13" target="_blank" title="前端样式">精致物品
+			<li><a href="topic/section/13" target="_blank" title="前端样式">精致物品
 		        </a>
 		    </li>                 
        		</ul>
 </li>
-    <li><a target="_blank" title="" href="Topic_list.action?sectionId=3">资源分享</a></li>
+    <li><a target="_blank" title="" href="topic/section/3">资源分享</a></li>
     
-    <li><a target="_blank" title="" href="Topic_list.action?sectionId=12">游戏圈</a></li>
+    <li><a target="_blank" title="" href="topic/section/12">游戏圈</a></li>
     
 
     <li><a target="_blank" title="" href="SoftSection_listpr.action">写帖子/博客</a>
 
 		 <ul>	
-			<li><a href="Topic_list.action?sectionId=11"  target="_blank" title="HTML">发帖求助
+			<li><a href="topic/section/11"  target="_blank" title="HTML">发帖求助
 		        </a>
 		      </li>   
 		      <li><a href="javascript:void(0);" onclick="writeBlog()" target="_blank" title="日有一计，必有所获">去写博客
@@ -219,7 +219,7 @@ a:hover{
     
     <!-- 图文版块   2017.05.04   -->
       <strong>最新</strong>
-      <span class="modTit-link"><a href="Topic_list.action?sectionId=21">更多</a></span></h2>
+      <span class="modTit-link"><a href="topic/section/21">更多</a></span></h2>
     <div class="left">
       <ul class="miki">
       <c:forEach items="${countList }" var="article">
@@ -243,9 +243,9 @@ a:hover{
           <li>
            <c:choose>
           	<c:when test="${topic.code==null }">
-          		<a href="Topic_details.action?topicId=${topic.id }" title="${topic.title }" target="_blank">${topic.title }</a>
+          		<a href="${host}/topic/detail/${topic.id }" title="${topic.title }" target="_blank">${topic.title }</a>
           		<span class="newslistSubTitle">
-              		<a href="Topic_details.action?topicId=${topic.id }" title="香焦叶" target="_blank">
+              		<a href="${host}/topic/detail/${topic.id }" title="香焦叶" target="_blank">
 				<span class="time${status.count}" title="2018-10-30 00:02:32"><fmt:formatDate value="${topic.publishTime }" pattern="yy-MM-dd HH:mm:ss"/></span></a>
             	</span>
           	</c:when>
@@ -285,14 +285,14 @@ a:hover{
 <div class="row chaotong"></div>
 <div class="row r2">
   <div class="col">
-    <h2 class="modTit"><strong><a href="#">网友原创</a></strong><span class="modTit-link"><a href="Topic_list.action?sectionId=21">更多</a></span></h2>
+    <h2 class="modTit"><strong><a href="#">网友原创</a></strong><span class="modTit-link"><a href="topic/section/21">更多</a></span></h2>
     <div class="r2bor">
       <ul class="newslist" id="dataClubYch">
       <c:forEach items="${ycTopicList }" var="topic">
       <li>
 	<c:choose>
           	<c:when test="${topic[3]==null }">
-          		<a href="Topic_details.action?topicId=${topic[0] }" target="_blank">${topic[1] }</a>${topic[2] }
+          		<a href="${host}/topic/detail/${topic[0] }" target="_blank">${topic[1] }</a>${topic[2] }
 			
           	</c:when>
           	<c:otherwise>
@@ -314,7 +314,7 @@ a:hover{
 		<li>
 	<c:choose>
           	<c:when test="${topic.code==null }">
-          		<a target="_blank" title="${topic.title }  " href="Topic_details.action?topicId=${topic.id }">${topic.title }  </a>${topic.user.nickName  }
+          		<a target="_blank" title="${topic.title }  " href="${host}/topic/detail/${topic.id }">${topic.title }  </a>${topic.user.nickName  }
           	</c:when>
           	<c:otherwise>
           		<a target="_blank" title="${topic.title }  " href="http://sharehoo.cn/${topic.code }.html">${topic.title }  </a>${topic.user.nickName  }
@@ -329,7 +329,7 @@ a:hover{
      <c:forEach items="${helpTopicList }" var="topic">
 	<li><c:choose>
           	<c:when test="${topic[3]==null }">
-          		<a href="Topic_details.action?topicId=${topic[0] }" target="_blank">${topic[1] }</a>${topic[2] }
+          		<a href="${host}/topic/detail/${topic[0] }" target="_blank">${topic[1] }</a>${topic[2] }
           	</c:when>
           	<c:otherwise>
           		<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${topic[1] }</a>${topic[2] }
@@ -346,49 +346,49 @@ a:hover{
 	 <h2 class="modTit" style="margin:0px;padding:0px;"> <strong><a href="#">版块排行</a></strong><span class="modTit-link"></span></h2>
 	  <ul class="paihang" id="rank" style="margin:0; padding:0; border:none; list-style:none;">             
 	   <li>
-		   <em>01</em><a href="Topic_list.action?sectionId=1" target="_blank">javaWeb</a>
+		   <em>01</em><a href="topic/section/1" target="_blank">javaWeb</a>
 		   <span><i style="width:52%;"></i></span>        
 	   </li>  
 	                 
 	   <li>          
-		   <em>02</em><a href="Topic_list.action?sectionId=11" target="_blank">出谋划策</a>  
+		   <em>02</em><a href="topic/section/11" target="_blank">出谋划策</a>  
 		   <span>            <i style="width:32%;"></i>          </span>       
 	   </li>  
 	   
 	  <li> 
-		  <em>03</em> <a href="Topic_list.action?sectionId=16" target="_blank">大数据</a>          
+		  <em>03</em> <a href="topic/section/16" target="_blank">大数据</a>          
 		  <span>            <i style="width:20%;"></i>          </span>        
 	  </li>  
 	                
 	  <li>
-		  <em>04</em><a href="Topic_list.action?sectionId=20" target="_blank">编程语言</a> 
+		  <em>04</em><a href="topic/section/20" target="_blank">编程语言</a> 
 		   <span>            <i style="width:15%;"></i>          </span>        
 	   </li>     
 	              
 	   <li>         
-		    <em>05</em>          <a href="Topic_list.action?sectionId=12" target="_blank">游戏开发</a>
+		    <em>05</em>          <a href="topic/section/12" target="_blank">游戏开发</a>
 		   <span>  <i style="width:2%;"></i>  </span>       
 	    </li> 
 	              
 	    <li> 
-		     <em>06</em>  <a href="Topic_list.action?sectionId=15" target="_blank">约伴出游</a> 
+		     <em>06</em>  <a href="topic/section/15" target="_blank">约伴出游</a> 
 		     <span>  <i style="width:10%;"></i></span>        
 	     </li>
 	                     
 	  <li>   
-		  <em>07</em> <a href="Topic_list.action?sectionId=19" target="_blank">美食美客</a> 
+		  <em>07</em> <a href="topic/section/19" target="_blank">美食美客</a> 
 		  <span>  <i style="width:8%;"></i> </span>        
 	  </li> 
 	   <li> 
-		   <em>08</em>  <a href="Topic_list.action?sectionId=2" target="_blank">二手市场</a> 
+		   <em>08</em>  <a href="topic/section/2" target="_blank">二手市场</a> 
 		       <span> <i style="width:6%;"></i></span>        
 	   </li>               
 	  <li> 
-		  <em>09</em> <a href="Topic_list.action?sectionId=18" target="_blank">微信开发</a>
+		  <em>09</em> <a href="topic/section/18" target="_blank">微信开发</a>
 		   <span> <i style="width:3%;"></i></span>       
 	    </li>                     
 	      <li>
-		       <em>10</em>  <a href="Topic_list.action?sectionId=8" target="_blank">HTML5+CSS</a> 
+		       <em>10</em>  <a href="topic/section/8" target="_blank">HTML5+CSS</a> 
 		       <span> <i style="width:2%;"></i></span>        
 	      </li>  
 	    </ul>
@@ -418,17 +418,17 @@ a:hover{
 	 <div style="height:120px;border:1px solid silver;border-left:0px;border-right:0px;">
 	  <ul class="paihang" id="rank" style="margin:0; padding:0; border:none; list-style:none;">             
 		   <li>
-			   <em>在线人数</em><a href="Topic_list.action?sectionId=1" target="_blank">：${application.onlineCount }</a>
+			   <em>在线人数</em><a href="topic/section/1" target="_blank">：${application.onlineCount }</a>
 			   <span><i style="width:22%;"></i></span>        
 		   </li>  
 		                 
 		   <li>          
-			   <em>今日访问量</em><a href="Topic_list.action?sectionId=11" target="_blank">：233</a>  
+			   <em>今日访问量</em><a href="topic/section/11" target="_blank">：233</a>  
 			   <span>            <i style="width:32%;"></i>          </span>       
 		   </li>  
 		   
 		  <li> 
-			  <em>总访问量:</em> <a href="Topic_list.action?sectionId=16" target="_blank">：<%=count %></a>          
+			  <em>总访问量:</em> <a href="topic/section/16" target="_blank">：<%=count %></a>          
 			  <span>            <i style="width:70%;"></i>          </span>        
 		  </li>
 	  </ul>
@@ -473,7 +473,7 @@ a:hover{
 <c:forEach items="${sectionList }" var="section"  begin="0" end="7" step="1">
 <div id="table_m_1371438909822" class="table_m clearfix ih-60 ui-droppable ui-droppable, ui-sortable" style="border: 0px; margin: 0px 10px 10px 0px; padding: 0px; position: relative;">
 	<div class="table_head" style="height: 25px; line-height: 25px; margin-bottom: 5px; background-image: url(topic/images/daily_tit_bg_10.jpg); background-color: rgb(255, 255, 255); background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
-		<a href="Topic_list.action?sectionId=${section.id }" target="_blank">
+		<a href="topic/section/${section.id }" target="_blank">
 			<div class="Tc-18-4">${fn:substring(section.name, 0, 2)}</div>
 			<div class="Tc-18-1">${fn:substring(section.name, 2, 10)}</div>
 			<div class="love-more">更多</div>
@@ -507,7 +507,7 @@ a:hover{
 
 						<c:choose>
 				          	<c:when test="${topic[3]==null }">
-				          		<a href="Topic_details.action?topicId=${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
+				          		<a href="${host}/topic/detail/${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
 				          	</c:when>
 				          	<c:otherwise>
 				          		<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
@@ -580,7 +580,7 @@ a:hover{
 		<c:forEach items="${sectionList }" var="section"  begin="8" end="11" step="1">
 			<div id="table_m_1371438913403" class="table_m clearfix ih-60 ui-droppable ui-droppable, ui-sortable" style="border: 0px; margin: 0px 0px 10px; padding: 0px; position: relative;">
 				<div class="table_head" style="margin-top:-5px;height: 25px; line-height: 25px; margin-bottom: 5px; background-image: url(./topic/images/daily_tit_bg_10.jpg); background-color: rgb(255, 255, 255); background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
-					<a href="Topic_list.action?sectionId=${section.id }" target="_blank">
+					<a href="topic/section/${section.id }" target="_blank">
 						<div class="Tc-18-4">${fn:substring(section.name, 0, 2)}</div>
 						<div class="Tc-18-1">${fn:substring(section.name, 2, 10)}</div>
 						<div class="love-more">更多</div>
@@ -613,7 +613,7 @@ a:hover{
 							<div class="title_s love-height a_color_1" "="">
 								<c:choose>
 								<c:when test="${topic[3]==null }">
-									<a href="Topic_details.action?topicId=${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
+									<a href="${host}/topic/detail/${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
 								</c:when>
 								<c:otherwise>
 									<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
@@ -639,7 +639,7 @@ a:hover{
 		<c:forEach items="${sectionList }" var="section"  begin="13" end="15" step="1">
 			<div id="table_m_1371438913403" class="table_m clearfix ih-60 ui-droppable ui-droppable, ui-sortable" style="border: 0px; margin: 0px 0px 10px; padding: 0px; position: relative;">
 				<div class="table_head" style="height: 25px; line-height: 25px; margin-bottom: 5px; background-image: url(./topic/images/daily_tit_bg_10.jpg); background-color: rgb(255, 255, 255); background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
-					<a href="Topic_list.action?sectionId=${section.id }" target="_blank">
+					<a href="topic/section/${section.id }" target="_blank">
 					<div class="Tc-18-4">${fn:substring(section.name, 0, 2)}</div>
 					<div class="Tc-18-1">${fn:substring(section.name, 2, 10)}</div>
 					<div class="love-more">更多</div>
@@ -671,7 +671,7 @@ a:hover{
 								<div class="title_s love-height a_color_1" "="">
 									<c:choose>
 										<c:when test="${topic[3]==null }">
-											<a href="Topic_details.action?topicId=${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
+											<a href="${host}/topic/detail/${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
 										</c:when>
 										<c:otherwise>
 											<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
@@ -902,7 +902,7 @@ a:hover{
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			$.alert("您还未登陆！");
 		} else {
-			window.location.href="Topic_preSave.action?sectionId=11";
+			window.location.href="topic/write?sectionId=11";
 		}	
 }
 </script>
@@ -923,7 +923,7 @@ a:hover{
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			$.alert("您还未登陆！");
 		} else {
-			window.location.href="Topic_list.action?sectionId=11";
+			window.location.href="topic/section/11";
 		}	
 }
 </script>

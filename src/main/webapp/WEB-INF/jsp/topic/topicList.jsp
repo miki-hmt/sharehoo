@@ -15,17 +15,17 @@
 	会员可以发帖交流与讨论，每个人都有一个个人博客，可以在上面写下自己的心得与感悟。同时提供资源下载，开源源码下载，课程设计，专注于服务大学生。">
 <title>IT帮-资讯传播社区--技术交流_干货分享-百家争鸣</title>
          
- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style5.css">                
-  <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />              
-<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/bootstrap.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/uniform.css" />
-<script src="${pageContext.request.contextPath}/admin/js/jquery.ui.custom.js"></script>
+ <link rel="stylesheet" href="${host}/css/style5.css">                
+  <link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />              
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.css" />
+<link rel="stylesheet" href="${host}/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
 
 
-<script src="${pageContext.request.contextPath }/js/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/timer.js"></script>
+<script type="text/javascript" src="${host}/js/timer.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
   debugger
@@ -112,7 +112,7 @@ if('${currentUser.nickName}'==''){
 alert("请先登陆，再发帖！");
 return false;
 }
-
+}
 function modifyTopic(topicId,topicTop,topicGood){
 	$("#topicId").val(topicId);
 	$("#topicTop").val(topicTop);
@@ -156,7 +156,7 @@ padding:-4px 0;
 
                                  <!-- 2016.09.21修改 -->
                                  
-<div style=" width: 1200px;height:900px; margin: 0 auto;background:url('images/rw2.png');margin-top:-9px;background-color:#FFFFFF;border:0px solid #AC9B8B;box-shadow:2px 5px 5px rgba(0,0,0,0.8);">
+<div style=" width: 1200px;height:900px; margin: 0 auto;background:url('${host}/images/rw2.png');margin-top:-9px;background-color:#FFFFFF;border:0px solid #AC9B8B;box-shadow:2px 5px 5px rgba(0,0,0,0.8);">
 
 <div style="width: 1200px; margin: 0 auto;">
 	<div style="margin-bottom: 10px;">
@@ -166,7 +166,7 @@ padding:-4px 0;
 	                   <!-- a class="" href="Topic_preSave.action验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06 -->
 	                   
 	                   
-		<a class="" href="Topic_preSave.action?sectionId=${section.id }"><img alt="随便说说" src="${pageContext.request.contextPath}/images/post.jpg"></a>
+		<a class="" href="${host}/topic/write?sectionId=${section.id }"><img alt="随便说说" src="${pageContext.request.contextPath}/images/post.jpg"></a>
 		<div class="pagination alternate pull-right" align="center" style="margin: 0px;">
 			<ul class="clearfix">
 				${pageCode }
@@ -184,13 +184,13 @@ padding:-4px 0;
 	<div class="slider" style="border:4px solid white "><!--主体结构，请用此类名调用插件，此类名可自定义-->
 		<ul style="margin:0 0 10px 0px;padding:0">
 			<c:forEach items="${bannerList }" var="banner">
-				<li><a href="${banner.url}" style="overflow:auto"><img src="${pageContext.request.contextPath}/${banner.news_img}" alt="${banner.news_name }" /></a></li>
+				<li><a href="${banner.url}" style="overflow:auto"><img src="${host}/${banner.news_img}" alt="${banner.news_name }" /></a></li>
 			</c:forEach>
 		</ul>
 	</div>
 </div>
-<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/YuxiSlider.jQuery.min.js"></script>
+<script src="${host}/js/jquery.min.js"></script>
+<script src="${host}/js/YuxiSlider.jQuery.min.js"></script>
 <script>
 $(".slider").YuxiSlider({
 	width:290, //容器宽度
@@ -241,17 +241,17 @@ $(".slider").YuxiSlider({
 										
 									</c:when>
 									<c:otherwise>
-										<img src="./images/icon/hot.png">
+										<img src="${host}/images/icon/hot.png">
 									</c:otherwise>
 								</c:choose>
 								<c:choose>
 									<c:when test="${topic.top==1 }">
-										<img src="./images/icon/ding.gif">
+										<img src="${host}/images/icon/ding.gif">
 									</c:when>
 									<c:otherwise></c:otherwise>
 								</c:choose>
 																															
-								<a href="Topic_details.action?topicId=${topic.id }" target="_blank">${topic.title }</a></div>
+								<a href="${host}/topic/detail/${topic.id}" target="_blank">${topic.title }</a></div>
 							<div style="border:0px solid red;width:15%;float:right;text-align:right;">
 							<a href="#"><font style="font-size:8pt;">
 								<fmt:formatDate value="${topic.publishTime}" pattern="yy-MM-dd"/></font></a>
@@ -329,16 +329,16 @@ $(".slider").YuxiSlider({
 										
 									</c:when>
 									<c:otherwise>
-										<img src="./images/icon/hot.png">
+										<img src="${host}/images/icon/hot.png">
 									</c:otherwise>
 								</c:choose>
 								<c:choose>
 									<c:when test="${topic.top==1 }">
-										<img src="./images/icon/ding.gif">
+										<img src="${host}/images/icon/ding.gif">
 									</c:when>
 									<c:otherwise></c:otherwise>
 								</c:choose>																
-								<a href="Topic_details.action?topicId=${topic.id}" style="blue" target="_blank">${topic.title }</a></div>
+								<a href="${host}/topic/detail/${topic.id}" style="blue" target="_blank">${topic.title }</a></div>
 								<div style="border:0px solid red;width:15%;float:right;text-align:right;"><a href="#"><font style="font-size:8pt">
 									<span class="time${status.count}" title=""><fmt:formatDate value="${topic.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/></font></a></div>
 							</td>

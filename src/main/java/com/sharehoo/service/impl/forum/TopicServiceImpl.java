@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
@@ -26,7 +27,7 @@ import com.sharehoo.util.forum.StringUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
-
+@Transactional
 @Service("topicService")
 public class TopicServiceImpl implements TopicService {
 

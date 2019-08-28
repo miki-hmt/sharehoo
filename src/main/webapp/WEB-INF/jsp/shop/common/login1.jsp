@@ -56,7 +56,7 @@
 		function Login(){	
 			 if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			var curPage=window.location.href;
-			window.location.href="${pageContext.request.contextPath}/login.jsp?prePage="+curPage;
+			window.location.href="${pageContext.request.contextPath}/login?prePage="+curPage;
 			 }else{
 				  alert("上了还想上嘛？");
 			  }
@@ -258,7 +258,7 @@
 	               		          </a>
 	               		    </dt>                     
 	               		    <dt>
-	               		       <a href="http://sharehoo.cn/Topic_list.action?sectionId=11" target="_blank" class="p-ask clearfix">
+	               		       <a href="http://sharehoo.cn/topic/section/11" target="_blank" class="p-ask clearfix">
 	               		          <em class="icon"></em>
 	               		          <span>提问题</span>
 	               		       </a>
@@ -282,7 +282,7 @@
 	               		      </a>
 	               		   </dt>                     
 	               		   <dt>
-	               		      <a href="http://sharehoo.cn/Topic_preSave.action?sectionId=20" target="_blank" class="c-code clearfix">
+	               		      <a href="http://sharehoo.cn/topic/write??sectionId=20" target="_blank" class="c-code clearfix">
 	               		         <em class="icon"></em>
 	               		         <span>创建代码片</span>
 	               		      </a>
@@ -347,8 +347,8 @@
 	               	 <a href="${pageContext.request.contextPath }/Notice_listpr.action" target="_blank">论坛</a>
 	               </dd>                      
 	               	<dd> <a href="Shop_home.action" target="_blank">下载</a></dd>                      
-	               	<dd> <a href="${pageContext.request.contextPath }/Topic_list.action?sectionId=21" target="_blank">知识库</a></dd>                      
-	               	<dd><a href="${pageContext.request.contextPath }/Topic_list.action?sectionId=11" target="_blank">技术问答</a></dd>                      
+	               	<dd> <a href="${pageContext.request.contextPath }/topic/section/21" target="_blank">知识库</a></dd>                      
+	               	<dd><a href="${pageContext.request.contextPath }/topic/section/11" target="_blank">技术问答</a></dd>                      
 	               	<dd><a href="#" target="_blank">博客头条</a></dd>                     
 	               	<dd style="display:none"> <a href="${pageContext.request.contextPath }/Topic_leaveList.action" target="_blank">秘密墙</a></dd>                    
              	</dl>                  

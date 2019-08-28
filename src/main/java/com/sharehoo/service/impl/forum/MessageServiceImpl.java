@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -14,6 +15,7 @@ import com.sharehoo.dao.impl.forum.MessageDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Message;
 import com.sharehoo.service.MessageService;
+@Transactional
 @Service("messageService")
 public class MessageServiceImpl implements MessageService {
 	

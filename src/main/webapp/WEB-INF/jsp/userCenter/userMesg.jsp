@@ -154,8 +154,8 @@
 												<font style="color:gray;"><br>
 												<img alt="" src="${pageContext.request.contextPath}/${uu.get(reply).face }"
 													style="width: 25px; height: 25px;border-radius:50%;">${uu.get(reply).nickName }&nbsp;&nbsp;在您的帖子&nbsp;
-												<a href="Topic_details.action?topicId=${to.get(reply).id }" target="_blank">${to.get(reply).title }</a>&nbsp;回复了您：<br>
-												<br></font>${reply.content }<br><a href="Topic_details.action?topicId=${to.get(reply).id }" target="_blank">查看详细细节>></a>												
+												<a href="${host}/topic/detail/${to.get(reply).id }" target="_blank">${to.get(reply).title }</a>&nbsp;回复了您：<br>
+												<br></font>${reply.content }<br><a href="${host}/topic/detail/${to.get(reply).id }" target="_blank">查看详细细节>></a>												
 										</td>
 									</tr>
 									

@@ -6,16 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>IT帮-资讯传播社区--芝兰之室</title>
-<link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
-<link href="css/style.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/emoticon.css" />
-<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.emoticons.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/ckeditor410/ckeditor.js"></script>
+<link href="${host}/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="${host}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+<link rel="stylesheet" type="text/css" href="${host}/css/emoticon.css" />
+<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-
 
 //简单的 敏感词汇验证  2016.12.13 ....时间允许，可以建一个数据库表，存储相关词汇 
 //定义敏感字符     
@@ -47,7 +44,7 @@ function checkForm(){
 	if('${currentUser.nickName}'==''){
 		alert("请先登陆，再发布！");
 		/* var url="Report_preSave.action?role=0&reportType=1";
-		window.open("login.jsp?url="+url); */
+		window.open("login?url="+url); */
 		return false;
 	}
 	if ($("#title").val()==""||$("#title").val()==null) {
@@ -139,8 +136,8 @@ function checkForm(){
 <div id="footer" style="width: 1200px; margin: 0 auto;">
 	<jsp:include page="../common/footer.jsp"/>
 </div>
-<script src="${pageContext.request.contextPath }/shop/alert/jquery-1.2.6.js" type="text/javascript"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.funkyUI.js"></script>
+<script src="${host}/shop/alert/jquery-1.2.6.js" type="text/javascript"></script>
+<script type="text/javascript" src="${host}/js/jquery.funkyUI.js"></script>
 	<script type="text/javascript">
 		/* //放新浪微博表情
 		$("#message_face").jqfaceedit({

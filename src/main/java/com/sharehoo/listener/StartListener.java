@@ -8,13 +8,19 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
 import com.sharehoo.config.lang.Consts;
 import com.sharehoo.util.CxCacheUtil;
-
+@Configuration
 @WebListener
 public class StartListener implements ServletContextListener{
 	private Logger logger = Logger.getLogger(StartListener.class);
+	
+	//************ 使用该标签，要加上@Configuration，否则取不到值
+	@Value("${spring.site.store.host}")
+	private String host;
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		logger.info("监听器初始化...");
@@ -30,6 +36,11 @@ public class StartListener implements ServletContextListener{
 		
 		String softPath = path + Consts.FORUM_UPLOAD_PATH +"/"+Consts.FORUM_UPLOAD_SOFT_FOLDER +"/" + Consts.SDF_YYYYMM.format(new Date());
 		ct.setAttribute("softPath", softPath);
+		logger.info("网站域名："+host);
+		/***********
+		 * 将域名存放到全局变量中
+		 * *******************************/
+		ct.setAttribute("host", host);		
 	}
 	
 	@Override

@@ -16,26 +16,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>${topic.title}-IT帮-资讯传播社区讨论区</title>
 <meta name="Keywords" content="${topic.title}">
 <meta name="description" content="${topic.title}" />
-<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 <!--我的高亮效果是zenburn-->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/highlight/styles/gruvbox-dark.css">
-<script src="${pageContext.request.contextPath}/highlight/highlight.pack.js"></script>
+<link rel="stylesheet" href="${host}/highlight/styles/gruvbox-dark.css">
+<script src="${host}/highlight/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${host}/js/jquery-1.7.2.min.js"></script>
 
-<link href="css/style3.css" rel="stylesheet" type="text/css" />
+<link href="${host}/css/style3.css" rel="stylesheet" type="text/css" />
 
-<link rel="alternate"  href="//sharehoo.cn/Topic_details.action?topicId=${topic.id}" >
-<script src="js/jquery-1.11.1.js" type="text/javascript"></script>
-<script src="js/jquery.emoticons.js" type="text/javascript"></script>
+<link rel="alternate"  href="//sharehoo.cn/${host}/topic/detail/${topic.id}" >
+<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="${host}/js/jquery.emoticons.js" type="text/javascript"></script>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/emoticon.css" />
-<link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="${host}/css/emoticon.css" />
+<link href="${host}/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="${host}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 
 <!--  2018.07.24 代码块样式 -->
-<link href="css/popDrag.css" rel="stylesheet" type="text/css" />
+<link href="${host}/css/popDrag.css" rel="stylesheet" type="text/css" />
 
 <style type="text/css">
 	.demo1 img{ width: 23px; height: 23px; position: absolute; bottom:auto; left: 84%; margin-left: -10px; }
@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	.demo19 img{ width: 23px; height: 23px; position: absolute; bottom: auto; left: 88%; margin-left: -10px; }
 	.demo20 img{ width: 23px; height: 23px; position: absolute; bottom: auto; left: 88%; margin-left: -10px; }
 </style>
-<link href="css/style.css" rel="stylesheet" />
+<link href="${host}/css/style.css" rel="stylesheet" />
 
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/timer.js"></script>
@@ -135,13 +135,13 @@ function saveRep(){
 						<td>
 							<c:choose>
 									<c:when test="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='男'}">
-										<img alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 50px;height:500px;border-radius:50%;">
+										<img alt="" src="${host}/images/user/user0.gif" style="width: 50px;height:500px;border-radius:50%;">
 									</c:when>
 									<c:when test="${(topic.user.face==null||topic.user.face=='')&&topic.user.sex=='女'}">
-										<img alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 50px;height: 50px;border-radius:50%;">
+										<img alt="" src="${host}/images/user/female.gif" style="width: 50px;height: 50px;border-radius:50%;">
 									</c:when>
 									<c:otherwise>
-										<img alt="" src="${pageContext.request.contextPath}/${topic.user.face}" style="width: 50px;height: 50px;border-radius:50%;">
+										<img alt="" src="${host}/${topic.user.face}" style="width: 50px;height: 50px;border-radius:50%;">
 									</c:otherwise>
 							</c:choose>
 							<a href="#" style="font-size: 8pt;color: black;">${topic.user.nickName }</a>
@@ -222,13 +222,13 @@ function saveRep(){
 						<td>
 							<c:choose>
 									<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='男'}">
-										<img alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 50px;height: 50px;border-radius:50%;">
+										<img alt="" src="${host}/images/user/user0.gif" style="width: 50px;height: 50px;border-radius:50%;">
 									</c:when>
 									<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='女'}">
-										<img alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 50px;height: 50px;border-radius:50%;">
+										<img alt="" src="${host}/images/user/female.gif" style="width: 50px;height: 50px;border-radius:50%;">
 									</c:when>
 									<c:otherwise>
-										<img alt="" src="${pageContext.request.contextPath}/${reply.user.face}" style="width: 50px;height: 50px;border-radius:50%;">
+										<img alt="" src="${host}/${reply.user.face}" style="width: 50px;height: 50px;border-radius:50%;">
 									</c:otherwise>
 							</c:choose>
 														
@@ -311,14 +311,14 @@ function saveRep(){
 							&nbsp;<a href="#1" style="font-size: 9pt;text-align:right;color:gray;"onclick='copy("<c:out value="${reply.content }" escapeXml="true"/>","${(page-1)*10+status.index+1 }")'>引用</a>&nbsp;						
 							<a href="javascript:void();" onclick='zan("${status.index+1 }","${reply.id }","${reply.good }")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
 								<span id="good${status.index+1 }">
-									<img alt="" src="${pageContext.request.contextPath}/images/icon/thumbs10.png" style="width: 16px;height: 16px;">
+									<img alt="" src="${host}/images/icon/thumbs10.png" style="width: 16px;height: 16px;">
 										[<font id="gd${status.index+1}" style="font-weight:bold;color:red;">${reply.good }</font>]
 								</span>
 							</a>
 																																									
 							<a href="javascript:void();" onclick='bad("${status.index+1 }","${reply.id }","${reply.bad}")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
 								<span id="bad${status.index+1}">
-									<img alt="" src="${pageContext.request.contextPath}/images/icon/dislike3.png" style="width: 32px;height: 25px;">
+									<img alt="" src="${host}/images/icon/dislike3.png" style="width: 32px;height: 25px;">
 										[<font id="bd${status.index+1}"	style="font-weight:bold;color:red;">${reply.bad }</font>]
 								</span>
 							</a>
@@ -344,9 +344,9 @@ function saveRep(){
 												<tr>
 													<td style="width:78%;">
 														<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${sonReply.user.id}" target="_blank">
-															<img alt="" src="${pageContext.request.contextPath}/${sonReply.user.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.user.nickName }</a>&nbsp;回复&nbsp; 
+															<img alt="" src="${host}/${sonReply.user.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.user.nickName }</a>&nbsp;回复&nbsp; 
 																<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${sonReply.sonUser.id}" target="_blank">
-																	<img alt="" src="${pageContext.request.contextPath}/${sonReply.sonUser.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.sonUser.nickName}
+																	<img alt="" src="${host}/${sonReply.sonUser.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.sonUser.nickName}
 																</a>：<pre><code class="language-java hljs"	style="background-color:#FFFFFF;color:gray;">${sonReply.content }</code></pre>
 													</td>					
 													<td style="width:21%;">
@@ -475,7 +475,7 @@ function saveRep(){
     </form>  
 </div>
 
-<script src="js/PopDrag.js" type="text/javascript"></script>
+<script src="${host}/js/PopDrag.js" type="text/javascript"></script>
 
 <script type="text/javascript">  
     //初始化弹出框  
@@ -553,7 +553,7 @@ function popWin(){
 
                       <!-- 微信二维玛        2017.03.02               -->
 
-<script src="js/fun.js" type="text/javascript">
+<script src="${host}/js/fun.js" type="text/javascript">
 </script>
 <script type="text/javascript">
 
@@ -593,7 +593,7 @@ function popWin(){
 	<div class="popPanel">
 		<div class="popPanel-inner">
 			<div class="qrcodePanel">
-				<img src="images/miki.jpg" /><span>扫描二维码打赏小编</span></div>
+				<img src="${host}/images/miki.jpg" /><span>扫描二维码打赏小编</span></div>
 			<div class="arrowPanel">
 				<div class="arrow01">
 				</div>

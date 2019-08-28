@@ -96,7 +96,7 @@
 			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
-			<a class=" " href="http://sharehoo.cn/Topic_list.action?sectionId=4" target="_blank">赏金平台</a>
+			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
@@ -151,7 +151,7 @@ function openAddDlg(){
 function Login(){	
 	 if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 	var curPage=window.location.href;
-	window.location.href="${pageContext.request.contextPath}/login.jsp?prePage="+curPage;
+	window.location.href="${pageContext.request.contextPath}/login?prePage="+curPage;
 	 }else{
 		  alert("上了还想上嘛？");
 	  }
@@ -636,7 +636,7 @@ function htmlencode(s){
 	<h4 class="com_t">评论资源</h4>
 	<div class="cannot_com_c">
 		<p class="cannot_com_t"><i class="fa fa-exclamation-circle"></i><span>您不能发表评论，可能是以下原因：</span></p>
-		<p class="cannot_com_b"><em><a href="http://sharehoo.cn/login.jsp">登录</a>后才能评论</em></p>
+		<p class="cannot_com_b"><em><a href="http://sharehoo.cn/login">登录</a>后才能评论</em></p>
 		<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">待评论资源</a>
 	</div>
 </div>

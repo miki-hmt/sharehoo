@@ -72,10 +72,10 @@ a:hover {color:#FF6600; text-decoration: underline;}
 		<br/>
 		<br/>
 		<script type="text/javascript">
-					setTimeout("location.href='home.jsp'", 3000);
+					setTimeout("location.href='home'", 3000);
 		</script>
-		<span style="margin-left: 50px;"><a target="_top" href="<c:url value='/login.jsp'/>">3秒后自动跳转到登录页面</a></span>
-		<span style="margin-left: 50px;"><a target="_top" href="<c:url value='/home.jsp'/>">主页</a></span>
+		<span style="margin-left: 50px;"><a target="_top" href="<c:url value='/login'/>">3秒后自动跳转到登录页面</a></span>
+		<span style="margin-left: 50px;"><a target="_top" href="<c:url value='/home'/>">主页</a></span>
 	  </div>
 	</div>
 </div>

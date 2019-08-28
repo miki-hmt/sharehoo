@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Soft;
@@ -33,7 +34,7 @@ public class SoftSectionController {
 	private SoftService softService;
 	
 	@RequestMapping("/admin/softsection/list")
-	public String list(HttpServletRequest request,@PathVariable("page") String page,Model model)throws Exception{
+	public String list(HttpServletRequest request,@RequestParam(value="page",required=false) String page,Model model)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
@@ -52,7 +53,7 @@ public class SoftSectionController {
 	}
 	
 	@RequestMapping("/softsection/list")
-	public String listpr(HttpServletRequest request,@PathVariable("page") String page,Model model)throws Exception{
+	public String listpr(HttpServletRequest request,@RequestParam(value="page",required=false) String page,Model model)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}

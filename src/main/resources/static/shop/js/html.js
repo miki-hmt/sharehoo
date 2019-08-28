@@ -255,9 +255,9 @@ var userAgent = navigator.userAgent.toLowerCase();
               <div class="curr-icon"></div>\
             </div>\
             <dl>\
-              <dt><a href="http://sharehoo.cn/Topic_list.action?sectionId=1" target="_blank" class="p-news clearfix" style="display:none;"><em class="icon"></em><span>分享资讯</span></a></dt>\
+              <dt><a href="http://sharehoo.cn/topic/section/1" target="_blank" class="p-news clearfix" style="display:none;"><em class="icon"></em><span>分享资讯</span></a></dt>\
               <dt style="border: none;"><a href="javascript:void(0)"  onclick="javascript:upload()" target="_blank" class="p-doc clearfix"><em class="icon"></em><span>传文件</span></a></dt>\
-              <dt><a href="http://sharehoo.cn/Topic_list.action?sectionId=11" target="_blank" class="p-ask clearfix"><em class="icon"></em><span>提问题</span></a></dt>\
+              <dt><a href="http://sharehoo.cn/topic/section/11" target="_blank" class="p-ask clearfix"><em class="icon"></em><span>提问题</span></a></dt>\
               <dt><a href="#" target="_blank" class="p-blog clearfix"><em class="icon"></em><span>写博客</span></a></dt>\
               <dt><a href="javascript:void(0)"  onclick="javascript:upload()" target="_blank" class="p-src clearfix"><em class="icon"></em><span>传资源</span></a></dt>\
               </dl>\
@@ -295,9 +295,9 @@ var userAgent = navigator.userAgent.toLowerCase();
               <dd> <a href="http://sharehoo.cn/blog/Blog_show.action?userId=21" target="_blank">博客</a></dd>\
               <dd> <a href="http://sharehoo.cn" target="_blank">论坛</a></dd>\
               <dd> <a href="http://sharehoo.cn/shop/Shop_home.action" target="_blank">下载</a></dd>\
-              <dd> <a href="http://sharehoo.cn/Topic_list.action?sectionId=1" target="_blank">知识库</a></dd>\
-              <dd><a href="http://sharehoo.cn/Topic_list.action?sectionId=11" target="_blank">技术问答</a></dd>\
-              <dd><a href="http://sharehoo.cn/Topic_list.action?sectionId=21" target="_blank">原创社区</a></dd>\
+              <dd> <a href="http://sharehoo.cn/topic/section/1" target="_blank">知识库</a></dd>\
+              <dd><a href="http://sharehoo.cn/topic/section/11" target="_blank">技术问答</a></dd>\
+              <dd><a href="http://sharehoo.cn/topic/section/21" target="_blank">原创社区</a></dd>\
               <dd style="display:none;"> <a href="javascript:void(0)"  onclick="javascript:upload()" target="_blank">传文件</a></dd>\
             </dl>\
           </div>\

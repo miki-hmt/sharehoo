@@ -3,6 +3,7 @@ package com.sharehoo.service.impl.shop;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -12,7 +13,7 @@ import com.sharehoo.dao.BaseDAO;
 import com.sharehoo.dao.shop.TypeDao;
 import com.sharehoo.entity.shop.Type;
 import com.sharehoo.service.TypeService;
-
+@Transactional
 @Service("typeService")
 public class TypeServiceImpl implements TypeService {
 	

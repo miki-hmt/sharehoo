@@ -105,7 +105,7 @@ function check_up(thisform){
 						</div>
 					</c:when>
 				<c:otherwise>
-				<!-- <a href="login.jsp">登录</a>| -->
+				<!-- <a href="login">登录</a>| -->
 				<div class="header-user">
 					<font style="color:white;font-size:9pt;">
 						<a href="javascript:login()">登录&nbsp;</a>|<a href="register.jsp">&nbsp;注册&nbsp;</a>|
@@ -119,14 +119,14 @@ function check_up(thisform){
 		<div class="news-nav">
 			<div class="container clearfix">
 				<div class="nav-bar">
-					<a href="home.jsp" class="current">首页</a>
+					<a href="home" class="current">首页</a>
 					<a href="http://sharehoo.cn/blog/Blog_show.action?userId=21" target="_blank">博客社区<img src="./images/icon/hot.gif"></a>
 					<a class=" " href="${pageContext.request.contextPath}/shop/Shop_home.action" target="_blank">下载社区<img src="./images/icon/hot.gif"></a>
 					<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html" target="_blank">W3C文档</a>
-					<a href="Topic_list.action?sectionId=3" target="_blank">社友圈<img src="./images/icon/hot.gif"></a>			
-					<a class=" " href="game2.jsp" target="_blank">H5小游戏</a>			
-					<a href="Topic_leaveList.action" target="_blank">秘密墙<img src="./images/icon/hot.gif"></a>
-					<a href="SoftSection_listpr.action" target="_blank">软件下载</a>
+					<a href="topic/section/3" target="_blank">社友圈<img src="./images/icon/hot.gif"></a>			
+					<a class=" " href="h5" target="_blank">H5小游戏</a>			
+					<a href="secret" target="_blank">秘密墙<img src="./images/icon/hot.gif"></a>
+					<a href="softsection/list" target="_blank">软件下载</a>
 					<a class=" " href="http://sharehoo.cn/154339002942889.html" target="blank">社区规则</a>	
 				</div>
 				
@@ -165,7 +165,7 @@ $(document).ready(function(){
 		type: "POST",
 		dataType: "json",
 		data: {},
-		url: "Mess_getNews.action",
+		url: "/user/news",
 		success: function(result) {
 			if(result.mes){
 				$("#news").show();
@@ -186,7 +186,7 @@ function update(){
 		type: "POST",
 		dataType: "json",
 		data: {},
-		url: "Mess_getNews.action",
+		url: "/user/news",
 		success: function(result) {
 			if(result.mes){
 				$("#news").show();
