@@ -28,12 +28,58 @@
 	 	 <script type="text/javascript">
 			function deleteArticle(articleId){
 				if (confirm("您确定要删除这篇文章吗？")) {
-					$.post("../manage/Article_delete.action",{articleId:articleId},function(result){
-						if(result.success){
+					$.post("${host}/blog/manage/article/delete",{articleId:articleId},function(result){
+						if(result.status==200){
 							alert("文章已成功删除！");
 							location.reload(true);
 						}else{
-							alert("请先删除文章下评论！");
+							alert("删除失败！！");
+						}
+					},"json");
+				}else{
+					return;
+				}
+			}
+			
+			function operate(type,articleId){
+				switch(type){
+					case "recommend" :
+						recommendArticle(articleId);
+					break;
+					case "unrecommend" :
+						unrecommendArticle(articleId);
+					break;
+					case "publish" :
+						window.open("${host}/blog/manage/article/go?articleId="+articleId);
+					break;
+					case "update" :
+						window.open("${host}/blog/manage/article/preview?articleId="+articleId);
+					break;
+				}
+			}
+			
+			function recommendArticle(articleId){
+				if (confirm("您确定要将这篇文章设为推荐吗？")) {
+					$.post("${host}/blog/manage/article/recommend",{articleId:articleId},function(result){
+						if(result.status==200){
+							alert("设置成功！");
+							location.reload(true);
+						}else{
+							alert("设置失败！！");
+						}
+					},"json");
+				}else{
+					return;
+				}
+			}
+			function unrecommendArticle(articleId){
+				if (confirm("您确定要删除这篇文章吗？")) {
+					$.post("${host}/blog/manage/article/unRecommend",{articleId:articleId},function(result){
+						if(result.status==200){
+							alert("设置成功！");
+							location.reload(true);
+						}else{
+							alert("设置失败！！");
 						}
 					},"json");
 				}else{
@@ -60,12 +106,12 @@
           <h3><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></h3>
           <div class="autor"><span>作者：${article.editer }</span><span>分类：[<a href="#">${article.type }</a>]</span><span>浏览（<a href="#">${article.count }</a>）</span><span>评论（<a href="#">${article.count1 }</a>）</span>
           	<span>
-		      <select style="border:solid 1px green;" onchange='document.location.href=this.options[this.selectedIndex].value;'>
+		      <select style="border:solid 1px green;" onchange='operate(this.options[this.selectedIndex].value,${article.id })'>
 				 <option>编辑文章</option>
-				 <option value='${host}/blog/manage/article/go'>发表文章</option>
-				 <option value='${host}/blog/manage/article/preview?articleId=${article.id }'>修改文章</option>		
-				 <option value='${host}/blog/manage/article/recommend?articleId=${article.id }'>设为推荐</option>
-				 <option value='${host}/blog/manage/article/unRecommend?articleId=${article.id }'>取消推荐</option>
+				 <option value='publish'>发表文章</option>
+				 <option value='update'>修改文章</option>		
+				 <option value='recommend'>设为推荐</option>
+				 <option value='unrecommend'>取消推荐</option>
 			</select>
 		<button style="background:#0F9C7C;color:white;" onclick="javascript:deleteArticle(${article.id })">删除</button>
           </span>

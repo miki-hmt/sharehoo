@@ -7,10 +7,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Reply;
 import com.sharehoo.entity.forum.Section;
@@ -75,7 +79,7 @@ public class TopicController {
 	// 发帖方法实现
 	public String preSave(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="sectionId",required=false) int sectionId) throws Exception {
 		HttpSession session = request.getSession();
-		User currentUser = (User) session.getAttribute("currentUser");
+		User currentUser = (User) session.getAttribute(Consts.CURRENTUSER);
 
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
 		if (currentUser == null) {
@@ -94,7 +98,7 @@ public class TopicController {
 	@RequestMapping("/topic/leftsecret")
 	public String preSave2(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
 		HttpSession session = request.getSession();
-		User currentUser = (User) session.getAttribute("currentUser");
+		User currentUser = (User) session.getAttribute(Consts.CURRENTUSER);
 		
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
 		if (currentUser == null) {
@@ -156,7 +160,7 @@ public class TopicController {
 
 		// 2017.05.01 回复帖子实现用户积分+1
 		HttpSession session = request.getSession();
-		User currentUser = (User) session.getAttribute("currentUser");
+		User currentUser = (User) session.getAttribute(Consts.CURRENTUSER);
 		if (currentUser == null) {
 			request.getRequestDispatcher("/errorlogin").forward(request, response);
 		}

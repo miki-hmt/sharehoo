@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.service.forum.ReplyService;
 
@@ -24,7 +25,7 @@ public class MessController {
 	public JSONObject getNews(HttpServletRequest request)throws Exception{
 		JSONObject result=new JSONObject();
 		HttpSession session=request.getSession();
-		User user = (User)session.getAttribute("currentUser");
+		User user = (User)session.getAttribute(Consts.CURRENTUSER);
 		if(user!=null){
 			Long count=replyService.getUnReplyCountByUserId(user.getId());
 			if(count>0){
@@ -44,7 +45,7 @@ public class MessController {
 	public JSONObject getNewsCount(HttpServletRequest request)throws Exception{
 		JSONObject result=new JSONObject();
 		HttpSession session=request.getSession();
-		User user = (User)session.getAttribute("currentUser");
+		User user = (User)session.getAttribute(Consts.CURRENTUSER);
 		if(user!=null){
 			Long count=replyService.getUnReplyCountByUserId(user.getId());
 			if(count>0){

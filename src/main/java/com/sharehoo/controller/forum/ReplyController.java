@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Reply;
 import com.sharehoo.entity.forum.Topic;
@@ -238,7 +239,7 @@ public class ReplyController {
 	public JSONObject delete(HttpServletRequest request,@PathVariable("replyId") int replyId)throws Exception{
 		JSONObject result=new JSONObject();
 		HttpSession session=request.getSession();
-		User user = (User)session.getAttribute("currentUser");
+		User user = (User)session.getAttribute(Consts.CURRENTUSER);
 		if("2".equals(user.getType()) || user.getSectionList().size()>0){
 			Reply reply=replyService.findReplyById(replyId);
 			replyService.deleteReply(reply);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sharehoo.base.ipseek.IpGet;
 import com.sharehoo.base.ipseek.IpSeekUtils;
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.Article;
 import com.sharehoo.entity.forum.Critique;
 import com.sharehoo.entity.forum.User;
@@ -82,7 +83,7 @@ public class CritiqueController {
 	@RequestMapping("/blog/{nicknameId}/critique/delete")
 	@ResponseBody
 	public E3Result delete(HttpServletRequest req,@RequestParam("id") int id)throws Exception{
-		User user = (User)req.getSession().getAttribute("currentUser");
+		User user = (User)req.getSession().getAttribute(Consts.CURRENTUSER);
 		if(null!=user) {
 			if(id>0){
 				Critique critique=critiqueService.getCritiqueById(id);

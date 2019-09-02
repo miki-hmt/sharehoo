@@ -51,7 +51,8 @@
           <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd>${critique.name }
-            <time><fmt:formatDate value="${critique.time }" pattern="yyyy-MM-dd HH:mm:ss "/></time>&nbsp;&nbsp;<a href="../manage/CritiqueManage_delete.action?id=${critique.id }" class="dellink"><span style="color:red;">删除</span></a>
+            <time><fmt:formatDate value="${critique.time }" pattern="yyyy-MM-dd HH:mm:ss "/></time>&nbsp;&nbsp;
+            	<a href="../manage/CritiqueManage_delete.action?id=${critique.id }" class="dellink"><span style="color:red;">删除</span></a>
           </dd>
          	<font style="color:gray;">${critique.content }</font> 
         </dl>

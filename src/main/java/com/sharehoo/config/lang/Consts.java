@@ -23,6 +23,8 @@ public interface Consts {
 	public static final SimpleDateFormat SDF_YYYYMM = new SimpleDateFormat("yyyyMM");
 	public static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
+	public static final String CURRENTUSER = "currentUser";
+	
 	/*
 	 * 默认头像
 	 */

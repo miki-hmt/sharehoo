@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,12 +45,12 @@ public class ArticleController {
 	/*
 	 * 前台用户文章保存方法  2017.04.25
 	 */
-	@RequestMapping("blog/manage/article/save")
+	@RequestMapping(value="blog/manage/article/save",method= RequestMethod.POST)
 	@ResponseBody
 	public E3Result save(HttpServletRequest request,@RequestParam(value="articleImage",required=false) MultipartFile articleImage,@RequestParam(value="faceFileName",required=false) String faceFileName,
 			Article article){
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(user==null) {
 			return E3Result.build(401, "请登录后再发表...");
 		}
@@ -109,7 +110,7 @@ public class ArticleController {
 	@ResponseBody
 	public E3Result delete(@RequestParam("articleId")int articleId,Model model,HttpServletRequest request)throws Exception{
 
-		User user=(User) request.getSession().getAttribute("currentUser");
+		User user=(User) request.getSession().getAttribute(Consts.CURRENTUSER);
 		if(user==null) {
 			return E3Result.build(401, "请登录后再发表...");
 		}
@@ -117,7 +118,7 @@ public class ArticleController {
 		Article article=articleService.getArticleById(articleId);
 		List<Critique> replyList=critiqueService.getArticleCritiquesByAid(articleId);
 		if(replyList.size()>0){
-			return E3Result.build(401, "删除失败，该评论不存在...");
+			return E3Result.build(401, "删除失败，请先删除文章的评论信息..");
 		}
 		articleService.deleteArticle(article);	
 		}
@@ -133,7 +134,7 @@ public class ArticleController {
 	public String list(HttpServletRequest request,@RequestParam(value="page",required=false) String page,Model model)throws Exception{
 		
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(null==user) {
 			return "error";
 		}
@@ -170,7 +171,7 @@ public class ArticleController {
 	@RequestMapping("blog/manage/article/go")
 	public String add(HttpServletRequest request,Model model)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(user==null) {
 			return "error";
 		}
@@ -186,7 +187,7 @@ public class ArticleController {
 	@RequestMapping("blog/manage/article/preview")
 	public String update(HttpServletRequest request,Model model,@RequestParam("articleId") int articleId)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(user==null) {
 			return "error";
 		}
@@ -203,7 +204,7 @@ public class ArticleController {
 	public E3Result modify(HttpServletRequest request,@RequestParam(value="image",required=false) MultipartFile image,@RequestParam(value="faceFileName",required=false) String faceFileName,
 			Article article){
 		
-		User user=(User) request.getSession().getAttribute("currentUser");
+		User user=(User) request.getSession().getAttribute(Consts.CURRENTUSER);
 		if(user==null) {
 			return E3Result.build(401, "请登录后再发表...");
 		}
@@ -246,6 +247,9 @@ public class ArticleController {
 				if(!StringUtils.isNotEmpty(article.getTitle())){
 					article.setTitle(updateArticle.getTitle());
 				}
+				if(null==article.getTime()){
+					article.setTime(updateArticle.getTime());
+				}
 				if(!StringUtils.isNotEmpty(article.getContent())){
 					article.setContent(updateArticle.getContent());
 				}
@@ -281,7 +285,7 @@ public class ArticleController {
 	@ResponseBody
 	public E3Result recommend(@RequestParam("articleId")int articleId,HttpServletRequest request)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(user==null) {
 			return E3Result.build(401, "请登录后再发表...");
 		}
@@ -303,7 +307,7 @@ public class ArticleController {
 	@ResponseBody
 	public E3Result unRecommend(@RequestParam("articleId")int articleId,Model model,HttpServletRequest request)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(user==null) {
 			return E3Result.build(401, "请登录后再发表...");
 		}

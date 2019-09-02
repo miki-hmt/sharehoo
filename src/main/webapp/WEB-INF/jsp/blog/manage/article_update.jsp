@@ -1,25 +1,28 @@
 ﻿<%@page pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
     <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>${user.nickName }的个人博客——更新博客</title>
 		<meta name="keywords" content="${user.nickName }的个人博客" />
 		<meta name="description" content="${user.nickName }的个人博客。" />
-		<link href="../include/css/base.css" rel="stylesheet"/>
-		<link href="../include/css/style.css" rel="stylesheet"/>
-		<link href="../include/css/media.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
 		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 		<script type="text/javascript" src="${host}/js/jquery-1.11.1.js"></script>
-		<script type="text/javascript" src="${host}/ckeditor410/ckeditor.js"></script>
+		<script type="text/javascript" src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="${host}/js/uploadPreview.min.js"></script>
 		
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		
 		<script type="text/javascript">
 		$(function () {
-			$("#image").uploadPreview({ Img: "ImgPr", Width: 220, Height: 220 });
+			$("#articleImage").uploadPreview({ Img: "ImgPr", Width: 220, Height: 220 });
 	
 		});
 		</script>
@@ -43,10 +46,10 @@
   <article>
     <h2 class="about_h">您现在的位置是：<a href="../manage/article">首页</a>><a href="#">博客更新</a></h2>
     <div class="index_about">
-    <form action="../manage/Article_modify.action" method="post" theme="xhtml" enctype="multipart/form-data">
+    <form action="" method="post" id="article_form" enctype="multipart/form-data">
     	<table>
     		<tr>
-	    		<td><input name="article.title" value="${article.title }" style="width:96%;font-size:12pt;text-align:center;"/></td>
+	    		<td><input id="title" name="title" value="${article.title }" style="width:96%;font-size:12pt;text-align:center;"/></td>
     		</tr>
     		<tr>
 	    		<td>
@@ -56,14 +59,14 @@
 			<div class="control-group">
 				<label class="control-label" for="image">文章配图(*)</label>
 				<div class="controls">
-					<input type="file" id="image" name="image">
+					<input type="file" id="articleImage" name="articleImage"/>
 				</div>
 			</div></td>
     		</tr>
     		<tr>
     			<table>
       			<tr>
-	    			<td><textarea name="article.content" class="ckeditor" style ="height:150px; width:700px;bg-color:gray;" placeholder="您的内容">${article.content }</textarea>	    				
+	    			<td><textarea id="content" name="content" class="ckeditor" style ="height:150px; width:700px;bg-color:gray;" placeholder="您的内容">${article.content }</textarea>	    				
 	    			</td>
     			</tr>   			
     			</table>
@@ -72,40 +75,41 @@
    	    	
     		<tr>
     			<td>
-    				<span>发表时间:</span><input  name="article.time" value="${article.time }" style="width:90px"/>
-    				<span>作者:</span><input name="article.editer" value="${article.editer }" style="width:90px"/>
-    				<span>浏览:</span><input name="article.count" value="${article.count }" readonly="readonly"/>
-    				<span>评论:</span><input name="article.count1" value="${article.count1 }" readonly="readonly"/>
+    				<!-- 2019.09.02 时间格式前台不处理，因为前台传到后台为string，转Date会报错 -->
+    				<span>发表时间:</span><input id="time" name="showtime" value="${article.time }" readonly="readonly" style="width:90px"/>
+    				<span>作者:</span><input id="editer" name="editer" value="${article.editer }" style="width:90px"/>
+    				<span>浏览:</span><input id="count" name="count" value="${article.count }" readonly="readonly"/>
+    				<span>评论:</span><input id="count1" name="count1" value="${article.count1 }" readonly="readonly"/>
     			</td>
     		</tr>
     		<tr>
 	    		<td>
-	    			<span>关键词:</span><input name="article.keywords" value="${article.keywords }"style="width:90px"/>
-	    			<span>分类:</span><input name="article.type" value="${article.type }"style="width:90px"/>
+	    			<span>关键词:</span><input id="keywords" name="keywords" value="${article.keywords }"style="width:90px"/>
+	    			<span>分类:</span><input id="type" name="type" value="${article.type }"style="width:90px"/>
 	    			<span>设为推荐:</span>
-	    			<s:if test="#article.notice=='recommendArticles'">
-		    			<input name="article.notice" type="radio" value="1" checked/>是
-		 				<input name="article.notice" type="radio" value="2" />否
-	    			</s:if>
-	    			<s:else>
-	    				<input name="article.notice" type="radio" value="1" />是
-		 				<input name="article.notice" type="radio" value="2" checked/>否
-	    			</s:else>
-	    			<input name="article.id" value="${article.id }" style="display:none;"/>
-	    			<input id="user" name="article.user.id" value="${user.id}" type="hidden"/>
+	    			<c:if test="${article.notice=='recommendArticles'}">
+		    			<input name="notice" type="radio" value="1" checked/>是
+		 				<input name="notice" type="radio" value="2" />否
+	    			</c:if>
+	    			<c:if test="${article.notice==''}">
+	    				<input name="notice" type="radio" value="1" />是
+		 				<input name="notice" type="radio" value="2" checked/>否
+	    			</c:if>
+	    			<input name="id" value="${article.id }" style="display:none;"/>
+	    			<input id="user" name="user.id" value="${user.id}" type="hidden"/>
 	    		</td>
     		</tr>
     		<tr>
-	    			<td><input type="submit" style="width: 60px;height: 30px;font-size: larger;" value="修改"/></td>
+	    			<td><input id="okBtn" type="button" style="width: 60px;height: 30px;font-size: larger;" value="修改"/></td>
     			</tr>
     	</table>
     </form>
       <div class="nextinfo">
          <s:if test="articleBefore!=null">
-        <p>上一篇：<a href="../article/article_detail?id=<s:property value="id-1"/>"><s:property value="articleBefore.title"/></a></p>
+        <p>上一篇：<a href="../article/article_detail?id="><s:property value="articleBefore.title"/></a></p>
       </s:if>
       <s:if test="articleAfter!=null">
-        <p>下一篇：<a href="../article/article_detail?id=<s:property value="id+1"/>"><s:property value="articleAfter.title"/></a></p>
+        <p>下一篇：<a href="../article/article_detail?id="><s:property value="articleAfter.title"/></a></p>
       </s:if>
       </div>
     </div>
@@ -146,9 +150,87 @@
     </div>
     <%@ include file="../copyright.jsp" %> 
   </aside>
-  <script src="../include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
+  
+<script type="text/javascript">
+	
+	function addFileName() {
+		var uploadfile = $("#articleImage").val();
+		var fileName = getFileName(uploadfile);
+		$("#faceFileName").val(fileName);
+	}
+	//获取文件名方式一
+	function getFileName(file) { //通过第一种方式获取文件名
+		var pos = file.lastIndexOf("\\"); //查找最后一个\的位置
+		return file.substring(pos + 1); //截取最后一个\位置到字符长度，也就是截取文件名 
+	}
+	
+	
+	//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+	$("#okBtn").on("click", function() {
+
+		//ckeditor4.12新特性，提交表单前需要更新textAera字段内容	2019.09.02
+		for (instance in CKEDITOR.instances) {
+			CKEDITOR.instances[instance].updateElement();
+		}
+		if (checkForm()) {
+			addFileName();
+			var faceFileName = $('#ImgPr')[0].src;
+			var formData = new FormData($("#article_form")[0]);
+			$.ajax({
+				type : "POST",
+				url : "${host}/blog/manage/article/update?faceFileName=" + faceFileName,
+				data : formData,
+				cache : false,
+				async : false,
+				processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+				contentType : false, //必须false才会自动加上正确的Content-Type
+				success : function(data) {
+					if (data.status == 200) {
+						alert("修改成功!!");
+					} else {
+						alert("修改失败!!" + data.msg);
+					}
+				}
+			});
+			return false;
+		}
+	});
+	function checkForm() {
+		var editer = $("#editer").val();
+		var keywords = $("#keywords").val();
+		var type = $("#type").val();
+		var image = $("#image").val();
+		var title = $("#title").val();
+		var result = true;
+		if (title == "") {
+			result = false;
+		}
+		if (editer == "") {
+			$("#editer").html("作者不能为空！");
+			result = false;
+		}
+		if (keywords == "") {
+			$("#keywords").html("关键字不能为空！");
+			result = false;
+		}
+		if (type == "") {
+			$("#type").html("类型不能为空！");
+			result = false;
+		}
+
+		if ($("#content").val().length < 10) {
+			alert("文章内容最少20个字符！");
+			result = false;
+		}
+		return result;
+		
+	}
+</script>
+  
+  
 </div>
 </body>
 </html>

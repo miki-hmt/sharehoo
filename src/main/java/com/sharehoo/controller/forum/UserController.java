@@ -102,6 +102,7 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/user/register",method= RequestMethod.POST)
+	@ResponseBody
 	public E3Result register(@RequestParam(value="facelogo",required=false) MultipartFile facelogo,@RequestParam(value="faceFileName",required=false) String faceFileName,
 			User user)throws Exception{
 		
@@ -245,7 +246,7 @@ public class UserController {
 		request.setAttribute("code", "error");//通知msg.jsp显示X
 	}
 		User currentUser=userService.getUserByNickName(user.getNickName()); //定义一个当前对象赋给刚注册成功的用户
-		request.getSession().setAttribute("currentUser", currentUser);
+		request.getSession().setAttribute(Consts.CURRENTUSER, currentUser);
 
 		return "msg";		
 	}
@@ -496,7 +497,7 @@ public class UserController {
 			error="用户未激活，请激活后登录！";			
 			session.setAttribute("error", error);
 		}else{
-			session.setAttribute("currentUser", currentUser);
+			session.setAttribute(Consts.CURRENTUSER, currentUser);
 			session.removeAttribute("error");		
 			Log log1=new Log();
 			String ip=IpGet.getIp2(request);
@@ -547,7 +548,7 @@ public class UserController {
 		
 		User currentUser=userService.login(user);
 		if (currentUser!=null&&currentUser.getType()==2) {
-			session.setAttribute("currentUser", currentUser);
+			session.setAttribute(Consts.CURRENTUSER, currentUser);
 			
 			Log log1=new Log();
 			String ip=IpGet.getIp2(request);
@@ -596,7 +597,7 @@ public class UserController {
 	@RequestMapping("/user/modify")
 	public String preSave(HttpServletRequest request,Model model)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
 		String navCode=NavUtil.genNavCode("个人中心");
 		model.addAttribute("navCode", navCode);
@@ -617,7 +618,7 @@ public class UserController {
 	public String userCenter(HttpServletRequest request,Model model)throws Exception{
 		
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		
 		/*
 		 * 2017.05.29
@@ -662,7 +663,7 @@ public class UserController {
 	@RequestMapping("/user/main")
 	public String center(HttpServletRequest request,Model model)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
 		String navCode=NavUtil.genNavCode("个人中心");
 		model.addAttribute("navCode", navCode);
@@ -678,7 +679,7 @@ public class UserController {
 	@RequestMapping("/user/topic")
 	public String topic(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
 		if(user.getId()>0){
 		System.out.println("用户："+user.getId());
@@ -724,7 +725,7 @@ public class UserController {
 	@RequestMapping("/user/answer")
 	public String answer(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
 		if (StringUtil.isEmpty(page)) {
 			page="1";
@@ -761,7 +762,7 @@ public class UserController {
 	@RequestMapping("/user/reply")
 	public String unReply(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
 		/*
 		 * 2017.05.29
@@ -802,7 +803,7 @@ public class UserController {
 	@RequestMapping("/admin/user/save")
 	public String save(HttpServletRequest request,@RequestBody User user)throws Exception{
 		userService.saveUser(user);
-		//session.setAttribute("currentUser", user);
+		//session.setAttribute(Consts.CURRENTUSER, user);
 		/*navCode=NavUtil.genNavCode("个人中心");
 		mainPage="userCenter/userInfo.jsp";*/
 		return "admin/main";

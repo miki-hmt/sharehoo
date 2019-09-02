@@ -8,10 +8,10 @@
 		<title>个人博客——关于我</title>
 		<meta name="keywords" content="个人博客" />
 		<meta name="description" content="sharehoo社区博客。" />
-		<link href="../include/css/base.css" rel="stylesheet"/>
-		<link href="../include/css/about.css" rel="stylesheet"/>
-		<link href="../include/css/media.css" rel="stylesheet"/>
-		<script type="text/javascript" src="${host}/ckeditor/ckeditor.js"></script>
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/about.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
+		<script type="text/javascript" src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
@@ -30,10 +30,10 @@
     <div class="about">
       <h2>Just about me</h2>
       <ul>
-      <form action="../manage/Me_save.action" method="post" theme="xhtml" enctype="multipart/form-data">
-      <textarea name="me.content" class="ckeditor"><c:forEach items="${listByUer }" var="me">${me.content }</c:forEach></textarea>
-      <input id="user" name="me.user.id" value="${user.id }" type="hidden"/>
-      <input id="me" name="me.id" value="${me.id }" type="hidden"/>
+      <form action="" method="post" enctype="multipart/form-data">
+      <textarea name="content" class="ckeditor"><c:forEach items="${listByUer }" var="me">${me.content }</c:forEach></textarea>
+      <input id="user" name="user.id" value="${user.id }" type="hidden"/>
+      <input id="me" name="id" value="${me.id }" type="hidden"/>
       <input type="submit" style="width: 60px;height: 30px;font-size: larger;" value="保存">
 	  </form>
        </ul>
@@ -48,7 +48,7 @@
   <aside>
    <%@ include file="../info.jsp" %>
   </aside>
-  <script src="../include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>

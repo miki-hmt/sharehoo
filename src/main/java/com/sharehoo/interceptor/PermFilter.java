@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.util.forum.StringUtil;
 @WebFilter(urlPatterns = "/login/*", filterName = "permFilter")
 public class PermFilter implements Filter{
@@ -45,7 +46,7 @@ public class PermFilter implements Filter{
 		rs = (HttpServletResponse) response;
         HttpSession session=rq.getSession();       			
 		
-		if (session!=null&&(session.getAttribute("admin")!=null || session.getAttribute("currentUser")!=null)) {		
+		if (session!=null&&(session.getAttribute("admin")!=null || session.getAttribute(Consts.CURRENTUSER)!=null)) {		
 			chain.doFilter(rq, rs); 
 		}
 		 

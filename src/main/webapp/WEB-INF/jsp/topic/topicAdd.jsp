@@ -13,7 +13,7 @@
 <script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
 <script src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-
+CKEDITOR.replace("content");
 //简单的 敏感词汇验证  2016.12.13 ....时间允许，可以建一个数据库表，存储相关词汇 
 //定义敏感字符     
 var forbiddenArray =['吃屎','骚逼','妈逼','麻痹','狗娘养的','傻逼','畜生','尼玛','妈的','反共','草泥马'];

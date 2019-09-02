@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.util.StringEx;
 import com.sharehoo.util.forum.StringUtil;
 
@@ -41,7 +42,7 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter {
         }     
         HttpSession session=request.getSession();       			
 		
-		if (session!=null&&(session.getAttribute("admin")!=null || session.getAttribute("currentUser")!=null)) {		
+		if (session!=null&&(session.getAttribute("admin")!=null || session.getAttribute(Consts.CURRENTUSER)!=null)) {		
 			return true; 
 		}
 		 
