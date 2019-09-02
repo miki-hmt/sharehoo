@@ -78,7 +78,7 @@ public class TopicController {
 		User currentUser = (User) session.getAttribute("currentUser");
 
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
-		if (currentUser != null) {
+		if (currentUser == null) {
 			request.getRequestDispatcher("/errorlogin").forward(request, response);
 		}
 		if(sectionId==0) {
@@ -97,7 +97,7 @@ public class TopicController {
 		User currentUser = (User) session.getAttribute("currentUser");
 		
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
-		if (currentUser != null) {
+		if (currentUser == null) {
 			// response.sendRedirect(request.getContextPath()+"/login.jsp");
 			request.getRequestDispatcher("/errorlogin").forward(request, response);
 		}

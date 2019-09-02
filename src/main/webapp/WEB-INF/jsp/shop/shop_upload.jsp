@@ -299,7 +299,7 @@
     	
     	$.post("Shop_valImageCode.action",{imageCode:imageCode},
     			function(result){
-    				var result=eval('('+result+')');
+    				var result=eval(result);
     				if(!result.exist){
     					$("#imageErrorInfo").html("验证码错误，亲亲，请戴上眼镜认真看看！");
     					$("#imageCode").focus();

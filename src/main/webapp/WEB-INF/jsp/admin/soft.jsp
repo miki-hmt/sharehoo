@@ -21,7 +21,7 @@ function userDelete(userId){
 	if(confirm("用户所发的帖子也将被删除，确定要删除这条数据吗?")){
 		$.post("User_delete.action",{userId:userId},
 				function(result){
-					var result=eval('('+result+')');
+					var result=eval(result);
 					if(result.info){
 						alert(result.info);
 						window.location.reload(true);
@@ -43,7 +43,7 @@ function deleteUsers(){
 	var ids=strIds.join(",");
 	if(confirm("用户所发的帖子也将被删除，您确定要删除这"+selectedSpan.length+"条数据吗？")){
 		$.post("User_deleteUsers.action",{ids:ids},function(result){
-			var result=eval('('+result+')');
+			var result=eval(result);
 			if(result.info){
 				alert(result.info);
 				location.reload(true); 

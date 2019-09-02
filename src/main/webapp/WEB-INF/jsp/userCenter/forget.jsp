@@ -96,7 +96,7 @@ function checkTrueName(trueName){
 	
 	$.post("User_existUserWithTrueName.action",{trueName:trueName},
 			function(result){
-				var result=eval('('+result+')');
+				var result=eval(result);
 				if(result.exist){
 					$("#userErrorInfo").html("该用户存在！");
 					

@@ -108,7 +108,7 @@ function check_up(thisform){
 				<!-- <a href="login">登录</a>| -->
 				<div class="header-user">
 					<font style="color:white;font-size:9pt;">
-						<a href="javascript:login()">登录&nbsp;</a>|<a href="register.jsp">&nbsp;注册&nbsp;</a>|
+						<a href="javascript:login()">登录&nbsp;</a>|<a href="${host}/register">&nbsp;注册&nbsp;</a>|
 						<a href="userCenter/forget.jsp">忘记密码</a>
 					</font>
 				</div>

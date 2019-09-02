@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>IT帮-资讯传播社区--用户注册</title>
-<link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
-<link href="bootstrap/css/docs.css" rel="stylesheet" />
+<link href="${host}/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="${host}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="${host}/bootstrap/css/docs.css" rel="stylesheet" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.messages_cn.js"></script>
@@ -95,7 +95,7 @@ return;
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
 <script type="text/javascript">
 $(function () {
-	$("#face").uploadPreview({ Img: "ImgPr", Width: 220, Height: 220 });
+	$("#face").uploadPreview({ Img: "ImgPr", Width: 220, Height: 220 });   
 });
 </script>
 <script type="text/javascript">
@@ -125,9 +125,10 @@ function checkNickName(nickName){
 		$("#nickName").focus();
 		return;
 	} */
-	$.post("User_existUserWithUserName.action",{nickName:nickName},
-			function(result){
-				var result=eval('('+result+')');
+	$.post("${host}/user/nickname",{nickName:nickName},
+			function(data){
+				var result=eval(data);
+				debugger
 				if(result.exist){
 					$("#userErrorInfo").html("用户名已存在，请重新输入！");
 					$("#nickName").focus();
@@ -143,12 +144,12 @@ function checkNickName(nickName){
 
 function checkEmail(email){
 	
-	$.post("User_existUserWithEmail.action",{email:email},
-			function(result){
-				var result=eval('('+result+')');
+	$.post("${host}/user/email",{email:email},
+			function(data){
+				var result=eval(data);
 				if(result.exist){
-					$("#emailErrorInfo").html("邮箱已存在，请重新输入！");
-					$("#email").focus();
+					//$("#emailErrorInfo").html("邮箱已存在，请重新输入！");
+					//$("#email").focus();
 				}else{
 					$("#emailErrorInfo").html("");
 				}
@@ -206,25 +207,25 @@ function checkForm(){
 		<jsp:include page="common/top_register.jsp"/>
 	</div>
 	</div>
-	<div class="" align="center" style="width: 1200px; margin:0px auto;background-color:#F8F8F8;background: url(../images/rw_register.png);">
+	<div class="" align="center" style="width: 1200px; margin:0px auto;background-color:#F8F8F8;background: url(${host}/images/rw_register.png);">
 			<h1 style="margin-bottom: 30px;">欢迎注册
 				<font style="font-size:9pt;">╮(╯▽╰)(**本站采用邮件激活方式注册，请认真填写邮箱!*)</font></h1>
-		<form id="regForm" style="width: 700px;" enctype="multipart/form-data" class="form-horizontal form-inline" method="post" action="User_register.action">
+		<form id="regForm" style="width: 700px;" enctype="multipart/form-data" class="form-horizontal form-inline" method="post" action="">
 			<div class="control-group">
 				<div class="controls">
-					<input class="input-block-level" type="text" id="nickName" name="user.nickName" onblur="checkNickName(this.value)" value="${user.nickName }" placeholder="昵称"/><span class="pull-left"></span>
+					<input class="input-block-level" type="text" id="nickName" name="nickName" onblur="checkNickName(this.value)" value="${user.nickName }" placeholder="昵称"/><span class="pull-left"></span>
 					<font id="userErrorInfo" class="pull-right" color="red"></font>
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="controls">
-					<input class="input-block-level" type="text" id="trueName" name="user.trueName" onblur="checkTrueName(this.value)" value="${user.trueName }" placeholder="真实姓名"/><span class="pull-left"></span>
+					<input class="input-block-level" type="text" id="trueName" name="trueName" onblur="checkTrueName(this.value)" value="${user.trueName }" placeholder="真实姓名"/><span class="pull-left"></span>
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="controls">
 					<label class="radio" style="margin-right: 50px;">
-						<select id="sex" name="user.sex"><option value="">...性别...</option>
+						<select id="sex" name="sex"><option value="">...性别...</option>
 							<option value="女" ${user.sex=='女'?'selected':'' }>女</option>
 							<option value="男" ${user.sex=='男'?'selected':'' }>男</option>
 						</select> <span class="pull-left"></span>
@@ -236,13 +237,13 @@ function checkForm(){
 			</div>
 			<div class="control-group">
 				<div class="controls">
-					<font style="color:gray;">头像:</font><input type="file" id="face" name="face">
+					<font style="color:gray;">头像:</font><input type="file" id="face" name="facelogo">
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="controls">
 					<input class="input-block-level" type="password" id="password"
-						name="user.password" value="${user.password }" onKeyUp=pwdstrong(this.value) onBlur=pwdstrong(this.value) placeholder="用户密码" /><span class="pull-left"></span>																																												
+						name="password" value="${user.password }" onKeyUp=pwdstrong(this.value) onBlur=pwdstrong(this.value) placeholder="用户密码" /><span class="pull-left"></span>																																												
 				</div>
 			</div>
 			
@@ -270,7 +271,7 @@ function checkForm(){
 			<div class="control-group">
 				<div class="controls">
 					<input class="text input-block-level" type="text" id="email"
-						name="user.email" onblur="checkEmail(this.value)" value="${user.email }" placeholder="电子邮箱"/><span class="pull-left"></span>
+						name="email" onblur="checkEmail(this.value)" value="${user.email }" placeholder="电子邮箱"/><span class="pull-left"></span>
 						<font id="emailErrorInfo" class="pull-right" color="red"></font>
 				</div>
 			</div>
@@ -278,18 +279,64 @@ function checkForm(){
 				<label class="control-label" for="moble"></label>
 				<div class="controls">
 					<input class="text input-block-level" type="text" id="mobile"
-						name="user.mobile" value="${user.mobile }" placeholder="联系方式"/><span class="pull-left"></span>
+						name="mobile" value="${user.mobile }" placeholder="联系方式"/><span class="pull-left"></span>
 				</div>
 			</div>
 			
 			<div class="control-group" style="margin: 0px;">
 				<div style="margin-left: 70px;">
-					<button type="submit" tabindex="5" style="">提交注册</button> &nbsp;&nbsp;&nbsp;&nbsp;
+					<button tabindex="5" style="" onclick="register()">提交注册</button> &nbsp;&nbsp;&nbsp;&nbsp;
 				</div>
 			</div>
 			<font id="error" color="red"></font>
-			<input type="hidden" name="user.type" value="1">
+			<input type="hidden" name="type" value="1">
+			<input type="hidden" id="faceFileName" name="faceFileName">
 		</form>
 	</div>
+	
+	
+	
+<script type="text/javascript">
+
+function addFileName(){
+	var uploadfile = $("#face").val();
+	var fileName= getFileName(uploadfile);
+	$("#faceFileName").val(fileName);
+}
+//获取文件名方式一
+  function getFileName(file){		//通过第一种方式获取文件名
+    var pos=file.lastIndexOf("\\");//查找最后一个\的位置
+	return file.substring(pos+1); //截取最后一个\位置到字符长度，也就是截取文件名 
+ }
+//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+ function register(){
+ 	 addFileName();
+ 	 var faceFileName = $('#ImgPr')[0].src;
+ 	 var formData = new FormData($("#regForm")[0]);
+	 $.ajax({
+       type: "POST",
+       url: "user/register?faceFileName="+faceFileName,
+       data: formData,
+       cache: false,
+       async: false,
+       processData : false,  //必须false才会避开jQuery对 formdata 的默认处理
+       contentType : false,  //必须false才会自动加上正确的Content-Type
+       success: function (data) {
+       		console.log("成功");
+		/*
+		layer.alert("增加成功", {icon: 6}, function () {
+                    window.parent.location.reload(); //刷新父页面
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //关闭当前frame
+                    parent.layer.close(index);
+                });
+		*/
+       }
+   	});
+	 //$.post("user/login", $("#fm").serialize());
+ }
+ 
+</script>
 </body>
 </html>

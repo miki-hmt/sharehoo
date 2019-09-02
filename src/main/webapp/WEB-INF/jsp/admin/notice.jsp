@@ -42,7 +42,7 @@ function zoneDelete(zoneId){
 	if(confirm("确定要删除这条数据吗?")){
 		$.post("Notice_delete.action",{noticeId:zoneId},				
 				function(result){
-					var result=eval('('+result+')');
+					var result=eval(result);
 					if(result.error){
 						alert(result.error);
 					}else{
