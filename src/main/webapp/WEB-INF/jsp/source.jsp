@@ -110,7 +110,7 @@
 				
 		<div class="app-box">
             <div class="app-box-head clearfix">
-            <a href="Soft_listpr.action?softSectionId=${softSection.id }" target="_blank">
+            <a href="${host }/softsection/detail/${softSection.id }" target="_blank">
             <h1 class="app-title">
             ${softSection.areaName }           
             </h1>
@@ -127,7 +127,7 @@
             <h2>${softSection.areaName }推荐</h2>
               <ul class="app-list clearfix">
                    <c:forEach items="${good.get(softSection) }" var="soft">
-              		<li><a href="Soft_softDetail.action?softId=${soft.id }" title="${soft.soname }" target="_blank"><img src="${host}/${soft.logo }" alt="${soft.soname }"><span>${soft.soname }</span></a></li>
+              		<li><a href="${host }/soft/detail/${soft.id }" title="${soft.soname }" target="_blank"><img src="${host}/${soft.logo }" alt="${soft.soname }"><span>${soft.soname }</span></a></li>
                  
               	</c:forEach>             	            
               </ul>

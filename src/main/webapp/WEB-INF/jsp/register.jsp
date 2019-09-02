@@ -310,6 +310,7 @@ function addFileName(){
  }
 //springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
  function register(){
+ 	checkForm();
  	 addFileName();
  	 var faceFileName = $('#ImgPr')[0].src;
  	 var formData = new FormData($("#regForm")[0]);
@@ -332,9 +333,9 @@ function addFileName(){
                     parent.layer.close(index);
                 });
 		*/
-       }
+       }       
    	});
-	 //$.post("user/login", $("#fm").serialize());
+	return false;
  }
  
 </script>

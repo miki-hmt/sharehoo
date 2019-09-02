@@ -7,7 +7,7 @@
 		<title>个人博客——登录</title>
 		<meta name="keywords" content="个人博客" />
 		<meta name="description" content="炮总的个人博客。" />
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 		<link href="../include/css/base.css" rel="stylesheet"/>
 		<link href="../include/css/style.css" rel="stylesheet"/>
 		<link href="../include/css/media.css" rel="stylesheet"/>

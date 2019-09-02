@@ -15,12 +15,12 @@
 		<link href="../include/css/style.css" rel="stylesheet"/>
 		<link href="../include/css/media.css" rel="stylesheet"/>
 
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />		
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />		
 
 		<!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 		<!--我的高亮效果是zenburn-->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/highlight/styles/gruvbox-dark.css">
-		<script src="${pageContext.request.contextPath}/highlight/highlight.pack.js"></script>
+		<link rel="stylesheet" href="${host}/highlight/styles/gruvbox-dark.css">
+		<script src="${host}/highlight/highlight.pack.js"></script>
 		<script>hljs.initHighlightingOnLoad();</script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
@@ -40,11 +40,11 @@
   <header>
     <h1>${user.nickName }的博客</h1>
     <h2>愿居于一城，与卿所见美好......</h2>
-    <div class="logo"><a href="${pageContext.request.contextPath }/blog/manage/Article_list.action"></a></div>
+    <div class="logo"><a href="${host}/blog/manage/Article_list.action"></a></div>
 	  <%@ include file="../manage_nav.jsp" %>
    </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${user.id}">首页</a>><a href="${pageContext.request.contextPath }/blog/Blog_article.action?userId=${user.id}">漫生活</a>><a href="#">详细内容</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/${user.nickNameId}">首页</a>><a href="${host}/blog/Blog_article.action?userId=${user.id}">漫生活</a>><a href="#">详细内容</a></h2>
     <div class="index_about">
       <h2 class="c_titile">${article.title }</h2>
       <p class="box_c"><span class="d_time">发布时间：<fmt:formatDate value="${article.time }" pattern="yyyy-MM-dd HH:mm:ss "/></span><span>编辑：${article.editer }</span><span>浏览（${article.count }）</span><span>评论（${article.count1 }）</span></p>
@@ -56,10 +56,10 @@
       </div>
       <div class="nextinfo">
       <s:if test="before!=null">
-        <p>上一篇：<a href="${pageContext.request.contextPath }/blog/Blog_detail.action?id=${before.id }">${before.title }</a></p>
+        <p>上一篇：<a href="${host}/blog/Blog_detail.action?id=${before.id }">${before.title }</a></p>
       </s:if>
       <s:if test="next!=null">
-        <p>下一篇：<a href="${pageContext.request.contextPath }/blog/Blog_detail.action?id=${next.id }">${next.title }</a></p>
+        <p>下一篇：<a href="${host}/blog/Blog_detail.action?id=${next.id }">${next.title }</a></p>
       </s:if>
       </div>
     </div>
@@ -79,10 +79,10 @@
 		      <c:forEach items="${countList }" var="article" varStatus="state">
 		      <c:choose>
 		      	<c:when test="${ state.index<3}">
-		      		<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath }/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>       	
+		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>       	
 		      	</c:when>
 		      	<c:otherwise>
-		      		<li><span>${state.index+1 }</span><a href="${pageContext.request.contextPath }/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>
+		      		<li><span>${state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>
 		      	</c:otherwise>
 		      	</c:choose>
 		      </c:forEach>
@@ -94,10 +94,10 @@
 		      <c:forEach items="${recommendList }" var="article" varStatus="state">
 		      <c:choose>
 		      	<c:when test="${ state.index<3}">
-		      		<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath }/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>       	
+		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>       	
 		      	</c:when>
 		      	<c:otherwise>
-		      		<li><span>${state.index+1 }</span><a href="${pageContext.request.contextPath }/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>
+		      		<li><span>${state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>
 		      	</c:otherwise>
 		      	</c:choose>
 		      </c:forEach>
@@ -108,7 +108,7 @@
       <ul class="pl_n">
         <c:forEach items="${ critiques}" var="critiques">
         <dl>
-          <dt><img src="${pageContext.request.contextPath }/blog/include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd>${critiques.name }
             <fmt:formatDate value="${critiques.time }" pattern="yyyy-MM-dd HH:mm:ss "/>           
@@ -125,7 +125,7 @@
       <ul class="pl_n">
         <c:forEach items="${ replyList}" var="reply">
         <dl>
-          <dt><img src="${pageContext.request.contextPath }/blog/include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd>我&nbsp;回复：${reply.type }
             <fmt:formatDate value="${reply.time }" pattern="yyyy-MM-dd HH:mm:ss "/>           
@@ -140,7 +140,7 @@
         <p><span style="color:white;"><a name="1">回复留言</a></span></p>
       </h2>
       <br></br>
-       <form action="${pageContext.request.contextPath}/blog/manage/CritiqueManage_saveAr.action?userId=${user.id}" method="post" >
+       <form action="${host}/blog/manage/CritiqueManage_saveAr.action?userId=${user.id}" method="post" >
       		<table>
       			<tr>
       				<td><input type="text" name="critique.type" id="Content" placeholder="回复留言者"/></td>

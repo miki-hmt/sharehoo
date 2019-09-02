@@ -14,15 +14,15 @@
   		<meta name="Keywords" content="${user.nickName},课设,下载,博客,论坛,IT资讯,开发心得,干货分享,代码,源码">
   		<meta name="Description" content="${user.nickName}的个人博客--sharehoo.cn资讯交流平台--专注于程序员开发道路的技术分享，问题解决。
 	会员可以发帖交流与讨论，每个人都有一个个人博客，可以在上面写下自己的心得与感悟。同时提供资源下载，开源源码下载，课程设计，专注于服务大学生。">		
-		<link href="../blog/include/css/base.css" rel="stylesheet"/>
-		<link href="../blog/include/css/index.css" rel="stylesheet"/>
-		<link href="../blog/include/css/style.css" rel="stylesheet"/>
-		<link href="../blog/include/css/media.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<link href="${host }/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host }/blog/include/css/index.css" rel="stylesheet"/>
+		<link href="${host }/blog/include/css/style.css" rel="stylesheet"/>
+		<link href="${host }/blog/include/css/media.css" rel="stylesheet"/>
+		<link href="${host }/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 		<!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 		<!--我的高亮效果是zenburn-->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/highlight/styles/gruvbox-dark.css">
-		<script src="${pageContext.request.contextPath}/highlight/highlight.pack.js"></script>
+		<link rel="stylesheet" href="${host }/highlight/styles/gruvbox-dark.css">
+		<script src="${host }/highlight/highlight.pack.js"></script>
 		<script>hljs.initHighlightingOnLoad();</script>
 		<script>
 		// 网站链接自动推送js代码      2017.09.07
@@ -52,12 +52,12 @@
 		</script>
 
 		<!-- 尾部分页 css页码 	2017.05.24 -->
-		<link href="${pageContext.request.contextPath }/blog/include/css/page.css" rel="stylesheet"/>
+		<link href="${host }/blog/include/css/page.css" rel="stylesheet"/>
 		
 		<style type="text/css">
 			/*为段落定义样式*/
 			.avatar { margin: 10px auto; width: 160px; height: 160px; border-radius: 100%; overflow: hidden; }
-			.avatar a { display: block; padding-top: 100px; width: 160px; background: url(${pageContext.request.contextPath}/${user.face}) no-repeat; background-size: 160px 160px; }
+			.avatar a { display: block; padding-top: 100px; width: 160px; background: url(${host }/${user.face}) no-repeat; background-size: 160px 160px; }
 			.avatar a span { display: block; margin-top: 63px; padding-top: 8px; width: 160px; height: 55px; text-align: center; line-height: 20px; color: #fff; background: rgba(0, 0, 0, .5); -webkit-transition: margin-top .2s ease-in-out; -moz-transition: margin-top .2s ease-in-out; -o-transition: margin-top .2s ease-in-out; transition: margin-top .2s ease-in-out; }
 			.avatar a:hover span { display: block; margin-top: 0; }
 		</style>
@@ -88,11 +88,11 @@
       </h2>
       <c:forEach items="${articleList }" var="article">
 	      <div class="blogs">
-	        <h3><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}" target="_blank">${article.title }</a></h3>
-	        <figure><img src="${pageContext.request.contextPath }/${article.image}" ></figure>
+	        <h3><a href="${host}/blog/${user.nickNameId}/article/${article.id}" target="_blank">${article.title }</a></h3>
+	        <figure><img src="${host }/${article.image}" ></figure>
 	        <ul>
 	        <div class="content" style="height:12em;clear:both;" >${article.content }</div>
-	          <a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}" target="_blank" class="readmore" style="color:white;">阅读全文&gt;&gt;</a>
+	          <a href="${host}/blog/${user.nickNameId}/article/${article.id}" target="_blank" class="readmore" style="color:white;">阅读全文&gt;&gt;</a>
 	        </ul>
 	        <p class="autor"><span>作者：${article.editer }</span><span>分类：【<a href="/">${article.type }</a>】</span><span>浏览（<a href="/">${article.count }</a>）</span><span>评论（<a href="/">${article.count1 }</a>）</span></p>
 	        <div class="dateview"><fmt:formatDate value="${article.time }" pattern="yyyy-MM-dd HH:mm:ss "/></div>
@@ -115,7 +115,7 @@
       </h2>
       <ul>
       <c:forEach items="${countList }" var="article">
-        <li><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+        <li><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
       </c:forEach>
       </ul>
       <h2>
@@ -123,7 +123,7 @@
       </h2>
       <ul>
         <c:forEach items="${recommendList }" var="article">
-        	<li><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+        	<li><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
       	</c:forEach>
       </ul>
       
@@ -133,7 +133,7 @@
       <ul class="pl_n">
         <c:forEach items="${ critiques}" var="critiques">
         <dl>
-          <dt><img src="${pageContext.request.contextPath }/blog/include/images/s8.jpg" style="width:47px;height:47px;"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg" style="width:47px;height:47px;"> </dt>
           <dt> </dt>
           <dd>${critiques.name }
             <fmt:formatDate value="${critiques.time }" pattern="yyyy-MM-dd HH:mm:ss "/>
@@ -155,7 +155,7 @@
     </div>
     <%@ include file="./copyright.jsp" %> 
   </aside>
-  <script src="${pageContext.request.contextPath}/blog/include/js/silder.js"></script>
+  <script src="${host }/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>

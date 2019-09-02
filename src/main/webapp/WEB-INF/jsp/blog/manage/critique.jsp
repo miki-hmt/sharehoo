@@ -11,20 +11,20 @@
         <link rel="shortcut icon" href="../favicon.ico"/> 
 		<title>个人博客——留言板</title>
 		<meta name="keywords" content="个人博客" />
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 		<meta name="description" content="炮总的个人博客。" />
-		<link href="${pageContext.request.contextPath }/blog/include/css/base.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath }/blog/include/css/index.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath }/blog/include/css/style.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath }/blog/include/css/media.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/index.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
 		
 		<!-- 尾部分页 css页码 	2017.05.24 -->
-		<link href="${pageContext.request.contextPath }/blog/include/css/page.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/page.css" rel="stylesheet"/>
 		
-		<script type="text/javascript" src="${pageContext.request.contextPath }/blog/include/js/jquery.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/blog/include/js/jquery.gallery.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/blog/include/js/modernizr.custom.53451.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="${host}/blog/include/js/jquery.min.js"></script>
+		<script type="text/javascript" src="${host}/blog/include/js/jquery.gallery.js"></script>
+		<script type="text/javascript" src="${host}/blog/include/js/modernizr.custom.53451.js"></script>
+		<script type="text/javascript" src="${host}/ckeditor/ckeditor.js"></script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
@@ -48,7 +48,7 @@
       <ul class="pl_n">
        <c:forEach items="${critiques }" var="critique">
         <dl>
-          <dt><img src="${pageContext.request.contextPath }/blog/include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd>${critique.name }
             <time><fmt:formatDate value="${critique.time }" pattern="yyyy-MM-dd HH:mm:ss "/></time>&nbsp;&nbsp;<a href="../manage/CritiqueManage_delete.action?id=${critique.id }" class="dellink"><span style="color:red;">删除</span></a>
@@ -96,10 +96,10 @@
 		      <c:forEach items="${countList }" var="article" varStatus="state">
 		      <c:choose>
 		      	<c:when test="${ state.index<3}">
-		      		<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>       	
+		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>       	
 		      	</c:when>
 		      	<c:otherwise>
-		      		<li><span>${state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+		      		<li><span>${state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
 		      	</c:otherwise>
 		      	</c:choose>
 		      </c:forEach>
@@ -111,17 +111,17 @@
 		      	<c:forEach items="${recommendList }" var="article" varStatus="state">
 		      	<c:choose>
 		      		<c:when test="${ state.index<3}">
-		      			<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>       	
+		      			<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>       	
 		      		</c:when>
 		      	<c:otherwise>
-		      		<li><span>${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+		      		<li><span>${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
 		      	</c:otherwise>
 		      </c:choose>
 		      </c:forEach>
 		     </ul>
     <%@ include file="../copyright.jsp" %> 
   </aside>
-  <script src="${pageContext.request.contextPath }/blog/include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>

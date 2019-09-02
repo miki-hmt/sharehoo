@@ -11,7 +11,7 @@
 		<link href="../include/css/base.css" rel="stylesheet"/>
 		<link href="../include/css/about.css" rel="stylesheet"/>
 		<link href="../include/css/media.css" rel="stylesheet"/>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="${host}/ckeditor/ckeditor.js"></script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>

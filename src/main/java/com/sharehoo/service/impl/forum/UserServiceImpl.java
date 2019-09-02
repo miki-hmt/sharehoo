@@ -162,6 +162,18 @@ public class UserServiceImpl implements UserService {
 		}
 		return baseDAO.get(hql.toString().replaceFirst("and", "where"), param);
 	}
+	
+	
+	@Override
+	public User getUserByNickNameId(String nickNameId) {
+		List<Object> param=new LinkedList<Object>();
+		StringBuffer hql=new StringBuffer("from User");
+		if (StringUtil.isNotEmpty(nickNameId)) {
+			hql.append(" and nickNameId = ?");
+			param.add(nickNameId);
+		}
+		return baseDAO.get(hql.toString().replaceFirst("and", "where"), param);
+	}
 
 	@Override
 	public User findUserByActivationCode(String activationCode) {

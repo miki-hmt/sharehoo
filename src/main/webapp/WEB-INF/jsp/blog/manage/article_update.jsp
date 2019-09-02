@@ -10,10 +10,10 @@
 		<link href="../include/css/base.css" rel="stylesheet"/>
 		<link href="../include/css/style.css" rel="stylesheet"/>
 		<link href="../include/css/media.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor410/ckeditor.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<script type="text/javascript" src="${host}/js/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="${host}/ckeditor410/ckeditor.js"></script>
+		<script type="text/javascript" src="${host}/js/uploadPreview.min.js"></script>
 		
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		
@@ -51,7 +51,7 @@
     		<tr>
 	    		<td>
 	    		<div class="control-group" id="preDiv" style="width: 700px; height: 80px;margin-left: 70px;">
-				<img id="ImgPr" class="pull-left" style="width: 170px; height: 90px;" src="${pageContext.request.contextPath}/${article.image }" />
+				<img id="ImgPr" class="pull-left" style="width: 170px; height: 90px;" src="${host}/${article.image }" />
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="image">文章配图(*)</label>

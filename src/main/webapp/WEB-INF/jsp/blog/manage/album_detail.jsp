@@ -16,7 +16,7 @@
 		<link href="../include/css/style.css" rel="stylesheet"/>
 		<link href="../include/css/media.css" rel="stylesheet"/>
 
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 		<script type="text/javascript" src="../include/js/jquery.min.js"></script>
 		<script type="text/javascript" src="../include/js/jquery.gallery.js"></script>
 		<script type="text/javascript" src="../include/js/modernizr.custom.53451.js"></script>
@@ -42,7 +42,7 @@
       </h3>
       <ul>
       <s:iterator value="photoList">
-        <li><img src="${pageContext.request.contextPath }/<s:property value="image" />"/></a><span><s:property value="note"/><a href="../manage/album_photo_delete?id=<s:property value="id" />">删除</a></span></li>
+        <li><img src="${host}/<s:property value="image" />"/></a><span><s:property value="note"/><a href="../manage/album_photo_delete?id=<s:property value="id" />">删除</a></span></li>
       </s:iterator>
       </ul>
       <h3>

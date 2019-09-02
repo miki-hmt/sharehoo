@@ -43,7 +43,7 @@ public class SoftSectionController {
 		model.addAttribute("softSectionList", softSectionList);
 		long total=softSectionService.getSoftSectionCount(null);
 		model.addAttribute("total", total);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/SoftSection_list.action", total, Integer.parseInt(page), 6,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/softsection/list", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
 		String mainPage="softSection.jsp";
 		model.addAttribute("mainPage", mainPage);
@@ -70,7 +70,7 @@ public class SoftSectionController {
 		model.addAttribute("good", good);
 		long total=softSectionService.getSoftSectionCount(null);
 		
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"SoftSection_listpr.action", total, Integer.parseInt(page), 8,null);	
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/softsection/list", total, Integer.parseInt(page), 8,null);	
 		model.addAttribute("pageCode", pageCode);
 		return "source";
 	}

@@ -226,8 +226,8 @@ a:hover{
         <li class="row-l">
       	  
               <dl>
-                <dt><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}" title="" target="_blank"><img src="${pageContext.request.contextPath}/${article.image}" alt=""></a></dt>
-                <dd><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}" title="${article.title }" target="_blank">${fn:substring(article.title, 0, 14)}</a></dd>
+                <dt><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="" target="_blank"><img src="${pageContext.request.contextPath}/${article.image}" alt=""></a></dt>
+                <dd><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="${article.title }" target="_blank">${fn:substring(article.title, 0, 14)}</a></dd>
               </dl>
       	  
         </li>
@@ -267,12 +267,12 @@ a:hover{
   <h2 class="modTit" style="margin:0px;padding:0px;"> <strong>发帖达人</strong><span class="modTit-link"></span></h2>
   	 <c:forEach items="${userScoreList }" var="user" varStatus="state">
       <div class="card_">
-        <a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${user.id}" target="_blank">
+        <a href="${pageContext.request.contextPath }/blog/${user.nickNameId}" target="_blank">
           <img src="${pageContext.request.contextPath}/${user.face}">
         </a>
         <span>
           <strong>
-            <a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${user.id}" target="_blank">${user.nickName }</a>
+            <a href="${pageContext.request.contextPath }/blog/${user.nickNameId}" target="_blank">${user.nickName }</a>
           </strong> 
           <em>积分：<i>${user.score }</i></em>
         </span>

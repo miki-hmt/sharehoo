@@ -77,7 +77,7 @@ public class SoftController {
 	}
 	
 	@RequestMapping("/admin/soft/update")
-	public String save1(@RequestParam("logo") File logo,@PathVariable("logoFileName") String logoFileName,@RequestBody Soft soft,
+	public String save1(@RequestParam("logo") File logo,@RequestParam(value="logoFileName",required=false) String logoFileName,@RequestBody Soft soft,
 			Model model)throws Exception{
 		
 		if (logo!=null) {
@@ -136,7 +136,7 @@ public class SoftController {
 	 *遍历soft表
 	 */
 	@RequestMapping("/admin/soft/list")	
-	public String list(@PathVariable("page") String page,Model model,HttpServletRequest request)throws Exception{
+	public String list(@RequestParam(value="page",required=false) String page,Model model,HttpServletRequest request)throws Exception{
 
 		if (StringUtil.isEmpty(page)) {
 			page="1";
@@ -151,7 +151,7 @@ public class SoftController {
 		
 		long total=softService.getSoftCount(null);
 		model.addAttribute("total", total);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/Soft_list.action", total, Integer.parseInt(page), 10,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/soft/list", total, Integer.parseInt(page), 10,null);
 		model.addAttribute("pageCode", pageCode);
 		String mainPage="soft.jsp";
 		model.addAttribute("mainPage", mainPage);
@@ -167,8 +167,8 @@ public class SoftController {
 	 * @throws Exception
 	 * 根据softId获取当前soft，然后获取列表，实现sectionDetail.jsp的数据遍历
 	 */
-	@RequestMapping("/softsection/detail")	
-	public String listpr(HttpServletRequest request,@PathVariable("page") String page,@PathVariable("sectionId") int sectionId,Model model)throws Exception{
+	@RequestMapping("/softsection/detail/{sectionId}")	
+	public String listpr(HttpServletRequest request,@RequestParam(value="page",required=false) String page,@PathVariable("sectionId") int sectionId,Model model)throws Exception{
 								
 		if (StringUtil.isEmpty(page)) {
 			page="1";
@@ -185,13 +185,13 @@ public class SoftController {
 		List<Soft> hotSoftList=softService.hotListByHot(1, pageBean2);
 		model.addAttribute("hotSoftList", hotSoftList);
 		long total=softService.getSoftCountBySoftSectionId(sectionId);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/Soft_listpr.action", total, Integer.parseInt(page), 10,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/softsection/detail/"+sectionId, total, Integer.parseInt(page), 10,null);
 		model.addAttribute("pageCode", pageCode);
 		return "soft/sectionDetail";
 	}
 	
-	@RequestMapping("/soft/detail")	
-	public String softDetail(HttpServletRequest request,@PathVariable("page") String page,@PathVariable("softId") int softId,Model model)throws Exception{
+	@RequestMapping("/soft/detail/{softId}")	
+	public String softDetail(HttpServletRequest request,@RequestParam(value="page",required=false) String page,@PathVariable("softId") int softId,Model model)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}

@@ -299,7 +299,7 @@
                	<div class="bd">                      
                		<dl class="clearfix">                        
                		  <dt class="pull-left img">
-               		  		<a target="_blank" href="${pageContext.request.contextPath }/User_userCenter.action" class="avatar">
+               		  		<a target="_blank" href="${pageContext.request.contextPath }/${host}/user/center?page=1" class="avatar">
                		        	<img src="${pageContext.request.contextPath }/${currentUser.face}" style="width:100px;height:100px;">
                		       </a>
                		  </dt>                        

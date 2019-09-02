@@ -75,7 +75,7 @@ $(function(){
 	$(".screenbg ul img").css("width",width+"px");
 });
 function loadimage(){
-	document.getElementById("randImage").src = "${pageContext.request.contextPath}/image.jsp?"+Math.random();
+	document.getElementById("randImage").src = "${host}/imageCode?"+Math.random();
 }
 
 function checkForm(){
@@ -94,7 +94,7 @@ function checkForm(){
 
 function checkTrueName(trueName){
 	
-	$.post("User_existUserWithTrueName.action",{trueName:trueName},
+	$.post("${host}/user/truename",{trueName:trueName},
 			function(result){
 				var result=eval(result);
 				if(result.exist){
@@ -114,27 +114,29 @@ function checkTrueName(trueName){
 
 <div class="login-box">
 	<h1>找回密码&nbsp;&nbsp;&nbsp;</h1>
-	<form method="post" action="User_find.action" enctype="multipart/form-data">
+	<form method="post" id="forget_form" action="" enctype="multipart/form-data">
 		<table>
 			<tr class="name">
 				<td><label>真实姓名：</label></td>
-				<td><input type="text" id="trueName" name="user.trueName" onblur="checkTrueName(this.value)" value="${user.trueName }" tabindex="1" autocomplete="off" /><span class="pull-left"></span>
+				<td><input type="text" id="trueName" name="trueName" onblur="checkTrueName(this.value)" value="${user.trueName }" tabindex="1" autocomplete="off" /><span class="pull-left"></span>
 					<font id="userErrorInfo" class="pull-right" color="yellow"></font></td>
 			</tr>
 			<tr class="code">
 				<td><label>验证码：</label></td>
 				<td>
-					<input  class="text" style="margin-right: 10px;"
-							type=text value="${imageCode }" name="imageCode" id="imageCode"><img
-							onclick="javascript:loadimage();" title="换一张试试" name="randImage"
+					<input  class="text" style="margin-right: 148px;"
+							type=text value="${imageCode }" name="imageCode" id="imageCode">
+							<img id="randImage" src="${host}/imageCode" width="90" height="34" name="randImage" title="点击换一个" 
+								style="vertical-align: middle; margin-top: -56px;margin-left:161px;" onclick="javascript:loadimage();" />
+							<%-- <img onclick="javascript:loadimage();" title="换一张试试" name="randImage"
 							id="randImage" src="${pageContext.request.contextPath}/image.jsp" border="1"
-							align="absmiddle">
+							align="absmiddle"> --%>
 				</td>
 				
 			</tr>		
 			<tr>
 				<td colspan="2">
-					<button type="submit" tabindex="5">验证</button> &nbsp;&nbsp;&nbsp;&nbsp;
+					<button tabindex="5" onclick="find()">验证</button> &nbsp;&nbsp;&nbsp;&nbsp;
 						<font id="error" style="font-size: 20px;" color="yellow">${error }</font>
 			</td>
 			</tr>
@@ -142,7 +144,7 @@ function checkTrueName(trueName){
 	</form>
 </div>
 
-<div class="bottom"><font color="yellow">©2016.miki</font><a href="javascript:;" target="_blank"><font color="yellow">关于</font></a> <span><font color="yellow">城建java论坛</font></span><img width="13" height="16" src="${pageContext.request.contextPath}/images/copy_rignt_24.png" /></div>
+<div class="bottom"><font color="yellow">©2019.miki</font><a href="javascript:;" target="_blank"><font color="yellow">关于</font></a> <span><font color="yellow">IT咨询交流社区</font></span><img width="13" height="16" src="${pageContext.request.contextPath}/images/copy_rignt_24.png" /></div>
 
 
         <!-- 管理员登录界面背景 -->
@@ -153,5 +155,25 @@ function checkTrueName(trueName){
 		<li><a href="javascript:;"><img src="${pageContext.request.contextPath}/images/2.jpg"></a></li>
 	</ul>
 </div>
+
+<script type="text/javascript">
+//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+ function find(){
+	 $.ajax({
+       type: "POST",
+       url: "${host}/user/find",
+       data: $("#forget_form").serialize(),
+       success: function (data) {
+       		if(data.status=='200' || data.status==200){
+       			alert("临时密码找回成功，请登录邮箱查看，确认收到密码后请尽快修改。")
+       		}else{
+       			alert("密码找回失败，原因："+data.msg);
+       		}
+       }
+   	});
+ }
+ 
+</script>
+
 </body>
 </html>

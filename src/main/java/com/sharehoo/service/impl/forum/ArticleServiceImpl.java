@@ -245,7 +245,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<Article> getRecommendsByUserId(int userId) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		String hql = "from Article as article where article.notice like ? and article.user.id=:userId order by article.time desc";
+		String hql = "from Article as article where article.notice like '%recommendArticles%' and article.user.id=? order by article.time desc";
 		param.add(userId);
 		return baseDAO.findTopN(hql, param, 10);
 	}
@@ -254,7 +254,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public Article getBefore(int articleId, int userId) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		String hql = "from Article as article where article.id<:articleId and article.user.id=:userId order by article.id desc";
+		String hql = "from Article as article where article.id< ? and article.user.id= ? order by article.id desc";
 		param.add(articleId);
 		param.add(userId);
 		List<Article> list = baseDAO.find(hql, param);
@@ -270,7 +270,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public Article getAfter(int articleId, int userId) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		String hql = "from Article as article where article.id>:id and article.user.id=:userId order by article.id asc";
+		String hql = "from Article as article where article.id>? and article.user.id=? order by article.id asc";
 		param.add(articleId);
 		param.add(userId);
 		List<Article> list = baseDAO.find(hql, param);

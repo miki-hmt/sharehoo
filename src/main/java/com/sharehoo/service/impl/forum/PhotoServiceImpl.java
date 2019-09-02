@@ -45,7 +45,7 @@ public class PhotoServiceImpl implements PhotoService {
 	public List<Photo> getPhotosByAlbumId(int aid) {
 		// TODO Auto-generated method stub
 		List<Object> params = new LinkedList<Object>();
-		String hql = "from Photo as photo where photo.notice like ? and photo.album.id=:aid order by photo.time desc";
+		String hql = "from Photo as photo where photo.notice like ? and photo.album.id=? order by photo.time desc";
 		params.add("1");
 		params.add(aid);
 		return baseDAO.find(hql, params);

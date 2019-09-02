@@ -11,10 +11,11 @@
 		<title>${user.nickName}的个人博客—相册--IT帮-资讯传播社区</title>
 		<meta name="keywords" content="${user.nickName},个人博客" />
 		<meta name="description" content="${user.nickName}的个人博客。" />
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		<link href="../blog/include/css/base.css" rel="stylesheet"/>
-		<link href="../blog/include/css/style.css" rel="stylesheet"/>
-		<link href="../blog/include/css/media.css" rel="stylesheet"/>
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="js/modernizr.js"></script>
@@ -29,14 +30,14 @@
     <%@ include file="./nav.jsp" %> 
   </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${user.id}">首页</a>><a href="${pageContext.request.contextPath }/blog/AlbumShow_list.action?userId=${user.id}">相册</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/${user.nickNameId}">首页</a>><a href="${host}/blog/${user.nickNameId}/album">相册</a></h2>
     <div class="template">
      <h3>
         <p><span>个人相册</span></p>
      </h3>
       <ul>
       <c:forEach items="${ albumList}" var="album">
-        <li><a href="${pageContext.request.contextPath }/blog/AlbumShow_photo.action?aid=${album.id }" ><img src="${pageContext.request.contextPath }/${album.image}"/></a><span>${album.title }</span></li>
+        <li><a href="${host}/blog/${user.nickNameId}/album/details/${album.id }" ><img src="${host}/${album.image}"/></a><span>${album.title }</span></li>
       </c:forEach>
       </ul>
      <h3>
@@ -45,7 +46,7 @@
       <ul class="pl_n">
        <c:forEach items="${phCritiques }" var="critique">
         <dl>
-          <dt><img src="${pageContext.request.contextPath }/blog/include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd>${critique.name }
             <time><fmt:formatDate value="${critique.time }" pattern="yyyy-MM-dd HH:mm:ss "/></time>
@@ -58,20 +59,20 @@
         <p><span>留下足迹</span></p>
         <a href="#" target="_blank" class="more"></a>
       </h3>
-       <form action="${pageContext.request.contextPath}/blog/Critique_savePh.action?userId=${user.id}" method="post" >
+       <form id="album_form" method="post" >
       		<table>
       			<tr>
-      				<td><span>您的昵称:</span></td><td><input type="text" name="critique.name"/></td>
+      				<td><span>您的昵称:</span></td><td><input type="text" id="name" name="name"/></td>
       			</tr>
       			<tr>
 	    			<td><div style="width:70px;padding-bottom: 189px;"><span>留言内容:</span>
-	    			</div></td><td><textarea name="critique.content" style ="height:200px; width:630px;" ></textarea></td>
+	    			</div></td><td><textarea id="content" name="content" style ="height:200px; width:630px;" ></textarea></td>
     			</tr>
     			<tr>
-	    			<td></td><td><button type="submit" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
+	    			<td></td><td><button id="submitAdd" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
     			</tr>
     			
-    			<input type="hidden" name="critique.user.id" value="${user.id }"/>
+    			<input type="hidden" name="user.id" value="${user.id }"/>
       		</table>
       </form>
   </article>
@@ -90,10 +91,10 @@
         <c:forEach items="${countList }" var="article" varStatus="state">
 		      <c:choose>
 		      	<c:when test="${ state.index<3}">
-		      		<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>       	
+		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>       	
 		      	</c:when>
 		      	<c:otherwise>
-		      		<li><span>${state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+		      		<li><span>${state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
 		      	</c:otherwise>
 		      	</c:choose>
 		      </c:forEach>
@@ -105,10 +106,10 @@
       <c:forEach items="${recommendList }" var="article" varStatus="state">
 		      	<c:choose>
 		      		<c:when test="${ state.index<3}">
-		      			<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>       	
+		      			<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>       	
 		      		</c:when>
 		      	<c:otherwise>
-		      		<li><span>${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+		      		<li><span>${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
 		      	</c:otherwise>
 		      </c:choose>
 		      </c:forEach>
@@ -116,9 +117,41 @@
     </div> 
     <%@ include file="./copyright.jsp" %> 
   </aside>
-  <script src="../blog/include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>
+
+<script type="text/javascript">
+//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+$(document).ready(function() {	
+	$("#submitAdd").on("click",function(){
+		var name=$("#name").val();
+		var content=$("#content").val();
+		if(name==""){
+			alert("亲亲，昵称不能为空哦");
+			return false;
+		}
+		if(content=""){
+			alert("亲亲，评论内容不能为空哦");
+			return false;
+		}
+		$.ajax({
+	       type: "POST",
+	       url: "${host}/blog/${user.nickNameId}/photo/critique",
+	       data: $("#album_form").serialize(),
+	       success: function (data) {
+	       		if(data.status==200){
+	       			alert("评论成功");
+	       			window.location.reload();
+	       			//window.location.href="${host}/blog/${user.nickNameId}/critiques";
+	       		}
+	       }
+		   	});
+   		return false;	//!!一定要return false, 否則會自動刷新頁面,導致ajax彈窗提醒失效。防止刷新頁面
+})
+});
+</script>
+
 </body>
 </html>

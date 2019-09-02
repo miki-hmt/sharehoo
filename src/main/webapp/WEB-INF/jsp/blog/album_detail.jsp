@@ -12,13 +12,13 @@
 		<title>${user.nickName}的个人博客—相册--IT帮-资讯传播社区</title>
 		<meta name="keywords" content="个人博客" />
 		<meta name="description" content="个人博客 。" />
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		<link href="../blog/include/css/base.css" rel="stylesheet"/>
-		<link href="../blog/include/css/style.css" rel="stylesheet"/>
-		<link href="../blog/include/css/media.css" rel="stylesheet"/>
-		<script type="text/javascript" src="../blog/include/js/jquery.min.js"></script>
-		<script type="text/javascript" src="../blog/include/js/jquery.gallery.js"></script>
-		<script type="text/javascript" src="../blog/include/js/modernizr.custom.53451.js"></script>
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
+		<script type="text/javascript" src="${host}/blog/include/js/jquery.min.js"></script>
+		<script type="text/javascript" src="${host}/blog/include/js/jquery.gallery.js"></script>
+		<script type="text/javascript" src="${host}/blog/include/js/modernizr.custom.53451.js"></script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
@@ -29,11 +29,11 @@
   <header>
     <h1>${user.nickName }的博客</h1>
     <h2>愿居于一城，与卿所见美好......</h2>
-    <div class="logo"><a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${user.id}"></a></div>
+    <div class="logo"><a href="${host}/blog/${user.nickNameId}"></a></div>
     <%@ include file="./nav.jsp" %> 
      </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${user.id}">首页</a>><a href="${pageContext.request.contextPath }/blog/AlbumShow_list.action?userId=${user.id}">个人相册</a>><a href="#">照片</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/${user.nickNameId}">首页</a>><a href="${host}/blog/${user.nickNameId}/album">个人相册</a>><a href="#">照片</a></h2>
     <div class="template">
       <h3>
         <p><span>个人相册</span></p>
@@ -44,7 +44,7 @@
 			<section id="dg-container" class="dg-container">
 				<div class="dg-wrapper">
 				<c:forEach items="${photoList}" var="photo" varStatus="state">
-					<a href="#"><img src="${pageContext.request.contextPath }/${photo.image}"  width="480px" height="260"/><div>第${state.index+1 }张：${photo.note }&nbsp;&nbsp;<fmt:formatDate value="${photo.time }" pattern="yyyy-MM-dd HH:mm:ss "/></div></a>
+					<a href="#"><img src="${host}/${photo.image}"  width="480px" height="260"/><div>第${state.index+1 }张：${photo.note }&nbsp;&nbsp;<fmt:formatDate value="${photo.time }" pattern="yyyy-MM-dd HH:mm:ss "/></div></a>
 				</c:forEach>
 				</div>
 				<nav >	
@@ -53,12 +53,6 @@
 				</nav>
 			</section>
         </div>
-       
-		<script type="text/javascript">
-			$(function() {
-				$('#dg-container').gallery();
-			});
-		</script>
       </ul>
       
       
@@ -90,7 +84,12 @@
       </ul>
    <%@ include file="./copyright.jsp" %> 
   </aside>
-  <script src="../include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
+  <script type="text/javascript">
+			$(function() {
+				$('#dg-container').gallery();
+			});
+		</script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>

@@ -79,7 +79,7 @@ public class ReplyController {
 		 */
 		Properties props = new Properties();
 		try {
-			props.load(this.getClass().getClassLoader().getResourceAsStream("email_template2.properties"));
+			props.load(this.getClass().getClassLoader().getResourceAsStream("user_reply_email.properties"));
 		} catch (IOException e1) {
 			throw new RuntimeException(e1);
 		}
@@ -156,7 +156,7 @@ public class ReplyController {
 		 */
 		Properties props = new Properties();
 		try {
-			props.load(this.getClass().getClassLoader().getResourceAsStream("email_template4.properties"));
+			props.load(this.getClass().getClassLoader().getResourceAsStream("user_comments_email.properties"));
 		} catch (IOException e1) {
 			throw new RuntimeException(e1);
 		}
@@ -258,7 +258,7 @@ public class ReplyController {
 		return "redirect:";
 	}
 	
-	@RequestMapping("/reply/details")
+	@RequestMapping("/reply/details/{rid}")
 	public String details(HttpServletRequest request, @PathVariable("rid") int rid,@PathVariable("page") String page,Model model)throws Exception{
 		if(rid>0){
 			if (StringUtil.isEmpty(page)) {
@@ -272,7 +272,7 @@ public class ReplyController {
 			List<Reply> sonList=replyService.getSonReplyList(rid, pageBean);
 			model.addAttribute("sonList", sonList);
 			
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/reply/details", total, Integer.parseInt(page), 18,null);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/reply/details/"+rid, total, Integer.parseInt(page), 18,null);
 			model.addAttribute("pageCode", pageCode);
 		}
 		return "topic/sonReply";

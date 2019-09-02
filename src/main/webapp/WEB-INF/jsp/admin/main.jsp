@@ -22,7 +22,7 @@ function logout() {
         //用户密码修改 
 function checkUserLogin(){
 	
-		window.location.href="User_userCenter.action";
+		window.location.href="${host}/user/center?page=1";
 }
 
 $(function(){
