@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--修改日期格式只显示年月日  -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
     	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1,text/html; charset=utf-8"/> 
         <link rel="shortcut icon" href="../favicon.ico"/> 
@@ -12,35 +12,17 @@
 		<meta name="keywords" content="${user.nickName},个人博客" />
 		<meta name="description" content="${user.nickName}个人博客" />
 		
-		<link href="../blog/include/css/base.css" rel="stylesheet"/>
-		<link href="../blog/include/css/style.css" rel="stylesheet"/>
-		<link href="../blog/include/css/media.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		
-		<script type="text/javascript" src="../blog/include/js/jquery.min.js"></script>
-		<script type="text/javascript" src="../blog/include/js/jquery.gallery.js"></script>
-		<script type="text/javascript" src="../blog/include/js/modernizr.custom.53451.js"></script>
-		<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+		<script type="text/javascript" src="${host}/blog/include/js/jquery.gallery.js"></script>
+		<script type="text/javascript" src="${host}/blog/include/js/modernizr.custom.53451.js"></script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
 		<![endif]-->
-		<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			function check(){
-				var name=$("#name").val();
-				var content=$("#criContent").val();
-				if(name==""){
-					alert("亲亲，昵称不能为空哦");
-					return false;
-				}
-				if(content=""){
-					alert("亲亲，评论内容不能为空哦");
-					return false;
-				}
-				return true;
-			}
-		</script>
 
 	</head>
 <body>
@@ -52,7 +34,7 @@
     <%@ include file="./nav.jsp" %>
     </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="${pageContext.request.contextPath}/blog/Blog_show.action?userId=${user.id}">首页</a>><a href="${pageContext.request.contextPath}/blog/Critique_save.action?userId=${user.id}">留言板</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/${user.nickNameId}">首页</a>><a href="${host}/blog/${user.nickNameId}/critiques">留言板</a></h2>
     <div class="template">
       
       <h3>
@@ -61,7 +43,7 @@
       <ul class="pl_n">
        <c:forEach items="${critiqueList }" var="critique" >
         <dl>
-          <dt><img src="../blog/include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd>${critique.name }
             <time><fmt:formatDate value="${critique.time }" pattern="yyyy-MM-dd HH:mm:ss "/></time>
@@ -78,19 +60,18 @@
         <p><span>随便说说</span></p>
         <a href="#" target="_blank" class="more"></a>
       </h3>
-       <form action="${pageContext.request.contextPath}/blog/Critique_save.action?userId=${user.id}" method="post" onsubmit="return check()">
+       <form method="post" id="critique_form">
       		<table>
       			<tr>
-      				<td><span>您的昵称:</span></td><td><input id="name" type="text" name="critique.name"/></td>
+      				<td><span>您的昵称:</span></td><td><input id="name" type="text" name="name"/></td>
       			</tr>
       			<tr>
-	    			<td><div style="width:70px;padding-bottom: 189px;"><span>留言内容:</span></div></td><td><textarea id="criContent" name="critique.content" style ="height:200px; width:630px;" ></textarea></td>
+	    			<td><div style="width:70px;padding-bottom: 189px;"><span>留言内容:</span></div></td><td><textarea id="criContent" name="content" style ="height:200px; width:630px;" ></textarea></td>
     			</tr>
     			<tr>
-	    			<td></td><td><button type="submit" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
+	    			<td></td><td><button id="submitAdd" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
     			</tr>
-    			
-    			<input type="hidden" name="critique.user.id" value="${user.id }"/>
+    			<input type="hidden" name="user.id" value="${user.id }"/>
       		</table>
       </form>
      </div>
@@ -114,14 +95,45 @@
       </h2>
       <ul>
         <s:iterator value="recommendArticles" >
-        	<li><a href="../article/article_detail?id=<s:property value="id"/>"><s:property value="title"/></a></li>
+        	<li><a href="../article/article_detail?id="><s:property value="title"/></a></li>
       	</s:iterator>
       </ul>
     <%@ include file="./copyright.jsp" %> 
   </aside>
-  <script src="../blog/include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>
+
+<script type="text/javascript">
+//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+$(document).ready(function() {	
+	$("#submitAdd").on("click",function(){
+		var name=$("#name").val();
+		var content=$("#criContent").val();
+		if(name==""){
+			alert("亲亲，昵称不能为空哦");
+			return false;
+		}
+		if(content=""){
+			alert("亲亲，评论内容不能为空哦");
+			return false;
+		}
+		$.ajax({
+	       type: "POST",
+	       url: "${host}/blog/${user.nickNameId}/critique/add",
+	       data: $("#critique_form").serialize(),
+	       success: function (data) {
+	       		if(data.status==200){
+	       			alert("留言成功");
+	       			window.location.reload();
+	       			//window.location.href="${host}/blog/${user.nickNameId}/critiques";
+	       		}
+	       }
+		   	});
+   		return false;	//!!一定要return false, 否則會自動刷新頁面,導致ajax彈窗提醒失效。防止刷新頁面
+})
+});
+</script>
 </body>
 </html>

@@ -35,7 +35,7 @@ public class ZoneController {
 		
 		long total=zoneService.getZoneCount(null);
 		model.addAttribute("total", total);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/Zone_list.action", total, Integer.parseInt(page), 6,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/zone/list", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
 		String mainPage="zone.jsp";
 		model.addAttribute("mainPage", mainPage);

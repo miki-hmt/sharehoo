@@ -17,7 +17,7 @@ function updateSolr(){
 	if(confirm("确定要更新全部索引吗?")){
 		$.post("${pageContext.request.contextPath}/shop/SolrJ_importItenList.action",				
 				function(result){
-					var result=eval('('+result+')');
+					var result=eval(result);
 					if(result.status==200){
 						alert("更新成功!");
 					}else{
@@ -33,7 +33,7 @@ function updateTopicSolr(){
 	if(confirm("确定要更新全部索引吗?")){
 		$.post("${pageContext.request.contextPath}/SearchJ_importItenList.action",				
 				function(result){
-					var result=eval('('+result+')');
+					var result=eval(result);
 					if(result.status==200){
 						alert("更新成功!");
 					}else{

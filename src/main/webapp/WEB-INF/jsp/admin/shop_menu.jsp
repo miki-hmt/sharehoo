@@ -48,7 +48,7 @@ function menuDelete(menuId){
 	if(confirm("确定要删除这条数据吗?")){
 		$.post("${pageContext.request.contextPath}/shop/Menu_delete.action",{menuId:menuId},				
 				function(result){
-					var result=eval('('+result+')');
+					var result=eval(result);
 					if(result.error){
 						alert("删除成功！");
 						window.location.reload(true);

@@ -7,14 +7,14 @@
 		<title>个人博客——写博客</title>
 		<meta name="keywords" content="个人博客" />
 		<meta name="description" content="个人博客。" />
-		<link href="../include/css/base.css" rel="stylesheet"/>
-		<link href="../include/css/style.css" rel="stylesheet"/>
-		<link href="../include/css/media.css" rel="stylesheet"/>
-		<link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor410/ckeditor.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
+		<link href="${host}/bootstrap/css/bootstrap.css" rel="stylesheet" />
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<script type="text/javascript" src="${host}/js/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="${host}/js/uploadPreview.min.js"></script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		<style type="text/css">
 			/*为段落定义样式*/
@@ -39,26 +39,27 @@ $(function () {
   <header>
     <h1>${user.nickName }的博客</h1>
     <h2>愿居于一城，与卿所见美好......</h2>
-    <div class="logo"><a href="${pageContext.request.contextPath }/blog/manage/Article_list.action"></a></div>
+    <div class="logo"><a href="${host}/blog/manage/Article_list.action"></a></div>
     <%@ include file="../manage_nav.jsp" %>
     </header>
   <article>
     <h2 class="about_h">您现在的位置是：<a href="../manage/Article_list.action">首页</a>><a href="1/">写博客</a></h2>
     <div class="index_about">
-    <form  method="post" theme="xhtml" enctype="multipart/form-data" action="../manage/Article_save.action">
+    <form  method="post" theme="xhtml" enctype="multipart/form-data">
     	<table>
     		<tr>
-	    		<td><input name="article.title" value="${article.title }" style="width:90%;font-size:12pt;text-align:center;" placeholder="请在这里输入标题"/></td>
+	    		<td><input id="title" name="title" value="${article.title }" style="width:90%;font-size:12pt;text-align:center;" placeholder="请在这里输入标题"/></td>
     		</tr>
     		<tr>
 	    		<td>
 	    	<div class="control-group" id="preDiv" style="width: 700px; height: 80px;margin-left: 70px;">
-				<img id="ImgPr" class="pull-left" style="width: 170px; height: 90px;" src="${pageContext.request.contextPath}/${article.image }" />
+				<img id="ImgPr" class="pull-left" style="width: 170px; height: 90px;" src="${host}/${article.image }" />
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="image">文章配图(*)</label>
 				<div class="controls">
-					<input type="file" id="image" name="image">
+					<input type="file" id="image" name="articleImage">
+					<input type="hidden" id="faceFileName" name="faceFileName">
 				</div>
 			</div>
 			</td>
@@ -66,7 +67,7 @@ $(function () {
     		<tr>
     			<table>
       			<tr>
-	    			<td><textarea name="article.content" class="ckeditor" style ="height:150px; width:700px;bg-color:gray;" placeholder="您的内容"></textarea>
+	    			<td><textarea id="content" name="content" class="ckeditor" style ="height:150px; width:700px;bg-color:gray;" placeholder="您的内容"></textarea>
 	    				
 	    			</td>
     			</tr>   			
@@ -74,17 +75,17 @@ $(function () {
     		</tr>
     		<tr>
 	    		<td>
-    				<span>作者:</span><input name="article.editer" value="${article.editer }" style="width:90px"/>
-	    			<span>关键词:</span><input name="article.keywords" value="${article.keywords }" style="width:90px"/>
-	    			<span>分类:</span><input name="article.type" value="${article.type }"  style="width:90px"/>
+    				<span>作者:</span><input id="editer" name="editer" value="${article.editer }" style="width:90px"/>
+	    			<span>关键词:</span><input id="keywords" name="keywords" value="${article.keywords }" style="width:90px"/>
+	    			<span>分类:</span><input id="type" name="type" value="${article.type }"  style="width:90px"/>
 	    			<span>设为推荐:</span>
-	    				<input name="article.notice" type="radio" value="1" />是
-		 				<input name="article.notice" type="radio" value="2" checked/>否
-		 				<input id="user" name="article.user.id" value="${user.id }" type="hidden"/>
+	    				<input id="notice" name="notice" type="radio" value="1" />是
+		 				<input name="notice" type="radio" value="2" checked/>否
+		 				<input id="user" name="user.id" value="${user.id }" type="hidden"/>
 	    		</td>
     		</tr>
     		<tr>
-	    			<td><input type="submit" style="width: 60px;height: 30px;font-size: larger;" value="确定"/></td>
+	    			<td><input style="width: 60px;height: 30px;font-size: larger;" onclick="add()" value="确定"/></td>
     			</tr>
     	</table>
     </form>
@@ -104,7 +105,7 @@ $(function () {
       </h2>
       <ul>
        <s:iterator value="recommendArticles" >
-        <li><a href="../article/article_detail?id=<s:property value="id"/>"><s:property value="title"/></a></li>
+        <li><a href="../article/article_detail?id="><s:property value="title"/></a></li>
       </s:iterator>
       </ul>
       <h2>
@@ -113,7 +114,7 @@ $(function () {
       <ul class="pl_n">
         <s:iterator value="critiques" >
         <dl>
-          <dt><img src="../include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd><s:property value="name"/>
             <time><s:property value="time"/></time>
@@ -126,9 +127,87 @@ $(function () {
     </div>
    <%@ include file="../copyright.jsp" %> 
   </aside>
-  <script src="../include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>
+
+<script type="text/javascript">
+
+function addFileName(){
+	var uploadfile = $("#image").val();
+	var fileName= getFileName(uploadfile);
+	$("#faceFileName").val(fileName);
+}
+//获取文件名方式一
+  function getFileName(file){		//通过第一种方式获取文件名
+    var pos=file.lastIndexOf("\\");//查找最后一个\的位置
+	return file.substring(pos+1); //截取最后一个\位置到字符长度，也就是截取文件名 
+ }
+//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+ function add(){
+ 	checkForm();
+ 	 addFileName();
+ 	 var faceFileName = $('#ImgPr')[0].src;
+ 	 var formData = new FormData($("#regForm")[0]);
+	 $.ajax({
+       type: "POST",
+       url: "${host}/blog/manage/article/save?faceFileName="+faceFileName,
+       data: formData,
+       cache: false,
+       async: false,
+       processData : false,  //必须false才会避开jQuery对 formdata 的默认处理
+       contentType : false,  //必须false才会自动加上正确的Content-Type
+       success: function (data) {
+       		console.log("成功");
+		/*
+		layer.alert("增加成功", {icon: 6}, function () {
+                    window.parent.location.reload(); //刷新父页面
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //关闭当前frame
+                    parent.layer.close(index);
+                });
+		*/
+       }       
+   	});
+	return false;
+ }
+ 
+ function checkForm(){
+	var editer=$("#editer").val();
+	var keywords=$("#keywords").val();
+	var type=$("#type").val();
+	var content=$("#content").val();
+	var image=$("#image").val();
+	var title=$("#title").val();
+	if (title=="") {
+		return false;
+	}
+	if (editer=="") {
+		$("#editer").html("作者不能为空！");
+		return false;
+	}
+	if (keywords=="") {
+		$("#keywords").html("关键字不能为空！");
+		return false;
+	}
+	if (type=="") {
+		$("#type").html("类型不能为空！");
+		return false;
+	}
+
+	if (content=="") {
+		$("#content").html("内容不能为空！");
+		return false;
+	}
+	if (image=="") {
+		$("#image").html("图片不能为空！");
+		return false;
+	}
+}
+ 
+</script>
+
 </body>
 </html>

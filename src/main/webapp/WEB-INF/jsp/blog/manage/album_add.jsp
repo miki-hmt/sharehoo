@@ -14,12 +14,12 @@
 		<script type="text/javascript" src="../include/js/jquery.min.js"></script>
 		<script type="text/javascript" src="../include/js/jquery.gallery.js"></script>
 		<script type="text/javascript" src="../include/js/modernizr.custom.53451.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<script type="text/javascript" src="${host}/ckeditor/ckeditor.js"></script>
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 
 		<!-- 2017.06.03 相册封面视图显示 -->
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+		<script type="text/javascript" src="${host}/js/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="${host}/js/uploadPreview.min.js"></script>
 		
 		
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0"/>
@@ -53,7 +53,7 @@
       			<tr>
       				<td>
 			      		<div class="control-group" id="preDiv" style="width: 700px; height: 80px;margin-left: 70px;">
-							<img id="ImgPr" class="pull-left" style="width: 170px; height: 90px;" src="${pageContext.request.contextPath}/${album.image }" />
+							<img id="ImgPr" class="pull-left" style="width: 170px; height: 90px;" src="${host}/${album.image }" />
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="image">文章配图(*)</label>
@@ -111,7 +111,7 @@
       </ul>
     <%@ include file="../copyright.jsp" %> 
   </aside>
-  <script src="${pageContext.request.contextPath }/blog/include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>

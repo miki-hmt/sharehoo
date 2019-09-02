@@ -13,8 +13,8 @@
 		<link href="../include/css/base.css" rel="stylesheet"/>
 		<link href="../include/css/style.css" rel="stylesheet"/>
 		<link href="../include/css/media.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		<script src="${pageContext.request.contextPath }/js/jquery-1.11.1.js" type="text/javascript"></script>
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
 	 	 <script type="text/javascript">
 		function deleteAlbum(albumId){
 			if (confirm("您忍心删除这个相册吗？")) {
@@ -53,7 +53,7 @@
         <a href="../manage/AlbumManage_add.action"  class="more">新建相册</a> </h3>
       <ul>
       <c:forEach items="${ albumList}" var="album">
-        <li><a href="../manage/AlbumManage_detail.action?aid=${album.id }" ><img src="${pageContext.request.contextPath }/${album.image}"/></a><span>${album.title }
+        <li><a href="../manage/AlbumManage_detail.action?aid=${album.id }" ><img src="${host}/${album.image}"/></a><span>${album.title }
 	<a href="javascript:void(0)" onclick="javascript:deleteAlbum(${album.id })">删除</a></span></li>
       </c:forEach>
       </ul>
@@ -63,7 +63,7 @@
       <ul class="pl_n">
        <c:forEach items="${critiques }" var="critique">
         <dl>
-          <dt><img src="${pageContext.request.contextPath }/blog/include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd>${critique.name }
             <time><fmt:formatDate value="${critique.time }" pattern="yyyy-MM-dd HH:mm:ss "/></time>&nbsp;&nbsp;<a href="../manage/CritiqueManage_deletePhc.action?id=${critique.id }" class="dellink"><span style="color:red;">删除</span></a>
@@ -83,10 +83,10 @@
         <c:forEach items="${countList }" var="article" varStatus="state">
 		      <c:choose>
 		      	<c:when test="${ state.index<3}">
-		      		<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>       	
+		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>       	
 		      	</c:when>
 		      	<c:otherwise>
-		      		<li><span>${state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+		      		<li><span>${state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
 		      	</c:otherwise>
 		      	</c:choose>
 		      </c:forEach>
@@ -98,10 +98,10 @@
       <c:forEach items="${recommendList }" var="article" varStatus="state">
 		      	<c:choose>
 		      		<c:when test="${ state.index<3}">
-		      			<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>       	
+		      			<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>       	
 		      		</c:when>
 		      	<c:otherwise>
-		      		<li><span>${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+		      		<li><span>${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
 		      	</c:otherwise>
 		      </c:choose>
 		      </c:forEach>

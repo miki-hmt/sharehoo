@@ -20,6 +20,7 @@ public interface UserService {
 	public void delete(User user);
 	
 	public User getUserById(int id);
+	public User getUserByNickNameId(String nickNameid);
 	
 	public User getUserByNickName(String nickName);
 	

@@ -129,7 +129,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${TopicList }" var="topic">
+								<c:forEach items="${topicList }" var="topic">
 									<tr>																			
 										<td style="text-align: center;vertical-align: middle;font-size:10pt;"><a href="${host}/topic/detail/${topic.id }">${topic.title }</a></td>
 										<td style="text-align: center;vertical-align: middle;width: 110px;vertical-align: middle;font-size:10pt;">
@@ -191,11 +191,11 @@
         </div>
     <div id="right_1">
         <ul>
-	    <li><a href="User_userCenter.action"><span style="font-size:9pt;">回到首页</span></a></li>     
-            <li><a href="User_topic.action"><span style="font-size:9pt;color:yellow;font-weight:bold;">我的帖子</span></a></li>
-            <li><a href="User_answer.action"><span style="font-size:9pt;">我的提问</span></a></li>
-             <li><a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${currentUser.id}" target="_blank"><span style="font-size:9pt;">查看博客</span></a></li>
-            <li><a href="${pageContext.request.contextPath }/blog/manage/Article_list.action?userId=${currentUser.id}" target="_blank"><span style="font-size:9pt;">管理博客</span></a></li>
+	    <li><a href="${host}/user/center?page=1"><span style="font-size:9pt;">回到首页</span></a></li>     
+            <li><a href="${host}/user/topic?page=1"><span style="font-size:9pt;color:yellow;font-weight:bold;">我的帖子</span></a></li>
+            <li><a href="${host}/user/answer?page=1"><span style="font-size:9pt;">我的提问</span></a></li>
+             <li><a href="${pageContext.request.contextPath }/blog/${currentUser.nickNameId}" target="_blank"><span style="font-size:9pt;">查看博客</span></a></li>
+            <li><a href="${host}/blog/manage/article/list?page=1" target="_blank"><span style="font-size:9pt;">管理博客</span></a></li>
             <li><a href="User_center.action"><span style="font-size:9pt;">个人资料</span></a></li>
             <li><a href="#"><span style="font-size:9pt;">我的好友</span></a></li>
         </ul>

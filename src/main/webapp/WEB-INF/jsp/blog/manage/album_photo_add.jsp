@@ -18,10 +18,10 @@
 		<script type="text/javascript" src="../include/js/jquery.gallery.js"></script>
 		<script type="text/javascript" src="../include/js/modernizr.custom.53451.js"></script>
 		<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 		<!-- 2017.06.03 相册封面视图显示 -->
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+		<script type="text/javascript" src="${host}/js/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="${host}/js/uploadPreview.min.js"></script>
 		
 		
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0"/>
@@ -46,7 +46,7 @@
     <%@ include file="../manage_nav.jsp" %>
     </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="${pageContext.request.contextPath }/blog/manage/Article_list.action">首页</a>><a href="${pageContext.request.contextPath }/blog/manage/AlbumManage_list.action">相册管理</a>><a href="#">添加照片</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/manage/Article_list.action">首页</a>><a href="${host}/blog/manage/AlbumManage_list.action">相册管理</a>><a href="#">添加照片</a></h2>
     <div class="template">
       <h3>
         <p><span>个人相册</span></p>
@@ -55,7 +55,7 @@
       		<table>
       			<tr>
       				<td><div class="control-group" id="preDiv" style="width: 700px; height: 80px;margin-left: 70px;">
-							<img id="ImgPr" class="pull-left" style="width: 170px; height: 90px;" src="${pageContext.request.contextPath}/${photo.image }" />
+							<img id="ImgPr" class="pull-left" style="width: 170px; height: 90px;" src="${host}/${photo.image }" />
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="image">添加图片(*)</label>

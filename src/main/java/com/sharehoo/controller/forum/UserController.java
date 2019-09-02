@@ -3,6 +3,8 @@ package com.sharehoo.controller.forum;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.Security;
 import java.text.MessageFormat;
 import java.util.Date;
@@ -28,12 +30,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,8 +58,11 @@ import com.sharehoo.service.forum.ReplyService;
 import com.sharehoo.service.forum.SectionService;
 import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.UserService;
+import com.sharehoo.util.BootPathUtil;
 import com.sharehoo.util.CxCacheUtil;
+import com.sharehoo.util.StringEx;
 import com.sharehoo.util.forum.DateUtil;
+import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.GaoDeUtil;
 import com.sharehoo.util.forum.IOUtils;
 import com.sharehoo.util.forum.MD5;
@@ -70,7 +77,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class UserController {
-	
+	private Logger logger = Logger.getLogger(UserController.class);
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -94,112 +101,118 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/user/register")
-	public String register(@RequestParam("face") MultipartFile face,@RequestParam("faceFileName") String faceFileName,
-			@RequestBody User user)throws Exception{
-		if (face!=null) {
-			String basePath = (String)CxCacheUtil.getIntance().getValue(Consts.ROOT_PATH);
+	@RequestMapping(value="/user/register",method= RequestMethod.POST)
+	public E3Result register(@RequestParam(value="facelogo",required=false) MultipartFile facelogo,@RequestParam(value="faceFileName",required=false) String faceFileName,
+			User user)throws Exception{
+		
+		if (facelogo!=null) {		
+			 //获取项目的static根路径  
+	    	String staticPath = BootPathUtil.getStaticPath();
+		
 			String imageName=DateUtil.getCurrentDateStr();
-			String realPath = basePath + Consts.FORUM_UPLOAD_PATH + Consts.FORUM_UPLOAD_USER_FOLDER + "/images/user/";
+			String realPath = staticPath +"/images/user/"+Consts.SDF_YYYYMM.format(new Date());  
 
 			String imageFile=imageName+"."+faceFileName.split("\\.")[1];
-			File saveFile=new File(realPath,imageFile);
-			IOUtils.cp(face.getInputStream(), new FileOutputStream(saveFile));
+			File savePath=new File(realPath);
+			if(!savePath.exists()) {
+				savePath.mkdirs();
+			}
+			
+			InputStream is = facelogo.getInputStream();    	    
+	          
+	        File toFile = new File(realPath, imageFile);    
+	        OutputStream os = new FileOutputStream(toFile);       
+	        byte[] buffer = new byte[1024];       
+	        int length = 0;    
+	        while ((length = is.read(buffer)) > 0) {       
+	            os.write(buffer, 0, length);       
+	        }       
+	        is.close();    
+	        os.close();
+			
+			//IOUtils.cp(facelogo.getInputStream(), new FileOutputStream(saveFile));
 			//FileUtils.copyFile(face, saveFile);
-			user.setFace("images/user/"+imageFile);//原来为"images/user/"   2016.10.12
+			user.setFace("images/user/"+Consts.SDF_YYYYMM.format(new Date())+"/"+imageFile);	//原来为"images/user/"   2016.10.12
 		}else{
 			user.setFace("images/user/timg1.jpg");
 		}
 		user.setRegTime(new Date());
-		
-		/*
-		 * MD5加密用户密码
-		 * 2017.05.27
-		 */
+		//*********** 2017.05.27 Md5加密
 		user.setPassword(new MD5().complie(user.getPassword().trim())); //trim函数，去掉字符串中的首，尾空格
 		
 		user.setStatus(false);				//2017.04.14 注册时设置状态为false，不可登录状态
 		user.setActivationCode(CommonUtils.uuid()+CommonUtils.uuid());	//2017.04.14  自动生成激活码，用于邮箱验证，需要导入itcast-tools-1.4.jar包
-		userService.saveUser(user);
-		
-		
-		/* 3. 发邮件   **3**
-		 * 把配置文件内容加载到prop中
-		 */
+					
+		//*********3. 发邮件   **3**
 		Properties props = new Properties();
 		try {
-			props.load(this.getClass().getClassLoader().getResourceAsStream("email_template.properties"));
-		} catch (IOException e1) {
-			throw new RuntimeException(e1);
-		}
-		
-		//登录邮件服务器，得到session
-    	
-        //设置SSL连接、邮件环境
-        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());                      
+			props.load(this.getClass().getClassLoader().getResourceAsStream("register_email.properties"));		
+			//登录邮件服务器，得到session   	
+	        //设置SSL连接、邮件环境
+	        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());                      
 
-        //建立邮件会话
-        
-        final String userName=props.getProperty("username");
-        final String password=props.getProperty("password");
-        
-        Session session = Session.getDefaultInstance(props, new Authenticator() {
-            //身份认证
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(userName, password);
-            }
-        });
-        //建立邮件对象
-        MimeMessage message = new MimeMessage(session);
-        //设置邮件的发件人、收件人、主题
-            //附带发件人名字
-        
-        String from=props.getProperty("from");
-        String title=props.getProperty("subject");
-        String to = user.getEmail();
-        String content = MessageFormat.format(props.getProperty("content"),user.getActivationCode(),user.getNickName());		//内容
-        
-        message.setFrom(new InternetAddress(from));
-        message.setRecipients(Message.RecipientType.TO,to);
-        
-        //邮件标题
-        message.setSubject(title);
-        
-        //文本部分
-        MimeBodyPart textPart = new MimeBodyPart();
-        textPart.setContent("<img src='cid:myimg'/><div style='width:1193px; height:100px;border:1px solid red'>"+content+"</div>", "text/html;charset=UTF-8");
-        //内嵌图片部分
-        MimeBodyPart imagePart = new MimeBodyPart();
-        imagePart.setDataHandler(new DataHandler(new FileDataSource("D:/soft/logo.jpg")));//图片路径
-        imagePart.setContentID("myimg");
-        //图文整合，关联关系
-        MimeMultipart mmp1 = new MimeMultipart();
-        mmp1.addBodyPart(textPart);
-        mmp1.addBodyPart(imagePart);
-        mmp1.setSubType("related");
-        MimeBodyPart textImagePart = new MimeBodyPart();
-        textImagePart.setContent(mmp1);
-        //附件部分
-        MimeBodyPart attachmentPart = new MimeBodyPart();
-        DataHandler dh = new DataHandler(new FileDataSource("D:/soft/freemarker/file/sharehoo社区福利.txt"));//文件路径
-        String fileName = dh.getName();
-        attachmentPart.setDataHandler(dh);
-        attachmentPart.setFileName(fileName);
-        //图文和附件整合，复杂关系
-        MimeMultipart mmp2 = new MimeMultipart();
-        mmp2.addBodyPart(textImagePart);
-        mmp2.addBodyPart(attachmentPart);
-        mmp2.setSubType("mixed");
-        //将以上内容添加到邮件的内容中并确认
-        message.setContent(mmp2);
-        message.saveChanges();
-        //发送邮件
-        Transport.send(message);
-		
-		
-		//User currentUser=userService.getUserByNickName(user.getNickName()); //定义一个当前对象赋给刚注册成功的用户
-		//request.getSession().setAttribute("currentUser", currentUser);
-		return "register_success";
+	        //建立邮件会话        
+	        final String userName=props.getProperty("username");
+	        final String password=props.getProperty("password");
+	        
+	        Session session = Session.getDefaultInstance(props, new Authenticator() {
+	            //身份认证
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(userName, password);
+	            }
+	        });
+	        //建立邮件对象
+	        MimeMessage message = new MimeMessage(session);
+	        //设置邮件的发件人、收件人、主题
+	            //附带发件人名字	        
+	        String from=props.getProperty("from");
+	        String title=props.getProperty("subject");
+	        String to = user.getEmail();
+	        String content = MessageFormat.format(props.getProperty("content"),user.getActivationCode(),user.getNickName());		//内容
+	        
+	        message.setFrom(new InternetAddress(from));
+	        message.setRecipients(Message.RecipientType.TO,to);
+	        
+	        //邮件标题
+	        message.setSubject(title);
+	        
+	        //文本部分
+	        MimeBodyPart textPart = new MimeBodyPart();
+	        textPart.setContent("<img src='cid:myimg'/><div style='width:1193px; height:100px;border:1px solid red'>"+content+"</div>", "text/html;charset=UTF-8");
+	        //内嵌图片部分
+	        MimeBodyPart imagePart = new MimeBodyPart();
+	        imagePart.setDataHandler(new DataHandler(new FileDataSource("D:/soft/logo.jpg")));//图片路径
+	        imagePart.setContentID("myimg");
+	        //图文整合，关联关系
+	        MimeMultipart mmp1 = new MimeMultipart();
+	        mmp1.addBodyPart(textPart);
+	        mmp1.addBodyPart(imagePart);
+	        mmp1.setSubType("related");
+	        MimeBodyPart textImagePart = new MimeBodyPart();
+	        textImagePart.setContent(mmp1);
+	        //附件部分
+	        MimeBodyPart attachmentPart = new MimeBodyPart();
+	        DataHandler dh = new DataHandler(new FileDataSource("D:/soft/freemarker/file/sharehoo社区福利.txt"));//文件路径
+	        String fileName = dh.getName();
+	        attachmentPart.setDataHandler(dh);
+	        attachmentPart.setFileName(fileName);
+	        //图文和附件整合，复杂关系
+	        MimeMultipart mmp2 = new MimeMultipart();
+	        mmp2.addBodyPart(textImagePart);
+	        mmp2.addBodyPart(attachmentPart);
+	        mmp2.setSubType("mixed");
+	        //将以上内容添加到邮件的内容中并确认
+	        message.setContent(mmp2);
+	        message.saveChanges();
+	        //发送邮件
+	        Transport.send(message);
+			
+		} catch (Exception e1) {
+			logger.error("注册服务异常..."+e1);
+			return E3Result.build(401, "注册失败...，请检查相关信息",e1.getMessage());
+		}	
+		userService.saveUser(user);
+		return E3Result.ok();
 	}
 	
 	
@@ -281,7 +294,7 @@ public class UserController {
 		return "redirect:home";
 	}
 	
-	@RequestMapping("/user/check-name")
+	@RequestMapping("/user/nickname")
 	@ResponseBody
 	public JSONObject existUserWithUserName(@RequestParam("nickName") String nickName)throws Exception{
 		boolean exist=userService.existUserWithNickName(nickName);
@@ -314,7 +327,6 @@ public class UserController {
 		JSONObject result=new JSONObject();
 		if (exist) {
 			result.put("exist", true);
-			System.out.println("miki2222222");
 		} else {
 			result.put("exist", false);
 		}
@@ -350,12 +362,14 @@ public class UserController {
 	 */
 	@RequestMapping("/user/find")
 	@ResponseBody
-	public String find(HttpServletRequest request,@RequestParam("trueName") String trueName,@RequestParam("imageCode") String imageCode)throws Exception{
+	public E3Result find(HttpServletRequest request,@RequestParam("trueName") String trueName,@RequestParam("imageCode") String imageCode)throws Exception{
 		HttpSession session1=request.getSession();
 		
-		if(!imageCode.equals(session1.getAttribute("sRand"))){
+		String code = String.valueOf(session1.getAttribute(Constants.KAPTCHA_SESSION_KEY));
+		if(!imageCode.equals(code)){
 			String error="验证码错误！";			
 			session1.setAttribute("error", error);	
+			return E3Result.build(401, "验证码错误");
 		}
 		else{
 			trueName=session1.getAttribute("trueName").toString();
@@ -382,76 +396,73 @@ public class UserController {
 		 */
 		Properties props = new Properties();
 		try {
-			props.load(this.getClass().getClassLoader().getResourceAsStream("email_template3.properties"));
-		} catch (IOException e1) {
-			throw new RuntimeException(e1);
-		}
-		
-		//登录邮件服务器，得到session
-    	
-        //设置SSL连接、邮件环境
-        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());                      
+			props.load(this.getClass().getClassLoader().getResourceAsStream("user_find_email.properties"));
+			
+			//登录邮件服务器，得到session 	
+	        //设置SSL连接、邮件环境
+	        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());                      
 
-        //建立邮件会话
-        
-        final String userName=props.getProperty("username");
-        final String password=props.getProperty("password");
-        
-        Session session = Session.getDefaultInstance(props, new Authenticator() {
-            //身份认证
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(userName, password);
-            }
-        });
-        //建立邮件对象
-        MimeMessage message = new MimeMessage(session);
-        //设置邮件的发件人、收件人、主题
-            //附带发件人名字
-        
-        String from=props.getProperty("from");
-        String title=props.getProperty("subject");
-        String to = user.getEmail();
-        String content = MessageFormat.format(props.getProperty("content"),sa);		//内容
-        
-        message.setFrom(new InternetAddress(from));
-        message.setRecipients(Message.RecipientType.TO,to);
-        
-        //邮件标题
-        message.setSubject(title);
-        
-        //文本部分
-        MimeBodyPart textPart = new MimeBodyPart();
-        textPart.setContent("<img src='cid:myimg'/><div style='width:1193px; height:100px;border:1px solid red'>"+content+"</div>", "text/html;charset=UTF-8");
-        //内嵌图片部分
-        MimeBodyPart imagePart = new MimeBodyPart();
-        imagePart.setDataHandler(new DataHandler(new FileDataSource("D:/soft/logo.jpg")));//图片路径
-        imagePart.setContentID("myimg");
-        //图文整合，关联关系
-        MimeMultipart mmp1 = new MimeMultipart();
-        mmp1.addBodyPart(textPart);
-        mmp1.addBodyPart(imagePart);
-        mmp1.setSubType("related");
-        MimeBodyPart textImagePart = new MimeBodyPart();
-        textImagePart.setContent(mmp1);
-        //附件部分
-        MimeBodyPart attachmentPart = new MimeBodyPart();
-        DataHandler dh = new DataHandler(new FileDataSource("D:/soft/freemarker/file/sharehoo社区福利.txt"));//文件路径
-        String fileName = dh.getName();
-        attachmentPart.setDataHandler(dh);
-        attachmentPart.setFileName(fileName);
-        //图文和附件整合，复杂关系
-        MimeMultipart mmp2 = new MimeMultipart();
-        mmp2.addBodyPart(textImagePart);
-        mmp2.addBodyPart(attachmentPart);
-        mmp2.setSubType("mixed");
-        //将以上内容添加到邮件的内容中并确认
-        message.setContent(mmp2);
-        message.saveChanges();
-        //发送邮件
-        Transport.send(message);
-		
+	        //建立邮件会话      
+	        final String userName=props.getProperty("username");
+	        final String password=props.getProperty("password");
+	        
+	        Session session = Session.getDefaultInstance(props, new Authenticator() {
+	            //身份认证
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(userName, password);
+	            }
+	        });
+	        //建立邮件对象
+	        MimeMessage message = new MimeMessage(session);
+	        //设置邮件的发件人、收件人、主题
+	            //附带发件人名字       
+	        String from=props.getProperty("from");
+	        String title=props.getProperty("subject");
+	        String to = user.getEmail();
+	        String content = MessageFormat.format(props.getProperty("content"),sa);		//内容
+	        
+	        message.setFrom(new InternetAddress(from));
+	        message.setRecipients(Message.RecipientType.TO,to);
+	        
+	        //邮件标题
+	        message.setSubject(title);
+	        
+	        //文本部分
+	        MimeBodyPart textPart = new MimeBodyPart();
+	        textPart.setContent("<img src='cid:myimg'/><div style='width:1193px; height:100px;border:1px solid red'>"+content+"</div>", "text/html;charset=UTF-8");
+	        //内嵌图片部分
+	        MimeBodyPart imagePart = new MimeBodyPart();
+	        imagePart.setDataHandler(new DataHandler(new FileDataSource("D:/soft/logo.jpg")));//图片路径
+	        imagePart.setContentID("myimg");
+	        //图文整合，关联关系
+	        MimeMultipart mmp1 = new MimeMultipart();
+	        mmp1.addBodyPart(textPart);
+	        mmp1.addBodyPart(imagePart);
+	        mmp1.setSubType("related");
+	        MimeBodyPart textImagePart = new MimeBodyPart();
+	        textImagePart.setContent(mmp1);
+	        //附件部分
+	        MimeBodyPart attachmentPart = new MimeBodyPart();
+	        DataHandler dh = new DataHandler(new FileDataSource("D:/soft/freemarker/file/sharehoo社区福利.txt"));//文件路径
+	        String fileName = dh.getName();
+	        attachmentPart.setDataHandler(dh);
+	        attachmentPart.setFileName(fileName);
+	        //图文和附件整合，复杂关系
+	        MimeMultipart mmp2 = new MimeMultipart();
+	        mmp2.addBodyPart(textImagePart);
+	        mmp2.addBodyPart(attachmentPart);
+	        mmp2.setSubType("mixed");
+	        //将以上内容添加到邮件的内容中并确认
+	        message.setContent(mmp2);
+	        message.saveChanges();
+	        //发送邮件
+	        Transport.send(message);
+		} catch (IOException e1) {
+			logger.error("密码找回异常..."+e1);
+			return E3Result.build(401, "密码找回异常...", e1.getMessage());
+			}	
 		}
-		return "1msg";
+		return E3Result.ok();
 	}
 	/**
 	 * 2017.04.15
@@ -665,7 +676,7 @@ public class UserController {
 	 * 更新个人中心  模帖子版块
 	 */
 	@RequestMapping("/user/topic")
-	public String topic(HttpServletRequest request,Model model,@RequestParam("page") String page)throws Exception{
+	public String topic(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("currentUser");
 		model.addAttribute("user", user);
@@ -697,7 +708,7 @@ public class UserController {
 		model.addAttribute("topicReplyCount", topicReplyCount);
 		
 		long topicTotal=topicService.getTopicCountByUserId(user.getId());
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/User_topic.action", topicTotal, Integer.parseInt(page), 8,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/user/topic", topicTotal, Integer.parseInt(page), 8,null);
 		model.addAttribute("pageCode", pageCode);
 	}			
 		String navCode=NavUtil.genNavCode("个人中心");
@@ -711,7 +722,7 @@ public class UserController {
 	 * 更新个人中心  我的问答版块
 	 */
 	@RequestMapping("/user/answer")
-	public String answer(HttpServletRequest request,Model model,@RequestParam("page") String page)throws Exception{
+	public String answer(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("currentUser");
 		model.addAttribute("user", user);
@@ -737,7 +748,7 @@ public class UserController {
 		model.addAttribute("topicReplyCount", topicReplyCount);
 		
 		long topicTotal=topicService.getAnswerCountByUserId(user.getId());
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/User_answer.action", topicTotal, Integer.parseInt(page), 8,null);			
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/user/answer", topicTotal, Integer.parseInt(page), 8,null);			
 		model.addAttribute("pageCode", pageCode);
 		return "userCenter/answerTopic";
 	}
@@ -748,7 +759,7 @@ public class UserController {
 	 * 用户未读信息列表
 	 */
 	@RequestMapping("/user/reply")
-	public String unReply(HttpServletRequest request,Model model,@RequestParam("page") String page)throws Exception{
+	public String unReply(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("currentUser");
 		model.addAttribute("user", user);
@@ -783,7 +794,7 @@ public class UserController {
 		model.addAttribute("uu", uu);
 		
 		long replyTotal=replyService.getUnReplyCountByUserId(user.getId());
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/User_unReply.action", replyTotal, Integer.parseInt(page), 8,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/user/reply", replyTotal, Integer.parseInt(page), 8,null);
 		model.addAttribute("pageCode", pageCode);
 		return "userCenter/userMesg";
 	}
@@ -808,7 +819,7 @@ public class UserController {
 		List<Section> sectionList=sectionService.findSectionList(null, null);
 		model.addAttribute("sectionList", sectionList);
 		long total=userService.getUserCount(null);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/User_list.action", total, Integer.parseInt(page), 6,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/user/list", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
 		String mainPage="user.jsp";
 		model.addAttribute("mainPage", mainPage);

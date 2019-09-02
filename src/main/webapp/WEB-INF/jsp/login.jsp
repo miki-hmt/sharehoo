@@ -162,7 +162,7 @@ function checkForm(){
 <script type="text/javascript" src="login-style/js/style.js"></script>
 
 <script type="text/javascript">
-
+//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
  function login(){
 	 $.ajax({
        type: "POST",

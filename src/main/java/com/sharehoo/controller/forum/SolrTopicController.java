@@ -84,7 +84,7 @@ public class SolrTopicController {
 		}
 		param.append("category_name="+category_name+"&keyword="+keyword);
 		
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/SearchJ_search.action", recordCount, page, count,param.toString());
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/solr/search", recordCount, page, count,param.toString());
 		model.addAttribute("pageCode", pageCode);
 		//返回逻辑视图search.jsp
 		return "soutie";

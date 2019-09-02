@@ -14,10 +14,10 @@
   		<meta name="Keywords" content="课设,下载,博客,论坛,IT资讯,开发心得,干货分享,代码,源码">
   		<meta name="Description" content="sharehoo.cn资讯交流平台--专注于程序员开发道路的技术分享，问题解决。
 	会员可以发帖交流与讨论，每个人都有一个个人博客，可以在上面写下自己的心得与感悟。同时提供资源下载，开源源码下载，课程设计，专注于服务大学生。">	
-		<link href="../blog/include/css/base.css" rel="stylesheet"/>
-		<link href="../blog/include/css/about.css" rel="stylesheet"/>
-		<link href="../blog/include/css/media.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/about.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
@@ -32,7 +32,7 @@
   <%@ include file="./nav.jsp" %> 
    </header>
   <article>
-    <h3 class="about_h">您现在的位置是：<a href="${PageContext.request.contextPath }/blog/Blog_show.action?userId=${user.id}">首页</a>><a href="${PageContext.request.contextPath }/blog/Blog_about.action?userId=${user.id}">关于我</a></h3>
+    <h3 class="about_h">您现在的位置是：<a href="${host}/blog/${user.nickNameId}">首页</a>><a href="${host}/blog/${user.nickNameId}/about">关于我</a></h3>
     <div class="about">
       <h2>Just about me</h2>
       <ul>
@@ -51,7 +51,7 @@
   <aside>
    <%@ include file="./info.jsp" %>
   </aside>
-  <script src="../blog/include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>

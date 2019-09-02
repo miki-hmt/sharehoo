@@ -54,7 +54,7 @@ public class SectionController {
 		model.addAttribute("zoneList", zoneList);
 		long total=sectionService.getSectionCount(null);
 		model.addAttribute("total", total);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/Section_list.action", total, Integer.parseInt(page), 6,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/section/list", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
 		String mainPage="section.jsp";
 		model.addAttribute("mainPage", mainPage);

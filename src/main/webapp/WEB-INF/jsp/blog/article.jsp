@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--修改日期格式只显示年月日  -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>${user.nickName}博客文章--IT帮-资讯传播社区--技术交流_干货分享_课设下载_源码下载</title>
@@ -15,16 +15,16 @@
 	会员可以发帖交流与讨论，每个人都有一个个人博客，可以在上面写下自己的心得与感悟。同时提供资源下载，开源源码下载，课程设计，专注于服务大学生。">	
 		
 		<!-- 尾部分页 css页码 	2017.05.24 -->
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		<link href="${pageContext.request.contextPath }/blog/include/css/page.css" rel="stylesheet"/>
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<link href="${host}/blog/include/css/page.css" rel="stylesheet"/>
 		<!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 		<!--我的高亮效果是zenburn-->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/highlight/styles/gruvbox-dark.css">
-		<script src="${pageContext.request.contextPath}/highlight/highlight.pack.js"></script>
+		<link rel="stylesheet" href="${host}/highlight/styles/gruvbox-dark.css">
+		<script src="${host}/highlight/highlight.pack.js"></script>
 		<script>hljs.initHighlightingOnLoad();</script>
-		<link href="../blog/include/css/base.css" rel="stylesheet"/>
-		<link href="../blog/include/css/style.css" rel="stylesheet"/>
-		<link href="../blog/include/css/media.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
@@ -39,18 +39,18 @@
      <%@ include file="./nav.jsp" %> 
        </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${user.id}">首页</a>><a href="${pageContext.request.contextPath }/blog/Blog_article.action?userId=${user.id}">漫生活</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/${user.nickNameId}">首页</a>><a href="${host}/blog/${user.nickNameId}/article">漫生活</a></h2>
     <div class="bloglist">
     <c:forEach items="${articleList }" var="article">
       <div class="newblog">
         <ul>
-          <h3><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></h3>
+          <h3><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></h3>
           <div class="autor"><span>作者：<a>${article.editer }</a></span><span>分类：[<a href="/">${article.type }</a>]</span><span>浏览（<a href="/">${article.count }</a>）</span><span>评论（<a href="/">${article.count1 }</a>）</span>
           <span>
           </span></div>
-          <div class="content">${article.content }</div><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  class="readmore" style="display:inline-block;"  target="_blank">全文</a>
+          <div class="content">${article.content }</div><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  class="readmore" style="display:inline-block;"  target="_blank">全文</a>
         </ul>
-        <figure><img src="${pageContext.request.contextPath }/${article.image}" width="200" height="100" /></figure>
+        <figure><img src="${host}/${article.image}" width="200" height="100" /></figure>
         <div class="dateview"><fmt:formatDate value="${article.time }" pattern="yyyy-MM-dd HH:mm:ss "/></div>
       </div>
      </c:forEach>
@@ -78,10 +78,10 @@
 		      <c:forEach items="${countList }" var="article" varStatus="state">
 		      <c:choose>
 		      	<c:when test="${ state.index<3}">
-		      		<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>       	
+		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>       	
 		      	</c:when>
 		      	<c:otherwise>
-		      		<li><span>${state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+		      		<li><span>${state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
 		      	</c:otherwise>
 		      	</c:choose>
 		      </c:forEach>
@@ -93,10 +93,10 @@
 		      	<c:forEach items="${recommendList }" var="article" varStatus="state">
 		      	<c:choose>
 		      		<c:when test="${ state.index<3}">
-		      			<li><span class="num1">${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>       	
+		      			<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>       	
 		      		</c:when>
 		      	<c:otherwise>
-		      		<li><span>${ state.index+1 }</span><a href="${pageContext.request.contextPath}/blog/Blog_detail.action?id=${article.id}"  target="_blank">${article.title }</a></li>
+		      		<li><span>${ state.index+1 }</span><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  target="_blank">${article.title }</a></li>
 		      	</c:otherwise>
 		      </c:choose>
 		      </c:forEach>
@@ -107,7 +107,7 @@
       <ul class="pl_n">
       <s:iterator value="critiques" >
         <dl>
-          <dt><img src="../include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd><s:property value="name"/>
             <time><s:property value="time"/></time>
@@ -119,7 +119,7 @@
     </div>
    <%@ include file="./copyright.jsp" %> 
   </aside>
-  <script src="../blog/include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>

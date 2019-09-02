@@ -1,18 +1,10 @@
 package com.sharehoo.service.impl.forum;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.annotation.Resource;
 import javax.transaction.Transactional;
-
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sharehoo.dao.BaseDAO;
 import com.sharehoo.dao.impl.forum.CritiqueDao;
 import com.sharehoo.entity.forum.Critique;
 import com.sharehoo.entity.forum.PageBean;
@@ -48,8 +40,7 @@ public class CritiqueServiceImpl implements CritiqueService {
 	public List<Critique> getListByUserId(int userId) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		String hql = "from Critique as critique where critique.notice like ? and critique.user.id=:userId order by critique.time desc";
-		param.add("1");
+		String hql = "from Critique as critique where critique.notice like '1' and critique.user.id=? order by critique.time desc";
 		param.add(userId);
 		return baseDAO.findTopN(hql, param, 16);
 	}
@@ -105,7 +96,7 @@ public class CritiqueServiceImpl implements CritiqueService {
 	public List<Critique> getArticleCritiquesByAid(int articleId) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		String hql = "from Critique as critique where critique.notice like ? and critique.article.id=:articleId order by critique.time desc";
+		String hql = "from Critique as critique where critique.notice like ? and critique.article.id=? order by critique.time desc";
 		param.add("2");
 		param.add(articleId);
 		return baseDAO.findTopN(hql, param, 10);
@@ -115,7 +106,7 @@ public class CritiqueServiceImpl implements CritiqueService {
 	public List<Critique> getPhListByUserId(int userId) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		String hql="from Critique as critique where critique.notice like ? and critique.user.id=:userId order by critique.time desc";
+		String hql="from Critique as critique where critique.notice like ? and critique.user.id=? order by critique.time desc";
 		param.add("3");
 		param.add(userId);
 		
@@ -126,7 +117,7 @@ public class CritiqueServiceImpl implements CritiqueService {
 	public List<Critique> getReplyListByAid(int aid) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		String hql="from Critique as critique where critique.notice like ? and critique.article.id=:aid order by critique.time desc";
+		String hql="from Critique as critique where critique.notice like ? and critique.article.id=? order by critique.time desc";
 		param.add("3");
 		param.add(aid);
 

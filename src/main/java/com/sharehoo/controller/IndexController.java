@@ -113,7 +113,7 @@ public class IndexController {
 		
 	}
 	
-	@RequestMapping("/notice/list")
+	@RequestMapping("/admin/notice/list")
 	public String list(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception{
 		String page = request.getParameter("page");		
 		if (StringUtil.isEmpty(page)) {

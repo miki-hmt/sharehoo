@@ -15,11 +15,11 @@
 		<link href="../include/css/base.css" rel="stylesheet"/>
 		<link href="../include/css/style.css" rel="stylesheet"/>
 		<link href="../include/css/media.css" rel="stylesheet"/>
-		<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 		<script type="text/javascript" src="../include/js/jquery.min.js"></script>
 		<script type="text/javascript" src="../include/js/jquery.gallery.js"></script>
 		<script type="text/javascript" src="../include/js/modernizr.custom.53451.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="${host}/ckeditor/ckeditor.js"></script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
@@ -42,7 +42,7 @@
       		<table>
       		<c:forEach items="${fileList}" var="file">
       			<tr>
-      				<td><a href="${pageContext.request.contextPath}/image_upload/file/${file.image}">${file.note}</a></td>
+      				<td><a href="${host}/image_upload/file/${file.image}">${file.note}</a></td>
       				<td>&nbsp;</td>
       				<td><a href="../manage/PhotoManage_deleteFile.action?id=${file.id}">删除</a></td>
       			</tr>

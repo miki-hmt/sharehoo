@@ -22,7 +22,7 @@ function checkUserLogin(){
 	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 		alert("您还未登陆！");
 	} else {
-		window.location.href="User_userCenter.action";
+		window.location.href="${host}/user/center?page=1";
 	}
 }
 
@@ -80,8 +80,8 @@ function check_up(thisform){
 							                  	  		</c:choose>
 												
 						<a href="javascript:checkUserLogin()" style="color:#FFEC24;margin-left:-4px;text-transform:uppercase;">${currentUser.nickName }</a><font style="color:white;font-size:9pt;">|</font>
-						<a href="User_userCenter.action" target="_blank" title="进入个人中心" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">个人中心</font></a><font style="color: white;font-size:9pt;">|</font>				
-						<a href="User_userCenter.action" target="_blank" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">消息</font><img id="news" src="${host}/common/images/logo/mess.png" style="width:6px;height:24px;display:none;"/></a><font style="color: white;font-size:9pt;">|</font>
+						<a href="${host}/user/center?page=1" target="_blank" title="进入个人中心" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">个人中心</font></a><font style="color: white;font-size:9pt;">|</font>				
+						<a href="${host}/user/center?page=1" target="_blank" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">消息</font><img id="news" src="${host}/common/images/logo/mess.png" style="width:6px;height:24px;display:none;"/></a><font style="color: white;font-size:9pt;">|</font>
 						<a href="javascript:logout()"><font style="color:#FFEC24;margin-left:-4px;">注销</font></a>
 						</font>
 						<c:choose>
@@ -111,8 +111,8 @@ function check_up(thisform){
 				<!-- <a href="login">登录</a>| -->
 				<div class="header-user">
 					<font style="color:white;font-size:9pt;">
-						<a href="javascript:login()">登录&nbsp;</a>|<a href="register.jsp">&nbsp;注册&nbsp;</a>|
-						<a href="userCenter/forget.jsp">忘记密码</a>
+						<a href="javascript:login()">登录&nbsp;</a>|<a href="${host}/register">&nbsp;注册&nbsp;</a>|
+						<a href="${host}/user/forget">忘记密码</a>
 					</font>
 				</div>
 			</c:otherwise>
@@ -159,7 +159,7 @@ function check_up(thisform){
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
-	$.post("/user/news",function(result){
+	$.post("${host}/user/news",function(result){
 		if(result.mes){
 			$("#news").show();
 		}else{

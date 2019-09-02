@@ -380,7 +380,7 @@ function check(sourceId){
 	if (confirm("需要消耗..${source.douNum}..下载豆，确定要下载吗？")) {
 	$.post("Source_download.action",{sourceId:sourceId},
 			function(result){
-				var result=eval('('+result+')');
+				var result=eval(result);
 				if(!result.successs){
 					alert("虎豆已成功扣除，正在进入下载页面.....");					
 					window.location.href="Source_kiss.action?signal=${signal}&source_id=${source.id}";													

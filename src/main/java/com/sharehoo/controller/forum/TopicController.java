@@ -78,7 +78,7 @@ public class TopicController {
 		User currentUser = (User) session.getAttribute("currentUser");
 
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
-		if (currentUser != null) {
+		if (currentUser == null) {
 			request.getRequestDispatcher("/errorlogin").forward(request, response);
 		}
 		if(sectionId==0) {
@@ -97,7 +97,7 @@ public class TopicController {
 		User currentUser = (User) session.getAttribute("currentUser");
 		
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
-		if (currentUser != null) {
+		if (currentUser == null) {
 			// response.sendRedirect(request.getContextPath()+"/login.jsp");
 			request.getRequestDispatcher("/errorlogin").forward(request, response);
 		}
@@ -280,7 +280,7 @@ public class TopicController {
 		List<Topic> leaveList = topicService.findPtTopicListBySectionId(17, pageBean);
 		model.addAttribute("leaveList", leaveList);
 		long total = topicService.getPtTopicCountBySectionId(17);
-		String pageCode = PageUtil.genPagination(request.getContextPath() + "/Topic_leaveList.action", total,
+		String pageCode = PageUtil.genPagination(request.getContextPath() + "/secret", total,
 				Integer.parseInt(page), Integer.parseInt(SECRET_TOPIC), null);
 		model.addAttribute("pageCode", pageCode);
 		return "leavemessage";
@@ -313,7 +313,7 @@ public class TopicController {
 		model.addAttribute("ptTopicList", ptTopicList);
 		
 		long total = topicService.getPtTopicCountBySectionId(sectionId);
-		String pageCode = PageUtil.genPagination(request.getContextPath() + "/", total,
+		String pageCode = PageUtil.genPagination(request.getContextPath() + "//topic/section/"+sectionId, total,
 				Integer.parseInt(page), 20, null);
 		model.addAttribute("pageCode", pageCode);
 		
@@ -361,7 +361,7 @@ public class TopicController {
 		long total = topicService.getTopicCount(s_topic);
 		model.addAttribute("total", total);
 		
-		String pageCode = PageUtil.genPagination(request.getContextPath() + "/admin/Topic_listAdmin.action", total,
+		String pageCode = PageUtil.genPagination(request.getContextPath() + "/admin/topic/list", total,
 				Integer.parseInt(page), 10, null);
 		model.addAttribute("pageCode", pageCode);
 		List<Section> sectionList = sectionService.findSectionList(null, null);
@@ -392,7 +392,7 @@ public class TopicController {
 		
 		long total = topicService.getTopicCount(s_topic);
 		model.addAttribute("total", total);
-		String pageCode = PageUtil.genPagination(request.getContextPath() + "/Topic_search.action", total,
+		String pageCode = PageUtil.genPagination(request.getContextPath() + "/topic/search", total,
 				Integer.parseInt(page), 10, null);
 		model.addAttribute("pageCode", pageCode);
 		List<Section> sectionList = sectionService.findSectionList(null, null);
@@ -441,7 +441,7 @@ public class TopicController {
 		if (topicId > 0) {
 			param.append("topicId=" + topicId);
 		}
-		String pageCode = PageUtil.genPagination(request.getContextPath() + "/Topic_details.action", total,
+		String pageCode = PageUtil.genPagination(request.getContextPath() + "/topic/detail/"+topicId, total,
 				Integer.parseInt(page), 10, param.toString());
 		model.addAttribute("pageCode", pageCode);
 		

@@ -61,7 +61,7 @@ function sectionDelete(sectionId){
 	if(confirm("确定要删除这条数据吗?")){
 		$.post("Section_delete.action",{sectionId:sectionId},
 				function(result){
-					var result=eval('('+result+')');
+					var result=eval(result);
 					if(result.error){
 						alert(result.error);
 					}else{
@@ -102,7 +102,7 @@ function resetValue(){
 }
 function searchUserByNickName(userNickName){
 	$.post("Section_getUserByNickName.action",{nickName:userNickName},function(result){
-		var result=eval('('+result+')');
+		var result=eval(result);
 		$("#info").html(result.info);
 		$("#masterId").val(result.masterId);
 	});
@@ -111,7 +111,7 @@ function searchUserByNickName(userNickName){
 
 function searchUserByNickName1(userNickName){
 	$.post("Section_getUserByNickName.action",{nickName:userNickName},function(result){
-		var result=eval('('+result+')');
+		var result=eval(result);
 		$("#info1").html(result.info);
 		$("#smasterId").val(result.masterId);
 	});
