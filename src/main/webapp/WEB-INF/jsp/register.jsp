@@ -8,7 +8,12 @@
 <link href="${host}/bootstrap/css/bootstrap.css" rel="stylesheet" />
 <link href="${host}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 <link href="${host}/bootstrap/css/docs.css" rel="stylesheet" />
+
+<!-- 2019.09.03 自定义弹窗所需插件 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.messages_cn.js"></script>
 <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
@@ -297,47 +302,57 @@ function checkForm(){
 	
 	
 <script type="text/javascript">
-
-function addFileName(){
-	var uploadfile = $("#face").val();
-	var fileName= getFileName(uploadfile);
-	$("#faceFileName").val(fileName);
-}
-//获取文件名方式一
-  function getFileName(file){		//通过第一种方式获取文件名
-    var pos=file.lastIndexOf("\\");//查找最后一个\的位置
-	return file.substring(pos+1); //截取最后一个\位置到字符长度，也就是截取文件名 
- }
-//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
- function register(){
- 	checkForm();
- 	 addFileName();
- 	 var faceFileName = $('#ImgPr')[0].src;
- 	 var formData = new FormData($("#regForm")[0]);
-	 $.ajax({
-       type: "POST",
-       url: "user/register?faceFileName="+faceFileName,
-       data: formData,
-       cache: false,
-       async: false,
-       processData : false,  //必须false才会避开jQuery对 formdata 的默认处理
-       contentType : false,  //必须false才会自动加上正确的Content-Type
-       success: function (data) {
-       		console.log("成功");
-		/*
-		layer.alert("增加成功", {icon: 6}, function () {
-                    window.parent.location.reload(); //刷新父页面
-                    // 获得frame索引
-                    var index = parent.layer.getFrameIndex(window.name);
-                    //关闭当前frame
-                    parent.layer.close(index);
-                });
-		*/
-       }       
-   	});
-	return false;
- }
- 
+$(function(){
+	function addFileName(){
+		var uploadfile = $("#face").val();
+		var fileName= getFileName(uploadfile);
+		$("#faceFileName").val(fileName);
+	}
+	//获取文件名方式一
+	  function getFileName(file){		//通过第一种方式获取文件名
+	    var pos=file.lastIndexOf("\\");//查找最后一个\的位置
+		return file.substring(pos+1); //截取最后一个\位置到字符长度，也就是截取文件名 
+	 }
+	//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+	 function register(){
+	 	checkForm();
+	 	 addFileName();
+	 	 var nickName = $("#nickName").val();
+	 	 var faceFileName = $('#ImgPr')[0].src;
+	 	 var formData = new FormData($("#regForm")[0]);
+		 $.ajax({
+	       type: "POST",
+	       url: "user/register?faceFileName="+faceFileName,
+	       data: formData,
+	       cache: false,
+	       async: false,
+	       processData : false,  //必须false才会避开jQuery对 formdata 的默认处理
+	       contentType : false,  //必须false才会自动加上正确的Content-Type
+	       success: function (data) {
+	       		console.log("成功");
+	       		if(data.status==200){
+	       			tipOk("注册成功");
+	       			window.location.href = "${host}/user/welcome?nickName="+nickName;
+	       		}
+	       }       
+	   	});
+		return false;
+	 }
+	 
+	 function tipOk(content){
+			swal({   
+				title: content,   
+				text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+				imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+				html: true,
+				timer: 2000,   
+				showConfirmButton: false
+			});
+		};
+		function tipError(content){
+			swal("登录失败", content, "error");
+		};
+});
 </script>
 </body>
 </html>

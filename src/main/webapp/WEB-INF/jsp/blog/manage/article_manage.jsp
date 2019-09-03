@@ -24,16 +24,21 @@
 		<script src="../include/js/modernizr.js"></script>
 		<![endif]-->
 
-		<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+		<!-- 2019.09.03 自定义弹窗所需插件 -->
+		<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+		<script src="${host}/sweetalert/sweetalert.min.js"></script>
+		
 	 	 <script type="text/javascript">
+	 	 $(function(){
 			function deleteArticle(articleId){
 				if (confirm("您确定要删除这篇文章吗？")) {
 					$.post("${host}/blog/manage/article/delete",{articleId:articleId},function(result){
 						if(result.status==200){
-							alert("文章已成功删除！");
+							tipOk("文章已成功删除！");
 							location.reload(true);
 						}else{
-							alert("删除失败！！");
+							tipError("删除失败！！");
 						}
 					},"json");
 				}else{
@@ -62,10 +67,10 @@
 				if (confirm("您确定要将这篇文章设为推荐吗？")) {
 					$.post("${host}/blog/manage/article/recommend",{articleId:articleId},function(result){
 						if(result.status==200){
-							alert("设置成功！");
+							tipOk("设置成功！");
 							location.reload(true);
 						}else{
-							alert("设置失败！！");
+							tipError("设置失败！！");
 						}
 					},"json");
 				}else{
@@ -76,16 +81,31 @@
 				if (confirm("您确定要删除这篇文章吗？")) {
 					$.post("${host}/blog/manage/article/unRecommend",{articleId:articleId},function(result){
 						if(result.status==200){
-							alert("设置成功！");
+							tipOk("设置成功！");
 							location.reload(true);
 						}else{
-							alert("设置失败！！");
+							tipError("设置失败！！");
 						}
 					},"json");
 				}else{
 					return;
 				}
 			}
+			
+			function tipOk(content){
+				swal({   
+					title: content,   
+					text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+					imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+					html: true,
+					timer: 2000,   
+					showConfirmButton: false
+				});
+			};
+			function tipError(content){
+				swal("操作失败", content, "error");
+			};
+		});
 		</script>
 
 	</head>

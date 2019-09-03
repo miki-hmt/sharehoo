@@ -543,7 +543,7 @@ function Confirm(msg,func1,func2,w,h){
 			if(func1){
 				func1();
 			}
-			window.location.href="User_logout.action";
+			window.location.href="user/logout";
 		})
 	$.DialogData.dialogDiv.find("input[id^='_ButtonCancel_']").bind("click", function() { 
 			if(func2){

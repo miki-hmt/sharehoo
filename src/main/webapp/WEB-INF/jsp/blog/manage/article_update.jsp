@@ -14,7 +14,12 @@
 		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
 		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
 		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		<script type="text/javascript" src="${host}/js/jquery-1.11.1.js"></script>
+		
+		<!-- 2019.09.03 自定义弹窗所需插件 -->
+		<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+		<script src="${host}/sweetalert/sweetalert.min.js"></script>
+		
 		<script type="text/javascript" src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="${host}/js/uploadPreview.min.js"></script>
 		
@@ -155,6 +160,7 @@
   <!-- 清除浮动 --> 
   
 <script type="text/javascript">
+$(function(){
 	
 	function addFileName() {
 		var uploadfile = $("#articleImage").val();
@@ -189,9 +195,9 @@
 				contentType : false, //必须false才会自动加上正确的Content-Type
 				success : function(data) {
 					if (data.status == 200) {
-						alert("修改成功!!");
+						tipOk("修改成功!!");
 					} else {
-						alert("修改失败!!" + data.msg);
+						tipError("修改失败!!" + data.msg);
 					}
 				}
 			});
@@ -222,12 +228,27 @@
 		}
 
 		if ($("#content").val().length < 10) {
-			alert("文章内容最少20个字符！");
+			tipError("文章内容最少20个字符！");
 			result = false;
 		}
 		return result;
 		
 	}
+	
+	function tipOk(content){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		});
+	};
+	function tipError(content){
+		swal("操作失败", content, "error");
+	};
+});
 </script>
   
   

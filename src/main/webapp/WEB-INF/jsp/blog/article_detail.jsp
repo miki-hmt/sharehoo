@@ -15,27 +15,72 @@
 		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
 		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+		
+		<!-- 2019.09.03 自定义弹窗所需插件 -->
+		<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+		<script src="${host}/sweetalert/sweetalert.min.js"></script>
+		
 		<!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 		<!--我的高亮效果是zenburn-->
-		<link rel="stylesheet" href="${host}/highlight/styles/gruvbox-dark.css">
+		<link rel="stylesheet" href="${host}/highlight/styles/gruvbox-dark.css"/>
 		<script src="${host}/highlight/highlight.pack.js"></script>
 		<script>hljs.initHighlightingOnLoad();</script>
 
 		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+		
 		<script type="text/javascript">
-			function check(){
+		
+			//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+			$(document).ready(function() {	
+				$("#submitAdd").on("click",function(){
+					if(!check()){
+						$.ajax({
+				       type: "POST",
+				       url: "${host}/blog/${user.nickNameId}/article/${article.id}/add",
+				       data: $("#critique_form").serialize(),
+				       success: function (data) {
+				       		if(data.status==200){
+				       			tipOk("留言成功");
+				       			window.location.reload();
+				       			//window.location.href="${host}/blog/${user.nickNameId}/critiques";
+				       		}
+				       }
+					   	});
+			   		return false;	//!!一定要return false, 否則會自動刷新頁面,導致ajax彈窗提醒失效。防止刷新頁面
+					}
+					
+				})
+			
+			function tipOk(content){
+					swal({   
+						title: content,   
+						text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+						imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+						html: true,
+						timer: 2000,   
+						showConfirmButton: false
+					});
+				};
+				function tipError(content){
+					swal("操作失败", content, "error");
+				};
+				
+				function check(){
+				var result = false;
 				var name=$("#name").val();
 				var content=$("#criContent").val();
 				if(name==""){
-					alert("亲亲，昵称不能为空哦");
-					return false;
+					tipError("亲亲，昵称不能为空哦");
+					result = true;
 				}
 				if(content=""){
-					alert("亲亲，评论内容不能为空哦");
-					return false;
+					tipError("亲亲，评论内容不能为空哦");
+					result = true;
 				}
-			}
+				}		
+			});
+		
 		</script>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
@@ -161,20 +206,20 @@
         <p><span style="color:white;">发表看法</span></p>
       </h2>
       <br></br>
-       <form action="${host}/blog/Critique_saveAr.action?id=${article.id}" method="post" onsubmit="return check()">
+       <form action="" method="post" id="critique_form">
       		<table>
       			<tr>
-      				<td><input type="text" id="name" name="critique.name" placeholder="您的昵称"/></td>
+      				<td><input type="text" id="name" name="name" placeholder="您的昵称"/></td>
       			</tr>
       			<tr>
-	    			<td><textarea id="criContent" name="critique.content" style ="height:200px; width:268px;bg-color:gray;" placeholder="您的内容"></textarea></td>
+	    			<td><textarea id="criContent" name="content" style ="height:200px; width:268px;bg-color:gray;" placeholder="您的内容"></textarea></td>
     			</tr>
     			<tr>
 	    			<td><button type="submit" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
     			</tr>
     			
-    			<input type="hidden" name="critique.user.id" value="${user.id }"/>
-    			<input type="hidden" name="critique.article.id" value="${article.id }"/>
+    			<input type="hidden" name="user.id" value="${user.id }"/>
+    			<input type="hidden" name="article.id" value="${article.id }"/>
       		</table>
       </form>
       

@@ -113,7 +113,7 @@ public class UserController {
 			String imageName=DateUtil.getCurrentDateStr();
 			String realPath = staticPath +"/images/user/"+Consts.SDF_YYYYMM.format(new Date());  
 
-			String imageFile=imageName+"."+faceFileName.split("\\.")[1];
+			String imageFile=imageName+"."+facelogo.getOriginalFilename().split("\\.")[1];
 			File savePath=new File(realPath);
 			if(!savePath.exists()) {
 				savePath.mkdirs();
@@ -216,6 +216,12 @@ public class UserController {
 		return E3Result.ok();
 	}
 	
+	@RequestMapping("/user/welcome")
+	public String registerSuccess(Model model,@RequestParam("nickName") String nickName) {
+		model.addAttribute("nickName", nickName);
+		
+		return "reg-result";
+	}
 	
 	/**
 	 * miki
@@ -473,7 +479,8 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/user/login")
-	public String login(HttpServletRequest request,User user,@RequestParam(value="imageCode",required = true) String imageCode,
+	@ResponseBody
+	public E3Result login(HttpServletRequest request,User user,@RequestParam(value="imageCode",required = true) String imageCode,
 			@RequestParam(value="error",required = false) String error)throws Exception{	
 		HttpSession session=request.getSession();
 		/*
@@ -489,12 +496,12 @@ public class UserController {
 			session.setAttribute("error", error);			
 		}else
 			if(currentUser==null){
-			error="用户名或密码错误！";			
-			session.setAttribute("error", error);			
+			error="用户名或密码错误！";
+			session.setAttribute("error", error);
 		}
 		else 
 			if(currentUser.isStatus()==false){
-			error="用户未激活，请激活后登录！";			
+			error="用户未激活，请激活后登录！";
 			session.setAttribute("error", error);
 		}else{
 			session.setAttribute(Consts.CURRENTUSER, currentUser);
@@ -519,19 +526,15 @@ public class UserController {
 			log1.setOperation_log("用户登录");
 			log1.setUser(currentUser);
 			logService.save(log1);
-						
-			/*
-			 *2017.05.29 miki 统计未读信息数
-			 */
+			//********** 统计未登录的信息			
 			Long count2=replyService.getUnReplyCountByUserId(currentUser.getId());
 			session.setAttribute("count", count2);
-
 			}
-		if (user.getType()==3) {
-			return "adminLogin";
-		} else {
-			return "log_result";
+		if(StringUtil.isNotEmpty(error)) {
+			return E3Result.build(401, error);
 		}
+		
+		return E3Result.ok();
 	}
 	
 	@RequestMapping("/admin/user/login")
@@ -576,10 +579,17 @@ public class UserController {
 		return "admin/main";
 	}
 	
+	/**
+	* @Title: logout  
+	* @Description: TODO(重定向多层级使用)  
+	* @author miki 
+	* @date 2019年9月3日 下午6:14:19   
+	* @throws
+	 */
 	@RequestMapping("/user/logout")
 	public String logout(HttpServletRequest request)throws Exception{
 		request.getSession().invalidate();
-		return "redirect:home";
+		return "redirect:/index.html";
 	}
 	
 	@RequestMapping("/user/forget")

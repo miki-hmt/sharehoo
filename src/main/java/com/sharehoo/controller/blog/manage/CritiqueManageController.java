@@ -31,7 +31,7 @@ public class CritiqueManageController {
 	@Autowired
 	private CritiqueService critiqueService;
 	
-	@RequestMapping("/blog/manage/critique/list")
+	@RequestMapping("/blog/manage/critique")
 	public String list(HttpServletRequest request,@RequestParam(value="page",required=false) String page,Model model)throws Exception{
 			
 			HttpSession session=request.getSession();
@@ -48,7 +48,7 @@ public class CritiqueManageController {
 				PageBean pageBean=new PageBean(Integer.parseInt(page), 10);
 				List<Critique> critiques=critiqueService.getAllListByUserId(user.getId(), pageBean);//换个分页留言
 				model.addAttribute("critiques", critiques);
-				String pageCode=PageUtil.genPagination(request.getContextPath()+"/blog/manage/critique/list", total, Integer.parseInt(page), 12,null);
+				String pageCode=PageUtil.genPagination(request.getContextPath()+"/blog/manage/critique", total, Integer.parseInt(page), 12,null);
 				model.addAttribute("pageCode", pageCode);
 				
 			return "blog/manage/critique";
@@ -130,7 +130,7 @@ public class CritiqueManageController {
 	* @date 2019年9月2日 下午9:32:23   
 	* @throws
 	 */
-	@RequestMapping("/blog/manage/critique/delete")
+	@RequestMapping("/blog/manage/ar/reply")
 	@ResponseBody
 	public E3Result saveAr(HttpServletRequest request,@RequestParam(value="id",required=false) int id,Critique critique)throws Exception{
 		HttpSession session=request.getSession();

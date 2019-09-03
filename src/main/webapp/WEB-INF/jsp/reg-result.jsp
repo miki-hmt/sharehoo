@@ -11,11 +11,11 @@
             src: url('digital-7_mono.ttf') format("truetype");
         }
     </style>
-    <link href="register_result/default.css" type="text/css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-    <script type="text/javascript" src="register_result/jquery.js"></script>
-    <script type="text/javascript" src="register_result/garden.js"></script>
-    <script type="text/javascript" src="register_result/functions.js"></script>
+    <link href="${host}/register_result/default.css" type="text/css" rel="stylesheet">
+<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+    <script type="text/javascript" src="${host}/register_result/jquery.js"></script>
+    <script type="text/javascript" src="${host}/register_result/garden.js"></script>
+    <script type="text/javascript" src="${host}/register_result/functions.js"></script>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
         <div id="content">
             <div id="code">
                 <span class="comments">/**注册成功！</span><br />
-                <span class="space"/><span class="comments">* haha恭喜你,亲爱的陌生人，注册成为本站又又又一位重要的成员.</span><br />
+                <span class="space"/><span class="comments">* haha恭喜你,亲爱的${nickName}，注册成为本站又又又一位重要的成员.</span><br />
                 <span class="space"/><span class="comments">* so 本站从2016.10.8号上线至今，多靠各位的举手之劳，一步步走到今天这样的地步.</span><br />
                 <span class="space"/><span class="comments">*/</span><br />
                 Sharehoo = <span class="keyword">share</span> Who(<span class="string">"we"</span>);<br />

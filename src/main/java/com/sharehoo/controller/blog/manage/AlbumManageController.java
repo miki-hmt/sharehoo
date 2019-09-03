@@ -47,7 +47,7 @@ public class AlbumManageController {
 	
 	@RequestMapping("/blog/manage/album/add")
 	@ResponseBody
-	public E3Result save(HttpServletRequest request,@RequestParam("aid") int aid,@RequestParam(value="photoFile",required=false) MultipartFile file,
+	public E3Result save(HttpServletRequest request,@RequestParam(value="photoFile",required=false) MultipartFile file,
 			@RequestParam("faceFileName") String faceFileName,Album album){
 		
 		try {
@@ -57,8 +57,9 @@ public class AlbumManageController {
 		    	if(file.getSize()>600*1024*3) {
 		    		return E3Result.build(401, "上传文件限制在3M以内哦");
 		    	}
+		    	faceFileName = file.getOriginalFilename();
 				String imageName=DateUtil.getCurrentDateStr();
-				String realPath = staticPath +"/image_upload/file/"+Consts.SDF_YYYYMM.format(new Date()); 
+				String realPath = staticPath +"/image_upload/album/"+Consts.SDF_YYYYMM.format(new Date()); 
 				String imageFile=imageName+"."+faceFileName.split("\\.")[1];
 				
 				File savePath=new File(realPath);
@@ -76,7 +77,7 @@ public class AlbumManageController {
 		        }       
 		        is.close();    
 		        os.close();
-		        album.setImage("image_upload/album/"+imageFile);//原来为"images/user/"   2016.10.12
+		        album.setImage("image_upload/album/"+Consts.SDF_YYYYMM.format(new Date())+"/"+imageFile);//原来为"images/user/"   2016.10.12
 			}else {
 				album.setImage("images/user/timg1.jpg");
 			}

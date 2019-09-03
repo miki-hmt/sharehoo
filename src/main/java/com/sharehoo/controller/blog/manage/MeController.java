@@ -29,7 +29,7 @@ public class MeController {
 		User user=(User) session.getAttribute(Consts.CURRENTUSER);		
 		model.addAttribute("user", user);
 		List<Me> listByUer=meService.getMeListByUserId(user.getId(), null);
-		model.addAttribute("listByUer", listByUer);
+		model.addAttribute("me", listByUer.get(0));
 		return "blog/manage/about";
 	}
 	

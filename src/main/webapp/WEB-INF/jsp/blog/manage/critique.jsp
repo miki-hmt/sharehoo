@@ -21,10 +21,14 @@
 		<!-- 尾部分页 css页码 	2017.05.24 -->
 		<link href="${host}/blog/include/css/page.css" rel="stylesheet"/>
 		
-		<script type="text/javascript" src="${host}/blog/include/js/jquery.min.js"></script>
+		<!-- 2019.09.03 自定义弹窗所需插件 -->
+		<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+		<script src="${host}/sweetalert/sweetalert.min.js"></script>
+		
 		<script type="text/javascript" src="${host}/blog/include/js/jquery.gallery.js"></script>
 		<script type="text/javascript" src="${host}/blog/include/js/modernizr.custom.53451.js"></script>
-		<script type="text/javascript" src="${host}/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0"/>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
@@ -39,7 +43,7 @@
     <%@ include file="../manage_nav.jsp" %>
     </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="../manage/Article_list.action?userId=${user.id }">首页</a>><a href="#">留言板</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="">首页</a>><a href="#">留言板</a></h2>
     <div class="template">
       
       <h3>
@@ -52,7 +56,7 @@
           <dt> </dt>
           <dd>${critique.name }
             <time><fmt:formatDate value="${critique.time }" pattern="yyyy-MM-dd HH:mm:ss "/></time>&nbsp;&nbsp;
-            	<a href="../manage/CritiqueManage_delete.action?id=${critique.id }" class="dellink"><span style="color:red;">删除</span></a>
+            	<a href="javascript:deleteCritique(${critique.id })" class="dellink"><span style="color:red;">删除</span></a>
           </dd>
          	<font style="color:gray;">${critique.content }</font> 
         </dl>
@@ -72,7 +76,7 @@
 	    			</td>
     			</tr>
     			<tr>
-	    			<td><button type="submit" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
+	    			<td><button type="submit" style="background:#E41635;width: 60px;height: 30px;font-size: larger;color:white">提交</button></td>
     			</tr>
     			
     			<input type="hidden" name="critique.user.id" value="${user.id }"/>
@@ -126,5 +130,39 @@
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>
+
+ <script type="text/javascript">
+ $(function(){
+	function deleteCritique(id){
+		if (confirm("您确定要删除这个评论吗？")) {
+			$.post("${host}/blog/manage/critique/delete",{id:id},function(result){
+				if(result.status==200){
+					tipOk("评论已成功删除！");
+					location.reload(true);
+				}else{
+					tipError("删除失败！！");
+				}
+			},"json");
+		}else{
+			return;
+		}
+	}
+	
+	function tipOk(content){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		});
+	};
+	function tipError(content){
+		swal("操作失败", content, "error");
+	};
+ });
+</script>
+
 </body>
 </html>

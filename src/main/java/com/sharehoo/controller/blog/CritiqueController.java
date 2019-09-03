@@ -117,7 +117,7 @@ public class CritiqueController {
 	 * 2017.06.03
 	 * 保存文章评论
 	 */
-	@RequestMapping("/blog/{nicknameId}/article/{id}/critique")
+	@RequestMapping("/blog/{nicknameId}/article/{id}/add")
 	@ResponseBody
 	public E3Result saveAr(@PathVariable("id") int id,Model model,Critique critique)throws Exception{
 		if(id>0){

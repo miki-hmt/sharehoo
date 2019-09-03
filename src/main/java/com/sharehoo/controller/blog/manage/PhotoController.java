@@ -53,6 +53,7 @@ public class PhotoController {
 	public String add(HttpServletRequest request,Model model,@RequestParam("aid") int aid)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+		model.addAttribute("user", user);
 		if(user==null) {
 			return "error";
 		}
@@ -68,48 +69,49 @@ public class PhotoController {
 	 */
 	@RequestMapping("/blog/manage/photo/add")
 	@ResponseBody
-	public E3Result save(HttpServletRequest request,@RequestParam("aid") int aid,@RequestParam(value="photoImage",required=false) MultipartFile image,
+	public E3Result save(HttpServletRequest request,@RequestParam(value="photoImage",required=false) MultipartFile image,
 			@RequestParam("faceFileName") String faceFileName,Photo photo)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(null==user) {
 			return E3Result.build(401, "请登录后，再保存..");
 		}
-		if(aid>0){
-			if (image!=null) {			
-				//获取项目的static根路径  
-		    	String staticPath = BootPathUtil.getStaticPath();
-		    	
-				String imageName=DateUtil.getCurrentDateStr();
-				String realPath = staticPath +"/images/article/"+Consts.SDF_YYYYMM.format(new Date()); 
-				String imageFile=imageName+"."+faceFileName.split("\\.")[1];
-				
-				File savePath=new File(realPath);
-				if(!savePath.exists()) {
-					savePath.mkdirs();
-				}		
-				InputStream is = image.getInputStream();    	    
-		          
-		        File toFile = new File(realPath, imageFile);    
-		        OutputStream os = new FileOutputStream(toFile);       
-		        byte[] buffer = new byte[1024];       
-		        int length = 0;    
-		        while ((length = is.read(buffer)) > 0) {       
-		            os.write(buffer, 0, length);       
-		        }       
-		        is.close();    
-		        os.close();
-							
-				photo.setImage("image_upload/album/"+Consts.SDF_YYYYMM.format(new Date())+"/"+imageFile);//原来为"images/user/"   2016.10.12
-			}else{
-				photo.setImage("images/user/timg1.jpg");
-			}
-			photo.setTime(new Date());
-			photo.setNotice("1");
-			photoService.save(photo);
-			user.setScore(user.getScore()+2);
-			userService.saveUser(user);
+		
+		if (image!=null) {			
+			//获取项目的static根路径  
+	    	String staticPath = BootPathUtil.getStaticPath();
+	    	faceFileName = image.getOriginalFilename();
+	    	
+			String imageName=DateUtil.getCurrentDateStr();
+			String realPath = staticPath +"/image_upload/album/photo/"+Consts.SDF_YYYYMM.format(new Date()); 
+			String imageFile=imageName+"."+faceFileName.split("\\.")[1];
+			
+			File savePath=new File(realPath);
+			if(!savePath.exists()) {
+				savePath.mkdirs();
+			}		
+			InputStream is = image.getInputStream();    	    
+	          
+	        File toFile = new File(realPath, imageFile);    
+	        OutputStream os = new FileOutputStream(toFile);       
+	        byte[] buffer = new byte[1024];       
+	        int length = 0;    
+	        while ((length = is.read(buffer)) > 0) {       
+	            os.write(buffer, 0, length);       
+	        }       
+	        is.close();    
+	        os.close();
+						
+			photo.setImage("image_upload/album/photo/"+Consts.SDF_YYYYMM.format(new Date())+"/"+imageFile);//原来为"images/user/"   2016.10.12
+		}else{
+			photo.setImage("images/user/timg1.jpg");
 		}
+		photo.setTime(new Date());
+		photo.setNotice("1");
+		photoService.save(photo);
+		user.setScore(user.getScore()+2);
+		userService.saveUser(user);
+		
 		return E3Result.ok();
 	}
 	
@@ -131,8 +133,8 @@ public class PhotoController {
 	/*
 	 * miki	2017.06.05	文件列表 跳转到file_list.jsp
 	  */
-	@RequestMapping("/blog/manage/file/list")
-	public String file(HttpServletRequest request,Model model,@RequestParam("aid") int aid,
+	@RequestMapping("/blog/manage/file")
+	public String file(HttpServletRequest request,Model model,
 			@RequestParam(value="page",required=false) String page)throws Exception{
 		
 		HttpSession session=request.getSession();
@@ -145,7 +147,7 @@ public class PhotoController {
 			List<Photo> fileList=photoService.getFileListByUserId(user.getId(), pageBean);
 			model.addAttribute("fileList", fileList);
 			long total=photoService.getFileCountByUserId(user.getId());
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/blog/manage/AlbumManage_file.action", total, Integer.parseInt(page), 16,null);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/blog/manage/file/list", total, Integer.parseInt(page), 16,null);
 			model.addAttribute("pageCode", pageCode);
 			
 		return "blog/manage/file_list";
@@ -180,7 +182,7 @@ public class PhotoController {
 		    	}
 				String imageName=DateUtil.getCurrentDateStr();
 				String realPath = staticPath +"/image_upload/file/"+Consts.SDF_YYYYMM.format(new Date()); 
-				String imageFile=imageName+"."+faceFileName.split("\\.")[1];
+				String imageFile=imageName+"."+file.getOriginalFilename().split("\\.")[1];
 				
 				File savePath=new File(realPath);
 				if(!savePath.exists()) {

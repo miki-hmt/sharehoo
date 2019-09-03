@@ -58,9 +58,10 @@ public class ArticleController {
 			if (articleImage!=null) {
 				//获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();
+		    	faceFileName = articleImage.getOriginalFilename();
 		    	
 				String imageName=DateUtil.getCurrentDateStr();
-				String realPath = staticPath +"/images/article/"+Consts.SDF_YYYYMM.format(new Date()); 
+				String realPath = staticPath +"/image_upload/article/"+Consts.SDF_YYYYMM.format(new Date()); 
 				String imageFile=imageName+"."+faceFileName.split("\\.")[1];
 				
 				File savePath=new File(realPath);
@@ -79,7 +80,7 @@ public class ArticleController {
 		        is.close();    
 		        os.close();
 				
-				article.setImage("images/article/"+Consts.SDF_YYYYMM.format(new Date())+"/"+imageFile);//原来为"images/user/"   2016.10.12
+				article.setImage("image_upload/article/"+Consts.SDF_YYYYMM.format(new Date())+"/"+imageFile);//原来为"images/user/"   2016.10.12
 			}else{
 				article.setImage("images/article/timg1.jpg");
 			}
@@ -216,6 +217,7 @@ public class ArticleController {
 				if (image!=null) {
 					//获取项目的static根路径  
 			    	String staticPath = BootPathUtil.getStaticPath();
+			    	faceFileName = image.getOriginalFilename();
 			    	
 					String imageName=DateUtil.getCurrentDateStr();
 					String realPath = staticPath +"/images/article/"+Consts.SDF_YYYYMM.format(new Date()); 

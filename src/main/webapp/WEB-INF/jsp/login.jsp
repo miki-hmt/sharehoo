@@ -7,6 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>IT帮-资讯传播社区--登陆</title>
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
 <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <script type="text/javascript" src="login-style/js/jquery-1.12.3.min.js"></script>
 <style>
@@ -15,17 +16,6 @@
 function loadimage(){
 	document.getElementById("randImage").src = "imageCode?"+Math.random();
 }
-
-function checkForm(){
-	 var imageCode=$("#txtCode").val();
-	 
-	 if(imageCode==""){
-		 Tip('验证码不能为空！');
-		 return false;
-	 }
-	 return;
-}
-
 </script>
 
 
@@ -45,7 +35,7 @@ function checkForm(){
 	<div class="wrapper" id="login_body" style="width:;">
 		<div class="log_ad" style="display:"><a href="javascript:;"></a></div>
 		<div class="login_border" style="padding:8px;">
-		<form method="post" action="user/login" onsubmit="return checkForm()" id="login_form">
+		<form method="post" action="" id="login_form">
 			<div class="login" style="display: block;">
 				<div style="position:absolute; right:30px; top:14px;">
 					<a href="register" target="_blank">账号注册
@@ -160,20 +150,70 @@ function checkForm(){
 	</div>
 </div>
 <script type="text/javascript" src="login-style/js/style.js"></script>
-
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
+
 //springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
- function login(){
-	 $.ajax({
-       type: "POST",
-       url: "user/login",
-       data: $("#login_form").serialize(),
-       success: function (data) {}
-   	});
-	 //$.post("user/login", $("#fm").serialize());
-	 alert("保存成功！");
- }
- 
+$(function(){
+	$("#logbtn").on("click", function() {
+		
+		if (!checkForm()) {
+			$.ajax({
+		       type: "POST",
+		       url: "user/login",
+		       data: $("#login_form").serialize(),
+		       success: function (data) {
+		       		if(data.status==200){
+		       			//alert("登录成功！！");
+		       			tipOk("登录成功！！");
+		       			window.location.href = "${host}/index.html";
+		       		}else{
+		       			alert("登录失败！！"+data.msg);
+		       		}
+		       }
+		   	});
+			return false;
+		}
+		return false;	
+	});
+	
+	function checkForm(){
+	 var imageCode=$("#txtCode").val();
+	 var nickName=$("#txtUser").val();
+	 var pwd=$("#Userpwd").val();
+	 var result =false;
+	 if(nickName==""){
+		 //alert('用户名不能为空！');
+		 tipError("用户名不能为空！");
+		 result = true;
+	 }
+	 if(imageCode==""){
+	 	tipError("验证码不能为空！");
+		 //alert('验证码不能为空！');
+		 result = true;
+	 }
+	 if(pwd==""){
+	 	tipError("密码不能为空！");
+		 //alert('密码不能为空！');
+		 result = true;
+	 }
+	 return result;
+}
+
+	function tipOk(content){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		});
+	};
+	function tipError(content){
+		swal("登录失败", content, "error");
+	};
+});
 </script>
 </body>
 
