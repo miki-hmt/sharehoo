@@ -18,8 +18,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
 <script src="${host}/sweetalert/sweetalert.min.js"></script>
 
-<script type="text/javascript"
-	src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
 
 <script type="text/javascript" src="${host}/js/uploadPreview.min.js"></script>
 <meta name="viewport"
@@ -43,8 +42,13 @@ span {
 			Width : 220,
 			Height : 220
 		});
-
-	});
+		//初始换编辑器
+		CKEDITOR.replace('content', { 
+			filebrowserImageUploadUrl :"${host}/topic/ckupload?",
+			codeSnippet_theme: 'zenburn',
+			height:'500'
+		});
+		});
 </script>
 
 
@@ -93,9 +97,9 @@ span {
 					<tr>
 						<table>
 							<tr>
-								<td><textarea id="content" name="content" class="ckeditor"
-										style="height:150px; width:700px;bg-color:gray;"
-										placeholder="您的内容"></textarea></td>
+								<td><textarea id="content" name="content" style="height:150px; width:700px;bg-color:gray;"
+										placeholder="您的内容"></textarea>
+										</td>
 							</tr>
 						</table>
 					</tr>
@@ -181,6 +185,7 @@ span {
 		for (instance in CKEDITOR.instances) {
 			CKEDITOR.instances[instance].updateElement();
 		}
+		
 		if (checkForm()) {
 			addFileName();
 			var faceFileName = $('#ImgPr')[0].src;

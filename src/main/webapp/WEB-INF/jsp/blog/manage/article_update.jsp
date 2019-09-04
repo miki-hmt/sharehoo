@@ -28,7 +28,12 @@
 		<script type="text/javascript">
 		$(function () {
 			$("#articleImage").uploadPreview({ Img: "ImgPr", Width: 220, Height: 220 });
-	
+			//2019.09.04 miki 初始化ckeditor编辑器，修改上传文件地址，记得去掉class="ckeditor"
+			CKEDITOR.replace('content', { 
+				filebrowserImageUploadUrl :"${host}/topic/ckupload?",
+				codeSnippet_theme: 'zenburn',
+				height:'500'
+			});
 		});
 		</script>
 		<style type="text/css">
@@ -71,7 +76,7 @@
     		<tr>
     			<table>
       			<tr>
-	    			<td><textarea id="content" name="content" class="ckeditor" style ="height:150px; width:700px;bg-color:gray;" placeholder="您的内容">${article.content }</textarea>	    				
+	    			<td><textarea id="content" name="content" style ="height:150px; width:700px;bg-color:gray;" placeholder="您的内容">${article.content }</textarea>	    				
 	    			</td>
     			</tr>   			
     			</table>

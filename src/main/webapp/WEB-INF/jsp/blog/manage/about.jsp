@@ -22,6 +22,18 @@
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
 		<![endif]-->
+		
+		<script type="text/javascript">
+			$(function() {
+				//2019.09.04 miki 初始化ckeditor编辑器，修改上传文件地址，记得去掉class="ckeditor"
+				CKEDITOR.replace('content', { 
+					filebrowserImageUploadUrl :"${host}/topic/ckupload?",
+					codeSnippet_theme: 'zenburn',
+					height:'500'
+				});
+				});
+		</script>
+		
 	</head>
 <body>
 <div class="ibody">
@@ -37,7 +49,7 @@
       <h2>Just about me</h2>
       <ul>
       <form action="" id="about_form" method="post" enctype="multipart/form-data">
-      <textarea id="content" name="content" class="ckeditor">${me.content }</textarea>
+      <textarea id="content" name="content">${me.content }</textarea>
       <input id="user" name="user.id" value="${user.id }" type="hidden"/>
       <input id="me" name="id" value="${me.id }" type="hidden"/>
       <input type="button" id="okBtn" style="background:#E41635;width: 60px;height: 30px;font-size: larger;color:white" value="保存">

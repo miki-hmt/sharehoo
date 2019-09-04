@@ -15,6 +15,18 @@
 <script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
 <script src="${host}/js/jquery.emoticons.js" type="text/javascript"></script>
 <script src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
+
+<script type="text/javascript">
+	$(function () {
+		//2019.09.04 miki 初始化ckeditor编辑器，修改上传文件地址，记得去掉class="ckeditor"
+		CKEDITOR.replace('content', { 
+			filebrowserImageUploadUrl :"${host}/topic/ckupload?",
+			codeSnippet_theme: 'zenburn',
+			height:'500'
+		});
+	});
+</script>
+
 <script type="text/javascript">
 
 //简单的 敏感词汇验证  2016.12.13 ....时间允许，可以建一个数据库表，存储相关词汇 
@@ -107,7 +119,7 @@ function checkForm(){
 					<div class="control-group">
 						<label class="control-label" for="Content">【吐槽心事】</label>
 						<div class="controls">
-							<textarea name="topic.content" id="Content" class="ckeditor" cols="50" style="height:200px;width: 800px;" ></textarea>
+							<textarea name="topic.content" id="Content" cols="50" style="height:200px;width: 800px;" ></textarea>
 						</div>
 					</div>
 					<input id="user" name="topic.user.id" value="${currentUser.id }" type="hidden"/>

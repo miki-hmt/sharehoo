@@ -36,6 +36,18 @@
 	src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
 <meta name="viewport"
 	content="width=device-width, minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0" />
+	
+	<script type="text/javascript">
+		$(function () {
+			//2019.09.04 miki 初始化ckeditor编辑器，修改上传文件地址，记得去掉class="ckeditor"
+			CKEDITOR.replace('content', { 
+				filebrowserImageUploadUrl :"${host}/topic/ckupload?",
+				codeSnippet_theme: 'zenburn',
+				height:'500'
+			});
+		});
+		</script>
+	
 <!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
 		<![endif]-->
@@ -90,8 +102,7 @@
 							placeholder="回复留言者姓名" style="height:30px;" /></td>
 					</tr>
 					<tr>
-						<td><textarea name="critique.content" class="ckeditor"
-								style="height:150px; width:700px;bg-color:gray;"
+						<td><textarea name="critique.content" style="height:150px; width:700px;bg-color:gray;"
 								placeholder="您的内容"></textarea></td>
 					</tr>
 					<tr>

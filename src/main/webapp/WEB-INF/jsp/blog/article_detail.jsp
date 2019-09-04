@@ -28,60 +28,6 @@
 		<script>hljs.initHighlightingOnLoad();</script>
 
 		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		
-		<script type="text/javascript">
-		
-			//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
-			$(document).ready(function() {	
-				$("#submitAdd").on("click",function(){
-					if(!check()){
-						$.ajax({
-				       type: "POST",
-				       url: "${host}/blog/${user.nickNameId}/article/${article.id}/add",
-				       data: $("#critique_form").serialize(),
-				       success: function (data) {
-				       		if(data.status==200){
-				       			tipOk("留言成功");
-				       			window.location.reload();
-				       			//window.location.href="${host}/blog/${user.nickNameId}/critiques";
-				       		}
-				       }
-					   	});
-			   		return false;	//!!一定要return false, 否則會自動刷新頁面,導致ajax彈窗提醒失效。防止刷新頁面
-					}
-					
-				})
-			
-			function tipOk(content){
-					swal({   
-						title: content,   
-						text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
-						imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
-						html: true,
-						timer: 2000,   
-						showConfirmButton: false
-					});
-				};
-				function tipError(content){
-					swal("操作失败", content, "error");
-				};
-				
-				function check(){
-				var result = false;
-				var name=$("#name").val();
-				var content=$("#criContent").val();
-				if(name==""){
-					tipError("亲亲，昵称不能为空哦");
-					result = true;
-				}
-				if(content=""){
-					tipError("亲亲，评论内容不能为空哦");
-					result = true;
-				}
-				}		
-			});
-		
-		</script>
 		<!--[if lt IE 9]>
 		<script src="../include/js/modernizr.js"></script>
 		<![endif]-->
@@ -235,19 +181,19 @@
 <script type="text/javascript">
 	$(document).ready(function() {	
 	$("#submitAdd").on("click",function(){
-		var content=$("#reply").val();
-		var author=$("#Content").val();
-		if(content==""){
+		var name=$("#name").val();
+		var criContent=$("#criContent").val();
+		if(name==""){
 			tipError("亲亲，昵称不能为空哦");
 			return false;
 		}
-		if(author=""){
+		if(criContent=""){
 			tipError("亲亲，评论内容不能为空哦");
 			return false;
 		}
 		$.ajax({
 	       type: "POST",
-	       url: "${host}//blog/article/${article.id}/critiqueAdd",
+	       url: "${host}/blog/article/${article.id}/critiqueAdd",
 	       data: $("#critique_form").serialize(),
 	       success: function (data) {
 	       		if(data.status==200){

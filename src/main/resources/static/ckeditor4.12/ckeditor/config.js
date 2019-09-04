@@ -32,7 +32,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
-	config.filebrowserImageUploadUrl = "ckupload"; //固定路径 ，文件上传  2017.05.30 
+	config.filebrowserImageUploadUrl = "ckupload?"; //固定路径 ，文件上传  2019.09.04 	加上?即可实现图片拖动上传
     config.image_previewText='我们这有矿哦，快来sharehoo.cn '; //预览区域显示内容
 	config.ui = 'rgb(255, 254, 253)';
 	// Simplify the dialog windows.

@@ -330,15 +330,16 @@ function checkForm(){
 	       success: function (data) {
 	       		console.log("成功");
 	       		if(data.status==200){
-	       			tipOk("注册成功");
-	       			window.location.href = "${host}/user/welcome?nickName="+nickName;
+	       			tipOk("注册成功",function(){
+	       				window.location.href = "${host}/user/welcome?nickName="+nickName;
+	       			});
 	       		}
 	       }       
 	   	});
 		return false;
 	 }
 	 
-	 function tipOk(content){
+	 function tipOk(content,callback){
 			swal({   
 				title: content,   
 				text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
@@ -346,6 +347,10 @@ function checkForm(){
 				html: true,
 				timer: 2000,   
 				showConfirmButton: false
+			},function(){
+				if (callback) {
+					callback();
+				}
 			});
 		};
 		function tipError(content){
