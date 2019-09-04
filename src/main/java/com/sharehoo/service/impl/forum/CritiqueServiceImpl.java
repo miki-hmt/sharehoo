@@ -118,7 +118,7 @@ public class CritiqueServiceImpl implements CritiqueService {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
 		String hql="from Critique as critique where critique.notice like ? and critique.article.id=? order by critique.time desc";
-		param.add("3");
+		param.add("4");
 		param.add(aid);
 
 		return baseDAO.findTopN(hql, param, 10);

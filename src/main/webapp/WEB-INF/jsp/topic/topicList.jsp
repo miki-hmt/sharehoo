@@ -20,10 +20,9 @@
 <link rel="stylesheet" href="${host}/admin/css/bootstrap.css" />
 <link rel="stylesheet" href="${host}/admin/css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="${host}/admin/css/uniform.css" />
-<script src="${host}/admin/js/jquery.ui.custom.js"></script>
-
 
 <script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
 
 <script type="text/javascript" src="${host}/js/timer.js"></script>
   <script type="text/javascript">
@@ -119,20 +118,7 @@ function modifyTopic(topicId,topicTop,topicGood){
 	$("#topicGood").val(topicGood);
 	url="Topic_modify.action?topicId="+topicId;
 }
-function saveTopic(){
-	$("#fm").form("submit",{
-		url:url,
-		success:function(result){
-		if (result.success) {
-			alert("数据已成功修改！");
-			location.reload(true);
-		} else {
-			alert("数据修改失败！");
-			return;
-		}
-	});
-}
-}
+
 </script>
 
 

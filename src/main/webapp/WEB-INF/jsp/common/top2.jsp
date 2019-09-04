@@ -5,6 +5,11 @@
 <html>
 <head>
 <link rel="stylesheet" href="${host}/shop/css/search_index.css">
+
+<!-- 2019.09.03 自定义弹窗所需插件 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
 
 function reP(){
@@ -12,8 +17,32 @@ function reP(){
 }
 
 function logout() {
-	$.confirm("<p>您确定要退出sharehoo社区</p><p>一个人浪迹天涯吗？</P>");
+	//$.confirm("<p>您确定要退出sharehoo社区</p><p>一个人浪迹天涯吗？</P>");
+	swal({
+		title : "您确定要退出sharehoo社区",
+		text : '<span style="color:red">一个人浪迹天涯吗？</span>',
+		type : "warning",
+		html : true,
+		showCancelButton : true,
+		closeOnConfirm : false,
+		confirmButtonText : "是的，忍心退出",
+		confirmButtonColor : "#ec6c62"
+	}, function() {
+		$.post("${host}/logout", {
+			id : '521'
+		}, function(result) {
+			if (result.status == 200) {
+				location.reload(true);
+			} else {
+				tipError("退出登录失败！！");
+			}
+		}, "json");
+	});
 }
+
+function tipError(content) {
+			swal("操作失败", content, "error");
+		}
 function login(){
 	var curPage=window.location.href;
 	window.location.href="login?prePage="+curPage;
@@ -122,14 +151,14 @@ function check_up(thisform){
 		<div class="news-nav">
 			<div class="container clearfix">
 				<div class="nav-bar">
-					<a href="home" class="current">首页</a>
+					<a href="${host}/home" class="current">首页</a>
 					<a href="http://sharehoo.cn/blog/Blog_show.action?userId=21" target="_blank">博客社区<img src="${host}/images/icon/hot.gif"></a>
-					<a class=" " href="${host}/shop/Shop_home.action" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
+					<a class=" " href="${pageContext.request.contextPath}/shop/Shop_home.action" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
 					<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html" target="_blank">W3C文档</a>
-					<a href="topic/section/3" target="_blank">社友圈<img src="${host}/images/icon/hot.gif"></a>			
-					<a class=" " href="game2.jsp" target="_blank">H5小游戏</a>			
-					<a href="Topic_leaveList.action" target="_blank">秘密墙<img src="${host}/images/icon/hot.gif"></a>
-					<a href="SoftSection_listpr.action" target="_blank">软件下载</a>
+					<a href="${host}/topic/section/3" target="_blank">社友圈<img src="${host}/images/icon/hot.gif"></a>			
+					<a class=" " href="${host}/h5" target="_blank">H5小游戏</a>			
+					<a href="${host}/secret" target="_blank">秘密墙<img src="${host}/images/icon/hot.gif"></a>
+					<a href="${host}/softsection/list" target="_blank">软件下载</a>
 					<a class=" " href="http://sharehoo.cn/154339002942889.html" target="blank">社区规则</a>	
 				</div>
 

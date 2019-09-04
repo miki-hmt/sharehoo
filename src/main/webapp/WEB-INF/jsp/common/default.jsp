@@ -906,8 +906,7 @@ a:hover{
 		}	
 }
 </script>
-<script src="${pageContext.request.contextPath }/shop/alert/jquery-1.2.6.js" type="text/javascript"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.funkyUI.js"></script>
+
 <script>
 	function writeBlog(){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {

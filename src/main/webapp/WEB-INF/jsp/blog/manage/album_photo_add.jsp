@@ -127,7 +127,7 @@
 </div>
 
 <script type="text/javascript">
-$(function(){	
+	
 	function addFileName() {
 		var uploadfile = $("#photoImage").val();
 		var fileName = getFileName(uploadfile);
@@ -190,7 +190,7 @@ $(function(){
 		function tipError(content){
 			swal("添加失败", content, "error");
 		};
-});
+
 </script>
 
 

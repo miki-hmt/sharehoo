@@ -177,7 +177,7 @@
       <ul class="pl_n">
         <c:forEach items="${ critiques}" var="critiques">
         <dl>
-          <dt><img src="${host}${host}/blog/include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"> </dt>
           <dt> </dt>
           <dd>${critiques.name }
             <fmt:formatDate value="${critiques.time }" pattern="yyyy-MM-dd HH:mm:ss "/>
@@ -215,7 +215,7 @@
 	    			<td><textarea id="criContent" name="content" style ="height:200px; width:268px;bg-color:gray;" placeholder="您的内容"></textarea></td>
     			</tr>
     			<tr>
-	    			<td><button type="submit" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
+	    			<td><button id="submitAdd" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
     			</tr>
     			
     			<input type="hidden" name="user.id" value="${user.id }"/>
@@ -231,5 +231,80 @@
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {	
+	$("#submitAdd").on("click",function(){
+		var content=$("#reply").val();
+		var author=$("#Content").val();
+		if(content==""){
+			tipError("亲亲，昵称不能为空哦");
+			return false;
+		}
+		if(author=""){
+			tipError("亲亲，评论内容不能为空哦");
+			return false;
+		}
+		$.ajax({
+	       type: "POST",
+	       url: "${host}//blog/article/${article.id}/critiqueAdd",
+	       data: $("#critique_form").serialize(),
+	       success: function (data) {
+	       		if(data.status==200){
+	       			tipOk("回复成功",function(){
+		       			 	window.location.reload();       			
+		       			});
+	       		}
+	       }
+		   	});
+   		return false;	//!!一定要return false, 否則會自動刷新頁面,導致ajax彈窗提醒失效。防止刷新頁面
+})
+});
+
+function deleteCritique(id) {
+			swal({
+				title : "",
+				text : "您确定要删除这个评论吗？",
+				type : "warning",
+				showCancelButton : true,
+				closeOnConfirm : false,
+				confirmButtonText : "是的，我要删除",
+				confirmButtonColor : "#ec6c62"
+			}, function() {
+				$.post("${host}/blog/manage/critique/delete", {
+					id : id
+				}, function(result) {
+					if (result.status == 200) {
+						tipOk("评论已成功删除！", function() {
+							console.log(".......");
+							location.reload(true);
+						});
+	
+					} else {
+						tipError("删除失败！！");
+					}
+				}, "json");
+			});
+		}
+
+function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("操作失败", content, "error");
+	};
+</script>
+
 </body>
 </html>

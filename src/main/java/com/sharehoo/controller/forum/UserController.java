@@ -592,6 +592,20 @@ public class UserController {
 		return "redirect:/index.html";
 	}
 	
+	/**
+	 * @Title: logout  
+	 * @Description: TODO(重定向多层级使用)  
+	 * @author miki 
+	 * @date 2019年9月3日 下午6:14:19   
+	 * @throws
+	 */
+	@RequestMapping("/logout")
+	@ResponseBody
+	public E3Result logoutAjax(HttpServletRequest request)throws Exception{
+		request.getSession().invalidate();
+		return E3Result.ok();
+	}
+	
 	@RequestMapping("/user/forget")
 	public String toForget(HttpServletRequest request)throws Exception{
 

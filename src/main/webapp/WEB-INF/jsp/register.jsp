@@ -302,7 +302,6 @@ function checkForm(){
 	
 	
 <script type="text/javascript">
-$(function(){
 	function addFileName(){
 		var uploadfile = $("#face").val();
 		var fileName= getFileName(uploadfile);
@@ -352,7 +351,6 @@ $(function(){
 		function tipError(content){
 			swal("登录失败", content, "error");
 		};
-});
 </script>
 </body>
 </html>

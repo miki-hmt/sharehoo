@@ -165,10 +165,11 @@ $(function(){
 		       success: function (data) {
 		       		if(data.status==200){
 		       			//alert("登录成功！！");
-		       			tipOk("登录成功！！");
-		       			window.location.href = "${host}/index.html";
+		       			tipOk("登录成功！！",function(){
+		       			 	window.location.href = "${host}/index.html";	       			
+		       			});
 		       		}else{
-		       			alert("登录失败！！"+data.msg);
+		       			tipError("登录失败！！"+data.msg);
 		       		}
 		       }
 		   	});
@@ -200,7 +201,7 @@ $(function(){
 	 return result;
 }
 
-	function tipOk(content){
+	function tipOk(content,callback){
 		swal({   
 			title: content,   
 			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
@@ -208,7 +209,11 @@ $(function(){
 			html: true,
 			timer: 2000,   
 			showConfirmButton: false
-		});
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
 	};
 	function tipError(content){
 		swal("登录失败", content, "error");

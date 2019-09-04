@@ -1,4 +1,4 @@
-@import url("/zh_cn/font_color.css");
+/* @import url("/zh_cn/font_color.css"); */
 .chanNav{ background:#f7f7f7; border-bottom:1px solid #d9d9d9; height:30px;font-size:12px; min-width:1000px;}
 .chanNavCon {width:1000px; margin:0 auto; *zoom:1;}
 .chanNavCon:after {display:block; overflow:hidden; clear:both; height:0; visibility:hidden; content:".";}

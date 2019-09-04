@@ -30,7 +30,6 @@
 		<script src="${host}/sweetalert/sweetalert.min.js"></script>
 		
 	 	 <script type="text/javascript">
-	 	 $(function(){
 			function deleteArticle(articleId){
 				if (confirm("您确定要删除这篇文章吗？")) {
 					$.post("${host}/blog/manage/article/delete",{articleId:articleId},function(result){
@@ -105,7 +104,6 @@
 			function tipError(content){
 				swal("操作失败", content, "error");
 			};
-		});
 		</script>
 
 	</head>
@@ -123,7 +121,7 @@
     <c:forEach items="${articleList }" var="article">
       <div class="newblog">
         <ul>
-          <h3><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></h3>
+          <h3><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></h3>
           <div class="autor"><span>作者：${article.editer }</span><span>分类：[<a href="#">${article.type }</a>]</span><span>浏览（<a href="#">${article.count }</a>）</span><span>评论（<a href="#">${article.count1 }</a>）</span>
           	<span>
 		      <select style="border:solid 1px green;" onchange='operate(this.options[this.selectedIndex].value,${article.id })'>

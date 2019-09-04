@@ -21,7 +21,6 @@
 		<script src="${host}/sweetalert/sweetalert.min.js"></script>
 		
 	 	<script type="text/javascript">
-	 	$(function(){
 	 		function deleteAlbum(albumId){
 			if (confirm("您忍心删除这个相册及相册里的照片吗？")) {
 				$.post("${host}/blog/manage/album/delete",{aid:albumId},function(result){
@@ -63,8 +62,7 @@
 		};
 		function tipError(content){
 			swal("删除失败", content, "error");
-			};
-	 	});	
+			};	
 		</script>
 
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>

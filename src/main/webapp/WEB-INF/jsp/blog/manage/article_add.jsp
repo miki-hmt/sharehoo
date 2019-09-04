@@ -163,7 +163,6 @@ span {
 	</div>
 
 <script type="text/javascript">
-$(function(){
 
 	function addFileName() {
 		var uploadfile = $("#articleImage").val();
@@ -249,7 +248,6 @@ $(function(){
 	function tipError(content){
 		swal("发表失败", content, "error");
 	};
-});
 </script>
 
 </body>

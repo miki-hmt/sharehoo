@@ -31,7 +31,7 @@
 		<![endif]-->
 		
 		<script type="text/javascript">
-		$(function(){
+
 			function deletePhoto(photoId){
 				if (confirm("您忍心删除这个相册里的照片吗？")) {
 					$.post("${host}//blog/manage/file/delete",{id:photoId},function(result){
@@ -74,7 +74,6 @@
 		function tipError(content){
 			swal("删除失败", content, "error");
 		};
-		});	
 		</script>
 	</head>
 <body>

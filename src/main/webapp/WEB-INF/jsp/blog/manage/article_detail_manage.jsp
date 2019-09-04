@@ -11,15 +11,20 @@
 		<title>个人博客——博客</title>
 		<meta name="keywords" content="个人博客" />
 		<meta name="description" content="炮总的个人博客。" />
-		<link href="../include/css/base.css" rel="stylesheet"/>
-		<link href="../include/css/style.css" rel="stylesheet"/>
-		<link href="../include/css/media.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/base.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
+		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
 
 		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />		
-
+		
+		<!-- 2019.09.03 自定义弹窗所需插件 -->
+		<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+		<script src="${host}/sweetalert/sweetalert.min.js"></script>
+		
 		<!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 		<!--我的高亮效果是zenburn-->
-		<link rel="stylesheet" href="${host}/highlight/styles/gruvbox-dark.css">
+		<link rel="stylesheet" href="${host}/highlight/styles/gruvbox-dark.css"/>
 		<script src="${host}/highlight/highlight.pack.js"></script>
 		<script>hljs.initHighlightingOnLoad();</script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
@@ -30,6 +35,7 @@
 		  // 楼层回复传参功能实现      2017.02.28     
 		function reply(b){
 			 document.getElementById("Content").value = b;
+			 $("#content").focus();
 			 //CKEDITOR.instances.Content.setData(text+a+text2+b+text3);
 			   
 		}
@@ -114,7 +120,7 @@
             <fmt:formatDate value="${critiques.time }" pattern="yyyy-MM-dd HH:mm:ss "/>           
           </dd>
           <a href="#"><font style="color:gray;">${critiques.content }</font></a>
-          &nbsp;<a href="../manage/CritiqueManage_deleteArc.action?id=${critiques.id }" class="dellink"><span style="color:red;">删除</span></a>
+          &nbsp;<a href="javascript:deleteCritique(${critiques.id })" class="dellink"><span style="color:red;">删除</span></a>
           &nbsp;<a href="#1" style="font-size: 9pt;text-align:right;" onclick='reply("${critiques.name }")'><span style="color:red;">回复</span></a>
         </dl>
         </c:forEach>
@@ -131,7 +137,7 @@
             <fmt:formatDate value="${reply.time }" pattern="yyyy-MM-dd HH:mm:ss "/>           
           </dd>
           <a href="#"><font style="color:gray;">${reply.content }</font></a>
-          &nbsp;<a href="../manage/CritiqueManage_deleteArc.action?id=${reply.id }" class="dellink"><span style="color:red;">删除</span></a>
+          &nbsp;<a href="javascript:deleteCritique(${reply.id })" class="dellink"><span style="color:red;">删除</span></a>
         </dl>
         </c:forEach>
       </ul>
@@ -140,20 +146,20 @@
         <p><span style="color:white;"><a name="1">回复留言</a></span></p>
       </h2>
       <br></br>
-       <form action="${host}/blog/manage/CritiqueManage_saveAr.action?userId=${user.id}" method="post" >
+       <form action="" method="post" id="reply_form">
       		<table>
       			<tr>
-      				<td><input type="text" name="critique.type" id="Content" placeholder="回复留言者"/></td>
+      				<td><input type="text" name="type" id="Content" placeholder="回复留言者"/></td>
       			</tr>
       			<tr>
-	    			<td><textarea name="critique.content" style ="height:200px; width:268px;bg-color:gray;" placeholder="回复内容"></textarea></td>
+	    			<td><textarea id ="reply" name="content" style ="height:200px; width:268px;bg-color:gray;" placeholder="回复内容"></textarea></td>
     			</tr>
     			<tr>
-	    			<td><button type="submit" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
+	    			<td><button id="submitAdd" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
     			</tr>
     			
-    			<input type="hidden" name="critique.user.id" value="${user.id }"/>
-    			<input type="hidden" name="critique.article.id" value="${article.id }"/>
+    			<input type="hidden" name="user.id" value="${user.id }"/>
+    			<input type="hidden" name="article.id" value="${article.id }"/>
       		</table>
       </form>
       
@@ -161,9 +167,84 @@
     </div>
    <%@ include file="../copyright.jsp" %> 
   </aside>
-  <script src="../blog/include/js/silder.js"></script>
+  <script src="${host}/blog/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {	
+	$("#submitAdd").on("click",function(){
+		var content=$("#reply").val();
+		var author=$("#Content").val();
+		if(content==""){
+			tipError("亲亲，昵称不能为空哦");
+			return false;
+		}
+		if(author=""){
+			tipError("亲亲，评论内容不能为空哦");
+			return false;
+		}
+		$.ajax({
+	       type: "POST",
+	       url: "${host}/blog/manage/ar/reply?id=521",
+	       data: $("#reply_form").serialize(),
+	       success: function (data) {
+	       		if(data.status==200){
+	       			tipOk("回复成功",function(){
+		       			 	window.location.reload();       			
+		       			});
+	       		}
+	       }
+		   	});
+   		return false;	//!!一定要return false, 否則會自動刷新頁面,導致ajax彈窗提醒失效。防止刷新頁面
+})
+});
+
+function deleteCritique(id) {
+			swal({
+				title : "",
+				text : "您确定要删除这个评论吗？",
+				type : "warning",
+				showCancelButton : true,
+				closeOnConfirm : false,
+				confirmButtonText : "是的，我要删除",
+				confirmButtonColor : "#ec6c62"
+			}, function() {
+				$.post("${host}/blog/manage/critique/delete", {
+					id : id
+				}, function(result) {
+					if (result.status == 200) {
+						tipOk("评论已成功删除！", function() {
+							console.log(".......");
+							location.reload(true);
+						});
+	
+					} else {
+						tipError("删除失败！！");
+					}
+				}, "json");
+			});
+		}
+
+function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("操作失败", content, "error");
+	};
+</script>
+
+
 </body>
 </html>
