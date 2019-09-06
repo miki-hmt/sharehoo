@@ -33,6 +33,20 @@ public class Operate implements Serializable{
 	
 	private Date operate_time;
 	
+	public Operate() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Operate(String type,Shop shop,User user,Source source,String notice,Date operate_time) {
+		// TODO Auto-generated constructor stub
+		this.type = type;
+		this.shop = shop;
+		this.user = user;
+		this.source = source;
+		this.notice = notice;
+		this.operate_time = operate_time;
+	}
+	
 	@Id
 	@GeneratedValue(generator="_native") //设置自动增长
 	@GenericGenerator(name="_native",strategy="native")

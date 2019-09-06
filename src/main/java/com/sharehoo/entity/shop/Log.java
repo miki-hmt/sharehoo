@@ -34,6 +34,22 @@ public class Log implements Serializable{
 	private String address;
 	private Shop shop;
 	
+	public Log() {
+		
+	}
+	
+	public Log(String ip,Date time,String type,String operation_log,User user,Shop shop,String address) {
+		// TODO Auto-generated constructor stub
+		this.ip = ip;
+		this.time = time;
+		this.type = type;
+		this.operation_log = operation_log;
+		this.user = user;
+		this.shop = shop;
+		this.address = address;
+	}
+	
+	
 	@Id
 	@GeneratedValue(generator="_native") //设置自动增长
 	@GenericGenerator(name="_native",strategy="native")

@@ -71,15 +71,15 @@ public class ShopController {
 		List<Category> categories=categoryService.getCategoryList(null, null);
 		model.addAttribute("categories", categories);
 		List<Type> types=typeService.getTypeList();
-		model.addAttribute("categories", categories);
+		model.addAttribute("types", types);
 		List<NewsBanner> bannerList=newsBannerService.findNewsBannerListByType();
-		model.addAttribute("categories", categories);
+		model.addAttribute("bannerList", bannerList);
 		List<Source> goodList=sourceService.getGoodSources();
-		model.addAttribute("categories", categories);
+		model.addAttribute("goodList", goodList);
 		List<Source> newSources=sourceService.getNewSources();
-		model.addAttribute("categories", categories);
+		model.addAttribute("newSources", newSources);
 		List<Shop> richList=shopService.getRichShops();
-		model.addAttribute("categories", categories);
+		model.addAttribute("richList", richList);
 		return "shop/home";
 	}
 	

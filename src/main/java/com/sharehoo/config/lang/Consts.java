@@ -16,9 +16,11 @@ public interface Consts {
 	public static final String SHOP_CKEDITOR_UPLOAD_PATH = "/../sharehoo-responsitory/ckupload/shop"; 
 	public static final String FORUM_CKEDITOR_UPLOAD_PATH = "/../sharehoo-responsitory/ckupload/forum"; 
 	public static final String FORUM_UPLOAD_PATH = "/../sharehoo-responsitory/upload/forum"; 
+	public static final String SHOP_UPLOAD_PATH = "/../sharehoo-responsitory/upload/shop"; 
 	public static final String FORUM_UPLOAD_SECTION_FOLDER = "/section"; 
 	public static final String FORUM_UPLOAD_USER_FOLDER = "/user"; 
 	public static final String FORUM_UPLOAD_SOFT_FOLDER = "/soft"; 
+	public static final String SHOP_UPLOAD_SOURCE_FOLDER = "/source"; 
 	public static final String ROOT_PATH = "basePath"; 
 	public static final SimpleDateFormat SDF_YYYYMM = new SimpleDateFormat("yyyyMM");
 	public static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
