@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
+import org.hibernate.transform.Transformers;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -53,7 +55,7 @@ public class BaseDAOImpl<T> extends SimpleJpaRepository<T, Integer> implements B
 	 * jpa 里是entityManager.createQuery; jpql查询(类hql)，entityManager.createNativeQuery; sql查询。
 	 * **********************************************************/
 	public List<T> find(String hql) {
-		return this.getCurrentSession().createNativeQuery(hql).getResultList();
+		return this.getCurrentSession().createQuery(hql).getResultList();
 	}
 	
 	
@@ -265,5 +267,19 @@ public class BaseDAOImpl<T> extends SimpleJpaRepository<T, Integer> implements B
 		q.setFirstResult(0);
 		q.setMaxResults(N);
 		return q.list();
+	}
+	
+	@Override
+	public List<T> findTopNBySql(String hql, List<Object> param, int N,Class<T> c) {
+		Query<T> q = this.getCurrentSession().createNativeQuery(hql,c);
+		
+		if (param != null && param.size() > 0) {
+			for (int i = 0; i < param.size(); i++) {
+				q.setParameter(i, param.get(i));
+			}
+		}
+		q.setFirstResult(0);
+		q.setMaxResults(N);
+		return q.getResultList();
 	}
 }

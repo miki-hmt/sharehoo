@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
@@ -34,122 +35,50 @@ public class TopicServiceImpl implements TopicService {
 	@Autowired	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
 	private TopicDao baseDAO;
 	
+	@Value("S{forum.topic.YUAN_CHUANG}")	//原创社区
+	private String token;					
+	@Value("S{forum.topic.ADVICE}")			//出谋划策
+	private String advice;
+	@Value("S{forum.topic.JAVAWEB}")		//javaweb
+	private String java;
+	@Value("S{forum.topic.ERSHOU}")			//二手集市
+	private String ershou;
+	@Value("S{forum.topic.MONEY}")			//赏金
+	private String money;
+	@Value("S{forum.topic.JOB_INTERVIEW}")	//面试总结
+	private String job;
+	@Value("S{forum.topic.CODE}")			//编程语言
+	private String code;
+	@Value("S{forum.topic.SAY}")			//我想说
+	private String say;
+	@Value("S{forum.topic.SERVERDEV}")		//服务运维
+	private String server;
+	@Value("S{forum.topic.MUSIC}")			//音乐心灵
+	private String music;
+	@Value("S{forum.topic.FRIEND}")			//约伴出游
+	private String friend;
+	@Value("S{forum.topic.BIGDATA}")		//大数据
+	private String bigdata;
+	@Value("S{forum.topic.WECHAT}")			//微信开发
+	private String wechat;
+	@Value("S{forum.topic.FOOD}")			//美食
+	private String food;
+	@Value("S{forum.topic.WEB}")			//web前端
+	private String web;
+	@Value("S{forum.topic.GAMEDEV}")		//游戏开发
+	private String game;
+	
 	@Autowired
 	private JedisClient jedisClient;
+	
+	
 	@Override
 	public void saveTopic(Topic topic) {
-		
-		Properties prop = new Properties();
-		try {
-			prop.load(this.getClass().getClassLoader().getResourceAsStream("resource.properties"));
-		} catch (IOException e1) {
-			throw new RuntimeException(e1);
-		}
-		
-		String token=prop.getProperty("YUAN_CHUANG");	//原创社区
-		String advice=prop.getProperty("ADVICE");		//出谋划策
-		String java=prop.getProperty("JAVAWEB");		//javaweb
-		String ershou=prop.getProperty("ERSHOU");		//二手集市
-		String money=prop.getProperty("MONEY");			//赏金
-		String job=prop.getProperty("JOB_INTERVIEW");	//面试总结
-		String code=prop.getProperty("CODE");			//编程语言
-		String say=prop.getProperty("SAY");				//我想说
-		String game=prop.getProperty("JINGMEI");
-		String jingmei=prop.getProperty("MUSIC");
-		String music=prop.getProperty("FRIEND");
-		String friend=prop.getProperty("FRIEND");
-		String bigdata=prop.getProperty("BIGDATA");
-		String wechat=prop.getProperty("WECHAT");
-		String food=prop.getProperty("FOOD");
-		String web=prop.getProperty("WEB");
 				
 		int sectionId=topic.getSection().getId();
-		switch(sectionId){
-		case 21 :
-				
-			jedisClient.hdel(token,String.valueOf(sectionId));
-			
-			break;
-		case 11 :
-				
-			jedisClient.hdel(advice,String.valueOf(sectionId));
-			
-			break;
-		case 1 :
-
-			jedisClient.hdel(java,String.valueOf(sectionId));
-			
-			
-			break;
-		case 2 :
-
-			jedisClient.hdel(ershou,String.valueOf(sectionId));	
-
-			break;
-		case 3 :
-
-			jedisClient.hdel(say,String.valueOf(sectionId));	
-
-			break;
-		case 4 :
-
-			jedisClient.hdel(money,String.valueOf(sectionId));	
-
-			break;
-		case 7 :
-
-			jedisClient.hdel(job,String.valueOf(sectionId));	
-
-			break;
-		case 8 :
-
-			jedisClient.hdel(web,String.valueOf(sectionId));	
-
-			break;
-		
-		case 12 :
-
-			jedisClient.hdel(game,String.valueOf(sectionId));	
-
-			break;
-		case 13 :
-
-			jedisClient.hdel(jingmei,String.valueOf(sectionId));	
-
-			break;
-		case 14 :
-
-			jedisClient.hdel(music,String.valueOf(sectionId));	
-
-			break;
-		case 15 :
-
-			jedisClient.hdel(friend,String.valueOf(sectionId));	
-
-			break;
-		case 16 :
-
-			jedisClient.hdel(bigdata,String.valueOf(sectionId));	
-
-			break;
-		case 18 :
-
-			jedisClient.hdel(wechat,String.valueOf(sectionId));	
-
-			break;
-		case 19 :
-
-			jedisClient.hdel(food,String.valueOf(sectionId));	
-
-			break;
-		case 20 :
-
-			jedisClient.hdel(code,String.valueOf(sectionId));	
-
-			break;
-
-		}
-		
+		try {
+			redisDelete(sectionId);
+		} catch (Exception e) {}		//redis错误可以忽略	2019.09.07
 		baseDAO.merge(topic);
 	}
 
@@ -159,7 +88,73 @@ public class TopicServiceImpl implements TopicService {
 	}
 	
 	
+	private void redisDelete(int sectionId) {
+		switch(sectionId){
+			case 21 :				
+				jedisClient.hdel(token,String.valueOf(sectionId));
+				
+				break;
+			case 11 :				
+				jedisClient.hdel(advice,String.valueOf(sectionId));
+				
+				break;
+			case 1 :
+				jedisClient.hdel(java,String.valueOf(sectionId));
+							
+				break;
+			case 2 :
+				jedisClient.hdel(ershou,String.valueOf(sectionId));	
 	
+				break;
+			case 3 :
+				jedisClient.hdel(say,String.valueOf(sectionId));	
+	
+				break;
+			case 4 :	
+				jedisClient.hdel(money,String.valueOf(sectionId));	
+	
+				break;
+			case 7 :	
+				jedisClient.hdel(job,String.valueOf(sectionId));	
+	
+				break;
+			case 8 :
+				jedisClient.hdel(web,String.valueOf(sectionId));	
+	
+				break;		
+			case 12 :
+				jedisClient.hdel(game,String.valueOf(sectionId));	
+	
+				break;
+			case 13 :
+				jedisClient.hdel(server,String.valueOf(sectionId));	
+	
+				break;
+			case 14 :
+				jedisClient.hdel(music,String.valueOf(sectionId));	
+	
+				break;
+			case 15 :
+				jedisClient.hdel(friend,String.valueOf(sectionId));	
+	
+				break;
+			case 16 :
+				jedisClient.hdel(bigdata,String.valueOf(sectionId));	
+	
+				break;
+			case 18 :
+				jedisClient.hdel(wechat,String.valueOf(sectionId));	
+	
+				break;
+			case 19 :
+				jedisClient.hdel(food,String.valueOf(sectionId));	
+	
+				break;
+			case 20 :
+				jedisClient.hdel(code,String.valueOf(sectionId));	
+				break;
+		}
+	}
 	
 	
         /*

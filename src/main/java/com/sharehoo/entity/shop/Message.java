@@ -32,6 +32,20 @@ public class Message implements Serializable{
 	private int status=0;	//私信状态，可读则为0，已读为1
 	private Source source;
 	
+	public Message() {
+		
+	}
+	
+	public Message(Shop shop,User user,Date time,String type,String content,String name,Source source) {
+		this.shop = shop;
+		this.user = user;
+		this.time = time;
+		this.type = type;
+		this.content = content;
+		this.name = name;
+		this.source = source;
+	}
+	
 	@Id
 	@GeneratedValue(generator="_native") //设置自动增长
 	@GenericGenerator(name="_native",strategy="native")

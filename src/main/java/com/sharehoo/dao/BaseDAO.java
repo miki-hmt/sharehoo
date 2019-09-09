@@ -192,6 +192,13 @@ public interface BaseDAO<T> extends JpaRepository<T, Integer>, JpaSpecificationE
 	public Integer executeSql(String sql);
 	
 	public List<T> findTopN(String hql, List<Object> param, int N);
-
+	
+	/**2019.09.08	miik 通过sql查找前五行数据
+	 * @param hql
+	 * @param param
+	 * @param N
+	 * @return
+	 */
+	public List<T> findTopNBySql(String sql, List<Object> param, int N,Class<T> c);
 
 }

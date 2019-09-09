@@ -133,7 +133,7 @@ function loadimage(){
 			<a href="http://sharehoo.cn" rel="nofollow">sharehoo社区</a><i>|</i>
 			<a href="http://sharehoo.cn/shop/Shop_home.action" rel="nofollow">sharehoo下载频道</a><i>|</i>
 			<a href="http://sharehoo.cn/shop/Source_search.action" rel="nofollow">资源搜索</a><i>|</i>
-			<a href="http://sharehoo.cn/blog/Blog_show.action?userId=21" rel="nofollow">博客</a><i>|</i>
+			<a href="http://sharehoo.cn/blog/miki" rel="nofollow">博客</a><i>|</i>
 			<a href="http://sharehoo.cn/topic/section/2" rel="nofollow">二手集市</a><i>|</i>
 			<a href="http://sharehoo.cn/topic/section/21" rel="nofollow">原创社区</a><i>|</i>
 			<a href="http://sharehoo.cn/Topic_leaveList.action" rel="nofollow">吐槽树洞</a><i>|</i>
@@ -166,7 +166,7 @@ $(function(){
 		       		if(data.status==200){
 		       			//alert("登录成功！！");
 		       			tipOk("登录成功！！",function(){
-		       			 	window.location.href = "${host}/index.html";	       			
+		       			 	window.location.href = data.data;	       			
 		       			});
 		       		}else{
 		       			tipError("登录失败！！"+data.msg);

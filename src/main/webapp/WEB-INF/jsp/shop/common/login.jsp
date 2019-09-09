@@ -17,12 +17,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/index.css">
 	
+	<!-- 2019.09.03 自定义弹窗所需插件 -->
+	<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+	<script src="${host}/sweetalert/sweetalert.min.js"></script>
+
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/bootstrap.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/common.css">
 	<link href="${pageContext.request.contextPath}/shop/css/quake.slider.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css">
-	<script src="${pageContext.request.contextPath}/shop/js/jquery.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/shop/js/quake.slider-min.js" type="text/javascript"></script>
+	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_index.css">
 	<script src="${pageContext.request.contextPath}/shop/js/animateBackground-plugin.js" type="text/javascript"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/tabSwitch.js" defer></script>
@@ -32,14 +36,53 @@
 	
 	<script type="text/javascript">
 	
+	function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("操作失败", content, "error");
+	};
+	
 	function reP(){
 	    document.getElementById('oImg').style.display = "block";
 	}
 
 	function logout() {
-		if (confirm("您确定要退出系统吗？")) {
+		/* if (confirm("您确定要退出系统吗？")) {
 			window.location.href="User_logout.action";
-		}
+		} */
+		//$.confirm("<p>您确定要退出sharehoo社区</p><p>一个人浪迹天涯吗？</P>");
+		swal({
+			title : "您确定要退出sharehoo社区",
+			text : '<span style="color:red">一个人浪迹天涯吗？</span>',
+			type : "warning",
+			html : true,
+			showCancelButton : true,
+			closeOnConfirm : false,
+			confirmButtonText : "是的，忍心退出",
+			confirmButtonColor : "#ec6c62"
+		}, function() {
+			$.post("${host}/logout", {
+				id : '521'
+			}, function(result) {
+				if (result.status == 200) {
+					location.reload(true);
+				} else {
+					tipError("退出登录失败！！");
+				}
+			}, "json");
+		});
 	}
 	
 	
@@ -47,9 +90,9 @@
 			if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 				alert("您还未登陆！");
 			} else {
-				window.location.href="Shop_userCenter.action";
+				window.location.href="${host}/shop/center";
 			}	
-	}
+		}
 	</script>
 	
 	<script type="text/javascript">

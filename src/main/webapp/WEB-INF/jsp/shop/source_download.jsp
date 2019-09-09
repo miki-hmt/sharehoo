@@ -86,7 +86,7 @@
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 	}
 
@@ -94,7 +94,7 @@
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Cdk_buy.action";
+			window.location.href="${host}/shop/cdk/buy";
 		}	
 }
 </script>
@@ -125,11 +125,11 @@
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
+			<a href="${host}/shop/index.html">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
-			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
+			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
-			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
+			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
@@ -305,7 +305,7 @@ $(function(){
               	<c:forEach items="${collectSources}" var="collect">
                     <li>                          
                      <i class="fa fa-caret-right"></i>
-                        <a strategy="SearchAlgorithm" title="Python_Machine_Learning_By_Example" href="Source_detail.action?source_id=${collect.source.id}" target="_blank">${collect.source.name }</a><span>下载豆：<em>${collect.source.douNum }</em></span>
+                        <a strategy="SearchAlgorithm" title="Python_Machine_Learning_By_Example" href="${host}/shop/source/${collect.source.id}" target="_blank">${collect.source.name }</a><span>下载豆：<em>${collect.source.douNum }</em></span>
                     </li>
                </c:forEach>
                                                
@@ -609,7 +609,7 @@ function uuid() {
                 <div class="resource_c resource_c_show">
                   <ul class="resource_c_list">
                   	<c:forEach items="${ohterSources }" var="source">
-                  		<li><i class="fa fa-caret-right"></i><a href="Source_detail.action?source_id=${source.id }" target="_blank">${source.name }</a></li>
+                  		<li><i class="fa fa-caret-right"></i><a href="${host}/shop/source/${source.id }" target="_blank">${source.name }</a></li>
                   	</c:forEach>                 	
 				 </ul>
                   <div class="check_all"><a href="Shop_view.action?shopId=${source.shop.id }" target="_blank" class="check_all_btn">查看全部资源</a>

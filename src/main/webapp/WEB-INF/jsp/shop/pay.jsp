@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/pay-css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/pay-css/common.css?{min}">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/pay-css/c_buy.min.css?{min}">
-
+<link href="${pageContext.request.contextPath }/shop/css/ask_float_block.css" rel="stylesheet" type="text/css" />
 
 <!-- 尾部分页 css页码 	2017.08.03 miki-->
 <link href="${pageContext.request.contextPath }/blog/include/css/page.css" rel="stylesheet"/>
@@ -36,10 +36,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css">
 
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
-<script type="text/javascript"  src="/static/static/js/libs/jquery-version.js" type="text/javascript"></script>
+<script type="text/javascript"  src="${host}/shop/js/libs/jquery-version.js" type="text/javascript"></script>
 <script type='text/javascript' src='${pageContext.request.contextPath}/shop/js/jquery.form.js'></script>
 <script src="${pageContext.request.contextPath}/shop/js/html5shiv.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/csdn_download_comment.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/sharehoo_download_comment.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/placeholder.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/pay-js/jquery.select.js"></script>
@@ -49,7 +49,7 @@
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 }
 </script>
@@ -179,11 +179,11 @@
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
+			<a href="${host}/shop/index.html">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank">资源分类</a>
-			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
+			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
-			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
+			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
 			<a href="${pageContext.request.contextPath}/SoftSection_listpr.action" target="_blank" class="current">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
@@ -374,10 +374,9 @@ function close_update(){
 </script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/shop/js/toolbar.js"></script>
       <!-- ask 全局悬浮按钮  -->
-   			<link href="${pageContext.request.contextPath }/shop/css/ask_float_block.css" rel="stylesheet" type="text/css" />
         <!--script(type="text/javascript" src="static/js/apps/fontSize.js")-->
 	<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath }/shop/js/async_new.js"></script>
-	<script data-main="/static/static/js/apps/download.config.js" src="/static/static/js/libs/require.js"></script>
+	<!-- <script data-main="${host}/shop/js/apps/download.config.js" src="${host}/shop/js/libs/require.js"></script> -->
  
   </body>
 </html>

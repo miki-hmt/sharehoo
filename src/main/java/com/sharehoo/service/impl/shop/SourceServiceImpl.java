@@ -123,7 +123,7 @@ public class SourceServiceImpl implements SourceService {
 	public List<Source> getSourcesByshopId(int shopId) {
 		// TODO Auto-generated method stub
 		List<Object> params = new LinkedList<Object>();
-		String hql = "from Source as source where source.shop.id=:shopId order by source.downNum desc";
+		String hql = "from Source as source where source.shop.id=? order by source.downNum desc";
 		params.add(shopId);
 		
 		return baseDAO.findTopN(hql, params, 5);
@@ -133,7 +133,7 @@ public class SourceServiceImpl implements SourceService {
 	public Source getnewSourceByShopId(int shopId) {
 		// TODO Auto-generated method stub
 		List<Object> params = new LinkedList<Object>();
-		String hql = "from Source as source where source.shop.id=:shopId order by source.upload_time desc ";
+		String hql = "from Source as source where source.shop.id=? order by source.upload_time desc ";
 		params.add(shopId);
 		List<Source> list = baseDAO.findTopN(hql, params, 1);
 		if(list.size()==0){

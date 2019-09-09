@@ -30,12 +30,12 @@
 <!-- 页面使用font-awesome矢量字体图标方法引入	2017.08.04	miki -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css">
 
+<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
 <script type='text/javascript' src='${pageContext.request.contextPath}/shop/js/jquery.form.js'></script>
 <script src="${pageContext.request.contextPath}/shop/js/html5shiv.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/csdn_download_comment.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/sharehoo_download_comment.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/placeholder.js"></script>
 
-<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
 <script type="text/javascript">
 	$(function () {
@@ -46,7 +46,7 @@
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 }
 </script>
@@ -89,13 +89,13 @@
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
+			<a href="${host}/shop/index.html">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/Source_search.action" target="_blank">资源分类</a>
-			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
+			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="#" target="_blank">赏金平台</a>
-			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
+			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
-			<a href="${pageContext.request.contextPath}/shop/Cdk_buy.action" target="_blank">虎豆充值</a>
+			<a href="${host}/shop/cdk/buy" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank" class="current">我的店铺</a>
 		</div>
 		<div class="search-download">
@@ -171,15 +171,15 @@
         <div class="main">
           <div class="datas_detail pull-left">
             <ul class="tabs clearfix">
-              <li><a href="${pageContext.request.contextPath}/shop/Shop_userCenter.action">店内商品</a></li> 
+              <li><a href="${host}/shop/center">店内商品</a></li> 
               
               <!-- class="cur" 鼠标点击，游标当前所处位置  2017.08.11 miki-->         
-              <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_operatelog.action">虎豆明细</a></li>     
+              <li><a href="${pageContext.request.contextPath}/shop/admin/log">虎豆明细</a></li>     
               <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_comments.action">店铺评价</a></li>
               <li ><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_collects.action">我的收藏</a></li>
-              <li ><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_focus.action">我的关注</a></li>     
-              <li class="cur"><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_update.action?shopId=${shop.id}">店铺设置</a></li>
-              <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_money.action">虎豆提现</a></li>
+              <li ><a href="${pageContext.request.contextPath}/shop/admin/focus">我的关注</a></li>     
+              <li class="cur"><a href="${pageContext.request.contextPath}/shop/admin/update/go">店铺设置</a></li>
+              <li><a href="${pageContext.request.contextPath}/shop/admin/money/go">虎豆提现</a></li>
             </ul>
             <div class="items">
             

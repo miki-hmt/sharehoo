@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.entity.shop.Operate;
 import com.sharehoo.entity.shop.Shop;
@@ -43,7 +44,7 @@ public class SignController {
 	@ResponseBody
 	public E3Result save(HttpServletRequest request)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("currentUser");
+		User user=(User)session.getAttribute(Consts.CURRENTUSER);
 
 		Operate operate=new Operate();
 		if(user!=null){
@@ -117,7 +118,7 @@ public class SignController {
 	@RequestMapping("/shop/sign/daydayup")
 	public String go(HttpServletRequest request,Model model)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("currentUser");
+		User user=(User)session.getAttribute(Consts.CURRENTUSER);
 		if(user!=null){
 			Shop shop = shopService.getShopByuserId(user.getId());
 			Sign sign = signService.getSignByShopId(shop.getId());
@@ -149,7 +150,7 @@ public class SignController {
 	public E3Result getSign(HttpServletRequest request)throws Exception{
 		JSONObject result=new JSONObject();
 		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("currentUser");
+		User user=(User)session.getAttribute(Consts.CURRENTUSER);
 		if(user!=null){
 			Shop shop = shopService.getShopByuserId(user.getId());
 			Sign sign = signService.getSignByShopId(shop.getId());
@@ -173,7 +174,7 @@ public class SignController {
 	public JSONArray show(HttpServletRequest request)throws Exception{
 		JSONArray sign=new JSONArray();
 		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("currentUser");
+		User user=(User)session.getAttribute(Consts.CURRENTUSER);
 		if(user!=null){
 			SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM"); //设置时间格式为天
 			SimpleDateFormat sdf=new SimpleDateFormat("dd"); //设置时间格式为天

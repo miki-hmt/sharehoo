@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.entity.shop.Cdk;
@@ -45,17 +46,17 @@ public class CDKController {
 	
 	/**
 	* @Title: addCdk  
-	* @Description: TODO(参数保存cdk)  
+	* @Description: TODO(批量生成cdk)  
 	* @author miki 
 	* @date 2019年9月4日 下午4:41:17   
 	* @throws
 	 */
-	@RequestMapping("/shop/cdk/add")
+	@RequestMapping("/shop/cdk/batchAdd")
 	@ResponseBody
 	public E3Result addCdk(@RequestParam("total") int total,@RequestParam("num") int num)throws Exception{
 
 		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute("currentUser");
+		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		if (user!=null&&user.getType()==2) {
 			for(int i=1;i<=total;i++){
 				Cdk cdk=new Cdk();
@@ -78,12 +79,12 @@ public class CDKController {
 	* @date 2019年9月4日 下午4:41:46   
 	* @throws
 	 */
-	@RequestMapping("/shop/cdk/add")
+	@RequestMapping("/shop/cdk/update")
 	@ResponseBody
 	public E3Result update(@RequestParam("cdkId") int cdkId,Cdk cdk)throws Exception{
 		JSONObject result=new JSONObject();
 		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute("currentUser");
+		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		if (user!=null&&user.getType()==2) {
 			if(cdkId>0){
 				cdkService.add(cdk);
@@ -107,7 +108,7 @@ public class CDKController {
 	@RequestMapping("/shop/cdk")
 	public String list(@RequestParam("page") String page,Model model,@RequestParam(value="error",required=false) String error)throws Exception{
 		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute("currentUser");
+		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
 		if (user!=null&&user.getType()==2) {
 			if (StringUtil.isEmpty(page)) {
@@ -144,7 +145,7 @@ public class CDKController {
 	public E3Result delete(@RequestParam("cdkId") int cdkId,Cdk cdk)throws Exception{
 		JSONObject result=new JSONObject();
 		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute("currentUser");
+		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		if (user!=null&&user.getType()==2) {
 			if(cdkId>0){
 				cdk=cdkService.getCdk(cdkId);
@@ -163,7 +164,7 @@ public class CDKController {
 	@ResponseBody
 	public E3Result exchange(@RequestParam("code") String code)throws Exception{
 		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute("currentUser");
+		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		Shop shop=shopService.getShopByuserId(user.getId());
 		if (shop!=null) {
 			if(!code.equals("")){
@@ -198,10 +199,9 @@ public class CDKController {
 	}
 	
 	@RequestMapping("/shop/cdk/buy")
-	@ResponseBody
 	public String buy(Model model)throws Exception{
 		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute("currentUser");
+		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
 		Shop shop=shopService.getShopByuserId(user.getId());
 		model.addAttribute("shop", shop);

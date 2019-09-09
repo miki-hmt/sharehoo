@@ -75,7 +75,7 @@ function searchType(typeid){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 }
 
@@ -84,7 +84,7 @@ function searchType(typeid){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Cdk_buy.action";
+			window.location.href="${host}/shop/cdk/buy";
 		}	
 }
 </script>
@@ -149,11 +149,11 @@ function htmlencode(s){
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
+			<a href="${host}/shop/index.html">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank">资源分类</a>
-			<a href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank" class="current">精品铺子</a>
+			<a href="${host}/shop/rank" target="_blank" class="current">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
-			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
+			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
@@ -190,12 +190,12 @@ function htmlencode(s){
             </div>
             
             <div class="dl_album_t_c clearfix ">
-              <div class="dl_album_t_c_l fl"><a href="/album/detail/3825"><img src="http://public.download.csdn.net/uploads_album/2017/07/04/4e469a6ccea14978cbcd507fdac83007.jpg"></a></div>
+              <div class="dl_album_t_c_l fl"><a href="/album/detail/3825"><img src=""></a></div>
               <div class="dl_album_t_c_r"><a href="/album/detail/3825" 
               target="_blank" class="dl_album_t_title">【2017软考】2017年上半年软考各科目考试真题及答案解析！</a>
                 <p class="dl_album_p">2017年上半年软考 信息系统项目管理师（高项），系统集成项目管理工程师（集成），软件设计师，系统分析师，网络工程师（网工），网络规划设计师（...</p>
                 <div class="dl_album_c_b clearfix">
-                  <label><a href="/album/detail/3825" class="album_img"><img src="2_xiaornshuo.jpg"></a><a href="#" class="album_name">xiaornshuo</a></label><span class="dl_album_c_b_r"><i class="fa fa-eye"></i><em>9538</em></span>
+                  <label><a href="/album/detail/3825" class="album_img"><img src="${host}/shop/images/2_xiaornshuo.jpg"></a><a href="#" class="album_name">xiaornshuo</a></label><span class="dl_album_c_b_r"><i class="fa fa-eye"></i><em>9538</em></span>
                 </div>
               </div>
             </div>
@@ -245,7 +245,7 @@ function htmlencode(s){
               <c:forEach items="${shopList }" var="shop">
               <dl class="album_list_b">
 	              <dt>
-		              <a href="Shop_view.action?shopId=${shop.id }" target="_blank" class="album_cate_img">
+		              <a href="${host}/shop/${shop.id}" target="_blank" class="album_cate_img">
 		              	<img src="${pageContext.request.contextPath}/shop/${shop.face}">
 		              </a>
 		              <span class="album_num">
@@ -368,7 +368,7 @@ function htmlencode(s){
           </div>
            
           <!--广告-->
-          <!-- <div class="dl_mar dl_mar_b"><a href="#"><img src="/static/static/images/dl_img.jpg"></a></div> -->
+          <!-- <div class="dl_mar dl_mar_b"><a href="#"><img src="${host}/shop/images/dl_img.jpg"></a></div> -->
           
 		    
         </div>
@@ -376,8 +376,7 @@ function htmlencode(s){
     </div>
 	<%@ include file="./common/footer.jsp" %> 
     <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/toolbar.js" defer></script>
-	<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/shop/js/async_new.js"></script>
-	<script data-main="/static/static/js/apps/download.config.js" src="/static/static/js/libs/require.js"></script>
+	<!-- <script data-main="${host}/shop/js/apps/download.config.js" src="${host}/shop/js/libs/require.js"></script> -->
  
   </body>
 </html>

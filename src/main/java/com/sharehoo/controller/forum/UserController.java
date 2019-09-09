@@ -534,7 +534,33 @@ public class UserController {
 			return E3Result.build(401, error);
 		}
 		
-		return E3Result.ok();
+		String destination = getDestination(session);	//2019.09.07	miki 登录后，获取将要跳转的链接
+		return E3Result.ok(destination);
+	}
+	
+	/**网站登录后的中转站	2019.09.07	miki
+	 * @return
+	 */
+	@RequestMapping("forward")
+	public String goForward() {
+		return "log_result";
+	}
+	
+	private String getDestination(HttpSession session) {
+		String going_to=(String)session.getAttribute("GOING_TO");
+		String prepareGoingTo=(String)session.getAttribute("prepareGoingTo");
+		String backGoingTo=(String)session.getAttribute("backGoingTo");
+
+		if(going_to!=null){
+			return going_to;
+		}else if(prepareGoingTo!=null){
+			if(session.getAttribute("error")!=null){
+				return backGoingTo;
+			}else{
+				return prepareGoingTo;
+			}
+		}
+		return null;
 	}
 	
 	@RequestMapping("/admin/user/login")

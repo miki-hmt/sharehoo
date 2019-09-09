@@ -1,5 +1,7 @@
 server:
     port: 8080
+    servlet:
+      context-path: /sharehoo
 forum:
    leavemessage:
         SECRET_TOPIC: 40
@@ -15,16 +17,36 @@ forum:
         #solr_search.jsp--source--count 2018.08.17
         SEARCH_RESULT_ROWS: 10
         SEARCH_TOPIC_RESULT_ROWS: 15
+        
+        #redis
+        YUAN_CHUANG: YUAN_CHUANG
+        ADVICE: ADVICE
+        JAVAWEB: JAVAWEB
+        ERSHOU: ERSHOU
+        MONEY: MONEY
+        JOB_INTERVIEW: JOB_INTERVIEW
+        CODE: CODE
+        SAY: SAY
+        WEB: WEB
+        GAME: GAME
+        SERVERDEV: SERVERDEV
+        MUSIC: MUSIC
+        FRIEND: FRIEND
+        BIGDATA: BIGDATA
+        WECHAT: WECHAT
+        FOOD: FOOD
+        GANEDEV: GAMEDEV
+        
    #sharehoo---water marker 2018.08.21
    WATER_MARK_PATH: C:/apache-tomcat-7.0.55/webapps/Forum/images/topicImage/
    WATER_NARK_CONTENT: sharehoo社区
    
 spring:
     freemarker:
-        HTML_GEN_PATH: E:/eclipseMars2Workspace/freemarker/topic/
-        template-loader-path:
-        - /templates/
-        - file:./templates/
+        HTML_GEN_PATH: C:/miki/soft/freemarker/topic/
+        template-loader-path: classpath:/templates/
+        #- /templates/
+        #- file:./templates/
         cache: false
         settings:
             classic_compatible: true #处理空值
@@ -70,10 +92,16 @@ spring:
         timeout: 0    
     data:
         solr:
-          host: http://localhost:8081/solr/collection1       
+          host: http://localhost:8081/solr/collection1   
+              
     servlet:
         multipart:
-            max-file-size: 5MB
+            enabled: true
+            file-size-threshold: 0
+            max-file-size: 1550MB     #2019.09.08 miki 配置店铺上传资源的最大值
+            max-request-size: 1550MB   #2019.09.08 miki 配置文件最大下载大小 
+    
+            
     # 2019.07.04  miki  配置springboot访问jsp页面
     mvc:
         view:

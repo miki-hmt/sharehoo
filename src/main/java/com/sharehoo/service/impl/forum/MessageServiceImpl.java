@@ -71,7 +71,7 @@ public class MessageServiceImpl implements MessageService {
 	public List<Message> getAdminMesList(int shopId) {
 		// TODO Auto-generated method stub
 		List<Object> param = new LinkedList<Object>();
-		String hql = "from Message as message where message.shop.id=:shopId and message.type like '%handle%' and status=0 order by message.time desc";
+		String hql = "from Message as message where message.shop.id=? and message.type like '%handle%' and status=0 order by message.time desc";
 		param.add(shopId);
 		return baseDAO.findTopN(hql, param, 3);
 	}

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.entity.shop.Comment;
 import com.sharehoo.service.forum.CommentService;
@@ -27,7 +28,7 @@ public class CommentController {
 	@RequestMapping("shop/source/{sourceId}/comment")
 	public E3Result save(HttpServletRequest request,@PathVariable("sourceId") int sourceId,Comment comment)throws Exception{
 		HttpSession session=request.getSession();
-		User currentUser=(User) session.getAttribute("currentUser");
+		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);
 
 		if(currentUser!=null){		
 			//查询数据库的该用户资源是否评论已存在

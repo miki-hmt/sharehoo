@@ -90,7 +90,7 @@ public class CollectServiceImpl implements CollectService {
 		// TODO Auto-generated method stub
 		String sql = "select *,count(*) from t_collect group by source_id order by count(*) desc ";
 		
-		return baseDAO.findTopN(sql, null, 5);
+		return baseDAO.findTopNBySql(sql, null, 5,Collect.class);
 	}
 
 	@Override

@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css">
 
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
-<script type="text/javascript"  src="/static/static/js/libs/jquery-version.js" type="text/javascript"></script>
+<script type="text/javascript"  src="${host}/shop/js/libs/jquery-version.js" type="text/javascript"></script>
 <script type='text/javascript' src='${pageContext.request.contextPath}/shop/js/jquery.form.js'></script>
 <script src="${pageContext.request.contextPath}/shop/js/html5shiv.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/csdn_download_comment.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/sharehoo_download_comment.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/placeholder.js"></script>
 
 <script type="text/javascript">
@@ -42,7 +42,7 @@
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 }
 </script>
@@ -169,12 +169,12 @@
             <ul class="tabs clearfix">
               <li><a href="Shop_files.action">店内商品</a></li> 
               
-              <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_operatelog.action">虎豆明细</a></li>     
+              <li><a href="${pageContext.request.contextPath}/shop/admin/log">虎豆明细</a></li>     
               <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_comments.action">店铺评价</a></li>
               <li ><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_collects.action">我的收藏</a></li>
-              <li ><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_focus.action">我的关注</a></li>     
-              <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_update.action?shopId=${shop.id}">店铺设置</a></li>
-              <li class="cur"><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_money.action">虎豆提现</a></li>
+              <li ><a href="${pageContext.request.contextPath}/shop/admin/focus">我的关注</a></li>     
+              <li><a href="${pageContext.request.contextPath}/shop/admin/update/go">店铺设置</a></li>
+              <li class="cur"><a href="${pageContext.request.contextPath}/shop/admin/money/go">虎豆提现</a></li>
             </ul>
             <div class="items">
             
@@ -191,7 +191,7 @@
 										  
 						<div class="content">
 							<h3>
-								<a target="_blank" href="Source_detail.action?source_id=${source.id }">${source.name }</a>
+								<a target="_blank" href="${host}/shop/source/${source.id }">${source.name }</a>
 							</h3>
 							<p class="brief" style="display:inline-block;">${source.description }</p>
 							<p class="tags clearfix">
@@ -396,7 +396,7 @@ function close_update(){
    			<link href="${pageContext.request.contextPath }/shop/css/ask_float_block.css" rel="stylesheet" type="text/css" />
         <!--script(type="text/javascript" src="static/js/apps/fontSize.js")-->
 	<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath }/shop/js/async_new.js"></script>
-	<script data-main="/static/static/js/apps/download.config.js" src="/static/static/js/libs/require.js"></script>
+	<!-- <script data-main="${host}/shop/js/apps/download.config.js" src="${host}/shop/js/libs/require.js"></script> -->
  
   </body>
 </html>

@@ -14,25 +14,25 @@
 <meta name="Copyright" content="sharehoo" />
 <meta http-equiv="X-UA-Compatible" content="IE=8,9" />
 <meta name="renderer" content="webkit|ie-stand" />
-<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/footer.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/index.css">
+<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+<link rel="stylesheet" href="${host}/shop/css/footer.css">
+<link rel="stylesheet" href="${host}/shop/css/index.css">
 
 <!-- 页面使用font-awesome矢量字体图标方法引入	2017.08.04	miki -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="${host}/font-awesome-4.4.0/css/font-awesome.min.css">
 
 <!-- 尾部分页 css页码 	2017.08.03 miki-->
 <link href="${pageContext.request.contextPath }/blog/include/css/page.css" rel="stylesheet"/>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/bootstrap.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/common.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_profile.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_new.css">
-
-<script type='text/javascript' src='${pageContext.request.contextPath}/shop/js/jquery.form.js'></script>
-<script src="${pageContext.request.contextPath}/shop/js/html5shiv.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/sharehoo_download_comment.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/placeholder.js"></script>
+<link rel="stylesheet" href="${host}/shop/css/bootstrap.css">
+<link rel="stylesheet" href="${host}/shop/css/common.css">
+<link rel="stylesheet" href="${host}/shop/css/download_profile.css">
+<link rel="stylesheet" href="${host}/shop/css/download_new.css">
+<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+<script type='text/javascript' src='${host}/shop/js/jquery.form.js'></script>
+<script src="${host}/shop/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="${host}/shop/js/sharehoo_download_comment.js"></script>
+<script type="text/javascript" src="${host}/shop/js/placeholder.js"></script>
 
 <script>
 	// 网站链接自动推送js代码      2017.09.07
@@ -53,15 +53,13 @@
 
 <!--  2017.08.05	防止不法分子利用js源码，得到文件路径下载url，我个人思路是给文件属性里增加一个二次别名，
 	且名字要采用md5方式命名，让别人猜不到命名规律，即使知道下载链接也得不到正确的路径  -->
-	
-<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
 <script type="text/javascript">
 
 	function validateLogin(){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 	}
 
@@ -69,7 +67,7 @@ function validateBuy(){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Cdk_buy.action";
+			window.location.href="${host}/shop/cdk/buy";
 		}	
 }
 
@@ -84,7 +82,7 @@ function validateBuy(){
 
 	<c:choose>
 		 <c:when test="${currentUser==null }">
-		 	<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="${pageContext.request.contextPath}/shop/js/html.js" type="text/javascript" domain="http://sharehoo.cn"></script>	
+		 	<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="${host}/shop/js/html.js" type="text/javascript" domain="http://sharehoo.cn"></script>	
 		 </c:when>
 		 <c:otherwise>
 		 	 <%@ include file="./common/login.jsp" %> 
@@ -93,12 +91,12 @@ function validateBuy(){
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank">资源分类</a>
-			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank" class="current">精品铺子</a>
+			<a href="${host}/shop/index.html">首页</a>
+			<a href="${host}/shop/SolrJ_searchItemList.action" target="_blank">资源分类</a>
+			<a class=" " href="${host}/shop/rank" target="_blank" class="current">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
-			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
-			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
+			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
+			<a class=" " href="${host}/Notice_listpr.action" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 		</div>
@@ -145,7 +143,7 @@ function validateBuy(){
 											  
 							<div class="content">
 								<h3>
-									<a target="_blank" href="Source_detail.action?source_id=${source.id }">${source.name }</a>
+									<a target="_blank" href="${host}/shop/source/${source.id }">${source.name }</a>
 								</h3>
 								<p class="brief" style="display:inline-block;">${source.description }</p>
 								<p class="tags clearfix">
@@ -183,7 +181,7 @@ function validateBuy(){
           <div class="aside pull-right">
             <div class="mod_personal">
               <dl id="personal_wrap" class="personal_wrap">
-                <dt><a href="#" target="_blank"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img" class="head"></a>
+                <dt><a href="#" target="_blank"><img src="${host}/shop/${shop.face}" alt="img" class="head"></a>
                   <!--.vip类是只有一个标签时用-->
                   <!--span.vip VIP-->
                   <!--注：vip_grey 是vip过期时的样式-->
@@ -203,7 +201,7 @@ function validateBuy(){
                   </c:choose>
                   
                   </p>
-                  <p class="personal_b">店铺等级：<img src="${pageContext.request.contextPath}/shop/images/level/down4.png" alt="等级：4"><span>财富值:&nbsp;<em>${shop.douNum }</em></span></p>
+                  <p class="personal_b">店铺等级：<img src="${host}/shop/images/level/down4.png" alt="等级：4"><span>财富值:&nbsp;<em>${shop.douNum }</em></span></p>
                 </dd>
               </dl>
               

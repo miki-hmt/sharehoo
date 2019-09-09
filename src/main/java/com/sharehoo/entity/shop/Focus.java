@@ -28,6 +28,18 @@ public class Focus implements Serializable{
 	private String type;	//执行类型,
 	private Date focus_time;
 	
+	public Focus() {
+		
+	}
+	
+	public Focus(String type,Date focus_time,User user,Shop shop) {
+		this.type = type;
+		this.focus_time = focus_time;
+		this.user = user;
+		this.shop = shop;
+	}
+	
+	
 	@Id
 	@GeneratedValue(generator="_native") //设置自动增长
 	@GenericGenerator(name="_native",strategy="native")

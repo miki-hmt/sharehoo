@@ -240,7 +240,7 @@ span {
 		
 	}
 	
-	function tipOk(content){
+	function tipOk(content,callback){
 		swal({   
 			title: content,   
 			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
@@ -248,7 +248,11 @@ span {
 			html: true,
 			timer: 2000,   
 			showConfirmButton: false
-		});
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
 	};
 	function tipError(content){
 		swal("发表失败", content, "error");

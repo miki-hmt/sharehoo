@@ -14,18 +14,30 @@
 <meta name="renderer" content="webkit|ie-stand" />
 <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/index.css">
-<link rel="stylesheet" href="http://c.csdnimg.cn/cdn/font-awesome-4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/bootstrap.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_new.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/footer.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/upload_resources.css"/>
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
 <script type="text/javascript"  src="${pageContext.request.contextPath}/shop/js/jquery-version.js" type="text/javascript"></script>
 <script type='text/javascript' src='${pageContext.request.contextPath}/shop/js/jquery.form.js'></script>
 <script src="${pageContext.request.contextPath}/shop/js/html5shiv.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/csdn_download_comment.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/sharehoo_download_comment.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/placeholder.js"></script>
-<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/ckeditor4.12/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//初始换编辑器
+		CKEDITOR.replace('description', {
+			filebrowserImageUploadUrl : "${host}/topic/ckupload?", //2019.09.07 miki 加上？可以实现拖动图片上传
+			codeSnippet_theme : 'zenburn',
+			height : '300'
+		});
+	});
+</script>
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/animate.css">
 <style type="text/css">	
 		/*2018.11.27	miki	进度条内容 start*/
@@ -83,13 +95,13 @@
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
+			<a href="${host}/shop/index.html">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank">资源分类</a>
-			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
+			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
-			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
+			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
-			<a href="${pageContext.request.contextPath}/shop/Cdk_buy.action" target="_blank">虎豆充值</a>
+			<a href="${host}/shop/cdk/buy" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank" class="current">我的店铺</a>
 		</div>
 		<div class="search-download">
@@ -102,17 +114,12 @@
 	</div>
 </div>
 <!-- //toolbar nav -->
-
-
 	
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/upload_resources.css">
-    
-    
     <div class="meeting_main">
       <div class="download_new clearfix">
         <div class="container clearfix csdn_dl_bread">
           <div class="row">
-            <div class="col-md-12"><a href="${pageContext.request.contextPath}/shop/Shop_home.action">下载频道</a>&nbsp;&nbsp;>&nbsp;&nbsp;资源上传</div>
+            <div class="col-md-12"><a href="${host}/shop/index.html">下载频道</a>&nbsp;&nbsp;>&nbsp;&nbsp;资源上传</div>
           </div>
         </div>
         <div class="create_album_wrap">
@@ -125,10 +132,9 @@
           -->
           <div class="create_album upl_resources">
           
-            <form action="${pageContext.request.contextPath}/shop/manage/SourceManage_upload.action" enctype="multipart/form-data" method="POST" class="form" onsubmit="return checkForm(this)">
+            <form action="" id="upload_form" enctype="multipart/form-data" method="POST" class="form">
               <input type="hidden" value="" id="hfile" />
-			  <input type="hidden" id="id" name="source.id"/>
-			  <input type="hidden" id="id" name="source.shop.id" value="${shop.id }"/>
+			  <input type="hidden" id="sourceId" name="shop.id" value="${shop.id }"/>
               <ul class="create_album_list clearfix">
                 
                 <li>
@@ -152,12 +158,12 @@
                 </li>
                 <li>
                   <label>资源名称：</label>
-                  <input type="text" id="name" name="source.name" 
+                  <input type="text" id="name" name="name" 
                    class="album_inpt" value="${source.name }"/><em></em>
                 </li>
                 <li>
                   <label>资源类型：</label>
-                  <select def="0" class="select category-1" id="type" name="source.type.id">
+                  <select def="0" class="select category-1" id="type" name="type.id">
 					<option value="0" >请选择</option>
 					 <c:forEach  items="${types }" var="type">
 					 	<option value="${type.id }" >${type.name}</option>
@@ -168,28 +174,27 @@
                 </li>
                 <li>
                   <label>关键词（tag）：</label>
-                  <input type="text" id="tag" name="source.tag" max="50"
-                   value="${source.tag }" class="album_inpt" />
+                  <input type="text" id="tag" name="tag" max="50"
+                   value="${source.tag }" class="album_inpt" placeholder="关键词请用 ; 隔开越详细，搜索越准确"/>
                    <em></em>
                 </li>
                  <li>
                   <label>大小（M）：</label>
-                  <input id="file_size" readonly="readonly" type="text" id="size" name="source.size" max="50"
+                  <input id="file_size" readonly="readonly" type="text" id="size" name="size" max="50"
                    value="${source.size}" class="album_inpt" />
                    <em></em>
                 </li>
                 <li>
                   <label>所属分类：</label>
-                  <select id="category" name="source.category.id" class="select category-1" onchange= "change()">
+                  <select id="category" name="category.id" class="select category-1" onchange= "change()">
                   	<option value="0">请选择</option>
 	                  <c:forEach  items="${categoryList }" var="category">
 						<option value="${category.id }" ${curCategory.id==category.id?'selected':'' }>${category.name }</option>
 					  </c:forEach>
                   </select>&nbsp;
                   
-                  <select id="sel_subclass" style="display:" name="source.menu.id">
-				  	<option value="0">请选择</option>
-				  	
+                  <select id="sel_subclass" style="display:" name="menu.id">
+				  	<option value="0">请选择</option>		  	
 				  </select>
 				 
 				  <em></em>                                
@@ -197,7 +202,7 @@
                            	          	           	
                 <li>
                   <label>下载豆：</label>
-                  	<select def="0" class="select category-1" name="source.douNum" id="douNum">
+                  	<select def="0" class="select category-1" name="douNum" id="douNum">
                     	<option value="0" > 0</option>
 			  		    <option value="1" > 1</option>
 			  		    <option value="2" > 2</option>
@@ -217,21 +222,21 @@
                   <label>验证码：</label>
                   <input name="imageCode" id="imageCode" tabindex="6" style="width: 80px;" onblur="checkImageCode(this.value)" value="${imageCode }" type="text" class="album_inpt">
                   <label style="width:auto;cursor:pointer;">
-                  <img onclick="javascript:loadimage();" title="换一张试试" name="randImage" id="randImage" src="${pageContext.request.contextPath }/image.jsp"  style="margin-left:5px;" border="0">
+              
+                  <img onclick="javascript:loadimage();" title="换一张试试" name="randImage" id="randImage" src="${host}/imageCode"  style="margin-left:5px;" border="0">
                   <span class="pull-left"></span><font id="imageErrorInfo" style="float:right;" color="red"></font>
                   </label><em></em>
 
-			<!-- 2018.11.27		miki	文件上传进度条设置 -->
-						<div id="upload_bar">
-			   				
-			   			</div>
-			
+					<!-- 2018.11.27		miki	文件上传进度条设置 -->
+					<div id="upload_bar">
+		   				
+		   			</div>	
                 </li>
                 
                 
                 <li>
                   <label>资源描述：</label>
-                  		<textarea name="source.description" id="description"  class="ckeditor" cols="50"
+                  		<textarea name="source.description" id="description" cols="50"
                   			max="1000" placeholder="描述不支持HTML标签；详细的资源描述有机会获得我们的推荐，更有利于他人下载，赚取更多积分。如资源描述不清，有可能审核不通过。"></textarea>
                   <em></em>
                 </li>
@@ -245,7 +250,7 @@
               </ul>
               <div class="create_album_b">
                 
-                <input type="submit" value="提交" class="album_submit submit-btn">
+                <input id="okBtn" type="button" value="提交" class="album_submit submit-btn">
               </div>
               <div style="text-align:center;">
               	<font id="error" color="red"></font>
@@ -287,20 +292,121 @@
     </div>
 
 
-    <script type="text/javascript">
+ <script type="text/javascript">
+    
+    //springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+	$("#okBtn").on("click", function() {
+
+		//ckeditor4.12新特性，提交表单前需要更新textAera字段内容	2019.09.02
+		for (instance in CKEDITOR.instances) {
+			CKEDITOR.instances[instance].updateElement();
+		}
+		
+		if (checkForm()) {
+			//进度条上传...
+			createProgress();
+			setTimeout("getProgressBar()",1000);
+			
+			var formData = new FormData($("#upload_form")[0]);
+			$.ajax({
+				type : "POST",
+				url : "${host}/shop/source/upload",
+				data : formData,
+				cache : false,
+				async : true,
+				processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+				contentType : false, //必须false才会自动加上正确的Content-Type
+				success : function(data) {
+					if (data.status == 200) {
+						//swal("Good!", "上传成功", "success");
+						tipOk("上传成功!!",function(){
+							location.reload();
+						});
+					} else {
+						tipError("资源上传失败!!" + data.msg);
+					}
+				}
+			});			
+		}
+		return false;	//阻止ajax结束自动刷新页面
+	});
+    
+    
+    //ajax异步提交
+	var flag=false;
+	var file;
+	function getProgressBar(){
+		if(!flag){
+		$.ajax({
+			cache : false,
+			async : true,
+			url:"${host}/shop/upload/status?shopId="+${shop.id},		//!!!注意：ajax不能同时调用同一个controller里的两个方法，否则定时会卡住
+			type:"post",
+			success:function(data){
+				debugger;
+				if(data.length>0){
+					/* flag=true;
+					return; */
+					eval(data);
+					//上传完毕，全部状态设为100
+					if(info.read==info.total){
+						flag=true;
+						$("#progress").css("width","100%");					
+						$("#progress").html("100%");
+						$("#upload_name").html("【"+info.items+"/"+file.files.length+"】"+file.files[(info.items-1)].name+"【100%】");
+					}else{
+						info.read=parseFloat(info.read);
+						info.total=parseFloat(info.total);
+						var percent=Math.round(info.read/info.total*10000)/100.00;
+						$("#progress").css("width",percent+"%");					
+						$("#progress").html(percent+"%");					
+						$("#upload_name").html("【"+info.items+"/"+file.files.length+"】"+file.files[(info.items-1)].name+"【"+percent+"%】");
+					}
+				}
+			}
+		});
+		setTimeout("getProgressBar();",1000);	//间隔一秒
+		}
+	}
+		
+	//创建进度条
+	function createProgress(){
+		$("#upload_bar").html("");
+		file=document.getElementById("txt_userfile");
+		var divContent="<div class='progressContent'>";
+		divContent=divContent+"<div id='upload_name' class='upload_name'>等待上传..</div><div id='progress' class='progressBar animated rotateIn' align=right>0%</div></div>";
+		$("#upload_bar").html(divContent);
+	}
+    
+    function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("操作失败", content, "error");
+	};
     
     //验证码生成机制	2017.08.01 miki
     function loadimage(){
-    	document.getElementById("randImage").src = "${pageContext.request.contextPath }/image.jsp?"+Math.random();
+    	document.getElementById("randImage").src = "${pageContext.request.contextPath }/imageCode?"+Math.random();
     }
     
     //检验验证码是否正确	2017.08.01 miki
     function checkImageCode(imageCode){
     	
-    	$.post("Shop_valImageCode.action",{imageCode:imageCode},
+    	$.post("${host}/shop/exitCode",{imageCode:imageCode},
     			function(result){
-    				var result=eval(result);
-    				if(!result.exist){
+    				if(result.status==401){
     					$("#imageErrorInfo").html("验证码错误，亲亲，请戴上眼镜认真看看！");
     					$("#imageCode").focus();
     				}else{
@@ -309,92 +415,78 @@
     			}
     	);
     }
-    
-    
-    	//表单检验 2017.08.01 miki
-    
-		    function checkForm(){
-			var dom = document.getElementById("txt_userfile");
-			var name=$("#name").val();
-			var sex=$("#txt_userfile").val();
-			var imageCode=$("#imageCode").val();
-			var tag=$("#tag").val();
-			var size=$("#size").val();
-			var cb_agree=$("#cb_agree").is(":checked");
-			if (name=="") {
-				$("#error").html("* 资源名称不能为空 *");
+      
+    //表单检验 2017.08.01 miki   
+    function checkForm(){
+		var dom = document.getElementById("txt_userfile");
+		var name=$("#name").val();
+		var sex=$("#txt_userfile").val();
+		var imageCode=$("#imageCode").val();
+		var tag=$("#tag").val();
+		var size=$("#size").val();
+		var cb_agree=$("#cb_agree").is(":checked");
+		if (name=="") {
+			$("#error").html("* 资源名称不能为空 *");
+			return false;
+		}else if (sex=="") {
+			$("#error").html("*文件不能为空*");
+			return false;
+		}else if(50<Math.round((Math.round(dom.files[0].size/1024*100)/100)/1024*100)/100){
+				$("#error").html("*超出最大上传文件大小*");
 				return false;
 			}
-			if (sex=="") {
-				$("#error").html("*文件不能为空*");
-				return false;
-			}else{
-				if(50<Math.round((Math.round(dom.files[0].size/1024*100)/100)/1024*100)/100){
-					$("#error").html("*超出最大上传文件大小*");
-					return false;
-				}
-			}
-			if (imageCode=="") {
-				$("#error").html("*验证码不能为空*");
-				return false;
-			}
-			if (tag=="") {
-				$("#error").html("*关键词不能为空*");
-				return false;
-			}
-			if (size=="") {
-				$("#error").html("*size不能为空*");
-				return false;
-			}
-			if (cb_agree==false) {
-				$("#error").html("*您尚未同意资源上传协议*");
-				return false;
-			}
-			if('${shop.sourceNum}'=='${shop.maxNum}'){
-				$("#error").html("*您已达到资源上传上限，请升级权限再来*");
-				return false;
-			}
-			$("#error").html("");
-
-			createProgress();
-			//getProgress();	//定时刷新
-			setTimeout("getProgressBar()",2000);
-			return true;
+		else if (imageCode=="") {
+			$("#error").html("*验证码不能为空*");
+			return false;
 		}
-    	  
-    	  	
+		else if (tag=="") {
+			$("#error").html("*关键词不能为空*");
+			return false;
+		}
+		else if (size=="") {
+			$("#error").html("*size不能为空*");
+			return false;
+		}
+		else if (cb_agree==false) {
+			$("#error").html("*您尚未同意资源上传协议*");
+			return false;
+		}
+		else if('${shop.sourceNum}'=='${shop.maxNum}'){
+			$("#error").html("*您已达到资源上传上限，请升级权限再来*");
+			return false;
+		}
+		$("#error").html("");
+		return true;
+	}
+    	    	  	
    //二级菜单显示  miki 2017.08.13
    
- function change() {
+	 function change() {
 	  	var categoryId=$("#category").val();
 	  	var tbody=window.document.getElementById("sel_subclass");	//获取select选择框元素 2017.08.13 miki		  
-  
-	$.ajax({  
-    	type: "post",  
-   	 dataType: "json",  
-    	url: "Menu_show.action",  
-    	data: { 
-    		categoryId:categoryId  },  
-	success: function (msg) { 
-		//alert(msg.length);
-   	 	if (msg.length>0) {  			
-       	 var str = "";       	    
-        	for (var key in msg) {        		        		   		
-        		 str += "<option value="+ msg[key].id+" ${curMenu.id==menu.id?'selected':'' }>" +msg[key].name+ "</option>";   
-                          }  
-                 tbody.innerHTML = str;              
-                }  
-            },  
+	  
+		$.ajax({  
+	    	type: "post",  
+	   	 	dataType: "json",  
+	    	url: "${host}/shop/source/menu",  
+	    	data: {categoryId:categoryId  },  
+			success: function (msg) { 
+		   	 	if (msg.length>0) {  			
+		       	 	var str = "";       	    
+		        	for (var key in msg) {        		        		   		
+		        		 str += "<option value="+ msg[key].id+" ${curMenu.id==menu.id?'selected':'' }>" +msg[key].name+ "</option>";   
+		               }  
+		            tbody.innerHTML = str;              
+		           }  
+		        },  
             error: function () {  
                 alert("查询失败")  
             }  
-        });    
-}  
+	      });    
+		}  
     	
     	
-    	
-    	
-    	
+    //获得字符串长度	   	
     function getStrLength(str) {
     	var len = 0;
     	for (var i=0; i<str.length; i++) {
@@ -408,6 +500,7 @@
     	}
     	return len;
     }
+    
     function stopupload()
     {
     	if(navigator.appName == "Microsoft Internet Explorer")
@@ -419,13 +512,10 @@
     $(document).ready(function() {
 
     	$('#btn_submit').click(function(){
-
-    		if(validate())
-    		{
+    		if(validate()){
     			$.getJSON("/index.php/upload/checkform/"+ $("#txt_validcode").serialize(),
     					function(data){
-    						if(data.succ==0)
-    						{
+    						if(data.succ==0){
 //     							alert(data.errmsg+'asdasdasd');
     							$("#imgValidcode").attr('src','/index.php/rest/tools/validcode/uploadvalidcode/'+Math.random());
     							var $em = $("#txt_validcode").parent().find( 'em' );
@@ -434,39 +524,32 @@
     	        			    $em.removeClass( 'form_correction' );
     	        			    $("#txt_validcode").focus();
     						}else{
-    			xhr = $('#uploadform').ajaxSubmit({
-    				dataType:  'json',
-    				beforeSubmit: function(a,f,o) {
-    					startProgress();
-    				 },
-    			    success: function(data) {
-
-    		    		$("#txt_title").val('');
-    		    		$("#txt_tag").val('');
-    		    		$("#txt_desc").val('');
-    		    		$("#txt_userfile").val('');
-    		    		$('#li_userfile').html('未选择文件');
-    		    		$("#sel_filetype").empty();
-    		    		$("#sel_primary").empty();
-    		    		$("#sel_subclass").empty();
-    		    		$("#sel_score").empty();
-    		    		$("#txt_validcode").val('');
-    		    		$("#imgValidcode").click();
-    		    		stopProgress();
-    		    		
-    		    		if(data.succ==1)
-    			    	{
-    						
-    			    		window.location.href='/upload/success';
-    			    	}
-    			    	
-    		    		else
-    			    	{
-    			    		alert(data.errmsg);
-    			    		window.location.reload();
-    			    	}
-    			    }
-    		    });
+				    			xhr = $('#uploadform').ajaxSubmit({
+				    				dataType:  'json',
+				    				beforeSubmit: function(a,f,o) {
+				    					startProgress();
+				    				 },
+				    			    success: function(data) {			
+				    		    		$("#txt_title").val('');
+				    		    		$("#txt_tag").val('');
+				    		    		$("#txt_desc").val('');
+				    		    		$("#txt_userfile").val('');
+				    		    		$('#li_userfile').html('未选择文件');
+				    		    		$("#sel_filetype").empty();
+				    		    		$("#sel_primary").empty();
+				    		    		$("#sel_subclass").empty();
+				    		    		$("#sel_score").empty();
+				    		    		$("#txt_validcode").val('');
+				    		    		$("#imgValidcode").click();
+				    		    		stopProgress();			    		    		
+				    		    		if(data.succ==1){	
+				    			    		window.location.href='/upload/success';
+				    			    	}else{
+				    			    		alert(data.errmsg);
+				    			    		window.location.reload();
+				    			    	}
+				    			    }
+				    		    });
     					}
     			});
     		}
@@ -477,7 +560,7 @@
     		$("#imgValidcode").attr("src","/index.php/rest/tools/validcode/uploadvalidcode/1"+Math.random());
     	});
 
-    	$('#sel_primary').selectsort('#sel_primary','#sel_subclass','0');
+    	//$('#sel_primary').selectsort('#sel_primary','#sel_subclass','0');
 
     	$('#sel_filetype').change(function(){
     		var allow_recommend_item = $('#allow_recommend');
@@ -502,8 +585,7 @@
     });
 
 	<!--2018.11.28	读取文件上传大小回显到表单框中-->
-    function show_uploadfile()
-    {
+    function show_uploadfile(){
     	var filename = $('#txt_userfile').val();
     	if ( filename )
     	{
@@ -517,24 +599,20 @@
 			}
     	}
     }
+    
     function addtag( tag ){
     	  var tags = $("#txt_tag").val();
     	  var arrtags=tags.split(" ");
     	  var dtags = new Array;
     	  var j=0;
-    	  for(var i=0;i<arrtags.length;i++)
-    	  {
-    	    if(jQuery.trim(arrtags[i])!='')
-    	    {
+    	  for(var i=0;i<arrtags.length;i++){
+    	    if(jQuery.trim(arrtags[i])!=''){
     	      dtags[j] = arrtags[i];
     	      j++;
     	    }
-
     	  }
-    	  for(i=0;i<dtags.length;i++)
-    	  {
-    	    if(tag==dtags[i])
-    	    {
+    	  for(i=0;i<dtags.length;i++){
+    	    if(tag==dtags[i]){
     	      return ;
     	    }
     	  }
@@ -542,7 +620,6 @@
     	    alert('最多允许填写5个Tag!');
     	    return ;
     	  }
-
     	  tags = tags + " "+tag;
     	  $("#txt_tag").val(tags);
     	}
@@ -793,6 +870,7 @@
     	$("#pop_add_org").fadeTo("slow",0.8);
     	setTimeout("getProgress()", 500);
     }
+    
     function getProgress(){
     	$.getJSON("/index.php/upload/get_progress/a618d39e13a528d5e8077a9c53c7562f",
     	function(data){
@@ -843,62 +921,9 @@
 
 </script>
 
-
-<!-- 		2018.11.27		miki	上传进度条设置 -->
-
-<script type="text/javascript">
-				
-		//ajax异步提交
-		var flag=false;
-		var file;
-		function getProgressBar(){
-			if(!flag){
-			$.ajax({
-				url:"../getStatus.jsp",
-				type:"post",
-				success:function(data){
-					debugger;
-					if(data.length==0){
-						flag=true;
-						return;
-					}
-					eval(data);
-					//上传完毕，全部状态设为100
-					if(info.read==info.total){
-						flag=true;
-						$("#progress").css("width","100%");					
-						$("#progress").html("100%");
-						$("#upload_name").html("【"+info.items+"/"+file.files.length+"】"+file.files[(info.items-1)].name+"【100%】");
-					}else{
-						info.read=parseFloat(info.read);
-						info.total=parseFloat(info.total);
-						var percent=Math.round(info.read/info.total*10000)/100.00;
-						$("#progress").css("width",percent+"%");					
-						$("#progress").html(percent+"%");					
-						$("#upload_name").html("【"+info.items+"/"+file.files.length+"】"+file.files[(info.items-1)].name+"【"+percent+"%】");
-					}
-				}
-			});
-			setTimeout("getProgressBar();",2000);	//间隔一秒
-			}
-		}
-		//创建进度条
-		function createProgress(){
-			$("#upload_bar").html("");
-			file=document.getElementById("txt_userfile");
-			var divContent="<div class='progressContent'>";
-			divContent=divContent+"<div id='upload_name' class='upload_name'>等待上传..</div><div id='progress' class='progressBar animated rotateIn' align=right>0%</div></div>";
-			$("#upload_bar").html(divContent);
-		}
-	</script>
-
-
-
   <!-- ask 全局悬浮按钮  -->
-    <!-- 优化脚本代码 start-->				
+  <!-- 优化脚本代码 start-->				
 <div id="a6a4aba9d" style="width: 1px; height: 1px; display: none;">
-<script id="adJs6a4aba9"></script>
-
 </div>
 <%@ include file="./common/footer.jsp" %> 
 <!-- 优化脚本代码 end-->		

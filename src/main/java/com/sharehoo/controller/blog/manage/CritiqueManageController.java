@@ -66,7 +66,7 @@ public class CritiqueManageController {
 	public E3Result deletePhc(HttpServletRequest request,@RequestParam(value="id",required=false) int id)throws Exception{
 		
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(null==user) {
 			return E3Result.build(401, "登录超时..");
 		}
@@ -112,7 +112,7 @@ public class CritiqueManageController {
 	public E3Result delete(HttpServletRequest request,@RequestParam(value="id",required=false) int id)throws Exception{
 		
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(null==user) {
 			return E3Result.build(401, "登录超时..");
 		}
@@ -134,7 +134,7 @@ public class CritiqueManageController {
 	@ResponseBody
 	public E3Result saveAr(HttpServletRequest request,@RequestParam(value="id",required=false) int id,Critique critique)throws Exception{
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(null==user) {
 			return E3Result.build(401, "登录超时..");
 		}

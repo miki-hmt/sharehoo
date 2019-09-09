@@ -64,7 +64,7 @@ function searchType(typeid){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 }
 </script>
@@ -92,9 +92,9 @@ function searchType(typeid){
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
+			<a href="${host}/shop/index.html">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
-			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
+			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="#" target="_blank">热搜模块</a>
 			<a href="#" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
@@ -112,7 +112,6 @@ function searchType(typeid){
 </div>
 <!-- //顶部登录部分js选择器	引入login文件的js，	2017.09.09 miki -->
 <script type="text/javascript" src="/js/search-service/main.js" charset="utf-8"></script>
-<script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>	
 <script type="text/javascript">
 	
 $(document).ready(function() {

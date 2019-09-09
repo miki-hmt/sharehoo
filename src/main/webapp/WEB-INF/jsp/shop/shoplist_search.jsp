@@ -22,7 +22,7 @@
 
 <!-- 尾部分页 css页码 	2017.08.03 miki-->
 <link href="${pageContext.request.contextPath }/blog/include/css/page.css" rel="stylesheet"/>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/footer.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/bootstrap.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/common.css">
 <link href="${pageContext.request.contextPath}/shop/css/quake.slider.css" rel="stylesheet" type="text/css">
@@ -75,7 +75,7 @@ function searchType(typeid){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 }
 </script>
@@ -94,7 +94,7 @@ function searchType(typeid){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Cdk_buy.action";
+			window.location.href="${host}/shop/cdk/buy";
 		}	
 }
 </script>
@@ -111,11 +111,11 @@ function searchType(typeid){
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
+			<a href="${host}/shop/index.html">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
-			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
+			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
-			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
+			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
@@ -134,39 +134,39 @@ function searchType(typeid){
       <div class="album_top_box">
         <dl class="dl_album_t clearfix">
           <dt>
-                      <label class="dl_album_btn dl_album_cur "><img src="http://public.download.csdn.net/uploads_album/2017/07/11/78f238551e9027621fbd5c4c34373b44.jpg"></label>
-                       <label class="dl_album_btn  "><img src="http://public.download.csdn.net/uploads_album/2017/07/10/c3f2a3d075eead12414f1d7dc100abf8.jpg"></label>
-                       <label class="dl_album_btn  "><img src="http://public.download.csdn.net/uploads_album/2017/07/04/4e469a6ccea14978cbcd507fdac83007.jpg"></label>
+                      <label class="dl_album_btn dl_album_cur "><img src=""></label>
+                       <label class="dl_album_btn  "><img src=""></label>
+                       <label class="dl_album_btn  "><img src=""></label>
                      </dt>
           <dd>
           
             <div class="dl_album_t_c clearfix dl_album_c_show">
-              <div class="dl_album_t_c_l fl"><a href="/album/detail/3843"><img src="http://public.download.csdn.net/uploads_album/2017/07/11/78f238551e9027621fbd5c4c34373b44.jpg"></a></div>
+              <div class="dl_album_t_c_l fl"><a href="/album/detail/3843"><img src=""></a></div>
               <div class="dl_album_t_c_r"><a href="/album/detail/3843" 
               target="_blank" class="dl_album_t_title">软考各科最新历年真题详细解析合集</a>
                 <p class="dl_album_p">本合集包括了软考网络工程师、网络规划设计师、系统集成项目管理工程师、信息安全工程师等软考科目上、下午最新历年真题详细解析。帮助广大学员熟...</p>
                 <div class="dl_album_c_b clearfix">
-                  <label><a href="/album/detail/3843" class="album_img"><img src="http://avatar.csdn.net/0/9/A/2_u011110479.jpg"></a><a href="#" class="album_name">u011110479</a></label><span class="dl_album_c_b_r"><i class="fa fa-eye"></i><em>4053</em></span>
+                  <label><a href="/album/detail/3843" class="album_img"><img src=""></a><a href="#" class="album_name">u011110479</a></label><span class="dl_album_c_b_r"><i class="fa fa-eye"></i><em>4053</em></span>
                 </div>
               </div>
             </div>
             <div class="dl_album_t_c clearfix ">
-              <div class="dl_album_t_c_l fl"><a href="/album/detail/3840"><img src="http://public.download.csdn.net/uploads_album/2017/07/10/c3f2a3d075eead12414f1d7dc100abf8.jpg"></a></div>
+              <div class="dl_album_t_c_l fl"><a href="/album/detail/3840"><img src=""></a></div>
               <div class="dl_album_t_c_r"><a href="/album/detail/3840" 
               target="_blank" class="dl_album_t_title">[资源优选]第二十六期：十五个Docker的优质资源</a>
                 <p class="dl_album_p">[资源优选]是由CSDN下载频道运营部发布的精品源码系列专辑，每周一上午11点发布。每周一个专题，收录了CSDN下载频道相关技术领域的热门优质资源。 查看...</p>
                 <div class="dl_album_c_b clearfix">
-                  <label><a href="/album/detail/3840" class="album_img"><img src="http://avatar.csdn.net/E/6/1/2_nigelyq.jpg"></a><a href="#" class="album_name">nigelyq</a></label><span class="dl_album_c_b_r"><i class="fa fa-eye"></i><em>8912</em></span>
+                  <label><a href="/album/detail/3840" class="album_img"><img src=""></a><a href="#" class="album_name">nigelyq</a></label><span class="dl_album_c_b_r"><i class="fa fa-eye"></i><em>8912</em></span>
                 </div>
               </div>
             </div>
             <div class="dl_album_t_c clearfix ">
-              <div class="dl_album_t_c_l fl"><a href="/album/detail/3825"><img src="http://public.download.csdn.net/uploads_album/2017/07/04/4e469a6ccea14978cbcd507fdac83007.jpg"></a></div>
+              <div class="dl_album_t_c_l fl"><a href="/album/detail/3825"><img src=""></a></div>
               <div class="dl_album_t_c_r"><a href="/album/detail/3825" 
               target="_blank" class="dl_album_t_title">【2017软考】2017年上半年软考各科目考试真题及答案解析！</a>
                 <p class="dl_album_p">2017年上半年软考 信息系统项目管理师（高项），系统集成项目管理工程师（集成），软件设计师，系统分析师，网络工程师（网工），网络规划设计师（...</p>
                 <div class="dl_album_c_b clearfix">
-                  <label><a href="/album/detail/3825" class="album_img"><img src="http://avatar.csdn.net/3/6/E/2_xiaornshuo.jpg"></a><a href="#" class="album_name">xiaornshuo</a></label><span class="dl_album_c_b_r"><i class="fa fa-eye"></i><em>9538</em></span>
+                  <label><a href="/album/detail/3825" class="album_img"><img src="${host}/shop/images/2_xiaornshuo.jpg"></a><a href="#" class="album_name">xiaornshuo</a></label><span class="dl_album_c_b_r"><i class="fa fa-eye"></i><em>9538</em></span>
                 </div>
               </div>
             </div>
@@ -379,17 +379,15 @@ function searchType(typeid){
           </div>
            
           <!--广告-->
-          <!-- <div class="dl_mar dl_mar_b"><a href="#"><img src="/static/static/images/dl_img.jpg"></a></div> -->
+          <!-- <div class="dl_mar dl_mar_b"><a href="#"><img src="${host}/shop/images/dl_img.jpg"></a></div> -->
           
 		    
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/toolbar.js" defer></script>
-	<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/shop/js/async_new.js"></script>
-	<script data-main="/static/static/js/apps/download.config.js" src="/static/static/js/libs/require.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/toolbar.js" defer></script>
+	<!-- <script data-main="${host}/shop/js/apps/download.config.js" src="${host}/shop/js/libs/require.js"></script> -->
  <%@ include file="./common/footer.jsp" %> 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/footer.css">
   </body>
 </html>
 	

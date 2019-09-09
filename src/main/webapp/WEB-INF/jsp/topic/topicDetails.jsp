@@ -172,7 +172,7 @@ function saveRep(){
 			</div>
 			<div class="span10">
 				<table style="width: 100%;border:1px solid #A9CBEE;">
-					<tr style="height: 60px;">
+					<tr style="height: 44px;">
 						<td style="background-color:#EFF4FB;">
 							【主题】:<strong><font color="red">${topic.title }</font></strong>
 						</td>

@@ -89,7 +89,6 @@ public class SourceController {
 		
 		HttpSession session=request.getSession();
 		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);	//下载者
-		model.addAttribute("currentUser", currentUser);
 		
 		long totalCollect=collectService.getCollectCountBySourceId(source_id);
 		List<Shop> newShopList=shopService.getNewShops();
@@ -107,8 +106,9 @@ public class SourceController {
 		Shop shop=source.getShop();	//资源店铺
 		model.addAttribute("shop", shop);
 		List<Source> ohterSources=sourceService.getSourcesByshopId(shop.getId());
-		model.addAttribute("bannerList", bannerList);
+		model.addAttribute("ohterSources", ohterSources);
 		if(currentUser!=null){
+			model.addAttribute("currentUser", currentUser);
 			Focus focus=focusService.getFocusByShopId(shop.getId(),currentUser.getId());
 			model.addAttribute("focus", focus);
 			Collect collect=collectService.getCollectByuserId(currentUser.getId(), source_id);
@@ -165,8 +165,8 @@ public class SourceController {
 	public E3Result download(HttpServletRequest request,Model model,@RequestParam("sourceId") int sourceId)throws Exception {
 
 		HttpSession session=request.getSession();
-		User currentUser=(User) session.getAttribute("currentUser");
-		model.addAttribute("currentUser", currentUser);
+		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);
+		model.addAttribute(Consts.CURRENTUSER, currentUser);
 		if(currentUser!=null){
 		if(sourceId>0){
 			Source source=sourceService.getSourceById(sourceId);
@@ -221,7 +221,7 @@ public class SourceController {
 			@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
 		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);
-		model.addAttribute("currentUser", currentUser);
+		model.addAttribute(Consts.CURRENTUSER, currentUser);
 
 		long totalCollect=collectService.getCollectCountBySourceId(source_id);
 		List<Shop> newShopList=shopService.getNewShops();

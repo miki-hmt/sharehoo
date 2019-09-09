@@ -23,7 +23,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/bootstrap.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_new.css">
-
+ <!-- ask 全局悬浮按钮  -->
+ <link href="${pageContext.request.contextPath }/shop/css/ask_float_block.css" rel="stylesheet" type="text/css" />
 <!-- 尾部分页 css页码 	2017.08.03 miki-->
 <link href="${pageContext.request.contextPath }/blog/include/css/page.css" rel="stylesheet"/>
 
@@ -31,10 +32,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css">
 
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
-<script type="text/javascript"  src="/static/static/js/libs/jquery-version.js" type="text/javascript"></script>
+<script type="text/javascript"  src="${host}/shop/js/libs/jquery-version.js" type="text/javascript"></script>
 <script type='text/javascript' src='${pageContext.request.contextPath}/shop/js/jquery.form.js'></script>
 <script src="${pageContext.request.contextPath}/shop/js/html5shiv.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/csdn_download_comment.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/sharehoo_download_comment.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/placeholder.js"></script>
 
 <script type="text/javascript">
@@ -42,7 +43,7 @@
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 }
 </script>
@@ -50,10 +51,10 @@
 <script type="text/javascript">
 	function upload(){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-			alert("您还未登陆！");
+			swal("您还未登陆！");
 		} 
 		else{
-			window.location.href="Shop_upload.action";
+			window.location.href="${host}/shop/upload.html";
 		}
 }
 </script>
@@ -72,7 +73,7 @@ function validateBuy(){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Cdk_buy.action";
+			window.location.href="${host}/shop/cdk/buy";
 		}	
 }
 </script>
@@ -93,11 +94,11 @@ function validateBuy(){
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
+			<a href="${host}/shop/index.html">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank">资源分类</a>
-			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
+			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
-			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
+			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank" class="current">我的店铺</a>
@@ -258,13 +259,13 @@ function validateBuy(){
         <div class="main">
           <div class="datas_detail pull-left">
             <ul class="tabs clearfix">
-              <li class="cur"><a href="Shop_userCenter.action">店内商品</a></li> 
-               <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_operatelog.action">虎豆明细</a></li>     
-              <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_comment.action">店铺评价</a></li>
-              <li ><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_collect.action">我的收藏</a></li>
-              <li ><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_focus.action">我的关注</a></li>     
-              <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_update.action?shopId=${shop.id}">店铺设置</a></li>
-              <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_money.action">虎豆提现</a></li>
+              <li class="cur"><a href="${host}/shop/center">店内商品</a></li> 
+               <li><a href="${pageContext.request.contextPath}/shop/admin/log">虎豆明细</a></li>     
+              <li><a href="${pageContext.request.contextPath}/shop/admin/comment">店铺评价</a></li>
+              <li ><a href="${pageContext.request.contextPath}/shop/admin/collect">我的收藏</a></li>
+              <li ><a href="${pageContext.request.contextPath}/shop/admin/focus">我的关注</a></li>     
+              <li><a href="${pageContext.request.contextPath}/shop/admin/update/go">店铺设置</a></li>
+              <li><a href="${pageContext.request.contextPath}/shop/admin/money/go">虎豆提现</a></li>
             </ul>
             <div class="items">
             
@@ -281,7 +282,7 @@ function validateBuy(){
 										  
 						<div class="content">
 							<h3>
-								<a target="_blank" href="Source_detail.action?source_id=${source.id }">${source.name }</a>
+								<a target="_blank" href="${host}/shop/source/${source.id }">${source.name }</a>
 							</h3>
 							<p class="brief" style="display:inline-block;">${source.description }</p>
 							<p class="tags clearfix">
@@ -529,11 +530,9 @@ function close_update(){
 
 </script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/shop/js/toolbar.js"></script>
-      <!-- ask 全局悬浮按钮  -->
-   			<link href="${pageContext.request.contextPath }/shop/css/ask_float_block.css" rel="stylesheet" type="text/css" />
         <!--script(type="text/javascript" src="static/js/apps/fontSize.js")-->
 	<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath }/shop/js/async_new.js"></script>
-	<script data-main="/static/static/js/apps/download.config.js" src="/static/static/js/libs/require.js"></script>
+	<!-- <script data-main="${host}/shop/js/apps/download.config.js" src="${host}/shop/js/libs/require.js"></script> -->
  
   </body>
 </html>

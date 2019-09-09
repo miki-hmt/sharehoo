@@ -26,25 +26,24 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome-4.4.0/css/font-awesome.min.css">
 
 <!-- 尾部分页 css页码 	2017.08.03 miki-->
-<link href="${pageContext.request.contextPath }/blog/include/css/page.css" rel="stylesheet"/>
-
+<link href="${pageContext.request.contextPath }/blog/include/css/page.css" rel="stylesheet"/> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/bootstrap.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/footer.css"> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_new.css">
-
-<script src="${pageContext.request.contextPath}/shop/js/html5shiv.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/placeholder.js"></script>
 
 <!--  2017.08.05	防止不法分子利用js源码，得到文件路径下载url，我个人思路是给文件属性里增加一个二次别名，
 	且名字要采用md5方式命名，让别人猜不到命名规律，即使知道下载链接也得不到正确的路径  -->
 	
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/shop/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/placeholder.js"></script>
 <script type="text/javascript">
 	function validateLogin(){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Shop_userCenter.action";
+			window.location.href="${host}/shop/center";
 		}	
 	}
 
@@ -52,7 +51,7 @@
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			alert("您还未登陆！");
 		} else {
-			window.location.href="Cdk_buy.action";
+			window.location.href="${host}/shop/cdk/buy";
 		}	
 }
 
@@ -93,11 +92,11 @@
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${pageContext.request.contextPath}/shop/Shop_home.action">首页</a>
+			<a href="${host}/shop/index.html">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
-			<a class=" " href="${pageContext.request.contextPath}/shop/Shop_rank.action" target="_blank">精品铺子</a>
+			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
-			<a href="${pageContext.request.contextPath}/shop/Search_rank.action" target="_blank">下载排行</a>			
+			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
 			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
@@ -258,7 +257,7 @@ function Login(){
 	              </span>
 	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >
 	              	<!-- <a href="/vip_code" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a> -->
-	              	<a href="Shop_userCenter.action" target="_blank">激活店铺</a>
+	              	<a href="${host}/shop/center" target="_blank">激活店铺</a>
 	              </span>
               	</c:when>
 				
@@ -317,7 +316,7 @@ function Login(){
               	<c:forEach items="${collectSources}" var="collect">
                     <li>                          
                      <i class="fa fa-caret-right"></i>
-                        <a strategy="SearchAlgorithm" title="Python_Machine_Learning_By_Example" href="Source_detail.action?source_id=${collect.source.id}" target="_blank">${collect.source.name }</a><span>下载豆：<em>${collect.source.douNum }</em></span>
+                        <a strategy="SearchAlgorithm" title="Python_Machine_Learning_By_Example" href="${host}/shop/source/${collect.source.id}" target="_blank">${collect.source.name }</a><span>下载数：<em>${collect.source.downNum }</em></span>
                     </li>
                </c:forEach>
                                                
@@ -677,7 +676,7 @@ function htmlencode(s){
                 <div class="resource_c resource_c_show">
                   <ul class="resource_c_list">
                   						<c:forEach items="${ohterSources }" var="source">
-                  							<li><i class="fa fa-caret-right"></i><a href="Source_detail.action?source_id=${source.id }" target="_blank">${source.name }</a></li>
+                  							<li><i class="fa fa-caret-right"></i><a href="${host}/shop/source/${source.id }" target="_blank">${source.name }</a></li>
                   						</c:forEach>
 										
 					                  </ul>
@@ -797,12 +796,7 @@ function htmlencode(s){
    
    
         <!-- 猜你在找 -->
-    <script type="text/javascript" defer>
-    
-	 <%@ include file="./common/footer.jsp" %> 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/footer.css">   
-		
-   </script>
+    <%@ include file="./common/footer.jsp" %>  
 	<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/toolbar.js"></script>
     <!--script(type="text/javascript" src="static/js/apps/fontSize.js")-->
 	<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/shop/js/async_new.js"></script>

@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.code.kaptcha.Constants;
 import com.sharehoo.base.ipseek.IpGet;
 import com.sharehoo.base.ipseek.IpSeekUtils;
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.Notice;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
@@ -38,6 +40,7 @@ import com.sharehoo.service.forum.NoticeService;
 import com.sharehoo.service.shop.FocusService;
 import com.sharehoo.service.shop.ShopService;
 import com.sharehoo.service.shop.SourceService;
+import com.sharehoo.util.CxCacheUtil;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.GaoDeUtil;
 import com.sharehoo.util.forum.PageUtil;
@@ -66,7 +69,7 @@ public class ShopController {
 	private NoticeService noticeService;
 	
 	
-	@RequestMapping("/shop")
+	@RequestMapping("/shop/index.html")
 	public String home(Model model)throws Exception{
 		List<Category> categories=categoryService.getCategoryList(null, null);
 		model.addAttribute("categories", categories);
@@ -83,6 +86,24 @@ public class ShopController {
 		return "shop/home";
 	}
 	
+	/****************
+	 * 2019.09.09	miki 注意：ajax异步上传文件，另外一个ajax获取进度条，
+	 * 				这两个接口不能在同一个controller中，否则上传接口会阻塞另一个获取进度条的接口
+	 * ***********************************************************************/
+	@RequestMapping("/shop/upload/status")
+	@ResponseBody
+	public String getProgress(@RequestParam("shopId") String shopId) {
+		Object total = CxCacheUtil.getIntance().getValue("total_"+shopId);
+		String value = "";
+		if(null!=total) {
+			Object progress = CxCacheUtil.getIntance().getValue("progress_"+shopId);
+			//创造json格式参数
+			value ="var info={read:"+progress+",total:"+total+",items:"+1+"}";		//items:"+arg2+"	d多文件上传的时候，使用arg2
+		}				
+		return value;
+		
+	}
+	
 	/*
 	 * 2017.08.02 miki 完善店铺中心模块功能
 	 */
@@ -90,7 +111,7 @@ public class ShopController {
 	public String userCenter(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
 		
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
 		if(user!=null){
 			Shop shop=shopService.getShopByuserId(user.getId());
@@ -111,7 +132,7 @@ public class ShopController {
 			List<Source> sourceList=sourceService.getSourcesByShopId(shop.getId(), pageBean);
 			model.addAttribute("sourceList", sourceList);
 			long total=sourceService.getSourceCountByuserId(user.getId());
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/Shop_userCenter.action", total, Integer.parseInt(page), 6,null);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/center", total, Integer.parseInt(page), 6,null);
 			model.addAttribute("pageCode", pageCode);
 			List<Message> messageList=messageService.getAdminMesList(shop.getId());
 			model.addAttribute("messageList", messageList);
@@ -127,7 +148,7 @@ public class ShopController {
 	public E3Result active(HttpServletRequest request)throws Exception{
 
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if(user==null) {
 			return E3Result.build(401, "您尚未登录...");
 		}
@@ -153,12 +174,12 @@ public class ShopController {
 		return E3Result.ok();
 	}
 	
-	@RequestMapping("/shop/active")
+	@RequestMapping("/shop/validate")
 	@ResponseBody
 	public E3Result validateStatus(HttpServletRequest request)throws Exception{
 			
 			HttpSession session=request.getSession();
-			User user=(User) session.getAttribute("currentUser");
+			User user=(User) session.getAttribute(Consts.CURRENTUSER);
 			if(user==null) {
 				return E3Result.build(401, "您尚未登录...");
 			}
@@ -176,7 +197,7 @@ public class ShopController {
 	public String upload(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception{
 		HttpSession session=request.getSession();
 
-		User user=(User) session.getAttribute("currentUser");
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		if (user==null) {
 			//response.sendRedirect(request.getContextPath()+"/login.jsp");
 			request.getRequestDispatcher("${pageContext.request.contextPath}/bug/error.jsp").forward(request, response);
@@ -199,8 +220,8 @@ public class ShopController {
 	@ResponseBody
 	public E3Result valImageCode(HttpServletRequest request,@RequestParam("imageCode") String imageCode)throws Exception {
 		HttpSession session=request.getSession();
-		
-		if(!imageCode.equals(session.getAttribute("sRand"))){
+		String attribute =String.valueOf(session.getAttribute(Constants.KAPTCHA_SESSION_KEY));
+		if(!imageCode.equals(attribute)){
 			return E3Result.build(401, "验证码错误");
 		}else {
 			return E3Result.ok();
@@ -216,7 +237,7 @@ public class ShopController {
 
 		HttpSession session=request.getSession();
 		Focus focus = null;
-		User user=(User) session.getAttribute("currentUser");	//关注者，
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);	//关注者，
 		model.addAttribute("user", user);
 		if(shopId>0){
 			Shop shop=shopService.getShopById(shopId);			//	关注对象店铺
@@ -258,7 +279,7 @@ public class ShopController {
 					total, Integer.parseInt(page), 6,param.toString());
 			model.addAttribute("pageCode", pageCode);
 		}
-			return "shop";
+			return "shop/shop_home";
 	}
 	
 	/*

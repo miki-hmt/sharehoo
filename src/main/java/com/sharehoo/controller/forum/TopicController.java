@@ -38,6 +38,7 @@ import com.sharehoo.service.forum.ReplyService;
 import com.sharehoo.service.forum.SectionService;
 import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.UserService;
+import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.IDUtils;
 import com.sharehoo.util.forum.PageUtil;
 import com.sharehoo.util.forum.ResponseUtil;
@@ -150,7 +151,8 @@ public class TopicController {
 	}
 	
 	@RequestMapping("/topic/publish")
-	public String save(HttpServletRequest request,HttpServletResponse response,@RequestBody Topic topic) throws Exception {
+	@ResponseBody
+	public E3Result save(HttpServletRequest request,HttpServletResponse response,Topic topic) throws Exception {
 
 		final long code = IDUtils.genTopicCode();
 		topic.setCode(code);
@@ -169,9 +171,7 @@ public class TopicController {
 		currentUser.setScore(currentUser.getScore() + 3);
 		userService.saveUser(currentUser);
 
-		/*
-		 * 2017.11.16 20:31 网页静态化实例
-		 */
+		//************2017.11.16 20:31 网页静态化实例
 		try {
 			Topic to = topicService.getTopic(topic.getCode());
 			
@@ -187,22 +187,25 @@ public class TopicController {
 			Configuration configuration = freeMarkerConfigurer.getConfiguration();
 
 			configuration.setDefaultEncoding("UTF-8");
-
-			Template template = configuration.getTemplate("topic.ftl");
+			
+			//************** 2019.09.07 miki 在springboot的yml文件中设置freeMarker模板文件的加载路径
+			Template template = configuration.getTemplate("topic.ftl");		
 
 			template.setEncoding("UTF-8");
 			// 创建一个输出流，指定目录及文件名
-//				Writer out=new FileWriter(HTML_GEN_PATH +topic.getCode()+ ".html");			
+			//Writer out=new FileWriter(HTML_GEN_PATH +topic.getCode()+ ".html");			
 
 			File file = new File(HTML_GEN_PATH, topic.getCode() + ".html");
 			Writer out = new PrintWriter(file, "UTF-8");
-//				Writer outWriter=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
+			//Writer outWriter=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
 			// 生成静态页面
 			template.process(data, out);
 			// 关闭流
 			out.close();
-		} catch (Exception e) {e.printStackTrace();logger.error(e);}
-		return "save";
+		} catch (Exception e) {
+			e.printStackTrace();logger.error(e);return E3Result.build(401, "发表失败..", e.getMessage());
+			}
+		return E3Result.ok();
 	}
 	
 	@RequestMapping("/admin/topic/save")

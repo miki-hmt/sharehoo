@@ -33,6 +33,19 @@ public class Collect implements Serializable{
 	private Date collect_time;
 	
 	
+	public Collect() {
+			
+		}
+	
+	public Collect(Shop shop,User user,Source source,Article article,String url,Date collect_time) {
+		this.user = user;
+		this.shop = shop;
+		this.source = source;
+		this.article = article;
+		this.url = url;
+		this.collect_time = collect_time;
+	}
+	
 	@Id
 	@GeneratedValue(generator="_native") //设置自动增长
 	@GenericGenerator(name="_native",strategy="native")
