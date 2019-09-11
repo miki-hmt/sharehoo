@@ -481,11 +481,51 @@
 		        },  
             error: function () {  
                 alert("查询失败")  
-            }  
+      }  
 	      });    
 		}  
     	
-    	
+   <!--2018.11.28	读取文件上传大小回显到表单框中-->
+    function show_uploadfile(){
+    	var filename = $('#txt_userfile').val();
+    	if ( filename )
+    	{
+    		filename = filename.replace(/C:\\fakepath\\/, '');
+    		$('#li_userfile').html('( '+filename+' )');
+		var dom = document.getElementById("txt_userfile");
+    		if(Math.round(dom.files[0].size/1024*100)/100>1024){
+				$("#file_size").val(Math.round((Math.round(dom.files[0].size/1024*100)/100)/1024*100)/100+"M");
+			}else{
+		 		$("#file_size").val(Math.round(dom.files[0].size/1024*100)/100+"K");
+			}
+    	}
+    }   
+    
+    function setTab(m,n){
+		var tli=document.getElementById("menu"+m).getElementsByTagName("a");
+		var mli=document.getElementById("main"+m).getElementsByTagName("ul");
+		for(i=0;i<tli.length;i++){
+			tli[i].className=i==n?"current1 current2":"";
+			mli[i].style.display=i==n?"block":"none";
+		}
+	}
+
+	function check_up(thisform){
+		var key=$.trim(thisform.keywords.value);
+		if(key==""){
+			alert("关键字不能为空！");
+		}
+		else{
+			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
+			key =  encodeURIComponent(key)
+			var url="http://download.csdn.net/search?keywords="+key;
+			window.location.href=url;
+		}
+		return false;
+	}
+    
+    
+    //********************  别人家的方法	2019.09.11 miki	
     //获得字符串长度	   	
     function getStrLength(str) {
     	var len = 0;
@@ -583,22 +623,6 @@
     		}
     	})
     });
-
-	<!--2018.11.28	读取文件上传大小回显到表单框中-->
-    function show_uploadfile(){
-    	var filename = $('#txt_userfile').val();
-    	if ( filename )
-    	{
-    		filename = filename.replace(/C:\\fakepath\\/, '');
-    		$('#li_userfile').html('( '+filename+' )');
-		var dom = document.getElementById("txt_userfile");
-    		if(Math.round(dom.files[0].size/1024*100)/100>1024){
-				$("#file_size").val(Math.round((Math.round(dom.files[0].size/1024*100)/100)/1024*100)/100+"M");
-			}else{
-		 		$("#file_size").val(Math.round(dom.files[0].size/1024*100)/100+"K");
-			}
-    	}
-    }
     
     function addtag( tag ){
     	  var tags = $("#txt_tag").val();
@@ -624,241 +648,241 @@
     	  $("#txt_tag").val(tags);
     	}
 
-    	function validate(){
-    	  slCtl = document.getElementById("MultiFileUploader");
-    	  var isOK = false;
-    	  if(jQuery.trim($("#txt_title").val())==''){
-    	    //alert('请填写资源的标题!');
-    	    var $em = $("#txt_title").parent().find( 'em' );
-    	    // $("#txt_title").parent().append( '<em class="form_error">请填写资源的标题!</em>' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $em.html( '请填写资源的标题!' );
-    	    $("#txt_title").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  else{
-    	    isOk = true;
-    	  }
+   	function validate(){
+   	  slCtl = document.getElementById("MultiFileUploader");
+   	  var isOK = false;
+   	  if(jQuery.trim($("#txt_title").val())==''){
+   	    //alert('请填写资源的标题!');
+   	    var $em = $("#txt_title").parent().find( 'em' );
+   	    // $("#txt_title").parent().append( '<em class="form_error">请填写资源的标题!</em>' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $em.html( '请填写资源的标题!' );
+   	    $("#txt_title").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  else{
+   	    isOk = true;
+   	  }
 
-    	  if(jQuery.trim($("#txt_title").val()).length>80){
-    	    //alert('您的资源名称太长了!');
-    	    var $em = $("#txt_title").parent().find( 'em' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $em.html( '您的资源名称太长了!' );
-    	    $("#txt_title").focus();
-    	    isOk = false
-    	    return false;
-    	  }else{
-    	    isOk = true;
-    	  }
+   	  if(jQuery.trim($("#txt_title").val()).length>80){
+   	    //alert('您的资源名称太长了!');
+   	    var $em = $("#txt_title").parent().find( 'em' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $em.html( '您的资源名称太长了!' );
+   	    $("#txt_title").focus();
+   	    isOk = false
+   	    return false;
+   	  }else{
+   	    isOk = true;
+   	  }
 
 
-    	  if(getStrLength(jQuery.trim($("#txt_title").val()))<10){
-    	    //alert('您填写的资源名称长度不符合规则，请检查!');
-    	    var $em = $("#txt_title").parent().find( 'em' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $em.html( '您填写的资源名称长度不符合规则，请检查!' );
-    	    // $em.css( { display: 'block' } );
-    	    $("#txt_title").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  if ( isOk ){
-    	    var $em = $("#txt_title").parent().find( 'em' );
-    	    $em.addClass( 'form_correction' );
-    	    $em.removeClass( 'form_error' );
-    	    $em.html( '' );
-    	  }
+   	  if(getStrLength(jQuery.trim($("#txt_title").val()))<10){
+   	    //alert('您填写的资源名称长度不符合规则，请检查!');
+   	    var $em = $("#txt_title").parent().find( 'em' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $em.html( '您填写的资源名称长度不符合规则，请检查!' );
+   	    // $em.css( { display: 'block' } );
+   	    $("#txt_title").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  if ( isOk ){
+   	    var $em = $("#txt_title").parent().find( 'em' );
+   	    $em.addClass( 'form_correction' );
+   	    $em.removeClass( 'form_error' );
+   	    $em.html( '' );
+   	  }
 
-    	  if($("#sel_filetype").val()<1){
-    	    //alert('请选择资源类型!');
-    	  // $("#sel_filetype").parent().append( '<em class="form_error">请选择资源类型!</em>' );
-    	    var $em = $("#sel_filetype").parent().find( 'em' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $em.html( '请选择资源类型!' );
-    	    $("#sel_filetype").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  else{
-    	    isOk = true;
-    	  }
-    	  if ( isOk ){
-    	    var $em = $("#sel_filetype").parent().find( 'em' );
-    	    $em.addClass( 'form_correction' );
-    	    $em.removeClass( 'form_error' );
-    	    $em.html( '' );
-    	  }
+   	  if($("#sel_filetype").val()<1){
+   	    //alert('请选择资源类型!');
+   	  // $("#sel_filetype").parent().append( '<em class="form_error">请选择资源类型!</em>' );
+   	    var $em = $("#sel_filetype").parent().find( 'em' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $em.html( '请选择资源类型!' );
+   	    $("#sel_filetype").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  else{
+   	    isOk = true;
+   	  }
+   	  if ( isOk ){
+   	    var $em = $("#sel_filetype").parent().find( 'em' );
+   	    $em.addClass( 'form_correction' );
+   	    $em.removeClass( 'form_error' );
+   	    $em.html( '' );
+   	  }
 
-    	  if(jQuery.trim($("#txt_tag").val())==''){
-    	    //alert('请填写资源的Tag!');
-    	    var $em = $("#txt_tag").parent().find( 'em' );
-    	    $em.html( '请填写资源的Tag!' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $("#txt_tag").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  else{
-    	    isOk = true;
-    	  }
-    	  if(jQuery.trim($("#txt_tag").val()).length<2){
-    	    var $em = $("#txt_tag").parent().find( 'em' );
-    	    $em.html( '资源Tag需要大于2个字符!' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $("#txt_tag").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  else{
-    	    isOk = true;
-    	  }
-    	  var tags = jQuery.trim($("#txt_tag").val()).split(/\s+/);
-    	  if(tags.length>5){
-    	    var $em = $("#txt_tag").parent().find( 'em' );
-    	    $em.html( '最多允许填写5个Tag!' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $("#txt_tag").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  else{
-    	    isOk = true;
-    	  }
-    	  for(var i=0;i<tags.length;i++){
-    	    if(tags[i].replace(/[^\x00-\xff]/g,"**").length > 12){
-    	      // alert('您填写的'+'"'+tags[i]+'"长度超出了限制，请检查');
-    	      $em = $("#txt_tag").parent().find( 'em' );
-    	      $em.html( '您填写的'+'"'+tags[i]+'"长度超出了限制，请检查' );
-    	      $em.addClass( 'form_error' );
-    	      $em.removeClass( 'form_correction' );
-    	      $("#txt_tag").focus();
-    	      isOk = false;
-    	      return false;
-    	    }
-    	    else{
-    	      isOk = true;
-    	    }
-    	  }
-    	  if ( isOk ){
-    	    var $em = $("#txt_tag").parent().find( 'em' );
-    	    $em.addClass( 'form_correction' );
-    	    $em.removeClass( 'form_error' );
-    	    $em.html( '' );
-    	  }
+   	  if(jQuery.trim($("#txt_tag").val())==''){
+   	    //alert('请填写资源的Tag!');
+   	    var $em = $("#txt_tag").parent().find( 'em' );
+   	    $em.html( '请填写资源的Tag!' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $("#txt_tag").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  else{
+   	    isOk = true;
+   	  }
+   	  if(jQuery.trim($("#txt_tag").val()).length<2){
+   	    var $em = $("#txt_tag").parent().find( 'em' );
+   	    $em.html( '资源Tag需要大于2个字符!' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $("#txt_tag").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  else{
+   	    isOk = true;
+   	  }
+   	  var tags = jQuery.trim($("#txt_tag").val()).split(/\s+/);
+   	  if(tags.length>5){
+   	    var $em = $("#txt_tag").parent().find( 'em' );
+   	    $em.html( '最多允许填写5个Tag!' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $("#txt_tag").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  else{
+   	    isOk = true;
+   	  }
+   	  for(var i=0;i<tags.length;i++){
+   	    if(tags[i].replace(/[^\x00-\xff]/g,"**").length > 12){
+   	      // alert('您填写的'+'"'+tags[i]+'"长度超出了限制，请检查');
+   	      $em = $("#txt_tag").parent().find( 'em' );
+   	      $em.html( '您填写的'+'"'+tags[i]+'"长度超出了限制，请检查' );
+   	      $em.addClass( 'form_error' );
+   	      $em.removeClass( 'form_correction' );
+   	      $("#txt_tag").focus();
+   	      isOk = false;
+   	      return false;
+   	    }
+   	    else{
+   	      isOk = true;
+   	    }
+   	  }
+   	  if ( isOk ){
+   	    var $em = $("#txt_tag").parent().find( 'em' );
+   	    $em.addClass( 'form_correction' );
+   	    $em.removeClass( 'form_error' );
+   	    $em.html( '' );
+   	  }
 
-    	  if($("#sel_subclass").val()<1000){	   
-    	    $em = $("#sel_subclass").parent().find( 'em' );
-    	    $em.html( '请选择分类!' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $("#sel_primary").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  else{
-    	    isOk = true;
-    	  }
-    	  if ( isOk ){
-    	    var $em = $("#sel_primary").parent().find( 'em' );
-    	    $em.addClass( 'form_correction' );
-    	    $em.removeClass( 'form_error' );
-    	    $em.html( ''  );
-    	  }
+   	  if($("#sel_subclass").val()<1000){	   
+   	    $em = $("#sel_subclass").parent().find( 'em' );
+   	    $em.html( '请选择分类!' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $("#sel_primary").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  else{
+   	    isOk = true;
+   	  }
+   	  if ( isOk ){
+   	    var $em = $("#sel_primary").parent().find( 'em' );
+   	    $em.addClass( 'form_correction' );
+   	    $em.removeClass( 'form_error' );
+   	    $em.html( ''  );
+   	  }
 
-    	  if(jQuery.trim($("#sel_score").val()) > 10){	   
-    	    $em = $("#txt_tag").parent().find( 'em' );
-    	    $em.html( '请选择正确的资源分!' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $("#sel_score").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  else{
-    	    isOk = true;
-    	  }
-    	  if ( isOk ){
-    	      var $em = $("#sel_score").parent().find( 'em' );
-    	    $em.addClass( 'form_correction' );
-    	    $em.removeClass( 'form_error' );
-    	    $em.html( ''  );
-    	  }
+   	  if(jQuery.trim($("#sel_score").val()) > 10){	   
+   	    $em = $("#txt_tag").parent().find( 'em' );
+   	    $em.html( '请选择正确的资源分!' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $("#sel_score").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  else{
+   	    isOk = true;
+   	  }
+   	  if ( isOk ){
+   	      var $em = $("#sel_score").parent().find( 'em' );
+   	    $em.addClass( 'form_correction' );
+   	    $em.removeClass( 'form_error' );
+   	    $em.html( ''  );
+   	  }
 
-    	//资源描述信息必填  update 20170511
-    	  if(jQuery.trim($("#txt_desc").val())==''){	    
-      	    $em = $("#txt_desc").parent().find( 'em' );
-      	    $em.html( '请填写资源描述!' );
-      	    $em.addClass( 'form_error' );
-      	    $em.removeClass( 'form_correction' );
-      	    $("#txt_desc").focus();
-      	    isOk = false;
-      	    return false;
-      	  }
-    	  else{
-      	    isOk = true;
-      	  }
-    	  if ( isOk ){
-    	      var $em = $("#sel_score").parent().find( 'em' );
-    	    $em.addClass( 'form_correction' );
-    	    $em.removeClass( 'form_error' );
-    	    $em.html( ''  );
-    	  }
-      	  
-    	  if ( isOk ){
-    	    var $em = $("#txt_desc").parent().find( 'em' );
-    	    $em.addClass( 'form_correction' );
-    	    $em.removeClass( 'form_error' );
-    	    $em.html( ''  );
-    	  }
+   	//资源描述信息必填  update 20170511
+   	  if(jQuery.trim($("#txt_desc").val())==''){	    
+     	    $em = $("#txt_desc").parent().find( 'em' );
+     	    $em.html( '请填写资源描述!' );
+     	    $em.addClass( 'form_error' );
+     	    $em.removeClass( 'form_correction' );
+     	    $("#txt_desc").focus();
+     	    isOk = false;
+     	    return false;
+     	  }
+   	  else{
+     	    isOk = true;
+     	  }
+   	  if ( isOk ){
+   	      var $em = $("#sel_score").parent().find( 'em' );
+   	    $em.addClass( 'form_correction' );
+   	    $em.removeClass( 'form_error' );
+   	    $em.html( ''  );
+   	  }
+     	  
+   	  if ( isOk ){
+   	    var $em = $("#txt_desc").parent().find( 'em' );
+   	    $em.addClass( 'form_correction' );
+   	    $em.removeClass( 'form_error' );
+   	    $em.html( ''  );
+   	  }
 
-    	  if($("#cb_agree").attr("checked")==false){
-    	    $em = $("#cb_agree").parent().find( 'em' );
-    	    $em.html( '请先同意资源上传协议!' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $("#cb_agree").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  else{
-    	    isOk = true;
-    	  }
-    	  if ( isOk ){
-    	      var $em = $("#cb_agree").parent().find( 'em' );
-    	    $em.addClass( 'form_correction' );
-    	    $em.removeClass( 'form_error' );
-    	    $em.html( ''  );
-    	  }
+   	  if($("#cb_agree").attr("checked")==false){
+   	    $em = $("#cb_agree").parent().find( 'em' );
+   	    $em.html( '请先同意资源上传协议!' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $("#cb_agree").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  else{
+   	    isOk = true;
+   	  }
+   	  if ( isOk ){
+   	      var $em = $("#cb_agree").parent().find( 'em' );
+   	    $em.addClass( 'form_correction' );
+   	    $em.removeClass( 'form_error' );
+   	    $em.html( ''  );
+   	  }
 
-    	  if(jQuery.trim($("#txt_validcode").val())==''){   	  
-    	    $em = $("#txt_validcode").parent().find( 'em' );
-    	    $em.html( '请输入验证码!' );
-    	    $em.addClass( 'form_error' );
-    	    $em.removeClass( 'form_correction' );
-    	    $("#txt_validcode").focus();
-    	    isOk = false;
-    	    return false;
-    	  }
-    	  else{
-    	    isOk = true;
-    	  }
-    	  if ( isOk ){
-    	      var $em = $("#txt_validcode").parent().find( 'em' );
-    	    $em.addClass( 'form_correction' );
-    	    $em.removeClass( 'form_error' );
-    	    $em.html( ''  );
-    	  }
-    	  return true;
-    	}
+   	  if(jQuery.trim($("#txt_validcode").val())==''){   	  
+   	    $em = $("#txt_validcode").parent().find( 'em' );
+   	    $em.html( '请输入验证码!' );
+   	    $em.addClass( 'form_error' );
+   	    $em.removeClass( 'form_correction' );
+   	    $("#txt_validcode").focus();
+   	    isOk = false;
+   	    return false;
+   	  }
+   	  else{
+   	    isOk = true;
+   	  }
+   	  if ( isOk ){
+   	      var $em = $("#txt_validcode").parent().find( 'em' );
+   	    $em.addClass( 'form_correction' );
+   	    $em.removeClass( 'form_error' );
+   	    $em.html( ''  );
+   	  }
+   	  return true;
+   	}
 
     function stopProgress()
     {
@@ -892,33 +916,6 @@
     		}
     	});
     }
-    </script>
-
-<script type="text/javascript">
-	
-	function setTab(m,n){
-		var tli=document.getElementById("menu"+m).getElementsByTagName("a");
-		var mli=document.getElementById("main"+m).getElementsByTagName("ul");
-		for(i=0;i<tli.length;i++){
-			tli[i].className=i==n?"current1 current2":"";
-			mli[i].style.display=i==n?"block":"none";
-		}
-	}
-
-	function check_up(thisform){
-		var key=$.trim(thisform.keywords.value);
-		if(key==""){
-			alert("关键字不能为空！");
-		}
-		else{
-			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
-			key =  encodeURIComponent(key)
-			var url="http://download.csdn.net/search?keywords="+key;
-			window.location.href=url;
-		}
-		return false;
-	}
-
 </script>
 
   <!-- ask 全局悬浮按钮  -->

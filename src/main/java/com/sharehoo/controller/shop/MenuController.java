@@ -37,7 +37,7 @@ public class MenuController {
 	/*
 	 * 利用ajax提交后台id，将二级菜单列表存储到json中		2017.08.13 miki
 	 */
-	@RequestMapping("shop/source/menu")
+	@RequestMapping("/shop/source/menu")
 	public String show(@RequestParam("categoryId") int categoryId,HttpServletResponse response)throws Exception{
 		if(categoryId>0){
 			 response.setContentType("text/json"); 			// 回传内容设为json格式 2017.08.13 miki		    
@@ -59,7 +59,7 @@ public class MenuController {
 	
 	
 	//2017.11.11  miki  实现二级菜单添加
-	@RequestMapping("manage/source/saveMenu")
+	@RequestMapping("/manage/source/saveMenu")
 	@ResponseBody
 	public E3Result save(HttpServletRequest request,@RequestParam("categoryId") int categoryId,Menu menu)throws Exception{
 		HttpSession sessiom=request.getSession();
@@ -80,7 +80,7 @@ public class MenuController {
 	}
 	
 	//2017.11.11  miki  实现二级菜单添加
-	@RequestMapping("manage/source/updateMenu")
+	@RequestMapping("/manage/source/updateMenu")
 	@ResponseBody
 	public E3Result update(HttpServletRequest request,@RequestParam("menuId") int menuId,Menu menu)throws Exception{
 		HttpSession sessiom=request.getSession();
@@ -100,7 +100,7 @@ public class MenuController {
 			}
 	}
 	
-	@RequestMapping("manage/source/deleteMenu")
+	@RequestMapping("/manage/source/deleteMenu")
 	@ResponseBody
 	public E3Result delete(HttpServletRequest request,@RequestParam("menuId") int menuId)throws Exception{
 		HttpSession sessiom=request.getSession();
@@ -119,7 +119,7 @@ public class MenuController {
 			}
 	}
 		
-	@RequestMapping("manage/source/list")	
+	@RequestMapping("/admin/shop/menu")	
 	public String list(HttpServletRequest request,@RequestParam("page") String page,Model model)throws Exception{
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
@@ -132,12 +132,15 @@ public class MenuController {
 			List<Menu> menuList=menuService.getAllMenuList(pageBean);
 			model.addAttribute("menuList", menuList);
 			long total=menuService.getCount();
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/manage/source/list", total, Integer.parseInt(page), 15,null);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/shop/menu", total, Integer.parseInt(page), 15,null);
 			model.addAttribute("pageCode", pageCode);
 			String mainPage="shop_menu.jsp";
 			model.addAttribute("mainPage", mainPage);
 			String crumb1="子模块管理";
 			model.addAttribute("crumb1", crumb1);
+			
+			//************** 添加父级菜单自动展开样式	2019.09.11 miki
+			model.addAttribute("ul", "download");
 			return "admin/main";
 		}else{
 			String error="我已经记录你的ip了，再乱来，你就死定了！";

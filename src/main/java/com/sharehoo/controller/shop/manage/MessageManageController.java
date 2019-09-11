@@ -32,8 +32,8 @@ public class MessageManageController {
 	@Autowired
 	private SourceService sourceService;
 	
-	@RequestMapping("/admin/message")
-	public String msList(HttpServletRequest request,Model model,@RequestParam("page") String page)throws Exception{
+	@RequestMapping("/admin/messages")
+	public String msList(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute(Consts.CURRENTUSER);
 		if (user!=null&&user.getType()==2) {
@@ -44,7 +44,7 @@ public class MessageManageController {
 			List<Message> mesList=messageService.findNoticeList(pageBean);
 			model.addAttribute("mesList", mesList);
 			long total=messageService.getMessageCount();
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/message", total, Integer.parseInt(page), 10,null);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/messages", total, Integer.parseInt(page), 10,null);
 			model.addAttribute("pageCode", pageCode);
 		}else {
 			String error="我已经记录你的ip了，再乱来，你就死定了！";
@@ -55,6 +55,9 @@ public class MessageManageController {
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="举报管理";
 		model.addAttribute("crumb1", crumb1);
+		
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "download");
 		return "admin/main";
 		
 	}

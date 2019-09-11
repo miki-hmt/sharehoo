@@ -10,24 +10,61 @@
 						author:miki
 						project:后台公告页面的增删改查
  -->
-	
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>	
 	
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-function openAddDlg(){
-	$("#myModalLabel").html("添加公告");
-}
- function saveSoftSection(){
+	function openAddDlg(){
+		$("#myModalLabel").html("添加公告");
+	}
+	function saveSoftSection(){
 	 if ($("#zoneName").val()==null||$("#zoneName").val()=='') {
 		 $("#error").html("请输入公告名称！");
+		 tipError("请输入公告名称");
 		 return false;
 	}
-	 $.post("Notice_save.action", $("#fm").serialize());
-	 alert("保存成功！");
-	 resetValue();
-	 location.reload(true);
- }
+	var formData = new FormData($("#fm")[0]);
+	$.ajax({
+		type : "POST",
+		url : "${host}/admin/notice/save",
+		data : formData,
+		cache : false,
+		async : false,
+		processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+		contentType : false, //必须false才会自动加上正确的Content-Type
+		success : function(data) {
+			if (data.status == 200) {
+				tipOk("保存成功", function() {
+					resetValue();
+					location.reload(true);
+				});			
+			} else {
+				tipError("保存失败!!" + data.msg);
+			}
+		}
+	});
+	return false;	//阻止ajax结束自动刷新页面	
+}
+ 	
+ 	function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			html: true,
+			type: "success",
+			timer: 3000  
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("发表失败", content, "error");
+	};
+
  function modifyZone(id,name,state,content){
 	 $("#myModalLabel").html("修改公告");
 	 $("#id").val(id);
@@ -38,21 +75,35 @@ function openAddDlg(){
  
  
  /*softSectionId对应SoftSection_delete.action里的变量，zoneId表示此处传 的值，softSectionId:zoneId表示将zoneId的值赋给softSectionId */	
-function zoneDelete(zoneId){
-	if(confirm("确定要删除这条数据吗?")){
-		$.post("Notice_delete.action",{noticeId:zoneId},				
-				function(result){
-					var result=eval(result);
-					if(result.error){
-						alert(result.error);
-					}else{
-						alert("删除成功！");
-						window.location.reload(true);
-					}
-				}
-			);
+	function zoneDelete(zoneId){
+		swal({
+				title: "您确定要删除吗？", 
+				text: "您确定要删除这条数据？", 
+				type: "warning",
+				showCancelButton: true,
+				closeOnConfirm: false,
+				confirmButtonText: "是的，忍痛删除",
+				confirmButtonColor: "#ec6c62"
+				}, function() {
+					$.ajax({
+						url: "${host}/notice/delete/"+zoneId,
+						data: {noticeId:zoneId},
+						type: "POST",
+					}).done(function(data) {
+						if(data.status==200){
+							tipOk("删除成功", function() {
+								resetValue();
+								location.reload(true);
+							});
+							//swal("操作成功!", "已成功删除数据！", "success");
+						}else{
+							swal("OMG", "删除操作失败了!", "error");
+						}					
+					}).error(function(data) {
+						swal("OMG", "删除操作失败了!", "error");
+					});
+				});
 	}
-}
  function resetValue(){
 	 $("#id").val("");
 	 $("#zoneName").val("");
@@ -134,7 +185,7 @@ function zoneDelete(zoneId){
 								<label class="control-label" for="zoneName">请输入名称：</label>
 							</td>
 							<td>
-								 <input id="zoneName" type="text" name="notice.name" placeholder="请输入…">
+								 <input id="zoneName" type="text" name="name" placeholder="请输入…">
 							</td>
 						</tr>
 						<tr>
@@ -142,7 +193,7 @@ function zoneDelete(zoneId){
 								<label class="control-label" for="noticeName">状态：</label>
 							</td>
 							<td>
-								 <input id="noticeName" type="text" name="notice.state" placeholder="请输入…">
+								 <input id="noticeName" type="text" name="state" placeholder="请输入…">(1:社区首页 0:资源下载板块)
 							</td>
 						</tr>
 						<tr>
@@ -150,18 +201,18 @@ function zoneDelete(zoneId){
 								<label class="control-label" for="description">请输入内容：</label>
 							</td>
 							<td>
-								<textarea rows="5" cols="50" style="width: 405px;" id="description" name="notice.content"></textarea>
+								<textarea rows="5" cols="50" style="width: 405px;" id="description" name="content"></textarea>
 							</td>
 						</tr>
 					</table>
-					<input id="id" type="hidden" name="notice.id">
+					<input id="id" type="hidden" name="id" value="0">
 				</form>
 			</div>
 			<div class="modal-footer">
 				<font id="error" style="color: red;"></font>
 				<button class="btn" data-dismiss="modal" aria-hidden="true"
 					onclick="return resetValue()">关闭</button>
-				<button class="btn btn-primary" onclick="javascript:saveSoftSection()">保存</button>
+				<button class="btn btn-primary" id="okBtn" onclick="javascript:saveSoftSection()">保存</button>		<!--  -->
 			</div>
 		</div>
 	</div>

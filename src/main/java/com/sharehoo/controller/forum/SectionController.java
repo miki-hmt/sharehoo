@@ -37,7 +37,7 @@ public class SectionController {
 	@Autowired
 	private ZoneService zoneService;
 	
-	@RequestMapping("/admin/section/list")
+	@RequestMapping("/admin/sections")
 	public String list(HttpServletRequest request,@PathVariable("page") String page,Model model)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
@@ -54,12 +54,15 @@ public class SectionController {
 		model.addAttribute("zoneList", zoneList);
 		long total=sectionService.getSectionCount(null);
 		model.addAttribute("total", total);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/section/list", total, Integer.parseInt(page), 6,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/sections", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
 		String mainPage="section.jsp";
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="小板块管理";
 		model.addAttribute("crumb1", crumb1);
+		
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "forum");
 		
 		return "admin/main";
 	}

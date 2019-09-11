@@ -137,7 +137,7 @@ public class SolrController {
 		
 	}
 	
-	@RequestMapping("admin/solr/show")
+	@RequestMapping("admin/solr")
 	public String show(HttpServletRequest request,Model model)throws Exception{
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
@@ -152,6 +152,10 @@ public class SolrController {
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="solr管理";
 		model.addAttribute("crumb1", crumb1);
+		
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "index");
+		
 		return "admin/main";
 	}
 }

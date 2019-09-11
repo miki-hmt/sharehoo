@@ -49,6 +49,9 @@ public class CategoryManageController {
 			model.addAttribute("mainPage", mainPage);
 			String crumb1="模块管理";
 			model.addAttribute("crumb1", crumb1);
+			
+			//************** 添加父级菜单自动展开样式	2019.09.11 miki
+			model.addAttribute("ul", "download");
 			return "admin/main";
 		}else{
 			String error="我已经记录你的ip了，再乱来，你就死定了！";

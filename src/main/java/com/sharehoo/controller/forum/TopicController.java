@@ -119,7 +119,7 @@ public class TopicController {
 	* @throws
 	 */
 	@RequestMapping(value="/secret/publish",method = RequestMethod.POST)
-	public String secretTopicSave(@RequestBody Topic topic) throws Exception {
+	public String secretTopicSave(Topic topic) throws Exception {
 		topic.setPublishTime(new Date());
 		topic.setModifyTime(new Date());
 		topicService.saveTopic(topic);
@@ -354,7 +354,7 @@ public class TopicController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/admin/topic/list")
+	@RequestMapping("/admin/topics")
 	public String listAdmin(@RequestParam(value="page",required = false) String page,Model model) throws Exception {
 		if (StringUtil.isEmpty(page)) {
 			page = "1";
@@ -368,13 +368,16 @@ public class TopicController {
 		long total = topicService.getTopicCount(s_topic);
 		model.addAttribute("total", total);
 		
-		String pageCode = PageUtil.genPagination(request.getContextPath() + "/admin/topic/list", total,
+		String pageCode = PageUtil.genPagination(request.getContextPath() + "/admin/topics", total,
 				Integer.parseInt(page), 10, null);
 		model.addAttribute("pageCode", pageCode);
 		List<Section> sectionList = sectionService.findSectionList(null, null);
 		model.addAttribute("sectionList", sectionList);
 		String mainPage = "topic.jsp";
 		model.addAttribute("mainPage", mainPage);
+		
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "forum");
 		
 		return "admin/main";
 	}

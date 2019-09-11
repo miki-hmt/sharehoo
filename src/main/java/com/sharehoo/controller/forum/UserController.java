@@ -563,9 +563,15 @@ public class UserController {
 		return null;
 	}
 	
+	@RequestMapping("/admin/go")
+	public String goAdmin() {
+		
+		return "admin/login";
+	}
+	
 	@RequestMapping("/admin/user/login")
-	public String loginAdmin(HttpServletRequest request,@RequestBody User user,@RequestParam("imageCode") String imageCode,
-			@RequestParam("error") String error)throws Exception{
+	public String loginAdmin(HttpServletRequest request,User user,@RequestParam(value="error",required=false) String error)
+			throws Exception{
 		HttpSession session=request.getSession();
 		//HttpServletRequest req=(HttpServletRequest)ServletActionContext.getRequest();
 		/*
@@ -573,7 +579,6 @@ public class UserController {
 		 * 加上函数.trim(),因为不去掉首尾空格的话，加密的数据会不一致 miki
 		 */
 		user.setPassword(new MD5().complie(user.getPassword().trim()));
-		System.out.println(user.getPassword());
 		
 		User currentUser=userService.login(user);
 		if (currentUser!=null&&currentUser.getType()==2) {
@@ -600,7 +605,23 @@ public class UserController {
 			
 		}else {
 			error="用户名或密码错误！";
-			return "login";
+			return "admin/login";
+		}
+		return "redirect:../ilovehmt.html";
+	}
+	
+	
+	@RequestMapping("/admin/ilovehmt.html")
+	public String adminIndex(HttpServletRequest request,Model model,@RequestParam(value="error",required=false) String error)
+			throws Exception{
+		HttpSession session=request.getSession();
+		User currentUser = (User)session.getAttribute(Consts.CURRENTUSER);
+		if (currentUser!=null&&currentUser.getType()==2) {
+			model.addAttribute("user", currentUser);
+		}else {
+			error="登录过期，请重新登录！";
+			model.addAttribute("error", error);
+			return "redirect:../admin/go";
 		}
 		return "admin/main";
 	}
@@ -876,6 +897,10 @@ public class UserController {
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="用户管理";
 		model.addAttribute("crumb1", crumb1);
+		
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "forum");
+		
 		return "admin/main";
 	}
 	
@@ -931,17 +956,16 @@ public class UserController {
 	 */
 	@RequestMapping("/admin/user/add/{userId}")
 	@ResponseBody
-	public JSONObject saveUser(@PathVariable("userId") int userId,@RequestBody User user)throws Exception{
-		JSONObject result=new JSONObject();
+	public E3Result saveUser(@PathVariable("userId") int userId,User user)throws Exception{
+		
 		if(userId>0){
 		User user1=userService.getUserById(userId);
 		user.setFace(user1.getFace());
 		userService.saveUser(user);
-		result.put("success", true);
-		}else{
-			result.put("success", true);
+		
+		return E3Result.ok();
 		}
-		return result;
+		return E3Result.build(401, "用户信息修改失败..");
 	}
 	
 	

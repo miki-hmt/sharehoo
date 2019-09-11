@@ -206,7 +206,7 @@ public class ShopManageController {
 		return "shop/manage/shop_focus";
 	}
 	
-	@RequestMapping("/shop/admin")
+	@RequestMapping("/admin/shop")
 	public String list(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
@@ -231,6 +231,9 @@ public class ShopManageController {
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="店铺管理";
 		model.addAttribute("crumb1", crumb1);
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "download");	
+		
 		return "admin/main";
 	}
 	

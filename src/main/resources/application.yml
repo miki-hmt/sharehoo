@@ -42,6 +42,7 @@ forum:
    WATER_NARK_CONTENT: sharehoo社区
    
 spring:
+    #2019.09.10 miki 设置topic的freemarker模板引擎文件的路径
     freemarker:
         HTML_GEN_PATH: C:/miki/soft/freemarker/topic/
         template-loader-path: classpath:/templates/

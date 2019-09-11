@@ -105,7 +105,7 @@ public class CDKController {
 	* @date 2019年9月4日 下午4:37:47   
 	* @throws
 	 */
-	@RequestMapping("/shop/cdk")
+	@RequestMapping("/admin/shop/cdks")
 	public String list(@RequestParam("page") String page,Model model,@RequestParam(value="error",required=false) String error)throws Exception{
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
@@ -118,7 +118,7 @@ public class CDKController {
 			List<Cdk> cdkList=cdkService.getCdkList(pageBean);
 			model.addAttribute("cdkList", cdkList);
 			long total=cdkService.getCdkTotal();
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/Cdk_list.action", total, Integer.parseInt(page), 10,null);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/shop/cdk", total, Integer.parseInt(page), 10,null);
 			model.addAttribute("pageCode", pageCode);
 	}else {
 		error="我已经记录你的ip了，再乱来，你就死定了！";
@@ -129,6 +129,9 @@ public class CDKController {
 	model.addAttribute("mainPage", mainPage);
 	String crumb1="兑换码管理";
 	model.addAttribute("crumb1", crumb1);
+	
+	//************** 添加父级菜单自动展开样式	2019.09.11 miki
+	model.addAttribute("ul", "download");
 	return "admin/main";
 	}
 	

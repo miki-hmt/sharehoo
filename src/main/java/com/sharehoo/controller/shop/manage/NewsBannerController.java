@@ -112,6 +112,9 @@ public class NewsBannerController {
 			model.addAttribute("mainPage", mainPage);
 			String crumb1="小板块管理";
 			model.addAttribute("crumb1", crumb1);
+			
+			//************** 添加父级菜单自动展开样式	2019.09.11 miki
+			model.addAttribute("ul", "download");
 			return "admin/main";
 		}else {
 			String error="系统已记录你的ip，再乱来你就死定了！";

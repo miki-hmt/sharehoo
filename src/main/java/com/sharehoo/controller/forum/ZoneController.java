@@ -24,7 +24,7 @@ public class ZoneController {
 	@Autowired
 	private ZoneService zoneService;
 	
-	@RequestMapping("/admin/zone/list")
+	@RequestMapping("/admin/zones")
 	public String list(@PathVariable("page") String page,Model model,HttpServletRequest request)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
@@ -35,12 +35,16 @@ public class ZoneController {
 		
 		long total=zoneService.getZoneCount(null);
 		model.addAttribute("total", total);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/zone/list", total, Integer.parseInt(page), 6,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/zones", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
 		String mainPage="zone.jsp";
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="大板块管理";
 		model.addAttribute("crumb1", crumb1);
+		
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "forum");
+		
 		return "admin/main";
 	}
 

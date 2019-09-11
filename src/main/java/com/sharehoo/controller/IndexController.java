@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.Article;
 import com.sharehoo.entity.forum.Notice;
 import com.sharehoo.entity.forum.PageBean;
@@ -28,6 +29,7 @@ import com.sharehoo.service.forum.NoticeService;
 import com.sharehoo.service.forum.SectionService;
 import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.UserService;
+import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
 import com.sharehoo.util.forum.StringUtil;
 
@@ -89,11 +91,19 @@ public class IndexController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/notice/save",method = RequestMethod.POST)
-	public String save(@RequestBody Notice notice)throws Exception{
-		notice.setPubDate(new Date());
-		noticeService.saveNotice(notice);
-		return "redirect:notice";
+	@RequestMapping(value = "/admin/notice/save",method = RequestMethod.POST)
+	@ResponseBody
+	public E3Result save(HttpServletRequest request,Notice notice)throws Exception{
+		User user = (User)request.getSession().getAttribute(Consts.CURRENTUSER);
+		if(null!=user) {
+			notice.setPubDate(new Date());
+			noticeService.saveNotice(notice);
+			
+			return E3Result.ok();
+		}
+		
+		
+		return E3Result.build(401, "保存失败..");
 	}
 	
 	/**miki
@@ -103,17 +113,16 @@ public class IndexController {
 	 */
 	@RequestMapping("/notice/delete/{noticeId}")
 	@ResponseBody
-	public JSONObject delete(@PathVariable("noticeId") int noticeId)throws Exception{
-		JSONObject result=new JSONObject();
+	public E3Result delete(@PathVariable("noticeId") int noticeId)throws Exception{
 		Notice e=noticeService.getNoticeById(noticeId);
 		noticeService.deleteNotice(e);
-		result.put("successAdmin", true);
 		
-		return result;
+		
+		return E3Result.ok();
 		
 	}
 	
-	@RequestMapping("/admin/notice/list")
+	@RequestMapping("/admin/notices")
 	public String list(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception{
 		String page = request.getParameter("page");		
 		if (StringUtil.isEmpty(page)) {
@@ -124,14 +133,17 @@ public class IndexController {
 		List<Notice> noticeList=noticeService.findNoticeList(s_notice, pageBean);
 		model.addAttribute("noticeList", noticeList);
 		long total=noticeService.getNoticeCount(s_notice);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/notice/list", total, Integer.parseInt(page), 6,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/notices", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
 		String mainPage="notice.jsp";
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="公告管理";
 		model.addAttribute("crumb1", crumb1);
 		
-		return "";
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "forum");
+		
+		return "admin/main";
 		
 	}
 	

@@ -5,25 +5,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>IT帮-资讯传播社区--后台登陆</title>
+<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="css/unicorn.login.css" />
 
-<script src="js/jquery.min.js"></script>  
-<script src="js/unicorn.login.js"></script> 
+<!-- <script src="js/jquery.min.js"></script>  
+<script src="js/unicorn.login.js"></script>  -->
 </head>
 <body>
 	<div id="logo">
         <img src="img/hh.png" alt="" />  <!-- 后台登陆logo图片插入 2016.08.19-->
     </div>
     <div id="loginbox">
-		<form id="loginform" class="form-vertical" action="User_loginAdmin.action" method="post">
+		<form id="loginform" class="form-vertical" action="${host}/admin/user/login" method="post">
 			<p>输入用户昵称和密码进入后台.</p>
 			<div class="control-group">
 				<div class="controls">
 					<div class="input-prepend">
 						<span class="add-on"><i class="icon-user"></i></span><input
-							type="text" name="user.nickName" value="${user.nickName }" placeholder="昵称" />
+							type="text" name="nickName" value="${user.nickName }" placeholder="昵称" />
 					</div>
 				</div>
 			</div>
@@ -31,7 +32,7 @@
 				<div class="controls">
 					<div class="input-prepend">
 						<span class="add-on"><i class="icon-lock"></i></span><input
-							type="password" name="user.password" value="${user.password }" placeholder="密码" />
+							type="password" name="password" value="${user.password }" placeholder="密码" />
 					</div>
 				</div>
 			</div>

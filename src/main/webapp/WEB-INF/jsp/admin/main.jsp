@@ -5,12 +5,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>IT帮-资讯传播社区--后台管理</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="css/uniform.css" />
-<link rel="stylesheet" href="css/unicorn.main.css" />
-<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="${host}/admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
+<link rel="stylesheet" href="${host}/admin/css/unicorn.grey.css" class="skin-color" />
+
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script> --%>
+<script src="${host}/js/jquery-1.7.2.min.js"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
+
+<!-- 引用该插件需要jQuery1.9以下的版本。
+	 $.browser方法已从jQuery 1.9中删除。jQuery.browser() removed
+	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
+<script src="${host}/admin/js/jquery.uniform.js"></script>
+<script src="${host}/admin/js/select2.min.js"></script>
+<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
+<script src="${host}/admin/js/bootstrap.min.js"></script>
+<script src="${host}/admin/js/unicorn.js"></script>
+<script src="${host}/admin/js/unicorn.tables.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 
@@ -41,7 +56,7 @@ $(function(){
 	var sonCategoryPage="shop_menu.jsp";
 	var menuPage="shop_sourceMenu.jsp";
 	var logPage="shop_log.jsp";
-	var typePage="shop_sourceType.jsp";
+	var typePage="shop_type.jsp";
 	var levelPage="shop_level.jsp";
 	var messagePage="shop_message.jsp";
 
@@ -119,12 +134,15 @@ $(function(){
 	else if(solrPage.indexOf(curPage)>=0&&curPage!=""){
 			$("#solrLi").addClass("active");
 		}
+		
+	//****************** 激活已经打开的父级菜单
+	$("#${ul}").css("display","block");
 })
 </script>
 </head>
 <%
 if(session.getAttribute("currentUser")==null){
-	response.sendRedirect("admin/login");
+	response.sendRedirect("admin/go");
 	return;
 }
 %>
@@ -135,63 +153,61 @@ if(session.getAttribute("currentUser")==null){
 
 	<div id="sidebar">
 		<ul>	
-			<li id="noticeLi"><a href="Notice_list.action"><i class="icon icon-home"></i> <span>公告管理</span></a></li>	
-			<li id="noticeLi"><a href="Notice_list.action"><i class="icon icon-home"></i> <span>站内私信</span></a></li>	
-			<li id="userLi"><a href="User_list.action"><i class="icon icon-home"></i> <span>用户管理</span></a></li>			
-			<li id="upLoadLi"><a href="SoftSection_list.action"><i class="icon icon-home"></i> <span>软件版块列表</span></a></li>
-			<li id="softLi"><a href="Soft_list.action"><i class="icon icon-home"></i> <span>软件列表</span></a></li>
+			<li id="noticeLi"><a href="${host}/admin/notice/list"><i class="icon icon-home"></i> <span>公告管理</span></a></li>	
+			<li id="noticeLi"><a href="${host}/admin/messages?page=1"><i class="icon icon-home"></i> <span>站内私信</span></a></li>	
+			<li id="userLi"><a href="${host}/admin/user/list?page=1"><i class="icon icon-home"></i> <span>用户管理</span></a></li>			
+			<li id="softSectionLi"><a href="${host}/admin/softsection/list?page=1"><i class="icon icon-home"></i> <span>软件版块列表</span></a></li>
+			<li id="softLi"><a href="${host}/admin/soft/list?page=1"><i class="icon icon-home"></i> <span>软件列表</span></a></li>
 			<li id="upLoadLi"><a href="Soft_upload.action"><i class="icon icon-home"></i> <span>上传软件</span></a></li>			
 			<!-- <li><a href="#"><i class="icon icon-home"></i> <span>回复管理</span></a></li> -->
 			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
 				<span>下载社区管理</span> <span class="label">11</span></a>
-				<ul>
-					<li id="shopLi"><a href="ShopManage_list.action"><i class="icon icon-home"></i> <span>店铺列表</span></a></li>
-					<li id="sourceLi"><a href="SourceManage_list.action"><i class="icon icon-home"></i> <span>资源管理</span></a></li>			
-					<li id="commentLi"><a href="Section_list.action"><i class="icon icon-home"></i> <span>评论列表</span></a></li>
-					<li id="bannerLi"><a href="NewsBanner_listAdmin.action"><i class="icon icon-home"></i> <span>banner列表</span></a></li>
-					<li id="logLi"><a href="Log_list.action"><i class="icon icon-home"></i> <span>网站日志</span></a></li>
-					<li id="messageLi"><a href="MesManage_msList.action"><i class="icon icon-home"></i> <span>举报日志</span></a></li>
-					<li id="operateLi"><a href="Cdk_list.action"><i class="icon icon-home"></i> <span>cdk管理</span></a></li>
-					<li id="categoryLi"><a href="Category_list.action"><i class="icon icon-home"></i> <span>大目录管理</span></a></li>
-					<li id="sonCategoryLi"><a href="Menu_list.action"><i class="icon icon-home"></i> <span>二级菜单管理</span></a></li>
-					<li id="typeLi"><a href="Type_list.action"><i class="icon icon-home"></i> <span>资源类型管理</span></a></li>
-					<li id="levelLi"><a href="Level_list.action"><i class="icon icon-home"></i> <span>等级列表</span></a></li>						
+				<ul id="download">
+					<li id="shopLi"><a href="${host}/admin/shop?page=1"><i class="icon icon-home"></i> <span>店铺列表</span></a></li>
+					<li id="sourceLi"><a href="${host}/admin/shop/source?page=1"><i class="icon icon-home"></i> <span>资源管理</span></a></li>			
+					<li id="commentLi"><a href="${host}/admin/shop/sourceComment?page=1"><i class="icon icon-home"></i> <span>评论列表</span></a></li>
+					<li id="bannerLi"><a href="${host}/admin/newsBanner?page=1"><i class="icon icon-home"></i> <span>banner列表</span></a></li>
+					<li id="logLi"><a href="${host}/admin/logs?page=1"><i class="icon icon-home"></i> <span>网站日志</span></a></li>
+					<li id="messageLi"><a href="${host}/admin/messages?page=1"><i class="icon icon-home"></i> <span>举报日志</span></a></li>
+					<li id="operateLi"><a href="${host}/admin/shop/cdks?page=1"><i class="icon icon-home"></i> <span>cdk管理</span></a></li>
+					<li id="categoryLi"><a href="${host}/amdin/shop/category?page=1"><i class="icon icon-home"></i> <span>大目录管理</span></a></li>
+					<li id="sonCategoryLi"><a href="${host}/admin/shop/menu?page=1"><i class="icon icon-home"></i> <span>二级菜单管理</span></a></li>
+					<li id="typeLi"><a href="${host}/admin/shop/types?page=1"><i class="icon icon-home"></i> <span>资源类型管理</span></a></li>
+					<li id="levelLi"><a href="${host}/admin/shop/levels?page=1"><i class="icon icon-home"></i> <span>等级列表</span></a></li>						
 				</ul>
 			</li>
 	
 			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
 				<span>solr索引管理</span> <span class="label">3</span></a>
-				<ul>
-					<li id="solrLi"><a href="SolrJ_show.action"><i class="icon icon-home"></i> <span>添加索引</span></a></li>
-					<li id="solrLi"><a href="SolrJ_show.action"><i class="icon icon-home"></i> <span>索引删除</span></a></li>			
-					<li id="solrLi"><a href="SolrJ_show.action"><i class="icon icon-home"></i> <span>索引统计</span></a></li>
+				<ul id="index">
+					<li id="solrLi"><a href="${host}/admin/solr"><i class="icon icon-home"></i> <span>添加索引</span></a></li>
+					<li id="solrLi"><a href="SolrJ_show.action?ul=index"><i class="icon icon-home"></i> <span>索引删除</span></a></li>			
+					<li id="solrLi"><a href="SolrJ_show.action?ul=index"><i class="icon icon-home"></i> <span>索引统计</span></a></li>
 											
 				</ul>
 			</li>
 			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
 					<span>博客管理</span> <span class="label">5</span></a>
-				<ul>		
-					<li id="userLi"><a href="User_list.action"><i class="icon icon-home"></i> <span>用户管理</span></a></li>
-					<li id="articleLi"><a href="article.jsp"><i class="icon icon-home"></i> <span>文章管理</span></a></li>
-					<li id="albumLi"><a href="album.jsp"><i class="icon icon-home"></i> <span>相册管理</span></a></li>
-					<li id="photoLi"><a href="photo.jsp"><i class="icon icon-home"></i> <span>用户文件管理</span></a></li>
-					<li id="critiqueLi"><a href="critique.jsp"><i class="icon icon-home"></i> <span>留言管理</span></a></li>	
+				<ul id="blog">		
+					<li id="articleLi"><a href="article.jsp?ul=blog"><i class="icon icon-home"></i> <span>文章管理</span></a></li>
+					<li id="albumLi"><a href="album.jsp?ul=blog"><i class="icon icon-home"></i> <span>相册管理</span></a></li>
+					<li id="photoLi"><a href="photo.jsp?ul=blog"><i class="icon icon-home"></i> <span>用户文件管理</span></a></li>
+					<li id="critiqueLi"><a href="critique.jsp?ul=blog"><i class="icon icon-home"></i> <span>留言管理</span></a></li>	
 				</ul>
 			</li>
 			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
 				<span>论坛管理</span> <span class="label">5</span></a>
-				<ul>
-					<li id="userLi"><a href="User_list.action"><i class="icon icon-home"></i> <span>用户管理</span></a></li>
-					<li id="zoneLi"><a href="Zone_list.action"><i class="icon icon-home"></i> <span>空间列表</span></a></li>
-					<li id="noticeLi"><a href="Notice_list.action"><i class="icon icon-home"></i> <span>公告管理</span></a></li>			
-					<li id="sectionLi"><a href="Section_list.action"><i class="icon icon-home"></i> <span>板块列表</span></a></li>
-					<li id="topicLi"><a href="Topic_listAdmin.action"><i class="icon icon-home"></i> <span>帖子列表</span></a></li>
+				<ul id="forum">
+					<li id="zoneLi"><a href="${host}/admin/zones?page=1"><i class="icon icon-home"></i> <span>空间列表</span></a></li>
+					<li id="noticeLi"><a href="${host}/admin/notices?page=1"><i class="icon icon-home"></i> <span>公告管理</span></a></li>			
+					<li id="sectionLi"><a href="${host}/admin/sections?page=1"><i class="icon icon-home"></i> <span>板块列表</span></a></li>
+					<li id="topicLi"><a href="${host}/admin/topics?page=1"><i class="icon icon-home"></i> <span>帖子列表</span></a></li>
 			
 				</ul>
 			</li>				
 			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
 				<span>系统管理</span> <span class="label">3</span></a>
-				<ul>
+				<ul id="system">
 					<li><a href="javascript:checkUserLogin()">修改密码</a></li>
 					<li><a href="javascript:logout()">安全退出</a></li>
 					<li><a href="#">刷新系统缓存</a></li>
@@ -232,15 +248,5 @@ if(session.getAttribute("currentUser")==null){
 			</div>
 		</div>
 	</div>
-
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.ui.custom.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.uniform.js"></script>
-<!-- <script src="js/select2.min.js"></script> -->
-<script src="js/jquery.dataTables.min.js"></script>
-<script src="js/unicorn.js"></script>
-<script src="js/unicorn.tables.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
 </body>
 </html>

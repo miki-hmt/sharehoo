@@ -25,7 +25,7 @@ public class LogController {
 	@Autowired
 	private LogService logService;
 	
-	@RequestMapping("/admin/log")
+	@RequestMapping("/admin/logs")
 	public String list(HttpServletRequest request,Model model,@RequestParam("page") String page)throws Exception{
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
@@ -38,7 +38,7 @@ public class LogController {
 			List<Log> logList=logService.getLogs(pageBean);
 			model.addAttribute("logList", logList);
 			long total=logService.getAllCount();
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/Log_list.action", total, Integer.parseInt(page), 12,null);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/logs", total, Integer.parseInt(page), 12,null);
 			model.addAttribute("pageCode", pageCode);
 		}else {
 			String error="我已经记录你的ip了，再乱来，你就死定了！";
@@ -49,6 +49,9 @@ public class LogController {
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="网站运行日志";
 		model.addAttribute("crumb1", crumb1);
+		
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "download");
 		return "admin/main";
 	}
 }

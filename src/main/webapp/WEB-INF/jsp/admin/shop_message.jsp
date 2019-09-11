@@ -7,6 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+
+<!-- 2019.09.10 增加自定义弹窗  miki-->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
 <style type="text/css">
 </style>
 <script type="text/javascript">	
@@ -17,65 +21,120 @@
 	 $("#sourceName").val(sourceName);
 	 $("#shopName").val(shopName);
 	 $("#description").val("您的店铺由于以下原因被举报:【"+content+"】经审核确实属实，暂如下处理：下架店铺该资源，并收回您之前该资源所有收入的豆并还将80%收入转给真正版权拥有者，如有不合理之处，请联系管理员。");
- }
- 
- 
- /*2016.11.15  修改店铺功能的实现 ，最初做的时候功能不完善，无法实现修改用户 ，原因：未添加saveUser()函数  */
- function send(){
-	 var sourceId= $("#sourceId").val();
-	 var messageId=$("#id").val();
-		 $.post("${pageContext.request.contextPath}/shop/manage/MesManage_save.action?sourceId="+sourceId+"&id="+messageId, $("#fm").serialize(),
-			 function(result){
- 			if(result.success){
- 				alert("发送成功！");
- 				resetValue();
- 				location.reload(true);
- 			}else{	    				
- 				alert("发送失败！");    			            				
- 			}
- 		},"json");
- }
-function messageUpdate(sourceId){
-	if(confirm("店铺关联的所有信息都要删除，确定要删除吗?")){
-		$.post("${pageContext.request.contextPath}/shop/manage/SourceManage_delete.action",{sourceId:sourceId},
-				function(result){
-					var result=eval(result);
-					if(result.info){
-						alert(result.info);
-						window.location.reload(true);
-					}
+	}
+
+
+	/*2016.11.15  修改店铺功能的实现 ，最初做的时候功能不完善，无法实现修改用户 ，原因：未添加saveUser()函数  */
+	function send() {
+		var sourceId = $("#sourceId").val();
+		var messageId = $("#id").val();
+
+		var formData = new FormData($("#fm")[0]);
+		$.ajax({
+			type : "POST",
+			url : "${pageContext.request.contextPath}/admin/message/save?sourceId=" + sourceId + "&id=" + messageId,
+			data : formData,
+			cache : false,
+			async : false,
+			processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+			contentType : false, //必须false才会自动加上正确的Content-Type
+			success : function(data) {
+				if (data.status == 200) {
+					tipOk("回复成功", function() {
+						resetValue();
+						location.reload(true);
+					});
+				} else {
+					tipError("回复失败!!" + data.msg);
 				}
-			);
-	}
-}
-function deleteUsers(){
-	var selectedSpan=$(".checked").parent().parent().next("td");
-	if(selectedSpan.length==0){
-		alert("请选择要删除的数据！");
-		return;
-	}
-	var strIds=[];
-	for(var i=0;i<selectedSpan.length;i++){
-		strIds.push(selectedSpan[i].innerHTML);
-	}
-	var ids=strIds.join(",");
-	if(confirm("用户所发的帖子也将被删除，您确定要删除这"+selectedSpan.length+"条数据吗？")){
-		$.post("User_deleteUsers.action",{ids:ids},function(result){
-			var result=eval(result);
-			if(result.info){
-				alert(result.info);
-				location.reload(true); 
 			}
 		});
-	}else{
-		return;
+		return false; //阻止ajax结束自动刷新页面 
 	}
-}
-function resetValue(){
-	 $("#id").val("");
-	 $("#userName").val("");
-}
 
+	function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			html: true,
+			type: "success",
+			timer: 3000  
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("发表失败", content, "error");
+	}
+	;
+
+	//2019.09.10	处理功能就是后台删除店铺违法的资源
+	function messageUpdate(sourceId) {
+		swal({
+			title : "店铺关联的所有信息都要删除，确定要删除吗?",
+			text : "您确定要删除这条数据？",
+			type : "warning",
+			showCancelButton : true,
+			closeOnConfirm : false,
+			confirmButtonText : "是的，删除",
+			confirmButtonColor : "#ec6c62"
+		}, function() {
+			$.ajax({
+				url : "${host}/admin/shop/sourceDelete",
+				data : {
+					sourceId : sourceId
+				},
+				type : "POST",
+			}).done(function(data) {
+				if (data.status == 200) {
+					tipOk("删除成功", function() {
+						resetValue();
+						location.reload(true);
+					});
+				//swal("操作成功!", "已成功删除数据！", "success");
+				} else {
+					swal("OMG", "删除操作失败了!", "error");
+				}
+			}).error(function(data) {
+				swal("OMG", "删除操作失败了!", "error");
+			});
+		});
+	}
+
+
+	function deleteBatch() {
+		var selectedSpan = $(".checked").parent().parent().next("td");
+		if (selectedSpan.length == 0) {
+			alert("请选择要删除的数据！");
+			return;
+		}
+		var strIds = [];
+		for (var i = 0; i < selectedSpan.length; i++) {
+			strIds.push(selectedSpan[i].innerHTML);
+		}
+		var ids = strIds.join(",");
+		if (confirm("用户所发的帖子也将被删除，您确定要删除这" + selectedSpan.length + "条数据吗？")) {
+			$.post("User_deleteUsers.action", {
+				ids : ids
+			}, function(result) {
+				var result = eval(result);
+				if (result.info) {
+					alert(result.info);
+					location.reload(true);
+				}
+			});
+		} else {
+			return;
+		}
+	}
+	
+	
+	function resetValue() {
+		$("#id").val("");
+		$("#userName").val("");
+	}
 </script>
 </head>
 <body>
@@ -98,38 +157,12 @@ function resetValue(){
 							</c:forEach>
 						</select>
 					</td>
-				</tr>
-				<tr>
-					<%-- <td>发帖时间:</td>
-					<td><input type="text" id="publishTime" class="input-medium search-query Wdate" onClick="WdatePicker()" name="s_topic.publishTime" value="<fmt:formatDate value="${s_topic.publishTime }" type="date" pattern="yyyy-MM-dd"/>" style="width: 165px;"/></td>
-					<td>最后修改时间:</td>
-					<td><input type="text" id="modifyTime" class="input-medium search-query Wdate" onClick="WdatePicker()" name="s_topic.modifyTime" value="<fmt:formatDate value="${s_topic.modifyTime }" type="date" pattern="yyyy-MM-dd"/>" style="width: 165px;"/></td> --%>
-					<td>所属大类:</td>
+					<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 					<td>
-						<select name="s_topic.top" style="width: 195px;"><option value="2">全部</option>
-							<option value="1" ${s_topic.top==1?'selected':'' }>置顶</option>
-							<option value="0" ${s_topic.top==0?'selected':'' }>非置顶</option>
-						</select>
-					</td>
-					<td>二级菜单:</td>
-					<td>
-						<select name="s_topic.top" style="width: 195px;"><option value="2">全部</option>
-							<option value="1" ${s_topic.top==1?'selected':'' }>置顶</option>
-							<option value="0" ${s_topic.top==0?'selected':'' }>非置顶</option>
-						</select>
-					</td>
-					<td>是否精华:</td>
-					<td>
-						<select name="s_topic.good" style="width: 195px;"><option value="2">全部</option>
-							<option value="1" ${s_topic.good==1?'selected':'' }>精华</option>
-							<option value="0" ${s_topic.good==0?'selected':'' }>非精华</option>
-						</select>
-					</td>
-					<td></td>
-					<td>
-						<button type="submit" class="btn btn-primary" title="Search">查询&nbsp;<i class="icon  icon-search"></i></button>
+						<button style="margin-top:9px;" type="submit" class="btn btn-primary" title="Search">查询&nbsp;<i class="icon  icon-search"></i></button>
 					</td>
 				</tr>
+				
 			</table>
 			</form>
 			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteUsers()" style="font-size:9pt;">批量删除</a>
@@ -206,7 +239,7 @@ function resetValue(){
 								<label class="control-label" for="shopName">处理商家名称：</label>
 							</td>
 							<td>
-								<input id="shopName" type="text" name="message.shop.shop_name" placeholder="导入数据失败！">
+								<input id="shopName" type="text" name="shop.shop_name" placeholder="导入数据失败！">
 							</td>
 						</tr>								
 											
@@ -215,7 +248,7 @@ function resetValue(){
 								<label class="control-label" for="sourceName">投诉资源名：</label>
 							</td>
 							<td>
-								<input id="sourceName" type="text" name="message.source.name" placeholder="导入数据失败！">
+								<input id="sourceName" type="text" name="source.name" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						
@@ -224,14 +257,14 @@ function resetValue(){
 								<label class="control-label" for="description">处理内容：</label>
 							</td>
 							<td>
-								<textarea rows="5" cols="50" style="width: 405px;" id="description" name="message.content"></textarea>
+								<textarea rows="5" cols="50" style="width: 405px;" id="description" name="content"></textarea>
 							</td>
 						</tr>
 																
 									
 					</table>
-					<input id="id" type="hidden" name="message.id">
-					<input id="sourceId" type="hidden" name="message.source.id">
+					<input id="id" type="hidden" name="id" value="0">
+					<input id="sourceId" type="hidden" name="source.id">
 				</form>
 			</div>
 			<div class="modal-footer">
