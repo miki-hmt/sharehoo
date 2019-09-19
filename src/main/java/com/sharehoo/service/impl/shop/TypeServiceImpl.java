@@ -1,5 +1,6 @@
 package com.sharehoo.service.impl.shop;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -44,6 +45,15 @@ public class TypeServiceImpl implements TypeService {
 	public Type getTypeById(int id) {
 		// TODO Auto-generated method stub
 		return baseDAO.get(Type.class, id);
+	}
+
+	@Override
+	public List<Type> getTypeByName(String typeName) {
+		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
+		StringBuffer hql=new StringBuffer("from Type and name = ?");
+		param.add(typeName);
+		return baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
 	}
 
 }

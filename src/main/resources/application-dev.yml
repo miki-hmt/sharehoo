@@ -2,10 +2,6 @@ server:
     port: 8080
     servlet:
       context-path: /sharehoo
-      
-shop:
-   solr-host: http://localhost:8081/solr/collection1
-   
 forum:
    leavemessage:
         SECRET_TOPIC: 40
@@ -105,8 +101,8 @@ spring:
             max-wait: -1
     data:
         solr:
-          host: http://localhost:8081/solr-topic/collection1
-                          
+          host: http://localhost:8081/solr-topic/collection1   
+              
     servlet:
         multipart:
             enabled: true
@@ -120,12 +116,7 @@ spring:
         view:
           prefix: /WEB-INF/jsp/
           suffix: .jsp
-    mail:
-      host: smtp.163.com
-      username: 18738907370@163.com
-      password: pgydyd19940928
-      default-encoding: UTF-8
-      
+    
     site:
         store:
             root: /data/sharehoo

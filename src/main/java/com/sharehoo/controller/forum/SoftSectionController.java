@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Soft;
 import com.sharehoo.entity.forum.SoftSection;
 import com.sharehoo.service.forum.SoftSectionService;
 import com.sharehoo.service.forum.SoftService;
+import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
 import com.sharehoo.util.forum.ResponseUtil;
 import com.sharehoo.util.forum.StringUtil;
@@ -80,17 +82,19 @@ public class SoftSectionController {
 	}
 	
 	@RequestMapping("/admin/softsection/add")
-	public String save(@RequestBody SoftSection softSection)throws Exception{
+	@ResponseBody
+	public E3Result save(SoftSection softSection)throws Exception{
 		softSectionService.saveSoftSection(softSection);
-		return "admin/main";
+		return E3Result.ok();
 	}
 	
 	@RequestMapping("/admin/softsection/delete/{softSectionId}")
+	@ResponseBody
 	public JSONObject delete(@PathVariable("softSectionId") int softSectionId)throws Exception{
 		JSONObject result=new JSONObject();
 		SoftSection e=softSectionService.findSoftSectionById(softSectionId);
 		softSectionService.deleteSoftSection(e);
-		result.put("success", true);
+		result.put("info", true);
 		
 		return result;
 	}

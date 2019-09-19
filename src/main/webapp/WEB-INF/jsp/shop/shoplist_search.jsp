@@ -54,9 +54,9 @@ function searchType(typeid){
 	var cateId = cateCur.attr("bate-id");
 	//alert(menuId);
 	if(menuId==undefined){
-		window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId+"&typeId="+typeId;
+		window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&typeId="+typeId;
 	}else{
-		window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId+"&menuId="+menuId+"&typeId="+typeId;
+		window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&menuId="+menuId+"&typeId="+typeId;
 	}
 }
 
@@ -111,12 +111,12 @@ function searchType(typeid){
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${host}/shop/index.html">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
+			<a href="${host}/shop/index.htm">首页</a>
+			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
-			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
+			<a class=" " href="${pageContext.request.contextPath}/" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 		</div>

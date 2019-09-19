@@ -48,7 +48,7 @@ forum:
 spring:
     #2019.09.10 miki 设置topic的freemarker模板引擎文件的路径
     freemarker:
-        HTML_GEN_PATH: C:/miki/soft/freemarker/topic/
+        HTML_GEN_PATH: D:/soft/freemarker/
         template-loader-path: classpath:/templates/
         #- /templates/
         #- file:./templates/
@@ -93,7 +93,7 @@ spring:
         open-in-view: true
     #2019.09.13 miki 社区首页数据缓存
     redis: 
-        host: 127.0.0.1
+        host: 134.175.1.32
         password:
         port: 6379   
         timeout: 0
@@ -105,8 +105,8 @@ spring:
             max-wait: -1
     data:
         solr:
-          host: http://localhost:8081/solr-topic/collection1
-                          
+          host: http://134.175.1.32:8010/solr-topic/collection1   
+              
     servlet:
         multipart:
             enabled: true
@@ -120,12 +120,7 @@ spring:
         view:
           prefix: /WEB-INF/jsp/
           suffix: .jsp
-    mail:
-      host: smtp.163.com
-      username: 18738907370@163.com
-      password: pgydyd19940928
-      default-encoding: UTF-8
-      
+    
     site:
         store:
             root: /data/sharehoo
@@ -139,7 +134,7 @@ spring:
             # 资源域名, resource.domain = true 是有效
             # 配置域名, 将域名的根目录指向 store.root 配置的地址
             # ---------------------------------
-            host: http://localhost:8088/sharehoo
+            host: http://sharehoo.cn
 
 logging:
   file: /../../idp/logs/dip/dip.log #${catalina.home}/../../idp/logs/dip/dip.log

@@ -389,7 +389,7 @@
 	               	<a href="#" target="_blank">博客</a>
 	               </dd>                     
 	               <dd> 
-	               	 <a href="${pageContext.request.contextPath }/Notice_listpr.action" target="_blank">论坛</a>
+	               	 <a href="${pageContext.request.contextPath }/" target="_blank">论坛</a>
 	               </dd>                      
 	               	<dd> <a href="Shop_home.action" target="_blank">下载</a></dd>                      
 	               	<dd> <a href="${pageContext.request.contextPath }/topic/section/21" target="_blank">知识库</a></dd>                      

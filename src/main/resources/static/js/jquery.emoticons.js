@@ -196,7 +196,7 @@
                     for( i = 0; i < rs.length; i++) {
                         for( n = 0; n < em.length; n++) {
                             if(em[n].phrase == rs[i]) {
-                                var t = "<img src='images/emotions/"  + em[n].url + "' />";
+                                var t = "<img src='../../images/emotions/"  + em[n].url + "' />";
                                 rContent = rContent.replace(rs[i], t);
                                 break;
                             }

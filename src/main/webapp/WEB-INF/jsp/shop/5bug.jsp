@@ -5,13 +5,60 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script src="${pageContext.request.contextPath }/shop/alert/jquery-1.2.6.js" type="text/javascript"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/shop/alert/jquery.funkyUI.js"></script>
+<!-- 2019.09.03 自定义弹窗所需插件 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
+
 <script type="text/javascript">
 	function validateLogin(){
 		//confirm("您确定要激活店铺吗？")
-		$.confirm("您确定要激活店铺吗？激活店铺享有以下特权:<p>1：上传资源 &nbsp;&nbsp;2：虎豆提现</p>");
+		swal({
+			title: "您确定要激活店铺吗？", 
+			text: '<table align=center width=100%><tr><td>激活店铺享有以下特权:</td><td></td></tr><tr><td>1：上传资源</td><td>2：虎豆提现</td></tr></table><br>来自<span style="color:red;">sharehoo社区</span>、<a href="#">温馨提示</a>：<br/><span style="font-size:9pt">资源一经售出，概不退货哦..</span>',   
+			imageUrl: "${pageContext.request.contextPath}/shop/images/logo/zip.svg",
+			html: true,
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是，强烈希望激活",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/shop/active",
+					data: {},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("店铺激活成功...正在跳转店铺首页", function() {
+							window.location.href="${host}/shop/center";
+						});
+					}else{
+						swal("OMG", data.msg, "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", "激活失败了!", "error");
+				});
+			});
+		//$.confirm("您确定要激活店铺吗？激活店铺享有以下特权:<p>1：上传资源 &nbsp;&nbsp;2：虎豆提现</p>");
 		
+		
+		function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("操作失败", content, "error");
+	};
 }
 </script>
 
@@ -620,10 +667,10 @@ body {
 }
 </style>
 
-                         <!-- html页面自动跳转代码  2016.10.06-->
+<!-- html页面自动跳转代码  2016.10.06-->
 
 
-<title>未知区域</title>
+<title>店铺激活..</title>
 </head>
 <body>
 <div class="wrapper">

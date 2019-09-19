@@ -68,4 +68,13 @@ public class MenuServiceImpl implements MenuService {
 		return baseDAO.count(hql.toString().replace("and", "where"), param);
 	}
 
+	@Override
+	public List<Menu> getMenuByName(String menuName) {
+		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
+		StringBuffer hql=new StringBuffer("from Menu and name = ?");
+		param.add(menuName);
+		return baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
+	}
+
 }

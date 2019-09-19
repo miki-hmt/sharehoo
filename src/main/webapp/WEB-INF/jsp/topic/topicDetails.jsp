@@ -17,17 +17,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="Keywords" content="${topic.title}">
 <meta name="description" content="${topic.title}" />
 <link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+
 <!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 <!--我的高亮效果是zenburn-->
 <link rel="stylesheet" href="${host}/highlight/styles/gruvbox-dark.css">
 <script src="${host}/highlight/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+
 <script type="text/javascript" src="${host}/js/jquery-1.7.2.min.js"></script>
 
 <link href="${host}/css/style3.css" rel="stylesheet" type="text/css" />
 
-<link rel="alternate"  href="//sharehoo.cn/${host}/topic/detail/${topic.id}" >
-<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+<link rel="alternate"  href="//sharehoo.cn/topic/detail/${topic.id}" >
 <script src="${host}/js/jquery.emoticons.js" type="text/javascript"></script>
 
 <link rel="stylesheet" type="text/css" href="${host}/css/emoticon.css" />
@@ -65,17 +66,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/timer.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-  debugger
-	for(var i=0;i<11;i++){
-		var date=$(".time_reply"+i).text();
-		$(".time_reply"+i).text(diaplayTime(date));
-	}
-	var date1=$(".time_topic").text();
+		for(var i=0;i<11;i++){
+			var date=$(".time_reply"+i).text();
+			$(".time_reply"+i).text(diaplayTime(date));
+		}
+		var date1=$(".time_topic").text();
 		$(".time_topic").text(diaplayTime(date1));
 	});
 function saveRep(){
      if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-		alert("您还未登陆！");
+		tipError("您还未登陆！");
 		return false;
 	}
      saveReply();		
@@ -388,19 +388,16 @@ function saveRep(){
 			</c:when>
 			<c:otherwise>
 				<ul class="clearfix">
-				${pageCode }
+					${pageCode }
 				</ul>
 			</c:otherwise>
 		</c:choose>
-	</div>
+	</div>	
 	
 	
 	
-	
-	<div>
-		
-	             <!-- 回复框表格    2016.08.24 -->
-	                           	                           	                        
+	<div>		
+	             <!-- 回复框表格    2016.08.24 -->	                           	                           	                        
 		<table >
 			<tr>
 				<td style="width: 20%;color:gray;font-size:10pt;">
@@ -409,7 +406,7 @@ function saveRep(){
 				<td style="width: 80%;">
 					<form id="replyForm" class="form-horizontal" style="margin-top: 10px;">
 					<table style="width: 100%;" cellpadding="10px;">
-						<input type="hidden" id="title" name="reply.title" style="width: 800px;">
+						<input type="hidden" id="title" name="title" style="width: 800px;">
 						<tr>
 							<td style="color:gray;font-size:10pt;">
 								
@@ -429,18 +426,18 @@ function saveRep(){
 							
 							<td>
 							<pre id="btn"><code class="language-java hljs">System.out.println("请输入你的代码块...");</code></pre>
-							<a name="1"><textarea name="reply.content" id="Content" cols="50" style="height:200px;width: 800px;"placeholder="----发表你的看法----开开心心交流----和和气气讨论----" ></textarea></a>
+							<a name="1"><textarea name="content" id="Content" cols="50" style="height:200px;width: 800px;"placeholder="----发表你的看法----开开心心交流----和和气气讨论----" ></textarea></a>
 							</td>
 							
 						</tr>
 						<tr>
 							<td>
-								<input id="userId" name="reply.user.id" value="${currentUser.id }" type="hidden"/>
-								<input id="topicId" name="reply.topic.id" value="${topic.id }" type="hidden"/>
+								<input id="userId" name="user.id" value="${currentUser.id }" type="hidden"/>
+								<input id="topicId" name="topic.id" value="${topic.id }" type="hidden"/>
 								<input id="replySonId" name="sonId" type="hidden"/>
 							</td>
 							<td>
-								<Button class="btn btn-primary " data-dismiss="modal" aria-hidden="true" type="button" onclick="javascript:saveRep()">提交</Button>
+								<Button class="btn btn-primary " id="okBtn" data-dismiss="modal" aria-hidden="true" type="button">提交</Button>
 								<font id="error"></font>
 							</td>
 						</tr>
@@ -500,12 +497,12 @@ function saveRep(){
         });  
     }); 
 
-function popWin(){
-		p.show({//定义坐标，如果缺省则居中显示  
-//            x:100,  
-//            y:100  
-        });
-	} 
+	function popWin(){
+			p.show({//定义坐标，如果缺省则居中显示  
+	//            x:100,  
+	//            y:100  
+	        });
+		} 
     EventUtil.addEvent(EventUtil._$('ok'),'click', function() {  
         //自定义点击确定按钮之后得操作  
         var t =$("#backReason").val();
@@ -553,12 +550,11 @@ function popWin(){
 
                       <!-- 微信二维玛        2017.03.02               -->
 
-<script src="${host}/js/fun.js" type="text/javascript">
-</script>
+<%-- <script src="${host}/js/fun.js" type="text/javascript">
+</script> --%>
 <script type="text/javascript">
-
-	    $(function(){
-
+		
+    $(function(){
         // 页面浮动面板
         $("#floatPanel > .ctrolPanel > a.arrow").eq(0).click(function(){$("html,body").animate({scrollTop :0}, 800);return false;});
         $("#floatPanel > .ctrolPanel > a.arrow").eq(1).click(function(){$("html,body").animate({scrollTop : $(document).height()}, 800);return false;});
@@ -575,7 +571,665 @@ function popWin(){
                         objPopPanel.css("width",w + "px");
             }	
         });
-    });
+   });
+    
+    
+    //************************ 点赞，踩功能
+	var x=0;
+	var y=0;
+	function zan(order,rid,num){
+		var goodx="gd" + order;
+		var goody="good" + order;
+		var n=$("#"+goodx).text();
+		n++;
+		x=x+1;
+		 if(x>10){
+			tipError("点赞过于频繁，歇一歇吧！");
+			x=x-1;
+		 }else{
+			$("#"+goodx).text(n);
+			$.post("${host}/reply/dianzan",{rid:rid,num:n},
+			function(result){
+				if(!result.success){
+					tipError("点赞失败，请重试");
+				}
+			},"json");
+		
+		 }
+		
+	}
+	
+	function zan1(order,rid,num){
+	
+		var n=$("#gd1").text();
+		n++;
+		x=x+1;
+		if(x>10){
+			tipError("点赞过于频繁，歇一歇吧！");
+			x=x-1;
+		 }else{
+			$("#gd1").text(n);
+			$.post("${host}/reply/dianzan",{rid:rid,num:n},
+			function(result){
+				if(!result.success){
+					tipError("点赞失败，请重试");
+				}
+			},"json");
+		
+		 }
+		
+		
+	}
+	
+	function bad1(order,rid,num){
+		
+		var n=$("#bd1").text();
+		n++;
+		$("#bd1").text(n);
+		$.post("${host}/reply/cai",{rid:rid,num:n},
+				function(result){
+					if(!result.success){
+						tipError("出错咯，请重试");
+					}
+				},"json");
+	}
+	
+	
+	function bad(order,rid,num){
+		var goodx="bd" + order;
+		var goody="bad" + order;
+		var n=$("#"+goodx).text();
+		n++;
+		y=y+1;
+		if(y>10){
+			tipError("点赞过于频繁，歇一歇吧！");
+			y=y-1;
+		 }else{
+			$("#"+goodx).text(n);
+			$.post("${host}/reply/cai",{rid:rid,num:n},
+				function(result){
+					if(!result.success){
+						tipError("出错咯，请重试");
+					}
+				},"json");
+		
+		 }
+		
+	}
+	
+	$(function () {        
+		   $("#good1").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo1').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo1").append("<img src=''>");
+		   		$('.demo1 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo1 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#good2").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo2').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo2").append("<img src=''>");
+		   		$('.demo2 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo2 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#good3").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo3').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo3").append("<img src=''>");
+		   		$('.demo3 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo3 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#good4").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo4').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		//var offset=-$(document).scrollTop()+200;
+		   		//tipError(offset);
+		   		//$(".demo img").css("bottom",offset);
+		   		$(".demo4").append("<img src=''>");
+		   		$('.demo4 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo4 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#good5").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo5').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		//var offset=$("#good5").position().top-$(document).scrollTop();
+		   		//tipError(offset);
+		   		//var offset=$("#good5").position().top;
+		   		//alert(offset);
+		   		$(".demo5").append("<img src=''>");
+		   		$('.demo5 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo5 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#good6").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo6').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo6").append("<img src=''>");
+		   		$('.demo6 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo6 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#good7").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo7').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo7").append("<img src=''>");
+		   		$('.demo7 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo7 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#good8").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo8').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo8").append("<img src=''>");
+		   		$('.demo8 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo8 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#good9").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo9').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo9").append("<img src=''>");
+		   		$('.demo9 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo9 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#good10").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo10').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo10").append("<img src=''>");
+		   		$('.demo10 img:eq(' + index + ')').attr('src','${host}/topic/zan/'+nb+'.gif')
+		   		$(".demo10 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	
+	$(function () {        
+		   $("#bad1").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo11').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo11").append("<img src=''>");
+		   		$('.demo11 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo11 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#bad2").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo12').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo12").append("<img src=''>");
+		   		$('.demo12 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo12 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#bad3").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo13').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo13").append("<img src=''>");
+		   		$('.demo13 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo13 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#bad4").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo14').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo14").append("<img src=''>");
+		   		$('.demo14 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo14 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#bad5").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo15').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo15").append("<img src=''>");
+		   		$('.demo15 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo15 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	
+	$(function () {        
+		   $("#bad6").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo16').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo16").append("<img src=''>");
+		   		$('.demo16 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo16 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#bad7").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo17').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo17").append("<img src=''>");
+		   		$('.demo17 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo17 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#bad8").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo18').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo18").append("<img src=''>");
+		   		$('.demo18 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo18 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#bad9").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo19').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo19").append("<img src=''>");
+		   		$('.demo19 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo19 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	$(function () {        
+		   $("#bad10").click(function(){
+		   	 	var x = 100;       
+		 		var y = 900;  
+		   		var nb = Math.floor(Math.random() * 7 + 1);
+		   		var index=$('.demo20').children('img').length;
+		   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
+		   		
+		   		$(".demo20").append("<img src=''>");
+		   		$('.demo20 img:eq(' + index + ')').attr('src','${host}/topic/bad/'+nb+'.gif')
+		   		$(".demo20 img").animate({
+		   			bottom:"800px",
+		   			opacity:"0",
+		   			left: rand,
+		   		},3000)
+		   		
+		   })
+		});
+	
+	  // 楼层回复传参功能实现      2017.02.28     
+	function reply(b,a,c){
+		 document.getElementById("title").value = c;
+	}
+	
+	//楼层回复传参功能实现      2017.02.28     
+	function replySon(b,a,c){
+		 document.getElementById("title").value = c;
+		 document.getElementById("replySonId").value = a;
+		   
+	}
+	
+	
+		//引用评论
+	function copy(c,d){
+			var text4 ="引用【 ";
+			var text5="】楼：";
+			var text6="：";
+			document.getElementById("Content").value = text4+d+text5+c+text6;
+			CKEDITOR.instances.Content.setData(text4+d+text5+c+text6);
+	
+		}
+	
+	  //简单的 敏感词汇验证  2016.12.13 ....时间允许，可以建一个数据库表，存储相关词汇 
+	//定义敏感字符     
+	var forbiddenArray =['傻逼','滚','黄色','畜生','sb','尼玛','妈的','反共','草泥马'];
+	//定义函数
+	function forbiddenStr(str){
+	//    var destString = trim(str);
+	    var re = '';
+	    
+	    for(var i=0;i<forbiddenArray.length;i++){
+	        if(i==forbiddenArray.length-1)
+	            re+=forbiddenArray[i];
+	        else
+	            re+=forbiddenArray[i]+"|";
+	    }
+	    //定义正则表示式对象
+	    //利用RegExp可以动态生成正则表示式
+	    var pattern = new RegExp(re,"g");
+	    if(pattern.test(str)){
+	        return false;
+	    }else{
+	        return true;
+	    }
+	}
+	
+	$(function(){
+	    $("#message_face").jqfaceedit({txtAreaObj:$("#Content"),containerObj:$('#container'),top:25,left:-27});
+		 //显示表情
+		$(".show_e").emotionsToHtml();
+	});
+	
+	
+	//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+	$("#okBtn").on("click", function() {
+			
+		if('${currentUser.nickName}'==null || '${currentUser.nickName}'==''){
+			tipError("请先登陆，再回帖！");
+			return false;
+		}
+		if ($("#Content").val().length<10) {
+			tipError("最少输入10个字符！");
+			return false;
+		}
+		if ($("#Content").val().length>1000) {
+			tipError("最多输入1000个字符！");
+			return false;	
+		}
+		
+		//敏感词汇判断   2016.12.13@miki 
+		
+		if(forbiddenStr($("#Content").val())==true){
+			var sonId=$("#replySonId").val();
+			if(sonId==""){
+				sonId = "0";
+			}
+			var formData = new FormData($("#replyForm")[0]);
+				$.ajax({
+					type : "POST",
+					url : "${host}/reply/save?sonId="+sonId,
+					data : formData,
+					cache : false,
+					async : false,
+					processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+					contentType : false, //必须false才会自动加上正确的Content-Type
+					success : function(data) {
+						if (data.status == 200) {
+							tipOk("回复成功!!",function(){
+								location.reload();
+							});
+						} else {
+							tipError("回复失败!!" + data.msg);
+						}
+					}
+				});
+				return false;	//阻止ajax结束自动刷新页面
+		}else{
+	        tipError("内容含敏感词汇！请修改后发表 ");
+	        return false;
+		}
+	});
+		
+			
+	function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	
+	function tipError(content){
+		swal("发表失败", content, "error");
+	};
+	
+	/* function saveReply(){
+		if('${currentUser.nickName}'==null){
+			alert("请先登陆，再回帖！");
+			return false;
+		}
+		if ($("#Content").val().length<10) {
+			alert("最少输入10个字符！");
+			return false;
+		}
+		if ($("#Content").val().length>1000) {
+			alert("最多输入1000个字符！");
+			return false;	
+		}
+		
+		//敏感词汇判断   2016.12.13@miki 
+		
+		if(forbiddenStr($("#Content").val())==true){
+			var sonId=$("#replySonId").val();
+			$.post("${host}/reply/save",$("#replyForm").serialize(),function(result){
+				if(result.success){
+					alert("回复成功！");
+					location.reload(true);
+				}else{
+					alert("回复失败！");
+				}
+			},"json");
+			
+		}else{
+	        alert("内容含敏感词汇！请修改后发表 ");
+	        return false;
+		}
+		
+	} */
+	
+	function deleteReply(replyId){
+		swal({
+			title: "您确定要删除这条回复吗？", 
+			text: "您确定要删除这条数据？", 
+			type: "warning",
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是的，它太碍眼",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/reply/delete",
+					data: {replyId:replyId},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("删除成功", function() {
+							location.reload(true);
+						});
+						//swal("操作成功!", "已成功删除数据！", "success");
+					}else{
+						swal("OMG", "删除操作失败了!", "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", "删除操作失败了!", "error");
+				});
+			});
+	}
+
 </script>
 <br><div style="text-align:center;clear:both"><br>
 </div>
@@ -604,9 +1258,6 @@ function popWin(){
 	</div>
 </div>
 </div>
-
-
-
 
         <!-- 回复界面不需要底部管理员登录选项footer.jsp       2016.09.27-->
 

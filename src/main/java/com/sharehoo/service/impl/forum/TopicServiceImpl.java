@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,41 +32,42 @@ import net.sf.json.JsonConfig;
 @Transactional
 @Service("topicService")
 public class TopicServiceImpl implements TopicService {
-
+	
+	Logger logger = Logger.getLogger(TopicServiceImpl.class);
 	@Autowired	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
 	private TopicDao baseDAO;
 	
-	@Value("S{forum.topic.YUAN_CHUANG}")	//原创社区
+	@Value("${forum.topic.YUAN_CHUANG}")	//原创社区
 	private String token;					
-	@Value("S{forum.topic.ADVICE}")			//出谋划策
+	@Value("${forum.topic.ADVICE}")			//出谋划策
 	private String advice;
-	@Value("S{forum.topic.JAVAWEB}")		//javaweb
+	@Value("${forum.topic.JAVAWEB}")		//javaweb
 	private String java;
-	@Value("S{forum.topic.ERSHOU}")			//二手集市
+	@Value("${forum.topic.ERSHOU}")			//二手集市
 	private String ershou;
-	@Value("S{forum.topic.MONEY}")			//赏金
+	@Value("${forum.topic.MONEY}")			//赏金
 	private String money;
-	@Value("S{forum.topic.JOB_INTERVIEW}")	//面试总结
+	@Value("${forum.topic.JOB_INTERVIEW}")	//面试总结
 	private String job;
-	@Value("S{forum.topic.CODE}")			//编程语言
+	@Value("${forum.topic.CODE}")			//编程语言
 	private String code;
-	@Value("S{forum.topic.SAY}")			//我想说
+	@Value("${forum.topic.SAY}")			//我想说
 	private String say;
-	@Value("S{forum.topic.SERVERDEV}")		//服务运维
+	@Value("${forum.topic.SERVERDEV}")		//服务运维
 	private String server;
-	@Value("S{forum.topic.MUSIC}")			//音乐心灵
+	@Value("${forum.topic.MUSIC}")			//音乐心灵
 	private String music;
-	@Value("S{forum.topic.FRIEND}")			//约伴出游
+	@Value("${forum.topic.FRIEND}")			//约伴出游
 	private String friend;
-	@Value("S{forum.topic.BIGDATA}")		//大数据
+	@Value("${forum.topic.BIGDATA}")		//大数据
 	private String bigdata;
-	@Value("S{forum.topic.WECHAT}")			//微信开发
+	@Value("${forum.topic.WECHAT}")			//微信开发
 	private String wechat;
-	@Value("S{forum.topic.FOOD}")			//美食
+	@Value("${forum.topic.FOOD}")			//美食
 	private String food;
-	@Value("S{forum.topic.WEB}")			//web前端
+	@Value("${forum.topic.WEB}")			//web前端
 	private String web;
-	@Value("S{forum.topic.GAMEDEV}")		//游戏开发
+	@Value("${forum.topic.GAMEDEV}")		//游戏开发
 	private String game;
 	
 	@Autowired
@@ -314,21 +316,13 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public List<Topic> findTopicListBySectionId(int sectionId,PageBean pageBean){
 		List<Topic> ycList=new ArrayList<>();
-		Properties prop = new Properties();
 		String jsonData="";
-		try {
-			prop.load(this.getClass().getClassLoader().getResourceAsStream("resource.properties"));
-		} catch (IOException e1) {
-			throw new RuntimeException(e1);
-		}
-		String token=prop.getProperty("YUAN_CHUANG");	//原创社区
-		String advice=prop.getProperty("ADVICE");		//出谋划策
 		
 		List<Object> param=new LinkedList<Object>();
 		
 		//查询缓存
 		try {
-				//免去每次遍历一个板块就要去查一次redis
+			//免去每次遍历一个板块就要去查一次redis
 			if(sectionId==21 || sectionId==11 || sectionId==1 || sectionId==2 || sectionId==4 || sectionId==7 ||sectionId==20){
 				String json=jedisClient.hget(token, sectionId+"");
 				
@@ -339,11 +333,9 @@ public class TopicServiceImpl implements TopicService {
 				
 					config.setExcludes(fields);
 					ycList = JSONArray.toList(JSONArray.fromObject(json), new Topic(),config );//将json字符串转成list对象
-
 					return ycList;												//2018.06.19 缓存中存在数据，取出，并终止程序向下进行
 				}
-			}
-						
+			}					
 		} catch (Exception e) {}	//2019.08.19	miki 忽略获取redis异常
 		
 		//2018.06.19 如果缓存中存在数据则取出，如果不存在则执行查询
@@ -360,42 +352,32 @@ public class TopicServiceImpl implements TopicService {
 		}
 		hql.append(" order by publishTime desc");
 		
-		if (pageBean!=null) {
-			
+		if (pageBean!=null) {		
 			//2018.06.19 如果查询到原创帖子模块，将查询到的数据存到redis缓存中
-			ycList=baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
-			
+			ycList=baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);		
 		}else {			
-			ycList=baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
-				
+			ycList=baseDAO.find(hql.toString().replaceFirst("and", "where"), param);				
 		}
 		
 		try {
 			switch(sectionId){
-			case 21 :
-				
+			case 21 :				
 				jsonData = JSON.toJSONString(ycList);		//2018.06.19 将list转成json字符串
 				jedisClient.hset(token,sectionId+"",jsonData);	//将json字符串放入redis中
 				
 				break;
-			case 11 :
-					
+			case 11 :					
 				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串	c出谋划策数据
 				jedisClient.hset(advice,sectionId+"",jsonData);	//将json字符串放入redis中
 				
 				break;
-
 			}
-		} catch (Exception e) {}	//写入redis失败可以忽略  2019.08.19	miki
-		
-		if (pageBean!=null) {			
-			
+		} catch (Exception e) {logger.error(e);}	//写入redis失败可以忽略  2019.08.19	miki	
+		if (pageBean!=null) {						
 			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
-		}else {
-							
+		}else {							
 			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
-		}
-		
+		}	
 	}
 	
 	/**miki
@@ -408,29 +390,7 @@ public class TopicServiceImpl implements TopicService {
 		String hql="";
 		List<Topic> ycList=new ArrayList<>();
 		List<Object> param = new LinkedList<Object>();
-		Properties prop = new Properties();
 		String jsonData="";
-		try {
-			prop.load(this.getClass().getClassLoader().getResourceAsStream("resource.properties"));
-		} catch (IOException e1) {
-			throw new RuntimeException(e1);
-		}
-		String token=prop.getProperty("YUAN_CHUANG");	//原创社区
-		String advice=prop.getProperty("ADVICE");		//出谋划策
-		String java=prop.getProperty("JAVAWEB");		//javaweb
-		String ershou=prop.getProperty("ERSHOU");		//二手集市
-		String money=prop.getProperty("MONEY");			//赏金
-		String job=prop.getProperty("JOB_INTERVIEW");	//面试总结
-		String code=prop.getProperty("CODE");			//编程语言
-		String say=prop.getProperty("SAY");				//我想说
-		String game=prop.getProperty("GAME");
-		String jingmei=prop.getProperty("JINGMEI");
-		String music=prop.getProperty("MUSIC");
-		String friend=prop.getProperty("FRIEND");
-		String bigdata=prop.getProperty("BIGDATA");
-		String wechat=prop.getProperty("WECHAT");
-		String food=prop.getProperty("FOOD");
-		String web=prop.getProperty("WEB");
 		
 		//先查询缓存
 				try {
@@ -514,7 +474,7 @@ public class TopicServiceImpl implements TopicService {
 			case 13 :
 
 				jsonData = JSON.toJSONString(ycList);		//2018.07.12 将list转成json字符串
-				jedisClient.hset(jingmei,sectionId+"",jsonData);	//将精美小东西的json字符串放入redis中		
+				jedisClient.hset(server,sectionId+"",jsonData);	//将精美小东西的json字符串放入redis中		
 
 				break;
 			case 14 :

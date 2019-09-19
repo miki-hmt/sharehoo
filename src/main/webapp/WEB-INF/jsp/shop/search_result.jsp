@@ -49,9 +49,9 @@ function searchType(typeid){
 	var cateId = cateCur.attr("bate-id");
 	//alert(menuId);
 	if(menuId==undefined){
-		window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId+"&typeId="+typeId;
+		window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&typeId="+typeId;
 	}else{
-		window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId+"&menuId="+menuId+"&typeId="+typeId;
+		window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&menuId="+menuId+"&typeId="+typeId;
 	}
 }
 
@@ -106,12 +106,12 @@ function validateBuy(){
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${host}/shop/index.html">首页</a>
+			<a href="${host}/shop/index.htm">首页</a>
 			<a href="${pageContext.request.contextPath}/shop/Source_search.action" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
-			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
+			<a class=" " href="${pageContext.request.contextPath}/" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 		</div>
@@ -161,7 +161,7 @@ $(document).ready(function() {
         		_this.attr("href",sUrl);
             }
         });
-        $("#keywords").attr("href",'Source_searchKey.action?keyword='+encodeURIComponent(keywords));
+        $("#keywords").attr("href",'${host}/shop/source/search?keyword='+encodeURIComponent(keywords));
     }
 	//处理特殊字符 end	
 })
@@ -183,9 +183,9 @@ function KeyP(event){
 	}
     if(code == 13 && keywords != ''){
     	keywords = encodeURIComponent(keywords)
-		window.location.href = "Source_searchKey.action?categoryId="+categoryid +"&typeId="+sourcetype+"&keyword="+keywords ;
+		window.location.href = "${host}/shop/source/search?categoryId="+categoryid +"&typeId="+sourcetype+"&keyword="+keywords ;
     }
-    $("#keywords").attr("href",'Source_searchKey.action?categoryId='+categoryid +'&typeId='+sourcetype+'&keyword='+keywords);
+    $("#keywords").attr("href",'${host}/shop/source/search?categoryId='+categoryid +'&typeId='+sourcetype+'&keyword='+keywords);
 	if(keywords == ''){
         $("#keywords").attr("href",'#');
 	}
@@ -222,7 +222,7 @@ function KeyP(event){
               <dd>
                 <ul class="cate_list" id="categoryid1">
                   <li bate-id="categoryall">
-                  	<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action">
+                  	<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach">
                   		全部
                   	</a>
                   </li>
@@ -459,7 +459,7 @@ function KeyP(event){
 				$(this).addClass("cate_cur").siblings("li").removeClass("cate_cur");
 				var cateCur = $(".cate_list .cate_cur");
 				var cateId = cateCur.attr("bate-id");							
-					window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId;																
+					window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId;																
 				});
 	    }
     	
@@ -479,7 +479,7 @@ function KeyP(event){
  	    	//var categoryId = $("#categoryid1").attr("bate-id");	
 				var cateId = ${curCategory.id};
  				var menuId=menuid;
- 				window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId+"&menuId="+menuId;
+ 				window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&menuId="+menuId;
  	    	});
  	    }
     	
@@ -492,7 +492,7 @@ function KeyP(event){
        	  var keywords = $("#keywords").val().trim();  
        	  if(keywords != ''){
        		  keywords=  encodeURIComponent(keywords)
-           	  var url="Source_searchKey.action";
+           	  var url="${host}/shop/source/search";
            	  window.location.href=url;
           	}
        	if(keywords == ''){
@@ -501,7 +501,7 @@ function KeyP(event){
        	}
        	if(keywords != ''){
        		 keywords=  encodeURIComponent(keywords)
-       		window.location.href = "Source_searchKey.action?keyword="+keywords+"&categoryId="+'${curCategory.id}'+"&typeId="+'${curType.id}' ;
+       		window.location.href = "${host}/shop/source/search?keyword="+keywords+"&categoryId="+'${curCategory.id}'+"&typeId="+'${curType.id}' ;
            }
      	}
 
@@ -535,7 +535,7 @@ function KeyP(event){
 			else{
 				//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 				key =  encodeURIComponent(key)
-				var url="Source_searchKey.action?keyword="+encodeURIComponent(key);
+				var url="${host}/shop/source/search?keyword="+encodeURIComponent(key);
 				window.location.href=url;
 			}
 			return false;

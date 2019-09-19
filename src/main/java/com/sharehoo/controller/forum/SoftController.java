@@ -1,6 +1,9 @@
 package com.sharehoo.controller.forum;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.PageBean;
@@ -22,8 +27,10 @@ import com.sharehoo.entity.forum.Soft;
 import com.sharehoo.entity.forum.SoftSection;
 import com.sharehoo.service.forum.SoftSectionService;
 import com.sharehoo.service.forum.SoftService;
+import com.sharehoo.util.BootPathUtil;
 import com.sharehoo.util.CxCacheUtil;
 import com.sharehoo.util.forum.DateUtil;
+import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
 import com.sharehoo.util.forum.StringUtil;
 
@@ -37,15 +44,12 @@ public class SoftController {
 	@Autowired SoftSectionService softSectionService;
 	//后台soft.jsp页面删除功能实现
 	@RequestMapping("/admin/soft/delete/{softId}")
-	public String delete2(@PathVariable("softId") int softId,Model model)throws Exception{
-		JSONObject result=new JSONObject();
+	@ResponseBody
+	public E3Result delete2(@PathVariable("softId") int softId)throws Exception{
 		Soft soft=softService.findSoftById(softId);
 		softService.deleteSoft(soft);
-		result.put("success", true);
-		//ResponseUtil.write(ServletActionContext.getResponse(), result);
-		String mainPage="source.jsp";
-		model.addAttribute("mainPage", mainPage);
-		return "admin/main";    //原来为null,strust.xml里的通配符匹配，会自动跳转到Topic_list.action
+		
+		return E3Result.ok();    //原来为null,strust.xml里的通配符匹配，会自动跳转到Topic_list.action
 	}
 	
 	@RequestMapping("/admin/soft/update/{softId}")
@@ -76,55 +80,75 @@ public class SoftController {
 		return "admin/main";
 	}
 	
+	/**
+	* @Title: save1  
+	* @Description: TODO(软件修改)  
+	* @author miki 
+	* @date 2019年9月12日 下午9:56:25   
+	* @throws
+	 */
 	@RequestMapping("/admin/soft/update")
-	public String save1(@RequestParam("logo") File logo,@RequestParam(value="logoFileName",required=false) String logoFileName,@RequestBody Soft soft,
-			Model model)throws Exception{
+	@ResponseBody
+	public E3Result save1(HttpServletRequest request,Soft soft)throws Exception{
 		
-		if (logo!=null) {
-			String imageName=DateUtil.getCurrentDateStr();
-			String basePath = (String)CxCacheUtil.getIntance().getValue(Consts.ROOT_PATH);
-			String realPath = basePath + Consts.FORUM_UPLOAD_PATH + Consts.FORUM_UPLOAD_SOFT_FOLDER +"/"+
-					Consts.SDF_YYYYMM.format(new Date()) +"/images/soft/";
-			String imageFile=imageName+"."+logoFileName.split("\\.")[1];
-			File saveFile=new File(realPath,imageFile);
-			FileUtils.copyFile(logo, saveFile);
-			soft.setLogo("images/soft/"+imageFile);//原来为"images/user/"   2017.04.12
-		}else{
-			soft.setLogo("images/soft/timg1.jpg");
-		}		
-		softService.saveSoft(soft);	
-		String mainPage="updateSoft.jsp";
-		model.addAttribute("mainPage", mainPage);
-		String crumb1="资源上传";
-		model.addAttribute("crumb1", crumb1);
-		return "admin/main";	
+		Soft old = softService.findSoftById(soft.getId());
+		if(null!=old) {
+			soft.setLogo(old.getLogo());
+			soft.setPublishDate(old.getPublishDate());
+			
+			softService.saveSoft(soft);
+			return E3Result.ok();	
+		}
+			
+		return E3Result.build(401, "更新失败..");	
 	}
 	
-	
-	@RequestMapping("/admin/soft/add")	
-	public String save(@RequestParam("logo") File logo,@PathVariable("logoFileName") String logoFileName,@RequestBody Soft soft,
-			Model model)throws Exception{
+	/**
+	* @Title: save  
+	* @Description: TODO(添加软件)  
+	* @author miki 
+	* @date 2019年9月12日 下午10:05:04   
+	* @throws
+	 */
+	@RequestMapping("/admin/soft/add")
+	@ResponseBody
+	public E3Result save(@RequestParam("slogo") MultipartFile logo,@RequestBody Soft soft){	
+		try {
+			if (logo!=null) {		
+				 //获取项目的static根路径  
+		    	String staticPath = BootPathUtil.getStaticPath();
+			
+				String imageName=DateUtil.getCurrentDateStr();
+				String realPath = staticPath +"/images/soft/"+Consts.SDF_YYYYMM.format(new Date());  
+
+				String imageFile=imageName+"."+logo.getOriginalFilename().split("\\.")[1];
+				File savePath=new File(realPath);
+				if(!savePath.exists()) {
+					savePath.mkdirs();
+				}			
+				InputStream is = logo.getInputStream();    	    
+		          
+		        File toFile = new File(realPath, imageFile);    
+		        OutputStream os = new FileOutputStream(toFile);       
+		        byte[] buffer = new byte[1024];       
+		        int length = 0;    
+		        while ((length = is.read(buffer)) > 0) {       
+		            os.write(buffer, 0, length);       
+		        }       
+		        is.close();    
+		        os.close();
+				
+				soft.setLogo("images/soft/"+Consts.SDF_YYYYMM.format(new Date()) +"/"+imageFile);//原来为"images/user/"   2017.04.12
+			}else{
+				soft.setLogo("images/soft/timg1.jpg");
+			}
+			soft.setPublishDate(new Date());
+			softService.saveSoft(soft);
+		} catch (Exception e) {
+			return E3Result.build(401, "软件资源添加失败..",e.getMessage());
+		}	
 		
-		if (logo!=null) {
-			String imageName=DateUtil.getCurrentDateStr();
-			String basePath = (String)CxCacheUtil.getIntance().getValue(Consts.ROOT_PATH);
-			String realPath = basePath + Consts.FORUM_UPLOAD_PATH + Consts.FORUM_UPLOAD_SOFT_FOLDER +"/"+
-					Consts.SDF_YYYYMM.format(new Date())+"/images/soft/";
-			//String realPath=ServletActionContext.getServletContext().getRealPath("/images/soft/");
-			String imageFile=imageName+"."+logoFileName.split("\\.")[1];
-			File saveFile=new File(realPath,imageFile);
-			FileUtils.copyFile(logo, saveFile);
-			soft.setLogo("images/soft/"+imageFile);//原来为"images/user/"   2017.04.12
-		}else{
-			soft.setLogo("images/soft/timg1.jpg");
-		}
-		soft.setPublishDate(new Date());
-		softService.saveSoft(soft);	
-		String mainPage="addSoft.jsp";
-		model.addAttribute("mainPage", mainPage);
-		String crumb1="资源上传";
-		model.addAttribute("crumb1", crumb1);
-		return "admin/main";	
+		return E3Result.ok();	
 	}
 	
 	

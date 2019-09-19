@@ -17,5 +17,7 @@ public interface CategoryService {
 	
 	public Category getCategoryById(int categoryId);
 	
+	public List<Category> getCategoryByName(String categoryName);
+	
 	public Long getCount();
 }

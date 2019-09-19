@@ -1,6 +1,10 @@
 package com.sharehoo.controller.forum;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Section;
@@ -22,8 +28,10 @@ import com.sharehoo.entity.forum.Zone;
 import com.sharehoo.service.forum.SectionService;
 import com.sharehoo.service.forum.UserService;
 import com.sharehoo.service.forum.ZoneService;
+import com.sharehoo.util.BootPathUtil;
 import com.sharehoo.util.CxCacheUtil;
 import com.sharehoo.util.forum.DateUtil;
+import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
 import com.sharehoo.util.forum.StringUtil;
 import net.sf.json.JSONObject;
@@ -71,30 +79,44 @@ public class SectionController {
 	
 	//上传logo文件保存方法实现
 	@RequestMapping("/admin/section/add")
-	public String save(@RequestBody Section section,@RequestParam("logo") File logo,@PathVariable("logoFileName") String logoFileName)throws Exception{
-		String basePath = (String)CxCacheUtil.getIntance().getValue(Consts.ROOT_PATH);
+	public E3Result save(@RequestBody Section section,@RequestParam("logo") MultipartFile logo,
+			@PathVariable("logoFileName") String logoFileName)throws Exception{
 		if (logo != null) {
-
-			// 将上传图片名设置为日期类型201x.xx.xx.
-			String imageName = DateUtil.getCurrentDateStr();
-			/*
-			 * 指定上传文件的保存地址,原地址为"/images/logo/"即默认地址为tomact服务器下的webapp里的工程，
-			 * 由于每次重启tomact，都要重新加载eclipse工程里的项目，eclipse工程里的项目并没有上传进图片
-			 * 所以每次上传到tomact服务器中的图片资源都被自动删除了，这里将路径改为eclipse工程里的项目路径
-			 */
-			String realPath = basePath + Consts.FORUM_UPLOAD_PATH + Consts.FORUM_UPLOAD_SECTION_FOLDER + "/images/logo/";
-
-			String imageFile = imageName + "." + logoFileName.split("\\.")[1];
-			File saveFile = new File(realPath, imageFile);
-			FileUtils.copyFile(logo, saveFile);
-			section.setLogo("images/logo/" + imageFile);
+			
+			//获取项目的static根路径  
+	    	String staticPath = BootPathUtil.getStaticPath();
+	    	if(logo.getSize()>600*1024*3) {
+	    		return E3Result.build(401, "上传文件限制在3M以内哦");
+	    	}
+	    	logoFileName = logo.getOriginalFilename();
+			String imageName=DateUtil.getCurrentDateStr();
+			String realPath = staticPath +"/images/logo/"+Consts.SDF_YYYYMM.format(new Date()); 
+			String imageFile=imageName+"."+logoFileName.split("\\.")[1];
+			
+			File savePath=new File(realPath);
+			if(!savePath.exists()) {
+				savePath.mkdirs();
+			}		
+			InputStream is = logo.getInputStream();    	    
+	          
+	        File toFile = new File(realPath, imageFile);    
+	        OutputStream os = new FileOutputStream(toFile);       
+	        byte[] buffer = new byte[1024];       
+	        int length = 0;    
+	        while ((length = is.read(buffer)) > 0) {       
+	            os.write(buffer, 0, length);       
+	        }       
+	        is.close();    
+	        os.close();
+			
+			section.setLogo("images/logo/" +Consts.SDF_YYYYMM.format(new Date())+"/"+ imageFile);
 		} else {
 			section.setLogo("");
 		}
 		section.setId(section.getId());
 		sectionService.saveSection(section);
 		
-		return "redirect:";
+		return E3Result.ok();
 	}
 	
 	@RequestMapping("/admin/section/delete/{sectionId}")

@@ -8,7 +8,6 @@
 
 <!-- 2019.09.03 自定义弹窗所需插件 -->
 <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
 <script src="${host}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
 
@@ -46,7 +45,7 @@ function tipError(content) {
 		}
 function login(){
 	var curPage=window.location.href;
-	window.location.href="login?prePage="+curPage;
+	window.location.href="${host}/login?prePage="+curPage;
 }
 function checkUserLogin(){
 	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
@@ -68,7 +67,7 @@ function check_up(thisform){
 			key =  encodeURIComponent(key);
 			var url="SearchJ_search.action?keyword="+encodeURIComponent(key);
 			window.open(url);
-			//var url="shop/SolrJ_searchItemList.action?keyword="+encodeURIComponent(key);
+			//var url="shop/${host}/shop/source/serach?keyword="+encodeURIComponent(key);
 			//window.location.href=url;
 		}
 		return false;
@@ -151,7 +150,7 @@ function check_up(thisform){
 				<div class="nav-bar">
 					<a href="${host}/home" class="current">首页</a>
 					<a href="http://sharehoo.cn/blog/miki" target="_blank">博客社区<img src="${host}/images/icon/hot.gif"></a>
-					<a class=" " href="${host}/shop/index.html" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
+					<a class=" " href="${host}/shop/index.htm" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
 					<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html" target="_blank">W3C文档</a>
 					<a href="${host}/topic/section/3" target="_blank">社友圈<img src="${host}/images/icon/hot.gif"></a>			
 					<a class=" " href="h5" target="_blank">H5小游戏</a>			

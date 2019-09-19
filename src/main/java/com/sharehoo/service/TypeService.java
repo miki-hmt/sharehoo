@@ -12,5 +12,7 @@ public interface TypeService {
 	
 	public List<Type> getTypeList();
 	
+	public List<Type> getTypeByName(String typeName);
+	
 	public Type getTypeById(int id);
 }

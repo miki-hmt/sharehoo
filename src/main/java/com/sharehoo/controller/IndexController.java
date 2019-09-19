@@ -156,7 +156,7 @@ public class IndexController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/index.html")
+	@RequestMapping("/")
 	public String index(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception{
 		List<Notice> noticeList=noticeService.findNoticeList(null, null);
 		model.addAttribute("noticeList", noticeList);

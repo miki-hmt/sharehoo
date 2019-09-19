@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sharehoo.config.lang.Consts;
+import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.entity.shop.Category;
+import com.sharehoo.entity.shop.Menu;
 import com.sharehoo.entity.shop.SearchItem;
 import com.sharehoo.entity.shop.SearchResult;
+import com.sharehoo.entity.shop.Source;
 import com.sharehoo.entity.shop.Type;
+import com.sharehoo.service.MenuService;
 import com.sharehoo.service.SolrJService;
 import com.sharehoo.service.TypeService;
 import com.sharehoo.service.forum.CategoryService;
+import com.sharehoo.service.shop.SourceService;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
 import com.sharehoo.util.forum.StringUtil;
@@ -38,45 +43,66 @@ public class SolrController {
 	@Autowired
 	private SolrJService solrJService;
 	
+	@Autowired
+	private MenuService menuService;
+	@Autowired
+	private SourceService sourceService;
+
+	
 	@RequestMapping("shop/source/serach")
 	public String searchItemList(Model model,@RequestParam(value="keyword",required=false) String keyword,
 			@RequestParam(value="category_name",required=false) String category_name,
 			@RequestParam(value="menu_name",required=false) String menu_name,@RequestParam(value="type",required=false) String type,
-			@RequestParam(value="page",required=false) int page,HttpServletRequest request)throws Exception{
+			@RequestParam(value="page",required=false) String pages,HttpServletRequest request)throws Exception{
 			
 		List<Category> categories = categoryService.getCategoryList(null, null);
 		model.addAttribute("categories", categories);
+		
 		List<Type> types = typeService.getTypeList();
 		model.addAttribute("types", types);
 		int count = Integer.parseInt(SEARCH_RESULT_ROWS);
-
+		
+		int page = 0;
+		if(null!=pages) {
+			page = Integer.parseInt(pages);
+		}
 		// 前台关键字乱码问题
 		if (StringUtil.isNotEmpty(keyword)) {
-			// keyword=new String(keyword.getBytes("iso-8859-1"), "utf-8");
-			keyword = java.net.URLDecoder.decode(keyword, "UTF-8"); // 2017.08.16 将url中文参数进行转码
+			keyword = java.net.URLDecoder.decode(keyword, "UTF-8"); 			// 2017.08.16 将url中文参数进行转码
 		}
 		if (StringUtil.isNotEmpty(category_name)) {
-
 			category_name = java.net.URLDecoder.decode(category_name, "UTF-8"); // 2017.08.16 将url中文参数进行转码
 		}
 		if (StringUtil.isNotEmpty(menu_name)) {
-
-			menu_name = java.net.URLDecoder.decode(menu_name, "UTF-8"); // 2017.08.16 将url中文参数进行转码
+			menu_name = java.net.URLDecoder.decode(menu_name, "UTF-8"); 		// 2017.08.16 将url中文参数进行转码
 		}
 		if (StringUtil.isNotEmpty(type)) {
-
-			type = java.net.URLDecoder.decode(type, "UTF-8"); // 2017.08.16 将url中文参数进行转码
+			type = java.net.URLDecoder.decode(type, "UTF-8"); 					// 2017.08.16 将url中文参数进行转码
 		}
 
 		// 组织搜索字段为0而显示到前台的情况
 		if (!"0".equals(category_name)) {
-			model.addAttribute("curCategory", category_name);
+			List<Category> categoriesByName = categoryService.getCategoryByName(category_name);
+			
+			if(categoriesByName.size()>0) {
+				model.addAttribute("curCategory", categoriesByName.get(0));
+				
+				List<Menu> menuListBycategoryId = menuService.getMenuListBycategoryId(categoriesByName.get(0).getId());
+				model.addAttribute("menus", menuListBycategoryId);
+			}		
 		}
 		if (!"0".equals(menu_name)) {
-			model.addAttribute("curMenu", menu_name);
+			List<Menu> list = menuService.getMenuByName(menu_name);
+			if(list.size()>0) {
+				model.addAttribute("curMenu", list.get(0));
+			}
+			
 		}
 		if (!"0".equals(type)) {
-			model.addAttribute("curType", type);
+			List<Type> typelist = typeService.getTypeByName(type);
+			if(typelist.size()>0) {
+				model.addAttribute("curType", typelist.get(0));
+			}			
 		}
 		model.addAttribute("search", keyword);
 
@@ -86,46 +112,83 @@ public class SolrController {
 		// 查询关键字回显
 		String query = keyword;
 		model.addAttribute("query", query);
-		long totalPages = result.getTotalPages();
-		model.addAttribute("totalPages", totalPages);
 		long recordCount = result.getRecordCount();
-		model.addAttribute("recordCount", recordCount);
+
 		List<SearchItem> itemList = result.getItemList();
 		model.addAttribute("itemList", itemList);
-		// 分页
 		if (page <= 0) {
 			page = 1;
 		}
+		
 		StringBuffer param = new StringBuffer();
 		if (null == category_name) {
 			category_name = "";
-		}
-		if (null == type) {
+		}if (null == type) {
 			type = "";
-		}
-		if (null == keyword) {
+		}if (null == keyword) {
 			keyword = "";
 		}
 		param.append("category_name=" + category_name + "&type=" + type + "&keyword=" + keyword);
-
 		String pageCode = PageUtil.genPagination(request.getContextPath() + "/shop/source/serach", recordCount,
 				page, count, param.toString());
 		model.addAttribute("pageCode", pageCode);
-		// 返回逻辑视图search.jsp
-		return "shop/solrJ_search";
-			
-		}
+
+		return "shop/solrJ_search";			
+	}
 	
 	
 	
 	//资源分类页搜索结果显示  	2017.08.15 miki
-	@RequestMapping("shop/source/serach/go")
-	public String result(Model model)throws Exception{
+	@RequestMapping("/shop/source/categories")
+	public String result(Model model,@RequestParam(value="categoryId",required=false) String categoryId,@RequestParam(value="typeId",required=false) String typeId,
+			@RequestParam(value="menuId",required=false) String menuId,@RequestParam(value="page",required=false) String page,
+			HttpServletRequest request)throws Exception{
 		List<Category> categories=categoryService.getCategoryList(null, null);
 		model.addAttribute("categories", categories);
 		List<Type> types=typeService.getTypeList();
 		model.addAttribute("types", types);
-		return "too";
+		
+		if(null!=categoryId){
+			Category curCategory=categoryService.getCategoryById(Integer.parseInt(categoryId));
+			model.addAttribute("curCategory", curCategory);
+			List<Menu> menus=menuService.getMenuListBycategoryId(Integer.parseInt(categoryId));
+			model.addAttribute("menus", menus);
+		}
+		if(null!=typeId){
+			Type curType=typeService.getTypeById(Integer.parseInt(typeId));
+			model.addAttribute("curType", curType);
+		}	
+		
+		if(null!=menuId){
+			int menId = Integer.parseInt(menuId);
+			Menu curMenu=menuService.getMenuById(menId);
+			model.addAttribute("curMenu", curMenu);
+			if (StringUtil.isEmpty(page)) {
+				page="1";
+			}
+			PageBean pageBean=new PageBean(Integer.parseInt(page), 7);
+			List<Source> sourceList=sourceService.getSourceListByMenuId(menId, pageBean);
+			model.addAttribute("sourceList", sourceList);
+			long total=sourceService.getCountByMenuId(menId);
+			StringBuffer param=new StringBuffer();
+			param.append("menuId="+menuId);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/categories", total, Integer.parseInt(page), 7,param.toString());
+			model.addAttribute("pageCode", pageCode);
+		}else{
+			if (StringUtil.isEmpty(page)) {
+				page="1";
+			}
+			PageBean pageBean=new PageBean(Integer.parseInt(page), 7);
+			List<Source> sourceList=sourceService.getSourceListByCategoryId(Integer.parseInt(categoryId==null ? "0":categoryId), pageBean);
+			model.addAttribute("sourceList", sourceList);
+			long total=sourceService.getCountByCategoryId(Integer.parseInt(categoryId==null ? "0":categoryId));
+			StringBuffer param=new StringBuffer();
+			param.append("categoryId="+categoryId);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/categories", total, Integer.parseInt(page), 10,param.toString());
+			model.addAttribute("pageCode", pageCode);
+		}
+		
+		return "shop/solrJ_search_result";
 	}
 
 	@RequestMapping("admin/shop/solr/import")

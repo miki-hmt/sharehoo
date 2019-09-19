@@ -134,6 +134,9 @@ $(function(){
 	else if(solrPage.indexOf(curPage)>=0&&curPage!=""){
 			$("#solrLi").addClass("active");
 		}
+	else if(upLoadPage.indexOf(curPage)>=0&&curPage!=""){
+			$("#upLoadLi").addClass("active");
+		}
 		
 	//****************** 激活已经打开的父级菜单
 	$("#${ul}").css("display","block");
@@ -153,12 +156,12 @@ if(session.getAttribute("currentUser")==null){
 
 	<div id="sidebar">
 		<ul>	
-			<li id="noticeLi"><a href="${host}/admin/notice/list"><i class="icon icon-home"></i> <span>公告管理</span></a></li>	
+			<li id="noticeLi"><a href="${host}/admin/notices"><i class="icon icon-home"></i> <span>公告管理</span></a></li>	
 			<li id="noticeLi"><a href="${host}/admin/messages?page=1"><i class="icon icon-home"></i> <span>站内私信</span></a></li>	
 			<li id="userLi"><a href="${host}/admin/user/list?page=1"><i class="icon icon-home"></i> <span>用户管理</span></a></li>			
 			<li id="softSectionLi"><a href="${host}/admin/softsection/list?page=1"><i class="icon icon-home"></i> <span>软件版块列表</span></a></li>
 			<li id="softLi"><a href="${host}/admin/soft/list?page=1"><i class="icon icon-home"></i> <span>软件列表</span></a></li>
-			<li id="upLoadLi"><a href="Soft_upload.action"><i class="icon icon-home"></i> <span>上传软件</span></a></li>			
+			<li id="addSoftLi"><a href="${host}/admin/soft/upload"><i class="icon icon-home"></i> <span>上传软件</span></a></li>			
 			<!-- <li><a href="#"><i class="icon icon-home"></i> <span>回复管理</span></a></li> -->
 			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
 				<span>下载社区管理</span> <span class="label">11</span></a>

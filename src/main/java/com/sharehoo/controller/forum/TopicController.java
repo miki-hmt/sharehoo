@@ -134,7 +134,7 @@ public class TopicController {
 	* @date 2019年8月27日 下午10:48:06   
 	* @throws
 	 */
-	@RequestMapping("/topic/modify/{id}")
+	@RequestMapping("/admin/topic/modify/{id}")
 	public String update(Model model,@PathVariable("id") int id) throws Exception {
 		Topic topic = topicService.findTopicById(id);	// 获取topicId之后得到tpic对象 2017.04.05，否则页面无法得到topic数据
 		model.addAttribute("topic", topic);
@@ -220,59 +220,49 @@ public class TopicController {
 
 	// 2017.04.04 前台帖子列表修改方法
 	@RequestMapping("/topic/modify/{topicId}")
-	public String modify(HttpServletRequest request,HttpServletResponse response,@PathVariable("topicId") int topicId) throws Exception {
-		JSONObject result = new JSONObject();
+	@ResponseBody
+	public E3Result modify(HttpServletRequest request,HttpServletResponse response,@PathVariable("topicId") int topicId) throws Exception {
 		if (topicId > 0) {
 			Topic topic = topicService.findTopicById(topicId);
 			topic.setTop(0);
 			topic.setGood(0);
 			topicService.saveTopic(topic);
 		}
-		result.put("success", true);
-		ResponseUtil.write(response, result);
-		return null;
+		return E3Result.ok();
 	}
 
 	/*
 	 * miki 2017.06.20 设为精华帖
 	 */
 	@RequestMapping("/topic/hot/{topicId}")
-	public String modifyHot(HttpServletRequest request,HttpServletResponse response,@PathVariable("topicId") int topicId) throws Exception {
-		JSONObject result = new JSONObject();
+	@ResponseBody
+	public E3Result modifyHot(HttpServletRequest request,HttpServletResponse response,@PathVariable("topicId") int topicId) throws Exception {
 		if (topicId > 0) {
 			Topic topic = topicService.findTopicById(topicId);
 			if (topic.getGood() == 1) {
-				result.put("success", false);
-				ResponseUtil.write(response, result);
-				return null;
+				return E3Result.build(401, "已经射过了，不要再射了..");
 			}
 			topic.setGood(1);
 			topicService.saveTopic(topic);
 		}
-		result.put("success", true);
-		ResponseUtil.write(response, result);
-		return null;
+		return E3Result.ok();
 	}
 
 	/*
 	 * miki 2017.06.20 设为置顶帖
 	 */
 	@RequestMapping("/topic/top/{topicId}")
-	public String modifyTop(HttpServletRequest request,HttpServletResponse response,@PathVariable("topicId") int topicId) throws Exception {
-		JSONObject result = new JSONObject();
+	@ResponseBody
+	public E3Result modifyTop(HttpServletRequest request,HttpServletResponse response,@PathVariable("topicId") int topicId) throws Exception {
 		if (topicId > 0) {
 			Topic topic = topicService.findTopicById(topicId);
 			if (topic.getTop() == 1) {
-				result.put("success", false);
-				ResponseUtil.write(response, result);
-				return null;
+				return E3Result.build(401, "已经顶到了，不要再顶了..");
 			}
 			topic.setTop(1);
 			topicService.saveTopic(topic);
 		}
-		result.put("success", true);
-		ResponseUtil.write(response, result);
-		return null;
+		return E3Result.ok();
 	}
 
 	/*
@@ -461,44 +451,37 @@ public class TopicController {
 	// 后台删除，单个操作实现
 	@RequestMapping("/topic/delete")
 	@ResponseBody
-	public JSONObject backDelete(@RequestParam("topicId") int topicId) throws Exception {
-		JSONObject result = new JSONObject();
+	public E3Result backDelete(@RequestParam("topicId") int topicId) throws Exception {
 		Topic topic = topicService.findTopicById(topicId);
 		topicService.deleteTopic(topic);
-		result.put("success", true);
-		return result; // 原来为null
+		return E3Result.ok(); // 原来为null
 	}
 
 	// topicList页面删除功能实现
-	@RequestMapping("/topic/back-delete")
+	@RequestMapping("/topic/backDelete")
 	@ResponseBody
-	public JSONObject delete(@RequestParam("topicId") int topicId) throws Exception {
-		JSONObject result = new JSONObject();
+	public E3Result delete(@RequestParam("topicId") int topicId) throws Exception {
 		if (topicId > 0) {
 			int size = replyService.findReplyListByTopicId(topicId, null).size();
-			if (size > 0) {
-				result.put("success", false);				
-				return result;
+			if (size > 0) {			
+				return E3Result.build(401, "请先删除该帖子下的回复..");
 			}
 			Topic topic = topicService.findTopicById(topicId);
-			topicService.deleteTopic(topic);
-			result.put("success", true);			
+			topicService.deleteTopic(topic);		
 		}
-		return result; // 原来为null,strust.xml里的通配符匹配，会自动跳转到Topic_list.action
+		return E3Result.ok(); // 原来为null,strust.xml里的通配符匹配，会自动跳转到Topic_list.action
 	}
 
 	// 删除多个操作
-	@RequestMapping("/topic/batch-delete")
+	@RequestMapping("/topic/batchDelete")
 	@ResponseBody
-	public JSONObject batchDelete(@RequestParam("ids") String ids) throws Exception {
-		JSONObject result = new JSONObject();
+	public E3Result batchDelete(@RequestParam("ids") String ids) throws Exception {
 		String[] idsStr = ids.split(",");
 		for (int i = 0; i < idsStr.length; i++) {
 			Topic e = topicService.findTopicById(Integer.parseInt(idsStr[i]));
 			topicService.deleteTopic(e);
 		}
-		result.put("success", true);
 		
-		return result;
+		return E3Result.ok();
 	}
 }

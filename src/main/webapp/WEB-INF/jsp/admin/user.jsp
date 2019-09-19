@@ -14,7 +14,7 @@
 <style type="text/css">
 </style>
 <script type="text/javascript">
- function modifyUser(id,nickName,trueName,password,sex,face,email,mobile,regTime,levelId,score,status){
+ function modifyUser(id,nickName,trueName,password,sex,face,email,mobile,regTime,levelId,score,status,nickNameId){
 	 $("#myModalLabel").html("修改用户");
 	 $("#id").val(id);
 	 $("#nickName").val(nickName);
@@ -28,6 +28,7 @@
 	 $("#levelId").val(levelId);
 	 $("#score").val(score);
 	 $("#status").val(status);
+	 $("#nickNameId").val(nickNameId);
 	}
 
 
@@ -104,46 +105,66 @@
 		swal("发表失败", content, "error");
 	};
 
-	function userDelete(userId){
-	if(confirm("用户所发的帖子也将被删除，确定要删除这条数据吗?")){
-		$.post("User_delete.action",{userId:userId},
-				function(result){
-					var result=eval(result);
-					if(result.info){
-						alert(result.info);
-						window.location.reload(true);
-					}
+	function userDelete(userId){	
+		swal({
+			title: "您确定要拉黑这家伙吗？", 
+			text: "拉黑之后，将不能行驶登录权限..", 
+			type: "warning",
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是的，强行拉黑！",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/admin/user/limit/"+userId,
+					data: {userId:userId},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("拉黑成功", function() {
+							resetValue();
+							location.reload(true);
+						});
+						//swal("操作成功!", "已成功删除数据！", "success");
+					}else{
+						swal("OMG", "操作失败了!", "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", "操作失败了!", "error");
+				});
+			});
+	}
+	
+	function deleteUsers() {
+		var selectedSpan = $(".checked").parent().parent().next("td");
+		if (selectedSpan.length == 0) {
+			alert("请选择要删除的数据！");
+			return;
+		}
+		var strIds = [];
+		for (var i = 0; i < selectedSpan.length; i++) {
+			strIds.push(selectedSpan[i].innerHTML);
+		}
+		var ids = strIds.join(",");
+		if (confirm("用户所发的帖子也将被删除，您确定要删除这" + selectedSpan.length + "条数据吗？")) {
+			$.post("User_deleteUsers.action", {
+				ids : ids
+			}, function(result) {
+				var result = eval(result);
+				if (result.info) {
+					alert(result.info);
+					location.reload(true);
 				}
-			);
+			});
+		} else {
+			return;
+		}
 	}
-}
-function deleteUsers(){
-	var selectedSpan=$(".checked").parent().parent().next("td");
-	if(selectedSpan.length==0){
-		alert("请选择要删除的数据！");
-		return;
-	}
-	var strIds=[];
-	for(var i=0;i<selectedSpan.length;i++){
-		strIds.push(selectedSpan[i].innerHTML);
-	}
-	var ids=strIds.join(",");
-	if(confirm("用户所发的帖子也将被删除，您确定要删除这"+selectedSpan.length+"条数据吗？")){
-		$.post("User_deleteUsers.action",{ids:ids},function(result){
-			var result=eval(result);
-			if(result.info){
-				alert(result.info);
-				location.reload(true); 
-			}
-		});
-	}else{
-		return;
-	}
-}
-function resetValue(){
+	
+	function resetValue(){
 	 $("#id").val("");
 	 $("#userName").val("");
-}
+	}
 
 </script>
 </head>
@@ -228,8 +249,10 @@ function resetValue(){
 										</td>
 										<td style="text-align: center;vertical-align: middle;">
 											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" 
-											onclick="return modifyUser(${user.id},'${user.nickName }','${user.trueName }','${user.password }','${user.sex }','${user.face }','${user.email }','${user.mobile }','${user.regTime }','${user.levelId }','${user.score }','${user.status }' )">修改</button>
-											<button class="btn btn-danger" type="button" onclick="javascript:userDelete(${user.id})">删除</button>
+											onclick="return modifyUser(${user.id},'${user.nickName }','${user.trueName }','${user.password }','${user.sex }',
+												'${user.face }','${user.email }','${user.mobile }','${user.regTime }','${user.levelId }','${user.score }',
+												'${user.status }','${user.nickNameId}' )">修改</button>
+											<button class="btn btn-danger" type="button" onclick="javascript:userDelete(${user.id})">拉黑</button>
 										</td>
 									</tr>
 								</c:forEach>
@@ -270,6 +293,14 @@ function resetValue(){
 							</td>
 							<td>
 								<input id="nickName" type="text" name="nickName" placeholder="导入数据失败！">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label" for="userName">用户昵称ID：</label>
+							</td>
+							<td>
+								<input id="nickNameId" type="text" name="nickNameId" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						
@@ -331,7 +362,8 @@ function resetValue(){
 								<label class="control-label" for="regTime">注册时间：</label>
 							</td>
 							<td>
-								<input id="regTime" type="text" name="regTime" placeholder="导入数据失败！">
+								<!-- 2019.09.12 miki 设置disabled为true，将不提交该属性 -->
+								<input id="regTime" type="text" name="regTime" disabled="true" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						<tr>

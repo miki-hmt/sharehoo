@@ -43,9 +43,17 @@ function searchType(typeid){
 	var cateId = cateCur.attr("bate-id");
 	//alert(menuId);
 	if(menuId==undefined){
-		window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId+"&typeId="+typeId;
+		if(cateId==undefined){
+			window.location.href="${pageContext.request.contextPath}/shop/source/categories?typeId="+typeId;
+		}else{
+			window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&typeId="+typeId;
+		}		
 	}else{
-		window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId+"&menuId="+menuId+"&typeId="+typeId;
+		if(cateId==undefined){
+			window.location.href="${pageContext.request.contextPath}/shop/source/categories?typeId="+typeId;
+		}else{
+			window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&menuId="+menuId+"&typeId="+typeId;
+		}
 	}
 }
 
@@ -92,13 +100,13 @@ function searchType(typeid){
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${host}/shop/index.html">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
+			<a href="${host}/shop/index.htm">首页</a>
+			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="#" target="_blank">热搜模块</a>
 			<a href="#" target="_blank">下载排行</a>			
-			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
-			<a href="${pageContext.request.contextPath}/SoftSection_listpr.action" target="_blank">虎豆充值</a>
+			<a class=" " href="${pageContext.request.contextPath}/" target="_blank">论坛</a>			
+			<a href="${pageContext.request.contextPath}/shop/cdk/buy" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 		</div>
 		<div class="search-download">
@@ -146,7 +154,7 @@ $(document).ready(function() {
         		_this.attr("href",sUrl);
             }
         });
-        $("#keywords").attr("href",'SolrJ_searchItemList.action?keyword='+encodeURIComponent(keywords));
+        $("#keywords").attr("href",'${host}/shop/source/serach?keyword='+encodeURIComponent(keywords));
     }
 	//处理特殊字符 end	
 })
@@ -168,9 +176,9 @@ function KeyP(event){
 	}
     if(code == 13 && keywords != ''){
     	keywords = encodeURIComponent(keywords)
-		window.location.href = "SolrJ_searchItemList.action?categoryId="+categoryid +"&typeId="+sourcetype+"&keyword="+keywords ;
+		window.location.href = "${host}/shop/source/serach?categoryId="+categoryid +"&typeId="+sourcetype+"&keyword="+keywords ;
     }
-    $("#keywords").attr("href",'SolrJ_searchItemList.action?categoryId='+categoryid +'&typeId='+sourcetype+'&keyword='+keywords);
+    $("#keywords").attr("href",'${host}/shop/source/serach?categoryId='+categoryid +'&typeId='+sourcetype+'&keyword='+keywords);
 	if(keywords == ''){
         $("#keywords").attr("href",'#');
 	}
@@ -207,7 +215,7 @@ function KeyP(event){
               <dd>
                 <ul class="cate_list" id="categoryid1">
                   <li bate-id="categoryall">
-                  	<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action">
+                  	<a href="${pageContext.request.contextPath}/shop/source/categories">
                   		全部
                   	</a>
                   </li>
@@ -230,7 +238,7 @@ function KeyP(event){
                   	<c:forEach items="${menus}" var="menu">
                   		<c:choose>
 							<c:when test="${menu.id==curMenu.id }">
-								<a href="javascript:void(0);" bate-id="${menu.id }" onclick="javascript:show2('${menu.id }')" id="miki" class="sub_a" style="color:#CC0000;">${menu.name}</a>
+								<a href="javascript:void(0);" bate-id="${menu.id }" onclick="javascript:show2('${menu.id }')" id="miki" class="sub_a cate_cur" style="color:#CC0000;">${menu.name}</a>
 							</c:when>
 	                  		<c:otherwise>
 	                  			<a href="javascript:void(0);" onclick="javascript:show2('${menu.id }')" class=" sub_a">${menu.name}</a>
@@ -246,11 +254,11 @@ function KeyP(event){
              <dl class="cate_sea_list clearfix">
               <dt>资源类型：</dt>
               <dd id="sourcetype">
-              <label bata-id="10" class="source_item js_source"><a href="${pageContext.request.contextPath}/shop/Source_search.action">全部</a></label>
+              <label bata-id="10" class="source_item js_source"><a href="${pageContext.request.contextPath}/shop/source/categories">全部</a></label>
               <c:forEach items="${types}" var="type" >
               	<c:choose>
 							<c:when test="${curType.id==type.id }">
-								<label bata-id="${type.id }" class="source_item js_source"><a href="javascript:void(0);" onclick="javascript:searchType(${type.id})" style="color:#CC0000;">${type.name }</a></label>
+								<label bata-id="${type.id }" class="source_item js_source cate_cur"><a href="javascript:void(0);" onclick="javascript:searchType(${type.id})" style="color:#CC0000;">${type.name }</a></label>
 							</c:when>
 	                  		<c:otherwise>
 	                  			<label bata-id="${type.id }" class="source_item js_source"><a href="javascript:void(0);" onclick="javascript:searchType(${type.id})">${type.name }</a></label>
@@ -282,7 +290,7 @@ function KeyP(event){
             				<a class="cate_close" id="tech_close" href="#"><img src="${pageContext.request.contextPath}/shop/images/logo/close.jpg" alt="img" style="margin-top:5px;"></a></label>
                              </c:if>  
                              <label id="source_type" class="condition_item"><em>清空全部</em>
-	            				<a class="cate_close" id="tech_close" href="${pageContext.request.contextPath}/shop/Source_search.action"><img src="${pageContext.request.contextPath}/shop/images/logo/close.jpg" alt="img" style="margin-top:5px;">
+	            				<a class="cate_close" id="tech_close" href="${pageContext.request.contextPath}/shop/source/categories"><img src="${pageContext.request.contextPath}/shop/images/logo/close.jpg" alt="img" style="margin-top:5px;">
 	            				</a>
             				</label>                                                                   
           				           
@@ -444,7 +452,7 @@ function KeyP(event){
 				$(this).addClass("cate_cur").siblings("li").removeClass("cate_cur");
 				var cateCur = $(".cate_list .cate_cur");
 				var cateId = cateCur.attr("bate-id");							
-					window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId;
+					window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId;
 					return false;
 				});
 	    	return false;
@@ -454,7 +462,7 @@ function KeyP(event){
     	
     	//点击全部关闭子元素，并查询结果
     	function close(){
-    		window.location.href="${pageContext.request.contextPath}/shop/Source_search.action";
+    		window.location.href="${pageContext.request.contextPath}/shop/source/categories";
     	}
     		
     	//二级菜单 类型查询   2017.08.15 miki
@@ -464,9 +472,9 @@ function KeyP(event){
  	    	$('.subSearch').click(function(){//点击的时候给当前这个加上红色下划线，其他的移除
 				$(this).addClass("cate_cur").siblings("a").removeClass("cate_cur");			
  	    	//var categoryId = $("#categoryid1").attr("bate-id");	
-				var cateId = ${curCategory.id};
+				var cateId = '${curCategory.id}';
  				var menuId=menuid;
- 				window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId+"&menuId="+menuId;
+ 				window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&menuId="+menuId;
  				return false;
  	    	});
  	    	return false;
@@ -486,7 +494,7 @@ function KeyP(event){
        	}
        	if(keywords != ''){
        		 keywords=  encodeURIComponent(keywords)
-       		window.location.href = "SolrJ_searchItemList.action?keyword="+keywords+"&category_name="+'${curCategory.name}'+"&type="+'${curType.name}' ;
+       		window.location.href = "${host}/shop/source/serach?keyword="+keywords+"&category_name="+'${curCategory.name}'+"&type="+'${curType.name}' ;
        		return false;
            }
        	return false;
@@ -522,7 +530,7 @@ function KeyP(event){
 			else{
 				//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 				key =  encodeURIComponent(key)
-				var url="SolrJ_searchItemList.action?keyword="+encodeURIComponent(key);
+				var url="${host}/shop/source/serach?keyword="+encodeURIComponent(key);
 				window.location.href=url;
 			}
 			return false;

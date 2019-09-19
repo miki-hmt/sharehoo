@@ -1,12 +1,14 @@
 package com.sharehoo.dao.jedis;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-@Service
+
+@Service("jedisClient")
 public class JedisClientPool implements JedisClient {
-	
+	@Autowired
 	private JedisPool jedisPool;
 
 	public JedisPool getJedisPool() {

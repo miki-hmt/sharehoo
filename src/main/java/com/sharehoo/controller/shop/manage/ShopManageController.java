@@ -219,7 +219,7 @@ public class ShopManageController {
 			List<Shop> shopList=shopService.allShops(pageBean);
 			model.addAttribute("shopList", shopList);
 			long total=shopService.getAllShopCount();
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/admin",
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/shop",
 					total, Integer.parseInt(page), 7,null);
 			model.addAttribute("pageCode", pageCode);
 		}else {

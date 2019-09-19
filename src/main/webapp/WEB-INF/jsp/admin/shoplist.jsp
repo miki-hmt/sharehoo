@@ -7,6 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+
+<!-- 2019.09.11	miki 自定义弹窗 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
 <style type="text/css">
 </style>
 <script type="text/javascript">	
@@ -51,30 +55,88 @@
 			$("#error").html("最大容量不能为空！");
 			return false;
 		}
-		 $.post("${pageContext.request.contextPath}/shop/manage/ShopManage_saveShop.action?shopId="+shopId, $("#fm").serialize(),
-			 function(result){
- 			if(result.success){
- 				alert("修改成功！");
- 				resetValue();
- 				location.reload(true);
- 			}else{	    				
- 				alert("修改失败！");    			            				
- 			}
- 		},"json");
- }
-function shopDelete(shopId){
-	if(confirm("店铺关联的所有信息都要删除，确定要删除吗?")){
-		$.post("${pageContext.request.contextPath}/shop/manage/ShopManage_delete.action",{shopId:shopId},
-				function(result){
-					var result=eval(result);
-					if(result.info){
-						alert(result.info);
-						window.location.reload(true);
-					}
+		
+		var formData = new FormData($("#fm")[0]);
+		$.ajax({
+			type : "POST",
+			url : "${host}/admin/shop/update?shopId="+shopId,
+			data : formData,
+			cache : false,
+			async : false,
+			processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+			contentType : false, //必须false才会自动加上正确的Content-Type
+			success : function(data) {
+				if (data.status == 200) {
+					tipOk("修改成功", function() {
+						resetValue();
+						location.reload(true);
+					});
+				} else {
+					tipError("修改失败!!" + data.msg);
 				}
-			);
+			}
+		});
+		return false; //阻止ajax结束自动刷新页面
+ }
+ 
+ function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			html: true,
+			type: "success",
+			timer: 3000  
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("发表失败", content, "error");
+	};
+ 
+	function shopDelete(shopId){
+		swal({
+			title: "您确定要拉黑这家伙吗？", 
+			text: "拉黑之后，将不能行驶登录权限..", 
+			type: "warning",
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是的，强行拉黑！",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/admin/shop/delete",
+					data: {shopId:shopId},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("拉黑成功", function() {
+							resetValue();
+							location.reload(true);
+						});
+						//swal("操作成功!", "已成功删除数据！", "success");
+					}else{
+						swal("OMG", "操作失败了!", "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", "操作失败了!", "error");
+				});
+			});
+				
+		/* if(confirm("店铺关联的所有信息都要删除，确定要删除吗?")){
+			$.post("${pageContext.request.contextPath}/shop/manage/ShopManage_delete.action",{shopId:shopId},
+					function(result){
+						var result=eval(result);
+						if(result.info){
+							alert(result.info);
+							window.location.reload(true);
+						}
+					}
+				);
+		} */
 	}
-}
 function deleteUsers(){
 	var selectedSpan=$(".checked").parent().parent().next("td");
 	if(selectedSpan.length==0){
@@ -202,14 +264,14 @@ function resetValue(){
 				<h3 id="myModalLabel">修改店铺</h3>
 			</div>
 			<div class="modal-body">
-				<form id="fm" action="User_save.action">
+				<form id="fm" action="">
 					<table>
 						<tr>
 							<td>
 								<label class="control-label" for="name">店铺下载数：</label>
 							</td>
 							<td>
-								<input id="name" type="text" name="shop.shop_name" placeholder="导入数据失败！">
+								<input id="name" type="text" name="shop_name" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						
@@ -218,7 +280,7 @@ function resetValue(){
 								<label class="control-label" for="status">注销店铺：</label>(false:注销)
 							</td>
 							<td>
-								<input id="status" type="text" name="shop.status" placeholder="导入数据失败！">
+								<input id="status" type="text" name="status" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						
@@ -227,7 +289,7 @@ function resetValue(){
 								<label class="control-label" for="downNum">店铺下载数：</label>
 							</td>
 							<td>
-								<input id="downNum" type="text" name="shop.downNum" placeholder="导入数据失败！">
+								<input id="downNum" type="text" name="downNum" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						<tr>
@@ -235,7 +297,7 @@ function resetValue(){
 								<label class="control-label" for="tag">店铺标签：</label>
 							</td>
 							<td>
-								<input id="tag" type="text" name="shop.tag" placeholder="导入数据失败！">
+								<input id="tag" type="text" name="tag" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						
@@ -244,7 +306,7 @@ function resetValue(){
 								<label class="control-label" for="douNum">店铺豆数：</label>
 							</td>
 							<td>
-								<input id="douNum" type="text" name="shop.douNum" placeholder="导入数据失败！">
+								<input id="douNum" type="text" name="douNum" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						<tr>
@@ -252,7 +314,7 @@ function resetValue(){
 								<label class="control-label" for="sourceNum">店铺资源数：</label>
 							</td>
 							<td>
-								<input id="sourceNum" type="text" readonly="readonly" name="shop.sourceNum" placeholder="导入数据失败！">
+								<input id="sourceNum" type="text" readonly="readonly" name="sourceNum" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						<tr>
@@ -260,12 +322,12 @@ function resetValue(){
 								<label class="control-label" for="maxNum">店铺最大资源数：</label>
 							</td>
 							<td>
-								<input id="maxNum" type="text" name="shop.maxNum" placeholder="导入数据失败！">								
+								<input id="maxNum" type="text" name="maxNum" placeholder="导入数据失败！">								
 							</td>
 						</tr>					
 									
 					</table>
-					<input id="id" type="hidden" name="shop.id">
+					<input id="id" type="hidden" name="id">
 				</form>
 			</div>
 			<div class="modal-footer">

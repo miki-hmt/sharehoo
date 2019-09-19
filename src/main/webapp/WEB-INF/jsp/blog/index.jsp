@@ -10,10 +10,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>${user.nickName}的个人博客-IT帮-资讯传播社区-技术交流_干货分享_课设下载_源码下载</title>
 		<meta name="baidu-site-verification" content="qGEMPsi9L8" />
- 		<meta name="Author" content="miki">
-  		<meta name="Keywords" content="${user.nickName},课设,下载,博客,论坛,IT资讯,开发心得,干货分享,代码,源码">
+ 		<meta name="Author" content="miki"/>
+  		<meta name="Keywords" content="${user.nickName},课设,下载,博客,论坛,IT资讯,开发心得,干货分享,代码,源码"/>
   		<meta name="Description" content="${user.nickName}的个人博客--sharehoo.cn资讯交流平台--专注于程序员开发道路的技术分享，问题解决。
-	会员可以发帖交流与讨论，每个人都有一个个人博客，可以在上面写下自己的心得与感悟。同时提供资源下载，开源源码下载，课程设计，专注于服务大学生。">		
+	会员可以发帖交流与讨论，每个人都有一个个人博客，可以在上面写下自己的心得与感悟。同时提供资源下载，开源源码下载，课程设计，专注于服务大学生。"/>		
 		<link href="${host }/blog/include/css/base.css" rel="stylesheet"/>
 		<link href="${host }/blog/include/css/index.css" rel="stylesheet"/>
 		<link href="${host }/blog/include/css/style.css" rel="stylesheet"/>
@@ -21,7 +21,7 @@
 		<link href="${host }/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 		<!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 		<!--我的高亮效果是zenburn-->
-		<link rel="stylesheet" href="${host }/highlight/styles/gruvbox-dark.css">
+		<link rel="stylesheet" href="${host }/highlight/styles/gruvbox-dark.css"/>
 		<script src="${host }/highlight/highlight.pack.js"></script>
 		<script>hljs.initHighlightingOnLoad();</script>
 		<script>
@@ -39,8 +39,6 @@
     			s.parentNode.insertBefore(bp, s);
 			})();
 		</script>
-
-		<meta name="baidu-site-verification" content="qGEMPsi9L8" />
 		<script>
 		var _hmt = _hmt || [];
 		(function() {

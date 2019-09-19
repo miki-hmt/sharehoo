@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<!-- 2019.09.11	miki 自定义弹窗 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
 <head>
 
 	<!-- 					2017.04.04
@@ -22,11 +26,29 @@ function openAddDlg(){
 		 $("#error").html("请输入大板块名称！");
 		 return false;
 	}
-	 $.post("SoftSection_save.action", $("#fm").serialize());
-	 alert("保存成功！");
-	 resetValue();
-	 location.reload(true);
+	var formData = new FormData($("#fm")[0]);
+		$.ajax({
+			type : "POST",
+			url : "${host}/admin/softsection/add",
+			data : formData,
+			cache : false,
+			async : false,
+			processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+			contentType : false, //必须false才会自动加上正确的Content-Type
+			success : function(data) {
+				if (data.status == 200) {
+					tipOk("保存成功", function() {
+						resetValue();
+						location.reload(true);
+					});
+				} else {
+					tipError("保存失败!!" + data.msg);
+				}
+			}
+		});
+		return false; //阻止ajax结束自动刷新页面
  }
+ 
  function modifyZone(id,areaName,descript){
 	 $("#myModalLabel").html("修改大板块");
 	 $("#id").val(id);
@@ -37,7 +59,34 @@ function openAddDlg(){
  
  /*softSectionId对应SoftSection_delete.action里的变量，zoneId表示此处传 的值，softSectionId:zoneId表示将zoneId的值赋给softSectionId */	
 function zoneDelete(zoneId){
-	if(confirm("确定要删除这条数据吗?")){
+	swal({
+		title: "您确定要删除这家伙吗？", 
+		text: "删除之后，就灭了啊..", 
+		type: "warning",
+		showCancelButton: true,
+		closeOnConfirm: false,
+		confirmButtonText: "是的，强行删除！",
+		confirmButtonColor: "#ec6c62"
+		}, function() {
+			$.ajax({
+				url: "${host}/admin/softsection/delete/"+zoneId,
+				data: {softSectionId:zoneId},
+				type: "POST",
+			}).done(function(data) {
+				if(data.info){
+					tipOk("删除成功", function() {
+						resetValue();
+						location.reload(true);
+					});
+					//swal("操作成功!", "已成功删除数据！", "success");
+				}else{
+					swal("OMG", "操作失败了!", "error");
+				}					
+			}).error(function(data) {
+				swal("OMG", "操作失败了!", "error");
+			});
+		});	
+	/* if(confirm("确定要删除这条数据吗?")){
 		$.post("SoftSection_delete.action",{softSectionId:zoneId},				
 				function(result){
 					var result=eval(result);
@@ -49,8 +98,26 @@ function zoneDelete(zoneId){
 					}
 				}
 			);
-	}
+	} */
 }
+
+	function tipOk(content,callback){
+			swal({   
+				title: content,   
+				text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+				html: true,
+				type: "success",
+				timer: 3000  
+			},function(){
+					if (callback) {
+						callback();
+					}
+				});
+		};
+	function tipError(content){
+		swal("发表失败", content, "error");
+	};
+
  function resetValue(){
 	 $("#id").val("");
 	 $("#zoneName").val("");
@@ -122,7 +189,7 @@ function zoneDelete(zoneId){
 								<label class="control-label" for="zoneName">请输入板块名称：</label>
 							</td>
 							<td>
-								 <input id="zoneName" type="text" name="softSection.areaName" placeholder="请输入…">
+								 <input id="zoneName" type="text" name="areaName" placeholder="请输入…">
 							</td>
 						</tr>
 						<tr>
@@ -130,11 +197,12 @@ function zoneDelete(zoneId){
 								<label class="control-label" for="description">请输入备注：</label>
 							</td>
 							<td>
-								<textarea rows="5" cols="50" style="width: 405px;" id="description" name="softSection.descript"></textarea>
+								<textarea rows="5" cols="50" style="width: 405px;" id="description" name="descript"></textarea>
 							</td>
 						</tr>
 					</table>
-					<input id="id" type="hidden" name="softSection.id">
+					<!-- 2019.09.12 miki 此处因为保存和修改都使用一个form，所以给id一个默认值，修改时对其重新初始化，添加时后台会自动生成新的id -->
+					<input id="id" type="hidden" name="id" value="0">
 				</form>
 			</div>
 			<div class="modal-footer">

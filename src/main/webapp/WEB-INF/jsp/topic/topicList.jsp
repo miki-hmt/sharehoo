@@ -37,56 +37,144 @@
 
 <script type="text/javascript">
 	function delTopic(topicId){
-		if (confirm("您确定要删除这个帖子吗？")) {
-			$.post("Topic_delete2.action",{topicId:topicId},function(result){
-				if(result.success){
-					alert("帖子已成功删除！");
-					location.reload(true);
-				}else{
-					alert("请先删除帖子下的评论！");
-				}
-			},"json");
-		}else{
-			return;
-		}
+	
+		swal({
+			title: "您确定要删除吗？", 
+			text: "您确定要删除这条数据？", 
+			type: "warning",
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是的，忍痛删除",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/topic/delete/",
+					data: {topicId:topicId},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("删除成功", function() {
+							location.reload(true);
+						});
+						//swal("操作成功!", "已成功删除数据！", "success");
+					}else{
+						swal("OMG", "删除操作失败了!", "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", "删除操作失败了!", "error");
+				});
+			});
 	}
-
+	
+	function tipOk(content,callback){
+			swal({   
+				title: content,   
+				text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+				imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+				html: true,
+				timer: 2000,   
+				showConfirmButton: false
+			},function(){
+				if (callback) {
+					callback();
+				}
+			});
+		};
 </script>
 
 
 <script type="text/javascript">
 	function modifyTopic(topicId){
-		if (confirm("确定撤销该帖所有荣誉吗？")) {
-			$.post("Topic_modify.action",{topicId:topicId},function(result){
-				if(result.success){
-					alert("帖子已成功修改！");
-					location.reload(true);
-				}else{
-					alert("修改失败！");
-				}
-			},"json");
-		}else{
-			return;
-		}
+	
+		swal({
+			title: "确定撤销该帖所有荣誉吗？", 
+			text: "撤销之后，将成为普通的帖子呦", 
+			type: "warning",
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是的，忍痛撤销",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/topic/modify/"+topicId,
+					data: {topicId:topicId},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("撤销成功", function() {
+							location.reload(true);
+						});
+						//swal("操作成功!", "已成功删除数据！", "success");
+					}else{
+						swal("OMG", "撤销操作失败了!", "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", "撤销操作失败了!", "error");
+				});
+			});
 	}
 	
 	function setHot(topicId){
-		if (confirm("确定要将该贴设为热门吗？")) {
-			$.post("Topic_modifyHot.action",{topicId:topicId},function(result){
-				if(result.success){
-					alert("帖子已成功修改！");
-					location.reload(true);
-				}else{
-					alert("已经精华了不要再射了！");
-				}
-			},"json");
-		}else{
-			return;
-		}
+	
+		swal({
+			title: "确定要将该贴设为热门吗？", 
+			text: "设为热门之后，可以让更多人看到哦", 
+			type: "warning",
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是的，我要热门",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/topic/hot/"+topicId,
+					data: {topicId:topicId},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("设置成功", function() {
+							location.reload(true);
+						});
+						//swal("操作成功!", "已成功删除数据！", "success");
+					}else{
+						swal("OMG", "已经精华了不要再射了！", "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", "已经精华了不要再射了！", "error");
+				});
+			});
+			
 	}
 	
 	function setTop(topicId){
-		if (confirm("确定要将该贴置顶吗？")) {
+	
+		swal({
+			title: "确定要将该贴设为置顶吗？", 
+			text: "设为置顶之后，可以让更多人看到哦", 
+			type: "warning",
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是的，我要热门",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/topic/top/"+topicId,
+					data: {topicId:topicId},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("设置成功", function() {
+							location.reload(true);
+						});
+						//swal("操作成功!", "已成功删除数据！", "success");
+					}else{
+						swal("OMG", data.msg, "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", data.msg, "error");
+				});
+			});
+			
+		/* if (confirm("确定要将该贴置顶吗？")) {
 			$.post("Topic_modifyTop.action",{topicId:topicId},function(result){
 				if(result.success){
 					alert("帖子已成功修改！");
@@ -97,7 +185,7 @@
 			},"json");
 		}else{
 			return;
-		}
+		} */
 	}
 	
 </script>
@@ -106,18 +194,18 @@
 <script type="text/javascript">
 
 //游客进入帖子页面，只能浏览不能评论，若是强行评论，会跳出提示2016.09.24
-function checkForm(){
-if('${currentUser.nickName}'==''){
-alert("请先登陆，再发帖！");
-return false;
-}
-}
-function modifyTopic(topicId,topicTop,topicGood){
+	function checkForm(){
+		if('${currentUser.nickName}'==''){
+			alert("请先登陆，再发帖！");
+		return false;
+		}
+	}
+/* function modifyTopic(topicId,topicTop,topicGood){
 	$("#topicId").val(topicId);
 	$("#topicTop").val(topicTop);
 	$("#topicGood").val(topicGood);
 	url="Topic_modify.action?topicId="+topicId;
-}
+} */
 
 </script>
 

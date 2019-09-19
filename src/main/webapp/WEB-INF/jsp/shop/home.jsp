@@ -39,7 +39,6 @@
 })();
 </script>
 
-<meta name="baidu-site-verification" content="qGEMPsi9L8" />
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -125,7 +124,7 @@ var _hmt = _hmt || [];
 			else{
 				//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 				key =  encodeURIComponent(key)
-				var url="SolrJ_searchItemList.action?keyword="+encodeURIComponent(key);
+				var url="${host}/shop/source/serach?keyword="+encodeURIComponent(key);
 				window.location.href=url;
 			}
 			return false;
@@ -141,7 +140,7 @@ var _hmt = _hmt || [];
 			else{
 				//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 				key =  encodeURIComponent(keyword)
-				var url="SolrJ_searchItemList.action?keyword="+encodeURIComponent(key);
+				var url="${host}/shop/source/serach?keyword="+encodeURIComponent(key);
 				window.location.href=url;
 			}
 			return false;
@@ -161,12 +160,12 @@ var _hmt = _hmt || [];
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${host}/shop/index.html" class="current">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank">资源分类</a>
+			<a href="${host}/shop/index.htm" class="current">首页</a>
+			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
-			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
+			<a class=" " href="${pageContext.request.contextPath}/" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 		</div>
@@ -275,7 +274,7 @@ var _hmt = _hmt || [];
           
           <ul class="announcement_list clearfix">
                       <li class="announcement_item">
-            <a target="_blank" href="http://sharehoo.cn/shop/SolrJ_searchItemList.action?categoryId=1&typeId=0">
+            <a target="_blank" href="http://sharehoo.cn/shop/${host}/shop/source/serach?categoryId=1&typeId=0">
             <i class="fa fa-chevron-circle-right"></i>
             2017毕业设计板块            </a>
             </li>
@@ -582,11 +581,11 @@ var _hmt = _hmt || [];
     	  
     	if(keywords == ''){
         //有可能是大类，有可能是小类，有可能有大类和小类
-        	window.location.href = "SolrJ_searchItemList.action?category_name="+categoryid+"&type="+sourcetype;
+        	window.location.href = "${host}/shop/source/serach?category_name="+categoryid+"&type="+sourcetype;
     	}
     	if(keywords != ''){
     		 keywords=  encodeURIComponent(keywords)
-    		window.location.href = "SolrJ_searchItemList.action?category_name="+categoryid+"&type="+sourcetype+"&keyword="+keywords;
+    		window.location.href = "${host}/shop/source/serach?category_name="+categoryid+"&type="+sourcetype+"&keyword="+keywords;
         }
   	}
 
@@ -611,7 +610,7 @@ var _hmt = _hmt || [];
 		}
 		if(code == 13 && keywords != ''){
 			keywords = encodeURIComponent(keywords)
-			window.location.href = "SolrJ_searchItemList.action?category_name="+categoryid+"&type="+sourcetype+"&keyword="+keywords;
+			window.location.href = "${host}/shop/source/serach?category_name="+categoryid+"&type="+sourcetype+"&keyword="+keywords;
 			//window.location.href="/search/" + categoryid +'/'+ sourcetype + '/'+ '0' + '/'+ '2'+ '/' + '1'+ '/'+keywords;
 		}
     }

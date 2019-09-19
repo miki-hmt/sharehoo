@@ -5,13 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
-
-import com.sharehoo.dao.BaseDAO;
-import com.sharehoo.dao.SearchDao;
 import com.sharehoo.dao.shop.ShopDao;
 import com.sharehoo.dao.shop.SourceDao;
 import com.sharehoo.entity.shop.Search;
@@ -19,6 +13,8 @@ import com.sharehoo.entity.shop.Shop;
 import com.sharehoo.entity.shop.Source;
 import com.sharehoo.service.shop.SearchService;
 import com.sharehoo.util.forum.StringUtil;
+
+
 @Transactional
 @Service("searchService")
 public class SearchServiceImpl implements SearchService {

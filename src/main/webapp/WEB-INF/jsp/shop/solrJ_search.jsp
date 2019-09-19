@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
      <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,13 +72,13 @@
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${host}/shop/index.html">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
+			<a href="${host}/shop/index.htm">首页</a>
+			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="#" target="_blank">热搜模块</a>
 			<a href="#" target="_blank">下载排行</a>			
-			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
-			<a href="${pageContext.request.contextPath}/SoftSection_listpr.action" target="_blank">虎豆充值</a>
+			<a class=" " href="${pageContext.request.contextPath}/" target="_blank">论坛</a>			
+			<a href="${pageContext.request.contextPath}/shop/cdk/buy" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 		</div>
 		<div class="search-download">
@@ -91,7 +92,7 @@
 </div>
 <!-- //顶部登录部分js选择器	引入login文件的js，	2017.09.09 miki -->
 	
-	<script type="text/javascript" src="/js/search-service/main.js" charset="utf-8"></script>
+<!-- <script type="text/javascript" src="/js/search-service/main.js" charset="utf-8"></script> -->
 <script type="text/javascript">
 	
 $(document).ready(function() {
@@ -126,7 +127,7 @@ $(document).ready(function() {
         		_this.attr("href",sUrl);
             }
         });
-        $("#keywords").attr("href",'Source_searchKey.action?keyword='+encodeURIComponent(keywords));
+        $("#keywords").attr("href",'${host}/shop/source/search?keyword='+encodeURIComponent(keywords));
     }
 	//处理特殊字符 end	
 })
@@ -148,9 +149,9 @@ function KeyP(event){
 	}
     if(code == 13 && keywords != ''){
     	keywords = encodeURIComponent(keywords)
-		window.location.href = "Source_searchKey.action?categoryId="+categoryid +"&typeId="+sourcetype+"&keyword="+keywords ;
+		window.location.href = "${host}/shop/source/search?categoryId="+categoryid +"&typeId="+sourcetype+"&keyword="+keywords ;
     }
-    $("#keywords").attr("href",'Source_searchKey.action?categoryId='+categoryid +'&typeId='+sourcetype+'&keyword='+keywords);
+    $("#keywords").attr("href",'${host}/shop/source/search?categoryId='+categoryid +'&typeId='+sourcetype+'&keyword='+keywords);
 	if(keywords == ''){
         $("#keywords").attr("href",'');
 	}
@@ -186,34 +187,63 @@ function KeyP(event){
               <dt>技术领域：</dt>
               <dd>
                 <ul class="cate_list" id="categoryid1">
-                  <li bate-id="categoryall" class="cate_cur">
-                  	<a href="javascript:void(0);" onclick="javascript:close();">
-                  		全部
-                  	</a>
-                  </li>
-                  
-                  <c:forEach items="${categories}" var="category">
-                  		<li bate-id="${category.id }" class="" style="line-height:25px;"><a href="javascript:void(0);" onclick="javascript:show()">${category.name}</a></li>
+                	<li bate-id="0" class="">
+	                  	<a href="javascript:void(0);" onclick="javascript:close();">
+	                  		全部
+	                  	</a>
+	                  </li>              
+                  <c:forEach items="${categories}" var="category">            
+                  	<c:choose>
+                  		<c:when test="${category.name eq curCategory.name}">              			
+                  			<li bate-id="${category.id }" class="cate_cur" style="line-height:25px;"><a href="javascript:void(0);" 
+                  				onclick="javascript:show()">${category.name}</a></li>
+                  		</c:when>
+                  		<c:otherwise>            	
+                         	<li bate-id="${category.id }" class="" style="line-height:25px;"><a href="javascript:void(0);" 
+                         		onclick="javascript:show()">${category.name}</a></li>
+                     	</c:otherwise>
+                  	</c:choose>
                   </c:forEach>
                   
                 </ul>
-                <div class="subSearch" id="sonSearch" style="display:none;">
-                  <img class="sub_img" src="${pageContext.request.contextPath}/shop/images/logo/san.jpg" alt="img">
-                         <a href="/search/12001/10/0/1/1" id="12001" class=" sub_a">DOS</a>
-                         <a href="/search/12002/10/0/1/1" id="12002" class=" sub_a">Linux</a>
-                         <a href="/search/12003/10/0/1/1" id="12003" class=" sub_a">MacOS</a>
-                         <a href="/search/12004/10/0/1/1" id="12004" class=" sub_a">OS</a>                                  
-                 </div>
-                             
+                
+                <!-- *******************显示目录下的菜单列表	2019.09.17	miki
+                ************************************************************************** -->
+                <c:choose>
+	                <c:when test="${fn:length(menus)==0}">
+	                	<div class="subSearch" id="sonSearch" style="display:none;">
+	                  		<img class="sub_img" src="${pageContext.request.contextPath}/shop/images/logo/san.jpg" alt="img">
+	                         <a href="/search/12001/10/0/1/1" id="12001" class=" sub_a">DOS</a>
+	                         <a href="/search/12002/10/0/1/1" id="12002" class=" sub_a">Linux</a>                                                      
+	                 	</div>
+	                </c:when>
+	                <c:otherwise>
+	                	<div class="subSearch" id="sonSearch" style="display:block;">
+	                  		<img class="sub_img" src="${pageContext.request.contextPath}/shop/images/logo/san.jpg" alt="img">
+	                  		<c:forEach items="${menus}" var="menu">
+	                  			<a href="javascript:void(0);" onclick="javascript:show2('${menu.id }')" id="miki" class=" sub_a">${menu.name }</a>
+	                  		</c:forEach>	                                                         
+	                 	</div>
+	                </c:otherwise>
+                 </c:choose>            
               </dd>
             </dl>
             
              <dl class="cate_sea_list clearfix">
               <dt>资源类型：</dt>
               <dd id="sourcetype">
-              <label bata-id="10" class="source_item js_source cate_cur"><a href="#">全部</a></label>
+              <label bata-id="10" class="source_item js_source"><a href="#">全部</a></label>      
               <c:forEach items="${types}" var="type" >
-              	<label bata-id="${type.id }" class="source_item js_source"><a href="#">${type.name }</a></label>
+              	<c:choose>
+	              	<c:when test="${type.name eq curType.name}">
+	           			<label bata-id="${type.id }" class="source_item js_source cate_cur"><a href="javascript:void(0);" 
+	           				onclick="javascript:searchType('${type.id }')">${type.name }</a></label>
+	                 </c:when>
+	                 <c:otherwise>        
+	                   	<label bata-id="${type.id }" class="source_item js_source"><a href="javascript:void(0);" 
+	           				onclick="javascript:searchType('${type.id }')">${type.name }</a></label>
+	               	</c:otherwise>
+              	</c:choose>
               </c:forEach>                 
               </dd>
             </dl>
@@ -231,15 +261,15 @@ function KeyP(event){
           <div class="condition clearfix"><span>已选条件 ： &nbsp;</span>        	
                 	        
              <c:if test="${curCategory!=null }">
-                             	<label id="source_type" class="condition_item"><em>${curCategory }</em>
+                             	<label id="source_type" class="condition_item"><em>${curCategory.name }</em>
             				<a class="cate_close" id="tech_close" href="#"><img src="${pageContext.request.contextPath}/shop/images/logo/close.jpg" alt="img" style="margin-top:5px;"></a></label>
                              </c:if>
             <c:if test="${curMenu!=null }">
-                  <label id="source_type" class="condition_item"><em>${curMenu}</em>
+                  <label id="source_type" class="condition_item"><em>${curMenu.name}</em>
             		<a class="cate_close" id="tech_close" href="#"><img src="${pageContext.request.contextPath}/shop/images/logo/close.jpg" alt="img" style="margin-top:5px;"></a></label>
              </c:if>
             <c:if test="${curType!=null && curType!='' }">
-                  <label id="source_type" class="condition_item"><em>${curType}</em>
+                  <label id="source_type" class="condition_item"><em>${curType.name}</em>
             		<a class="cate_close" id="tech_close" href="#"><img src="${pageContext.request.contextPath}/shop/images/logo/close.jpg" alt="img" style="margin-top:5px;"></a></label>
              </c:if>
               <c:if test="${search!=null }">
@@ -416,12 +446,46 @@ function KeyP(event){
 	    	$('.cate_list li').click(function(){//点击的时候给当前这个加上红色下划线，其他的移除
 				$(this).addClass("cate_cur").siblings("li").removeClass("cate_cur");
 				var cateCur = $(".cate_list .cate_cur");
-				var cateId = cateCur.attr("bate-id");		
-				window.location.href="${pageContext.request.contextPath}/shop/Source_result.action?categoryId="+cateId;											
-				});
+				var cateId = cateCur.attr("bate-id");
+				var typeId = '${curType.id}';
+				var url = "${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&typeId=0";
+				if(typeId.length>0){
+					url = "${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&typeId="+'${curType.id}' ;
+				}
+						
+				window.location.href=url;											
+			});
 	    }
     	
-    		    	  	
+    	//二级菜单 类型查询   2017.08.15 miki
+    	
+    	 function show2(menuid){     	
+ 	    	document.getElementById('sonSearch').style.display = 'block';
+ 	    	$('.subSearch').click(function(){//点击的时候给当前这个加上红色下划线，其他的移除
+				$(this).addClass("cate_cur").siblings("a").removeClass("cate_cur");			
+ 	    	//var categoryId = $("#categoryid1").attr("bate-id");	
+				var cateId = '${curCategory.id}';
+ 				var menuId=menuid;
+ 				window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&menuId="+menuId;
+ 				return false;
+ 	    	});
+ 	    	return false;
+ 	    }	    	  	
+    	
+    	function searchType(typeid){     	     			
+			//var categoryId = $("#categoryid1").attr("bate-id");
+			var cate= $("#miki");
+			var menuId= cate.attr("bate-id");
+			var typeId=typeid;
+			var cateCur = $(".cate_list .cate_cur");
+			var cateId = cateCur.attr("bate-id");
+			//alert(menuId);
+			if(''==menuId || menuId==undefined){
+				window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&typeId="+typeId;
+			}else{
+				window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&menuId="+menuId+"&typeId="+typeId;
+			}
+		}
     	
     	//点击全部关闭子元素，并查询结果
     	function close(){
@@ -431,20 +495,25 @@ function KeyP(event){
     	 function search_submit(){
        	  var categoryid = $(".category").attr("bate-id");
        	  var sourcetype = $(".sourcetype").attr("bate-id");
-       	  var keywords = $("#keywords").val().trim();  
-       	  if(keywords != ''){
+       	  var keywords = $("#keywords").val().trim();
+       	  var url= "${host}/shop/source/search";
+       	  if(keywords == ''){
+           	//有可能是大类，有可能是小类，有可能有大类和小类
+           		alert("关键字不能为空！");
+           		return false;
+       		}
+       		if(''!= keywords){
        		  keywords=  encodeURIComponent(keywords)
-           	  var url="Source_searchKey.action";
-           	  window.location.href=url;
+           	  url="${host}/shop/source/search?keywords="+keywords;
           	}
-       	if(keywords == ''){
-           //有可能是大类，有可能是小类，有可能有大类和小类
-           alert("关键字不能为空！");
-       	}
-       	if(keywords != ''){
-       		 keywords=  encodeURIComponent(keywords)
-       		window.location.href = "SolrJ_searchItemList.action?keyword="+keywords+"&categoryId="+'${curCategory}'+"&typeId="+'${curType}' ;
-           }
+       		if(''!=categoryid || null!=categoryid || categoryid!=undefined){
+       		 url = "${host}/shop/source/serach?keyword="+keywords+"&category_name="+'${curCategory.name}' ;
+           	}
+       		if(''!= sourcetype || null!=sourcetype || sourcetype!=undefined){
+       		 url = "${host}/shop/source/serach?keyword="+keywords+"&category_name="+'${curCategory.name}'+"&type="+'${curType.name}' ;
+           	}
+           
+           window.location.href = url ;
      	}
 
     	
@@ -477,7 +546,7 @@ function KeyP(event){
 			else{
 				//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 				key =  encodeURIComponent(key)
-				var url="SolrJ_searchItemList.action?keyword="+encodeURIComponent(key);
+				var url="${host}/shop/source/serach?keyword="+encodeURIComponent(key);
 				window.location.href=url;
 			}
 			return false;

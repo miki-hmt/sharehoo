@@ -69,7 +69,7 @@ public class ShopController {
 	private NoticeService noticeService;
 	
 	
-	@RequestMapping("/shop/index.html")
+	@RequestMapping("/shop/index.htm")
 	public String home(Model model)throws Exception{
 		List<Category> categories=categoryService.getCategoryList(null, null);
 		model.addAttribute("categories", categories);
@@ -118,7 +118,7 @@ public class ShopController {
 			model.addAttribute("shop", shop);
 			if(shop==null){
 				model.addAttribute("error", "您尚未开通店铺..");
-				return "bug";
+				return "shop/5bug";
 			}
 			long dayVisit=logService.getLogCountByShopId(shop.getId());
 			long allVisit=logService.getAllLogCountByShopId(shop.getId());
@@ -193,7 +193,7 @@ public class ShopController {
 	/*
 	 * 2017.07.28 miki 上传文件页面的跳转
 	 */
-	@RequestMapping("/shop/upload.html")
+	@RequestMapping("/shop/upload.htm")
 	public String upload(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception{
 		HttpSession session=request.getSession();
 

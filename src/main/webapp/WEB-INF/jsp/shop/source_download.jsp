@@ -27,6 +27,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/bootstrap.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_new.css">
+
+<script src="${pageContext.request.contextPath}/shop/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/tingyun-rum.js"></script>
 
 <script type="text/javascript"  src="${pageContext.request.contextPath}/shop/js/jquery-version.js" type="text/javascript"></script>
@@ -72,7 +74,6 @@
 		background-position: 0 -28px;
 	}
 </style>
-<script src="${pageContext.request.contextPath}/shop/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/more-starts.js"></script>
 
 
@@ -95,8 +96,40 @@
 			alert("您还未登陆！");
 		} else {
 			window.location.href="${host}/shop/cdk/buy";
-		}	
-}
+		}
+	}
+
+	function Login() {
+		if ('${currentUser.nickName}' == null || '${currentUser.nickName}' == "") {
+			var curPage = window.location.href;
+			window.location.href = "${pageContext.request.contextPath}/login?prePage=" + curPage;
+		} else {
+			alert("上了还想上嘛？");
+		}
+	}
+	
+	//**************** 页面加载完，就开始下载
+	$(document).ready(function() {
+		swal({   
+			title: "天王盖地虎",   
+			text: "输入暗号:",   
+			type: "input",   
+			showCancelButton: true,   
+			closeOnConfirm: false,   
+			animation: "slide-from-top",   
+			inputPlaceholder: "填点东西到这里面吧" 
+		}, function(inputValue){   
+			if (inputValue === false) return false;      
+			if (inputValue === "") {     
+				swal.showInputError("请输入!");     
+				return false
+			}
+			tipOk("恭喜你答对了，资源下载中...", function() {
+				swal.close();
+				window.location.href="${host}/shop/source/download?source_id="+${source.id};			
+			});		
+		});	
+	});
 </script>
 
 
@@ -125,12 +158,12 @@
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${host}/shop/index.html">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
+			<a href="${host}/shop/index.htm">首页</a>
+			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
-			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
+			<a class=" " href="${pageContext.request.contextPath}/" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 			                
@@ -251,7 +284,7 @@ $(function(){
              
              <c:when test="${currentUser==null }">
 	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
-	              		<a target="_blank" href="#">尚未登录，无法下载</a>
+	              		<a target="_blank" href="javascript:Login()">尚未登录，无法下载</a>
 	              </span>
 	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >              
 	              		<a href="javascript:;" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a>

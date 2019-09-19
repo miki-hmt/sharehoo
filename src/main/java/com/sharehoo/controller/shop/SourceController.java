@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sharehoo.base.download.MikiUtil;
 import com.sharehoo.base.fencisys.CnUtil;
@@ -162,22 +163,20 @@ public class SourceController {
 	 * bug》》》暂时没能解决同一用户注册多个小号，为自己店铺增加豆数
 	 */
 	@RequestMapping("/shop/score/change")
-	public E3Result download(HttpServletRequest request,Model model,@RequestParam("sourceId") int sourceId)throws Exception {
+	@ResponseBody
+	public E3Result download(HttpServletRequest request,@RequestParam("sourceId") int sourceId)throws Exception {
 
 		HttpSession session=request.getSession();
 		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);
-		model.addAttribute(Consts.CURRENTUSER, currentUser);
 		if(currentUser!=null){
 		if(sourceId>0){
 			Source source=sourceService.getSourceById(sourceId);
 			if(source!=null){
 				User user=source.getUser();
-				model.addAttribute("user", user);
-				if(user.getId()!=currentUser.getId()){
+				//*********** 自己下载自己的东西不扣除积分，只有别人下载才扣除
+				if(user.getId()!=currentUser.getId()){	
 					Shop currentShop=source.getShop();
-					model.addAttribute("currentShop", currentShop);	
-					Shop shop=shopService.getShopByuserId(currentUser.getId());	//买家店铺	
-					model.addAttribute("shop", shop);
+					Shop shop=shopService.getShopByuserId(currentUser.getId());	//买家店铺	;
 					Operate operate = null;
 					Operate sell = null;
 					try {																							
@@ -187,17 +186,12 @@ public class SourceController {
 						
 						 // 2017.08.11 miki 保存下载者操作记录				
 						operate=new Operate("download", shop, currentUser, source, "下载（"+source.getName()+"）扣除虎豆", new Date());
-//						operate.setUser(currentUser);	//购买者
 						operateService.save(operate);
 						
 						 // 2017.08.11 miki 保存出售者出售记录		   
 						sell=new Operate("sell", source.getShop(), currentUser, source, "出售（"+source.getName()+"）获得虎豆", new Date());			
-						operateService.save(sell);
-						
-						
-					} catch (Exception e) {
-							
-					}
+						operateService.save(sell);					
+					} catch (Exception e) {}
 					shopService.save(currentShop);
 					shopService.save(shop);
 				}
@@ -278,7 +272,7 @@ public class SourceController {
 	            String filePath= staticPath +Consts.SHOP_UPLOAD_PATH +"/file/"+Consts.SDF_YYYYMM.format(new Date()) + "/" + source.getPath();		////"\\image_upload\\source_upload\\file\\"
 	            
 	            //下载的文件携带这个名称
-	            response.setHeader("Content-Disposition", "attachment;filename=" + source.getName());
+	            response.setHeader("Content-Disposition", "attachment;filename=" + source.getPath());
 	            //文件下载类型--二进制文件
 	            response.setContentType("application/octet-stream");        
 	            //result= ServletActionContext.getServletContext().getResourceAsStream(filePath);
@@ -346,13 +340,13 @@ public class SourceController {
 			StringBuffer param=new StringBuffer();
 			param.append("type="+type);
 			long total=sourceService.getAllCount();
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/search", total, Integer.parseInt(page), 10,param.toString());
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/search/go", total, Integer.parseInt(page), 10,param.toString());
 			model.addAttribute("pageCode", pageCode);
 		}else{
 		List<Source> sourceList=sourceService.allSourceList(pageBean);
 		model.addAttribute("sourceList", sourceList);
 		long total=sourceService.getAllCount();
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/search", total, Integer.parseInt(page), 10,null);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/search/go", total, Integer.parseInt(page), 10,null);
 		model.addAttribute("pageCode", pageCode);
 		}
 		
@@ -452,10 +446,10 @@ public class SourceController {
 	/*
 	 * 2017.08.15 关键字搜索算法  miki
 	 */
-	@RequestMapping("/shop/source/search/{keyword}")
+	@RequestMapping("/shop/search")
 	public String searchKey(Model model,HttpServletRequest request,@RequestParam(value="categoryId",required=false) int categoryId,
 			@RequestParam(value="typeId",required=false) int typeId,@RequestParam(value="page",required=false) String page,
-			@PathVariable("keyword")String keyword)throws Exception{
+			@RequestParam("keyword")String keyword)throws Exception{
 		
 		List<Category> categories=categoryService.getCategoryList(null, null);
 		model.addAttribute("categories", categories);
@@ -485,7 +479,8 @@ public class SourceController {
 			Type curType=typeService.getTypeById(typeId);
 			model.addAttribute("curType", curType);
 		}
-		Search se=searchService.getlast();	
+		Search se=searchService.getlast();
+		model.addAttribute("se", se);
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}

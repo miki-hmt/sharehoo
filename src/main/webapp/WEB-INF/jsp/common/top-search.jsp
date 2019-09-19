@@ -17,7 +17,7 @@ function logout() {
 }
 function login(){
 	var curPage=window.location.href;
-	window.location.href="login?prePage="+curPage;
+	window.location.href="${host}/login?prePage="+curPage;
 }
 function checkUserLogin(){
 	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
@@ -47,7 +47,7 @@ function check_up(thisform){
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>haha</title>
-		<link href="css/style.css" rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/common.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/download_index.css">
 </head>
@@ -121,7 +121,7 @@ function check_up(thisform){
 				<div class="nav-bar">
 					<a href="home" class="current">首页</a>
 					<a href="http://sharehoo.cn/blog/miki" target="_blank">博客社区<img src="${host}/images/icon/hot.gif"></a>
-					<a class=" " href="${host}/shop/index.html" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
+					<a class=" " href="${host}/shop/index.htm" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
 					<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html" target="_blank">W3C文档</a>
 					<a href="topic/section/3" target="_blank">社友圈<img src="${host}/images/icon/hot.gif"></a>			
 					<a class=" " href="h5" target="_blank">H5小游戏</a>			
@@ -165,7 +165,7 @@ $(document).ready(function(){
 		type: "POST",
 		dataType: "json",
 		data: {},
-		url: "Mess_getNews.action",
+		url: "${host}/user/news",
 		success: function(result) {
 			if(result.mes){
 				$("#news").show();
@@ -186,7 +186,7 @@ function update(){
 		type: "POST",
 		dataType: "json",
 		data: {},
-		url: "Mess_getNews.action",
+		url: "${host}/user/news",
 		success: function(result) {
 			if(result.mes){
 				$("#news").show();

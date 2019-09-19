@@ -16,7 +16,7 @@ function logout() {
 }
 function login(){
 	var curPage=window.location.href;
-	window.location.href="login?prePage="+curPage;
+	window.location.href="${host}/login?prePage="+curPage;
 }
 function checkUserLogin(){
 	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
@@ -36,7 +36,7 @@ function check_up(thisform){
 		else{
 			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 			key =  encodeURIComponent(key)
-			var url="shop/SolrJ_searchItemList.action?keyword="+encodeURIComponent(key);
+			var url="shop/${host}/shop/source/serach?keyword="+encodeURIComponent(key);
 			window.location.href=url;
 		}
 		return false;
@@ -119,7 +119,7 @@ function check_up(thisform){
 				<div class="nav-bar">
 					<a href="home" class="current">首页</a>
 					<a href="http://sharehoo.cn/blog/miki" target="_blank">博客社区<img src="${host}/images/icon/hot.gif"></a>
-					<a class=" " href="${host}/shop/index.html" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
+					<a class=" " href="${host}/shop/index.htm" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
 					<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html" target="_blank">W3C文档</a>
 					<a href="topic/section/3" target="_blank">社友圈<img src="${host}/images/icon/hot.gif"></a>			
 					<a class=" " href="h5" target="_blank">H5小游戏</a>			

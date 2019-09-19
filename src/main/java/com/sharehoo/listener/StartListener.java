@@ -1,5 +1,6 @@
 package com.sharehoo.listener;
 
+import java.io.File;
 import java.util.Date;
 
 import javax.servlet.ServletContext;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import com.sharehoo.config.lang.Consts;
+import com.sharehoo.util.BootPathUtil;
 import com.sharehoo.util.CxCacheUtil;
 @Configuration
 @WebListener
@@ -28,14 +30,18 @@ public class StartListener implements ServletContextListener{
 		CxCacheUtil.getIntance().setValue(Consts.ROOT_PATH, path);
 		ServletContext ct = sce.getServletContext();
 		ct.setAttribute("basePath", path);
-		String sectionPath = path + Consts.FORUM_UPLOAD_PATH + Consts.FORUM_UPLOAD_SECTION_FOLDER;
-		ct.setAttribute("sectionPath", sectionPath);
 		
-		String topicPath = path + Consts.FORUM_CKEDITOR_UPLOAD_PATH +"/"+Consts.SDF_YYYYMM.format(new Date());
-		ct.setAttribute("topicPath", topicPath);
+		String staticPath = BootPathUtil.getStaticPath();	
+		String realShopPath = staticPath +Consts.SHOP_UPLOAD_PATH;
+		String realForumPath = staticPath +Consts.FORUM_UPLOAD_PATH;
+		if(!new File(realShopPath).exists()) {
+			new File(realShopPath).mkdirs();
+		}
 		
-		String softPath = path + Consts.FORUM_UPLOAD_PATH +"/"+Consts.FORUM_UPLOAD_SOFT_FOLDER +"/" + Consts.SDF_YYYYMM.format(new Date());
-		ct.setAttribute("softPath", softPath);
+		if(!new File(realForumPath).exists()) {
+			new File(realForumPath).mkdirs();
+		}
+		
 		logger.info("网站域名："+host);
 		/***********
 		 * 将域名存放到全局变量中

@@ -17,6 +17,8 @@ public interface MenuService {
 	
 	public Menu getMenuById(int menuId);
 	
+	public List<Menu> getMenuByName(String menuName);
+	
 	public List<Menu> getAllMenuList(PageBean pageBean);
 	
 	public Long getCount();

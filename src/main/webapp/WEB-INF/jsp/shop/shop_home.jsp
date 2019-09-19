@@ -91,12 +91,12 @@ function validateBuy(){
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${host}/shop/index.html">首页</a>
-			<a href="${host}/shop/SolrJ_searchItemList.action" target="_blank">资源分类</a>
+			<a href="${host}/shop/index.htm">首页</a>
+			<a href="${host}/shop/${host}/shop/source/serach" target="_blank">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank" class="current">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
-			<a class=" " href="${host}/Notice_listpr.action" target="_blank">论坛</a>			
+			<a class=" " href="${host}/" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 		</div>

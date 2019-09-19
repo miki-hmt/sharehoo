@@ -11,7 +11,7 @@ function zan(order,rid,num){
 		x=x-1;
 	 }else{
 		$("#"+goodx).text(n);
-		$.post("${pageContext.request.contextPath}/Reply_zan.action",{rid:rid,num:n},
+		$.post(host+"/reply/dianzan",{rid:rid,num:n},
 		function(result){
 			if(!result.success){
 				alert("点赞失败，请重试");
@@ -32,7 +32,7 @@ function zan1(order,rid,num){
 		x=x-1;
 	 }else{
 		$("#gd1").text(n);
-		$.post("${pageContext.request.contextPath}/Reply_zan.action",{rid:rid,num:n},
+		$.post(host+"reply/dianzan",{rid:rid,num:n},
 		function(result){
 			if(!result.success){
 				alert("点赞失败，请重试");
@@ -49,7 +49,7 @@ function bad1(order,rid,num){
 	var n=$("#bd1").text();
 	n++;
 	$("#bd1").text(n);
-	$.post("${pageContext.request.contextPath}/Reply_bad.action",{rid:rid,num:n},
+	$.post(host+"/reply/cai",{rid:rid,num:n},
 			function(result){
 				if(!result.success){
 					alert("出错咯，请重试");
@@ -69,7 +69,7 @@ function bad(order,rid,num){
 		y=y-1;
 	 }else{
 		$("#"+goodx).text(n);
-		$.post("${pageContext.request.contextPath}/Reply_bad.action",{rid:rid,num:n},
+		$.post(host+"/reply/cai",{rid:rid,num:n},
 			function(result){
 				if(!result.success){
 					alert("出错咯，请重试");
@@ -89,7 +89,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo1").append("<img src=''>");
-	   		$('.demo1 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo1 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo1 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -108,7 +108,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo2").append("<img src=''>");
-	   		$('.demo2 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo2 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo2 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -127,7 +127,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo3").append("<img src=''>");
-	   		$('.demo3 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo3 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo3 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -148,7 +148,7 @@ $(function () {
 	   		//alert(offset);
 	   		//$(".demo img").css("bottom",offset);
 	   		$(".demo4").append("<img src=''>");
-	   		$('.demo4 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo4 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo4 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -170,7 +170,7 @@ $(function () {
 	   		//var offset=$("#good5").position().top;
 	   		//alert(offset);
 	   		$(".demo5").append("<img src=''>");
-	   		$('.demo5 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo5 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo5 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -189,7 +189,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo6").append("<img src=''>");
-	   		$('.demo6 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo6 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo6 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -208,7 +208,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo7").append("<img src=''>");
-	   		$('.demo7 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo7 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo7 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -227,7 +227,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo8").append("<img src=''>");
-	   		$('.demo8 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo8 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo8 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -246,7 +246,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo9").append("<img src=''>");
-	   		$('.demo9 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo9 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo9 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -265,7 +265,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo10").append("<img src=''>");
-	   		$('.demo10 img:eq(' + index + ')').attr('src','topic/zan/'+nb+'.gif')
+	   		$('.demo10 img:eq(' + index + ')').attr('src',host+'topic/zan/'+nb+'.gif')
 	   		$(".demo10 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -285,7 +285,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo11").append("<img src=''>");
-	   		$('.demo11 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo11 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo11 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -304,7 +304,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo12").append("<img src=''>");
-	   		$('.demo12 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo12 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo12 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -323,7 +323,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo13").append("<img src=''>");
-	   		$('.demo13 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo13 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo13 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -342,7 +342,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo14").append("<img src=''>");
-	   		$('.demo14 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo14 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo14 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -361,7 +361,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo15").append("<img src=''>");
-	   		$('.demo15 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo15 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo15 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -381,7 +381,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo16").append("<img src=''>");
-	   		$('.demo16 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo16 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo16 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -400,7 +400,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo17").append("<img src=''>");
-	   		$('.demo17 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo17 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo17 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -419,7 +419,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo18").append("<img src=''>");
-	   		$('.demo18 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo18 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo18 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -438,7 +438,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo19").append("<img src=''>");
-	   		$('.demo19 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo19 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo19 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -457,7 +457,7 @@ $(function () {
 	   		var rand = parseInt(Math.random() * (x - y + 1) + y); 
 	   		
 	   		$(".demo20").append("<img src=''>");
-	   		$('.demo20 img:eq(' + index + ')').attr('src','topic/bad/'+nb+'.gif')
+	   		$('.demo20 img:eq(' + index + ')').attr('src',host+'topic/bad/'+nb+'.gif')
 	   		$(".demo20 img").animate({
 	   			bottom:"800px",
 	   			opacity:"0",
@@ -490,12 +490,6 @@ function copy(c,d){
 
 	}
 
-  
-  
-  
-
-
-
   //简单的 敏感词汇验证  2016.12.13 ....时间允许，可以建一个数据库表，存储相关词汇 
 //定义敏感字符     
 var forbiddenArray =['傻逼','滚','黄色','畜生','sb','尼玛','妈的','反共','草泥马'];
@@ -525,6 +519,78 @@ $(function(){
 	 //显示表情
 	$(".show_e").emotionsToHtml();
 });
+
+
+//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+	$("#okBtn").on("click", function() {
+
+		//ckeditor4.12新特性，提交表单前需要更新textAera字段内容	2019.09.02
+		for (instance in CKEDITOR.instances) {
+			CKEDITOR.instances[instance].updateElement();
+		}
+		
+		if('${currentUser.nickName}'==null){
+		tipError("请先登陆，再回帖！");
+		return false;
+		}
+		if ($("#Content").val().length<10) {
+			tipError("最少输入10个字符！");
+			return false;
+		}
+		if ($("#Content").val().length>1000) {
+			tipError("最多输入1000个字符！");
+			return false;	
+		}
+		
+		//敏感词汇判断   2016.12.13@miki 
+		
+		if(forbiddenStr($("#Content").val())==true){
+			var sonId=$("#replySonId").val();
+			var formData = new FormData($("#replyForm")[0]);
+				$.ajax({
+					type : "POST",
+					url : host+"/reply/save",
+					data : formData,
+					cache : false,
+					async : false,
+					processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+					contentType : false, //必须false才会自动加上正确的Content-Type
+					success : function(data) {
+						if (data.status == 200) {
+							tipOk("回复成功!!",function(){
+								location.reload();
+							});
+						} else {
+							tipError("回复失败!!" + data.msg);
+						}
+					}
+				});
+				return false;	//阻止ajax结束自动刷新页面
+		}else{
+	        tipError("内容含敏感词汇！请修改后发表 ");
+	        return false;
+		}
+	});
+	
+		
+	function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: host+"/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("发表失败", content, "error");
+	};
+
 function saveReply(){
 	if('${currentUser.nickName}'==null){
 		alert("请先登陆，再回帖！");
@@ -543,7 +609,7 @@ function saveReply(){
 	
 	if(forbiddenStr($("#Content").val())==true){
 		var sonId=$("#replySonId").val();
-		$.post("Reply_save.action",$("#replyForm").serialize(),function(result){
+		$.post(host+"/reply/save",$("#replyForm").serialize(),function(result){
 			if(result.success){
 				alert("回复成功！");
 				location.reload(true);
@@ -560,7 +626,7 @@ function saveReply(){
 }
 function deleteReply(replyId){
 	if (confirm("您确定要删除这条回复吗？")) {
-		$.post("Reply_delete.action",{replyId:replyId},function(result){
+		$.post(host+"/reply/delete",{replyId:replyId},function(result){
 			if(result.success){
 				alert("数据已成功删除！");
 				location.reload(true);

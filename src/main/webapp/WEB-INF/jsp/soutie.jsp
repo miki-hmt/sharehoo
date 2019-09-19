@@ -8,13 +8,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IT帮-资讯传播社区--搜索结果</title>
 
-<link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<!-- 2019.09.03 自定义弹窗所需插件 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
+
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-<script src="${pageContext.request.contextPath }/shop/alert/jquery-1.2.6.js" type="text/javascript"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.funkyUI.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="bootstrap/js/bootstrap.js"></script>
+
+<script src="${host}/bootstrap/js/bootstrap.min.js"></script>
+<script src="${host}/bootstrap/js/bootstrap.js"></script>
 
 <style type="text/css">
 a:hover{

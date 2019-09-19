@@ -21,12 +21,14 @@ import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sharehoo.config.lang.Consts;
@@ -37,6 +39,7 @@ import com.sharehoo.entity.forum.User;
 import com.sharehoo.service.forum.ReplyService;
 import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.UserService;
+import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
 import com.sharehoo.util.forum.StringUtil;
 
@@ -44,6 +47,8 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class ReplyController {
+	
+	private static Logger logger = Logger.getLogger(ReplyController.class);
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -51,9 +56,15 @@ public class ReplyController {
 	@Autowired
 	private TopicService topicService;
 	
-	@RequestMapping("/reply")
+	@SuppressWarnings("restriction")
+	@RequestMapping("/reply/save")
 	@ResponseBody
-	public JSONObject save(Model model,@RequestBody Reply reply,@PathVariable("sonId") int sonId){
+	public E3Result save(Reply reply,@RequestParam("sonId") int sonId,HttpServletRequest request){
+		
+		User user = (User)request.getSession().getAttribute(Consts.CURRENTUSER);
+		if(user==null) {
+			return E3Result.build(401, "崽种,请登陆后再回帖..");
+		}
 		reply.setPublishTime(new Date());
 		reply.setStatus(0);	
 		if(sonId>0){
@@ -74,24 +85,19 @@ public class ReplyController {
 		currentUser.setScore(currentUser.getScore()+1);		
 		userService.saveUser(currentUser);	
 		
-		if(reply.getTitle().equals("")){				//回复发帖人		
-		/* 3. 发邮件   **3**
-		 * 把配置文件内容加载到prop中
-		 */
+		//********************************************回复发帖人		
+		if(reply.getTitle().equals("")){				
+		//************3. 发邮件   **3**
 		Properties props = new Properties();
 		try {
 			props.load(this.getClass().getClassLoader().getResourceAsStream("user_reply_email.properties"));
-		} catch (IOException e1) {
-			throw new RuntimeException(e1);
-		}
+		} catch (IOException e1) {throw new RuntimeException(e1);}
 		
-		//登录邮件服务器，得到session
-    	
+		//登录邮件服务器，得到session  	
         //设置SSL连接、邮件环境
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());                      
 
-        //建立邮件会话
-        
+        //建立邮件会话      
         final String userName=props.getProperty("username");
         final String password=props.getProperty("password");
         
@@ -101,11 +107,11 @@ public class ReplyController {
                 return new PasswordAuthentication(userName, password);
             }
         });
+        session.setDebug(true);
         //建立邮件对象
         MimeMessage message = new MimeMessage(session);
         //设置邮件的发件人、收件人、主题
-            //附带发件人名字
-        
+        //附带发件人名字      
         String from=props.getProperty("from");
         String title=props.getProperty("subject");
         String to = Tuser.getEmail();
@@ -146,21 +152,19 @@ public class ReplyController {
             message.setContent(mmp2);
             message.saveChanges();
             //发送邮件
+            Transport transport = session.getTransport();
+            transport.connect();
             Transport.send(message);
-		} catch (Exception e) {}     				
+            transport.close();
+		} catch (Exception e) {logger.error("回复邮件发送失败.."+e.getMessage());} 			//邮件发送失败，可以忽略    				
 		
-	}else{											//回复评论人		
+	}else{		//******************************回复评论人		
 		Reply father=replyService.findReplyById(Integer.parseInt(reply.getTitle()));
 		
-		/* 3. 发邮件   **3**
-		 * 把配置文件内容加载到prop中
-		 */
 		Properties props = new Properties();
 		try {
 			props.load(this.getClass().getClassLoader().getResourceAsStream("user_comments_email.properties"));
-		} catch (IOException e1) {
-			throw new RuntimeException(e1);
-		}
+		} catch (IOException e1) {throw new RuntimeException(e1);}
 		
 		//登录邮件服务器，得到session    	
         //设置SSL连接、邮件环境
@@ -179,7 +183,7 @@ public class ReplyController {
         //建立邮件对象
         MimeMessage message = new MimeMessage(session);
         //设置邮件的发件人、收件人、主题
-            //附带发件人名字
+        //附带发件人名字
         
         String from=props.getProperty("from");
         String title=props.getProperty("subject");
@@ -227,28 +231,24 @@ public class ReplyController {
             message.saveChanges();
             //发送邮件
             Transport.send(message);
-        }catch(Exception e){}}
-		JSONObject result=new JSONObject();
-		result.put("success", true);
+            
+        }catch(Exception e){ logger.error("回复邮件发送失败.."+e.getMessage());}}
 		
-		return result;
+		return E3Result.ok();
 	}
 	
 	@RequestMapping("/reply/delete")
 	@ResponseBody
-	public JSONObject delete(HttpServletRequest request,@PathVariable("replyId") int replyId)throws Exception{
-		JSONObject result=new JSONObject();
+	public E3Result delete(HttpServletRequest request,@RequestParam("replyId") int replyId)throws Exception{
+
 		HttpSession session=request.getSession();
 		User user = (User)session.getAttribute(Consts.CURRENTUSER);
 		if("2".equals(user.getType()) || user.getSectionList().size()>0){
 			Reply reply=replyService.findReplyById(replyId);
 			replyService.deleteReply(reply);
-			result.put("success", true);
-			
-			return result;
+			return E3Result.ok();
 		}
-		result.put("success", false);
-		return result;
+		return E3Result.build(401, "删除失败..");
 	}
 	
 	@RequestMapping("/admin/reply/update")
@@ -260,7 +260,8 @@ public class ReplyController {
 	}
 	
 	@RequestMapping("/reply/details/{rid}")
-	public String details(HttpServletRequest request, @PathVariable("rid") int rid,@PathVariable("page") String page,Model model)throws Exception{
+	public String details(HttpServletRequest request, @PathVariable("rid") int rid,@RequestParam(value="page",required=false) String page,
+			Model model)throws Exception{
 		if(rid>0){
 			if (StringUtil.isEmpty(page)) {
 				page="1";
@@ -282,7 +283,7 @@ public class ReplyController {
 	
 	//2017.12.17	miki 实现点赞功能
 	@RequestMapping("/reply/dianzan")
-	public JSONObject zan(@PathVariable("rid") int rid,@PathVariable("num") int num)throws Exception{
+	public JSONObject zan(@RequestParam("rid") int rid,@RequestParam("num") int num)throws Exception{
 		JSONObject result=new JSONObject();
 		if(rid>0){
 		Reply rep=replyService.findReplyById(rid);
@@ -302,7 +303,7 @@ public class ReplyController {
 	//2017.12.17	miki 实现点赞功能
 	//2017.12.17	miki 实现点赞功能
 	@RequestMapping("/reply/cai")
-	public JSONObject bad(@PathVariable("rid") int rid,@PathVariable("num") int num)throws Exception{
+	public JSONObject bad(@RequestParam("rid") int rid,@RequestParam("num") int num)throws Exception{
 		JSONObject result=new JSONObject();
 		if(rid>0){
 		Reply rep=replyService.findReplyById(rid);

@@ -233,7 +233,6 @@ public class UserController {
 	 */
 	@RequestMapping("/user/active")
 	public String active(HttpServletRequest request,@RequestParam("activationCode") String activationCode)throws Exception{
-		HttpSession session=request.getSession();
 		User user = null;
 		try {
 		
@@ -258,20 +257,41 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping("/user/update")	
-	public String modify(@RequestBody User user,@RequestParam("face") File face,@RequestParam("faceFileName") String faceFileName,
-			HttpServletRequest request)throws Exception{
+	@RequestMapping("/user/update")
+	@ResponseBody
+	public E3Result modify(User user,@RequestParam(value="face",required=false) MultipartFile face,
+			@RequestParam(value="faceFileName",required=false) String faceFileName,HttpServletRequest request)throws Exception{
 		if(null!=user){
 			User old=userService.getUserById(user.getId());
 			if (face!=null) {
+				
+				//获取项目的static根路径  
+		    	String staticPath = BootPathUtil.getStaticPath();
+		    	if(face.getSize()>600*1024*3) {
+		    		return E3Result.build(401, "上传文件限制在3M以内哦");
+		    	}
+		    	faceFileName = face.getOriginalFilename();
 				String imageName=DateUtil.getCurrentDateStr();
-				String basePath = (String)CxCacheUtil.getIntance().getValue(Consts.ROOT_PATH);
-				String realPath = basePath + Consts.FORUM_UPLOAD_PATH + Consts.FORUM_UPLOAD_USER_FOLDER + "/images/user/";
-
+				String realPath = staticPath +"/images/user/"+Consts.SDF_YYYYMM.format(new Date()); 
 				String imageFile=imageName+"."+faceFileName.split("\\.")[1];
-				File saveFile=new File(realPath,imageFile);
-				FileUtils.copyFile(face, saveFile);
-				user.setFace("images/user/"+imageFile);//原来为"images/user/" 
+				
+				File savePath=new File(realPath);
+				if(!savePath.exists()) {
+					savePath.mkdirs();
+				}		
+				InputStream is = face.getInputStream();    	    
+		          
+		        File toFile = new File(realPath, imageFile);    
+		        OutputStream os = new FileOutputStream(toFile);       
+		        byte[] buffer = new byte[1024];       
+		        int length = 0;    
+		        while ((length = is.read(buffer)) > 0) {       
+		            os.write(buffer, 0, length);       
+		        }       
+		        is.close();    
+		        os.close();
+				
+				user.setFace("images/user/"+Consts.SDF_YYYYMM.format(new Date()) +"/"+ imageFile);//原来为"images/user/" 
 			}else{
 				user.setFace(old.getFace());
 			}
@@ -298,7 +318,7 @@ public class UserController {
 			request.getSession().invalidate(); //注销session
 		}
 		
-		return "redirect:home";
+		return E3Result.ok();
 	}
 	
 	@RequestMapping("/user/nickname")
@@ -324,7 +344,7 @@ public class UserController {
 	@RequestMapping("/home")
 	public String toHome()throws Exception{
 		
-		return "redirect:index.html";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/user/email")
@@ -501,15 +521,18 @@ public class UserController {
 		}
 		else 
 			if(currentUser.isStatus()==false){
-			error="用户未激活，请激活后登录！";
+			error="您尚未激活，或已被管理员拉进小黑屋！";
 			session.setAttribute("error", error);
 		}else{
 			session.setAttribute(Consts.CURRENTUSER, currentUser);
 			session.removeAttribute("error");		
 			Log log1=new Log();
 			String ip=IpGet.getIp2(request);
+			String address = "[]";
+			try {
+				address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
+			} catch (Exception e) {}
 			
-			String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
 			if(address.equals("[]")){
 				String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
 				log1.setAddress(provence+">>"+"手机IP访问");
@@ -607,11 +630,11 @@ public class UserController {
 			error="用户名或密码错误！";
 			return "admin/login";
 		}
-		return "redirect:../ilovehmt.html";
+		return "redirect:../ilovehmt.htm";
 	}
 	
 	
-	@RequestMapping("/admin/ilovehmt.html")
+	@RequestMapping("/admin/ilovehmt.htm")
 	public String adminIndex(HttpServletRequest request,Model model,@RequestParam(value="error",required=false) String error)
 			throws Exception{
 		HttpSession session=request.getSession();
@@ -636,7 +659,7 @@ public class UserController {
 	@RequestMapping("/user/logout")
 	public String logout(HttpServletRequest request)throws Exception{
 		request.getSession().invalidate();
-		return "redirect:/index.html";
+		return "redirect:/";
 	}
 	
 	/**
@@ -948,6 +971,24 @@ public class UserController {
 	}
 	
 	/**
+	 * @Title: 修改用户状态，禁用 
+	 * @Description: TODO(对于{id}这样的参数必须要用@PathVariable来接收)  
+	 * @author miki 
+	 * @date 2019年8月27日 下午10:48:06   
+	 * @throws
+	 */
+	@RequestMapping("/admin/user/limit/{userId}")
+	@ResponseBody
+	public E3Result limit(@PathVariable("userId") int userId)throws Exception{
+
+		User e=userService.getUserById(userId);
+		e.setStatus(false);
+		userService.saveUser(e);
+		
+		return E3Result.ok();
+	}
+	
+	/**
 	* @Title: delete  
 	* @Description: TODO(对于{id}这样的参数必须要用@PathVariable来接收)  
 	* @author miki 
@@ -961,6 +1002,7 @@ public class UserController {
 		if(userId>0){
 		User user1=userService.getUserById(userId);
 		user.setFace(user1.getFace());
+		user.setRegTime(user1.getRegTime());
 		userService.saveUser(user);
 		
 		return E3Result.ok();

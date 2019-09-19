@@ -92,12 +92,12 @@
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${host}/shop/index.html">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank" class="current">资源分类</a>
+			<a href="${host}/shop/index.htm">首页</a>
+			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
-			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
+			<a class=" " href="${pageContext.request.contextPath}/" target="_blank">论坛</a>			
 			<a href="javascript:void(0)" onclick="javascript:validateBuy()" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 			                   
@@ -241,7 +241,7 @@ function Login(){
              
              <c:when test="${currentUser==null }">
 	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
-	              		<a target="_blank" href="#">尚未登录，无法下载</a>
+	              		<a target="_blank" href="javascript:Login()">尚未登录，无法下载</a>
 	              </span>
 	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >              
 	              		<a href="javascript:;" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a>
@@ -375,27 +375,35 @@ function Login(){
 	<div class="recommand download_comment" sourceid="9896715">
 <script type="text/javascript">
 
-function check(sourceId){
-	if (confirm("需要消耗..${source.douNum}..下载豆，确定要下载吗？")) {
-	$.post("Source_download.action",{sourceId:sourceId},
-			function(result){
-				var result=eval(result);
-				if(!result.successs){
-					alert("虎豆已成功扣除，正在进入下载页面.....");					
-					window.location.href="Source_kiss.action?signal=${signal}&source_id=${source.id}";													
-				}else{
-					if(result.success=="unlogin"){
-						alert("尚未登录！");
-						}else{
-							alert("下载失败！资源id为"+sourceId);
-							}
-				}
-			}
-	);
-	}else{
-		return;
+	function check(sourceId){
+		swal({
+			title: "${source.name}", 
+			text: '<table align=center width=100%><tr><td>资源所需虎豆</td><td>当前拥有虎豆</td><td>当前拥有积分</td></tr><tr style="color:red"><td>${source.douNum}</td><td>${currentShop.douNum}</td><td>${currentUser.score}</td></tr></table><br>来自<span style="color:red;">sharehoo社区</span>、<a href="#">温馨提示</a>：<br/><span style="font-size:9pt">资源一经售出，概不退货哦..</span>',   
+			imageUrl: "${pageContext.request.contextPath}/shop/images/logo/zip.svg",
+			html: true,
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是，割肉也下载",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/shop/score/change",
+					data: {sourceId:sourceId},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("虎豆已成功扣除，资源打包中...", function() {
+							window.location.href="${host}/shop/source/${source.id}/download?signal=${signal}";
+						});
+						//swal("操作成功!", "已成功删除数据！", "success");
+					}else{
+						swal("OMG", data.msg, "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", "下载失败了!", "error");
+				});
+			});
 	}
-}
 
 
 //关注功能实现，miki 2017.08.10
@@ -452,7 +460,7 @@ function collectSource(sourceId){
 			else{
 				//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 				key =  encodeURIComponent(keyword)
-				var url="Source_searchKey.action?keyword="+encodeURIComponent(key);
+				var url="${host}/shop/source/search?keyword="+encodeURIComponent(key);
 				window.location.href=url;
 			}
 			return false;
@@ -539,7 +547,7 @@ function htmlencode(s){
 			else{
 				//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 				key =  encodeURIComponent(key)
-				var url="Source_searchKey.action?keyword="+encodeURIComponent(key);
+				var url="${host}/shop/source/search?keyword="+encodeURIComponent(key);
 				window.location.href=url;
 			}
 			return false;

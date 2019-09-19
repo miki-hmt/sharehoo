@@ -64,4 +64,13 @@ public class CategoryServiceImpl implements CategoryService {
 		return baseDAO.count(hql.toString().replace("and", "where"), param);
 	}
 
+	@Override
+	public List<Category> getCategoryByName(String categoryName) {
+		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
+		StringBuffer hql=new StringBuffer("from Category and name = ?");
+		param.add(categoryName);
+		return baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
+	}
+
 }

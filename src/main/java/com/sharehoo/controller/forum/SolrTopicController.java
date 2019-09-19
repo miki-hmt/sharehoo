@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sharehoo.entity.forum.SearchTopic;
@@ -38,11 +40,13 @@ public class SolrTopicController {
 		
 	//生成帖子索引		miki	2019.01.02
 	@RequestMapping("/solr/search")
-	public String search(@PathVariable("keyword") String keyword,@PathVariable("category_name") String category_name,
-			Model model,HttpServletRequest request,@PathVariable("page") int page)throws Exception{
-
+	public String search(@RequestParam("keyword") String keyword,@RequestParam(value="category_name",required=false) String category_name,
+			Model model,HttpServletRequest request,@RequestParam(value="page",required=false) String page)throws Exception{
+		int pages = 1;
 		int count=Integer.parseInt(SEARCH_TOPIC);
-		
+		if(StringUtils.isNotEmpty(page)) {
+			pages = Integer.parseInt(page);
+		}
 		//前台关键字乱码问题
 		if(StringUtil.isNotEmpty(keyword)){
 //				keyword=new String(keyword.getBytes("iso-8859-1"), "utf-8");
@@ -60,7 +64,7 @@ public class SolrTopicController {
 		//ct.put("search", keyword);
 		model.addAttribute("search", keyword);
 		//得到查询列表
-		TopicSearchResult result=topicSolrJService.searchTopic(keyword,category_name,page,count );
+		TopicSearchResult result=topicSolrJService.searchTopic(keyword,category_name,pages,count );
 		
 		//查询关键字回显		
 		String query=keyword;
@@ -72,8 +76,8 @@ public class SolrTopicController {
 		List<SearchTopic> itemList=result.getItemList();
 		model.addAttribute("itemList", itemList);
 		//分页
-		if (page<=0) {
-			page=1;
+		if (pages<=0) {
+			pages=1;
 		}
 		StringBuffer param=new StringBuffer();
 		if(null==category_name){
@@ -84,7 +88,7 @@ public class SolrTopicController {
 		}
 		param.append("category_name="+category_name+"&keyword="+keyword);
 		
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/solr/search", recordCount, page, count,param.toString());
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/solr/search", recordCount, pages, count,param.toString());
 		model.addAttribute("pageCode", pageCode);
 		//返回逻辑视图search.jsp
 		return "soutie";

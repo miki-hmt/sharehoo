@@ -95,12 +95,12 @@
 <div class="news-nav">
 	<div class="container clearfix">
 		<div class="nav-bar">
-			<a href="${host}/shop/index.html">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/SolrJ_searchItemList.action" target="_blank">资源分类</a>
+			<a href="${host}/shop/index.htm">首页</a>
+			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
-			<a class=" " href="${pageContext.request.contextPath}/Notice_listpr.action" target="_blank">论坛</a>			
+			<a class=" " href="${pageContext.request.contextPath}/" target="_blank">论坛</a>			
 			<a href="${host}/shop/cdk/buy" target="_blank">虎豆充值</a>
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank" class="current">我的店铺</a>
 		</div>
@@ -119,7 +119,7 @@
       <div class="download_new clearfix">
         <div class="container clearfix csdn_dl_bread">
           <div class="row">
-            <div class="col-md-12"><a href="${host}/shop/index.html">下载频道</a>&nbsp;&nbsp;>&nbsp;&nbsp;资源上传</div>
+            <div class="col-md-12"><a href="${host}/shop/index.htm">下载频道</a>&nbsp;&nbsp;>&nbsp;&nbsp;资源上传</div>
           </div>
         </div>
         <div class="create_album_wrap">
