@@ -6,7 +6,7 @@
 .cb_buy_con .c_buy_choose{display:block;padding-bottom:18px;font-size:16px;line-height:20px;color:#333;text-align:center}
 .cb_buy_con .c_buy_choose em{display:inline-block;margin-right:10px;font-size:20px;font-weight:bold;line-height:20px;color:#e4393c}
 .cb_buy_con .cbuy_list{padding-bottom:39px}
-.cb_buy_con .cbuy_list .cbuy_item{width:354px;height:208px;padding:19px 20px 0;margin-right:30px;background:url("../images/c_num.png") no-repeat #f3f3f3;border:1px solid #f3f3f3;box-sizing:border-box}
+.cb_buy_con .cbuy_list .cbuy_item{width:354px;height:208px;padding:19px 20px 0;margin-right:30px;background:url("../../images/c_num.png") no-repeat #f3f3f3;border:1px solid #f3f3f3;box-sizing:border-box}
 .cb_buy_con .cbuy_list .cbuy_item:first-child{background-position:0 0}
 .cb_buy_con .cbuy_list .cbuy_item:nth-child(2){background-position:0 -208px}
 .cb_buy_con .cbuy_list .cbuy_item:last-child{margin-right:0;background-position:0 -416px}
@@ -17,7 +17,7 @@
 .cb_buy_con .cbuy_list .cbuy_item .c_tips{font-size:14px;color:#666}
 .cb_buy_con .cbuy_list .cbuy_item .mark{color:#e4393c}
 .cb_buy_con .cbuy_list .cbuy_cur{position:relative;border:1px solid #f05d53}
-.cb_buy_con .cbuy_list .cbuy_cur:before{display:block;width:20px;height:20px;content:"";background:url("../images/c_num_selected.png") no-repeat center;position:absolute;right:0;bottom:0}
+.cb_buy_con .cbuy_list .cbuy_cur:before{display:block;width:20px;height:20px;content:"";background:url("../../images/c_num_selected.png") no-repeat center;position:absolute;right:0;bottom:0}
 .cb_buy_con .payment{position:relative;text-align:center}
 .cb_buy_con .payment .wechat_payment,.cb_buy_con .payment .zhifubao_payment,.cb_buy_con .payment .erweima_out{position:relative;display:inline-block;width:200px;height:220px;padding:15px}
 .cb_buy_con 

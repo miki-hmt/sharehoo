@@ -23,9 +23,13 @@ public interface Consts {
 	public static final String SHOP_UPLOAD_SOURCE_FOLDER = "/source"; 
 	public static final String ROOT_PATH = "basePath"; 
 	public static final SimpleDateFormat SDF_YYYYMM = new SimpleDateFormat("yyyyMM");
+	public static final SimpleDateFormat SDF_YYYYMMDD = new SimpleDateFormat("yyyyMMdd");
 	public static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public static final String CURRENTUSER = "currentUser";
+	public static final String ONLINEUSER = "online_count";
+	public static final String DAYONLINEUSER = "day_online_count";
+	public static final String NOWDATE = "now";
 	
 	/*
 	 * 默认头像

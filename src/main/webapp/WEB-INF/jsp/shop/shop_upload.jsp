@@ -30,7 +30,7 @@
 <script type="text/javascript">
 	$(function() {
 		//初始换编辑器
-		CKEDITOR.replace('description', {
+		CKEDITOR.replace('descriptions', {
 			filebrowserImageUploadUrl : "${host}/topic/ckupload?", //2019.09.07 miki 加上？可以实现拖动图片上传
 			codeSnippet_theme : 'zenburn',
 			height : '300'
@@ -236,7 +236,7 @@
                 
                 <li>
                   <label>资源描述：</label>
-                  		<textarea name="source.description" id="description" cols="50"
+                  		<textarea name="description" id="descriptions" cols="50"
                   			max="1000" placeholder="描述不支持HTML标签；详细的资源描述有机会获得我们的推荐，更有利于他人下载，赚取更多积分。如资源描述不清，有可能审核不通过。"></textarea>
                   <em></em>
                 </li>

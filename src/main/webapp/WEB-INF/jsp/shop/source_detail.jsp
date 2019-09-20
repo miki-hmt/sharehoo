@@ -206,29 +206,68 @@ function Login(){
               </div>
             </div>
             <div class="download_b"><span>${source.description }</span></div>
+            
             <!--pdf-->
-                        <div class="dl_operate clearfix">
+            <div class="dl_operate clearfix">
               <div class="dl_operate_l fl">
-                               <label>
-                                <i class="fa fa-star yellow"></i>
-                                <i class="fa fa-star yellow"></i>
-                                <i class="fa fa-star yellow"></i>
-                                <i class="fa fa-star yellow"></i>
-                                <i class="fa fa-star yellow"></i>
-                                </label><span>综合评分：<em>4.6</em></span><i class="user_grade">（${commentTotal}位用户评分）</i>
+                  <label>
+                  	<c:choose>
+                  		<c:when test="${average<1.9}">
+                  			<i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star"></i>
+		                     <i class="fa fa-star"></i>
+		                     <i class="fa fa-star"></i>
+		                     <i class="fa fa-star"></i>
+                  		</c:when>
+                  		<c:when test="${average>1.9 && average<2.9}">
+                  			<i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star"></i>
+		                     <i class="fa fa-star"></i>
+		                     <i class="fa fa-star"></i>
+                  		</c:when>
+                  		<c:when test="${average<3.9 && average>2.9}">
+                  			<i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star"></i>
+		                     <i class="fa fa-star"></i>
+                  		</c:when>
+                  		<c:when test="${average<4.9 && average>3.9}">
+                  			<i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star"></i>
+                  		</c:when>
+                  		<c:otherwise>
+                  			<i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+		                     <i class="fa fa-star yellow"></i>
+                  		</c:otherwise>
+                  	</c:choose>
+                   
+                   </label><span>综合评分：<em>${average}</em></span><i class="user_grade">（${commentTotal}位用户评分）</i>
               </div>
              <div class="dl_operate_r fr">
                <c:choose>
                   	<c:when test="${collect!=null }">
-                  		<a href="javascript:void(0);" id="favorite" class="dl_func favoRed"><i class="fa fa-star" ></i>><span>我已收藏</span></a>
+                  		<a href="javascript:void(0);" id="favorite" class="dl_func favoRed"><i class="fa fa-star" ></i><span id="dl_func_collect">我已收藏</span></a>
                   		<a href="javascript:void(0);" id="favorite" class="dl_func"><i class="fa fa-star-o"></i><span style="color:silver;">收藏</span><em style="color:silver;">(${collectTotal })</em></a>
                   	</c:when>
                   	<c:otherwise>
-                  		<a href="javascript:void(0);" onclick="javascript:collectSource(${source.id})" id="favorite" class="dl_func"><i class="fa fa-star-o"></i><span>收藏</span><em>(${collectTotal })</em></a>
+                  		<a href="javascript:void(0);" onclick="javascript:collectSource(${source.id})" id="favorite" class="dl_func"><i class="fa fa-star-o"></i><span id="dl_func_collect">收藏</span><em>(${collectTotal })</em></a>
                   	</c:otherwise>
                   		
                   </c:choose>
-              <a href="#comment" class="dl_func"><i class="fa fa-commenting-o"></i><span>评论</span><em><i>(${commentTotal})</i></em></a><a href="javascript:;" onclick="jb()" id="download_report" class="dl_func"><i class="fa fa-exclamation-triangle"></i><span>举报</span></a>
+		              <a href="#comment" class="dl_func">
+		              	<i class="fa fa-commenting-o"></i><span>评论</span><em><i>(${commentTotal})</i></em>
+		              </a>
+		              <a href="javascript:;" onclick="jb()" id="download_report" class="dl_func">
+		              	<i class="fa fa-exclamation-triangle"></i><span>举报</span>
+		              </a>
              </div>
             </div>
             <div class="dl_download" data-id="9896715">
@@ -374,7 +413,8 @@ function Login(){
 
 	<div class="recommand download_comment" sourceid="9896715">
 <script type="text/javascript">
-
+	
+	//********** 下载操作
 	function check(sourceId){
 		swal({
 			title: "${source.name}", 
@@ -406,120 +446,147 @@ function Login(){
 	}
 
 
-//关注功能实现，miki 2017.08.10
-
-function focusShop(shopId){
-	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-		alert("您还未登陆！");
-	} else {
-		if (confirm("您确定要关注该店铺吗？")) {
-			$.post("${host}/shop/focus",{shopId:shopId},
-			function(result){
-    			if(result.data==200){
-    				alert("关注成功，请到店铺收藏中心查看！");
-    				location.reload(true);
-    			}else{	    				
-    				alert("您已经关注过了！");    			            				
-    			}
-    		},"json");
-		}else{
-			return;
-		}
-	}	
-}
-
-//收藏功能实现，miki 2017.08.10
-
-function collectSource(sourceId){
-	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-		alert("您还未登陆！");
-	} else {
-		if (confirm("您正在收藏该资源，请确认")) {
-			$.post("${host}/shop/focus",{sourceId:sourceId},
-			function(result){
-    			if(result.data==200){
-    				alert("收藏成功，请到店铺收藏中心查看！");
-    				location.reload(true);
-    			}else{	    				
-    				alert("您已经收藏过了！");    			            				
-    			}
-    		},"json");
-		}else{
-			return;
-		}
-	}	
-}
-
-
-//底部热门标签关键字搜索  2017.08.26 miki
-	
-		function find(keyword){			
-			if(keyword==""){
-				alert("关键字不能为空！");
-			}
-			else{
-				//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
-				key =  encodeURIComponent(keyword)
-				var url="${host}/shop/source/search?keyword="+encodeURIComponent(key);
-				window.location.href=url;
-			}
-			return false;
-		}
-
-
-function uuid() {  
-    var s = [];  
-    var hexDigits = "0123456789abcdef";  
-    for (var i = 0; i < 36; i++) {  
-        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);  
-    }  
-    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010  
-    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01  
-    s[8] = s[13] = s[18] = s[23] = "-";  
-   
-    var uuid = s.join("");  
-    return uuid;  
-} 
-
-
-//2017.08.29 miki 举报功能实现
-
-function jb(){
-	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-		alert("您还未登陆！");
-	} else {
-		document.getElementById('rep').style.display = 'block';		//将隐藏的举报框显示出来  2017.08.29 miki
-		$("#jb").focus();
+	//******** 关注功能实现，miki 2017.08.10
+	function focusShop(shopId){
+		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
+			alert("您还未登陆！");
+			} else {	
+				swal({
+				title : "您确定要关注该店铺吗？",
+				text : '<span style="color:red">关注之后，可以实时查看最新商品..</span>',
+				type : "warning",
+				html : true,
+				showCancelButton : true,
+				closeOnConfirm : false,
+				confirmButtonText : "强行关注，最为致命",
+				confirmButtonColor : "#ec6c62"
+			}, function() {
+				$.post("${host}/shop/focus", {
+					shopId:shopId
+				}, function(result) {
+					if (result.status == 200) {
+						tipOk("关注成功!!",function(){
+								swal.close();
+								$(".attention_btn").removeClass("attention").addClass("al_attention").attr('style','background:#EEF1F3;color:red');
+								$(".attention_btn").text("已关注");
+							});				
+						//********** 尽量不刷新页面，减少不必要得请求资源消耗	2019.09.20 miki
+						//location.reload(true);
+					} else {
+						tipError("您已经关注过了！");
+					}
+				}, "json");
+			});
+		}	
 	}
-}
+
+	//******** 收藏功能实现，miki 2017.08.10	
+	function collectSource(sourceId){
+		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
+			alert("您还未登陆！");
+		} else {	
+			swal({
+				title : "您正在收藏该资源，请确认？",
+				text : '<span style="color:red">好的东西用到用不到不知道，收藏起来是必须的..</span>',
+				type : "warning",
+				html : true,
+				showCancelButton : true,
+				closeOnConfirm : false,
+				confirmButtonText : "是的，我要",
+				confirmButtonColor : "#ec6c62"
+			}, function() {
+				$.post("${host}/shop/collect", {
+					sourceId:sourceId
+				}, function(result) {
+					if (result.status == 200) {
+						tipOk("收藏成功!!",function(){
+								swal.close();
+								$("#favorite").addClass("favoRed");
+								$("#dl_func_collect").text("我已收藏");
+							});				
+						//********** 尽量不刷新页面，减少不必要得请求资源消耗	2019.09.20 miki
+						//location.reload(true);
+					} else {
+						tipError("您已经收藏过了！");
+					}
+				}, "json");
+			});
+		}	
+	}
 
 
-function checkSource(sourceId){
-	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-		alert("您还未登陆！");
-	} else {
-		var reason=$("#rname").val();
-		if (confirm("您正在提交举报材料，请确认")) {
-			if (reason==1) {
-				alert("类型不能为空！");
-				return false;
-			}
-			$.post("${host}/shop/message/report?sourceId="+sourceId, $("#form").serialize(),
-			function(result){
-    			if(result.success){
-    				alert("举报成功，请静候结果！");
-    				location.reload(true);
-    			}else{	    				
-    				alert("举报失败！");    			            				
-    			}
-    		},"json");
-		}else{
-			return;
+	//********** 底部热门标签关键字搜索  2017.08.26 miki	
+	function find(keyword){			
+		if(keyword==""){
+			alert("关键字不能为空！");
+		}
+		else{
+			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
+			key =  encodeURIComponent(keyword)
+			var url="${host}/shop/source/search?keyword="+encodeURIComponent(key);
+			window.location.href=url;
+		}
+		return false;
+	}
+
+	//*********** uuid生成
+	function uuid() {  
+	    var s = [];  
+	    var hexDigits = "0123456789abcdef";  
+	    for (var i = 0; i < 36; i++) {  
+	        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);  
+	    }  
+	    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010  
+	    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01  
+	    s[8] = s[13] = s[18] = s[23] = "-";  
+	   
+	    var uuid = s.join("");  
+	    return uuid;  
+	} 
+
+
+	//******** 2017.08.29 miki 举报功能实现	
+	function jb(){
+		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
+			alert("您还未登陆！");
+		} else {
+			document.getElementById('rep').style.display = 'block';		//将隐藏的举报框显示出来  2017.08.29 miki
+			$("#jb").focus();
 		}
 	}
-}
-	
-function htmlencode(s){  
+
+
+	function checkSource(sourceId){
+		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
+			alert("您还未登陆！");
+			} else {
+				var reason=$("#rname").val();
+				if (reason==1) {
+						alert("类型不能为空！");
+						return false;
+					}			
+				var formData = new FormData($("#form")[0]);
+				$.ajax({
+					type : "POST",
+					url : "${host}/shop/message/report?sourceId="+sourceId,
+					data : formData,
+					cache : false,
+					async : false,
+					processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+					contentType : false, //必须false才会自动加上正确的Content-Type
+					success : function(data) {
+						if (data.status == 200) {
+							tipOk("举报成功，请静候结果！!!",function(){
+								swal.close();
+							});
+						} else {
+							tipError("举报失败!!人品不行啊" + data.msg);
+						}
+					}
+				});
+			}
+	}
+	function htmlencode(s){  
 		    var div = document.createElement('div');  
 		    div.appendChild(document.createTextNode(s));  
 		    return div.innerHTML;  
@@ -551,10 +618,7 @@ function htmlencode(s){
 				window.location.href=url;
 			}
 			return false;
-		}
-	       
- 
-	
+		}	
 </script>
 		<div class="common_li clearfix">
 			<h3 class="tit">评论<span>共有${commentTotal}条</span></h3>
@@ -628,78 +692,82 @@ function htmlencode(s){
 				</div>
 			</c:forEach>	
 			
-		<!-- 分页 nav -->
-	<div class="pagination alternate">
+			<!-- 分页 nav -->
+			<div class="pagination alternate">
 					<ul class="clearfix">
 						${pageCode }
 					</ul>
-				</div> 
-		</div>
-				
-            		</div>
+			</div> 
+		</div>				
+      </div>
 
             <!-- recommand submit -->
-<div class="cannot_comment">
-	<h4 class="com_t">评论资源</h4>
-	<div class="cannot_com_c">
-		<p class="cannot_com_t"><i class="fa fa-exclamation-circle"></i><span>您不能发表评论，可能是以下原因：</span></p>
-		<p class="cannot_com_b"><em><a href="http://sharehoo.cn/login">登录</a>后才能评论</em></p>
-		<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">待评论资源</a>
-	</div>
-</div>
+		<div class="cannot_comment">
+			<h4 class="com_t">评论资源</h4>
+			<div class="cannot_com_c">
+				<p class="cannot_com_t"><i class="fa fa-exclamation-circle"></i><span>您不能发表评论，可能是以下原因：</span></p>
+				<p class="cannot_com_b"><em><a href="http://sharehoo.cn/login">登录</a>后才能评论</em></p>
+				<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">待评论资源</a>
+			</div>
+		</div>
 	
-<div style="    padding: 20px;">
-	<div class="cannot_com_c">	
-		 <dl class="cant cc_comment_msg" style="display: none;">
-			<dt>&nbsp;</dt>
-			<dd></dd>
-		</dl>
-	</div> 
-</div>
-          </div>
-
-        </div>
-        <div class="download_r fr">
-          <div class="mod_personal">
-            <dl class="personal_wrap" id="personal_wrap">
-              <dt><a href="/user/szstudy"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img" class="head"></a></dt>
+		<div style="    padding: 20px;">
+			<div class="cannot_com_c">	
+				 <dl class="cant cc_comment_msg" style="display: none;">
+					<dt>&nbsp;</dt>
+					<dd></dd>
+				</dl>
+			</div> 
+		</div>
+     </div>
+   </div>
+   
+      <div class="download_r fr">
+         <div class="mod_personal">
+           <dl class="personal_wrap" id="personal_wrap">
+             <dt><a href="/user/szstudy"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img" class="head"></a></dt>
               <dd><a href="/user/szstudy" target="_blank" class="name">${shop.shop_name }</a>
-                <p>                
-                <c:choose>
-                  	<c:when test="${focus!=null }">
-                  		<span class="attention_btn al_attention" style="background:#EEF1F3;color:red;">已关注</span>
-                  	</c:when>
-                  	<c:otherwise>
-                  		<span class="attention_btn attention" style="background:#AC3839;color:white;"><a href="javascript:void(0)" onclick="javascript:focusShop(${shop.id})" style="color:white;">关注</a></span>
-                  	</c:otherwise>
-                  		
-                  </c:choose>
-               </p>
-                <p class="personal_b"><img alt="等级：3" src="${pageContext.request.contextPath}/shop/images/level/down3.png"><span>财富值&nbsp;<em>${shop.douNum }</em></span></p>
+                	<p>                
+	                <c:choose>
+	                  	<c:when test="${focus!=null }">
+	                  		<span class="attention_btn al_attention" style="background:#EEF1F3;color:red;">已关注</span>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                  		<span class="attention_btn attention" style="background:#AC3839;color:white;"><a href="javascript:void(0)" onclick="javascript:focusShop(${shop.id})" style="color:white;">关注</a></span>
+	                  	</c:otherwise>
+	                  		
+	                  </c:choose>
+               		</p>
+                <p class="personal_b">
+                	<img alt="等级：3" src="${pageContext.request.contextPath}/shop/images/level/down3.png">
+                	<span>财富值&nbsp;<em>${shop.douNum }</em></span>
+                </p>
               </dd>
             </dl>
             <div class="resource">
-              <div class="resource_t"><span class="resource_btn resource_cur">店铺其他资源</span><span class="resource_btn">店铺专辑</span></div>
-              <div class="resource_c_wrap">
-                <div class="resource_c resource_c_show">
-                  <ul class="resource_c_list">
-                  						<c:forEach items="${ohterSources }" var="source">
-                  							<li><i class="fa fa-caret-right"></i><a href="${host}/shop/source/${source.id }" target="_blank">${source.name }</a></li>
-                  						</c:forEach>
-										
-					                  </ul>
-                  <div class="check_all"><a href="${host}/shop/${source.shop.id }" target="_blank" class="check_all_btn">查看店铺更多资源</a>
-                  </div>
-                </div>
-                <div class="resource_c">
-                  <ul class="resource_c_list">
-                                    </ul>
-                  <div class="check_all"><a href="/user/szstudy/album" class="check_all_btn" target="_blank">查看全部0个资源</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              	<div class="resource_t"><span class="resource_btn resource_cur">店铺其他资源</span><span class="resource_btn">店铺专辑</span></div>
+              		<div class="resource_c_wrap">
+                		<div class="resource_c resource_c_show">
+                  			<ul class="resource_c_list">
+           						<c:forEach items="${ohterSources }" var="source">
+           							<li>
+           								<i class="fa fa-caret-right"></i>
+           								<a href="${host}/shop/source/${source.id }" target="_blank">${source.name }</a>
+           							</li>
+           						</c:forEach>									
+					        </ul>
+                  			<div class="check_all"><a href="${host}/shop/${source.shop.id }" target="_blank" class="check_all_btn">查看店铺更多资源</a>
+                  			</div>
+                		</div>
+		               <div class="resource_c">
+		                 <ul class="resource_c_list">
+		                                   </ul>
+		                 <div class="check_all"><a href="/user/szstudy/album" class="check_all_btn" target="_blank">查看全部0个资源</a>
+		                 </div>
+		               </div>
+              		</div>
+            	</div>
+          	</div>
           <div class="dl_mar"><a href="/upload" class="upload_res"><i class="fa fa-upload"></i><span>上传资源</span></a>
           </div>
           <!--广告-->
@@ -723,39 +791,41 @@ function htmlencode(s){
 			<a href="javascript:void(0);" onclick="javascript:find('numpy')" title="numpy" class="tag">numpy</a>
 			<a href="javascript:void(0);" onclick="javascript:find('opencv')" title="opencv" class="tag">opencv</a>
 		</div>
-          </div>
-          <!--VIP会员动态-->
-          <div class="dl_wrap">
-            <h4 class="dl_common_t"><span>VIP会员动态</span>
-            </h4>
-            <div id="vip_dynamic">
-			功能暂未开放
-	            <ul class="vip_dynamic">
-	            </ul>
-            </div>
-          </div>
-          <!--广告-->
-          <div class="dl_mar dl_mar_b">
-          	
-
+      </div>
+      
+       <!--VIP会员动态-->
+       <div class="dl_wrap">
+          <h4 class="dl_common_t"><span>VIP会员动态</span>
+          </h4>
+         	<div id="vip_dynamic">
+				功能暂未开放
+          <ul class="vip_dynamic">
+          </ul>
+         </div>
+       </div>
+          
+        <!--广告-->
+        <div class="dl_mar dl_mar_b">         	
 			<!-- 广告位结束 -->
-          </div>
-          <!--下载排行榜-->
-          <div class="dl_mar"><a href="/rankings" class="upload_res"><span>下载排行榜</span></a>
+        </div>
+        
+       <!--下载排行榜-->
+       <div class="dl_mar"><a href="/rankings" class="upload_res"><span>下载排行榜</span></a>
 		<div class="dl_wrap">
             <h4 class="dl_common_t"><span>下载热度排行</span>
             </h4>
             <div id="vip_dynamic">
-		因数据量较少，暂无排名
+				因数据量较少，暂无排名
 	            <ul class="vip_dynamic">
 			 <li><i class="fa fa-caret-right"></i>因数据量较少，暂无排名</li>
 	            </ul>
             </div>
           </div>
-          </div>
+        </div>
 
-
-	<div class="tags" style="display:none;" id="rep">           
+		<!-- ****************举报功能的实现	2019.09.20	miki
+				*********************************************************** -->
+		<div class="tags" style="display:none;" id="rep">           
              <div class="dl_mar"><a href="/rankings" class="upload_res"><span>举报</span></a>
          	 </div>
                <div class="content clearfix">
@@ -763,40 +833,37 @@ function htmlencode(s){
 		      		<table>
 		      			<tr>
 		      				<td>
-					      <select id="rname" name="message.name" class="form-control">
-			                <option style="font-size:12px" value="1">请选择类型</option>
-			                <option style="font-size:12px" value="资源无法下载">资源无法下载</option>
-			                <option style="font-size:12px" value="资源无法使用">资源无法使用</option>
-			                <option style="font-size:12px" value="标题与实际内容不符">标题与实际内容不符</option>
-			                <option style="font-size:12px" value="含有危害国家安全内容">含有危害国家安全内容</option>
-			                <option style="font-size:12px" value="含有反动色情等内容">含有反动色情等内容</option>
-			                <option style="font-size:12px" value="含广告内容">含广告内容</option>
-			                <option style="font-size:12px" value="版权问题，盗用别人店铺的资源">版权问题，盗用别人店铺的资源</option>
-			                <option style="font-size:12px" value="其他">其他</option>
-			              </select>
-              </td>
+						      <select id="rname" name="name" class="form-control">
+				                <option style="font-size:12px" value="1">请选择类型</option>
+				                <option style="font-size:12px" value="资源无法下载">资源无法下载</option>
+				                <option style="font-size:12px" value="资源无法使用">资源无法使用</option>
+				                <option style="font-size:12px" value="标题与实际内容不符">标题与实际内容不符</option>
+				                <option style="font-size:12px" value="含有危害国家安全内容">含有危害国家安全内容</option>
+				                <option style="font-size:12px" value="含有反动色情等内容">含有反动色情等内容</option>
+				                <option style="font-size:12px" value="含广告内容">含广告内容</option>
+				                <option style="font-size:12px" value="版权问题，盗用别人店铺的资源">版权问题，盗用别人店铺的资源</option>
+				                <option style="font-size:12px" value="其他">其他</option>
+				              </select>
+              				</td>
 		      			</tr>
 		      			<tr>
-			    			<td><textarea id="jb" name="message.content" style ="height:200px; width:268px;bg-color:gray;" placeholder="详细说明"></textarea></td>
+			    			<td><textarea id="jb" name="content" style ="height:200px; width:268px;bg-color:gray;" placeholder="详细说明"></textarea></td>
 		    			</tr>
-		    			
-		    			
-		    			<input type="hidden" name="message.source.id" value="${source.id }"/>
-		    			<input type="hidden" name="message.user.id" value="${currentUser.id }"/>
-		    			<input type="hidden" name="message.shop.id" value="${shop.id }"/>
+		    					    			
+		    			<input type="hidden" name="source.id" value="${source.id }"/>
+		    			<input type="hidden" name="user.id" value="${currentUser.id }"/>
+		    			<input type="hidden" name="shop.id" value="${shop.id }"/>
 		      		</table>
-     		 </form>
+     		 	</form>
                <button  style="width: 60px;height: 30px;font-size: larger;background:#C52727;color:white;" onclick="checkSource(${source.id})">提交</button>                                         
               </div>
             </div>
 
-          <!--公告-->
-          
+          <!--公告-->         
           <!--广告-->
-          <div class="dl_mar dl_mar_b">
-          	<!-- 广告位开始 -->
-			
-		<!-- 广告位结束 -->
+       <div class="dl_mar dl_mar_b">
+          	<!-- 广告位开始 -->		
+			<!-- 广告位结束 -->
           </div>
         </div>
       </div>

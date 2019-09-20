@@ -25,8 +25,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/footer.css">
 	<!--2017.10.15 miki body样式css文件 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/pay-css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/pay-css/common.css?{min}">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/pay-css/c_buy.min.css?{min}">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/pay-css/common.css">	<!-- ?{min} -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/pay-css/c_buy.min.css"><!-- ?{min} -->
 <link href="${pageContext.request.contextPath }/shop/css/ask_float_block.css" rel="stylesheet" type="text/css" />
 
 <!-- 尾部分页 css页码 	2017.08.03 miki-->
@@ -144,10 +144,11 @@
 			 $.post("${pageContext.request.contextPath}/shop/cdk/exchange?code="+code,
 				 function(result){
 				if(result.status==200){
-					alert("兑换成功！");
+					swal("兑换成功！", "虎豆已充值到账！", "success");
+					//alert("兑换成功！");
 					//location.reload(true);
 				}else{
-					alert(result.msg);
+					tipError(result.msg);
 				}
 			},"json");
 	}

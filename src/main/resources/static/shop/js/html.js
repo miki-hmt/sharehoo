@@ -307,7 +307,7 @@ var userAgent = navigator.userAgent.toLowerCase();
                 <h5>服务</h5>\
               </dt>\
               <dd style="display:none"> <a href="#" target="_blank">店铺入驻<img src="#" style="display: none; margin-top: -26px; width: 23px;"></a></dd>\
-              <dd> <a href="http://sharehoo.cn/game2.jsp" target="_blank">H5小游戏<img src="http://localhost:8088/sharehoo/shop/images/logo/new.gif" style=" margin-top: -26px; width: 23px;"></a></dd>\
+              <dd> <a href="http://sharehoo.cn/game2.jsp" target="_blank">H5小游戏<img src="http://sharehoo.cn/shop/images/logo/new.gif" style=" margin-top: -26px; width: 23px;"></a></dd>\
               <dd> <a href="#" target="_blank">威客平台</a></dd>\
               <dd> <a href="#" target="_blank">店铺活动</a></dd>\
               <dd> <a href="http://sharehoo.cn/Topic_leaveList.action" target="_blank">秘密墙</a></dd>\

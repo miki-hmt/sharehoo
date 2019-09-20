@@ -1,12 +1,8 @@
-﻿<%@page import="com.sharehoo.interceptor.OnlineCounter"%>
-<%@page import="com.sharehoo.util.Counter"%>
-<%@page import="com.sharehoo.util.OnlineCounterListener" %>
-<%@ page language="java" import="java.util.*,java.sql.*" pageEncoding="utf-8" %>
+﻿
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!--修改日期格式只显示年月日  -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
     
@@ -383,42 +379,23 @@ a:hover{
 	      </li>  
 	    </ul>
 	    
-	
-
-				<!-- 统计访问量    -->
-
-	<% 
- 	Counter CountFileHandler = new Counter(); 
-	 long count = 0; 
-	 if(application.getAttribute("count") == null){ 
- 	 count = CountFileHandler.readFromFile(request.getRealPath("/") + "count.txt"); 
- 	 application.setAttribute("count", new Long(count)); 
-	 }  
-	 count = (Long)application.getAttribute("count"); 
- 	if(session.isNew()){ 
- 	 count++; 
-  	application.setAttribute("count", count); 
- 	 //更新文件目录 
- 	 CountFileHandler.write2File(request.getRealPath("/") + "count.txt",count); 
- 	 } 
- 	%> 
-
+	<!-- 统计访问量    -->
 	   
 	    <!-- 访问量统计 -->
 	 <div style="height:120px;border:1px solid silver;border-left:0px;border-right:0px;">
 	  <ul class="paihang" id="rank" style="margin:0; padding:0; border:none; list-style:none;">             
 		   <li>
-			   <em>在线人数</em><a href="topic/section/1" target="_blank">：${application.onlineCount }</a>
+			   <em>在线人数</em><a href="#" id="online"></a>
 			   <span><i style="width:22%;"></i></span>        
 		   </li>  
 		                 
 		   <li>          
-			   <em>今日访问量</em><a href="topic/section/11" target="_blank">：233</a>  
+			   <em>今日访问量</em><a href="#" id="dayonline"></a>  
 			   <span>            <i style="width:32%;"></i>          </span>       
 		   </li>  
 		   
 		  <li> 
-			  <em>总访问量:</em> <a href="topic/section/16" target="_blank">：<%=count %></a>          
+			  <em>总访问量</em> <a href="#" id="total"></a>          
 			  <span>            <i style="width:70%;"></i>          </span>        
 		  </li>
 	  </ul>
@@ -869,7 +846,26 @@ a:hover{
 <script type="text/javascript" src="js/timer.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-  debugger
+  	
+  	$.ajax({
+		cache: false,
+		type: "POST",
+		dataType: "json",
+		data: {},
+		url: "${host}/online",
+		success: function(result) {
+			if(result.status==200){
+				$("#total").text('：'+result.data.total);
+				$("#dayonline").text('：'+result.data.daytotal);
+				$("#online").text('：'+result.data.online);
+			}else{
+				$("#total").text('：521');
+				$("#dayonline").text('：1314');
+				$("#online").text('：99999');
+			}
+		}
+	});
+	
 	for(var i=0;i<13;i++){
 		var date=$(".time"+i).text();
 		$(".time"+i).text(diaplayTime(date));

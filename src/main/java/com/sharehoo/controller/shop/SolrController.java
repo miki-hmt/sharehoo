@@ -121,14 +121,13 @@ public class SolrController {
 		}
 		
 		StringBuffer param = new StringBuffer();
-		if (null == category_name) {
-			category_name = "";
-		}if (null == type) {
-			type = "";
-		}if (null == keyword) {
-			keyword = "";
+		if (null != category_name) {
+			param.append("category_name=" + category_name);
+		}if (null != type) {
+			param.append("&type==" + type);
+		}if (null != keyword) {
+			param.append("&keyword=" + keyword);
 		}
-		param.append("category_name=" + category_name + "&type=" + type + "&keyword=" + keyword);
 		String pageCode = PageUtil.genPagination(request.getContextPath() + "/shop/source/serach", recordCount,
 				page, count, param.toString());
 		model.addAttribute("pageCode", pageCode);

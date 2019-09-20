@@ -66,7 +66,7 @@ public class CommentServiceImpl implements CommentService {
 	public Comment getCommentByUserSourceId(int sourceId,int userId) {
 		// TODO Auto-generated method stub
 		List<Object> params = new LinkedList<Object>();
-		String hql = "from Comment as comment where comment.user.id=:userId and comment.source.id=:sourceId ";
+		String hql = "from Comment as comment where comment.user.id=? and comment.source.id=? ";
 		params.add(userId);
 		params.add(sourceId);
 		List<Comment> findTopN = baseDAO.findTopN(hql, params, 1);
@@ -126,6 +126,21 @@ public class CommentServiceImpl implements CommentService {
 			param.add(shopId);
 		}
 		hql.append(" and sacrify_score > 4");
+		return baseDAO.count(hql.toString().replaceFirst("and", "where"), param);
+	}
+	
+	/**
+	 * 2019.09.20 miki 计算某个资源得所有评分总和
+	 */
+	@Override
+	public Long getCommentTotalScoreBysourceId(int sourceId) {
+		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
+		StringBuffer hql=new StringBuffer("select sum(sacrify_score) from Comment");
+		if(sourceId>0){
+			hql.append(" and source_id=?");
+			param.add(sourceId);
+		}
 		return baseDAO.count(hql.toString().replaceFirst("and", "where"), param);
 	}
 }

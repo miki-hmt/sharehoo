@@ -36,7 +36,6 @@ public class Counter extends HttpServlet {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			write2File(filename, 0);
@@ -46,14 +45,11 @@ public class Counter extends HttpServlet {
 			try {
 				count = Long.parseLong(in.readLine());
 			} catch (NumberFormatException e) {
-				// TODO: handle exception
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return count;

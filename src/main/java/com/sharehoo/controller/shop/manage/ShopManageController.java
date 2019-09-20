@@ -303,7 +303,7 @@ public class ShopManageController {
 		    	String staticPath = BootPathUtil.getStaticPath();
 			
 				String imageName=DateUtil.getCurrentDateStr();
-				String realPath = staticPath +"/shop/images/user/"+Consts.SDF_YYYYMM.format(new Date());  
+				String realPath = staticPath +"/images/shop/face/"+Consts.SDF_YYYYMM.format(new Date());  
 
 				String imageFile=imageName+"."+image.getOriginalFilename().split("\\.")[1];
 				File savePath=new File(realPath);
@@ -322,7 +322,7 @@ public class ShopManageController {
 		        }       
 		        is.close();    
 		        os.close();
-				shop.setFace("images/user/"+Consts.SDF_YYYYMM.format(new Date())+"/"+imageFile);	//原来为"images/user/"   2016.10.12
+				shop.setFace("images/shop/face/"+Consts.SDF_YYYYMM.format(new Date())+"/"+imageFile);	//原来为"images/user/"   2016.10.12
 			}else{
 				shop.setFace(shop1.getFace());
 			}

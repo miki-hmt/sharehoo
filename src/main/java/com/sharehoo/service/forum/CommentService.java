@@ -33,6 +33,8 @@ public interface CommentService {
 	 */
 	public Long getCommentCountBysourceId(int sourceId);
 	
+	public Long getCommentTotalScoreBysourceId(int sourceId);
+	
 	/*
 	 * 2017.08.11 miki 根据shopId，得到评分大于等于四的数量
 	 */

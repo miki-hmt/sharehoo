@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.User;
@@ -26,6 +27,7 @@ public class CommentController {
 	 * 2017.08.08 miki 评论保存功能，同时验证用户是否唯一评论，同一资源，同一个用户只能评论一次
 	 */
 	@RequestMapping("shop/comment/{sourceId}")
+	@ResponseBody
 	public E3Result save(HttpServletRequest request,@PathVariable("sourceId") int sourceId,Comment comment)throws Exception{
 		HttpSession session=request.getSession();
 		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);

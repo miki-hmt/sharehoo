@@ -207,7 +207,7 @@ public class CDKController {
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
 		Shop shop=shopService.getShopByuserId(user.getId());
-		model.addAttribute("shop", shop);
+		model.addAttribute("shop1", shop);
 		if (shop!=null) {
 			return "shop/pay";
 		}else{

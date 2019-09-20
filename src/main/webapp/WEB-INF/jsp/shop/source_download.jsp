@@ -253,7 +253,7 @@ $(function(){
                                 <i class="fa fa-star yellow"></i>
                                 <i class="fa fa-star yellow"></i>
                                 <i class="fa fa-star yellow"></i>
-                                <i class="fa fa-star yellow"></i>
+                                <i class="fa fa-star"></i>
                                 </label><span>综合评分：<em>4.6</em></span><i class="user_grade">（${commentTotal}位用户评分）</i>
               </div>
               <div class="dl_operate_r fr">
@@ -263,7 +263,11 @@ $(function(){
 	                  		<a href="javascript:void(0);" id="favorite" class="dl_func"><i class="fa fa-star-o"></i><span style="color:silver;">收藏</span><em style="color:silver;">(${collectTotal })</em></a>
 	                  	</c:when>
 	                  	<c:otherwise>
-	                  		<a href="javascript:void(0);" onclick="javascript:collectSource(${source.id})" id="favorite" class="dl_func"><i class="fa fa-star-o"></i><span>收藏</span><em>(${collectTotal })</em></a>
+	                  		<a href="javascript:void(0);" onclick="javascript:collectSource(${source.id})" id="favorite" class="dl_func">
+	                  			<i class="fa fa-star-o"></i>
+	                  			<span id="dl_func_collect">收藏</span>
+	                  			<em>(${collectTotal })</em>
+	                  		</a>
 	                  	</c:otherwise>
 	                  		
 	                  </c:choose>
@@ -387,40 +391,55 @@ $(function(){
 	
 		<div class="recommand download_comment" sourceid="9896715">	
 			<script type="text/javascript">	
-			//收藏功能实现，miki 2017.08.10	
+			//收藏功能实现，miki 2017.08.10
+			
+				//******** 收藏功能实现，miki 2017.08.10	
 				function collectSource(sourceId){
 					if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 						alert("您还未登陆！");
-					} else {
-						if (confirm("您正在收藏该资源，请确认")) {
-							$.post("${host}/shop/collect",{sourceId:sourceId},
-							function(result){
-				    			if(result.data==200){
-				    				alert("收藏成功，请到店铺收藏中心查看！");
-				    				location.reload(true);
-				    			}else{	    				
-				    				alert("您已经收藏过了！");    			            				
-				    			}
-				    		},"json");
-						}else{
-							return;
-						}
+					} else {	
+						swal({
+							title : "您正在收藏该资源，请确认？",
+							text : '<span style="color:red">好的东西用到用不到不知道，收藏起来是必须的..</span>',
+							type : "warning",
+							html : true,
+							showCancelButton : true,
+							closeOnConfirm : false,
+							confirmButtonText : "是的，我要",
+							confirmButtonColor : "#ec6c62"
+						}, function() {
+							$.post("${host}/shop/collect", {
+								sourceId:sourceId
+							}, function(result) {
+								if (result.status == 200) {
+									tipOk("收藏成功!!请到店铺收藏中心查看",function(){
+											swal.close();
+											$("#favorite").addClass("favoRed");
+											$("#dl_func_collect").text("我已收藏");
+										});				
+									//********** 尽量不刷新页面，减少不必要得请求资源消耗	2019.09.20 miki
+									//location.reload(true);
+								} else {
+									tipError("您已经收藏过了！");
+								}
+							}, "json");
+						});
 					}	
 				}
 				
-				function uuid() {  
-				    var s = [];  
-				    var hexDigits = "0123456789abcdef";  
-				    for (var i = 0; i < 36; i++) {  
-				        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);  
-				    }  
-				    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010  
-				    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01  
-				    s[8] = s[13] = s[18] = s[23] = "-";  
-				   
-				    var uuid = s.join("");  
-				    return uuid;  
-				}  	
+			function uuid() {  
+			    var s = [];  
+			    var hexDigits = "0123456789abcdef";  
+			    for (var i = 0; i < 36; i++) {  
+			        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);  
+			    }  
+			    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010  
+			    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01  
+			    s[8] = s[13] = s[18] = s[23] = "-";  
+			   
+			    var uuid = s.join("");  
+			    return uuid;  
+			}  	
 			</script>
 		<div class="common_li clearfix">
 			<h3 class="tit">评论<span>共有${commentTotal }条</span></h3>
@@ -511,21 +530,20 @@ $(function(){
 	                    <ul id="csdn_dl_commentbox" class="comment_stars">
 	                        <li class="tit">星级评价：</li>
 	                        <input class="star" id="star" name="sacrify_score" value="${comment.sacrify_score }" type="hidden"/>
-	                                <li class="stats">
-	                                
-	                                <div class="BOX"> 
-										<div id="star" class="">
-											<ul class="star_UL" sid="0">
-												<li><a href="javascript:;">1</a></li>
-												<li><a href="javascript:;">2</a></li>
-												<li><a href="javascript:;">3</a></li>
-												<li><a href="javascript:;">4</a></li>
-												<li><a href="javascript:;">5</a></li>
-											</ul>
-											<span  class="star_result_span">
-												<strong></strong>&nbsp;&nbsp;<a></a>
-											</span>
-										</div>
+	                                <li class="stats">                                
+		                                <div class="BOX"> 
+											<div id="star" class="">
+												<ul class="star_UL" sid="0">
+													<li><a href="javascript:;">1</a></li>
+													<li><a href="javascript:;">2</a></li>
+													<li><a href="javascript:;">3</a></li>
+													<li><a href="javascript:;">4</a></li>
+													<li><a href="javascript:;">5</a></li>
+												</ul>
+												<span  class="star_result_span">
+													<strong></strong>&nbsp;&nbsp;<a></a>
+												</span>
+											</div>
 										</div>
 	
 	                                </li>
@@ -544,48 +562,56 @@ $(function(){
 	            </div>
 	        </form>
 		  </div>                         
-	      <!-- 2017.08.08 form表单异步提交及验证	 -->               
-	       <script type="text/javascript">
-	       
-	         function postComment(){
-	         	if ($("#star").val()==null||$("#star").val()=='') {
-		      		$("#error").html("星级评价不能为空！");
-		         		 return false;
-	         	}else if ($("#content").val()==null||$("#content").val()=='') {
-	         		$("#error").html("评论不能为空！");
-	         		 return false;
-	         	}else if ($("#content").val().length<5) {
-	         		$("#error").html("最少输入五个汉字！");
-	      			return false;
-		      	}else if ($("#content").val().length>160) {
-		      		$("#error").html("最多输入80个汉字！");
-		      		return false;	
-		      	}
-	      		$("#error").html("");
-		      	$.post("${host}/shop/comment/${source.id}",$("#fm").serialize(),function(result){
-		  			if(result.data==200){
-		  				alert("评论成功，谢谢参与！");
-		  				location.reload(true);
-		  			}else{
-		  				if(result.data==401){
-		  					alert("您已经评论过了，不能二次评论！");
-		  				}else{
-		  					alert("我不知道你是怎样越过这么多权限到这一步的，反正你是真牛掰！");
-		  				}			            				
-		  			}
-		  		},"json");
-	         }
-	         
-	         $(function () {
-	             function cache_hit() {
-	                 $("#imgValidcode").attr("src", "/index.php/rest/tools/validcode/comment_validate/1" + Math.random());
-	             }
-	
-	             $("#imgValidcode").on("click", function () {
-	                 cache_hit();
-	             });
-	         });
-	     </script>                    
+     <!-- 2017.08.08 form表单异步提交及验证	 -->               
+     <script type="text/javascript">
+      
+      function postComment(){
+      	if ($("#star").val()==null||$("#star").val()=='') {
+    		$("#error").html("星级评价不能为空！");
+       		 return false;
+      	}else if ($("#content").val()==null||$("#content").val()=='') {
+      		$("#error").html("评论不能为空！");
+      		 return false;
+      	}else if ($("#content").val().length<5) {
+      		$("#error").html("最少输入五个汉字！");
+   			return false;
+    	}else if ($("#content").val().length>160) {
+    		$("#error").html("最多输入80个汉字！");
+    		return false;	
+    	}
+   		$("#error").html("");
+    		
+    	var formData = new FormData($("#fm")[0]);
+		$.ajax({
+			type : "POST",
+			url : "${host}/shop/comment/${source.id}",
+			data : formData,
+			cache : false,
+			async : false,
+			processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+			contentType : false, //必须false才会自动加上正确的Content-Type
+			success : function(data) {
+				if (data.status == 200) {
+					tipOk("评论成功，谢谢参与！",function(){
+						location.reload();
+					});
+				} else {
+					tipError("您已经评论过了，不能二次评论！" + data.msg);
+				}
+			}
+		});
+       }
+        
+       $(function () {
+           function cache_hit() {
+               $("#imgValidcode").attr("src", "/index.php/rest/tools/validcode/comment_validate/1" + Math.random());
+           }
+
+           $("#imgValidcode").on("click", function () {
+               cache_hit();
+           });
+       });
+    </script>                    
 		
 		<div style="    padding: 20px;">
 			<div class="cannot_com_c">	
@@ -610,7 +636,8 @@ $(function(){
                   		<span class="attention_btn al_attention" style="background:#EEF1F3;color:red;">已关注</span>
                   	</c:when>
                   	<c:otherwise>
-                  		<span class="attention_btn attention" style="background:#AC3839;color:white;"><a href="javascript:void(0)" onclick="javascript:focusShop(${shop.id})" style="color:white;">关注</a></span>
+                  		<span class="attention_btn attention" style="background:#AC3839;color:white;">
+                  			<a href="javascript:void(0)" onclick="javascript:focusShop(${shop.id})" style="color:white;">关注</a></span>
                   	</c:otherwise>
                   		
                   </c:choose>
@@ -712,25 +739,39 @@ $(function(){
 <!-- 猜你在找 -->
 <script type="text/javascript" defer>
     
-    function focusShop(shopId){
-    	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-    		alert("您还未登陆！");
-    	} else {
-    		if (confirm("您确定要关注该店铺吗？")) {
-    			$.post("${host}/shop/focus",{shopId:shopId},
-    			function(result){
-        			if(result.data==200){
-        				alert("关注成功，请到店铺收藏中心查看！");
-        				location.reload(true);
-        			}else{	    				
-        				alert("您已经关注过了！");    			            				
-        			}
-        		},"json");
-    		}else{
-    			return;
-    		}
-    	}	
-    }
+    //******** 关注功能实现，miki 2017.08.10
+	function focusShop(shopId){
+		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
+			alert("您还未登陆！");
+			} else {	
+				swal({
+				title : "您确定要关注该店铺吗？",
+				text : '<span style="color:red">关注之后，可以实时查看最新商品..</span>',
+				type : "warning",
+				html : true,
+				showCancelButton : true,
+				closeOnConfirm : false,
+				confirmButtonText : "强行关注，最为致命",
+				confirmButtonColor : "#ec6c62"
+			}, function() {
+				$.post("${host}/shop/focus", {
+					shopId:shopId
+				}, function(result) {
+					if (result.status == 200) {
+						tipOk("关注成功!!",function(){
+								swal.close();
+								$(".attention_btn").removeClass("attention").addClass("al_attention").attr('style','background:#EEF1F3;color:red');
+								$(".attention_btn").text("已关注");
+							});				
+						//********** 尽量不刷新页面，减少不必要得请求资源消耗	2019.09.20 miki
+						//location.reload(true);
+					} else {
+						tipError("您已经关注过了！");
+					}
+				}, "json");
+			});
+		}	
+	}
     
     function get_find_report(bd,pageno){
 		$.get("/index.php/source/get_source_report/"+bd+"/"+pageno,

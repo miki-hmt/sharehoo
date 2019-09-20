@@ -197,6 +197,9 @@ public class BaseDAOImpl<T> extends SimpleJpaRepository<T, Integer> implements B
 				q.setParameter(i, param.get(i));
 			}
 		}
+		if(q.uniqueResult()==null) {
+			return (long) 0;
+		}
 		return (Long) q.uniqueResult();
 	}
 

@@ -46,7 +46,11 @@ public class StartListener implements ServletContextListener{
 		/***********
 		 * 将域名存放到全局变量中
 		 * *******************************/
-		ct.setAttribute("host", host);		
+		ct.setAttribute("host", host);
+		
+		//*************** 设置当前访问量标识符
+		CxCacheUtil.getIntance().setValue(Consts.NOWDATE, Consts.SDF_YYYYMMDD.format(new Date()));
+		CxCacheUtil.getIntance().setValue(Consts.DAYONLINEUSER,1);
 	}
 	
 	@Override

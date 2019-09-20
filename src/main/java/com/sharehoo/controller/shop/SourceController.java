@@ -1,6 +1,7 @@
 package com.sharehoo.controller.shop;
 
 import java.io.FileInputStream;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -92,30 +93,43 @@ public class SourceController {
 		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);	//下载者
 		
 		long totalCollect=collectService.getCollectCountBySourceId(source_id);
+		model.addAttribute("collectTotal", totalCollect);
+		
 		List<Shop> newShopList=shopService.getNewShops();
 		model.addAttribute("newShopList", newShopList);
 		
 		List<NewsBanner> bannerList=newsBannerService.findRecommendBannerListByType();		//大神推荐版块图文下载
 		model.addAttribute("bannerList", bannerList);
+		
 		List<Collect> collectSources=collectService.getCollectsByCollectCount();
 		model.addAttribute("collectSources", collectSources);
+		
 		if(source_id>0){
 		Source source=sourceService.getSourceById(source_id);	//资源
 		model.addAttribute("source", source);
+		
 		User user=source.getUser();	//资源上传者
 		model.addAttribute("user", user);
+		
 		Shop shop=source.getShop();	//资源店铺
 		model.addAttribute("shop", shop);
+		
 		List<Source> ohterSources=sourceService.getSourcesByshopId(shop.getId());
 		model.addAttribute("ohterSources", ohterSources);
+		
 		if(currentUser!=null){
 			model.addAttribute("currentUser", currentUser);
+			
 			Focus focus=focusService.getFocusByShopId(shop.getId(),currentUser.getId());
 			model.addAttribute("focus", focus);
+			
 			Collect collect=collectService.getCollectByuserId(currentUser.getId(), source_id);
 			model.addAttribute("collect", collect);
+			
+			Shop currentShop=shopService.getShopByuserId(currentUser.getId());	//下载者店铺
+			model.addAttribute("currentShop", currentShop);
+			
 			//执行访问操作，必须要有用户登录才行 	2017.08.25 miki
-
 			String ip=IpGet.getIp2(request);
 			String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
 			if(address.equals("[]")){
@@ -129,29 +143,30 @@ public class SourceController {
 			}
 			Log log1 = new Log(ip, new Date(), "visitor", "店铺访问", currentUser, shop,address);		
 			logService.save(log1);
-			
-		}
-		
+		}	
 		String signature=RadomUtil.getUUID();	//产生伪下载令牌，迷惑盗链者
 		model.addAttribute("signal", signature);
-		model.addAttribute("collectTotal", totalCollect);
-		if(currentUser!=null){
-			Shop currentShop=shopService.getShopByuserId(currentUser.getId());	//下载者店铺
-			model.addAttribute("currentShop", currentShop);
-		}		
+				
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
 		PageBean pageBean=new PageBean(Integer.parseInt(page), 7);
 		List<Comment> commentList=commentService.getCommentsBySourceId(source_id, pageBean);
 		model.addAttribute("commentList", commentList);
-		/**
-		 * 2017.04.30
-		 * miki
-		 * 后台数据传递到前台的方法*****重要
-		 */		
+			
 		long commentTotal=commentService.getCommentCountBysourceId(source_id);
+		
+		//************** 计算资源的平均分  2019.09.20	miki
+		DecimalFormat df = new DecimalFormat("0.0");		//格式化小数
+		model.addAttribute("average", 0.0);
+		if(commentTotal>0) {
+			long commentScores=commentService.getCommentTotalScoreBysourceId(source_id);
+			String average = df.format((float)commentScores / commentTotal);
+			model.addAttribute("average", average);
+		}
+		
 		model.addAttribute("commentTotal", commentTotal);
+	
 		String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/"+source_id, commentTotal, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
 	}
@@ -258,6 +273,13 @@ public class SourceController {
 		return "shop/source_download";
 	}
 	
+	/**
+	* @Title: downKiss  
+	* @Description: TODO(最终的下载功能)  
+	* @author miki 
+	* @date 2019年9月20日 下午4:17:22   
+	* @throws
+	 */
 	@RequestMapping("/shop/source/download")
 	public String downKiss(HttpServletRequest request,HttpServletResponse response, @RequestParam("source_id") int source_id,Model model){
 		HttpSession session=request.getSession();

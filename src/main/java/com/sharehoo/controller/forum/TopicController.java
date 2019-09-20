@@ -310,7 +310,7 @@ public class TopicController {
 		model.addAttribute("ptTopicList", ptTopicList);
 		
 		long total = topicService.getPtTopicCountBySectionId(sectionId);
-		String pageCode = PageUtil.genPagination(request.getContextPath() + "//topic/section/"+sectionId, total,
+		String pageCode = PageUtil.genPagination(request.getContextPath() + "/topic/section/"+sectionId, total,
 				Integer.parseInt(page), 20, null);
 		model.addAttribute("pageCode", pageCode);
 		

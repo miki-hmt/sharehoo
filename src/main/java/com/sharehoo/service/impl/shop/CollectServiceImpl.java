@@ -6,12 +6,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sharehoo.dao.shop.CollectDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Collect;
 import com.sharehoo.service.shop.CollectService;
-
+@Transactional
 @Service("collectService")
 public class CollectServiceImpl implements CollectService {
 	
