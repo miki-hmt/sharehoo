@@ -62,12 +62,12 @@ span {
 		<h1>${user.nickName }的博客</h1>
 		<h2>愿居于一城，与卿所见美好......</h2>
 		<div class="logo">
-			<a href="${host}/blog/manage/Article_list.action"></a>
+			<a href="${host}/blog/manage/article/list"></a>
 		</div>
 		<%@ include file="../manage_nav.jsp"%> </header>
 		<article>
 		<h2 class="about_h">
-			您现在的位置是：<a href="../manage/Article_list.action">首页</a>><a href="1/">写博客</a>
+			您现在的位置是：<a href="${host}/blog/manage/article/list">首页</a>><a href="1/">写博客</a>
 		</h2>
 		<div class="index_about">
 			<form method="post" enctype="multipart/form-data" id="article_form">

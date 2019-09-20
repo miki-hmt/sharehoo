@@ -60,7 +60,7 @@
 			alert("您还未登陆！");
 		} 
 		else{
-			window.location.href="Shop_upload.action";
+			window.location.href="${host}/shop/upload.htm";
 		}
 }
 	
@@ -141,21 +141,13 @@
 		 }else{
 			 $("#error2").html("");
 		 }
-			 $.post("${pageContext.request.contextPath}/shop/Cdk_exchange.action?code="+code,
+			 $.post("${pageContext.request.contextPath}/shop/cdk/exchange?code="+code,
 				 function(result){
-				if(result.info=='b'){
+				if(result.status==200){
 					alert("兑换成功！");
-					location.reload(true);
+					//location.reload(true);
 				}else{
-				if(result.info=="a"){
-					alert("兑换码不存在，兑换失败！");
-					}
-				if(result.info=="d"){
-					alert("您尚未登录或注册店铺！无法购买虎豆！");
-					}
-				if(result.info=="c"){
-					alert("兑换失败！");
-					}
+					alert(result.msg);
 				}
 			},"json");
 	}
@@ -180,7 +172,7 @@
 	<div class="container clearfix">
 		<div class="nav-bar">
 			<a href="${host}/shop/index.htm">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank">资源分类</a>
+			<a href="${pageContext.request.contextPath}/shop/source/categories" target="_blank">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
@@ -201,7 +193,7 @@
 
 
 	
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_profile.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_profile.css"/>
 
 
  

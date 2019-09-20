@@ -65,7 +65,7 @@ function check_up(thisform){
 		else{
 			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 			key =  encodeURIComponent(key)
-			var url="shop/${host}/shop/source/serach?keyword="+encodeURIComponent(key);
+			var url="solr/serach?keyword="+encodeURIComponent(key);
 			window.location.href=url;
 		}
 		return false;
@@ -173,7 +173,7 @@ function check_up(thisform){
 					<h4 align="center">欢迎来到秘密墙！</h4>
 					<h5>-*在这里可以说下自己的秘密</h5>
 					<h5>-*同时还能看别人的秘密哦</h5>
-					<h5>-<img src="${host}/common/images/write.png"><a href="Topic_preSave2.action?sectionId=17">写下秘密....</a></h5>
+					<h5>-<img src="${host}/common/images/write.png"><a href="#">写下秘密....</a></h5>
 					</div>
 		
       		</div>

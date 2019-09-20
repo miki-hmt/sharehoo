@@ -65,7 +65,7 @@ function check_up(thisform){
 		else{
 			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 			key =  encodeURIComponent(key);
-			var url="SearchJ_search.action?keyword="+encodeURIComponent(key);
+			var url="${host}/solr/search?keyword="+encodeURIComponent(key);
 			window.open(url);
 			//var url="shop/${host}/shop/source/serach?keyword="+encodeURIComponent(key);
 			//window.location.href=url;

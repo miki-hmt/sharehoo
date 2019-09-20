@@ -218,7 +218,7 @@
              <li><a href="${host}/user/reply?page=1"><span style="font-size:9pt;">信箱(<font style="font-size:9pt;color:yellow;">${count }</font>)</span></a></li>
              <li><a href="${pageContext.request.contextPath }/blog/${currentUser.nickNameId}" target="_blank"><span style="font-size:9pt;">查看博客</span></a></li>
             <li><a href="${host}/blog/manage/article/list?page=1" target="_blank"><span style="font-size:9pt;">管理博客</span></a></li>
-            <li><a href="User_center.action"><span style="font-size:9pt;">个人资料</span></a></li>
+            <li><a href="${host}/user/modify"><span style="font-size:9pt;">个人资料</span></a></li>
             <li><a href="#"><span style="font-size:9pt;">我的好友</span></a></li>
         </ul>
     </div>

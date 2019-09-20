@@ -112,11 +112,11 @@
   <header>
     <h1>${user.nickName }的博客</h1>
     <h2>愿居于一城，与卿所见美好......</h2>
-    <div class="logo"><a href="${host}/blog/manage/Article_list.action"></a></div>
+    <div class="logo"><a href="${host}/blog/manage/article/list"></a></div>
    <%@ include file="../manage_nav.jsp" %>
      </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/manage/Article_list.action">首页</a>><a href="#">博客管理</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/manage/article/list">首页</a>><a href="#">博客管理</a></h2>
     <div class="bloglist">
     <c:forEach items="${articleList }" var="article">
       <div class="newblog">
@@ -134,7 +134,8 @@
 		<button style="background:#0F9C7C;color:white;" onclick="javascript:deleteArticle(${article.id })">删除</button>
           </span>
           </div>
-          <div class="content" >${article.content }</div><a href="${host}/blog/manage/Article_detail.action?id=${article.id }"  class="readmore" style="display:inline-block;" target="_blank">全文</a>
+          <div class="content" >${article.content }</div>
+          	<a href="${host}/blog/manage/article/details?id=${article.id }"  class="readmore" style="display:inline-block;" target="_blank">全文</a>
         </ul>
         <figure><img src="${host}/${article.image }"  /></figure>
         <div class="dateview">${article.time }</div>
@@ -142,16 +143,19 @@
      </c:forEach>
 	<div class="newblog">
         <ul>
-          <h3><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></h3>
+          <h3><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></h3>
           <div class="autor"><span>作者：${article.editer }</span><span>分类：[<a href="#">${article.type }</a>]</span><span>浏览（<a href="#">${article.count }</a>）</span><span>评论（<a href="#">${article.count1 }</a>）</span>
           	<span>
-		      <select style="border:0;" onchange='document.location.href=this.options[this.selectedIndex].value;'>
+		      <select style="border:0;" onchange='operate(this.options[this.selectedIndex].value,${article.id })'>
 				 <option>编辑文章</option>
-				 <option value='../manage/Article_add.action?userId=${user.id }'>发表文章</option>
+				 <option value='publish'>发表文章</option>
+				 <option value='update'>修改文章</option>
+				 <option value='recommend'>设为推荐</option>
+				 <option value='unrecommend'>取消推荐</option>
 			</select>
           </span>
           </div>
-          <div class="content" >${article.content }</div><a href="${host}/blog/manage/Article_detail.action?id=${article.id }"  class="readmore" style="display:inline-block;" target="_blank">全文</a>
+          <div class="content" >${article.content }</div><a href="${host}/blog/manage/article/details?id=${article.id }"  class="readmore" style="display:inline-block;" target="_blank">全文</a>
         </ul>
         <figure><img src="${host}/${article.image }"  /></figure>
         <div class="dateview">${article.time }</div>
@@ -175,10 +179,10 @@
       <c:forEach items="${countList }" var="article" varStatus="state">
       <c:choose>
       	<c:when test="${ state.index<3}">
-      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>       	
+      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></li>       	
       	</c:when>
       	<c:otherwise>
-      		<li><span>${state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>
+      		<li><span>${state.index+1 }</span><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></li>
       	</c:otherwise>
       	</c:choose>
       </c:forEach>
@@ -192,10 +196,10 @@
       	<c:forEach items="${recommendList }" var="article" varStatus="state">
       	<c:choose>
       		<c:when test="${ state.index<3}">
-      			<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>       	
+      			<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></li>       	
       		</c:when>
       	<c:otherwise>
-      		<li><span>${ state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>
+      		<li><span>${ state.index+1 }</span><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></li>
       	</c:otherwise>
       </c:choose>
       </c:forEach>

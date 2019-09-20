@@ -315,8 +315,8 @@ function KeyP(event){
             <div class="album_detail_wrap">
             <c:forEach items="${sourceList }" var="source">
             	<dl class="album_detail_list clearfix">
-                <dt><a href="${pageContext.request.contextPath }/shop/Source_detail.action?source_id=${source.id}" target="_blank"><img src="${pageContext.request.contextPath }/shop/images/logo/zip.svg" alt="img"></a></dt>
-                <dd><a href="${pageContext.request.contextPath }/shop/Source_detail.action?source_id=${source.id}" class="album_detail_title" target="_blank">${source.name }</a>
+                <dt><a href="${pageContext.request.contextPath }/shop/source/${source.id}" target="_blank"><img src="${pageContext.request.contextPath }/shop/images/logo/zip.svg" alt="img"></a></dt>
+                <dd><a href="${pageContext.request.contextPath }/shop/source/${source.id}" class="album_detail_title" target="_blank">${source.name }</a>
                   <p class="cate_search_p"><font style="font-size:9pt;color:gray;">${source.description} </font></p><br>
                   <div class="album_detail_bot clearfix">
                     <label><span>下载次数：</span><em>${source.downNum }</em></label>

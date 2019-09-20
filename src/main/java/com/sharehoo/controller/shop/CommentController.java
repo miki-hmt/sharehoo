@@ -25,7 +25,7 @@ public class CommentController {
 	/*
 	 * 2017.08.08 miki 评论保存功能，同时验证用户是否唯一评论，同一资源，同一个用户只能评论一次
 	 */
-	@RequestMapping("shop/source/{sourceId}/comment")
+	@RequestMapping("shop/comment/{sourceId}")
 	public E3Result save(HttpServletRequest request,@PathVariable("sourceId") int sourceId,Comment comment)throws Exception{
 		HttpSession session=request.getSession();
 		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);

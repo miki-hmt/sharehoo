@@ -150,7 +150,7 @@ function htmlencode(s){
 	<div class="container clearfix">
 		<div class="nav-bar">
 			<a href="${host}/shop/index.htm">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank">资源分类</a>
+			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/categories" target="_blank">资源分类</a>
 			<a href="${host}/shop/rank" target="_blank" class="current">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
@@ -214,7 +214,7 @@ function htmlencode(s){
                 	<a href="/album" class="item_cur">全部</a>
                 <c:forEach items="${categories }" var="category">
                
-                		<a href="Shop_category.action?categoryId=${category.id }" target="_blank">${category.name }</a>
+                		<a href="${host}/shop/category?categoryId=${category.id }" target="_blank">${category.name }</a>
                 	  	
                 </c:forEach>
 		                               
@@ -334,7 +334,7 @@ function htmlencode(s){
                             	<!-- total_contribution -->
                <c:forEach items="${rankList }" var="shop">
                		<li class="clearfix">
-                  <label><a href="Shop_view.action?shopId=${shop.id }"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img"></a><a href="Shop_view.action?shopId=${shop.id }" class="contri_name">${shop.shop_name }</a>
+                  <label><a href="${host}/shop/${shop.id }"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img"></a><a href="${host}/shop/${shop.id }" class="contri_name">${shop.shop_name }</a>
                   </label><span><em>下载数：</em><i>${shop.downNum }</i></span>
                 </li>
                </c:forEach>           
@@ -359,7 +359,7 @@ function htmlencode(s){
             <div class="dl_notice">
               <ul class="resource_c_list">
 	              <c:forEach items="${noticeList}" var="notice">
-	              	<li><i class="fa fa-caret-right"></i><a href="#"  onClick="window.open('${pageContext.request.contextPath}/Notice_detail.action?noticeId=${notice.id }','','width=500,height=400');">${notice.name}</a></li>
+	              	<li><i class="fa fa-caret-right"></i><a href="#"  onClick="window.open('${pageContext.request.contextPath}/notice/detail/${notice.id }','','width=500,height=400');">${notice.name}</a></li>
 	              </c:forEach>
                               
                   <li><i class="fa fa-caret-right"></i><a href="#">源码超市——带你进入另一重编程境界</a></li>

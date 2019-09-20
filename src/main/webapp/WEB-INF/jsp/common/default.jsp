@@ -20,9 +20,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="renderer" content="webkit"> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-
-
-
 <!-- #2017.05.03   网站上半部分引入    文件              头 -->
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -55,7 +52,6 @@ function copy(c){
 		document.getElementById("content").value = c ;
 	}
 
-
 function findKey(){
 		var key=$("#keyword").val();
 		if(key==""){
@@ -69,9 +65,6 @@ function findKey(){
 		}
 		return false;
 	}
-
-
-
 </script>
 
 <link href="css/csshake.min.css" rel="stylesheet" type="text/css" />
@@ -79,7 +72,6 @@ function findKey(){
 a:hover{
   	text-decoration:none;
 }
-
 </style>
 </head>
 <body>
@@ -87,7 +79,6 @@ a:hover{
 		<!-- 2017.05.04  网站上半部分  头    -->
 
 <div style="border:0px solid red;background:#FFFFFF;">
-
 <style>
 
 	/*隐藏二级菜单列表      2016.10.08               */
@@ -107,8 +98,7 @@ a:hover{
 	margin:0px auto;  /*   2017.05.08       防止偏出，与一级菜单不对照          */
 	width:80px;  /*定义宽度，让二级菜单呈现瀑布式排列，而非横向  6  */
 	padding:0px;
-}
-		
+}		
 </style>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/she_files/function.js"></script>
@@ -183,7 +173,7 @@ a:hover{
     <li><a target="_blank" title="" href="topic/section/12">游戏圈</a></li>
     
 
-    <li><a target="_blank" title="" href="SoftSection_listpr.action">写帖子/博客</a>
+    <li><a target="_blank" title="" href="#">写帖子/博客</a>
 
 		 <ul>	
 			<li><a href="topic/section/11"  target="_blank" title="HTML">发帖求助
@@ -489,9 +479,9 @@ a:hover{
 	<div id="content_m_1383015574507" class="content_m" style="width: 330px; margin: 0px 0px 0px 10px; padding: 0px; border: 0px;">
 		<div class="content_list" style="width:330px" data="4.html">
 			<div class="list_s_love ti_1" data="504670793.html">
-				<div class="title_s love-height a_color_1" "="">
+				<div class="title_s love-height a_color_1" >
 					<font style="color:#B31515;">最近新帖:</font>${sectionNoReplyTopicCount.get(section)}&nbsp;<font style="color:#B31515;">精华帖:</font>${sectionGoodTopicCount.get(section) }
-					&nbsp;<font style="color:#B31515;">帖子总数:</font>${sectionTopicCount.get(section) }&nbsp;<font style="color:#B31515;">版主：</font><a href="blog/Blog_show.action?userId=${section.master.id }" target="_blamk" style="color:#088B23">${section.master.nickName }</a>
+					&nbsp;<font style="color:#B31515;">帖子总数:</font>${sectionTopicCount.get(section) }&nbsp;<font style="color:#B31515;">版主：</font><a href="blog/${section.master.nickNameId }" target="_blamk" style="color:#088B23">${section.master.nickName }</a>
 				</div>
 				
 		  </div>		
@@ -514,7 +504,7 @@ a:hover{
 				          	</c:otherwise>
 				          </c:choose>
 					</div>
-					<div class="nick_s a_color_2" "=""><a href="blog/Blog_show.action?userId=${topic[4]}">${topic[2] }</a>
+					<div class="nick_s a_color_2" ><a href="blog/Blog_show.action?userId=${topic[4]}">${topic[2] }</a>
 					</div>
 			  </div>
 			 </c:forEach>			
@@ -556,10 +546,10 @@ a:hover{
 				
 				<c:forEach items="${noticeList }" var="notice">
 					<div class="list_s_love ti_1" data="504835932.html">
-						<div class="title_s love-height a_color_1" "="">
-							<a href="#" onClick="window.open('Notice_detail.action?noticeId=${notice.id }','','width=500,height=400');" style="color:black;font-size:9pt;">${notice.name }</a>
+						<div class="title_s love-height a_color_1">
+							<a href="#" onClick="window.open('${host}/notice/detail/${notice.id }','','width=500,height=400');" style="color:black;font-size:9pt;">${notice.name }</a>
 						</div>
-						<div class="nick_s a_color_2" "="">
+						<div class="nick_s a_color_2">
 							<fmt:formatDate value="${notice.pubDate }" pattern="MM-dd "/>
 						</div>
 					</div>
@@ -599,9 +589,9 @@ a:hover{
 				<!-- 版块介绍 -->
 					<div class="content_list" style="width:330px" data="4.html">
 						<div class="list_s_love ti_1" data="504670793.html">
-							<div class="title_s love-height a_color_1" "="">
+							<div class="title_s love-height a_color_1" >
 							<font style="color:#B31515;">最近新帖:</font>${sectionNoReplyTopicCount.get(section)}&nbsp;<font style="color:#B31515;">精华帖:</font>${sectionGoodTopicCount.get(section) }
-							&nbsp;<font style="color:#B31515;">帖子总数:</font>${sectionTopicCount.get(section) }&nbsp;<font style="color:#B31515;">版主：</font><a href="blog/Blog_show.action?userId=${section.master.id }" target="_blamk" style="color:#088B23">${section.master.nickName }</a>
+							&nbsp;<font style="color:#B31515;">帖子总数:</font>${sectionTopicCount.get(section) }&nbsp;<font style="color:#B31515;">版主：</font><a href="blog/${section.master.nickNameId }" target="_blamk" style="color:#088B23">${section.master.nickName }</a>
 							</div>
 					
 			  			</div>		
@@ -610,7 +600,7 @@ a:hover{
 				
 				 	<c:forEach items="${good.get(section) }" var="topic">
 						<div class="list_s_love ti_1" data="504670793.html">
-							<div class="title_s love-height a_color_1" "="">
+							<div class="title_s love-height a_color_1" >
 								<c:choose>
 								<c:when test="${topic[3]==null }">
 									<a href="${host}/topic/detail/${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
@@ -620,7 +610,7 @@ a:hover{
 								</c:otherwise>
 							  </c:choose>	
 							</div>
-							<div class="nick_s a_color_2" "=""><a href="blog/Blog_show.action?userId=${topic[4]}">${topic[2] }</a>
+							<div class="nick_s a_color_2" ><a href="blog/Blog_show.action?userId=${topic[4]}">${topic[2] }</a>
 							</div>
 					  	</div>
 					 </c:forEach>	
@@ -656,9 +646,9 @@ a:hover{
 				<!-- 版块介绍 -->
 					<div class="content_list" style="width:330px" data="4.html">
 						<div class="list_s_love ti_1" data="504670793.html">
-							<div class="title_s love-height a_color_1" "="">
+							<div class="title_s love-height a_color_1" >
 							<font style="color:#B31515;">最近新帖:</font>${sectionNoReplyTopicCount.get(section)}&nbsp;<font style="color:#B31515;">精华帖:</font>${sectionGoodTopicCount.get(section) }
-							&nbsp;<font style="color:#B31515;">帖子总数:</font>${sectionTopicCount.get(section) }&nbsp;<font style="color:#B31515;">版主：</font><a href="blog/Blog_show.action?userId=${section.master.id }" target="_blamk" style="color:#088B23">${section.master.nickName }</a>
+							&nbsp;<font style="color:#B31515;">帖子总数:</font>${sectionTopicCount.get(section) }&nbsp;<font style="color:#B31515;">版主：</font><a href="blog/${section.master.nickNameId }" target="_blamk" style="color:#088B23">${section.master.nickName }</a>
 							</div>
 					
 			  			</div>		
@@ -668,7 +658,7 @@ a:hover{
 				
 					 	<c:forEach items="${good.get(section) }" var="topic">
 							<div class="list_s_love ti_1" data="504670793.html">
-								<div class="title_s love-height a_color_1" "="">
+								<div class="title_s love-height a_color_1" >
 									<c:choose>
 										<c:when test="${topic[3]==null }">
 											<a href="${host}/topic/detail/${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
@@ -678,7 +668,7 @@ a:hover{
 										</c:otherwise>
 									  </c:choose>
 								</div>
-								<div class="nick_s a_color_2" "=""><a href="blog/Blog_show.action?userId=${topic[4]}">${topic[2] }</a>
+								<div class="nick_s a_color_2" ><a href="blog/Blog_show.action?userId=${topic[4]}">${topic[2] }</a>
 								</div>
 						  	</div>
 						 </c:forEach>	
@@ -834,7 +824,7 @@ a:hover{
 						<div id="user_scroll_list" style="width: 3312px;">
 						<c:forEach items="${userScoreList }" var="user" varStatus="state">
 							<div class="scroll-t-1">
-								<a href="blog/Blog_show.action?userId=${user.id }" target="_blank">
+								<a href="blog/${user.nickNameId }" target="_blank">
 										<img src="${pageContext.request.contextPath}/${user.face}" title="${user.nickName }" alt="${user.nickName }" style="width:71px; height:71px;border:1px solid #85735F;">
 										<p>
 											<span class="title">${user.nickName }</span>
@@ -912,7 +902,7 @@ a:hover{
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
 			$.alert("您还未登陆！");
 		} else {
-			window.location.href="blog/manage/Article_add.action?userId=${currentUser.id}";
+			window.location.href="${host}/blog/manage/article/go";
 		}	
 }
 </script>

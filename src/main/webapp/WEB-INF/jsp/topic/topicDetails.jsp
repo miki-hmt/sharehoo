@@ -197,188 +197,166 @@ function saveRep(){
 				</table>
 			</div>
 		</div>
-		
-		
-		                          <!-- 回复列表2016.08.24 -->
+			
+		 <!-- 回复列表2016.08.24 -->
 		<c:forEach items="${replyList }" var="reply" varStatus="status">
-		<div class="row-fluid" style="margin-top: 20px;">
-			<div class="span2">
-			
-			
-			
-			
-			                                 <!-- 楼主信息所占表格      2016.09.22     -->
-			
-			
-						<!-- cellpadding指定单元表格之间的距离 -->
-				<table  style="width: 80%; border:1px solid #A9CBEE; background-color:#EFF4FB;" cellpadding="0px;">
-					<tr>
-						<td>
-							▲${(page-1)*10+status.index+1 }楼&nbsp;			
-							<a href="#" style="font-size: 8pt;color:gray;text-align:right;" >+关注好友</a>										
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<c:choose>
-									<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='男'}">
-										<img alt="" src="${host}/images/user/user0.gif" style="width: 50px;height: 50px;border-radius:50%;">
+			<div class="row-fluid" style="margin-top: 20px;">
+				<div class="span2">	
+				  <!-- 楼主信息所占表格      2016.09.22     -->
+					<!-- cellpadding指定单元表格之间的距离 -->
+					<table  style="width: 80%; border:1px solid #A9CBEE; background-color:#EFF4FB;" cellpadding="0px;">
+						<tr>
+							<td>
+								▲${(page-1)*10+status.index+1 }楼&nbsp;			
+								<a href="#" style="font-size: 8pt;color:gray;text-align:right;" >+关注好友</a>										
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<c:choose>
+										<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='男'}">
+											<img alt="" src="${host}/images/user/user0.gif" style="width: 50px;height: 50px;border-radius:50%;">
+										</c:when>
+										<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='女'}">
+											<img alt="" src="${host}/images/user/female.gif" style="width: 50px;height: 50px;border-radius:50%;">
+										</c:when>
+										<c:otherwise>
+											<img alt="" src="${host}/${reply.user.face}" style="width: 50px;height: 50px;border-radius:50%;">
+										</c:otherwise>
+								</c:choose>																			
+								
+								 <!-- 加载楼主姓名，可以把全部个人信息放入此处，减少空间     2016.09.27-->						                 				                  
+								<a href="#" style="font-size: 8pt;color: gray; text-align:right;">						
+									<strong>${reply.user.nickName }<br> 性别：${reply.user.sex }&nbsp;&nbsp;&nbsp;<br>
+										<c:choose>
+												<c:when test="${reply.user.sectionList.size()==0&&reply.user.type!=2 }">
+													<font style="color: gray;">用户</font>
+												</c:when>
+												<c:when test="${reply.user.sectionList.size()!=0&&reply.user.type!=2 }">
+													<font style="color: gray;">版主</font>
+													<c:forEach items="${reply.user.sectionList }" var="section">
+								                  	  				${section.name }
+								                  	 </c:forEach>
+								                </c:when>
+												<c:otherwise>
+													<font style="color: red;">管理</font>
+												</c:otherwise>
+										</c:choose><br>
+										积分：${reply.user.score }
+									</strong>
+								</a>																		
+							</td>
+						</tr>									
+						<!-- 此处存楼主放个人信息  已将表格移到别处 -->				
+					</table>
+					
+				</div>
+				
+				<!-- 回复帖子所占表格   2016.08.22 -->		                              
+				<div class="span10">
+					<table style="width: 90%;border:1px solid #A9CBEE;">
+						<tr>
+							<td style="text-align:left;border:1px solid #A9CBEE;background-color:#EFF4FB; padding:6px;" class="show_e">
+							
+								<c:choose>
+									<c:when test="${currentUser.id==section.master.id && currentUser.id!=null }">
+										<button class="btn btn-danger" onclick="javascript:deleteReply(${reply.id })">删除</button>
 									</c:when>
-									<c:when test="${(reply.user.face==null||reply.user.face=='')&&reply.user.sex=='女'}">
-										<img alt="" src="${host}/images/user/female.gif" style="width: 50px;height: 50px;border-radius:50%;">
+									<c:when test="${currentUser.type==2 }">
+										<button class="btn btn-danger" onclick="javascript:deleteReply(${reply.id })">删除</button>
 									</c:when>
 									<c:otherwise>
-										<img alt="" src="${host}/${reply.user.face}" style="width: 50px;height: 50px;border-radius:50%;">
 									</c:otherwise>
-							</c:choose>
-														
-							
-							
-							                  <!-- 加载楼主姓名，可以把全部个人信息放入此处，减少空间     2016.09.27-->
-							                  
-					                  
-					<a href="#" style="font-size: 8pt;color: gray; text-align:right;">
-					
-						<strong>${reply.user.nickName }<br> 性别：${reply.user.sex }&nbsp;&nbsp;&nbsp;<br>
-							<c:choose>
-									<c:when test="${reply.user.sectionList.size()==0&&reply.user.type!=2 }">
-										<font style="color: gray;">用户</font>
-									</c:when>
-									<c:when test="${reply.user.sectionList.size()!=0&&reply.user.type!=2 }">
-										<font style="color: gray;">版主</font>
-										<c:forEach items="${reply.user.sectionList }" var="section">
-					                  	  				${section.name }
-					                  	 </c:forEach>
-					                </c:when>
-									<c:otherwise>
-										<font style="color: red;">管理</font>
-									</c:otherwise>
-							</c:choose><br>
-							积分：${reply.user.score }
-						</strong>
-					</a>
-												
-							
-						</td>
-					</tr>
-					
-					
-					<!-- 此处存楼主放个人信息  已将表格移到别处 -->
-					
-					
-					
-					
-				</table>
-			</div>
-			
-			
-			                              <!-- 回复帖子所占表格   2016.08.22 -->
-			                              
-			                              
-			<div class="span10">
-				<table style="width: 90%;border:1px solid #A9CBEE;">
-					<tr>
-						<td style="text-align:left;border:1px solid #A9CBEE;background-color:#EFF4FB; padding:6px;" class="show_e">
+								</c:choose>
+								<a href="#" style="font-size: 9pt;color:gray;">回复于：<span class="time_reply${status.count}" title="2018-10-30 00:02:32"><fmt:formatDate value="${reply.publishTime }" pattern="yyyy-MM-dd HH:mm:ss "/></span></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div style="width: 975px;height:auto;padding:9px;font-size:10pt;" class="show_e">
+									${reply.content }<div class="demo${status.index+1 }"></div><div class="demo${status.index+11 }"></div>
+								</div>
+							</td>
+						</tr>
 						
-							<c:choose>
-								<c:when test="${currentUser.id==section.master.id && currentUser.id!=null }">
-									<button class="btn btn-danger" onclick="javascript:deleteReply(${reply.id })">删除</button>
-								</c:when>
-								<c:when test="${currentUser.type==2 }">
-									<button class="btn btn-danger" onclick="javascript:deleteReply(${reply.id })">删除</button>
+						<tr>
+							<td style="background-color:#EFF4FB;border:1px solid #A9CBEE;">
+								<div style="width: 980px;padding:4px;text-align:right;">
+								
+								&nbsp;<a href="" style="font-size: 9pt;text-align:right;color:gray;">评论:<font style="color:blue;">[${son.get(reply) }]</font>条</a>
+								&nbsp;<a href="#1" style="font-size: 9pt;text-align:right;color:gray;"onclick='replySon("${reply.user.nickName }","${reply.user.id }","${reply.id }")'>回复</a>	
+									
+								&nbsp;<a href="#1" style="font-size: 9pt;text-align:right;color:gray;"onclick='copy("<c:out value="${reply.content }" escapeXml="true"/>","${(page-1)*10+status.index+1 }")'>引用</a>&nbsp;						
+								<a href="javascript:void();" onclick='zan("${status.index+1 }","${reply.id }","${reply.good }")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
+									<span id="good${status.index+1 }">
+										<img alt="" src="${host}/images/icon/thumbs10.png" style="width: 16px;height: 16px;">
+											[<font id="gd${status.index+1}" style="font-weight:bold;color:red;">${reply.good }</font>]
+									</span>
+								</a>
+																																										
+								<a href="javascript:void();" onclick='bad("${status.index+1 }","${reply.id }","${reply.bad}")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
+									<span id="bad${status.index+1}">
+										<img alt="" src="${host}/images/icon/dislike3.png" style="width: 32px;height: 25px;">
+											[<font id="bd${status.index+1}"	style="font-weight:bold;color:red;">${reply.bad }</font>]
+									</span>
+								</a>
+																																																																																																						
+							    &nbsp;<a href="#1" style="font-size: 9pt;text-align:right;color:gray;">举报</a>
+		
+		
+		                           <!-- 引用“回复框”表格    2016.08.24   将其设为display，点击的时候显示此模块 -->
+		                           
+		 
+								</div>
+							</td>
+						</tr>
+						<c:choose>
+								<c:when test="${fn:length(sonReplyList.get(reply))>0}">
+									<tr style="background:#EFF4FB;">
+									<td>							
+										<div style="background:#EFF4FB;font-size:9pt;width:67%;" class="show_e">
+											<ul>
+											<c:forEach items="${sonReplyList.get(reply) }" var="sonReply">
+												<dd style="margin-bottom:8px;">
+												<table width=100%;>
+													<tr>
+														<td style="width:78%;">
+															<a href="${pageContext.request.contextPath }/blog/${sonReply.user.nickNameId}" target="_blank">
+																<img alt="" src="${host}/${sonReply.user.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.user.nickName }</a>&nbsp;回复&nbsp; 
+																	<a href="${pageContext.request.contextPath }/blog/${sonReply.sonUser.nickNameId}" target="_blank">
+																		<img alt="" src="${host}/${sonReply.sonUser.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.sonUser.nickName}
+																	</a>：<pre><code class="language-java hljs"	style="background-color:#FFFFFF;color:gray;">${sonReply.content }</code></pre>
+														</td>					
+														<td style="width:21%;">
+															<fmt:formatDate value="${sonReply.publishTime }" pattern="yy-MM-dd HH:mm "/>&nbsp;
+																<a href="#1" style="font-size: 9pt;text-align:right;color:gray;"onclick='replySon("${sonReply.user.nickName }","${sonReply.user.id }","${reply.id }")'>回复</a>
+														</td>
+													</tr>
+												</table>
+												</dd>
+											</c:forEach>
+												<dd>
+												<c:choose>
+												<c:when test="${son.get(reply)-6>0 }">
+												.............................................................................
+												还有(${son.get(reply)-6 })条，<a href="/reply/details/${reply.id }" style="font-size: 9pt;text-align:right;color:blue;" target="_blank">查看更多</a>
+												</c:when>
+												<c:otherwise>
+												</c:otherwise>
+												</c:choose>
+											</dd>	
+										</div>
+										
+									</td>
+								</tr>
 								</c:when>
 								<c:otherwise>
+								
 								</c:otherwise>
 							</c:choose>
-							<a href="#" style="font-size: 9pt;color:gray;">回复于：<span class="time_reply${status.count}" title="2018-10-30 00:02:32"><fmt:formatDate value="${reply.publishTime }" pattern="yyyy-MM-dd HH:mm:ss "/></span></a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div style="width: 975px;height:auto;padding:9px;font-size:10pt;" class="show_e">
-								${reply.content }<div class="demo${status.index+1 }"></div><div class="demo${status.index+11 }"></div>
-							</div>
-						</td>
-					</tr>
-					
-					<tr>
-						<td style="background-color:#EFF4FB;border:1px solid #A9CBEE;">
-							<div style="width: 980px;padding:4px;text-align:right;">
-							
-							&nbsp;<a href="" style="font-size: 9pt;text-align:right;color:gray;">评论:<font style="color:blue;">[${son.get(reply) }]</font>条</a>
-							&nbsp;<a href="#1" style="font-size: 9pt;text-align:right;color:gray;"onclick='replySon("${reply.user.nickName }","${reply.user.id }","${reply.id }")'>回复</a>	
-								
-							&nbsp;<a href="#1" style="font-size: 9pt;text-align:right;color:gray;"onclick='copy("<c:out value="${reply.content }" escapeXml="true"/>","${(page-1)*10+status.index+1 }")'>引用</a>&nbsp;						
-							<a href="javascript:void();" onclick='zan("${status.index+1 }","${reply.id }","${reply.good }")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
-								<span id="good${status.index+1 }">
-									<img alt="" src="${host}/images/icon/thumbs10.png" style="width: 16px;height: 16px;">
-										[<font id="gd${status.index+1}" style="font-weight:bold;color:red;">${reply.good }</font>]
-								</span>
-							</a>
-																																									
-							<a href="javascript:void();" onclick='bad("${status.index+1 }","${reply.id }","${reply.bad}")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
-								<span id="bad${status.index+1}">
-									<img alt="" src="${host}/images/icon/dislike3.png" style="width: 32px;height: 25px;">
-										[<font id="bd${status.index+1}"	style="font-weight:bold;color:red;">${reply.bad }</font>]
-								</span>
-							</a>
-																																																																																																					
-						    &nbsp;<a href="#1" style="font-size: 9pt;text-align:right;color:gray;">举报</a>
-	
-	
-	                           <!-- 引用“回复框”表格    2016.08.24   将其设为display，点击的时候显示此模块 -->
-	                           
-	 
-							</div>
-						</td>
-					</tr>
-					<c:choose>
-							<c:when test="${fn:length(sonReplyList.get(reply))>0}">
-								<tr style="background:#EFF4FB;">
-								<td>							
-									<div style="background:#EFF4FB;font-size:9pt;width:67%;" class="show_e">
-										<ul>
-										<c:forEach items="${sonReplyList.get(reply) }" var="sonReply">
-											<dd style="margin-bottom:8px;">
-											<table width=100%;>
-												<tr>
-													<td style="width:78%;">
-														<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${sonReply.user.id}" target="_blank">
-															<img alt="" src="${host}/${sonReply.user.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.user.nickName }</a>&nbsp;回复&nbsp; 
-																<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${sonReply.sonUser.id}" target="_blank">
-																	<img alt="" src="${host}/${sonReply.sonUser.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.sonUser.nickName}
-																</a>：<pre><code class="language-java hljs"	style="background-color:#FFFFFF;color:gray;">${sonReply.content }</code></pre>
-													</td>					
-													<td style="width:21%;">
-														<fmt:formatDate value="${sonReply.publishTime }" pattern="yy-MM-dd HH:mm "/>&nbsp;
-															<a href="#1" style="font-size: 9pt;text-align:right;color:gray;"onclick='replySon("${sonReply.user.nickName }","${sonReply.user.id }","${reply.id }")'>回复</a>
-													</td>
-												</tr>
-											</table>
-											</dd>
-										</c:forEach>
-											<dd>
-											<c:choose>
-											<c:when test="${son.get(reply)-6>0 }">
-											.............................................................................
-											还有(${son.get(reply)-6 })条，<a href="Reply_details.action?rid=${reply.id }" style="font-size: 9pt;text-align:right;color:blue;" target="_blank">查看更多</a>
-											</c:when>
-											<c:otherwise>
-											</c:otherwise>
-											</c:choose>
-										</dd>	
-									</div>
-									
-								</td>
-							</tr>
-							</c:when>
-							<c:otherwise>
-							
-							</c:otherwise>
-						</c:choose>
-				</table>
+					</table>
+				</div>
 			</div>
-		</div>
 		</c:forEach>
 	</div>
 	<div class="pagination alternate" align="center">
@@ -394,60 +372,55 @@ function saveRep(){
 		</c:choose>
 	</div>	
 	
-	
-	
+		
 	<div>		
-	             <!-- 回复框表格    2016.08.24 -->	                           	                           	                        
+        <!-- 回复框表格    2016.08.24 -->	                           	                           	                        
 		<table >
 			<tr>
-				<td style="width: 20%;color:gray;font-size:10pt;">
-			
+				<td style="width: 20%;color:gray;font-size:10pt;">		
 				</td>
 				<td style="width: 80%;">
 					<form id="replyForm" class="form-horizontal" style="margin-top: 10px;">
-					<table style="width: 100%;" cellpadding="10px;">
-						<input type="hidden" id="title" name="title" style="width: 800px;">
-						<tr>
-							<td style="color:gray;font-size:10pt;">
+						<table style="width: 100%;" cellpadding="10px;">
+							<input type="hidden" id="title" name="title" style="width: 800px;"/>
+							<tr>
+								<td style="color:gray;font-size:10pt;">							
+								</td>
+								<td>
+									<div id="container">
+									<a href="JavaScript:void(0)" id="message_face">【添加表情包】</a>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="JavaScript:void(0)" onclick="popWin()">【添加代码块】</a>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: top;color:gray;font-size:10pt;">						
+								</td>
 								
-							</td>
-							<td>
-								<div id="container">
-								<a href="JavaScript:void(0)" id="message_face">【添加表情包】</a>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="JavaScript:void(0)" onclick="popWin()">【添加代码块】</a>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td style="vertical-align: top;color:gray;font-size:10pt;">
-								
-							</td>
-							
-							<td>
-							<pre id="btn"><code class="language-java hljs">System.out.println("请输入你的代码块...");</code></pre>
-							<a name="1"><textarea name="content" id="Content" cols="50" style="height:200px;width: 800px;"placeholder="----发表你的看法----开开心心交流----和和气气讨论----" ></textarea></a>
-							</td>
-							
-						</tr>
-						<tr>
-							<td>
-								<input id="userId" name="user.id" value="${currentUser.id }" type="hidden"/>
-								<input id="topicId" name="topic.id" value="${topic.id }" type="hidden"/>
-								<input id="replySonId" name="sonId" type="hidden"/>
-							</td>
-							<td>
-								<Button class="btn btn-primary " id="okBtn" data-dismiss="modal" aria-hidden="true" type="button">提交</Button>
-								<font id="error"></font>
-							</td>
-						</tr>
-					</table>
+								<td>
+								<pre id="btn"><code class="language-java hljs">System.out.println("请输入你的代码块...");</code></pre>
+								<a name="1"><textarea name="content" id="Content" cols="50" style="height:200px;width: 800px;"placeholder="----发表你的看法----开开心心交流----和和气气讨论----" ></textarea></a>
+								</td>						
+							</tr>
+							<tr>
+								<td>
+									<input id="userId" name="user.id" value="${currentUser.id }" type="hidden"/>
+									<input id="topicId" name="topic.id" value="${topic.id }" type="hidden"/>
+									<input id="replySonId" name="sonId" type="hidden"/>
+								</td>
+								<td>
+									<Button class="btn btn-primary " id="okBtn" data-dismiss="modal" aria-hidden="true" type="button">提交</Button>
+									<font id="error"></font>
+								</td>
+							</tr>
+						</table>
 					</form>
 				</td>
 			</tr>
 		</table>
 	</div>
-</div>
+	</div>
 </div>
 
 

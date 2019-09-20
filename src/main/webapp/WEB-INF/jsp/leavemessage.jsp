@@ -24,11 +24,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 function checkForm(){
 	if('${currentUser.nickName}'==''){
 		alert("请先登陆或注册，再留言！");
-		/* var url="Report_preSave.action?role=0&reportType=1";
-		window.open("login?url="+url); */
 		return false;
 	}
-	
 	if (CKEDITOR.instances.Content.getData().length<10) {
 		alert("留言内容最少10个字符！");
 		return false;

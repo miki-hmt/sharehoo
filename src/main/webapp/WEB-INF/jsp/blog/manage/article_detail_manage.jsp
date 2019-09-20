@@ -46,11 +46,11 @@
   <header>
     <h1>${user.nickName }的博客</h1>
     <h2>愿居于一城，与卿所见美好......</h2>
-    <div class="logo"><a href="${host}/blog/manage/Article_list.action"></a></div>
+    <div class="logo"><a href="${host}/blog/manage/article/list"></a></div>
 	  <%@ include file="../manage_nav.jsp" %>
    </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/${user.nickNameId}">首页</a>><a href="${host}/blog/Blog_article.action?userId=${user.id}">漫生活</a>><a href="#">详细内容</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/${user.nickNameId}">首页</a>><a href="${host}/blog/${user.nickNameId}/article">漫生活</a>><a href="#">详细内容</a></h2>
     <div class="index_about">
       <h2 class="c_titile">${article.title }</h2>
       <p class="box_c"><span class="d_time">发布时间：<fmt:formatDate value="${article.time }" pattern="yyyy-MM-dd HH:mm:ss "/></span><span>编辑：${article.editer }</span><span>浏览（${article.count }）</span><span>评论（${article.count1 }）</span></p>
@@ -62,10 +62,10 @@
       </div>
       <div class="nextinfo">
       <s:if test="before!=null">
-        <p>上一篇：<a href="${host}/blog/Blog_detail.action?id=${before.id }">${before.title }</a></p>
+        <p>上一篇：<a href="${host}/blog/${user.nickNameId}/article/${before.id }">${before.title }</a></p>
       </s:if>
       <s:if test="next!=null">
-        <p>下一篇：<a href="${host}/blog/Blog_detail.action?id=${next.id }">${next.title }</a></p>
+        <p>下一篇：<a href="${host}/blog/${user.nickNameId}/article/${next.id }">${next.title }</a></p>
       </s:if>
       </div>
     </div>
@@ -85,10 +85,10 @@
 		      <c:forEach items="${countList }" var="article" varStatus="state">
 		      <c:choose>
 		      	<c:when test="${ state.index<3}">
-		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>       	
+		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></li>       	
 		      	</c:when>
 		      	<c:otherwise>
-		      		<li><span>${state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>
+		      		<li><span>${state.index+1 }</span><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></li>
 		      	</c:otherwise>
 		      	</c:choose>
 		      </c:forEach>
@@ -100,10 +100,10 @@
 		      <c:forEach items="${recommendList }" var="article" varStatus="state">
 		      <c:choose>
 		      	<c:when test="${ state.index<3}">
-		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>       	
+		      		<li><span class="num1">${ state.index+1 }</span><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></li>       	
 		      	</c:when>
 		      	<c:otherwise>
-		      		<li><span>${state.index+1 }</span><a href="${host}/blog/manage/Article_detail.action?id=${article.id }">${article.title }</a></li>
+		      		<li><span>${state.index+1 }</span><a href="${host}/blog/manage/article/details?id=${article.id }">${article.title }</a></li>
 		      	</c:otherwise>
 		      	</c:choose>
 		      </c:forEach>

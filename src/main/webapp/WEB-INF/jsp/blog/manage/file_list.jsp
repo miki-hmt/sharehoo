@@ -34,17 +34,17 @@
     <%@ include file="../manage_nav.jsp" %>
     </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="../manage/Article_list.action?userId=${user.id }">首页</a>><a href="../manage/PhotoManage_file.action?userId=${user.id }">文件管理</a>><a href="#">上传文件</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="#">首页</a>><a href="${host}/blog/manage/file">文件管理</a>><a href="#">上传文件</a></h2>
     <div class="template">
       <h3>
-        <a href="../manage/PhotoManage_addFile.action?userId=${user.id }">点击上传文件</a>
+        <a href="${host}/blog/manage/file/go">点击上传文件</a>
       </h3>
       		<table>
       		<c:forEach items="${fileList}" var="file">
       			<tr>
       				<td><a href="${host}/image_upload/file/${file.image}">${file.note}</a></td>
       				<td>&nbsp;</td>
-      				<td><a href="../manage/PhotoManage_deleteFile.action?id=${file.id}">删除</a></td>
+      				<td><a href="/blog/manage/file/delete?id=${file.id}">删除</a></td>
       			</tr>
       			</c:forEach>
       		</table>
@@ -68,7 +68,7 @@
       </ul>
     <%@ include file="../copyright.jsp" %> 
   </aside>
-  <script src="../include/js/silder.js"></script>
+  <script src="${host}/include/js/silder.js"></script>
   <div class="clear"></div>
   <!-- 清除浮动 --> 
 </div>

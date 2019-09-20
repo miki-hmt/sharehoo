@@ -191,7 +191,7 @@ sharehoo.cn
     <div id="right_1">
         <ul>
 		<li><a href="${host}/user/center?page=1"><span style="font-size:9pt;">回到首页</span></a></li>
-            <li><a href="User_center.action"><span style="font-size:9pt;">个人资料</span></a></li>
+            <li><a href="${host}/user/modify"><span style="font-size:9pt;">个人资料</span></a></li>
             <li><a href="${host}/user/topic?page=1"><span style="font-size:9pt;">我的帖子</span></a></li>
             <li><a href="${host}/user/answer?page=1"><span style="font-size:9pt;font-weight:bold;color:yellow;">我的提问</span></a></li>
              <li><a href="${host}/user/reply?page=1"><span style="font-size:9pt;">站内信箱</span></a></li>

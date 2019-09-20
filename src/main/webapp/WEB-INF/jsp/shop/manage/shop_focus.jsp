@@ -57,7 +57,7 @@
 			alert("您还未登陆！");
 		} 
 		else{
-			window.location.href="${pageContext.request.contextPath}/shop/Shop_upload.action";
+			window.location.href="${pageContext.request.contextPath}/shop/upload.htm";
 		}
 }
 </script>
@@ -90,7 +90,7 @@
 	<div class="container clearfix">
 		<div class="nav-bar">
 			<a href="${host}/shop/index.htm">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/Source_search.action" target="_blank">资源分类</a>
+			<a href="${pageContext.request.contextPath}/shop/source/categories" target="_blank">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="#" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
@@ -266,20 +266,21 @@
 				<li>
 				<div class="card clearfix">
 					<div class="img rar1">
-					<a href="${pageContext.request.contextPath}/Shop_home.action?shopId=${focus.shop.id}" target="_blank">
+					<a href="${pageContext.request.contextPath}/shop/index.htm" target="_blank">
 					<img src="${pageContext.request.contextPath}/shop/${focus.shop.face}"></a>
 					</div>			 
 										  
 						<div class="content">
 							<h3>
-								<a target="_blank" href="${pageContext.request.contextPath}/shop/Shop_view.action?shopId=${focus.shop.id}">${focus.shop.shop_name }</a>
+								<a target="_blank" href="${pageContext.request.contextPath}/shop/${focus.shop.id}">${focus.shop.shop_name }</a>
 							</h3>
 							<p class="brief" style="display:inline-block;"><label>店铺资源数：</label>${focus.shop.sourceNum }</p>
 							<p class="tags clearfix">
 								<a target="_blank" href="/tag/bootstrap">${focus.shop.tag }</a>
 							</p>
 							<div class="times">
-								<label>最近新品：</label><font style="color:red;"><a href="${pageContext.request.contextPath}/shop/Source_detail.action?source_id=${good.get(focus).id}" target="_blank" style="color:red;">${good.get(focus).name }</a></font>						
+								<label>最近新品：</label><font style="color:red;">
+									<a href="${pageContext.request.contextPath}/shop/source/${good.get(focus).id}" target="_blank" style="color:red;">${good.get(focus).name }</a></font>						
 							</div>
 							<div class="date">
 								<label>上传时间：</label><fmt:formatDate value="${good.get(focus).upload_time}" pattern="yyyy-MM-dd HH:mm "/>						</div>

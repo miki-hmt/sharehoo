@@ -166,7 +166,7 @@
 					</c:choose>
 				</td>
 				<td style="text-align:center; vertical-align: middle;">					
-					<a class="btn btn-info" type="button" href="User_preSave.action">修改</a>&nbsp;&nbsp;
+					<a class="btn btn-info" type="button" href="${host}/user/modify">修改</a>&nbsp;&nbsp;
 					<button class="btn btn-info"  onclick="tips_pop()">收件箱</button>&nbsp;&nbsp;
 				</td>
 		</tr>
@@ -196,11 +196,11 @@ sharehoo.cn
     <div id="right_1">
         <ul>
 	    <li><a href="${host}/user/center?page=1"><span style="font-size:9pt;">回到首页</span></a></li>
-            <li><a href="User_center.action"><span style="font-size:9pt;font-weight:bold; color:yellow;">个人资料</span></a></li>
+            <li><a href="${host}/user/modify"><span style="font-size:9pt;font-weight:bold; color:yellow;">个人资料</span></a></li>
             <li><a href="${host}/user/topic?page=1"><span style="font-size:9pt;">我的帖子</span></a></li>
             <li><a href="${host}/user/answer?page=1"><span style="font-size:9pt;">我的提问</span></a></li>
-             <li><a href="User_unReply.action"><span style="font-size:9pt;">站内信箱</span></a></li>
-              <li><a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${currentUser.id}" target="_blank"><span style="font-size:9pt;">查看博客</span></a></li>
+             <li><a href="${host}/user/reply"><span style="font-size:9pt;">站内信箱</span></a></li>
+              <li><a href="${pageContext.request.contextPath }/blog/${currentUser.nickNameId}" target="_blank"><span style="font-size:9pt;">查看博客</span></a></li>
             <li><a href="${host}/blog/manage/article/list?page=1" target="_blank"><span style="font-size:9pt;">管理博客</span></a></li>
             <li><a href="#"><span style="font-size:9pt;">我的好友</span></a></li>
         </ul>

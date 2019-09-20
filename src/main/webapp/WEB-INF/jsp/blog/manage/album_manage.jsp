@@ -75,7 +75,7 @@
   <header>
     <h1>${user.nickName}de博客</h1>
     <h2>愿居于一城，与卿所见美好......</h2>
-    <div class="logo"><a href="../manage/Article_list.action?userId=${user.id }"></a></div>
+    <div class="logo"><a href="${host}/blog/manage/article/list"></a></div>
 	<%@ include file="../manage_nav.jsp" %>
       </header>
   <article>

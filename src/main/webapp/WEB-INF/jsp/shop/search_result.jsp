@@ -107,7 +107,7 @@ function validateBuy(){
 	<div class="container clearfix">
 		<div class="nav-bar">
 			<a href="${host}/shop/index.htm">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/Source_search.action" target="_blank" class="current">资源分类</a>
+			<a href="${pageContext.request.contextPath}/shop/shop/source/categories" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
@@ -116,7 +116,7 @@ function validateBuy(){
 			<a href="javascript:void(0)" onclick="javascript:validateLogin()" target="_blank">我的店铺</a>
 		</div>
 		<div class="search-download">
-			<form action="Shop_search.action" method="post" onsubmit="return check_up(this);" name="download_search">
+			<form action="" method="post" onsubmit="return check_up(this);" name="download_search">
 				<input type="text" placeholder="搜索资源" value="" id="tagff" name="keywords"/>
 				<a href="javascript:check_up(download_search);void(0);" class="download-search-bth"></a>
 			</form>
@@ -222,7 +222,7 @@ function KeyP(event){
               <dd>
                 <ul class="cate_list" id="categoryid1">
                   <li bate-id="categoryall">
-                  	<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach">
+                  	<a href="${pageContext.request.contextPath}/shop/source/serach">
                   		全部
                   	</a>
                   </li>
@@ -261,7 +261,7 @@ function KeyP(event){
              <dl class="cate_sea_list clearfix">
               <dt>资源类型：</dt>
               <dd id="sourcetype">
-              <label bata-id="10" class="source_item js_source"><a href="${pageContext.request.contextPath}/shop/Source_search.action">全部</a></label>
+              <label bata-id="10" class="source_item js_source"><a href="${pageContext.request.contextPath}/shop/source/categories">全部</a></label>
               <c:forEach items="${types}" var="type" >
               	<c:choose>
 							<c:when test="${curType.id==type.id }">
@@ -297,7 +297,7 @@ function KeyP(event){
             				<a class="cate_close" id="tech_close" href="#"><img src="${pageContext.request.contextPath}/shop/images/logo/close.jpg" alt="img" style="margin-top:5px;"></a></label>
                              </c:if>  
                              <label id="source_type" class="condition_item"><em>清空全部</em>
-	            				<a class="cate_close" id="tech_close" href="${pageContext.request.contextPath}/shop/Source_search.action"><img src="${pageContext.request.contextPath}/shop/images/logo/close.jpg" alt="img" style="margin-top:5px;">
+	            				<a class="cate_close" id="tech_close" href="${pageContext.request.contextPath}/shop/source/categories"><img src="${pageContext.request.contextPath}/shop/images/logo/close.jpg" alt="img" style="margin-top:5px;">
 	            				</a>
             				</label>                                                                   
           				           
@@ -322,8 +322,8 @@ function KeyP(event){
             <div class="album_detail_wrap">
             <c:forEach items="${sourceList }" var="source">
             	<dl class="album_detail_list clearfix">
-                <dt><a href="${pageContext.request.contextPath }/shop/Source_detail.action?source_id=${source.id}" target="_blank"><img src="${pageContext.request.contextPath }/shop/images/logo/zip.svg" alt="img"></a></dt>
-                <dd><a href="${pageContext.request.contextPath }/shop/Source_detail.action?source_id=${source.id}" class="album_detail_title" target="_blank">${source.name }</a>
+                <dt><a href="${pageContext.request.contextPath }/shop/source/${source.id}" target="_blank"><img src="${pageContext.request.contextPath }/shop/images/logo/zip.svg" alt="img"></a></dt>
+                <dd><a href="${pageContext.request.contextPath }/shop/source/${source.id}" class="album_detail_title" target="_blank">${source.name }</a>
                   <p class="cate_search_p"><font style="font-size:9pt;color:gray;">${source.description} </font></p><br>
                   <div class="album_detail_bot clearfix">
                     <label><span>下载次数：</span><em>${source.downNum }</em></label>
@@ -467,7 +467,7 @@ function KeyP(event){
     	
     	//点击全部关闭子元素，并查询结果
     	function close(){
-    		window.location.href="${pageContext.request.contextPath}/shop/Source_search.action";
+    		window.location.href="${pageContext.request.contextPath}/shop/shop/source/categories";
     	}
     		
     	//二级菜单 类型查询   2017.08.15 miki

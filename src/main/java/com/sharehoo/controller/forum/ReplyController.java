@@ -256,7 +256,7 @@ public class ReplyController {
 		Reply reply=replyService.findReplyById(replyId);
 		reply.setStatus(1);
 		replyService.saveReply(reply);
-		return "redirect:";
+		return "redirect:/user/reply";
 	}
 	
 	@RequestMapping("/reply/details/{rid}")

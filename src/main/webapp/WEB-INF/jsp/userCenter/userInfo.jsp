@@ -152,7 +152,7 @@ setTimeout("tips_pop()",800);//3秒后调用tips_pop()这个函数
 					</c:choose>
 				</td>
 				<td style="text-align:center; vertical-align: middle;">					
-					<a class="btn btn-info" type="button" href="User_preSave.action">修改</a>&nbsp;&nbsp;
+					<a class="btn btn-info" type="button" href="${host}/user/modify">修改</a>&nbsp;&nbsp;
 					<button class="btn btn-info"  onclick="tips_pop()">收件箱</button>&nbsp;&nbsp;
 				</td>
 		</tr>

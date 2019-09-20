@@ -20,81 +20,78 @@
 <style type="text/css">
 button{cursor:pointer;width:100%;height:44px;padding:0;background:#ef4300;border:1px solid #ff730e;border-radius:6px;font-weight:700;color:#fff;font-size:24px;letter-spacing:15px;margin-top:10px; text-shadow:0 1px 2px rgba(0,0,0,.1)}
 span{color:Red;font-size:12px}
-
 .header1 {
 	margin:0px auto;
 	position: relative;
 	overflow: hidden;
 	text-align: center;
 }
-
 </style>
 
 <!-- 密码强度检测   2017.03.31    -->
 
 <script type="text/javascript">
 
-function Charstring(iN){              
-if (iN>=48 && iN <=57)                
-return 1; 
-if (iN>=65 && iN <=90)              
-return 2;
-if (iN>=97 && iN <=122)             
-return 4;
-else
-return 8;         
-}
+	function Charstring(iN){              
+		if (iN>=48 && iN <=57)                
+		return 1; 
+		if (iN>=65 && iN <=90)              
+		return 2;
+		if (iN>=97 && iN <=122)             
+		return 4;
+		else
+		return 8;         
+	}
 
-function modetotal(num){      
-modes=0;
-for (i=0;i<4;i++){
-if (num & 1) 
-	modes++;
-	num>>>=1;
-}
-return modes;
-}
+	function modetotal(num){      
+		modes=0;
+		for (i=0;i<4;i++){
+		if (num & 1) 
+			modes++;
+			num>>>=1;
+		}
+		return modes;
+	}
 
-function checkpwd(spwd){   
-if (spwd.length<=4)
-return 0;                         
-Modes=0;
-for (i=0;i<spwd.length;i++){         
-	Modes|=Charstring(spwd.charCodeAt(i));
-}
-return modetotal(Modes);
-} 
+	function checkpwd(spwd){   
+		if (spwd.length<=4)
+		return 0;                         
+		Modes=0;
+		for (i=0;i<spwd.length;i++){         
+			Modes|=Charstring(spwd.charCodeAt(i));
+		}
+		return modetotal(Modes);
+	}
 
-function pwdstrong(pwd){       
-O_color="#cccccc";              
-L_color="#ffff00";               
-M_color="#DC440F";                
-H_color="#FF0000";                  
-if (pwd==null||pwd==''){             
-	Lcolor=Mcolor=Hcolor=O_color;   
-} 
-else{
-	S_level=checkpwd(pwd);        
-	switch(S_level) {
-	case 0:
-		Lcolor=Mcolor=Hcolor=O_color;  
-	case 1:
-		Lcolor=L_color;
-		Mcolor=Hcolor=O_color;           
-		break;
-	case 2:
-		Lcolor=Mcolor=M_color;
-		Hcolor=O_color;           
-		break;
-	default:
-	Lcolor=Mcolor=Hcolor=H_color;
-}
-} 
-document.getElementById("pwd_L").style.background=Lcolor;    
-document.getElementById("pwd_M").style.background=Mcolor; 
-document.getElementById("pwd_H").style.background=Hcolor; 
-return;
-}
+	function pwdstrong(pwd) {
+		O_color = "#cccccc";
+		L_color = "#ffff00";
+		M_color = "#DC440F";
+		H_color = "#FF0000";
+		if (pwd == null || pwd == '') {
+			Lcolor = Mcolor = Hcolor = O_color;
+		} else {
+			S_level = checkpwd(pwd);
+			switch (S_level) {
+			case 0:
+				Lcolor = Mcolor = Hcolor = O_color;
+			case 1:
+				Lcolor = L_color;
+				Mcolor = Hcolor = O_color;
+				break;
+			case 2:
+				Lcolor = Mcolor = M_color;
+				Hcolor = O_color;
+				break;
+			default:
+				Lcolor = Mcolor = Hcolor = H_color;
+			}
+		}
+		document.getElementById("pwd_L").style.background = Lcolor;
+		document.getElementById("pwd_M").style.background = Mcolor;
+		document.getElementById("pwd_H").style.background = Hcolor;
+		return;
+	}
 </script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
@@ -104,52 +101,45 @@ $(function () {
 });
 </script>
 <script type="text/javascript">
-$(function () {
-	$("#regForm").validate(
-            {
-                /*自定义验证规则*/
-                rules: {
-                	"user.nickName": { required: true, minlength: 2 },
-                	"user.trueName":{ required: true, minlength: 2 },
-                	"user.sex":{ required: true },
-                	"user.password":{ required: true, minlength: 8 },
-                	"rePassWord":{ required: true, equalTo:password},
-                	"user.mobile":{ required: true,number:true },
-                	"user.email": { required: true, email: true }
-                },
-                /*错误提示位置*/
-                errorPlacement: function(error, element) {
-                    error.appendTo(element.siblings("span"));
-                }
-            }
-          );
-});
-function checkNickName(nickName){
-	/* if($("#nickName").val()==""){
-		$("#userErrorInfo").html("昵称不能为空！");
-		$("#nickName").focus();
-		return;
-	} */
-	$.post("${host}/user/nickname",{nickName:nickName},
-			function(data){
-				var result=eval(data);
+	$(function () {
+		$("#regForm").validate(
+	            {
+	                /*自定义验证规则*/
+	                rules: {
+	                	"nickName": { required: true, minlength: 2 },
+	                	"trueName":{ required: true, minlength: 2 },
+	                	"sex":{ required: true },
+	                	"password":{ required: true, minlength: 8 },
+	                	"rePassWord":{ required: true, equalTo:password},
+	                	"mobile":{ required: true,number:true },
+	                	"email": { required: true, email: true }
+	                },
+	                /*错误提示位置*/
+	                errorPlacement: function(error, element) {
+	                    error.appendTo(element.siblings("span"));
+	                }
+	            }
+	          );
+	});
+	function checkNickName(nickName) {
+		$.post("${host}/user/nickname", {
+			nickName : nickName
+		},
+			function(data) {
+				var result = eval(data);
 				debugger
-				if(result.exist){
+				if (result.exist) {
 					$("#userErrorInfo").html("用户名已存在，请重新输入！");
 					$("#nickName").focus();
-				}else{
+				} else {
 					$("#userErrorInfo").html("");
 				}
 			}
-	);
-}
+		);
+	}
 
-
-
-
-function checkEmail(email){
-	
-	$.post("${host}/user/email",{email:email},
+	function checkEmail(email){	
+		$.post("${host}/user/email",{email:email},
 			function(data){
 				var result=eval(data);
 				if(result.exist){
@@ -159,51 +149,45 @@ function checkEmail(email){
 					$("#emailErrorInfo").html("");
 				}
 			}
-	);
-}
-
-
-
-
-
-
-
-function checkForm(){
-	var nickName=$("#nickName").val();
-	var sex=$("#sex").val();
-	var password=$("#password").val();
-	var rePassWord=$("#rePassWord").val();
-	var mobile=$("#mobile").val();
-	var email=$("#email").val();
-	if (nickName=="") {
-		$("#error").html("昵称不能为空！");
-		return false;
+		);
 	}
-	if (sex=="") {
-		$("#error").html("请选择性别！");
-		return false;
+
+	function checkForm() {
+		var nickName = $("#nickName").val();
+		var sex = $("#sex").val();
+		var password = $("#password").val();
+		var rePassWord = $("#rePassWord").val();
+		var mobile = $("#mobile").val();
+		var email = $("#email").val();
+		if (nickName == "") {
+			$("#error").html("昵称不能为空！");
+			return false;
+		}
+		if (sex == "") {
+			$("#error").html("请选择性别！");
+			return false;
+		}
+		if (password == "") {
+			$("#error").html("密码不能为空！");
+			return false;
+		}
+		if (rePassWord == "") {
+			$("#error").html("确认密码不能为空！");
+			return false;
+		}
+		if (password != rePassWord) {
+			$("#error").html("密码和确认密码不一致，请重新输入！");
+			return false;
+		}
+		if (mobile == "") {
+			$("#error").html("联系电话不能为空！");
+			return false;
+		}
+		if (email == "") {
+			$("#error").html("邮箱不能为空！");
+			return false;
+		}
 	}
-	if (password=="") {
-		$("#error").html("密码不能为空！");
-		return false;
-	}
-	if (rePassWord=="") {
-		$("#error").html("确认密码不能为空！");
-		return false;
-	}
-	if (password!=rePassWord) {
-		$("#error").html("密码和确认密码不一致，请重新输入！");
-		return false;
-	}
-	if (mobile=="") {
-		$("#error").html("联系电话不能为空！");
-		return false;
-	}
-	if (email=="") {
-		$("#error").html("邮箱不能为空！");
-		return false;
-	}
-}
 </script>
 </head>
 <body>

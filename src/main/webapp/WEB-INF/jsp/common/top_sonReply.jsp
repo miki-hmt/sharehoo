@@ -36,7 +36,7 @@ function check_up(thisform){
 		else{
 			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 			key =  encodeURIComponent(key)
-			var url="shop/${host}/shop/source/serach?keyword="+encodeURIComponent(key);
+			var url="solr/serach?keyword="+encodeURIComponent(key);
 			window.location.href=url;
 		}
 		return false;
@@ -154,7 +154,7 @@ function check_up(thisform){
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
-	$.post("Mess_getNews.action",function(result){
+	$.post("${host}/user/news",function(result){
 		if(result.mes){
 			$("#news").show();
 		}else{

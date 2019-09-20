@@ -57,7 +57,7 @@
 			alert("您还未登陆！");
 		} 
 		else{
-			window.location.href="${pageContext.request.contextPath}/shop/Shop_upload.action";
+			window.location.href="${pageContext.request.contextPath}/shop/upload.htm";
 		}
 }
 </script>
@@ -90,7 +90,7 @@
 	<div class="container clearfix">
 		<div class="nav-bar">
 			<a href="${host}/shop/index.htm">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/Source_search.action" target="_blank">资源分类</a>
+			<a href="${pageContext.request.contextPath}/shop/source/categories" target="_blank">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="#" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
@@ -175,8 +175,8 @@
               
               <!-- class="cur" 鼠标点击，游标当前所处位置  2017.08.11 miki-->         
               <li><a href="${pageContext.request.contextPath}/shop/admin/log">虎豆明细</a></li>     
-              <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_comments.action">店铺评价</a></li>
-              <li ><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_collects.action">我的收藏</a></li>
+              <li><a href="${pageContext.request.contextPath}/shop/admin/comment">店铺评价</a></li>
+              <li ><a href="${pageContext.request.contextPath}/shop/admin/collect">我的收藏</a></li>
               <li ><a href="${pageContext.request.contextPath}/shop/admin/focus">我的关注</a></li>     
               <li class="cur"><a href="${pageContext.request.contextPath}/shop/admin/update/go">店铺设置</a></li>
               <li><a href="${pageContext.request.contextPath}/shop/admin/money/go">虎豆提现</a></li>

@@ -80,7 +80,7 @@ function validateBuy(){
 	<div class="container clearfix">
 		<div class="nav-bar">
 			<a href="${host}/shop/index.htm">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank" class="current">资源分类</a>
+			<a href="${pageContext.request.contextPath}/shop/source/categories" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
@@ -265,18 +265,18 @@ function KeyP(event){
                 <c:when test="${downNum!=null}">	
                 	
                 	 <span class="csdn-tracking-statistics" data-mod="popu_283">
-                		<a target="_self" href="${pageContext.request.contextPath }/shop/Source_search.action" id="1">最新上传</a>
+                		<a target="_self" href="${pageContext.request.contextPath }/shop/shop/source/categories" id="1">最新上传</a>
                 	</span>
                 	<span class="csdn-tracking-statistics" data-mod="popu_284">
-                		<a target="_self" href="${pageContext.request.contextPath }/shop/Source_search.action?type=downNum" id="0" class="search_cur">最多下载</a>
+                		<a target="_self" href="${pageContext.request.contextPath }/shop/shop/source/categories?type=downNum" id="0" class="search_cur">最多下载</a>
                 	</span>
                 </c:when>
                 <c:otherwise>
                 	<span class="csdn-tracking-statistics" data-mod="popu_284">
-                		<a target="_self" href="${pageContext.request.contextPath }/shop/Source_search.action" id="0" class="search_cur">最新上传</a>
+                		<a target="_self" href="${pageContext.request.contextPath }/shop/shop/source/categories" id="0" class="search_cur">最新上传</a>
                 	</span>
                 	 <span class="csdn-tracking-statistics" data-mod="popu_283">
-                		<a target="_self" href="${pageContext.request.contextPath }/shop/Source_search.action?type=downNum" id="1">最多下载</a>
+                		<a target="_self" href="${pageContext.request.contextPath }/shop/shop/source/categories?type=downNum" id="1">最多下载</a>
                 	</span>
                 </c:otherwise>
                 </c:choose>
@@ -290,8 +290,8 @@ function KeyP(event){
             <div class="album_detail_wrap">
             <c:forEach items="${sourceList }" var="source">
             	<dl class="album_detail_list clearfix">
-                <dt><a href="${pageContext.request.contextPath }/shop/Source_detail.action?source_id=${source.id}" target="_blank"><img src="${pageContext.request.contextPath }/shop/images/logo/zip.svg" alt="img"></a></dt>
-                <dd><a href="${pageContext.request.contextPath }/shop/Source_detail.action?source_id=${source.id}" class="album_detail_title" target="_blank">${source.name }</a>
+                <dt><a href="${pageContext.request.contextPath }/shop/source/${source.id}" target="_blank"><img src="${pageContext.request.contextPath }/shop/images/logo/zip.svg" alt="img"></a></dt>
+                <dd><a href="${pageContext.request.contextPath }/shop/source/${source.id}" class="album_detail_title" target="_blank">${source.name }</a>
                   <p class="cate_search_p"><font style="font-size:9pt;color:gray;">${source.description} </font></p><br>
                   <div class="album_detail_bot clearfix">
                     <label><span>下载次数：</span><em>${source.downNum }</em></label>

@@ -61,7 +61,7 @@
 			alert("您还未登陆！");
 		} 
 		else{
-			window.location.href="Shop_upload.action";
+			window.location.href="${host}/shop/upload.htm";
 		}
 }
 	
@@ -142,21 +142,13 @@
 		 }else{
 			 $("#error2").html("");
 		 }
-			 $.post("${pageContext.request.contextPath}/shop/Cdk_exchange.action?code="+code,
+			 $.post("${pageContext.request.contextPath}/shop/cdk/exchange?code="+code,
 				 function(result){
-				if(result.info=='b'){
+				if(result.data==200){
 					alert("兑换成功！");
 					location.reload(true);
-				}else{
-				if(result.info=="a"){
-					alert("兑换码不存在，兑换失败！");
-					}
-				if(result.info=="d"){
-					alert("您尚未登录或注册店铺！无法购买虎豆！");
-					}
-				if(result.info=="c"){
-					alert("兑换失败！");
-					}
+				}else{		
+					alert(data.msg);
 				}
 			},"json");
 	}
@@ -216,7 +208,7 @@
 			<dd>
 				<ul>
 					<c:forEach items="${userweeklist }" var="source">
-						<li><span class="title"><a title="${source.name }" href="${pageContext.request.contextPath }/shop/Source_detail.action?source_id=${source.id}">${source.name }</a></span><span class="num">${source.downNum }</span></li>
+						<li><span class="title"><a title="${source.name }" href="${pageContext.request.contextPath }/shop/source/${source.id}">${source.name }</a></span><span class="num">${source.downNum }</span></li>
 					</c:forEach>		
 					
 				</ul>
@@ -230,7 +222,7 @@
 			<dd>
 				<ul>
 					<c:forEach items="${shopweekList }" var="shop">
-						<li><span class="name"><a title="${shop.shop_name }" href="Shop_view.action?shopId=${shop.id }" class="user_name">${shop.shop_name }</a></span><span class="num">${shop.douNum }</span></li>
+						<li><span class="name"><a title="${shop.shop_name }" href="${host}/shop/${shop.id }" class="user_name">${shop.shop_name }</a></span><span class="num">${shop.douNum }</span></li>
 					</c:forEach>
 					
 			</ul>
@@ -245,7 +237,7 @@
 			<dd>
 				<ul>
 					<c:forEach items="${uploadrankweekList }" var="source">
-						<li><span class="name"><a title="${source.shop.shop_name }" href="Shop_view.action?shopId=${source.shop.id }" class="user_name">${source.shop.shop_name }</a></span><span class="num">${uploadCount.get(source) }</span></li>
+						<li><span class="name"><a title="${source.shop.shop_name }" href="${host}/shop/${source.shop.id }" class="user_name">${source.shop.shop_name }</a></span><span class="num">${uploadCount.get(source) }</span></li>
 					</c:forEach>
 					<li><span class="name"><a title="zzjlhlcd" class="user_name">zzjlhlcd</a></span><span class="num">75</span></li>
 					<li><span class="name"><a title="u012590555" class="user_name">泡泡泡你</a></span><span class="num">57</span></li>			
@@ -263,7 +255,7 @@
 			<dd>
 				<ul>
 					<c:forEach items="${userMonthList }" var="source">
-						<li><span class="title"><a title="${source.name },${source.tag}" href="${pageContext.request.contextPath }/shop/Source_detail.action?source_id=${source.id}">${source.name }--${source.tag} </a></span><span class="num">${source.downNum }</span></li>
+						<li><span class="title"><a title="${source.name },${source.tag}" href="${pageContext.request.contextPath }/shop/source/${source.id}">${source.name }--${source.tag} </a></span><span class="num">${source.downNum }</span></li>
 					</c:forEach>
 					
 			</ul>
@@ -277,7 +269,7 @@
 			<dd>
 				<ul>
 					<c:forEach items="${shopmonthList }" var="shop">
-						<li><span class="name"><a title="${shop.shop_name }" href="Shop_view.action?shopId=${shop.id }" class="user_name">${shop.shop_name }</a></span><span class="num">${shop.douNum }</span></li>
+						<li><span class="name"><a title="${shop.shop_name }" href="${host}/shop/${shop.id }" class="user_name">${shop.shop_name }</a></span><span class="num">${shop.douNum }</span></li>
 					</c:forEach>
 					<li title="l1505624"><span class="name"><a href="/user/l1505624" class="user_name">浮舟</a></span><span class="num">3761</span></li>
 					<li title="ramissue"><span class="name"><a href="/user/ramissue" class="user_name">ramissue</a></span><span class="num">3102</span></li>
@@ -294,7 +286,7 @@
 			<dd>
 				<ul>
 					<c:forEach items="${uploadrankweekList }" var="source">
-						<li><span class="name"><a title="${source.shop.shop_name }" href="Shop_view.action?shopId=${source.shop.id }" class="user_name">${source.shop.shop_name }</a></span><span class="num">${uploadCount.get(source) }</span></li>
+						<li><span class="name"><a title="${source.shop.shop_name }" href="${host}/shop/${source.shop.id }" class="user_name">${source.shop.shop_name }</a></span><span class="num">${uploadCount.get(source) }</span></li>
 					</c:forEach>
 					<li><span class="name"><a title="towangjindian" class="user_name">王金典</a></span><span class="num">233</span></li>											
 					<li><span class="name"><a title="cz_00001" class="user_name">传智播客教育集团</a></span><span class="num">136</span></li>

@@ -186,10 +186,10 @@ function searchType(typeid){
                 <c:forEach items="${categories }" var="category">
                		<c:choose>
                			<c:when test="${curCategory.id==category.id }">
-               				<a href="Shop_category.action?categoryId=${category.id }" target="_blank" class="item_cur">${category.name }</a>
+               				<a href="${host}/shop/category?categoryId=${category.id }" target="_blank" class="item_cur">${category.name }</a>
                			</c:when>
                			<c:otherwise>
-               				<a href="Shop_category.action?categoryId=${category.id }" target="_blank">${category.name }</a>
+               				<a href="${host}/shop/category?categoryId=${category.id }" target="_blank">${category.name }</a>
                			</c:otherwise>
                		</c:choose>
 
@@ -221,7 +221,7 @@ function searchType(typeid){
               <c:forEach items="${shopList }" var="shop">
               <dl class="album_list_b">
 	              <dt>
-		              <a href="Shop_view.action?shopId=${shop.id }" target="_blank" class="album_cate_img">
+		              <a href="${host}/shop/${shop.id }" target="_blank" class="album_cate_img">
 		              	<img src="${pageContext.request.contextPath}/shop/${shop.face}">
 		              </a>
 		              <span class="album_num">
@@ -229,7 +229,7 @@ function searchType(typeid){
 		              </span>
 	             </dt>
 	             <dd>
-	              <a href="Shop_view.action?shopId=${shop.id }" target="_blank" class="album_cate_t"><font style="font-size:9pt;">主要业务：${shop.tag }</font></a>
+	              <a href="${host}/shop/${shop.id }" target="_blank" class="album_cate_t"><font style="font-size:9pt;">主要业务：${shop.tag }</font></a>
 	              	
 	              
 	              <div class="album_cate_b"><a href="#" class="album_per_img">

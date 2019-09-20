@@ -33,11 +33,11 @@
   <header>
     <h1>${user.nickName }的博客</h1>
     <h2>愿居于一城，与卿所见美好......</h2>
-    <div class="logo"><a href="${host}/blog/Blog_show.action?userId=${user.id}"></a></div>
+    <div class="logo"><a href="${host}/blog/${user.nickNameId}"></a></div>
      <%@ include file="./nav.jsp" %>
     </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/Blog_show.action?userId=${user.id}">首页</a>><a href=#>资源</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="${host}/blog/${user.nickNameId}">首页</a>><a href=#>资源</a></h2>
     <div class="template">
       <h3>
         

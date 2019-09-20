@@ -173,19 +173,6 @@
 					swal("OMG", data.msg, "error");
 				});
 			});
-			
-		/* if (confirm("确定要将该贴置顶吗？")) {
-			$.post("Topic_modifyTop.action",{topicId:topicId},function(result){
-				if(result.success){
-					alert("帖子已成功修改！");
-					location.reload(true);
-				}else{
-					alert("已经置顶了不要再顶了！");
-				}
-			},"json");
-		}else{
-			return;
-		} */
 	}
 	
 </script>
@@ -200,12 +187,6 @@
 		return false;
 		}
 	}
-/* function modifyTopic(topicId,topicTop,topicGood){
-	$("#topicId").val(topicId);
-	$("#topicTop").val(topicTop);
-	$("#topicGood").val(topicGood);
-	url="Topic_modify.action?topicId="+topicId;
-} */
 
 </script>
 
@@ -233,13 +214,8 @@ padding:-4px 0;
 <div style=" width: 1200px;height:900px; margin: 0 auto;background:url('${host}/images/rw2.png');margin-top:-9px;background-color:#FFFFFF;border:0px solid #AC9B8B;box-shadow:2px 5px 5px rgba(0,0,0,0.8);">
 
 <div style="width: 1200px; margin: 0 auto;">
-	<div style="margin-bottom: 10px;">
-	
-	
-	
-	                   <!-- a class="" href="Topic_preSave.action验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06 -->
-	                   
-	                   
+	<div style="margin-bottom: 10px;">	
+	    <!-- a class="" href="Topic_preSave.action验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06 -->	                   
 		<a class="" href="${host}/topic/write?sectionId=${section.id }"><img alt="随便说说" src="${pageContext.request.contextPath}/images/post.jpg"></a>
 		<div class="pagination alternate pull-right" align="center" style="margin: 0px;">
 			<ul class="clearfix">
@@ -253,7 +229,7 @@ padding:-4px 0;
 	
 	<div style="width:25%;float:left;border:0px solid silver;height:500px;">
 
-		<div class="demo">
+	<div class="demo">
 	<a class="control prev"></a><a class="control next abs"></a><!--自定义按钮，移动端可不写-->
 	<div class="slider" style="border:4px solid white "><!--主体结构，请用此类名调用插件，此类名可自定义-->
 		<ul style="margin:0 0 10px 0px;padding:0">

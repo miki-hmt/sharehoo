@@ -124,7 +124,7 @@ function validateBuy(){
         <div class="main">
           <div class="datas_detail pull-left">
             <ul class="tabs clearfix">
-              <li class="cur"><a href="Shop_view.action?shopId=${shop.id }">店内资源</a></li>
+              <li class="cur"><a href="${host}/shop/${shop.id }">店内资源</a></li>
               <li ><a href="/user/delphiboy2003/downloads">店铺新品</a></li>
               <li ><a href="/user/delphiboy2003/album">店铺活动</a></li>
             </ul>
@@ -232,9 +232,9 @@ function validateBuy(){
 			alert("您还未登陆！");
 		} else {
 			if (confirm("您确定要关注该店铺吗？")) {
-				$.post("Operate_focus.action",{shopId:shopId},
+				$.post("${host}/shop/focus",{shopId:shopId},
 				function(result){
-	    			if(result.success){
+	    			if(result.data=200){
 	    				alert("关注成功，请到店铺收藏中心查看！");
 	    				location.reload(true);
 	    			}else{	    				

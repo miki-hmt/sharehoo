@@ -75,11 +75,7 @@
 	}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/more-starts.js"></script>
-
-
-
-<!--  2017.08.05	防止不法分子利用js源码，得到文件路径下载url，我个人思路是给文件属性里增加一个二次别名，
-	且名字要采用md5方式命名，让别人猜不到命名规律，即使知道下载链接也得不到正确的路径  -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/footer.css"/>
 	
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -159,7 +155,7 @@
 	<div class="container clearfix">
 		<div class="nav-bar">
 			<a href="${host}/shop/index.htm">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank" class="current">资源分类</a>
+			<a href="${pageContext.request.contextPath}/shop/source/serach" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
@@ -296,7 +292,7 @@ $(function(){
              
               	<c:when test="${currentShop.id==shop.id }">
               		<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
-              		<a target="_blank" href="Source_downKiss.action?source_id=${source.id }">免费下载</a>
+              		<a target="_blank" href="${host}/shop/source/download?source_id=${source.id }">免费下载</a>
               </span>
               <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >            	
               		<a href="javascript:;" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a>
@@ -306,7 +302,7 @@ $(function(){
               		
               	<c:otherwise>
               		<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
-              		<a href="Source_downKiss.action?source_id=${source.id }">抱走吧</a>
+              		<a href="${host}/shop/source/download?source_id=${source.id }">抱走吧</a>
 	              </span>
 	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >	       
 	              	<a href="javascript:;" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a>
@@ -321,303 +317,289 @@ $(function(){
              </div>
           </div>
           
-          <!--广告位		图片栏-->
-          <div class="mod_similar clearfix">
-            <div class="mod_similar_l fl">
-            	
-				<img src="${pageContext.request.contextPath}/shop/images/homebanner/sourcebanner/wx1.jpg" style="width:315px;">
-		
-				<!-- 广告位结束 -->
-            </div>
-            
-            <div class="mod_similar_r fr">
-              <h4 class="dl_common_t"><span>大家在收藏</span>
-                <label class="sim_t_r"></label>
-              </h4>
-              <ul class="csdn-tracking-statistics similar_list" id="over_download" data-mod="popu_19">
-              	<c:forEach items="${collectSources}" var="collect">
-                    <li>                          
-                     <i class="fa fa-caret-right"></i>
-                        <a strategy="SearchAlgorithm" title="Python_Machine_Learning_By_Example" href="${host}/shop/source/${collect.source.id}" target="_blank">${collect.source.name }</a><span>下载豆：<em>${collect.source.douNum }</em></span>
-                    </li>
-               </c:forEach>
-                                               
-              </ul>
-            </div>
-          </div>
-          <!--热门专辑-->
-          <div class="dl_wrap">
-            <h4 class="dl_common_t"><span>新店入驻</span>
-              <label><a href="#" target="_blank" class="create_album">我要开店</a><em class="giveC">审核通过送虎豆</em></label>
-            </h4>
-            <ul class="hot_album clearfix" data-mod="popu_52">
-            <c:forEach items="${newShopList}" var="shop">
-               <li><a href="Shop_view.action?shopId=${shop.id }" target="_blank"><img src="${pageContext.request.contextPath}/shop/${shop.face}"></a><a href="/album/detail/3872" class="hot_album_t">${shop.tag }</a>
-                <p class="hot_album_p">创建者：<em>${shop.user.nickName }</em></p>      
-              </li>
-              </c:forEach>
-            </ul>
-          </div>
-          <!--广告-->
-          <div class="ad">
-          	<!-- 广告位开始 -->
-			
-
+      <!--广告位		图片栏-->
+      <div class="mod_similar clearfix">
+        <div class="mod_similar_l fl">           	
+			<img src="${pageContext.request.contextPath}/shop/images/homebanner/sourcebanner/wx1.jpg" style="width:315px;">
 			<!-- 广告位结束 -->
-          </div>
-          <!--课程推荐-->
-          <div class="dl_wrap">
-            <h4 class="dl_common_t"><span class="relate_btn relate_cur">店铺推荐</span>
-            </h4>
-
-            <ul class="mod_dl_show mod_dl_relate" id="edu_down_reco" data-mod="popu_56" >
-			<c:forEach items="${bannerList }" var="banner">
-            		 <li>
-                            <a href="${banner.url }" target="_blank" strategy="">
-                                <img src="${pageContext.request.contextPath}/${banner.news_img}" title="${banner.news_name }">
-                            </a>
-                            <a href="${banner.url }" target="_blank" strategy="" class="mod_dl_relate_a">
-                                ${banner.news_name }                          
-                             </a>
-                        </li>
-            		</c:forEach>
-                         
-             </ul>
-
-            <ul class="blog_download mod_dl_relate">
-            </ul>
-
-          </div>
-          <!--评论-->
- <div id="comment" class="csdn_dl_comment">
-
-<div class="recommand download_comment" sourceid="9896715">
-
-<script type="text/javascript">
-
-//收藏功能实现，miki 2017.08.10
-
-function collectSource(sourceId){
-	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-		alert("您还未登陆！");
-	} else {
-		if (confirm("您正在收藏该资源，请确认")) {
-			$.post("Operate_collect.action",{sourceId:sourceId},
-			function(result){
-    			if(result.success){
-    				alert("收藏成功，请到店铺收藏中心查看！");
-    				location.reload(true);
-    			}else{	    				
-    				alert("您已经收藏过了！");    			            				
-    			}
-    		},"json");
-		}else{
-			return;
-		}
-	}	
-}
-
-
-
-function uuid() {  
-    var s = [];  
-    var hexDigits = "0123456789abcdef";  
-    for (var i = 0; i < 36; i++) {  
-        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);  
-    }  
-    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010  
-    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01  
-    s[8] = s[13] = s[18] = s[23] = "-";  
-   
-    var uuid = s.join("");  
-    return uuid;  
-}  
-
-
-</script>
-<div class="common_li clearfix">
-	<h3 class="tit">评论<span>共有${commentTotal }条</span></h3>
-	<c:forEach items="${commentList }" var="comment">
-		<div class="conLi clearfix" id="p_">
-	    	<div class="left_img"><a href="#" target="_blank"><img src="${pageContext.request.contextPath}/${comment.user.face}" title="${comment.user.nickName }" alt="${comment.user.nickName }"></a></div>
-	        <dl class="rightLi">
-	        	<dt class="top"><a href="/user/jarojar" target="_blank" class="name">${comment.user.nickName }</a><span class="time"><fmt:formatDate value="${comment.publishTime}" pattern="yyyy-MM-dd HH:mm:ss "/></span>
-	            	<ul class="comment_stars">
-	                	
-	                	<c:choose>
-		                	<c:when test="${comment.sacrify_score<2 }">
-		                		<li>
-		                		<i class="fa fa-star yellow"></i>
-			                	 <i class="fa fa-star"></i>
-			                	 <i class="fa fa-star "></i>
-			                	  <i class="fa fa-star "></i>
-			                	  <i class="fa fa-star "></i>
-			                	  </li>
-		                	</c:when>
-		                	
-		                	<c:when test="${comment.sacrify_score<3 && comment.sacrify_score>1 }">
-		                	<li>
-		                		<i class="fa fa-star yellow"></i>
-			                	 <i class="fa fa-star yellow"></i>
-			                	 <i class="fa fa-star "></i>
-			                	  <i class="fa fa-star "></i>
-			                	  <i class="fa fa-star "></i>
-			                	  </li>
-		                	</c:when>
-		                	
-		                	<c:when test="${comment.sacrify_score<4 && comment.sacrify_score>2 }">
-		                	<li>
-		                		<i class="fa fa-star yellow"></i>
-			                	 <i class="fa fa-star yellow"></i>
-			                	 <i class="fa fa-star yellow"></i>
-			                	  <i class="fa fa-star "></i>
-			                	  <i class="fa fa-star "></i>
-			                	  </li>
-		                	</c:when>
-		                	<c:when test="${comment.sacrify_score>3 && comment.sacrify_score<5 }">
-		                	<li>
-		                		<i class="fa fa-star yellow"></i>
-			                	 <i class="fa fa-star yellow"></i>
-			                	 <i class="fa fa-star yellow"></i>
-			                	  <i class="fa fa-star yellow"></i>
-			                	  <i class="fa fa-star "></i>
-			                	  </li>
-		                	</c:when>
-		                	<c:otherwise>
-		                	<li>
-		                		<i class="fa fa-star yellow"></i>
-			                	 <i class="fa fa-star yellow"></i>
-			                	 <i class="fa fa-star yellow"></i>
-			                	  <i class="fa fa-star yellow"></i>
-			                	  <i class="fa fa-star yellow"></i>
-			                	  </li>
-		                	</c:otherwise>
-		                </c:choose> 	 
-	                 </ul>
-	                 <!--2017.3.3 modified-->
-	            <div class="respond"></div>
-				</dt>
-				<dd class="detal">${comment.content }</dd>
-					<!--2017.3.3 modified 这里是回复框-->
-	            <dd class="respond_box">
-	                
-	            </dd>
-					<!--2017.3.3 modified 这里是回复列表-->
-				</dl>
-		</div>
-	</c:forEach>	
-	
-<!-- 分页 nav -->
-		<div class="pagination alternate">
-			<ul class="clearfix">
-				${pageCode }
-			</ul>
-		</div> 
-</div>
-		
-</div>
-
-<!-- 发布评论页面-->
-	 <div class="cc_comment_form recom_sub">
-	                            <form id="fm" >
-	                                <div class="common_form clearfix">
-	                                    <div class="common_bar clearfix">
-	                                        <ul id="csdn_dl_commentbox" class="comment_stars">
-	                                            <li class="tit">星级评价：</li>
-	                                            <input class="star" id="star" name="comment.sacrify_score" value="${comment.sacrify_score }" type="hidden"/>
-	                                            <li class="stats">
-	                                            
-		                                           <div class="BOX"> 
-													<div id="star" class="">
-														<ul class="star_UL" sid="0">
-															<li><a href="javascript:;">1</a></li>
-															<li><a href="javascript:;">2</a></li>
-															<li><a href="javascript:;">3</a></li>
-															<li><a href="javascript:;">4</a></li>
-															<li><a href="javascript:;">5</a></li>
-														</ul>
-														<span  class="star_result_span">
-															<strong></strong>&nbsp;&nbsp;<a></a>
-														</span>
-													</div>
-													</div>
-													
-	                                            </li>
-	                                        </ul>
-	                                    </div>
-	                                    <input id="userId" name="comment.user.id" value="${currentUser.id}" type="hidden">
-	                                    <input id="shopId" name="comment.shop.id" value="${shop.id}" type="hidden">
-	                                    <input id="sourceId" name="comment.source.id" value="${source.id}" type="hidden">
-	                                    <div class="common_tit">评论：<span>一个资源可评论一次</span></div>
-	                                    <textarea class="comment_area" id="content" name="comment.content"></textarea>
-	                                    <div class="common_bot clearfix"><span class="tip" style="color:red;"><i class="fa fa-exclamation-triangle fa-2x" ></i><font id="error" style="color:red;"></font></span>
-	                                        <button type="button" class="btn btn-sm btn-red" onclick="javascript:postComment()">发表评论
-	                                        </button>
-	                                    </div>
-	                                </div>
-	                            </form>
-	                            
-	             <!-- 2017.08.08 form表单异步提交及验证	 -->               
-	                            <script type="text/javascript">
-	                            
-			                            function postComment(){
-			                            	if ($("#star").val()==null||$("#star").val()=='') {
-				                        		$("#error").html("星级评价不能为空！");
-				                           		 return false;
-				                           	}
-				                           	 if ($("#content").val()==null||$("#content").val()=='') {
-				                           		$("#error").html("评论不能为空！");
-				                           		 return false;
-				                           	}if ($("#content").val().length<5) {
-				                           		$("#error").html("最少输入五个汉字！");
-				                        		return false;
-				                        	}
-				                        	if ($("#content").val().length>160) {
-				                        		$("#error").html("最多输入80个汉字！");
-				                        		return false;	
-				                        	}
-				                        	$("#error").html("");
-				                        	$.post("Comment_save.action?sourceId=${source.id}",$("#fm").serialize(),function(result){
-				                    			if(result.success){
-				                    				alert("评论成功，谢谢参与！");
-				                    				location.reload(true);
-				                    			}else{
-				                    				if(result.success==false){
-				                    					alert("您已经评论过了，不能二次评论！");
-				                    				}else{
-				                    					alert("我不知道你是怎样越过这么多权限到这一步的，反正你是真牛掰！");
-				                    				}			            				
-				                    			}
-				                    		},"json");
-			                            }
-	                            </script>
-	                            
-	                            <script type="text/javascript">
-	                                $(function () {
-	                                    function cache_hit() {
-	                                        $("#imgValidcode").attr("src", "/index.php/rest/tools/validcode/comment_validate/1" + Math.random());
-	                                    }
-	
-	                                    $("#imgValidcode").on("click", function () {
-	                                        cache_hit();
-	                                    });
-	                                });
-	
-	                            </script>
-	                        </div>
-	
-			<div style="    padding: 20px;">
-				<div class="cannot_com_c">	
-					 <dl class="cant cc_comment_msg" style="display: none;">
-						<dt>&nbsp;</dt>
-						<dd></dd>
-					</dl>
-				</div> 
-			</div>
-          </div>
-
         </div>
-        <div class="download_r fr">
+        
+        <div class="mod_similar_r fr">
+          <h4 class="dl_common_t"><span>大家在收藏</span>
+            <label class="sim_t_r"></label>
+          </h4>
+          <ul class="csdn-tracking-statistics similar_list" id="over_download" data-mod="popu_19">
+          	<c:forEach items="${collectSources}" var="collect">
+                <li>                          
+                 <i class="fa fa-caret-right"></i>
+                    <a strategy="SearchAlgorithm" title="Python_Machine_Learning_By_Example" href="${host}/shop/source/${collect.source.id}" target="_blank">${collect.source.name }</a><span>下载豆：<em>${collect.source.douNum }</em></span>
+                </li>
+           </c:forEach>
+                                           
+          </ul>
+        </div>
+      </div>
+          
+      <!--热门专辑-->
+      <div class="dl_wrap">
+        <h4 class="dl_common_t"><span>新店入驻</span>
+          <label><a href="#" target="_blank" class="create_album">我要开店</a><em class="giveC">审核通过送虎豆</em></label>
+        </h4>
+        <ul class="hot_album clearfix" data-mod="popu_52">
+        <c:forEach items="${newShopList}" var="shop">
+           <li><a href="${host}/shop/${shop.id }" target="_blank"><img src="${pageContext.request.contextPath}/shop/${shop.face}"></a><a href="/album/detail/3872" class="hot_album_t">${shop.tag }</a>
+            <p class="hot_album_p">创建者：<em>${shop.user.nickName }</em></p>      
+          </li>
+          </c:forEach>
+        </ul>
+      </div>
+          
+      	<!--广告-->
+      <div class="ad">
+      	<!-- 广告位开始 -->
+		<!-- 广告位结束 -->
+      </div>
+    <!--课程推荐-->
+    <div class="dl_wrap">
+      <h4 class="dl_common_t"><span class="relate_btn relate_cur">店铺推荐</span>
+      </h4>
+
+      <ul class="mod_dl_show mod_dl_relate" id="edu_down_reco" data-mod="popu_56" >
+<c:forEach items="${bannerList }" var="banner">
+      		 <li>
+                      <a href="${banner.url }" target="_blank" strategy="">
+                          <img src="${pageContext.request.contextPath}/${banner.news_img}" title="${banner.news_name }">
+                      </a>
+                      <a href="${banner.url }" target="_blank" strategy="" class="mod_dl_relate_a">
+                          ${banner.news_name }                          
+                       </a>
+                  </li>
+      		</c:forEach>
+                   
+       </ul>
+
+      <ul class="blog_download mod_dl_relate">
+      </ul>
+
+    </div>
+          <!--评论-->
+	<div id="comment" class="csdn_dl_comment">
+	
+		<div class="recommand download_comment" sourceid="9896715">	
+			<script type="text/javascript">	
+			//收藏功能实现，miki 2017.08.10	
+				function collectSource(sourceId){
+					if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
+						alert("您还未登陆！");
+					} else {
+						if (confirm("您正在收藏该资源，请确认")) {
+							$.post("${host}/shop/collect",{sourceId:sourceId},
+							function(result){
+				    			if(result.data==200){
+				    				alert("收藏成功，请到店铺收藏中心查看！");
+				    				location.reload(true);
+				    			}else{	    				
+				    				alert("您已经收藏过了！");    			            				
+				    			}
+				    		},"json");
+						}else{
+							return;
+						}
+					}	
+				}
+				
+				function uuid() {  
+				    var s = [];  
+				    var hexDigits = "0123456789abcdef";  
+				    for (var i = 0; i < 36; i++) {  
+				        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);  
+				    }  
+				    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010  
+				    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01  
+				    s[8] = s[13] = s[18] = s[23] = "-";  
+				   
+				    var uuid = s.join("");  
+				    return uuid;  
+				}  	
+			</script>
+		<div class="common_li clearfix">
+			<h3 class="tit">评论<span>共有${commentTotal }条</span></h3>
+			<c:forEach items="${commentList }" var="comment">
+				<div class="conLi clearfix" id="p_">
+			    	<div class="left_img"><a href="#" target="_blank"><img src="${pageContext.request.contextPath}/${comment.user.face}" title="${comment.user.nickName }" alt="${comment.user.nickName }"></a></div>
+			        <dl class="rightLi">
+			        	<dt class="top"><a href="/user/jarojar" target="_blank" class="name">${comment.user.nickName }</a><span class="time"><fmt:formatDate value="${comment.publishTime}" pattern="yyyy-MM-dd HH:mm:ss "/></span>
+			            	<ul class="comment_stars">
+			                	
+			                	<c:choose>
+				                	<c:when test="${comment.sacrify_score<2 }">
+				                		<li>
+				                		<i class="fa fa-star yellow"></i>
+					                	 <i class="fa fa-star"></i>
+					                	 <i class="fa fa-star "></i>
+					                	  <i class="fa fa-star "></i>
+					                	  <i class="fa fa-star "></i>
+					                	  </li>
+				                	</c:when>
+				                	
+				                	<c:when test="${comment.sacrify_score<3 && comment.sacrify_score>1 }">
+				                	<li>
+				                		<i class="fa fa-star yellow"></i>
+					                	 <i class="fa fa-star yellow"></i>
+					                	 <i class="fa fa-star "></i>
+					                	  <i class="fa fa-star "></i>
+					                	  <i class="fa fa-star "></i>
+					                	  </li>
+				                	</c:when>
+				                	
+				                	<c:when test="${comment.sacrify_score<4 && comment.sacrify_score>2 }">
+				                	<li>
+				                		<i class="fa fa-star yellow"></i>
+					                	 <i class="fa fa-star yellow"></i>
+					                	 <i class="fa fa-star yellow"></i>
+					                	  <i class="fa fa-star "></i>
+					                	  <i class="fa fa-star "></i>
+					                	  </li>
+				                	</c:when>
+				                	<c:when test="${comment.sacrify_score>3 && comment.sacrify_score<5 }">
+				                	<li>
+				                		<i class="fa fa-star yellow"></i>
+					                	 <i class="fa fa-star yellow"></i>
+					                	 <i class="fa fa-star yellow"></i>
+					                	  <i class="fa fa-star yellow"></i>
+					                	  <i class="fa fa-star "></i>
+					                	  </li>
+				                	</c:when>
+				                	<c:otherwise>
+				                	<li>
+				                		<i class="fa fa-star yellow"></i>
+					                	 <i class="fa fa-star yellow"></i>
+					                	 <i class="fa fa-star yellow"></i>
+					                	  <i class="fa fa-star yellow"></i>
+					                	  <i class="fa fa-star yellow"></i>
+					                	  </li>
+				                	</c:otherwise>
+				                </c:choose> 	 
+			                 </ul>
+			                 <!--2017.3.3 modified-->
+			            <div class="respond"></div>
+						</dt>
+						<dd class="detal">${comment.content }</dd>
+							<!--2017.3.3 modified 这里是回复框-->
+			            <dd class="respond_box">
+			                
+			            </dd>
+							<!--2017.3.3 modified 这里是回复列表-->
+						</dl>
+				</div>
+			</c:forEach>	
+			
+			<!-- 分页 nav -->
+			<div class="pagination alternate">
+				<ul class="clearfix">
+					${pageCode }
+				</ul>
+			</div> 
+		</div>				
+	</div>
+	
+	<!-- 发布评论页面-->
+		 <div class="cc_comment_form recom_sub">
+	        <form id="fm" >
+	            <div class="common_form clearfix">
+	                <div class="common_bar clearfix">
+	                    <ul id="csdn_dl_commentbox" class="comment_stars">
+	                        <li class="tit">星级评价：</li>
+	                        <input class="star" id="star" name="sacrify_score" value="${comment.sacrify_score }" type="hidden"/>
+	                                <li class="stats">
+	                                
+	                                <div class="BOX"> 
+										<div id="star" class="">
+											<ul class="star_UL" sid="0">
+												<li><a href="javascript:;">1</a></li>
+												<li><a href="javascript:;">2</a></li>
+												<li><a href="javascript:;">3</a></li>
+												<li><a href="javascript:;">4</a></li>
+												<li><a href="javascript:;">5</a></li>
+											</ul>
+											<span  class="star_result_span">
+												<strong></strong>&nbsp;&nbsp;<a></a>
+											</span>
+										</div>
+										</div>
+	
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        <input id="userId" name="user.id" value="${currentUser.id}" type="hidden">
+	                <input id="shopId" name="shop.id" value="${shop.id}" type="hidden">
+	                <input id="sourceId" name="source.id" value="${source.id}" type="hidden">
+	                <div class="common_tit">评论：<span>一个资源可评论一次</span></div>
+	                <textarea class="comment_area" id="content" name="content"></textarea>
+	                <div class="common_bot clearfix"><span class="tip" style="color:red;"><i class="fa fa-exclamation-triangle fa-2x" ></i><font id="error" style="color:red;"></font></span>
+	                    <button type="button" class="btn btn-sm btn-red" onclick="javascript:postComment()">
+	                    	发表评论
+	                    </button>
+	                </div>
+	            </div>
+	        </form>
+		  </div>                         
+	      <!-- 2017.08.08 form表单异步提交及验证	 -->               
+	       <script type="text/javascript">
+	       
+	         function postComment(){
+	         	if ($("#star").val()==null||$("#star").val()=='') {
+		      		$("#error").html("星级评价不能为空！");
+		         		 return false;
+	         	}else if ($("#content").val()==null||$("#content").val()=='') {
+	         		$("#error").html("评论不能为空！");
+	         		 return false;
+	         	}else if ($("#content").val().length<5) {
+	         		$("#error").html("最少输入五个汉字！");
+	      			return false;
+		      	}else if ($("#content").val().length>160) {
+		      		$("#error").html("最多输入80个汉字！");
+		      		return false;	
+		      	}
+	      		$("#error").html("");
+		      	$.post("${host}/shop/comment/${source.id}",$("#fm").serialize(),function(result){
+		  			if(result.data==200){
+		  				alert("评论成功，谢谢参与！");
+		  				location.reload(true);
+		  			}else{
+		  				if(result.data==401){
+		  					alert("您已经评论过了，不能二次评论！");
+		  				}else{
+		  					alert("我不知道你是怎样越过这么多权限到这一步的，反正你是真牛掰！");
+		  				}			            				
+		  			}
+		  		},"json");
+	         }
+	         
+	         $(function () {
+	             function cache_hit() {
+	                 $("#imgValidcode").attr("src", "/index.php/rest/tools/validcode/comment_validate/1" + Math.random());
+	             }
+	
+	             $("#imgValidcode").on("click", function () {
+	                 cache_hit();
+	             });
+	         });
+	     </script>                    
+		
+		<div style="    padding: 20px;">
+			<div class="cannot_com_c">	
+				 <dl class="cant cc_comment_msg" style="display: none;">
+					<dt>&nbsp;</dt>
+					<dd></dd>
+				</dl>
+			</div> 
+		</div>
+	  </div>
+    </div>
+    
+    
+    <div class="download_r fr">
           <div class="mod_personal">
             <dl class="personal_wrap" id="personal_wrap">
               <dt><a href="/user/szstudy"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img" class="head"></a></dt>
@@ -636,27 +618,29 @@ function uuid() {
                 <p class="personal_b"><img alt="等级：3" src="${pageContext.request.contextPath}/shop/images/level/down3.png"><span>财富值：&nbsp;<em>${shop.douNum }</em></span></p>
               </dd>
             </dl>
-            <div class="resource">
-              <div class="resource_t"><span class="resource_btn resource_cur">店铺其他资源</span><span class="resource_btn">店铺专辑</span></div>
+            
+          <div class="resource">
+            <div class="resource_t"><span class="resource_btn resource_cur">店铺其他资源</span><span class="resource_btn">店铺专辑</span></div>
               <div class="resource_c_wrap">
                 <div class="resource_c resource_c_show">
-                  <ul class="resource_c_list">
-                  	<c:forEach items="${ohterSources }" var="source">
-                  		<li><i class="fa fa-caret-right"></i><a href="${host}/shop/source/${source.id }" target="_blank">${source.name }</a></li>
-                  	</c:forEach>                 	
-				 </ul>
-                  <div class="check_all"><a href="Shop_view.action?shopId=${source.shop.id }" target="_blank" class="check_all_btn">查看全部资源</a>
-                  </div>
+                
+	                  <ul class="resource_c_list">
+	                  	<c:forEach items="${ohterSources }" var="source">
+	                  		<li><i class="fa fa-caret-right"></i><a href="${host}/shop/source/${source.id }" target="_blank">${source.name }</a></li>
+	                  	</c:forEach>                 	
+					 </ul>
+				 
+                	<div class="check_all"><a href="${host}/shop/${source.shop.id }" target="_blank" class="check_all_btn">查看全部资源</a></div>
                 </div>
                 <div class="resource_c">
-                  <ul class="resource_c_list">
-                                    </ul>
-                  <div class="check_all"><a href="/user/szstudy/album" class="check_all_btn" target="_blank">查看全部0个资源</a>
-                  </div>
+	                  <ul class="resource_c_list">
+	                  </ul>
+                  	 	<div class="check_all"><a href="/user/szstudy/album" class="check_all_btn" target="_blank">查看全部0个资源</a>
+                  		</div>
                 </div>
-              </div>
             </div>
           </div>
+        </div>
           <div class="dl_mar"><a href="/upload" class="upload_res"><i class="fa fa-upload"></i><span>上传资源</span></a>
           </div>
           <!--广告-->
@@ -691,57 +675,51 @@ function uuid() {
 	            </ul>
             </div>
           </div>
+          
           <!--广告-->
           <div class="dl_mar dl_mar_b">
-          	
-
 			<!-- 广告位结束 -->
           </div>
+          
           <!--下载排行榜-->
           <div class="dl_mar"><a href="/rankings" class="upload_res"><span>下载排行榜</span></a>
           </div>
           <!--公告-->
           <div class="dl_wrap">
-            <h4 class="dl_common_t"><span>公告</span>
-            </h4>
+            <h4 class="dl_common_t"><span>公告</span></h4>
             <div class="dl_notice">
               <ul class="resource_c_list">
-                              <li><i class="fa fa-caret-right"></i><a href="#">前端开发重难点</a></li>
-                              <li><i class="fa fa-caret-right"></i><a href="#">17年软考最新真题及解析</a></li>
-                              <li><i class="fa fa-caret-right"></i><a href="#">物联网全栈开发专题</a></li>
-                              <li><i class="fa fa-caret-right"></i><a href="#">二十大技术领域优质资源</a></li>
-                            </ul>
+                <li><i class="fa fa-caret-right"></i><a href="#">前端开发重难点</a></li>
+                <li><i class="fa fa-caret-right"></i><a href="#">17年软考最新真题及解析</a></li>
+                <li><i class="fa fa-caret-right"></i><a href="#">物联网全栈开发专题</a></li>
+                <li><i class="fa fa-caret-right"></i><a href="#">二十大技术领域优质资源</a></li>
+              </ul>
             </div>
           </div>
           <!--广告-->
           <div class="dl_mar dl_mar_b">
-          	<!-- 广告位开始 -->
-			
+          	<!-- 广告位开始 -->		
 			<!-- 广告位结束 -->
           </div>
         </div>
       </div>
     </div>
     <!-- 广告位开始 -->
-	<div class="J_adv" data-view="true" data-mod="ad_popu_22" data-mtp="62" data-order="418" data-con="ad_content_2078">
-                
-	</div>
+	<div class="J_adv" data-view="true" data-mod="ad_popu_22" data-mtp="62" data-order="418" data-con="ad_content_2078"></div>
 	<%@ include file="./common/footer.jsp" %> 
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/footer.css">
 	<!-- 广告位结束 -->
           
-        <!-- 猜你在找 -->
-    <script type="text/javascript" defer>
+<!-- 猜你在找 -->
+<script type="text/javascript" defer>
     
     function focusShop(shopId){
     	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
     		alert("您还未登陆！");
     	} else {
     		if (confirm("您确定要关注该店铺吗？")) {
-    			$.post("Operate_focus.action",{shopId:shopId},
+    			$.post("${host}/shop/focus",{shopId:shopId},
     			function(result){
-        			if(result.success){
+        			if(result.data==200){
         				alert("关注成功，请到店铺收藏中心查看！");
         				location.reload(true);
         			}else{	    				
@@ -754,56 +732,48 @@ function uuid() {
     	}	
     }
     
+    function get_find_report(bd,pageno){
+		$.get("/index.php/source/get_source_report/"+bd+"/"+pageno,
+			function(data){
+				if(data.succ > 0){
+					var html = '';
+					for (var i = 0; i < data.info.length; i++) {
+						html += '		<li><i class="fa fa-caret-right"></i>';
+						html += '			<a strategy="SearchAlgorithm" title="'+data.info[i].object.title+'" href="' + data.info[i].object.url + '" target="_blank">' + data.info[i].object.title + '</a><span>积分：<em>'+data.info[i].object.sourcescore+'</em></span>';
+						html += '		</li>';
+			        }
+			        var pre = (pageno - 1) < 1 ? data.total_rows : (pageno - 1);
+			        var next = (pageno + 1) > data.total_rows ? 1 : (parseInt(pageno) + 1);
+					$(".fa-angle-left").attr("data-id",pre);
+					$(".fa-angle-right").attr("data-id",next);
+					$("#over_download").html(html);
+				}							
+		},'json');			
+	}
     
-	    function get_find_report(bd,pageno){
-			$.get("/index.php/source/get_source_report/"+bd+"/"+pageno,
-					function(data){
-						if(data.succ > 0){
-							var html = '';
-							for (var i = 0; i < data.info.length; i++) {
-								html += '		<li><i class="fa fa-caret-right"></i>';
-								html += '			<a strategy="SearchAlgorithm" title="'+data.info[i].object.title+'" href="' + data.info[i].object.url + '" target="_blank">' + data.info[i].object.title + '</a><span>积分：<em>'+data.info[i].object.sourcescore+'</em></span>';
-								html += '		</li>';
-					        }
-					        var pre = (pageno - 1) < 1 ? data.total_rows : (pageno - 1);
-					        var next = (pageno + 1) > data.total_rows ? 1 : (parseInt(pageno) + 1);
-							$(".fa-angle-left").attr("data-id",pre);
-							$(".fa-angle-right").attr("data-id",next);
-							$("#over_download").html(html);
-						}							
-				},
-				'json');			
-		}
-    
-		var title = $( '.download_dl' ).find( 'h3' ).attr( 'title' );
-		var $tags = $( '.dl_b' ).find( 'a.tag' );
-		var bd, tags = [];
+	var title = $( '.download_dl' ).find( 'h3' ).attr( 'title' );
+	var $tags = $( '.dl_b' ).find( 'a.tag' );
+	var bd, tags = [];
 
-		$tags.each( function ( i, tag ) {
-			tags.push( $( tag ).html() );
-		} );
-		bd = title + ',' + tags.join( ',' );
-		var pageno = 1;		
-		$(document).ready(function() {
-			
-			$(".fa-angle-left").click(function(){
-				pageno = $(".fa-angle-left").attr("data-id");
-				get_find_report(bd,pageno);
-			});
-			$(".fa-angle-right").click(function(){
-				pageno = $(".fa-angle-right").attr("data-id");
-				get_find_report(bd,pageno);
-			});
-		});	
-
-		/**
-			vip会员动态
-		**/
+	$tags.each( function ( i, tag ) {
+		tags.push( $( tag ).html() );
+	} );
+	bd = title + ',' + tags.join( ',' );
+	var pageno = 1;		
+	$(document).ready(function() {
 		
-   </script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/toolbar.js"></script>
-    <!--script(type="text/javascript" src="static/js/apps/fontSize.js")-->
-	<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/shop/js/async_new.js"></script>
+		$(".fa-angle-left").click(function(){
+			pageno = $(".fa-angle-left").attr("data-id");
+			get_find_report(bd,pageno);
+		});
+		$(".fa-angle-right").click(function(){
+			pageno = $(".fa-angle-right").attr("data-id");
+			get_find_report(bd,pageno);
+		});
+	});		
+</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/shop/js/toolbar.js"></script>
+<script language="javascript" type="text/javascript" src="${pageContext.request.contextPath}/shop/js/async_new.js"></script>
 	
 </body>
 </html>

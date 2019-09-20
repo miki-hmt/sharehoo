@@ -151,7 +151,9 @@ var _hmt = _hmt || [];
 <body>
 	<c:choose>
 		 <c:when test="${currentUser==null }">
-		 	<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="${pageContext.request.contextPath}/shop/js/html.js" type="text/javascript" domain="http://sharehoo.cn/shop/Shop_home.action"></script>	
+		 	<script id="toolbar-tpl-scriptId" prod="download" skin="black" 
+		 		src="${pageContext.request.contextPath}/shop/js/html.js" type="text/javascript" 
+		 			domain="http://sharehoo.cn/shop/index.htm"></script>	
 		 </c:when>
 		 <c:otherwise>
 		 	 <%@ include file="./common/login.jsp" %> 
@@ -284,7 +286,7 @@ var _hmt = _hmt || [];
             2017最新简历模板免费下载            </a>
             </li>
                       <li class="announcement_item">
-            <a target="_blank" href="http://sharehoo.cn/shop/Shop_view.action?shopId=1">
+            <a target="_blank" href="http://sharehoo.cn/shop/1">
             <i class="fa fa-chevron-circle-right"></i>
             网站网页静态化测试            </a>
             </li>
@@ -323,7 +325,7 @@ var _hmt = _hmt || [];
                 <li class="tab_item cur">精品资源推荐</li>
                 <li class="tab_item">最新上传资源</li>
               </ul>
-              <div class="more_info"><a href="Source_search.action" target="_blank">更多》》</a></div>
+              <div class="more_info"><a href="shop/source/categories" target="_blank">更多》》</a></div>
             </div>
             <!-- 选项卡 内容-->
             <div class="tab_con_box">
@@ -378,7 +380,7 @@ var _hmt = _hmt || [];
           <!-- 广告位结束 -->
           
           <div class="resources_recommeded">
-            <div class="com_plate_tit"><span class="plate_title">热门店铺</span><a href="Shop_rank.action" target="_blank" class="more_link">更多》》</a>
+            <div class="com_plate_tit"><span class="plate_title">热门店铺</span><a href="${host}/shop/rank" target="_blank" class="more_link">更多》》</a>
             </div>
             <div class="rr_list">
               <!--店铺贡献榜-->
@@ -386,10 +388,13 @@ var _hmt = _hmt || [];
                 <!-- 循环开始 -->
                 <c:forEach items="${richList}" var="shop">
                  <dl class="album_list_b">
-                  <dt><a href="Shop_view.action?shopId=${shop.id }" target="_blank" class="album_cate_img"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img"></a>
-                  <a href="Shop_view.action?shopId=${shop.id }" target="_blank" class="album_num">${shop.douNum }</a></dt>
-                  <dd><a href="Shop_view.action?shopId=${shop.id }" target="_blank" class="album_cate_t">介绍：${shop.tag }</a>
-                    <div class="album_cate_b"><a href="Shop_view.action?shopId=${shop.id }" class="album_per_img"><img src="${pageContext.request.contextPath}/${shop.user.face}" alt="img"></a><a href="Shop_view.action?shopId=${shop.id }" target="_blank" class="album_per_name">店名：${shop.shop_name }</a></div>
+                  <dt><a href="${host}/shop/${shop.id }" target="_blank" class="album_cate_img"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img"></a>
+                  <a href="${host}/shop/${shop.id }" target="_blank" class="album_num">${shop.douNum }</a></dt>
+                  <dd><a href="${host}/shop/${shop.id }" target="_blank" class="album_cate_t">介绍：${shop.tag }</a>
+                    <div class="album_cate_b"><a href="${host}/shop/${shop.id }" class="album_per_img">
+                    	<img src="${pageContext.request.contextPath}/${shop.user.face}" alt="img">
+                    	</a>
+                    	<a href="${host}/shop/${shop.id }" target="_blank" class="album_per_name">店名：${shop.shop_name }</a></div>
                   </dd>
                 </dl>
                 </c:forEach>             
@@ -660,7 +665,7 @@ var _hmt = _hmt || [];
     		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
     			alert("您还未登陆！");
     		} else {
-    			window.open("Sign_go.action");
+    			window.open("${host}/shop/sign/daydayup");
     		}	
     });
 

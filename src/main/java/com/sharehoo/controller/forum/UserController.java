@@ -259,63 +259,67 @@ public class UserController {
 	
 	@RequestMapping("/user/update")
 	@ResponseBody
-	public E3Result modify(User user,@RequestParam(value="face",required=false) MultipartFile face,
+	public E3Result modify(User user,@RequestParam(value="facelogo",required=false) MultipartFile face,
 			@RequestParam(value="faceFileName",required=false) String faceFileName,HttpServletRequest request)throws Exception{
 		if(null!=user){
 			User old=userService.getUserById(user.getId());
-			if (face!=null) {
-				
-				//获取项目的static根路径  
-		    	String staticPath = BootPathUtil.getStaticPath();
-		    	if(face.getSize()>600*1024*3) {
-		    		return E3Result.build(401, "上传文件限制在3M以内哦");
-		    	}
-		    	faceFileName = face.getOriginalFilename();
-				String imageName=DateUtil.getCurrentDateStr();
-				String realPath = staticPath +"/images/user/"+Consts.SDF_YYYYMM.format(new Date()); 
-				String imageFile=imageName+"."+faceFileName.split("\\.")[1];
-				
-				File savePath=new File(realPath);
-				if(!savePath.exists()) {
-					savePath.mkdirs();
-				}		
-				InputStream is = face.getInputStream();    	    
-		          
-		        File toFile = new File(realPath, imageFile);    
-		        OutputStream os = new FileOutputStream(toFile);       
-		        byte[] buffer = new byte[1024];       
-		        int length = 0;    
-		        while ((length = is.read(buffer)) > 0) {       
-		            os.write(buffer, 0, length);       
-		        }       
-		        is.close();    
-		        os.close();
-				
-				user.setFace("images/user/"+Consts.SDF_YYYYMM.format(new Date()) +"/"+ imageFile);//原来为"images/user/" 
-			}else{
-				user.setFace(old.getFace());
-			}
-			if(StringUtils.isEmpty(user.getEmail())){
-				user.setEmail(old.getEmail());
-			}
-			if(StringUtils.isEmpty(user.getMobile())){
-				user.setMobile(old.getMobile());
-			}
-			if(StringUtils.isEmpty(user.getNickName())){
-				user.setNickName(old.getNickName());
-			}
-			if(StringUtils.isEmpty(user.getTrueName())){
-				user.setTrueName(old.getTrueName());
-			}
-			if(null==user.getRegTime()){
-				user.setRegTime(old.getRegTime());
-			}
-			user.setType(old.getType());
-
-			user.setPassword(new MD5().complie(user.getPassword().trim()));
-			
+			try {
+				if (face!=null && face.getSize()>0) {
+					
+					//获取项目的static根路径  
+			    	String staticPath = BootPathUtil.getStaticPath();
+			    	if(face.getSize()>600*1024*3) {
+			    		return E3Result.build(401, "上传文件限制在3M以内哦");
+			    	}
+			    	faceFileName = face.getOriginalFilename();
+					String imageName=DateUtil.getCurrentDateStr();
+					String realPath = staticPath +"/images/user/"+Consts.SDF_YYYYMM.format(new Date()); 
+					String imageFile=imageName+"."+faceFileName.split("\\.")[1];
+					
+					File savePath=new File(realPath);
+					if(!savePath.exists()) {
+						savePath.mkdirs();
+					}		
+					InputStream is = face.getInputStream();    	    
+			          
+			        File toFile = new File(realPath, imageFile);    
+			        OutputStream os = new FileOutputStream(toFile);       
+			        byte[] buffer = new byte[1024];       
+			        int length = 0;    
+			        while ((length = is.read(buffer)) > 0) {       
+			            os.write(buffer, 0, length);       
+			        }       
+			        is.close();    
+			        os.close();
+					
+					user.setFace("images/user/"+Consts.SDF_YYYYMM.format(new Date()) +"/"+ imageFile);//原来为"images/user/" 
+				}else{
+					user.setFace(old.getFace());
+				}
+				if(StringUtils.isEmpty(user.getEmail())){
+					user.setEmail(old.getEmail());
+				}
+				if(StringUtils.isEmpty(user.getMobile())){
+					user.setMobile(old.getMobile());
+				}
+				if(StringUtils.isEmpty(user.getNickName())){
+					user.setNickName(old.getNickName());
+				}
+				if(StringUtils.isEmpty(user.getTrueName())){
+					user.setTrueName(old.getTrueName());
+				}
+				if(null==user.getRegTime()){
+					user.setRegTime(old.getRegTime());
+				}
+				user.setType(old.getType());
+				if(!user.getPassword().equals(old.getPassword())) {
+					user.setPassword(new MD5().complie(user.getPassword().trim()));
+				}
+			} catch (Exception e) {
+				return E3Result.build(401, "修改失败");
+			}				
 			userService.saveUser(user);						
-			request.getSession().invalidate(); //注销session
+			//request.getSession().setAttribute(Consts.CURRENTUSER, null);; //注销session
 		}
 		
 		return E3Result.ok();
@@ -692,6 +696,9 @@ public class UserController {
 	public String preSave(HttpServletRequest request,Model model)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+		if(user==null) {
+			return "error";
+		}
 		model.addAttribute("user", user);
 		String navCode=NavUtil.genNavCode("个人中心");
 		model.addAttribute("navCode", navCode);

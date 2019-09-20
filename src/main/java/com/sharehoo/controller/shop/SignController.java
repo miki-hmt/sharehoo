@@ -141,7 +141,7 @@ public class SignController {
 			model.addAttribute("flag", flag);
 			return "shop/sign";
 		}
-		return "redirect:/shop";	//返回首页
+		return "redirect:/shop/index.htm";	//返回首页
 	}
 		
 		//得到sign对象

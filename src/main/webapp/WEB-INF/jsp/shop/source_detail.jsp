@@ -93,7 +93,7 @@
 	<div class="container clearfix">
 		<div class="nav-bar">
 			<a href="${host}/shop/index.htm">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/serach" target="_blank" class="current">资源分类</a>
+			<a href="${pageContext.request.contextPath}/shop/source/categories" target="_blank" class="current">资源分类</a>
 			<a class=" " href="${host}/shop/rank" target="_blank">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
@@ -330,7 +330,7 @@ function Login(){
             </h4>
             <ul class="hot_album clearfix" data-mod="popu_52">
             <c:forEach items="${newShopList}" var="shop">
-               <li><a href="Shop_view.action?shopId=${shop.id }" target="_blank"><img src="${pageContext.request.contextPath}/shop/${shop.face}"></a><a href="/album/detail/3872" class="hot_album_t">${shop.tag }</a>
+               <li><a href="${host}/shop/${shop.id }" target="_blank"><img src="${pageContext.request.contextPath}/shop/${shop.face}"></a><a href="/album/detail/3872" class="hot_album_t">${shop.tag }</a>
                 <p class="hot_album_p">创建者：<em>${shop.user.nickName }</em></p>      
               </li>
               </c:forEach>
@@ -413,9 +413,9 @@ function focusShop(shopId){
 		alert("您还未登陆！");
 	} else {
 		if (confirm("您确定要关注该店铺吗？")) {
-			$.post("Operate_focus.action",{shopId:shopId},
+			$.post("${host}/shop/focus",{shopId:shopId},
 			function(result){
-    			if(result.success){
+    			if(result.data==200){
     				alert("关注成功，请到店铺收藏中心查看！");
     				location.reload(true);
     			}else{	    				
@@ -435,9 +435,9 @@ function collectSource(sourceId){
 		alert("您还未登陆！");
 	} else {
 		if (confirm("您正在收藏该资源，请确认")) {
-			$.post("Operate_collect.action",{sourceId:sourceId},
+			$.post("${host}/shop/focus",{sourceId:sourceId},
 			function(result){
-    			if(result.success){
+    			if(result.data==200){
     				alert("收藏成功，请到店铺收藏中心查看！");
     				location.reload(true);
     			}else{	    				
@@ -504,7 +504,7 @@ function checkSource(sourceId){
 				alert("类型不能为空！");
 				return false;
 			}
-			$.post("Operate_report.action?sourceId="+sourceId, $("#form").serialize(),
+			$.post("${host}/shop/message/report?sourceId="+sourceId, $("#form").serialize(),
 			function(result){
     			if(result.success){
     				alert("举报成功，请静候结果！");
@@ -688,7 +688,7 @@ function htmlencode(s){
                   						</c:forEach>
 										
 					                  </ul>
-                  <div class="check_all"><a href="Shop_view.action?shopId=${source.shop.id }" target="_blank" class="check_all_btn">查看店铺更多资源</a>
+                  <div class="check_all"><a href="${host}/shop/${source.shop.id }" target="_blank" class="check_all_btn">查看店铺更多资源</a>
                   </div>
                 </div>
                 <div class="resource_c">

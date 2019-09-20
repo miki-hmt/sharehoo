@@ -4,8 +4,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/search_index.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${host}/css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/download_index.css">
+<!-- 2019.09.03 自定义弹窗所需插件 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css" />
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/shop/css/search_index.css"/>
 <script type="text/javascript">
 
 function reP(){
@@ -37,18 +43,13 @@ function check_up(thisform){
 		else{
 			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 			key =  encodeURIComponent(key)
-			var url="shop/${host}/shop/source/serach?keyword="+encodeURIComponent(key);
+			var url="/shop/source/serach?keyword="+encodeURIComponent(key);
 			window.location.href=url;
 		}
 		return false;
 	}
 </script>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>haha</title>
-		<link href="css/style.css" rel="stylesheet" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/common.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/download_index.css">
 </head>
 <body>
 
@@ -56,25 +57,21 @@ function check_up(thisform){
 			<div class="header-con">
 				<a class="header-logo" href="#"><img src="${pageContext.request.contextPath}/common/images/logo/logo1.jpg" style="width:40px;height:40px;"><font style="color:white;"></font></a>
 				
-				<c:choose>
-					
+				<c:choose>					
 					<c:when test="${not empty currentUser }">							
-											<div class="header-user">
-												
-												<font style="color:white;font-size:9pt;">
-											
-												<c:choose>
-							                  	  		<c:when test="${currentUser.sectionList.size()==0&&currentUser.type!=2 }">
-							                  	  			社区会员：	
-							                  	  		</c:when>
-							                  	  		<c:when test="${currentUser.sectionList.size()!=0&&currentUser.type!=2 }">
-							                  	  			社区版主：
-							                  	  		</c:when>
-							                  	  		<c:otherwise>
-							                  	  			社区管理：
-							                  	  		</c:otherwise>
-							                  	  		</c:choose>
-												
+						<div class="header-user">					
+							<font style="color:white;font-size:9pt;">					
+							<c:choose>
+	                  	  		<c:when test="${currentUser.sectionList.size()==0&&currentUser.type!=2 }">
+	                  	  			社区会员：	
+	                  	  		</c:when>
+	                  	  		<c:when test="${currentUser.sectionList.size()!=0&&currentUser.type!=2 }">
+	                  	  			社区版主：
+	                  	  		</c:when>
+	                  	  		<c:otherwise>
+	                  	  			社区管理：
+	                  	  		</c:otherwise>
+		                  	 </c:choose>											
 						<a href="javascript:checkUserLogin()" style="color:#FFEC24;margin-left:-4px;text-transform:uppercase;">${currentUser.nickName }</a><font style="color:white;font-size:9pt;">|</font>
 						<a href="${host}/user/center?page=1" target="_blank" title="进入个人中心" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">个人中心</font></a><font style="color: white;font-size:9pt;">|</font>				
 						<a href="${host}/user/center?page=1" target="_blank" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">消息</font><img id="news" src="${pageContext.request.contextPath}/common/images/logo/mess.png" style="width:6px;height:24px;display:none;"/></a><font style="color: white;font-size:9pt;">|</font>

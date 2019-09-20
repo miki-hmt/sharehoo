@@ -11,17 +11,18 @@
 <link href="shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
-
 <!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 		<!--我的高亮效果是zenburn-->
 <link rel="stylesheet" href="highlight/styles/gruvbox-dark.css">
 <script src="highlight/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
+<link rel="stylesheet" href="shop/css/search_index.css">
+<link rel="stylesheet" href="common/css/common.css">
+<link rel="stylesheet" href="common/css/download_index.css">
 
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
 <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
-<link href="css/style.css" rel="stylesheet" />
 
 <script>
 (function(){
@@ -49,14 +50,6 @@ var _hmt = _hmt || [];
 })();
 </script>
 
-<style type="text/css">
-.yin{
-	display:none;
-}
-</style>
-
-
-
 <link href="css/style.css" rel="stylesheet" />
 <script type="text/javascript">
 
@@ -66,7 +59,7 @@ function reP(){
 
 function logout() {
 	if (confirm("您确定要退出系统吗？")) {
-		window.location.href="http://sharehoo.cn/User_logout.action";
+		window.location.href="http://sharehoo.cn/user/logout";
 	}
 }
 function login(){
@@ -77,107 +70,64 @@ function checkUserLogin(){
 	if ('${user.nickName}'==null||'${user.nickName}'=="") {
 		alert("您还未登陆！");
 	} else {
-		window.location.href="http://sharehoo.cn/User_userCenter.action";
+		window.location.href="http://sharehoo.cn/user/center";
 	}
 }
 </script>
 
-
-<link href="css/csshake.min.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-	.weixin{
-		width:200px;
-		height:150px;
-		position:absolute;
-	}
-	.weixin img{
-	    position:relative;
-	    float:left;
-		width:150px;
-		height:150px;
-		display:none;
-		border-radius:50%;
-		
-	}
-.QQ{
-		width:120px;
-		height:85px;
-		position:absolute;
-	}	
-	
-	
-	
-.lx{
-	margin-top:6px;
-	font-weight:bold;
-	align:left;
-	font-size:10pt;
-	position:absolute;
-}
-.lx img{
-	width:21px;
-	height:21px;
-	margin-bottom:3px;
-}
-
-
-a:hover{
-  color:red;
-}
-
-</style>
-
-
 </head>
 <body>
 
-<div id="header" class="wrap" style="width: 1200px; margin: 0 auto;">
-	<div  class="container">
-	<div class="weixin">
-		<img src='images/miki.png' id="oImg">
-		</div>		
-	<div id="header-wrapper">
-		
-					           
-			<div id="logo">	 		
-				<h1><a href="#"><font size=5px>IT帮-资讯传播社区</font></a></h1>
-				<p> <a href="http://www.limi.store/" rel="nofollow">sharehoo.cn</a></p>
+<div class="wrap">
+
+	<div class="header">
+			<div class="header-con">
+				<a class="header-logo" href="#"><img src="common/images/logo/logo1.jpg" style="width:40px;height:40px;"><font style="color:white;"></font></a>
+				<!-- <a href="login">登录</a>| -->
+				<div class="header-user">
+					<font style="color:white;font-size:9pt;">
+						<a href="javascript:login()">登录&nbsp;</a>|<a href="register">&nbsp;注册&nbsp;</a>|
+						<a href="user/forget">忘记密码</a>
+					</font>
+				</div>
 			</div>
-		
-	</div>
-	<div>
-	
-		<div id="menu" class="container">
-			<ul  class="navUI">				
-				<li class="current_page_item"><a href="http://sharehoo.cn/home.jsp">首　页</a></li>
-				<li><a href="http://sharehoo.cn/blog/Blog_show.action?userId=21" target="_blank">博客社区<img src="./images/icon/hot.gif"></a></li>
-				<li><a href="http://sharehoo.cn/shop/Shop_home.action" target="blank">下载社区<img src="./images/icon/hot.gif"></a></li>
-								
-				<li><a href="http://sharehoo.cn/source/W3CSchool/www.w3school.com.cn/index.html" title="w3cschool最新版" target="blank">
-						w3c文档</a>																															
-				</li>				
-				
-				<li><a href="http://sharehoo.cn/topic/section/3" target="blank">社友圈<img src="./images/icon/hot.gif"></a></li>
-				<li><a href="http://sharehoo.cn/game2.jsp" target="blank">h5小游戏</a></li>
-				<li><a href="http://sharehoo.cn/Topic_leaveList.action" target="_blank">秘密墙<img src="./images/icon/hot.gif"></a></li>
-				
-				<li><a href="http://sharehoo.cn/SoftSection_listpr.action" title="可以上传下载有用的资源" target="_blank">软件下载</a></li>
-				<li><a href="http://sharehoo.cn/${host}/topic/detail/218" target="blank" title="站长邮箱：1329289117@qq.com"><font >社区规则</font></a></li>	
-			</ul>
 		</div>
+		<div class="news-nav">
+			<div class="container clearfix">
+				<div class="nav-bar">
+					<a href="home" class="current">首页</a>
+					<a href="http://sharehoo.cn/blog/miki" target="_blank">博客社区<img src="images/icon/hot.gif"></a>
+					<a class=" " href="shop/index.htm" target="_blank">下载社区<img src="images/icon/hot.gif"></a>
+					<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html" target="_blank">W3C文档</a>
+					<a href="topic/section/3" target="_blank">社友圈<img src="images/icon/hot.gif"></a>			
+					<a class=" " href="h5" target="_blank">H5小游戏</a>			
+					<a href="secret" target="_blank">秘密墙<img src="images/icon/hot.gif"></a>
+					<a href="softsection/list" target="_blank">软件下载</a>
+					<a class=" " href="http://sharehoo.cn/154339002942889.html" target="blank">社区规则</a>		
+				</div>
+			<div class="search-download" style="display:none;">
+					<form action="" method="post" onsubmit="return check_up(this);" name="download_search">
+						<input style="font-size:9pt;" type="text" placeholder="搜索资源..." value="" id="tagff" name="keywords"/>
+						<a href="javascript:check_up(download_search);void(0);" class="download-search-bth"></a>
+					</form>
+
+				</div>
+			</div>
+		</div>
+    <div class="home_page_wrap">    	
+	    	<div class="home_banner">       
+				
+		            <!--黑色背景块上面加入logo块  -->
+					<div style="width: 1200px; margin: 0 auto;height:150px;color:white;border:1px solid white;"> 		
+					<h4 align="center">欢迎讨论：${topic.title }！</h4>
+					<h5>-发帖者：${topic.user.nickName }</h5>
+					<h5>-<img src="common/images/write.png"><a href="#1">参与讨论....</a></h5>
+					</div>
 		
-	</div>
-<div class="lx"><div class="shake-little shake-constant shake-constant--hover"><img src="images/hk.jpg"/></div><a href="javascript:void();" onclick="reP()" style="color:red;">微信公众号</a>|<div class="shake-little shake-constant shake-constant--hover"><img src="images/kla.jpg" style="border-radius:50%;"/>
-</div><a href="#" style="color:red;" title="群号：191710765">官方群</a>
-</div>
-<div style="margin: 0 auto; font-size:10pt;font-weight:bold;height:31px;" align="right">
-		
-				<!-- <a href="login.jsp">登录</a>| -->
-				<a href="javascript:login()" style="color:#FFEC24;margin-left:0px;"><font color="white">登录</font></a>
-				<a href="http://sharehoo.cn/register.jsp" style="color:#FFEC24;margin-left:0px;"><font color="white">|注册|</font></a>
-				<a href="http://sharehoo.cn/userCenter/forget.jsp" style="color:#FFEC24;margin-left:0px;"><font color="white">忘记密码</font></a>
-	</div>
-	</div>
+      		</div>
+	    	 
+    </div>
+    
 </div>
 
 
@@ -224,6 +174,7 @@ a:hover{
 			<div class="span10">
 				<table style="width: 100%;border:1px solid #A9CBEE;" id="maincontentPanel">
 					<tr style="height: 60px;">
+						<a name="top"></a>
 						<td style="background-color:#EFF4FB;">
 							【主题】:<strong><font color="red">${topic.title }</font></strong>
 						</td>
@@ -240,7 +191,7 @@ a:hover{
 					
 					<tr>
 						<td style="text-align: right;height: 40px;color:gray;font-size:9pt;background-color:#EFF4FB;">
-							&nbsp;<a href="http://sharehoo.cn/${host}/topic/detail/${id}" style="font-size: 9pt;margin-right:;color:gray;">发表评论</a>
+							&nbsp;<a href="http://sharehoo.cn/topic/detail/${id}" style="font-size: 9pt;margin-right:;color:gray;">发表评论</a>
 							&nbsp;&nbsp;&nbsp;<a style="text-align: right;color:gray;font-size:9pt;"> 发表时间:『${topic.publishTime?string("yyyy-MM-dd HH:mm:ss") }』</a>
 						</td>
 					</tr>
@@ -253,8 +204,9 @@ a:hover{
 	</div>
 	
 	<div class="pagination alternate" align="center">
-		<div  class="more">										
-			<a href="http://sharehoo.cn/${host}/topic/detail/${id}">↓↓↓点击加载更多回复↓↓↓</a>
+		<a name="foot"></a>
+		<div  class="more">									
+			<a href="http://sharehoo.cn/topic/detail/${id}">↓↓↓点击加载更多回复↓↓↓</a>
 		</div>				
 	</div>
 	
@@ -296,11 +248,11 @@ a:hover{
 <!--浮动面板-->
 <div id="floatPanel">
 	<div class="ctrolPanel">
-		<a class="arrow" href="#"><span>顶部</span></a>
+		<a class="arrow" href="#top"><span>顶部</span></a>
 		
 		<a class="contact" href="http://www.baidu.com/" target="_blank"><span></span></a>
 		<a class="qrcode" href="#"><span>微信二维码</span></a>
-		<a class="arrow" href="#"><span>底部</span></a></div>
+		<a class="arrow" href="#foot"><span>底部</span></a></div>
 
 	<div class="popPanel">
 		<div class="popPanel-inner">
@@ -325,7 +277,7 @@ a:hover{
 <script type="text/javascript">
        $(document).ready(function(){
             	  // 在这里写你的代码...
-            	  $("#maincontentWrap").height($("#maincontentPanel").height()+100);
+            	  $("#maincontentWrap").height($("#maincontentPanel").height()+200);
              });
  
 </script>

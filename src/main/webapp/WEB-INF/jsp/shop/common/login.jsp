@@ -121,8 +121,8 @@
   <div class="csdn-toolbar csdn-toolbar-skin-black ">
           <div class="container row center-block ">  
                   <div class="col-md-3 pull-left logo clearfix">
-	                  <a href="http://sharehoo.cn/shop/Shop_home.action" title="sharehoo下载社区首页" target="_blank" class="icon"></a>
-	                  <a title="下载首页" href="http://sharehoo.cn/shop/Shop_home.action" class="img down-icon"></a>
+	                  <a href="http://sharehoo.cn/shop/index.htm" title="sharehoo下载社区首页" target="_blank" class="icon"></a>
+	                  <a title="下载首页" href="http://sharehoo.cn/shop/index.htm" class="img down-icon"></a>
                   </div>         
                    <div class="pull-right login-wrap ">           
                     <ul class="btns">              
@@ -295,7 +295,7 @@
 	               		       </a>
 	               		    </dt>                      
 	               		    <dt style="border: none;">
-	               		    	<a href="${pageContext.request.contextPath }/shop/Shop_upload.action" target="_blank" class="p-doc clearfix">
+	               		    	<a href="${pageContext.request.contextPath }/shop/upload.htm" target="_blank" class="p-doc clearfix">
 	               		          <em class="icon"></em>
 	               		          <span>传音乐/文档</span>
 	               		          </a>
@@ -307,13 +307,13 @@
 	               		       </a>
 	               		    </dt>                      
 	               		    <dt>
-	               		       <a href="http://sharehoo.cn/blog/manage/Article_add.action?userId=${currentUser.id }" target="_blank" class="p-blog clearfix">
+	               		       <a href="http://sharehoo.cn/blog/manage/article/go" target="_blank" class="p-blog clearfix">
 	               		          <em class="icon"></em>
 	               		          <span>写博客</span>
 	               		        </a>
 	               		   </dt>                      
 	               		   <dt>
-	               		     <a href="${pageContext.request.contextPath }/shop/Shop_upload.action" target="_blank" class="p-src clearfix">
+	               		     <a href="${pageContext.request.contextPath }/shop/upload.htm" target="_blank" class="p-src clearfix">
 	               		         <em class="icon"></em>
 	               		         <span>传资源</span>
 	               		     </a>
@@ -325,7 +325,7 @@
 	               		      </a>
 	               		   </dt>                     
 	               		   <dt>
-	               		      <a href="http://sharehoo.cn/topic/write??sectionId=20" target="_blank" class="c-code clearfix">
+	               		      <a href="http://sharehoo.cn/topic/write?sectionId=20" target="_blank" class="c-code clearfix">
 	               		         <em class="icon"></em>
 	               		         <span>创建代码片</span>
 	               		      </a>
@@ -389,11 +389,11 @@
 	               <dd> 
 	               	 <a href="${pageContext.request.contextPath }/" target="_blank">论坛</a>
 	               </dd>                      
-	               	<dd> <a href="Shop_home.action" target="_blank">下载</a></dd>                      
+	               	<dd> <a href="index.htm" target="_blank">下载</a></dd>                      
 	               	<dd> <a href="${pageContext.request.contextPath }/topic/section/21" target="_blank">知识库</a></dd>                      
 	               	<dd><a href="${pageContext.request.contextPath }/topic/section/11" target="_blank">技术问答</a></dd>                      
 	               	<dd><a href="#" target="_blank">博客头条</a></dd>                     
-	               	<dd style="display:none"> <a href="${pageContext.request.contextPath }/Topic_leaveList.action" target="_blank">秘密墙</a></dd>                    
+	               	<dd style="display:none"> <a href="${pageContext.request.contextPath }/secret" target="_blank">秘密墙</a></dd>                    
              	</dl>                  
                
 	 		</div>                  
@@ -424,8 +424,8 @@
 				<dt>                        
 					<h5>情感寄托</h5>                      
 				</dt>                      
-				<dd> <a href="${pageContext.request.contextPath }/Topic_leaveList.action" target="_blank">告白气球</a></dd>                      
-				<dd> <a href="${pageContext.request.contextPath }/Topic_leaveList.action" target="_blank">树洞秘密</a>
+				<dd> <a href="${pageContext.request.contextPath }/secret" target="_blank">告白气球</a></dd>                      
+				<dd> <a href="${pageContext.request.contextPath }/secret" target="_blank">树洞秘密</a>
 				</dd>                    
 																				
 			</dl>                  

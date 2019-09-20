@@ -184,9 +184,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<table width=100%;>
 										<tr>
 											<td style="width:78%;">
-												<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${sonReply.user.id}" target="_blank">
+												<a href="${pageContext.request.contextPath }/blog/${sonReply.user.nickNameId}" target="_blank">
 													<img alt="" src="${pageContext.request.contextPath}/${sonReply.user.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.user.nickName }</a>&nbsp;回复&nbsp; 
-														<a href="${pageContext.request.contextPath }/blog/Blog_show.action?userId=${sonReply.sonUser.id}" target="_blank">
+														<a href="${pageContext.request.contextPath }/blog/${sonReply.sonUser.nickNameId}" target="_blank">
 															<img alt="" src="${pageContext.request.contextPath}/${sonReply.sonUser.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.sonUser.nickName}
 														</a>：${sonReply.content }
 											</td>					

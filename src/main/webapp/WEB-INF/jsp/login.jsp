@@ -131,15 +131,15 @@ function loadimage(){
 	<div class="wrapper">
 		<div class="foot_nav">
 			<a href="http://sharehoo.cn" rel="nofollow">sharehoo社区</a><i>|</i>
-			<a href="http://sharehoo.cn/shop/Shop_home.action" rel="nofollow">sharehoo下载频道</a><i>|</i>
-			<a href="http://sharehoo.cn/shop/Source_search.action" rel="nofollow">资源搜索</a><i>|</i>
+			<a href="http://sharehoo.cn/shop/index.htm" rel="nofollow">sharehoo下载频道</a><i>|</i>
+			<a href="http://sharehoo.cn/shop/source/categories" rel="nofollow">资源搜索</a><i>|</i>
 			<a href="http://sharehoo.cn/blog/miki" rel="nofollow">博客</a><i>|</i>
 			<a href="http://sharehoo.cn/topic/section/2" rel="nofollow">二手集市</a><i>|</i>
 			<a href="http://sharehoo.cn/topic/section/21" rel="nofollow">原创社区</a><i>|</i>
-			<a href="http://sharehoo.cn/Topic_leaveList.action" rel="nofollow">吐槽树洞</a><i>|</i>
+			<a href="http://sharehoo.cn/secret" rel="nofollow">吐槽树洞</a><i>|</i>
 			<a href="http://sharehoo.cn/topic/section/4" rel="nofollow">集思广益</a><i>|</i>
 			<a href="http://sharehoo.cn/topic/section/11" rel="nofollow">发帖求助</a><i>|</i>
-			<a href="http://sharehoo.cn/login?prePage=http://sharehoo.cn/shop/Shop_home.action" rel="nofollow">我的店铺</a><i>|</i>
+			<a href="http://sharehoo.cn/login?prePage=http://sharehoo.cn/shop/index.htm" rel="nofollow">我的店铺</a><i>|</i>
 		</div>
 		<div class="copy">
 			<p>sharehoo.cn资讯交流平台--专注于程序员开发道路的技术分享，问题解决。

@@ -31,19 +31,19 @@
     <%@ include file="../manage_nav.jsp" %>
     </header>
   <article>
-    <h2 class="about_h">您现在的位置是：<a href="../manage/Article_list.action?userId=${user.id }">首页</a>><a href="../manage/PhotoManage_file.action?userId=${user.id }">文件管理管理</a>><a href="#">添加文件</a></h2>
+    <h2 class="about_h">您现在的位置是：<a href="#">首页</a>><a href="${host}/blog/manage/file">文件管理管理</a>><a href="#">添加文件</a></h2>
     <div class="template">
       <h3>
         <p><span>个人文件</span></p>
       </h3>
-       <form action="../manage/PhotoManage_saveFile.action?userId=${user.id}" method="post" theme="xhtml" enctype="multipart/form-data">
+       <form action="#" method="post" enctype="multipart/form-data">
       		<table>
       			<tr>
       				<td><span>添加文件:</span><input type="file" name="upload"/>(16M以内)</td>
       			</tr>
       			<tr>
       				<td><span>文件描述:</span><input type="text" name="name"/>
-      					<input type="hidden" name="photo.user.id" value="${user.id }"/>
+      					<input type="hidden" name="user.id" value="${user.id }"/>
       				</td>
       			</tr>
       			<tr>

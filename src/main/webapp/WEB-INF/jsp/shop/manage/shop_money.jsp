@@ -53,7 +53,7 @@
 			alert("您还未登陆！");
 		} 
 		else{
-			window.location.href="Shop_upload.action";
+			window.location.href="upload.htm";
 		}
 }
 </script>
@@ -170,8 +170,8 @@
               <li><a href="Shop_files.action">店内商品</a></li> 
               
               <li><a href="${pageContext.request.contextPath}/shop/admin/log">虎豆明细</a></li>     
-              <li><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_comments.action">店铺评价</a></li>
-              <li ><a href="${pageContext.request.contextPath}/shop/manage/ShopManage_collects.action">我的收藏</a></li>
+              <li><a href="${pageContext.request.contextPath}/shop/admin/comment">店铺评价</a></li>
+              <li ><a href="${pageContext.request.contextPath}/shop/admin/collect">我的收藏</a></li>
               <li ><a href="${pageContext.request.contextPath}/shop/admin/focus">我的关注</a></li>     
               <li><a href="${pageContext.request.contextPath}/shop/admin/update/go">店铺设置</a></li>
               <li class="cur"><a href="${pageContext.request.contextPath}/shop/admin/money/go">虎豆提现</a></li>
