@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/qiandao_style.css">
+<link rel="stylesheet" href="${host}/shop/css/qiandao_style.css">
 <title>签到-sharehoo社区</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
 	 <div class="qiandao-warp">
         <div class="qiandap-box">
             <div class="qiandao-banner">
-                <img src="images/qiandao_banner.jpg" height="551" width="1120" alt="">
+                <img src="${host}/shop/images/qiandao_banner.jpg" height="551" width="1120" alt="">
             </div>
             <div class="qiandao-con clear">
                 <div class="qiandao-left">
@@ -130,8 +130,8 @@
         <div class="qiandao-layer-bg"></div>
     </div>
     <!-- 签到 layer end -->
-    <script src="js/qiandao/jquery-1.10.2.min.js"></script>
-    <script src="js/qiandao/qiandao_js.js"></script>
+    <script src="${host}/shop/js/qiandao/jquery-1.10.2.min.js"></script>
+    <script src="${host}/shop/js/qiandao/qiandao_js.js"></script>
 
 </body>
 </html>

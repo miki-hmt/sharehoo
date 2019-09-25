@@ -45,8 +45,8 @@ public class SignController {
 	public E3Result save(HttpServletRequest request)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute(Consts.CURRENTUSER);
-
 		Operate operate=new Operate();
+		String msg = "";
 		if(user!=null){
 			Shop shop=shopService.getShopByuserId(user.getId());
 			if(shop!=null){
@@ -61,7 +61,7 @@ public class SignController {
 						sign.setNotice("连续签到七天获得额外奖励");	//连签七天获得额外奖励
 						operate.setNotice("连续签到七天获得奖励");
 						signService.saveSign(sign);
-						return E3Result.build(200,"恭喜你连续签到七天，喜提大礼包");
+						msg = "恭喜你连续签到七天，喜提大礼包";
 					}else{
 						sign.setDou_total(sign.getDou_total()+1);	//不是连签7天，则总豆数就是+1
 						
@@ -74,7 +74,7 @@ public class SignController {
 							sign.setSign_total(sign.getSign_total()+1);	//签到总次数+1
 							sign.setNotice("0");
 							signService.saveSign(sign);
-							return E3Result.build(200,"恭喜你连续签到"+sign.getSign_continue()+"天,累积七天有大奖哦");
+							msg = "恭喜你连续签到"+sign.getSign_continue()+"天,累积七天有大奖哦";
 						}else{	//未能连续签到成功，则相应数据进行重置
 							if(!last.equals(now)){
 								sign.setSign_continue(1);
@@ -82,7 +82,7 @@ public class SignController {
 								sign.setSign_total(sign.getSign_total()+1);	//签到总次数+1
 								sign.setNotice("1");
 								signService.saveSign(sign);
-								return E3Result.build(200,"恭喜你签到成功，累积七天有大奖哦");
+								msg = "恭喜你签到成功，累积七天有大奖哦";
 							}						
 						}
 						shop.setDouNum(shop.getDouNum()+1);
@@ -97,9 +97,8 @@ public class SignController {
 					sign2.setNotice("2");
 					sign2.setSign_total(1);
 					signService.saveSign(sign2);
-					return E3Result.build(200,"恭喜你签到成功，累积七天有大奖哦");
-				}
-				
+					msg = "恭喜你签到成功，累积七天有大奖哦";
+				}				
 			}else{
 				return E3Result.build(401,"您尚未激活店铺，签到没有积分哦");	//用户尚未激活店铺
 			}
@@ -112,10 +111,10 @@ public class SignController {
 		else{	//用户尚未登录
 			return E3Result.build(401,"请登录后签到");	//用户尚未激活店铺
 		}
-		return E3Result.build(200,"恭喜你签到成功，累积七天有大奖哦");
+		return E3Result.build(200, msg);
 	}
 	
-	@RequestMapping("/shop/sign/daydayup")
+	@RequestMapping("/sign/daydayup")
 	public String go(HttpServletRequest request,Model model)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute(Consts.CURRENTUSER);

@@ -151,7 +151,7 @@ function check_up(thisform){
 					<a href="${host}/home" class="current">首页</a>
 					<a href="http://sharehoo.cn/blog/miki" target="_blank">博客社区<img src="${host}/images/icon/hot.gif"></a>
 					<a class=" " href="${host}/shop/index.htm" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
-					<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html" target="_blank">W3C文档</a>
+					<a class=" " href="${host}/source/w3c/w3c.html" target="_blank">W3C文档</a>
 					<a href="${host}/topic/section/3" target="_blank">社友圈<img src="${host}/images/icon/hot.gif"></a>			
 					<a class=" " href="h5" target="_blank">H5小游戏</a>			
 					<a href="${host}/secret" target="_blank">秘密墙<img src="${host}/images/icon/hot.gif"></a>

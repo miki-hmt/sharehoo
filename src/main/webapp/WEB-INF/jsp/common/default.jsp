@@ -12,12 +12,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 
-	<!--2017.03.26 调用浏览器的极速内核模式  可以显示出标准样式 -->
+<!--2017.03.26 调用浏览器的极速内核模式  可以显示出标准样式 -->
 <meta name="renderer" content="webkit"> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <!-- #2017.05.03   网站上半部分引入    文件              头 -->
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/she_files/style.css">
 
@@ -27,11 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="author" content="chn 17869">
 
 <!-- #2017.05.03   网站上半部分引入    文件              尾 -->
-
-<title>首页</title>
-
 <style type="text/css" id="98512502000"></style>
-
 <script type="text/javascript">
 
 function checkForm(){
@@ -42,12 +37,10 @@ function checkForm(){
 	 }	 
 	 return true;
 }
-
-	//引用评论
+//引用评论
 function copy(c){		
 		document.getElementById("content").value = c ;
 	}
-
 function findKey(){
 		var key=$("#keyword").val();
 		if(key==""){
@@ -62,22 +55,10 @@ function findKey(){
 		return false;
 	}
 </script>
-
 <link href="css/csshake.min.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-a:hover{
-  	text-decoration:none;
-}
-</style>
-</head>
-<body>
-
-		<!-- 2017.05.04  网站上半部分  头    -->
-
-<div style="border:0px solid red;background:#FFFFFF;">
-<style>
-
-	/*隐藏二级菜单列表      2016.10.08               */
+a:hover{text-decoration:none;}
+/*隐藏二级菜单列表      2016.10.08               */
 .mainnav li ul li{
 	height:12px;
 }	
@@ -86,139 +67,111 @@ a:hover{
 	padding:0px;
 	width:80px;
 }		
-/*当鼠标移动到一级菜单时，显示二级菜单 2017.03.23 晚上  */
-			
+/*当鼠标移动到一级菜单时，显示二级菜单 2017.03.23 晚上  */			
 .mainnav li:hover ul{
 	text-align:center;
 	display:block;
 	margin:0px auto;  /*   2017.05.08       防止偏出，与一级菜单不对照          */
-	width:80px;  /*定义宽度，让二级菜单呈现瀑布式排列，而非横向  6  */
+	width:80px;  	  /*定义宽度，让二级菜单呈现瀑布式排列，而非横向  6  */
 	padding:0px;
-}		
+}
 </style>
+</head>
+
+<body>
+<!-- 2017.05.04  网站上半部分  头    -->
+<div style="border:0px solid red;background:#FFFFFF;">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/she_files/function.js"></script>
 <div class="club-nav">
-<div class="logo"><a href="http://sharehoo.cn/" title="IT帮-资讯传播社区" target="_blank"><img src="./images/banner/ti.jpg" style=" width:180px;height:62px;border-left: 0px solid #B6241F;"></a></div>
-<ul id="navMain" class="mainnav">
-    <li><a target="_blank" title="" href="topic/section/7">IT面试艺术</a></li>
-    <li><a target="_blank" title="javaWeb-api" href="topic/section/21">原创文章</a></li>
-    <li><a target="_blank" title="" href="">javaWeb-api</a>
-    	
-		 <ul>
-		      <li><a href="./source/jquery3.0/jQuery3.1.html" target="_blank" title="jquery3.0">前端样式
-		          </a>
-		      </li> 
-		      <li><a href="./source/hibernate/Hibernate.html" target="_blank" title="java，php，c#">后端语言
-		         </a>
-		     </li>
-		    <li><a href="./source/zhengze/zzbd.html" target="_blank" title="正则表达式">正则表达
-		        </a>
-		    </li>
-		     <li><a href="./source/txt.jsp" target="_blank" title="更多资源">更多文档
-		        </a>
-		    </li>                 
-       </ul>
-								
-        
-    </li>
-	<li><a target="_blank" title="" href="#">IT编程/语言</a>
-
-		<ul>	  
-		      <li><a href="topic/section/1" target="_blank" title="日有一计，必有所获">后端语言
-		         </a>
-		     </li>
-		    <li><a href="topic/section/8"  target="_blank" title="CSS">前端样式
-		        </a>
-		    </li>
-		     <li><a href="topic/section/7"  target="_blank" title="HTML">网页制作
-		        </a>
-		      </li>
-		     <li><a href="topic/section/11"  target="_blank" title="HTML">技术求助
-		        </a>
-		      </li>         
-       		</ul>
-		
-	</li>
-	<li><a target="_blank" title="" href="topic/section/16">大数据</a></li>
-    <li><a target="_blank" title="" href="topic/section/13">服务运维</a></li>
-    <li><a target="_blank" title="" href="topic/section/2">二手市场</a></li>
-    <li><a target="_blank" title="" href="topic/section/19">艺术/生活/美</a>
-
-		<ul>	  
-		      <li><a href="topic/section/19" target="_blank" title="日有一计，必有所获">美食美客
-		         </a>
-		     </li>
-		    <li><a href="topic/section/14" target="_blank" title="宁可食无肉，不可居无乐">音乐心灵
-		        </a>
-		    </li>
-		     <li><a href="topic/section/15" target="_blank" title="不吐不快">约伴出游
-		        </a>
-		    </li>  
-			<li><a href="topic/section/4" target="_blank" title="生活那些事">吐吐吐嘈
-		        </a>
-		    </li>
-
-			<li><a href="topic/section/13" target="_blank" title="前端样式">精致物品
-		        </a>
-		    </li>                 
-       		</ul>
-</li>
-    <li><a target="_blank" title="" href="topic/section/3">资源分享</a></li>
-    
-    <li><a target="_blank" title="" href="topic/section/12">游戏圈</a></li>
-    
-
-    <li><a target="_blank" title="" href="#">写帖子/博客</a>
-
-		 <ul>	
-			<li><a href="topic/section/11"  target="_blank" title="HTML">发帖求助
-		        </a>
-		      </li>   
-		      <li><a href="javascript:void(0);" onclick="writeBlog()" target="_blank" title="日有一计，必有所获">去写博客
-		         </a>
-		     </li>
-		    <li><a href="javascript:void(0);" onclick="writeTopic()" target="_blank" title="正则表达式">去写帖子
-		        </a>
-		    </li>
-		     <li><a href="javascript:void(0);" onclick="writeAnswer()" target="_blank" title="更多资源">去提问题
-		        </a>
-		    </li>                 
-       		</ul>
-	</li>
-    <li><a target="_blank" title="" href=""></a></li>	         
-</ul>
+	<div class="logo"><a href="http://sharehoo.cn/" title="IT帮-资讯传播社区" target="_blank"><img src="./images/banner/ti.jpg" style=" width:180px;height:62px;border-left: 0px solid #B6241F;"></a></div>
+	<ul id="navMain" class="mainnav">
+	    <li><a target="_blank" title="" href="topic/section/7">IT面试艺术</a></li>
+	    <li><a target="_blank" title="javaWeb-api" href="topic/section/21">原创文章</a></li>
+	    <li><a target="_blank" title="" href="">javaWeb-api</a>  	
+			 <ul>
+				<li><a href="./source/jquery3.0/jQuery3.1.html"
+					target="_blank" title="jquery3.0">前端样式 </a></li>
+				<li><a href="./source/hibernate/Hibernate.html"
+					target="_blank" title="java，php，c#">后端语言 </a></li>
+				<li><a href="./source/zhengze/zzbd.html" target="_blank"
+					title="正则表达式">正则表达 </a></li>
+				<li><a href="./source/txt.jsp" target="_blank" title="更多资源">更多文档
+				</a></li>
+			</ul>							        
+	    </li>
+		<li><a target="_blank" title="" href="#">IT编程/语言</a>
+			<ul>
+				<li><a href="topic/section/1" target="_blank"
+					title="日有一计，必有所获">后端语言 </a></li>
+				<li><a href="topic/section/8" target="_blank" title="CSS">前端样式
+				</a></li>
+				<li><a href="topic/section/7" target="_blank" title="HTML">网页制作
+				</a></li>
+				<li><a href="topic/section/11" target="_blank" title="HTML">技术求助
+				</a></li>
+			</ul></li>
+		<li><a target="_blank" title="" href="topic/section/16">大数据</a></li>
+	    <li><a target="_blank" title="" href="topic/section/13">服务运维</a></li>
+	    <li><a target="_blank" title="" href="topic/section/2">二手市场</a></li>
+	    <li><a target="_blank" title="" href="topic/section/19">艺术/生活/美</a>	
+			<ul>
+				<li><a href="topic/section/19" target="_blank"
+					title="日有一计，必有所获">美食美客 </a></li>
+				<li><a href="topic/section/14" target="_blank"
+					title="宁可食无肉，不可居无乐">音乐心灵 </a></li>
+				<li><a href="topic/section/15" target="_blank" title="不吐不快">约伴出游
+				</a></li>
+				<li><a href="topic/section/4" target="_blank" title="生活那些事">吐吐吐嘈
+				</a></li>
+	
+				<li><a href="topic/section/13" target="_blank" title="前端样式">精致物品
+				</a></li>
+			</ul></li>
+	    <li><a target="_blank" title="" href="topic/section/3">资源分享</a></li>    
+	    <li><a target="_blank" title="" href="topic/section/12">游戏圈</a></li>    	
+	    <li><a target="_blank" title="" href="#">写帖子/博客</a>
+			 <ul>
+				<li><a href="topic/section/11" target="_blank" title="HTML">发帖求助
+				</a></li>
+				<li><a href="javascript:void(0);" onclick="writeBlog()"
+					target="_blank" title="日有一计，必有所获">去写博客 </a></li>
+				<li><a href="javascript:void(0);" onclick="writeTopic()"
+					target="_blank" title="正则表达式">去写帖子 </a></li>
+				<li><a href="javascript:void(0);" onclick="writeAnswer()"
+					target="_blank" title="更多资源">去提问题 </a></li>
+			</ul></li>
+	    <li><a target="_blank" title="" href=""></a></li>	         
+	</ul>
 </div>
 
-<div class="row chaotong_nav"> 
-<!-- 66704196：社区首页变幻广告栏      类型：固定 尺寸：1000x90-->
-
-</div>
-<div class="row chaotong_nav"> 
-<!-- 66704196：社区首页变幻广告栏     类型：固定 尺寸：1000x90-->
-
-</div>
+	<div class="row chaotong_nav"> 
+	<!-- 66704196：社区首页变幻广告栏      类型：固定 尺寸：1000x90-->
+	
+	</div>
+	<div class="row chaotong_nav"> 
+	<!-- 66704196：社区首页变幻广告栏     类型：固定 尺寸：1000x90-->
+	
+	</div>
 
 <div class="row r2">
-<div class="section_L bbs-picture">
+	<div class="section_L bbs-picture">
     <h2 class="modTit"> 
     
     <!-- 图文版块   2017.05.04   -->
-      <strong>最新</strong>
-      <span class="modTit-link"><a href="topic/section/21">更多</a></span></h2>
+    <strong>最新</strong>
+    <span class="modTit-link"><a href="topic/section/21">更多</a></span></h2>
     <div class="left">
       <ul class="miki">
       <c:forEach items="${countList }" var="article">
-        <li class="row-l">
-      	  
-              <dl>
-                <dt><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="" target="_blank"><img src="${pageContext.request.contextPath}/${article.image}" alt=""></a></dt>
-                <dd><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="${article.title }" target="_blank">${fn:substring(article.title, 0, 14)}</a></dd>
-              </dl>
-      	  
+        <li class="row-l">	  
+           <dl>
+             <dt><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="" target="_blank">
+             		<img src="${pageContext.request.contextPath}/${article.image}" alt=""></a></dt>
+             <dd><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="${article.title }" target="_blank">${fn:substring(article.title, 0, 14)}</a></dd>
+           </dl>   	  
         </li>
-       </c:forEach> 
-        
+       </c:forEach>        
       </ul>
     </div>
 
@@ -249,176 +202,172 @@ a:hover{
     </div>
   </div>
    
-<div class="section_R1" style="margin-top:9px;">
-  <h2 class="modTit" style="margin:0px;padding:0px;"> <strong>发帖达人</strong><span class="modTit-link"></span></h2>
-  	 <c:forEach items="${userScoreList }" var="user" varStatus="state">
-      <div class="card_">
-        <a href="${pageContext.request.contextPath }/blog/${user.nickNameId}" target="_blank">
-          <img src="${pageContext.request.contextPath}/${user.face}">
-        </a>
-        <span>
-          <strong>
-            <a href="${pageContext.request.contextPath }/blog/${user.nickNameId}" target="_blank">${user.nickName }</a>
-          </strong> 
-          <em>积分：<i>${user.score }</i></em>
-        </span>
-      </div>
-      
-  </c:forEach>
+	<div class="section_R1" style="margin-top:9px;">
+	  <h2 class="modTit" style="margin:0px;padding:0px;"> <strong>发帖达人</strong><span class="modTit-link"></span></h2>
+	  	 <c:forEach items="${userScoreList }" var="user" varStatus="state">
+	      <div class="card_">
+	        <a href="${pageContext.request.contextPath }/blog/${user.nickNameId}" target="_blank">
+	          <img src="${pageContext.request.contextPath}/${user.face}">
+	        </a>
+	        <span>
+	          <strong>
+	            <a href="${pageContext.request.contextPath }/blog/${user.nickNameId}" target="_blank">${user.nickName }</a>
+	          </strong> 
+	          <em>积分：<i>${user.score }</i></em>
+	        </span>
+	      </div>
+	      
+	  </c:forEach>
+	</div>
 </div>
 
-</div>
-<div class="row chaotong"></div>
-<div class="row r2">
-  <div class="col">
-    <h2 class="modTit"><strong><a href="#">网友原创</a></strong><span class="modTit-link"><a href="topic/section/21">更多</a></span></h2>
-    <div class="r2bor">
-      <ul class="newslist" id="dataClubYch">
-      <c:forEach items="${ycTopicList }" var="topic">
-      <li>
-	<c:choose>
-          	<c:when test="${topic[3]==null }">
-          		<a href="${host}/topic/detail/${topic[0] }" target="_blank">${topic[1] }</a>${topic[2] }
-			
-          	</c:when>
-          	<c:otherwise>
-          		<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${topic[1] }</a>${topic[2] }
-          	</c:otherwise>
-          </c:choose>
-		  </li>
-       </c:forEach>
-     </ul>
-     </div>
-  </div>
-  
-  
-  <div class="coM">
-    <div class="spotlight" id="spotlight">
-      <h3><span class="active">版主推荐</span><span>出谋划策</span> </h3>
-      <ul class="newslist">
-      <c:forEach items="${tjTopicList }" var="topic">
-		<li>
-	<c:choose>
-          	<c:when test="${topic.code==null }">
-          		<a target="_blank" title="${topic.title }  " href="${host}/topic/detail/${topic.id }">${topic.title }  </a>${topic.user.nickName  }
-          	</c:when>
-          	<c:otherwise>
-          		<a target="_blank" title="${topic.title }  " href="http://sharehoo.cn/${topic.code }.html">${topic.title }  </a>${topic.user.nickName  }
-          	</c:otherwise>
-          </c:choose>	</li>
-	</c:forEach>
-</ul>
-
-
-<ul class="newslist" style="display:none;">
-
-     <c:forEach items="${helpTopicList }" var="topic">
-	<li><c:choose>
-          	<c:when test="${topic[3]==null }">
-          		<a href="${host}/topic/detail/${topic[0] }" target="_blank">${topic[1] }</a>${topic[2] }
-          	</c:when>
-          	<c:otherwise>
-          		<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${topic[1] }</a>${topic[2] }
-          	</c:otherwise>
-          </c:choose></li>
-	</c:forEach>
-
-     
-</ul>
-    </div>
-  </div>
-  
- <div class="section_R" style="margin-top:9px;">
-	 <h2 class="modTit" style="margin:0px;padding:0px;"> <strong><a href="#">版块排行</a></strong><span class="modTit-link"></span></h2>
-	  <ul class="paihang" id="rank" style="margin:0; padding:0; border:none; list-style:none;">             
-	   <li>
-		   <em>01</em><a href="topic/section/1" target="_blank">javaWeb</a>
-		   <span><i style="width:52%;"></i></span>        
-	   </li>  
-	                 
-	   <li>          
-		   <em>02</em><a href="topic/section/11" target="_blank">出谋划策</a>  
-		   <span>            <i style="width:32%;"></i>          </span>       
-	   </li>  
-	   
-	  <li> 
-		  <em>03</em> <a href="topic/section/16" target="_blank">大数据</a>          
-		  <span>            <i style="width:20%;"></i>          </span>        
-	  </li>  
-	                
-	  <li>
-		  <em>04</em><a href="topic/section/20" target="_blank">编程语言</a> 
-		   <span>            <i style="width:15%;"></i>          </span>        
-	   </li>     
-	              
-	   <li>         
-		    <em>05</em>          <a href="topic/section/12" target="_blank">游戏开发</a>
-		   <span>  <i style="width:2%;"></i>  </span>       
-	    </li> 
-	              
-	    <li> 
-		     <em>06</em>  <a href="topic/section/15" target="_blank">约伴出游</a> 
-		     <span>  <i style="width:10%;"></i></span>        
-	     </li>
-	                     
-	  <li>   
-		  <em>07</em> <a href="topic/section/19" target="_blank">美食美客</a> 
-		  <span>  <i style="width:8%;"></i> </span>        
-	  </li> 
-	   <li> 
-		   <em>08</em>  <a href="topic/section/2" target="_blank">二手市场</a> 
-		       <span> <i style="width:6%;"></i></span>        
-	   </li>               
-	  <li> 
-		  <em>09</em> <a href="topic/section/18" target="_blank">微信开发</a>
-		   <span> <i style="width:3%;"></i></span>       
-	    </li>                     
+	<div class="row chaotong"></div>
+	<div class="row r2">
+	  <div class="col">
+	    <h2 class="modTit"><strong><a href="#">网友原创</a></strong><span class="modTit-link"><a href="topic/section/21">更多</a></span></h2>
+	    <div class="r2bor">
+	      <ul class="newslist" id="dataClubYch">
+	      <c:forEach items="${ycTopicList }" var="topic">
 	      <li>
-		       <em>10</em>  <a href="topic/section/8" target="_blank">HTML5+CSS</a> 
-		       <span> <i style="width:2%;"></i></span>        
-	      </li>  
-	    </ul>
-	    
-	<!-- 统计访问量    -->
-	   
-	    <!-- 访问量统计 -->
-	 <div style="height:120px;border:1px solid silver;border-left:0px;border-right:0px;">
-	  <ul class="paihang" id="rank" style="margin:0; padding:0; border:none; list-style:none;">             
+			<c:choose>
+	          	<c:when test="${topic[3]==null }">
+	          		<a href="${host}/topic/detail/${topic[0] }" target="_blank">${topic[1] }</a>${topic[2] }
+				
+	          	</c:when>
+	          	<c:otherwise>
+	          		<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${topic[1] }</a>${topic[2] }
+	          	</c:otherwise>
+	          </c:choose>
+			  </li>
+	       </c:forEach>
+	     </ul>
+	     </div>
+	  </div>
+	  
+	  
+	  <div class="coM">
+	    <div class="spotlight" id="spotlight">
+	      <h3><span class="active">版主推荐</span><span>出谋划策</span> </h3>
+	      <ul class="newslist">
+	      <c:forEach items="${tjTopicList }" var="topic">
+			<li>
+		<c:choose>
+	          	<c:when test="${topic.code==null }">
+	          		<a target="_blank" title="${topic.title }  " href="${host}/topic/detail/${topic.id }">${topic.title }  </a>${topic.user.nickName  }
+	          	</c:when>
+	          	<c:otherwise>
+	          		<a target="_blank" title="${topic.title }  " href="http://sharehoo.cn/${topic.code }.html">${topic.title }  </a>${topic.user.nickName  }
+	          	</c:otherwise>
+	          </c:choose>	</li>
+		</c:forEach>
+	</ul>
+	
+	
+	<ul class="newslist" style="display:none;">
+	
+	     <c:forEach items="${helpTopicList }" var="topic">
+		<li><c:choose>
+	          	<c:when test="${topic[3]==null }">
+	          		<a href="${host}/topic/detail/${topic[0] }" target="_blank">${topic[1] }</a>${topic[2] }
+	          	</c:when>
+	          	<c:otherwise>
+	          		<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${topic[1] }</a>${topic[2] }
+	          	</c:otherwise>
+	          </c:choose></li>
+		</c:forEach>
+	
+	     
+	</ul>
+	    </div>
+	  </div>
+	  
+	 <div class="section_R" style="margin-top:9px;">
+		 <h2 class="modTit" style="margin:0px;padding:0px;"> <strong><a href="#">版块排行</a></strong><span class="modTit-link"></span></h2>
+		  <ul class="paihang" id="rank" style="margin:0; padding:0; border:none; list-style:none;">             
 		   <li>
-			   <em>在线人数</em><a href="#" id="online"></a>
-			   <span><i style="width:22%;"></i></span>        
+			   <em>01</em><a href="topic/section/1" target="_blank">javaWeb</a>
+			   <span><i style="width:52%;"></i></span>        
 		   </li>  
 		                 
 		   <li>          
-			   <em>今日访问量</em><a href="#" id="dayonline"></a>  
+			   <em>02</em><a href="topic/section/11" target="_blank">出谋划策</a>  
 			   <span>            <i style="width:32%;"></i>          </span>       
 		   </li>  
 		   
 		  <li> 
-			  <em>总访问量</em> <a href="#" id="total"></a>          
-			  <span>            <i style="width:70%;"></i>          </span>        
-		  </li>
-	  </ul>
-	    </div>
-  </div> 
-  
+			  <em>03</em> <a href="topic/section/16" target="_blank">大数据</a>          
+			  <span>            <i style="width:20%;"></i>          </span>        
+		  </li>  
+		                
+		  <li>
+			  <em>04</em><a href="topic/section/20" target="_blank">编程语言</a> 
+			   <span>            <i style="width:15%;"></i>          </span>        
+		   </li>     
+		              
+		   <li>         
+			    <em>05</em>          <a href="topic/section/12" target="_blank">游戏开发</a>
+			   <span>  <i style="width:2%;"></i>  </span>       
+		    </li> 
+		              
+		    <li> 
+			     <em>06</em>  <a href="topic/section/15" target="_blank">约伴出游</a> 
+			     <span>  <i style="width:10%;"></i></span>        
+		     </li>
+		                     
+		  <li>   
+			  <em>07</em> <a href="topic/section/19" target="_blank">美食美客</a> 
+			  <span>  <i style="width:8%;"></i> </span>        
+		  </li> 
+		   <li> 
+			   <em>08</em>  <a href="topic/section/2" target="_blank">二手市场</a> 
+			       <span> <i style="width:6%;"></i></span>        
+		   </li>               
+		  <li> 
+			  <em>09</em> <a href="topic/section/18" target="_blank">微信开发</a>
+			   <span> <i style="width:3%;"></i></span>       
+		    </li>                     
+		      <li>
+			       <em>10</em>  <a href="topic/section/8" target="_blank">HTML5+CSS</a> 
+			       <span> <i style="width:2%;"></i></span>        
+		      </li>  
+		    </ul>
+		    
+		<!-- 统计访问量    -->
+		   
+		    <!-- 访问量统计 -->
+		 <div style="height:120px;border:1px solid silver;border-left:0px;border-right:0px;">
+		  <ul class="paihang" id="rank" style="margin:0; padding:0; border:none; list-style:none;">             
+			   <li>
+				   <em>在线人数</em><a href="#" id="online"></a>
+				   <span><i style="width:22%;"></i></span>        
+			   </li>  
+			                 
+			   <li>          
+				   <em>今日访问量</em><a href="#" id="dayonline"></a>  
+				   <span>            <i style="width:32%;"></i>          </span>       
+			   </li>  
+			   
+			  <li> 
+				  <em>总访问量</em> <a href="#" id="total"></a>          
+				  <span>            <i style="width:70%;"></i>          </span>        
+			  </li>
+		  </ul>
+		    </div>
+	  </div> 
+	  
+	</div>
+	<div class="row chaotong"></div>
+	<div class="row r2">
+	</div>
+
+	<script src="${pageContext.request.contextPath}/she_files/freescroll.js"></script> 
+	<script src="${pageContext.request.contextPath}/she_files/tab.min.js"></script> 
+	<script src="./she_files/fixedLimit.min.js"></script>   
+	<script src="./she_files/function2016.js"></script> 	 <!--   2017 .05.06  首页实现出谋划策和版主推荐板块两者点击鼠标滑动特效的关键   -->
+	<!-- #2017.05.01     网站上半部分       End -->
 </div>
-<div class="row chaotong"></div>
-<div class="row r2">
 
-</div>
-
-<script src="${pageContext.request.contextPath}/she_files/freescroll.js"></script> 
-<script src="${pageContext.request.contextPath}/she_files/tab.min.js"></script> 
-<script src="./she_files/fixedLimit.min.js"></script>   
-<script src="./she_files/function2016.js"></script> 	 <!--   2017 .05.06  首页实现出谋划策和版主推荐板块两者点击鼠标滑动特效的关键   -->
-
-
-<!-- #2017.05.01     网站上半部分       End -->
-
-</div>
-
-<div style="width:1200px;margin:0 auto;height:35px;background:#FFFFFF;">
+	<div style="width:1200px;margin:0 auto;height:35px;background:#FFFFFF;">
 		<div style="width:1000px;margin:0 auto;height:40px;border:1px solid silver;background:#B6241F;">
 			<div style="position:absolute;margin-left:21px;color: #fff;text-align: left;font: bold 16px/36px simsun;">>>热门板块</div>
 				<div style="border:0px solid white;width:40%;height:35px;float:right;">

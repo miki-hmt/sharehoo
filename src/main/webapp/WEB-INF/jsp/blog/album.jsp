@@ -147,16 +147,18 @@ $(document).ready(function() {
 	       data: $("#album_form").serialize(),
 	       success: function (data) {
 	       		if(data.status==200){
-	       			tipOk("评论成功");
-	       			window.location.reload();
-	       			//window.location.href="${host}/blog/${user.nickNameId}/critiques";
+	       			tipOk("评论成功",function(){
+	       				window.location.reload();
+	       			});
+	       		}else{
+	       			tipError(data.msg);
 	       		}
 	       }
-		   	});
+		});
    		return false;	//!!一定要return false, 否則會自動刷新頁面,導致ajax彈窗提醒失效。防止刷新頁面
 	})
 
-	function tipOk(content){
+	function tipOk(content,callback){
 		swal({   
 			title: content,   
 			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
@@ -164,7 +166,11 @@ $(document).ready(function() {
 			html: true,
 			timer: 2000,   
 			showConfirmButton: false
-		});
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
 	};
 	function tipError(content){
 		swal("发表失败", content, "error");

@@ -22,8 +22,8 @@ $(function() {
             $.ajax({
             	cache: false,
             	type: "post",  
-           	 dataType: "json",  
-            	url: "Sign_show.action",  
+           	 	dataType: "json",  
+            	url: "http://sharehoo.cn/shop/sign/show",  
             	data: {},  
         	success: function(sign) { 
         		//alert(msg.length);          	 	
@@ -60,9 +60,9 @@ $(function() {
 						type: "POST",
 						dataType: "json",
 						data: {},
-						url: "Sign_save.action",
+						url: "http://sharehoo.cn/shop/sign",
 						success: function(result) {
-							if(result.mes){
+							if(result.status==200){
 								qiandaoFun();
 							}else{
 								alert("您尚未登录或激活店铺");
@@ -78,11 +78,11 @@ $(function() {
 				type: "POST",
 				dataType: "json",
 				data: {},
-				url: "Sign_getSign.action",
+				url: "http://sharehoo.cn/shop/getSign",
 				success: function(result) {
-					if(result.mes){
-						$("#conti").html(result.continu);
-						$("#hu").html(result.dou+"虎豆");
+					if(result.status==200){
+						$("#conti").html(result.data.continu);
+						$("#hu").html(result.data.dou+"虎豆");
 					}else{
 						$("#conti").html("0");
 						$("#hu").html("0");

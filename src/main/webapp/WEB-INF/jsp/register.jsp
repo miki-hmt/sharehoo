@@ -139,55 +139,33 @@ $(function () {
 	}
 
 	function checkEmail(email){	
-		$.post("${host}/user/email",{email:email},
+		$.post("${host}/user/truename",{email:email},
 			function(data){
 				var result=eval(data);
 				if(result.exist){
-					//$("#emailErrorInfo").html("邮箱已存在，请重新输入！");
-					//$("#email").focus();
+					$("#emailErrorInfo").html("邮箱已存在，请重新输入！");
+					$("#email").focus();
 				}else{
 					$("#emailErrorInfo").html("");
 				}
 			}
 		);
 	}
-
-	function checkForm() {
-		var nickName = $("#nickName").val();
-		var sex = $("#sex").val();
-		var password = $("#password").val();
-		var rePassWord = $("#rePassWord").val();
-		var mobile = $("#mobile").val();
-		var email = $("#email").val();
-		if (nickName == "") {
-			$("#error").html("昵称不能为空！");
-			return false;
-		}
-		if (sex == "") {
-			$("#error").html("请选择性别！");
-			return false;
-		}
-		if (password == "") {
-			$("#error").html("密码不能为空！");
-			return false;
-		}
-		if (rePassWord == "") {
-			$("#error").html("确认密码不能为空！");
-			return false;
-		}
-		if (password != rePassWord) {
-			$("#error").html("密码和确认密码不一致，请重新输入！");
-			return false;
-		}
-		if (mobile == "") {
-			$("#error").html("联系电话不能为空！");
-			return false;
-		}
-		if (email == "") {
-			$("#error").html("邮箱不能为空！");
-			return false;
-		}
+	
+	function checkTrueName(trueName){	
+		$.post("${host}/user/email",{trueName:trueName},
+			function(data){
+				var result=eval(data);
+				if(result.exist){
+					$("#userTrueNameErrorInfo").html("真实姓名用来找回密码，该标识已存在，请重新输入！");
+					$("#trueName").focus();
+				}else{
+					$("#userTrueNameErrorInfo").html("");
+				}
+			}
+		);
 	}
+
 </script>
 </head>
 <body>
@@ -209,6 +187,7 @@ $(function () {
 			<div class="control-group">
 				<div class="controls">
 					<input class="input-block-level" type="text" id="trueName" name="trueName" onblur="checkTrueName(this.value)" value="${user.trueName }" placeholder="真实姓名"/><span class="pull-left"></span>
+					<font id="userTrueNameErrorInfo" class="pull-right" color="red"></font>
 				</div>
 			</div>
 			<div class="control-group">
@@ -274,7 +253,7 @@ $(function () {
 			
 			<div class="control-group" style="margin: 0px;">
 				<div style="margin-left: 70px;">
-					<button tabindex="5" style="" onclick="register()">提交注册</button> &nbsp;&nbsp;&nbsp;&nbsp;
+					<button tabindex="5" style="" id="okbtn">提交注册</button> &nbsp;&nbsp;&nbsp;&nbsp;
 				</div>
 			</div>
 			<font id="error" color="red"></font>
@@ -297,39 +276,91 @@ $(function () {
 		return file.substring(pos+1); //截取最后一个\位置到字符长度，也就是截取文件名 
 	 }
 	//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
-	 function register(){
-	 	checkForm();
+	$("#okbtn").on("click", function() {
 	 	 addFileName();
-	 	 var nickName = $("#nickName").val();
-	 	 var faceFileName = $('#ImgPr')[0].src;
-	 	 var formData = new FormData($("#regForm")[0]);
-		 $.ajax({
-	       type: "POST",
-	       url: "user/register?faceFileName="+faceFileName,
-	       data: formData,
-	       cache: false,
-	       async: false,
-	       processData : false,  //必须false才会避开jQuery对 formdata 的默认处理
-	       contentType : false,  //必须false才会自动加上正确的Content-Type
-	       success: function (data) {
-	       		console.log("成功");
-	       		if(data.status==200){
-	       			tipOk("注册成功",function(){
-	       				window.location.href = "${host}/user/welcome?nickName="+nickName;
-	       			});
-	       		}
-	       }       
-	   	});
-		return false;
-	 }
+		 if(checkForm()){
+			var nickName = $("#nickName").val();
+	 		var faceFileName = $('#ImgPr')[0].src;
+	 		var formData = new FormData($("#regForm")[0]);
+			 $.ajax({
+			   type: "POST",
+			   url: "user/register?faceFileName="+faceFileName,
+			   data: formData,
+			   cache: false,
+			   async: false,
+			   processData : false,  //必须false才会避开jQuery对 formdata 的默认处理
+			   contentType : false,  //必须false才会自动加上正确的Content-Type
+			   success: function (data) {
+					console.log("成功");
+					if(data.status==200){
+						tipOk("注册成功",function(){
+							window.location.href = "${host}/user/welcome?nickName="+nickName;
+						});
+					}
+			   }       
+			});
+			return false;
+		 }
+	 	 return false;
+	 });
 	 
+	function checkForm() {
+		var nickName = $("#nickName").val();
+		var sex = $("#sex").val();
+		var password = $("#password").val();
+		var rePassWord = $("#rePassWord").val();
+		var mobile = $("#mobile").val();
+		var email = $("#email").val();
+		var errorInfo = $("#emailErrorInfo").html();
+		var userErrorInfo = $("#userErrorInfo").html();
+		if (errorInfo.length>0) {
+			$("#error").html("邮箱账号已经被注册，请确认！");
+			return false;
+		}
+
+		if (userErrorInfo.length>0) {
+			$("#error").html("该昵称已经被使用，请确认！");
+			return false;
+		}
+
+		if (nickName == "") {
+			$("#error").html("昵称不能为空！");
+			return false;
+		}
+		if (sex == "") {
+			$("#error").html("请选择性别！");
+			return false;
+		}
+		if (password == "") {
+			$("#error").html("密码不能为空！");
+			return false;
+		}
+		if (rePassWord == "") {
+			$("#error").html("确认密码不能为空！");
+			return false;
+		}
+		if (password != rePassWord) {
+			$("#error").html("密码和确认密码不一致，请重新输入！");
+			return false;
+		}
+		if (mobile == "") {
+			$("#error").html("联系电话不能为空！");
+			return false;
+		}
+		if (email == "") {
+			$("#error").html("邮箱不能为空！");
+			return false;
+		}
+		return true;
+	}
+
 	 function tipOk(content,callback){
 			swal({   
 				title: content,   
 				text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
 				imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
 				html: true,
-				timer: 2000,   
+				timer: 3000,   
 				showConfirmButton: false
 			},function(){
 				if (callback) {

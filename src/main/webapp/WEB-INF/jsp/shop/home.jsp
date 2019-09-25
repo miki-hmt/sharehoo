@@ -665,7 +665,7 @@ var _hmt = _hmt || [];
     		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
     			alert("您还未登陆！");
     		} else {
-    			window.open("${host}/shop/sign/daydayup");
+    			window.open("${host}/sign/daydayup");
     		}	
     });
 

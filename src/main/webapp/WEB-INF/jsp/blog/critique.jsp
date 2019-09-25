@@ -16,7 +16,12 @@
 		<link href="${host}/blog/include/css/style.css" rel="stylesheet"/>
 		<link href="${host}/blog/include/css/media.css" rel="stylesheet"/>
 		<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-		<script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
+		
+		<!-- 2019.09.03 自定义弹窗所需插件 -->
+		<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+		<script src="${host}/sweetalert/sweetalert.min.js"></script>
+		
 		<script type="text/javascript" src="${host}/blog/include/js/jquery.gallery.js"></script>
 		<script type="text/javascript" src="${host}/blog/include/js/modernizr.custom.53451.js"></script>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0"/>
@@ -112,11 +117,11 @@ $(document).ready(function() {
 		var name=$("#name").val();
 		var content=$("#criContent").val();
 		if(name==""){
-			alert("亲亲，昵称不能为空哦");
+			tipError("亲亲，昵称不能为空哦");
 			return false;
 		}
 		if(content=""){
-			alert("亲亲，评论内容不能为空哦");
+			tipError("亲亲，评论内容不能为空哦");
 			return false;
 		}
 		$.ajax({
@@ -125,15 +130,36 @@ $(document).ready(function() {
 	       data: $("#critique_form").serialize(),
 	       success: function (data) {
 	       		if(data.status==200){
-	       			alert("留言成功");
-	       			window.location.reload();
-	       			//window.location.href="${host}/blog/${user.nickNameId}/critiques";
+	       			tipOk("留言成功", function() {
+	       				window.location.reload();
+	       			});
+	       		}else{
+	       			tipError(data.msg);
 	       		}
-	       }
-		   	});
+	       	}
+		});
    		return false;	//!!一定要return false, 否則會自動刷新頁面,導致ajax彈窗提醒失效。防止刷新頁面
 })
 });
+
+function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("操作失败", content, "error");
+	};
+
 </script>
 </body>
 </html>

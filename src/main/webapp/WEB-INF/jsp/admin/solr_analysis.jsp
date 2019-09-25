@@ -7,44 +7,88 @@
 <head>
 	<!-- 				2018.08.20	author:miki
 						project:后台索引页面的增删改查
- -->	
+ -->
+ <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>	
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <script type="text/javascript">
  
  /*softSectionId对应SoftSection_delete.action里的变量，zoneId表示此处传 的值，softSectionId:zoneId表示将zoneId的值赋给softSectionId */	
 function updateSolr(){
-	if(confirm("确定要更新全部索引吗?")){
-		$.post("${pageContext.request.contextPath}/shop/SolrJ_importItenList.action",				
-				function(result){
-					var result=eval(result);
-					if(result.status==200){
-						alert("更新成功!");
-					}else{
-						alert("更新失败！");
-						window.location.reload(true);
-					}
-				}
-			);
-	}
+	swal({
+		title: "确定要更新资源的全部索引吗?", 
+		text: "更新完之后，才能搜索到新的？", 
+		type: "warning",
+		showCancelButton: true,
+		closeOnConfirm: false,
+		confirmButtonText: "是的，强行更新",
+		confirmButtonColor: "#ec6c62"
+		}, function() {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/shop/solr/import",
+				data: {},
+				type: "POST",
+			}).done(function(data) {
+				if(data.status==200){
+					tipOk("更新成功!",function(){
+							swal.close();
+						});
+					//swal("操作成功!", "已成功删除数据！", "success");
+				}else{
+					tipError("更新失败！",data.msg);
+				}					
+			}).error(function(data) {
+				tipError("更新失败！",data.msg);
+			});
+		});
 }
 
-function updateTopicSolr(){
-	if(confirm("确定要更新全部索引吗?")){
-		$.post("${pageContext.request.contextPath}/SearchJ_importItenList.action",				
-				function(result){
-					var result=eval(result);
-					if(result.status==200){
-						alert("更新成功!");
-					}else{
-						alert("更新失败！");
-						window.location.reload(true);
-					}
-				}
-			);
-	}
+function updateTopicSolr(){	
+	swal({
+		title: "确定要更新全部帖子的索引吗?", 
+		text: "更新完之后，才能搜索到新的？", 
+		type: "warning",
+		showCancelButton: true,
+		closeOnConfirm: false,
+		confirmButtonText: "是的，强行更新",
+		confirmButtonColor: "#ec6c62"
+		}, function() {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/admin/topic/solr/import",
+				data: {},
+				type: "POST",
+			}).done(function(data) {
+				if(data.status==200){
+					tipOk("更新成功!",function(){
+							swal.close();
+						});
+					//swal("操作成功!", "已成功删除数据！", "success");
+				}else{
+					tipError("更新失败！",data.msg);
+				}					
+			}).error(function(data) {
+				tipError("更新失败！",data.msg);
+			});
+		});
 }
 
+function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			html: true,
+			type: "success",
+			timer: 3000  
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("发表失败", content, "error");
+	};
 
  function resetValue(){
 	 $("#id").val("");
@@ -75,7 +119,6 @@ function updateTopicSolr(){
 	.layer04-panel-chart{width:100%;height:85%;}
   </style>
   
-  <script src="${pageContext.request.contextPath}/admin/js/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/admin/js/echarts.min.js"></script>
   <script src="${pageContext.request.contextPath}/admin/js/monitor.js"></script>
   <script type="text/javascript">

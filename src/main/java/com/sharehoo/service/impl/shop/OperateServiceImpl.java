@@ -78,7 +78,7 @@ public class OperateServiceImpl implements OperateService {
 	public List<Operate> getSignListByUserId(int userId) {
 		// TODO Auto-generated method stub
 		List<Object> params = new LinkedList<Object>();
-		String hql = "from Operate as operate where operate.user.id=:userId and operate.type like '%sign%' order by operate.operate_time desc";
+		String hql = "from Operate as operate where operate.user.id=? and operate.type like '%sign%' order by operate.operate_time desc";
 		params.add(userId);
 		
 		return baseDAO.findTopN(hql, params, 7);
@@ -108,11 +108,11 @@ public class OperateServiceImpl implements OperateService {
 		List<Object> param=new LinkedList<Object>();
 		StringBuffer hql=new StringBuffer("from Operate");
 		if(userId>0){
-			hql.append(" and user_id=?");
+			hql.append(" and user_id=?0");
 			param.add(userId);
 		}
 		if(time!=null){
-			hql.append(" and operate_time > str_to_date(?, '%Y-%m')");
+			hql.append(" and operate_time > str_to_date(?1, '%Y-%m')");
 			param.add(time);
 		}
 		hql.append(" and type like '%sign%'");

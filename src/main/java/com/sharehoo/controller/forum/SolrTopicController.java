@@ -29,7 +29,7 @@ public class SolrTopicController {
 	private String SEARCH_TOPIC;
 	
 	//生成帖子索引		miki	2019.01.02
-	@RequestMapping("/solr/import")
+	@RequestMapping("/admin/topic/solr/import")
 	@ResponseBody
 	public E3Result importItenList()throws Exception{
 		
