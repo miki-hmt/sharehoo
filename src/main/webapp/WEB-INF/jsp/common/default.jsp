@@ -113,7 +113,7 @@ a:hover{text-decoration:none;}
 			</ul></li>
 		<li><a target="_blank" title="" href="topic/section/16">大数据</a></li>
 	    <li><a target="_blank" title="" href="topic/section/13">服务运维</a></li>
-	    <li><a target="_blank" title="" href="topic/section/2">二手市场</a></li>
+	    <li><a target="_blank" title="" href="topic/section/2">Kettle专栏</a></li>
 	    <li><a target="_blank" title="" href="topic/section/19">艺术/生活/美</a>	
 			<ul>
 				<li><a href="topic/section/19" target="_blank"
@@ -319,7 +319,7 @@ a:hover{text-decoration:none;}
 			  <span>  <i style="width:8%;"></i> </span>        
 		  </li> 
 		   <li> 
-			   <em>08</em>  <a href="topic/section/2" target="_blank">二手市场</a> 
+			   <em>08</em>  <a href="topic/section/2" target="_blank">Kettle开发专栏</a> 
 			       <span> <i style="width:6%;"></i></span>        
 		   </li>               
 		  <li> 
