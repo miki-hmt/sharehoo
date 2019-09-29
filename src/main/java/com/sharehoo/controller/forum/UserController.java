@@ -683,7 +683,7 @@ public class UserController {
 	@RequestMapping("/user/forget")
 	public String toForget(HttpServletRequest request)throws Exception{
 
-		return "userCenter/forget";
+		return "userCenter/find";
 	}
 	
 	@RequestMapping("/admin/user/logout")

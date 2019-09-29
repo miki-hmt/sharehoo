@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
 <!--我的高亮效果是zenburn-->
-<link rel="stylesheet" href="${host}/highlight/styles/gruvbox-dark.css">
+<link rel="stylesheet" href="${host}/highlight/styles/zenburn.css">
 <script src="${host}/highlight/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
