@@ -7,7 +7,6 @@
 <html>
     <head>
     	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1,text/html; charset=utf-8"/> 
-        <link rel="shortcut icon" href="../favicon.ico"/> 
 		<title>${user.nickName}个人博客—留言板</title>
 		<meta name="keywords" content="${user.nickName},个人博客" />
 		<meta name="description" content="${user.nickName}个人博客" />
@@ -65,18 +64,34 @@
         <p><span>随便说说</span></p>
         <a href="#" target="_blank" class="more"></a>
       </h3>
+	
        <form method="post" id="critique_form">
+			<div style="margin-top:10px;height:39px">
+				<table>
+					<tr>
+						<td><span>验证码:</span></td>
+		      				<td>
+		      					<input id="txtCode" name="imageCode" style="width: 133px; margin-left: 27px;height:30px" placeholder="验证码"/>
+		      					<img id="randImage" src="${host}/imageCode" width="90" height="34" name="randImage" title="点击换一个" 
+										style="vertical-align: middle; margin-top: -35px;margin-left:170px;" onclick="javascript:loadimage();" />
+		      				</td>
+					</tr>
+				</table>
+			</div>
       		<table>
       			<tr>
-      				<td><span>您的昵称:</span></td><td><input id="name" type="text" name="name"/></td>
-      			</tr>
+      				<td><span>您的昵称:</span></td><td><input id="name" type="text" name="name"/></td>				
+      			</tr>		
+			
       			<tr>
 	    			<td><div style="width:70px;padding-bottom: 189px;"><span>留言内容:</span></div></td><td><textarea id="criContent" name="content" style ="height:200px; width:630px;" ></textarea></td>
-    			</tr>
+    			</tr>			
+			
     			<tr>
 	    			<td></td><td><button id="submitAdd" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
     			</tr>
     			<input type="hidden" name="user.id" value="${user.id }"/>
+			<input type="hidden" name="code" value="521"/>
       		</table>
       </form>
      </div>
@@ -111,6 +126,9 @@
 </div>
 
 <script type="text/javascript">
+function loadimage(){
+	document.getElementById("randImage").src = "${host}/imageCode?"+Math.random();
+}
 //springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
 $(document).ready(function() {	
 	$("#submitAdd").on("click",function(){

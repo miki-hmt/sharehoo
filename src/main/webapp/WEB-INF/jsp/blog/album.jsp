@@ -65,6 +65,18 @@
         <a href="#" target="_blank" class="more"></a>
       </h3>
        <form id="album_form" method="post" >
+       		<div style="margin-top:10px;height:39px">
+				<table>
+					<tr>
+						<td><span>验证码:</span></td>
+		      				<td>
+		      					<input id="txtCode" name="imageCode" style="width: 133px; margin-left: 27px;height:30px" placeholder="验证码"/>
+		      					<img id="randImage" src="${host}/imageCode" width="90" height="34" name="randImage" title="点击换一个" 
+										style="vertical-align: middle; margin-top: -35px;margin-left:170px;" onclick="javascript:loadimage();" />
+		      				</td>
+					</tr>
+				</table>
+			</div>
       		<table>
       			<tr>
       				<td><span>您的昵称:</span></td><td><input type="text" id="name" name="name"/></td>
@@ -128,6 +140,9 @@
 </div>
 
 <script type="text/javascript">
+function loadimage(){
+	document.getElementById("randImage").src = "${host}/imageCode?"+Math.random();
+}
 //springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
 $(document).ready(function() {	
 	$("#submitAdd").on("click",function(){

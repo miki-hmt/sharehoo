@@ -160,8 +160,15 @@
       			<tr>
 	    			<td><textarea id="criContent" name="content" style ="height:200px; width:268px;bg-color:gray;" placeholder="您的内容"></textarea></td>
     			</tr>
+			<tr>
+	      				<td>
+	      					<input id="txtCode" name="imageCode" style="width: 133px;height:30px" placeholder="验证码"/>
+	      					<img id="randImage" src="${host}/imageCode" width="90" height="34" name="randImage" title="点击换一个" 
+									style="vertical-align: middle; margin-top: -35px;margin-left:145px;" onclick="javascript:loadimage();" />
+	      				</td>
+					</tr>
     			<tr>
-	    			<td><button id="submitAdd" style="width: 60px;height: 30px;font-size: larger;">提交</button></td>
+	    			<td><button id="submitAdd" style="width: 60px;height: 30px;font-size: larger;margin-top:5px">提交</button></td>
     			</tr>
     			
     			<input type="hidden" name="user.id" value="${user.id }"/>
@@ -179,6 +186,9 @@
 </div>
 
 <script type="text/javascript">
+	function loadimage(){
+	document.getElementById("randImage").src = "${host}/imageCode?"+Math.random();
+}
 	$(document).ready(function() {	
 	$("#submitAdd").on("click",function(){
 		var name=$("#name").val();
@@ -200,6 +210,8 @@
 	       			tipOk("回复成功",function(){
 		       			 	window.location.reload();       			
 		       			});
+	       		}else{
+	       			tipError(data.msg);
 	       		}
 	       }
 		   	});

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.code.kaptcha.Constants;
 import com.sharehoo.base.ipseek.IpGet;
 import com.sharehoo.base.ipseek.IpSeekUtils;
 import com.sharehoo.config.lang.Consts;
@@ -46,10 +47,11 @@ public class CritiqueController {
 	 */
 	@RequestMapping("/blog/{nicknameId}/critique/add")
 	@ResponseBody
-	public E3Result save(HttpServletRequest req,@PathVariable("nicknameId") String nicknameId,Model model,Critique critique)throws Exception{
+	public E3Result save(HttpServletRequest req,@PathVariable("nicknameId") String nicknameId,Model model,Critique critique,
+			@RequestParam(value="imageCode",required = true)String code)throws Exception{
 		if(StringUtil.isNotEmpty(nicknameId)){
-			User currentUser = (User)req.getSession().getAttribute(Consts.CURRENTUSER);
-			if(null!=currentUser) {
+			Object imageCode = req.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+			if(code.equals(String.valueOf(imageCode))) {
 				User user=userService.getUserByNickNameId(nicknameId);
 				model.addAttribute("user", user);
 				Log log1=new Log();
@@ -78,7 +80,7 @@ public class CritiqueController {
 				}
 				return E3Result.ok();
 			}
-			return E3Result.build(401, "您尚未登录，无法发表留言..");
+			return E3Result.build(401, "验证码错误..");
 		}
 		return E3Result.build(401, "您访问的博客不存在哦..");
 	}
@@ -122,10 +124,10 @@ public class CritiqueController {
 	 */
 	@RequestMapping("/blog/article/{id}/critiqueAdd")
 	@ResponseBody
-	public E3Result saveAr(@PathVariable("id") int id,Model model,Critique critique,HttpServletRequest request)throws Exception{
+	public E3Result saveAr(@PathVariable("id") int id,@RequestParam(value="imageCode",required = true)String code, Model model,Critique critique,HttpServletRequest request)throws Exception{
 		if(id>0){
-			User currentUser = (User)request.getSession().getAttribute(Consts.CURRENTUSER);
-			if(null!=currentUser) {
+			Object imageCode = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+			if(code.equals(String.valueOf(imageCode))) {
 				Article article=articleService.getArticleById(id);
 				article.setCount1(article.getCount1()+1);
 				model.addAttribute("article", article);
@@ -135,7 +137,7 @@ public class CritiqueController {
 				critiqueService.save(critique);
 				return E3Result.ok();
 			}
-			return E3Result.build(401, "您尚未登录哦，请登陆后留言..");
+			return E3Result.build(401, "验证码错误..");
 		}
 		return E3Result.build(401, "您要评论的资源不存在哦");
 	}
@@ -147,14 +149,14 @@ public class CritiqueController {
 	 */
 	@RequestMapping("/blog/{nicknameId}/photo/critique")
 	@ResponseBody
-	public E3Result savePh(Critique critique,HttpServletRequest request)throws Exception{
-		User currentUser = (User)request.getSession().getAttribute(Consts.CURRENTUSER);
-		if(null!=currentUser) {
+	public E3Result savePh(Critique critique,@RequestParam(value="imageCode",required = true)String code,HttpServletRequest request)throws Exception{
+		Object imageCode = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+		if(code.equals(String.valueOf(imageCode))) {
 			critique.setTime(new Date());
 			critique.setNotice("3");
 			critiqueService.save(critique);
 			return E3Result.ok();
 		}
-		return E3Result.build(401, "您尚未登录哦，请登陆后再留言..");
+		return E3Result.build(401, "验证码错误..");
 	}
 }
