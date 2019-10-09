@@ -95,7 +95,17 @@
     		<tr>
 	    		<td>
 	    			<span>关键词:</span><input id="keywords" name="keywords" value="${article.keywords }"style="width:90px"/>
-	    			<span>分类:</span><input id="type" name="type" value="${article.type }"style="width:90px"/>
+	    			<span>分类:</span>
+	    			<select def="0" style="border:solid 1px green;margin-top:11px;font-size:11px;height:24px;width:130px;" id="type" name="type">
+						<option value="${article.type }" >${article.type }</option>
+						<option value="日记" >日记</option>
+						<option value="编程" >编程</option>
+						<option value="经典语录" >经典语录</option>
+						 <c:forEach  items="${tags }" var="tag">
+						 	<option value="${tag }" >${tag}</option>
+						 </c:forEach>									
+					 </select>
+	    			<%-- <input id="type" name="type" value="${article.type }"style="width:90px"/> --%>
 	    			<span>设为推荐:</span>
 	    			<c:if test="${article.notice=='recommendArticles'}">
 		    			<input name="notice" type="radio" value="1" checked/>是
@@ -138,7 +148,7 @@
       </h2>
       <ul>
        <s:iterator value="recommendArticles" >
-        <li><a href="../article/article_detail?id=<s:property value="id"/>"><s:property value="title"/></a></li>
+        <li><a href="../article/article_detail?id=">推荐1</a></li>
       </s:iterator>
       </ul>
       <h2>
@@ -147,12 +157,12 @@
       <ul class="pl_n">
         <s:iterator value="critiques" >
         <dl>
-          <dt><img src="../include/images/s8.jpg"> </dt>
+          <dt><img src="${host}/blog/include/images/s8.jpg"/> </dt>
           <dt> </dt>
-          <dd><s:property value="name"/>
-            <time><s:property value="time"/></time>
+          <dd>名字
+            <time>时间</time>
           </dd>
-          <dd><a href="#"><s:property value="content" escape="false"/></a></dd>
+          <dd><a href="#">内容</a></dd>
         </dl>
         </s:iterator>
       </ul>

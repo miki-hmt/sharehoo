@@ -38,12 +38,15 @@ public interface ArticleService {
 	 */
 	public List<Article> getArticleListByUserId(int userId,PageBean pageBean);
 	
+	public List<Article> getArticleListByUserId(int userId,String category,PageBean pageBean);
+	
 	/*
 	 * miki
 	 * 2017.05.24
 	 * 根据用户id得到用户总博客数目
 	 */
 	public Long getArticleCountByUserId(int userId);
+	public Long getArticleCountByUserId(int userId,String type);
 	
 	/*
 	 * miki

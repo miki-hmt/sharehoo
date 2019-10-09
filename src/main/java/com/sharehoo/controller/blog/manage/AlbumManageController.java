@@ -100,6 +100,8 @@ public class AlbumManageController {
 	public String list(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+		if(user!=null) {
+			model.addAttribute("user", user);
 			if(StringUtil.isEmpty(page)){
 				page="1";
 			}
@@ -113,6 +115,8 @@ public class AlbumManageController {
 			List<Critique> critiques=critiqueService.getPhListByUserId(user.getId());
 			model.addAttribute("critiques", critiques);
 			return "blog/manage/album_manage";
+		}
+		return "error";
 	}
 	
 	@RequestMapping("/blog/manage/album/delete")

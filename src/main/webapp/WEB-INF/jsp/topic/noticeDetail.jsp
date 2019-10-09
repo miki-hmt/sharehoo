@@ -1,43 +1,50 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!--修改日期格式只显示年月日  -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-<link rel="stylesheet" href="css/css1.css">
-<title>IT帮-资讯传播社区--公告页面</title>
-</head>
-<body bgcolor="#E9E9E9">
-<table width="500" height="200" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="39" colspan="2">
-      <p align="center"><font size="7" face="隶书">公告信息</font></td>
-  </tr>
-
-  <tr>
-    <td width="31%" height="37"><div align="center"><font size="5">标题： </font></div></td>
-    <td width="69%"><font size="5">${notice.name } </font></td>
-  </tr>
-  <tr>
-    <td width="31%" height="32"><div align="center">公告内容：</div></td>
-    <td width="69%" height="32"><textarea style="width:200px;height:170px;">${notice.content }</textarea> </td>
-  </tr>
-
-<tr>
-<td width="31%" height="27"><div align="center">发布时间： </div></td>
-<td width="69%" height="27"><fmt:formatDate value="${notice.pubDate }" pattern="yyyy-MM-dd "/></td>
-</tr>
-
-
-<tr><td height="27" colspan="2" align="center">
-<input type="button" name="wclose" value="关闭窗口" onClick="window.close()">
-</td>
-</tr>
-</table>
-
-</body>
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <title>IT帮-资讯传播社区--公告页面</title>
+	  <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+	  <link rel="stylesheet" href="${host}/blog/tag/css/style.css"> 
+	</head>
+	<body>
+	  	<h1><span style="font-size:9pt;">${notice.name }</span></h1>
+		<textarea class="tagarea" id="content" name="content">
+				<c:choose>
+					<c:when test="${not empty notice}">${notice.content }</c:when>
+					<c:otherwise>java 我爱你の</c:otherwise>
+				</c:choose>
+		  		
+			</textarea>
+			
+		<!--User Info-->
+		<table>
+		  <tr>
+		    <td colspan="3" align="center"><b>公告详情</b></td>
+		  </tr>
+		  <tr>
+		    <td>时间</td>
+		    <td> <fmt:formatDate value="${notice.pubDate }" pattern="yyyy-MM-dd "/> <span>Enter</span></td>
+		    <td> <i class="chcek"></i> </td>
+		  </tr>
+		  <tr>
+		    <td>内容</td>
+		    <td> <c:choose>
+					<c:when test="${not empty notice}">${notice.content }</c:when>
+					<c:otherwise>java 我爱你の</c:otherwise>
+				</c:choose> <span>Enter</span></td>
+		    <td> <i class="chcek"></i> </td>
+		  </tr>
+		  
+		</table>
+		<input id="bntClose" type="button" value="关闭" onclick="window.close();"/>
+	  <script type="text/javascript">
+		
+	  </script>
+	</body>
 </html>

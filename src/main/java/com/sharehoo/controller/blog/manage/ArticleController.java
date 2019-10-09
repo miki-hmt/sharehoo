@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sharehoo.config.lang.Consts;
+import com.sharehoo.entity.blog.Tag;
 import com.sharehoo.entity.forum.Article;
 import com.sharehoo.entity.forum.Critique;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
+import com.sharehoo.service.blog.TagService;
 import com.sharehoo.service.forum.ArticleService;
 import com.sharehoo.service.forum.CritiqueService;
 import com.sharehoo.service.forum.UserService;
@@ -42,6 +44,8 @@ public class ArticleController {
 	private UserService userService;
 	@Autowired
 	private CritiqueService critiqueService;
+	@Autowired
+	private TagService tagService;
 	/*
 	 * 前台用户文章保存方法  2017.04.25
 	 */
@@ -155,6 +159,13 @@ public class ArticleController {
 		model.addAttribute("critiques", critiques);
 		Article article=articleService.getArticleById(20);
 		model.addAttribute("article", article);
+		
+		Tag tag = tagService.getTagByUserId(user.getId());
+		if(tag!=null) {
+			String[] tags = tag.getContent().split(" ");
+			model.addAttribute("tags", tags);
+		}	
+		
 		StringBuffer param=new StringBuffer();
 		if (user.getId()>0) {
 			param.append("userId="+user.getId());
@@ -177,6 +188,12 @@ public class ArticleController {
 			return "error";
 		}
 		model.addAttribute("user", user);
+		
+		Tag tag = tagService.getTagByUserId(user.getId());
+		if(tag!=null) {
+			String[] tags = tag.getContent().split(" ");
+			model.addAttribute("tags", tags);
+		}	
 		return "blog/manage/article_add";
 	}
 	
@@ -197,6 +214,12 @@ public class ArticleController {
 			Article article=articleService.getArticleById(articleId);
 			model.addAttribute("article", article);
 		}
+		
+		Tag tag = tagService.getTagByUserId(user.getId());
+		if(tag!=null) {
+			String[] tags = tag.getContent().split(" ");
+			model.addAttribute("tags", tags);
+		}	
 		return "blog/manage/article_update";
 	}
 	

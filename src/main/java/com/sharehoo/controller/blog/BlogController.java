@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sharehoo.entity.blog.Tag;
 import com.sharehoo.entity.forum.Article;
 import com.sharehoo.entity.forum.Critique;
 import com.sharehoo.entity.forum.Me;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
+import com.sharehoo.service.blog.TagService;
 import com.sharehoo.service.forum.ArticleService;
 import com.sharehoo.service.forum.CritiqueService;
 import com.sharehoo.service.forum.MeService;
@@ -34,6 +36,8 @@ public class BlogController {
 	private CritiqueService critiqueService;
 	@Autowired
 	private MeService meService;
+	@Autowired
+	private TagService tagService;
 	/*
 	 * miki
 	 * 2017.06.01
@@ -102,6 +106,13 @@ public class BlogController {
 			PageBean pageBean=new PageBean(Integer.parseInt(page), 6);
 			List<Article> articleList=articleService.getArticleListByUserId(user.getId(),pageBean);
 			model.addAttribute("articleList", articleList);
+			
+			Tag tag = tagService.getTagByUserId(user.getId());
+			if(null!=tag) {
+				String[] split = tag.getContent().split(" ");
+				model.addAttribute("tags", split);
+			}
+			
 			long total=articleService.getArticleCountByUserId(user.getId());
 			StringBuffer param=new StringBuffer();
 			if (StringUtil.isNotEmpty(nicknameId)) {
@@ -113,6 +124,44 @@ public class BlogController {
 		return "blog/article";
 	}
 	
+	/*
+	 * miki
+	 * 2017.06.02
+	 * 慢生活分类版块
+	 */
+	@RequestMapping("/blog/{nicknameId}/article/category/{type}")
+	public String articleByCategory(@PathVariable("nicknameId") String nicknameId,Model model,@RequestParam(value="page",required=false) String page,
+			HttpServletRequest request,@PathVariable(value="type",required=false) String type)throws Exception{
+		if(StringUtil.isNotEmpty(nicknameId)){
+			User user=userService.getUserByNickNameId(nicknameId);
+			model.addAttribute("user", user);
+			if (StringUtil.isEmpty(page)) {
+				page="1";
+			}
+			List<Article> recommendList=articleService.getRecommendsByUserId(user.getId());
+			model.addAttribute("recommendList", recommendList);
+			List<Article> countList=articleService.getHotByUserId(user.getId());
+			model.addAttribute("countList", countList);
+			PageBean pageBean=new PageBean(Integer.parseInt(page), 6);
+			List<Article> articleList=articleService.getArticleListByUserId(user.getId(),type,pageBean);
+			model.addAttribute("articleList", articleList);
+			
+			Tag tag = tagService.getTagByUserId(user.getId());
+			if(null!=tag) {
+				String[] split = tag.getContent().split(" ");
+				model.addAttribute("tags", split);
+			}
+			
+			long total=articleService.getArticleCountByUserId(user.getId(),type);
+			StringBuffer param=new StringBuffer();
+			if (StringUtil.isNotEmpty(nicknameId)) {
+				param.append("nicknameId="+nicknameId);
+			}			
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/blog/"+nicknameId+"/article/category/"+type, total, Integer.parseInt(page), 6,param.toString());
+			model.addAttribute("pageCode", pageCode);
+		}
+		return "blog/article";
+	}
 	
 	/**文章详情页
 	 * @return
@@ -136,6 +185,13 @@ public class BlogController {
 			model.addAttribute("next", next);
 			List<Critique> critiques=critiqueService.getArticleCritiquesByAid(id);
 			model.addAttribute("critiques", critiques);
+			
+			Tag tag = tagService.getTagByUserId(user.getId());
+			if(null!=tag) {
+				String[] split = tag.getContent().split(" ");
+				model.addAttribute("tags", split);
+			}
+			
 			List<Critique> replyList=critiqueService.getReplyListByAid(id);
 			model.addAttribute("replyList", replyList);
 			article.setCount(article.getCount()+1);

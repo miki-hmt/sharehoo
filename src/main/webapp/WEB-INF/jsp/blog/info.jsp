@@ -7,7 +7,7 @@
     <div class="about_c">
       <p>昵称：${user.nickName}</p>
       <p>职业：我们不生产代码，我们只是大自然的搬运工。</p>
-      <p>籍贯：河南-平顶山</p>
+      <p>籍贯：银河系-地球-中国</p>
       <p>积分：${user.score}</p>
       <p>邮箱：${user.email}</p>
     </div>

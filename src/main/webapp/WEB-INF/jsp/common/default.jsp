@@ -473,7 +473,7 @@ a:hover{text-decoration:none;}
 				<c:forEach items="${noticeList }" var="notice">
 					<div class="list_s_love ti_1" data="504835932.html">
 						<div class="title_s love-height a_color_1">
-							<a href="#" onClick="window.open('${host}/notice/detail/${notice.id }','','width=500,height=400');" style="color:black;font-size:9pt;">${notice.name }</a>
+							<a href="#" onClick="window.open('${host}/notice/detail/${notice.id }','','width=500,height=450');" style="color:black;font-size:9pt;">${notice.name }</a>
 						</div>
 						<div class="nick_s a_color_2">
 							<fmt:formatDate value="${notice.pubDate }" pattern="MM-dd "/>

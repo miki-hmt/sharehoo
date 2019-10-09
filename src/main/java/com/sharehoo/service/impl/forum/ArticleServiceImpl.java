@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
@@ -279,6 +280,43 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		Article article = list.get(0);
 		return article;
+	}
+
+	@Override
+	public List<Article> getArticleListByUserId(int userId, String category, PageBean pageBean) {
+		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
+		StringBuffer hql=new StringBuffer("from Article");
+		if (userId>0) {
+			hql.append(" and userId=?");
+			param.add(userId);
+		}
+		if(StringUtils.isNotEmpty(category)) {
+			hql.append(" and type=?");
+			param.add(category);
+		}
+		hql.append(" order by time desc");
+		if (pageBean!=null) {
+			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
+		}else {
+			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
+		}
+	}
+
+	@Override
+	public Long getArticleCountByUserId(int userId, String type) {
+		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
+		StringBuffer hql=new StringBuffer("select count(*) from Article");
+		if(userId>0){
+			hql.append(" and userId=?");
+			param.add(userId);	
+		}
+		if(StringUtils.isNotEmpty(type)) {
+			hql.append(" and type=?");
+			param.add(type);
+		}
+		return baseDAO.count(hql.toString().replaceFirst("and", "where"), param);
 	}
 
 }

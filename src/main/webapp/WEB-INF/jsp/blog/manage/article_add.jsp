@@ -1,7 +1,7 @@
 ﻿<%@page pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html style="margin-top:-9px;">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>个人博客——写博客</title>
@@ -104,18 +104,29 @@ span {
 						</table>
 					</tr>
 					<tr>
-						<td><span>作者:</span><input id="editer" name="editer"
-							value="${article.editer }" style="width:90px" /> <span>关键词:</span><input
-							id="keywords" name="keywords" value="${article.keywords }"
-							style="width:90px" /> <span>分类:</span><input id="type"
-							name="type" value="${article.type }" style="width:90px" /> <span>设为推荐:</span>
-							<input id="notice" name="notice" type="radio" value="1" />是 <input
-							name="notice" type="radio" value="2" checked />否 <input
-							id="user" name="user.id" value="${user.id }" type="hidden" /></td>
+						<td><span>作者:</span>
+							<input id="editer" name="editer" value="${user.nickName }" style="width:90px" /> 
+							<span>关键词:</span>
+							<input id="keywords" name="keywords" value="${article.keywords }" style="width:90px" /> 
+							<span>分类:</span>
+							<select def="0" style="border:solid 1px green;margin-top:11px;font-size:11px;height:24px;width:130px;" id="type" name="type">
+								<option value="java" >请选择</option>
+								<option value="日记" >日记</option>
+								<option value="编程" >编程</option>
+								<option value="经典语录" >经典语录</option>
+								 <c:forEach  items="${tags }" var="tag">
+								 	<option value="${tag }" >${tag}</option>
+								 </c:forEach>									
+							 </select>
+							<%-- <input id="type" name="type" value="${article.type }" style="width:90px" />  --%>
+							<span>设为推荐:</span>
+							<input id="notice" name="notice" type="radio" value="1" />是
+							<input name="notice" type="radio" value="2" checked />否
+							<input id="user" name="user.id" value="${user.id }" type="hidden" /></td>
 					</tr>
 					<tr>
 						<td><input id="okBtn" type="button"
-							style="width: 60px;height: 30px;font-size: larger;" value="确定" /></td>
+							style="width: 60px;height: 30px;font-size: larger;" value="确定" /><span id="error"></span></td>
 					</tr>
 				</table>
 			</form>
@@ -133,30 +144,25 @@ span {
 				<p>栏目推荐</p>
 			</h2>
 			<ul>
-				<s:iterator value="recommendArticles">
-					<li><a href="../article/article_detail?id="><s:property
-								value="title" /></a></li>
-				</s:iterator>
+				<li><a href="../article/article_detail?id="></a></li>
 			</ul>
 			<h2>
 				<p>最新评论</p>
 			</h2>
 			<ul class="pl_n">
-				<s:iterator value="critiques">
-					<dl>
-						<dt>
-							<img src="${host}/blog/include/images/s8.jpg">
-						</dt>
-						<dt></dt>
-						<dd>
-							<s:property value="name" />
-							<time> <s:property value="time" /></time>
-						</dd>
-						<dd>
-							<a href="#"><s:property value="content" escape="false" /></a>
-						</dd>
-					</dl>
-				</s:iterator>
+				<dl>
+					<dt>
+						<img src="${host}/blog/include/images/s8.jpg"/>
+					</dt>
+					<dt></dt>
+					<dd>
+						名字
+						<time>时间</time>
+					</dd>
+					<dd>
+						<a href="#">内容</a>
+					</dd>
+				</dl>
 			</ul>
 
 		</div>
@@ -212,11 +218,12 @@ span {
 	function checkForm() {
 		var editer = $("#editer").val();
 		var keywords = $("#keywords").val();
-		var type = $("#type").val();
+		var type = $("#type option:selected").text();
 		var image = $("#image").val();
 		var title = $("#title").val();
 		var result = true;
 		if (title == "") {
+			$("#error").html("标题不能为空！");
 			result = false;
 		}
 		if (editer == "") {
@@ -228,7 +235,7 @@ span {
 			result = false;
 		}
 		if (type == "") {
-			$("#type").html("类型不能为空！");
+			$("#error").html("类型不能为空！");
 			result = false;
 		}
 
@@ -247,7 +254,7 @@ span {
 			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
 			html: true,
 			timer: 2000,   
-			showConfirmButton: false
+			showConfirmButton: true
 		},function(){
 				if (callback) {
 					callback();

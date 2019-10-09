@@ -82,9 +82,12 @@
   <aside>
     <div class="rnav">
       <li class="rnav1 "><a href="#">日记</a></li>
-      <li class="rnav2 "><a href="#">欣赏</a></li>
-      <li class="rnav3 "><a href="#">编程</a></li>
-      <li class="rnav4 "><a href="#">经典语录</a></li>
+      <li class="rnav2 "><a href="#">编程</a></li>
+      <li class="rnav3 "><a href="#">经典语录</a></li>
+      <c:forEach items="${tags }" var="tag">
+      	<li class="rnav4 "><a href="${host}/blog/${user.nickNameId}/article/category/${tag }">${tag }</a></li>
+      </c:forEach>
+      <li class="rnav1 "><a href="#" onClick="openWin('${host}/tag/add/${user.id}','tag','550','600')">添加+</a></li>
     </div>
     <div class="ph_news">
       <h2>
@@ -186,9 +189,16 @@
 </div>
 
 <script type="text/javascript">
+	function openWin(url,name,iWidth,iHeight) { 
+            //获得窗口的垂直位置 
+            var iTop = (window.screen.availHeight - 30 - iHeight) / 2; 
+            //获得窗口的水平位置 
+            var iLeft = (window.screen.availWidth - 10 - iWidth) / 2; 
+            window.open(url, name, 'height=' + iHeight + ',innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',status=no,toolbar=no,menubar=no,location=no,resizable=no,scrollbars=0,titlebar=no'); 
+        }
 	function loadimage(){
-	document.getElementById("randImage").src = "${host}/imageCode?"+Math.random();
-}
+		document.getElementById("randImage").src = "${host}/imageCode?"+Math.random();
+	}
 	$(document).ready(function() {	
 	$("#submitAdd").on("click",function(){
 		var name=$("#name").val();
