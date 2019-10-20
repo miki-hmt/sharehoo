@@ -77,7 +77,7 @@ public class PhotoController {
 			return E3Result.build(401, "请登录后，再保存..");
 		}
 		
-		if (image!=null) {			
+		if (image!=null && image.getSize()>0) {			
 			//获取项目的static根路径  
 	    	String staticPath = BootPathUtil.getStaticPath();
 	    	faceFileName = image.getOriginalFilename();
@@ -174,7 +174,7 @@ public class PhotoController {
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute(Consts.CURRENTUSER);
 		try {
-			if(null!=file) {
+			if(null!=file && file.getSize()>0) {
 				//获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();
 		    	if(file.getSize()>600*1024*3) {

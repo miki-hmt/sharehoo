@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.service.forum.UserService;
+import com.sharehoo.util.CxCacheUtil;
 
 @Controller
 public class TestController {
@@ -30,7 +32,12 @@ public class TestController {
 		model.addAttribute("root",root);
 		User user = userService.getUserById(1);
 		model.addAttribute("user",user);
-		System.out.println(root);
+		for(int i = 0;i<2000000000;i++) {
+			CxCacheUtil.getIntance().setValue("miki", "55"+i);
+		}
+		CxCacheUtil.getIntance().setValue("miki", "55");
+		Object value = CxCacheUtil.getIntance().getValue(Consts.ROOT_PATH);
+		System.out.println(root+value);
 		return "test";		
 	}
 	
@@ -55,6 +62,8 @@ public class TestController {
 		model.addAttribute("root",root);
 		User user = userService.getUserById(id);
 		model.addAttribute("user",user);
+		Object value = CxCacheUtil.getIntance().getValue("miki");
+		System.out.println(root+value);
 		System.out.println(root);
 		return "test";		
 	}

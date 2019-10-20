@@ -416,7 +416,7 @@ public class TopicServiceImpl implements TopicService {
 		if(sectionId==21 || sectionId==11 || sectionId==1 || sectionId==2 || sectionId==3 || sectionId==4 || 
 				sectionId==7 || sectionId==8 || sectionId==12 || sectionId==13 || sectionId==14 || 
 				sectionId==15 || sectionId==16 || sectionId==18 || sectionId== 19 || sectionId==20 ){					//只针对原创帖子做缓存
-			hql="select topic.id,topic.title,topic.user.nickName,concat(topic.code,''),topic.user.id from Topic as topic where topic.section.id=? order by topic.publishTime desc";
+			hql="select topic.id,topic.title,topic.user.nickName,concat(topic.code,''),topic.user.id,topic.user.nickNameId from Topic as topic where topic.section.id=? order by topic.publishTime desc";
 		}else{
 			hql= "from Topic as topic where topic.section.id=? order by topic.publishTime desc";
 		}

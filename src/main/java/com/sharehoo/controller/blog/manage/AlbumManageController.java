@@ -51,7 +51,7 @@ public class AlbumManageController {
 			@RequestParam("faceFileName") String faceFileName,Album album){
 		
 		try {
-			if(null!=file) {
+			if(null!=file && file.getSize()>0) {
 				//获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();
 		    	if(file.getSize()>600*1024*3) {

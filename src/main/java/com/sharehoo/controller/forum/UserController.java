@@ -106,7 +106,7 @@ public class UserController {
 	public E3Result register(@RequestParam(value="facelogo",required=false) MultipartFile facelogo,@RequestParam(value="faceFileName",required=false) String faceFileName,
 			User user)throws Exception{
 		
-		if (facelogo!=null) {		
+		if (facelogo!=null && facelogo.getSize()>0) {		
 			 //获取项目的static根路径  
 	    	String staticPath = BootPathUtil.getStaticPath();
 		

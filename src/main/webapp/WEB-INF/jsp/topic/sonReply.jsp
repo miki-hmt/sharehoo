@@ -16,23 +16,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>IT帮-资讯传播社区--回复帖子页面</title>
-<script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
-<link href="css/style3.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 
-<script src="js/jquery-1.11.1.js" type="text/javascript"></script>
-<script src="js/jquery.emoticons.js" type="text/javascript"></script>
+<!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
+<!--我的高亮效果是zenburn-->
+<link rel="stylesheet" href="${host}/highlight/styles/zenburn.css">
+<script src="${host}/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/emoticon.css" />
-<link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
-<link href="css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="${host}/js/jquery-1.7.2.min.js"></script>
 
-<script src="bootstrap/js/jquery.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="bootstrap/js/bootstrap.js"></script>
-<script src="js/fun.js" type="text/javascript"></script>
+<link href="${host}/css/style3.css" rel="stylesheet" type="text/css" />
+
+<script src="${host}/js/jquery.emoticons.js" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="${host}/css/emoticon.css" />
+<link href="${host}/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="${host}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+
+<!--  2018.07.24 代码块样式 -->
+<link href="${host}/css/popDrag.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
 
@@ -188,7 +191,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													<img alt="" src="${pageContext.request.contextPath}/${sonReply.user.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.user.nickName }</a>&nbsp;回复&nbsp; 
 														<a href="${pageContext.request.contextPath }/blog/${sonReply.sonUser.nickNameId}" target="_blank">
 															<img alt="" src="${pageContext.request.contextPath}/${sonReply.sonUser.face}" style="width: 27px;height: 27px;border:2px solid #85735F;">${sonReply.sonUser.nickName}
-														</a>：${sonReply.content }
+														</a>：
+														<pre><code class="language-java hljs"	style="background-color:#FFFFFF;color:gray;">${sonReply.content }</code></pre>
 											</td>					
 											<td style="width:21%;">
 												<fmt:formatDate value="${sonReply.publishTime }" pattern="yy-MM-dd HH:mm "/>&nbsp;
@@ -232,40 +236,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                           
 		<table >
 			<tr>
-				<td style="width: 20%;">
-					回帖事项：开开心心交流<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;和和气气讨论
-				</td>
+				<td style="width: 20%;color:gray;font-size:10pt;">		
+				</td>			
 				<td style="width: 80%;">
 					<form id="replyForm" class="form-horizontal" style="margin-top: 10px;">
 					<table style="width: 100%;" cellpadding="10px;">
 						
-						<input type="hidden" id="title" name="reply.title" value="${reply.id }" style="width: 800px;">
+						<input type="hidden" id="title" name="title" value="${reply.id }" style="width: 800px;"/>
+						<tr>
+								<td style="color:gray;font-size:10pt;">							
+								</td>
+								<td>
+									<div id="container">
+									<a href="JavaScript:void(0)" id="message_face">【添加表情包】</a>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="JavaScript:void(0)" onclick="popWin()">【添加代码块】</a>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: top;color:gray;font-size:10pt;">						
+								</td>
+								
+								<td>
+								<pre id="btn"><code class="language-java hljs">System.out.println("请输入你的代码块...");</code></pre>
+								<a name="1">
+								<textarea name="content" id="Content" cols="50" style="height:200px;width: 800px;" placeholder="----发表你的看法----开开心心交流----和和气气讨论----"></textarea>
+								</a>
+								</td>						
+							</tr>					
 						<tr>
 							<td>
-								【表情】:
+								<input id="userId" name="user.id" value="${currentUser.id }" type="hidden"/>			
+								<input id="topicId" name="topic.id" value="${reply.topic.id }" type="hidden"/>
+								<input id="replySonId" name="sonId" value="${reply.user.id }" type="hidden"/>
 							</td>
 							<td>
-								<div id="container">
-								<a href="JavaScript:void(0)" id="message_face">请选择...</a>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td style="vertical-align: top;">
-								<a name="1">【我也说一句】:</a>
-							</td>
-							<td>
-							<textarea name="reply.content" id="Content" cols="50" style="height:200px;width: 800px;" ></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input id="userId" name="reply.user.id" value="${currentUser.id }" type="hidden"/>			
-								<input id="topicId" name="reply.topic.id" value="${reply.topic.id }" type="hidden"/>
-								<input id="replySonId" name="sonId" type="hidden"/>
-							</td>
-							<td>
-								<Button class="btn btn-primary " data-dismiss="modal" aria-hidden="true" type="button" onclick="javascript:saveReply()">提交</Button>
+								<Button class="btn btn-primary " data-dismiss="modal" aria-hidden="true" id="okBtn" type="button">提交</Button>
 								<font id="error"></font>
 							</td>
 						</tr>
@@ -278,13 +285,231 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </div>
 
+<!-- 自定义弹出框 -->  
+<div id="textPopBox" class="popBox">  
+    <h3 class="popBoxHandle">请插入代码块</h3>  
+    <form action="" method="post">  
+        <table width="100%" cellspacing="5">  
+                
+            <tr rowspan="3" id="reasonText" style="display:block;">  
+                <td align="left" width="18"></td> 
+                <td align="left"><textarea style="background:transparent;width:420px;height:200px;" id="backReason" name="backReason"></textarea></td>  
+            </tr>  
+            <tr>  
+                <td colspan="2" align="center">  
+                    <br />  
+                    <input id='ok' type="button" class="button green" value="        确    认        " />        
+                    <input id='cancel' type="button" class="button blue" value="        取    消        " />  
+                </td>  
+            </tr>  
+        </table>  
+    </form>  
+</div>
 
+<script src="${host}/js/PopDrag.js" type="text/javascript"></script>
+
+<script type="text/javascript">  
+    //初始化弹出框  
+    var p = new PopUp({  
+        //isScroll:'disabled'  
+        //enableDrag:'disabled'  
+        //enableShadow:'disabled'  
+        //id为你自己自定义的弹出框div的id  
+        id:"textPopBox"  
+    });  
+  
+    //缩放窗口时重新定位弹出框及遮罩层的宽度和高度  
+    EventUtil.addEvent(window,'resize', function() {  
+        p.setPosition();  
+        //如果开启遮罩层，遮罩层元素存在，则重新定位遮罩层  
+        p.enableShadow && p.enableShadow.shadow && p.enableShadow.setProperty(p.enableShadow.shadow);  
+    });  
+    EventUtil.addEvent(EventUtil._$('btn'),'click', function() {  
+        p.show({//定义坐标，如果缺省则居中显示  
+//            x:100,  
+//            y:100  
+        });  
+    }); 
+
+	function popWin(){
+			p.show({//定义坐标，如果缺省则居中显示  
+	//            x:100,  
+	//            y:100  
+	        });
+		} 
+    EventUtil.addEvent(EventUtil._$('ok'),'click', function() {  
+        //自定义点击确定按钮之后得操作  
+        var t =$("#backReason").val();
+		var content="<pre><code class='language-java hljs'>"+t+"</code></pre>";
+		var comment=$("#Content").val();
+		$("#Content").val(comment+"<br>"+content);
+        //alert(t);  
+        //隐藏弹出框  
+        p.hide();  
+    });  
+    EventUtil.addEvent(EventUtil._$('cancel'),'click', function() {  
+        //自定义点击取消按钮之后得操作  
+          
+        //隐藏弹出框  
+        p.hide();  
+    });  
+  
+    //当按下ESC键时关闭弹出框  
+//    EventUtil.addEvent(document,'keyup',function(e) {  
+//        e = e || window.event;  
+//        e.keyCode == 27 && p.hide();  
+//    });  
+  
+    EventUtil.addEvent(window,'load',function() {  
+        if((isIE6 || isOpera) && p.isScroll != null && p.isScroll == 'enabled') {  
+            EventUtil.addEvent(window,'scroll', function() {  
+                setTimeout(function() {  
+                    p.setPosition();  
+                },100);  
+            });  
+        }  
+    });  
+      
+    //单选按钮的点击切换事件  
+    function openText(self) {  
+        var value = $(self).val();  
+        if ("true"==value) {  
+            $('#reasonText').css("display", "");  
+        } else {  
+            $('#reasonText').css("display", "none");  
+        }  
+    }  
+</script>
 
                       <!-- 返回顶部 代码        2017.03.02               -->
 
 
 <script type="text/javascript">
-
+	
+	
+	  // 楼层回复传参功能实现      2017.02.28     
+	function reply(b,a,c){
+		 document.getElementById("title").value = c;
+	}
+	
+	//楼层回复传参功能实现      2017.02.28     
+	function replySon(b,a,c){
+		 document.getElementById("title").value = c;
+		 document.getElementById("replySonId").value = a;
+		   
+	}
+	
+	
+		//引用评论
+	function copy(c,d){
+			var text4 ="引用【 ";
+			var text5="】楼：";
+			var text6="：";
+			document.getElementById("Content").value = text4+d+text5+c+text6;
+			CKEDITOR.instances.Content.setData(text4+d+text5+c+text6);
+	
+		}
+	
+	  //简单的 敏感词汇验证  2016.12.13 ....时间允许，可以建一个数据库表，存储相关词汇 
+	//定义敏感字符     
+	var forbiddenArray =['傻逼','滚','黄色','畜生','sb','尼玛','妈的','反共','草泥马'];
+	//定义函数
+	function forbiddenStr(str){
+	//    var destString = trim(str);
+	    var re = '';
+	    
+	    for(var i=0;i<forbiddenArray.length;i++){
+	        if(i==forbiddenArray.length-1)
+	            re+=forbiddenArray[i];
+	        else
+	            re+=forbiddenArray[i]+"|";
+	    }
+	    //定义正则表示式对象
+	    //利用RegExp可以动态生成正则表示式
+	    var pattern = new RegExp(re,"g");
+	    if(pattern.test(str)){
+	        return false;
+	    }else{
+	        return true;
+	    }
+	}
+		
+	//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+	$("#okBtn").on("click", function() {
+			
+		if('${currentUser.nickName}'==null || '${currentUser.nickName}'==''){
+			tipError("请先登陆，再回帖！");
+			return false;
+		}
+		if ($("#Content").val().length<10) {
+			tipError("最少输入10个字符！");
+			return false;
+		}
+		if ($("#Content").val().length>1000) {
+			tipError("最多输入1000个字符！");
+			return false;	
+		}
+		
+		//敏感词汇判断   2016.12.13@miki 
+		
+		if(forbiddenStr($("#Content").val())==true){
+			var sonId=$("#replySonId").val();
+			if(sonId==""){
+				sonId = "0";
+			}
+			var formData = new FormData($("#replyForm")[0]);
+				$.ajax({
+					type : "POST",
+					url : "${host}/reply/save?sonId="+sonId,
+					data : formData,
+					cache : false,
+					async : false,
+					processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+					contentType : false, //必须false才会自动加上正确的Content-Type
+					success : function(data) {
+						if (data.status == 200) {
+							tipOk("回复成功!!",function(){
+								location.reload();
+							});
+						} else {
+							tipError("回复失败!!" + data.msg);
+						}
+					}
+				});
+				return false;	//阻止ajax结束自动刷新页面
+		}else{
+	        tipError("内容含敏感词汇！请修改后发表 ");
+	        return false;
+		}
+	});
+		
+			
+	function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	
+	function tipError(content){
+		swal("发表失败", content, "error");
+	};
+		
+		
+		$(function(){
+		    $("#message_face").jqfaceedit({txtAreaObj:$("#Content"),containerObj:$('#container'),top:25,left:-27});
+			 //显示表情
+			$(".show_e").emotionsToHtml();
+		});
+		
 	    $(function(){
 
         // 页面浮动面板
@@ -321,7 +546,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="popPanel">
 		<div class="popPanel-inner">
 			<div class="qrcodePanel">
-				<img src="images/miki.png" /><span>扫描二维码关注网站最新动态</span></div>
+				<img src="${host }/images/miki.png" /><span>扫描二维码关注网站最新动态</span></div>
 			<div class="arrowPanel">
 				<div class="arrow01">
 				</div>

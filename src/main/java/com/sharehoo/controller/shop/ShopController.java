@@ -92,14 +92,23 @@ public class ShopController {
 	 * ***********************************************************************/
 	@RequestMapping("/shop/upload/status")
 	@ResponseBody
-	public String getProgress(@RequestParam("shopId") String shopId) {
-		Object total = CxCacheUtil.getIntance().getValue("total_"+shopId);
+	public String getProgress(@RequestParam("shopId") String shopId,HttpServletRequest request) {
+		//System.out.println("缓存的key值："+"total_"+shopId);
+		Object total = CxCacheUtil.getIntance().getValue("total_"+request.getSession().getId());
 		String value = "";
 		if(null!=total) {
-			Object progress = CxCacheUtil.getIntance().getValue("progress_"+shopId);
+			Object progress = CxCacheUtil.getIntance().getValue("progress_"+request.getSession().getId());
 			//创造json格式参数
 			value ="var info={read:"+progress+",total:"+total+",items:"+1+"}";		//items:"+arg2+"	d多文件上传的时候，使用arg2
-		}				
+			if(progress.equals(total)) {
+				 // 清除上传过后的进度条session
+		        System.out.println("上传完毕，准备清楚内存中的上传进度..."+"---结束时间："+System.currentTimeMillis());
+				CxCacheUtil.getIntance().unSetValue("total_"+request.getSession().getId());
+				CxCacheUtil.getIntance().unSetValue("progress_"+request.getSession().getId());
+			}
+		}else {
+			value ="var info={read:"+0+",total:"+10000+",items:"+1+"}";		//items:"+arg2+"	d多文件上传的时候，使用arg2
+		}
 		return value;
 		
 	}

@@ -358,8 +358,13 @@
 						info.read=parseFloat(info.read);
 						info.total=parseFloat(info.total);
 						var percent=Math.round(info.read/info.total*10000)/100.00;
-						$("#progress").css("width",percent+"%");					
-						$("#progress").html(percent+"%");					
+						$("#progress").css("width",percent+"%");
+						if(percent==0 || percent=='0'){
+							$("#progress").html("正在计算文件大小...");	
+						}else{
+							$("#progress").html(percent+"%");	
+						}					
+										
 						$("#upload_name").html("【"+info.items+"/"+file.files.length+"】"+file.files[(info.items-1)].name+"【"+percent+"%】");
 					}
 				}

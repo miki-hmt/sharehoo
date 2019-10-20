@@ -114,7 +114,7 @@ public class SoftController {
 	@ResponseBody
 	public E3Result save(@RequestParam("slogo") MultipartFile logo,@RequestBody Soft soft){	
 		try {
-			if (logo!=null) {		
+			if (logo!=null && logo.getSize()>0) {		
 				 //获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();
 			

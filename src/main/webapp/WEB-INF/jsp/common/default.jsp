@@ -168,7 +168,9 @@ a:hover{text-decoration:none;}
            <dl>
              <dt><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="" target="_blank">
              		<img src="${pageContext.request.contextPath}/${article.image}" alt=""></a></dt>
-             <dd><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="${article.title }" target="_blank">${fn:substring(article.title, 0, 14)}</a></dd>
+             <dd>
+             	<a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" 
+             		title="${article.title }" target="_blank">${article.title }</a></dd>
            </dl>   	  
         </li>
        </c:forEach>        
@@ -430,7 +432,7 @@ a:hover{text-decoration:none;}
 				          	</c:otherwise>
 				          </c:choose>
 					</div>
-					<div class="nick_s a_color_2" ><a href="blog/Blog_show.action?userId=${topic[4]}">${topic[2] }</a>
+					<div class="nick_s a_color_2" ><a href="blog/${topic[5]}">${topic[2] }</a>
 					</div>
 			  </div>
 			 </c:forEach>			
@@ -536,7 +538,7 @@ a:hover{text-decoration:none;}
 								</c:otherwise>
 							  </c:choose>	
 							</div>
-							<div class="nick_s a_color_2" ><a href="blog/Blog_show.action?userId=${topic[4]}">${topic[2] }</a>
+							<div class="nick_s a_color_2" ><a href="blog/${topic[5]}">${topic[2] }</a>
 							</div>
 					  	</div>
 					 </c:forEach>	
@@ -594,7 +596,7 @@ a:hover{text-decoration:none;}
 										</c:otherwise>
 									  </c:choose>
 								</div>
-								<div class="nick_s a_color_2" ><a href="blog/Blog_show.action?userId=${topic[4]}">${topic[2] }</a>
+								<div class="nick_s a_color_2" ><a href="blog/${topic[5]}">${topic[2] }</a>
 								</div>
 						  	</div>
 						 </c:forEach>	

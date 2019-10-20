@@ -291,7 +291,7 @@ public class SourceController {
 	        	// CKEditor提交的很重要的一个参数    
 	        	String staticPath = BootPathUtil.getStaticPath();
 	        	//这样能够组织一个文件流  
-	            String filePath= staticPath +Consts.SHOP_UPLOAD_PATH +"/file/"+Consts.SDF_YYYYMM.format(new Date()) + "/" + source.getPath();		////"\\image_upload\\source_upload\\file\\"
+	            String filePath= staticPath +Consts.SHOP_UPLOAD_PATH +"/file/"+ source.getPath();		////"\\image_upload\\source_upload\\file\\"
 	            
 	            //下载的文件携带这个名称
 	            response.setHeader("Content-Disposition", "attachment;filename=" + source.getPath());

@@ -297,7 +297,7 @@ public class ShopManageController {
 			@RequestParam(value="image",required=false) MultipartFile image)throws Exception{
 		if(shopId>0){
 			Shop shop1=shopService.getShopById(shopId);
-			if (image!=null) {
+			if (image!=null && image.getSize()>0) {
 				
 				 //获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();

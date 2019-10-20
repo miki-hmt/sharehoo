@@ -81,7 +81,7 @@ public class SectionController {
 	@RequestMapping("/admin/section/add")
 	public E3Result save(@RequestBody Section section,@RequestParam("logo") MultipartFile logo,
 			@PathVariable("logoFileName") String logoFileName)throws Exception{
-		if (logo != null) {
+		if (logo != null && logo.getSize()>0) {
 			
 			//获取项目的static根路径  
 	    	String staticPath = BootPathUtil.getStaticPath();

@@ -46,18 +46,21 @@
                 {'id':71,'phrase':'[玫瑰]','url':'71.gif'},{'id':72,'phrase':'[玫瑰蔫了]','url':'72.gif'},
                 {'id':73,'phrase':'[唇]','url':'73.gif'},{'id':74,'phrase':'[一对小企鹅]','url':'74.gif'},
                 {'id':75,'phrase':'[一只求爱的小企鹅]','url':'75.gif'},{'id':76,'phrase':'[笑的捶地]','url':'76.gif'},
-		{'id':77,'phrase':'[蜡烛]','url':'77.gif'},{'id':78,'phrase':'[给力]','url':'78.gif'},
-		{'id':79,'phrase':'[加载]','url':'79.gif'},{'id':80,'phrase':'[篮球]','url':'80.gif'},
-		{'id':81,'phrase':'[体操]','url':'81.gif'},{'id':82,'phrase':'[呆坐]','url':'82.gif'},
-		{'id':83,'phrase':'[背影]','url':'83.gif'},{'id':84,'phrase':'[转圈]','url':'84.gif'},
-		{'id':85,'phrase':'[飘逸]','url':'85.gif'},{'id':86,'phrase':'[跳起]','url':'86.gif'},
-		{'id':87,'phrase':'[起飞]','url':'87.gif'},{'id':88,'phrase':'[黄领巾]','url':'88.gif'},
-		{'id':89,'phrase':'[糖果]','url':'89.gif'},{'id':90,'phrase':'[红包]','url':'90.gif'},
-		{'id':91,'phrase':'[月饼]','url':'91.gif'},{'id':92,'phrase':'[茅台]','url':'92.gif'},
-		{'id':93,'phrase':'[蛋糕]','url':'93.gif'},{'id':94,'phrase':'[国庆]','url':'94.gif'},
-		{'id':95,'phrase':'[红旗]','url':'95.gif'},{'id':96,'phrase':'[红领巾]','url':'96.gif'},
-		{'id':97,'phrase':'[雪花]','url':'97.gif'},{'id':98,'phrase':'[音乐]','url':'98.gif'},
-		{'id':99,'phrase':'[米饭]','url':'99.gif'},{'id':100,'phrase':'[龙]','url':'100.gif'}
+		{'id':77,'phrase':'[害羞]','url':'Onion--7.gif'},{'id':78,'phrase':'[呕吐]','url':'Onion--10.gif'},
+		{'id':79,'phrase':'[心情好]','url':'Onion--11.gif'},{'id':80,'phrase':'[鄙视]','url':'Onion--12.gif'},
+		{'id':81,'phrase':'[吓尿]','url':'Onion--14.gif'},{'id':82,'phrase':'[催眠]','url':'Onion--15.gif'},
+		{'id':83,'phrase':'[得瑟]','url':'Onion--42.gif'},{'id':84,'phrase':'[大吵]','url':'Onion--48.gif'},
+		{'id':85,'phrase':'[飞起]','url':'Onion--77.gif'},{'id':86,'phrase':'[发烧]','url':'Onion--61.gif'},
+		{'id':87,'phrase':'[可怜]','url':'Onion--100.gif'},{'id':88,'phrase':'[写代码]','url':'Onion--81.gif'},
+		{'id':89,'phrase':'[必杀]','url':'Onion--90.gif'},{'id':90,'phrase':'[爽]','url':'Onion--16.gif'},
+		{'id':91,'phrase':'[擦汗]','url':'Onion--20.gif'},{'id':92,'phrase':'[跳舞]','url':'Onion--49.gif'},
+		{'id':93,'phrase':'[踢飞]','url':'Onion--44.gif'},{'id':94,'phrase':'[念经]','url':'Onion--106.gif'},
+		{'id':95,'phrase':'[踢球]','url':'Onion--76.gif'},{'id':96,'phrase':'[再见]','url':'Onion--84.gif'},
+		{'id':97,'phrase':'[瞌睡]','url':'Onion--85.gif'},{'id':98,'phrase':'[无语]','url':'Onion--74.gif'},
+		{'id':99,'phrase':'[死翘翘]','url':'Onion--33.gif'},{'id':100,'phrase':'[英雄]','url':'Onion--26.gif'},
+		{'id':101,'phrase':'[鼻血]','url':'Onion--1.gif'},{'id':102,'phrase':'[ok]','url':'Onion--2.gif'},
+		{'id':103,'phrase':'[恼怒]','url':'Onion--3.gif'},{'id':104,'phrase':'[坏笑]','url':'Onion--4.gif'},
+		{'id':105,'phrase':'[冷落]','url':'Onion--5.gif'},{'id':106,'phrase':'[抛弃]','url':'Onion--6.gif'}
             ];
     //textarea设置光标位置
     function setCursorPosition(ctrl, pos) {

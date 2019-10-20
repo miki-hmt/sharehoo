@@ -59,7 +59,7 @@ public class ArticleController {
 			return E3Result.build(401, "请登录后再发表...");
 		}
 		try {
-			if (articleImage!=null) {
+			if (articleImage!=null && articleImage.getSize()>0) {
 				//获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();
 		    	faceFileName = articleImage.getOriginalFilename();
@@ -225,7 +225,7 @@ public class ArticleController {
 	
 	@RequestMapping("blog/manage/article/update")
 	@ResponseBody
-	public E3Result modify(HttpServletRequest request,@RequestParam(value="image",required=false) MultipartFile image,@RequestParam(value="faceFileName",required=false) String faceFileName,
+	public E3Result modify(HttpServletRequest request,@RequestParam(value="articleImage",required=false) MultipartFile image,@RequestParam(value="faceFileName",required=false) String faceFileName,
 			Article article){
 		
 		User user=(User) request.getSession().getAttribute(Consts.CURRENTUSER);
@@ -237,7 +237,7 @@ public class ArticleController {
 			Article updateArticle=articleService.getArticleById(article.getId());
 			
 			try {
-				if (image!=null) {
+				if (image!=null && image.getSize()>0) {
 					//获取项目的static根路径  
 			    	String staticPath = BootPathUtil.getStaticPath();
 			    	faceFileName = image.getOriginalFilename();

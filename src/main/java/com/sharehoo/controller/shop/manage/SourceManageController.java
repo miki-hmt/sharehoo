@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,16 +30,14 @@ import com.sharehoo.service.shop.ShopService;
 import com.sharehoo.service.shop.SourceService;
 import com.sharehoo.util.BootPathUtil;
 import com.sharehoo.util.CxCacheUtil;
-import com.sharehoo.util.StringEx;
 import com.sharehoo.util.forum.DateUtil;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
-import com.sharehoo.util.forum.RadomUtil;
 import com.sharehoo.util.forum.StringUtil;
 
 @Controller
 public class SourceManageController {
-	
+	private static Logger logegr = Logger.getLogger(SourceManageController.class); 
 	@Autowired
 	private ShopService shopService;
 	@Autowired
@@ -61,14 +59,23 @@ public class SourceManageController {
 			Shop shop = shopService.getShopByuserId(user.getId());
 			source.setUpload_time(new Date());
 			if(null!=upload) {
-				//*************** 记录上传文件的总大小
-				CxCacheUtil.getIntance().setValue("total_"+source.getShop().getId(), upload.getSize());
 				
+				//long total = upload.getSize();
+				//*************** 记录上传文件的总大小
+				//CxCacheUtil.getIntance().setValue("total_"+shop.getId(), total);
+				System.out.println("开始统计文件总大小："+upload.getSize()+"---开始时间："+System.currentTimeMillis());
 				 //获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();	
 				String realPath = staticPath +Consts.SHOP_UPLOAD_PATH +"/file/"+Consts.SDF_YYYYMM.format(new Date());
 				// 2017.08.05 miki 文件二次命名，作为下载url链接，采用uuid加密命名，并截取2-18位字符，二次加密，增加安全性
-				String imageName = "file_" + DateUtil.getCurrentDateStr() +"."+ upload.getOriginalFilename().split("\\.")[1];
+				String[] split = upload.getOriginalFilename().split("\\.");
+				String imageName = "";
+				//************** 2019.10.10 解决文件名出现多个.的情况
+				if(split.length>2) {
+					imageName = "file_" + DateUtil.getCurrentDateStr() +"."+ split[split.length-1];
+				}else {
+					imageName = "file_" + DateUtil.getCurrentDateStr() +"."+ split[1];
+				}			
 				File savePath=new File(realPath);
 				if(!savePath.exists()) {
 					savePath.mkdirs();
@@ -79,21 +86,17 @@ public class SourceManageController {
 		        OutputStream os = new FileOutputStream(toFile);       
 		        byte[] buffer = new byte[1024];       
 		        int length = 0;
-		        int progress = 0;		//进度条
+		        //Long progress = 0L;		//进度条
 		        
 		        while ((length = is.read(buffer)) > 0) {       
 		            os.write(buffer, 0, length);
-		            progress += length; 
-		            CxCacheUtil.getIntance().setValue("progress_"+source.getShop().getId(), progress);
+//		            progress += length;
+//		            CxCacheUtil.getIntance().setValue("progress_"+shop.getId(), progress);           
 		        }       
 		        is.close();    
 		        os.close();
-		        
-		        // 清除上传过后的进度条session
-				CxCacheUtil.getIntance().unSetValue("total_"+shop.getId());
-				CxCacheUtil.getIntance().unSetValue("progress_"+shop.getId());
-		        
-		        source.setPath(imageName);
+		        		   		        
+		        source.setPath(Consts.SDF_YYYYMM.format(new Date())+"/"+imageName);
 			}
 			source.setUser(user);
 			source.setShop(shop);

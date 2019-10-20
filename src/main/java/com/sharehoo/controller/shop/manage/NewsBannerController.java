@@ -41,7 +41,7 @@ public class NewsBannerController {
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		if (user!=null&&user.getType()==2) {	
-			if (image!=null) {
+			if (image!=null && image.getSize()>0) {
 				
 				 //获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();

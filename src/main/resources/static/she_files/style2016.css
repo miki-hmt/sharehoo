@@ -225,7 +225,7 @@ body.bg18da {background:url() center top no-repeat #fff;}
 .bbs-picture dt a {font-size:9pt; width:170px; height:90px;display: table-cell;text-align: center;vertical-align: middle;overflow: hidden;
 background:#fcfcfc; }
 .bbs-picture dt a img{text-align:center; vertical-align:middle;}
-.bbs-picture dd { font-size:9pt;height:40px; line-height:20px; padding-top:3px; overflow:hidden; text-align:center;}
+.bbs-picture dd { font-size:9pt;height:40px; line-height:16px; padding-top:2px; overflow:hidden; text-align:center;}
 /**/
 .sideNavTop a, .goTop a { background-image:url(../img2014/backbg.gif); background-repeat:no-repeat; }
 .sideNav { display:none; height:0px; left:50%; position:absolute; width:500px; }
