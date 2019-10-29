@@ -1,0 +1,12 @@
+@charset "UTF-8";
+/* Change*/
+.tabs-1 .nav-tabs > .active > a, .tabs-1 .nav-tabs > .active > a:hover { border:0}
+/* CSS Document */
+.tabs-1 li {width: 199px; text-align: center;border-right:1px solid #ddd}
+.tabs-1 .tab-content{ padding:0}
+.tabs-1 ul { margin-bottom:0}
+.tabs-1 li .active  {width: 200px; border:0}
+.tabs-1 .active a{ color:#FFF; background-color:#A14AB2 }
+.tabs-1 li a{ color:#000; font-size:16px; border:0;-webkit-border-radius:0;margin: 0; background:#ffffff;}
+.tabs-1 li a:hover, .tabs-1 .active a:hover{ color:#FFF; background-color:#BF59D3}
+.tabs-1 li:last-child {width: 200px; border-right:0}

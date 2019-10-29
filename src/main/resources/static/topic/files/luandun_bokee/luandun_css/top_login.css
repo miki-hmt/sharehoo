@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+body{margin:0; padding:0; }
+.luan_login{height:42px;width:100%; background:url(../../../images/luandun_imgs/top_login_bg.png)}
+.login_main{width:1000px; height:42px; margin:0 auto;}
+
+/*设为首页*/
+.setIndex{width:75px; height:42px; line-height:42px; text-align:center;font-size:14px; font-family:"微软雅黑"; color:#909090; float:left; display:block;}
+.setIndex a:link,.setIndex a:visited{color:#909090; text-decoration:none}
+.setIndex a:hover{text-decoration:underline}
+
+/*登录表单*/
+.login_form{height:42px;float:right; padding-right:15px}
+.username{border:none;width:184px; height:28px; background:url(../../../images/luandun_imgs/username_03.png) no-repeat center center; margin-top:5px; font-size:12px; font-family:"微软雅黑"; text-indent:65px; float:left; line-height:28px}
+.password_luandun{border:none;width:184px; height:28px; background:url(../../../images/luandun_imgs/password_03.png) no-repeat center center; margin-top:5px; margin-left:14px; text-indent:45px; float:left;}
+.login_sub{font-size:14px; font-family:"微软雅黑"; border:none;margin:2px 0 0 10px; background:url(../../../images/luandun_imgs/login_sub_09.png) no-repeat center center; width:77px; height:36px; cursor:pointer}
+.regist{margin-left:5px}
+.login_form a:link,.login_form a:visited{color:#737373; text-decoration:none; font-family:"微软雅黑";}
+.login_form a:hover{text-decoration:underline}
+
+
+#layout_m_1370743397225{ background:#fff;}
+#layout_m_1370597083488{ background:#fff;}
+#layout_m_1370597113013{ background:#fff;}
+#layout_m_1370744086654{ background:#fff;}
+#layout_m_1370747385558{ background:#fff;}
+#layout_m_1370747636580{ background:#fff;}
+#layout_m_1371438904297{ background:#fff;}
+#layout_m_1374030381571{ background:#fff;}

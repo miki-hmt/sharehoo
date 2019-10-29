@@ -1,0 +1,14 @@
+.footer{
+	height:40px;
+	/*background:url(../images/footer.png) repeat-x;}  */		
+}			 	
+.footer	.foot{
+	font-size:9pt;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	/*background:url(../images/foot.png) repeat-x;  */
+	background-color:#48525e}
+.foot a{
+	color:white}	
+	

@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+#user_scroll{width:100%; overflow:hidden; margin:0 auto; float:left; height:95px;}
+#user_scroll #user_scroll_ul{ display:none;}
+#user_scroll_list .scroll-t-1{float:left; margin:0 5px 0;}
+#user_scroll_list p{text-align:center; font-size:12px; line-height:28px}
+#user_scroll_list .scroll-left{height:74px; width:22px; background:#963; float:left;}
+#user_scroll_list .scroll-right{height:74px; width:22px; background:#9C9; float:right}
+#user_scroll a:link,#user_scroll a:link{color:#333}
+#user_scroll a:hover{color:#f00}

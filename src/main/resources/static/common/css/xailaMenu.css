@@ -1,0 +1,123 @@
+
+
+	/*隐藏二级菜单列表      2016.10.08               */
+.mainnav li ul li{
+	height:12px;
+}	
+.mainnav li ul{
+	display:none;
+	padding:0px;
+	width:80px;
+}		
+/*当鼠标移动到一级菜单时，显示二级菜单 2017.03.23 晚上  */
+			
+.mainnav li:hover ul{
+	text-align:center;
+	display:block;
+	margin:0px auto;  /*   2017.05.08       防止偏出，与一级菜单不对照          */
+	width:80px;  /*定义宽度，让二级菜单呈现瀑布式排列，而非横向  6  */
+	padding:0px;
+	 /*将下拉菜单至于容器最顶层，防止被其他层叠覆盖，显现不出样式*/
+	    /*与一级菜单的贴合程度，从网站顶部距离开始算起*/
+}
+		
+
+
+
+.chanNav {background:#85735F;color:white;border-bottom:1px solid #d9d9d9; height:30px; line-height:16px; font-family:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",Tahoma,arial,sans-serif; font-size:12px; min-width:1000px;}
+.chanNavCon {width:1000px; margin:0 auto; *zoom:1;}
+.chanNavCon:after {display:block; clear:both; content:""; visibility:hidden; height:0;}
+.chanNav span.left {color:#666; float:left; padding-top:8px;}
+.chanNav span.left i {margin:0 6px; font-style:normal;color:white;}
+.chanNav span.right {float:right; padding-top:5px;}
+.chanNav span.right a {padding:3px 4px;}
+.chanNav span.right a.cnLogin {background:#d03c4d; color:#fff; font-weight:bold; margin-left:10px;color:white;}
+.chanNav span.right a.cnLogin:hover {background:#6e0007;}
+.chanNav a {display:inline-block; font-size:12px;color:white;; text-decoration:none;}
+.chanNav a:hover {font-size:12px; color:#b31515; text-decoration:underline;}
+.chanTopNickname {line-height:20px;}
+
+.cht-01 {text-align:center; margin:5px auto; width:1000px;}
+.ch_cht_5,.ch_cht_6 { width:1000px; margin:0 auto;margin-top:5px; text-align:center; overflow:hidden;}
+.adbroker_com{ margin:0 auto;}
+
+
+.buju{
+color:black;
+align:right;
+margin-bottom:0px;   /*原来为1250px*/
+height:371px;
+text-align: right;
+border-left:0px solid silver;     /*最新热帖板块......去除右边 界线，只保留左边界线和下边界线      2016.10.21  */
+border-bottom:1px solid silver;
+}
+
+.buju2{
+align:right;
+height:220px;
+
+border-left:0px solid silver;    /* 访问量板块.....去除右边 界线，只保留左边界线和下边界线      2016.10.21  */
+border-bottom:1px solid silver;
+}
+.buju3{
+align:right;
+height:405px;
+text-align: right;
+border-left:0px solid silver;     /*微信小游戏......去除右边 界线，只保留左边界线和下边界线      2016.10.21  */
+border-bottom:1px solid silver;
+}
+.buju4{
+align:right;
+height:334px;
+text-align: right;
+border-left:0px solid silver;     /*公告栏.....去除右边 界线，只保留左边界线和下边界线      2016.10.21  */
+border-bottom:1px solid silver;
+}
+
+.buju5{
+align:right;
+height:434px;
+text-align: right;
+border-left:0px solid silver;     /*用户排行.....去除右边 界线，只保留左边界线和下边界线      2016.10.21  */
+border-bottom:1px solid silver;	
+}
+.buju5 ul{
+	margin:2px;
+	padding:4px;
+}
+.buju5 li{
+	list-style:none;
+	text-decoration:none;
+	margin:0px;
+	padding:0px;
+	line-height:10px;
+}
+#bg{
+	font-size:10pt;
+	border:1px;
+	height:30px;
+	background-color:#85735F; /*#31B2AE*/
+	text-align:center;	 
+	/*rgba(1,2,3,...,n 参数 ) 表示透明度  前面的数字表示颜色的编码    000表示#000 黑色     0.8表示成程度   */
+	box-shadow:2px 5px 5px rgba(0,0,0,0.8); 
+}
+
+/*广告栏设置 */
+.ad{
+	float:left;
+}
+
+.bb{
+	text-align:left;
+	margin-top:12px;
+	border-bottom:1px solid silver;     /*去除右边 界线，只保留左边界线和下边界线      2016.10.21  */
+}
+.gg{	
+	margin-top:12px;
+	margin-left:0px;
+	border:0px solid red;
+}
+a:hover{
+  	text-decoration:none;
+}
+
