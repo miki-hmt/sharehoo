@@ -251,7 +251,7 @@ public class ReplyController {
 		return E3Result.build(401, "删除失败..");
 	}
 	
-	@RequestMapping("/admin/reply/update")
+	@RequestMapping("/admin/reply/update/{replyId}")
 	public String update(@PathVariable("replyId") int replyId)throws Exception{
 		Reply reply=replyService.findReplyById(replyId);
 		reply.setStatus(1);

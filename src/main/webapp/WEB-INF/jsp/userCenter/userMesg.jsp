@@ -145,7 +145,7 @@
 										<td colspan="3" style="text-align: left;vertical-align: middle;width: 110px;vertical-align: middle;font-size:10pt;">
 											第<font color=red>${state.index+1 }</font>条:
 										</td>																										
-										<td style="text-align: center;vertical-align: middle;font-size:10pt;"><a href="${host}/admin/reply/update?replyId=${reply.id }">标为已读</a></td>
+										<td style="text-align: center;vertical-align: middle;font-size:10pt;"><a href="${host}/admin/reply/update/${reply.id }">标为已读</a></td>
 										<td><input type="checkbox"/></td>																
 									</tr>
 									<tr>
