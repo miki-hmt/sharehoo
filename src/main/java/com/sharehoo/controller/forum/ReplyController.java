@@ -56,7 +56,7 @@ public class ReplyController {
 	@Autowired
 	private TopicService topicService;
 	
-	@SuppressWarnings("restriction")
+
 	@RequestMapping("/reply/save")
 	@ResponseBody
 	public E3Result save(Reply reply,@RequestParam("sonId") int sonId,HttpServletRequest request){
@@ -91,6 +91,12 @@ public class ReplyController {
 		Properties props = new Properties();
 		try {
 			props.load(this.getClass().getClassLoader().getResourceAsStream("user_reply_email.properties"));
+			
+			//****** 把JavaMail重构成异步，避免阻塞核心业务逻辑。
+			props.put("mail.smtp.timeout", 10000);
+			props.put("mail.smtp.connectiontimeout", 10000);
+			props.put("mail.smtp.writetimeout", 10000);
+	        props.put("mail.debug", "true");
 		} catch (IOException e1) {throw new RuntimeException(e1);}
 		
 		//登录邮件服务器，得到session  	
@@ -164,6 +170,12 @@ public class ReplyController {
 		Properties props = new Properties();
 		try {
 			props.load(this.getClass().getClassLoader().getResourceAsStream("user_comments_email.properties"));
+			
+			//****** 把JavaMail重构成异步，避免阻塞核心业务逻辑。
+			props.put("mail.smtp.timeout", 10000);
+			props.put("mail.smtp.connectiontimeout", 10000);
+			props.put("mail.smtp.writetimeout", 10000);
+	        props.put("mail.debug", "true");
 		} catch (IOException e1) {throw new RuntimeException(e1);}
 		
 		//登录邮件服务器，得到session    	

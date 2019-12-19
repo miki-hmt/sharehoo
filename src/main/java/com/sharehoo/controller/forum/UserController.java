@@ -101,6 +101,7 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings("restriction")
 	@RequestMapping(value="/user/register",method= RequestMethod.POST)
 	@ResponseBody
 	public E3Result register(@RequestParam(value="facelogo",required=false) MultipartFile facelogo,@RequestParam(value="faceFileName",required=false) String faceFileName,
@@ -147,7 +148,13 @@ public class UserController {
 		//*********3. 发邮件   **3**
 		Properties props = new Properties();
 		try {
-			props.load(this.getClass().getClassLoader().getResourceAsStream("register_email.properties"));		
+			props.load(this.getClass().getClassLoader().getResourceAsStream("register_email.properties"));
+			
+			//****** 把JavaMail重构成异步，避免阻塞核心业务逻辑。
+			props.put("mail.smtp.timeout", 10000);
+			props.put("mail.smtp.connectiontimeout", 10000);
+			props.put("mail.smtp.writetimeout", 10000);
+	        props.put("mail.debug", "true");
 			//登录邮件服务器，得到session   	
 	        //设置SSL连接、邮件环境
 	        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());                      
@@ -391,6 +398,7 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings("restriction")
 	@RequestMapping("/user/find")
 	@ResponseBody
 	public E3Result find(HttpServletRequest request,@RequestParam("trueName") String trueName,@RequestParam("imageCode") String imageCode)throws Exception{
@@ -428,6 +436,12 @@ public class UserController {
 		Properties props = new Properties();
 		try {
 			props.load(this.getClass().getClassLoader().getResourceAsStream("user_find_email.properties"));
+			
+			//****** 把JavaMail重构成异步，避免阻塞核心业务逻辑。
+			props.put("mail.smtp.timeout", 10000);
+			props.put("mail.smtp.connectiontimeout", 10000);
+			props.put("mail.smtp.writetimeout", 10000);
+	        props.put("mail.debug", "true");
 			
 			//登录邮件服务器，得到session 	
 	        //设置SSL连接、邮件环境

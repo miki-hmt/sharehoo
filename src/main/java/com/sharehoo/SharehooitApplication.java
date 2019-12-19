@@ -3,17 +3,13 @@ package com.sharehoo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.web.multipart.MultipartResolver;
-
 import com.sharehoo.dao.impl.BaseDAOImpl;
-import com.sharehoo.listener.CustomMultipartResolver;
 
 
 /*2019.10.11 miki 解决文件上传的监听
@@ -25,17 +21,18 @@ import com.sharehoo.listener.CustomMultipartResolver;
 
 @ServletComponentScan
 @EnableJpaRepositories(repositoryBaseClass = BaseDAOImpl.class)
-@SpringBootApplication(exclude = {MailSenderAutoConfiguration.class,MultipartAutoConfiguration.class})
+@SpringBootApplication(exclude = {MailSenderAutoConfiguration.class})
+@ComponentScan(basePackages = {"com.sharehoo", "org.springframework.web.multipart.commons"})
 public class SharehooitApplication extends SpringBootServletInitializer{
 	
 	/*
 	* 将 multipartResolver 指向我们刚刚创建好的继承 CommonsMultipartResolver 类的自定义文件上传处理类
 	*/
-	@Bean(name = "multipartResolver")
-	public MultipartResolver multipartResolver() {
-		CustomMultipartResolver customMultipartResolver = new CustomMultipartResolver();
-		return customMultipartResolver;
-	}
+//	@Bean(name = "multipartResolver")
+//	public MultipartResolver multipartResolver() {
+//		CustomMultipartResolver customMultipartResolver = new CustomMultipartResolver();
+//		return customMultipartResolver;
+//	}
 	
 	/**
 	 * 发布到外部Servlet容器

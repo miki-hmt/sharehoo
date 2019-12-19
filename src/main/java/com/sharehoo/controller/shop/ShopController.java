@@ -92,7 +92,7 @@ public class ShopController {
 	 * ***********************************************************************/
 	@RequestMapping("/shop/upload/status")
 	@ResponseBody
-	public String getProgress(@RequestParam("shopId") String shopId,HttpServletRequest request) {
+	public String getProgress(@RequestParam("shopId") String shopId,@RequestParam("length") String length,HttpServletRequest request) {
 		//System.out.println("缓存的key值："+"total_"+shopId);
 		Object total = CxCacheUtil.getIntance().getValue("total_"+request.getSession().getId());
 		String value = "";
@@ -107,7 +107,23 @@ public class ShopController {
 				CxCacheUtil.getIntance().unSetValue("progress_"+request.getSession().getId());
 			}
 		}else {
-			value ="var info={read:"+0+",total:"+10000+",items:"+1+"}";		//items:"+arg2+"	d多文件上传的时候，使用arg2
+			Object read = CxCacheUtil.getIntance().getValue("read_"+request.getSession().getId());
+			if(read!=null) {
+				int readlength = Integer.parseInt(String.valueOf(read));
+				if(readlength>=Integer.parseInt(length)) {
+					value ="var info={read:"+length+",total:"+length+",items:"+1+"}";		//items:"+arg2+"	d多文件上传的时候，使用arg2
+				}else {
+					readlength =readlength + 100*1024;
+					value ="var info={read:"+readlength+",total:"+length+",items:"+1+"}";		//items:"+arg2+"	d多文件上传的时候，使用arg2
+				}
+				
+				
+				CxCacheUtil.getIntance().setValue("read_"+request.getSession().getId(),readlength);
+				
+			}else {
+				value ="var info={read:"+0+",total:"+length+",items:"+1+"}";		//items:"+arg2+"	d多文件上传的时候，使用arg2
+				CxCacheUtil.getIntance().setValue("read_"+request.getSession().getId(),100*1024);
+			}			
 		}
 		return value;
 		

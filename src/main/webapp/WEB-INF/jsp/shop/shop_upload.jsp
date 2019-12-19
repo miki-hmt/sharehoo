@@ -305,7 +305,8 @@
 		if (checkForm()) {
 			//进度条上传...
 			createProgress();
-			setTimeout("getProgressBar()",1000);
+			var dom = document.getElementById("txt_userfile");
+			setTimeout("getProgressBar("+dom.files[0].size+")",1000);
 			
 			var formData = new FormData($("#upload_form")[0]);
 			$.ajax({
@@ -335,12 +336,12 @@
     //ajax异步提交
 	var flag=false;
 	var file;
-	function getProgressBar(){
+	function getProgressBar(fileSize){
 		if(!flag){
 		$.ajax({
 			cache : false,
 			async : true,
-			url:"${host}/shop/upload/status?shopId="+${shop.id},		//!!!注意：ajax不能同时调用同一个controller里的两个方法，否则定时会卡住
+			url:"${host}/shop/upload/status?shopId="+${shop.id}+"&length="+fileSize,		//!!!注意：ajax不能同时调用同一个controller里的两个方法，否则定时会卡住
 			type:"post",
 			success:function(data){
 				debugger;
@@ -370,7 +371,7 @@
 				}
 			}
 		});
-		setTimeout("getProgressBar();",1000);	//间隔一秒
+		setTimeout("getProgressBar("+fileSize+");",1000);	//间隔一秒
 		}
 	}
 		
