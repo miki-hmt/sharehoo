@@ -419,6 +419,8 @@ public class TopicController {
 			page = "1";
 		}
 		PageBean pageBean = new PageBean(Integer.parseInt(page), 10);
+		model.addAttribute("page", page);
+		
 		List<Reply> replyList = replyService.findReplyListByTopicId(topicId, pageBean);
 		model.addAttribute("replyList", replyList);
 		
