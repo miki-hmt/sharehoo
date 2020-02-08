@@ -26,66 +26,6 @@
 		});
 	});
 </script>
-
-<script type="text/javascript">
-
-//简单的 敏感词汇验证  2016.12.13 ....时间允许，可以建一个数据库表，存储相关词汇 
-//定义敏感字符     
-var forbiddenArray =['吃屎','骚逼','妈逼','麻痹','mabi','狗娘养的','傻逼','草','滚','黄色','逼','日','畜生','sb','尼玛','妈的','反共','草泥马'];
-//定义函数
-function forbiddenStr(str){
-//  var destString = trim(str);
-  var re = '';
-  
-  for(var i=0;i<forbiddenArray.length;i++){
-      if(i==forbiddenArray.length-1)
-          re+=forbiddenArray[i];
-      else
-          re+=forbiddenArray[i]+"|";
-  }
-  //定义正则表示式对象
-  //利用RegExp可以动态生成正则表示式
-  var pattern = new RegExp(re,"g");
-  if(pattern.test(str)){
-      return false;
-  }else{
-      return true;
-  }
-}
-
-
-             //游客进入帖子页面，只能浏览不能评论，若是强行评论，会跳出提示2016.09.24
-function checkForm(){
-	if('${currentUser.nickName}'==''){
-		alert("请先登陆，再发布！");
-		/* var url="Report_preSave.action?role=0&reportType=1";
-		window.open("login?url="+url); */
-		return false;
-	}
-	if ($("#title").val()==""||$("#title").val()==null) {
-		alert("请填写主题！");
-		return false;
-	}
-	
-	if (CKEDITOR.instances.Content.getData().length<10) {
-		alert("留言内容最少20个字符！");
-		return false;
-	}
-	if (CKEDITOR.instances.Content.getData().length>50) {
-		alert("内容最多120个字符！");
-		return false;
-	}
-	
-//敏感词汇判断   2016.12.13@miki 
-	
-	if(forbiddenStr(CKEDITOR.instances.Content.getData())==false){
-		alert("内容含敏感词汇！请修改后发表 ");
-        return false;
-		
-	}	
-	
-}
-</script>
 </head>
 <body>
 <div class="wrap" style="margin: 0 auto;">
@@ -112,21 +52,22 @@ function checkForm(){
 				</table>
 			</td>
 			<td>
-				<form class="form-horizontal" style="margin-top: 10px;" action="secret/publish?topic.section.id=17" method="post" onsubmit="return checkForm()">
+				<form class="form-horizontal" id="secret_form" style="margin-top: 10px;" action="" method="post">
 
-					<input type="hidden" id="title" name="topic.title" value="1" style="width: 800px;">
+					<input type="hidden" id="title" name="title" value="1" style="width: 800px;">
 
 					<div class="control-group">
 						<label class="control-label" for="Content">【吐槽心事】</label>
 						<div class="controls">
-							<textarea name="topic.content" id="Content" cols="50" style="height:200px;width: 800px;" ></textarea>
+							<textarea name="content" id="Content" cols="50" style="height:200px;width: 800px;" ></textarea>
 						</div>
 					</div>
-					<input id="user" name="topic.user.id" value="${currentUser.id }" type="hidden"/>
-					<%-- <input id="section" type="hidden" name="topic.section.id" value="${curSection.id }"/> --%>
+					<input id="user" name="user.id" value="${currentUser.id }" type="hidden"/>	
+					<input id="section" name="section.id" value="17" type="hidden"/>				
 					<div class="control-group">
 						<div class="controls">
-							<Button class="btn btn-primary " data-dismiss="modal" aria-hidden="true" type="submit">提交</Button>
+							<Button class="btn btn-primary " id="okBtn" data-dismiss="modal"
+									aria-hidden="true">提交</Button>
 							<font id="error"></font>
 						</div>
 					</div>
@@ -139,19 +80,106 @@ function checkForm(){
 	<jsp:include page="../common/footer.jsp"/>
 </div>
 	<script type="text/javascript">
-		/* //放新浪微博表情
-		$("#message_face").jqfaceedit({
-			txtAreaObj : $('#Content'),
-			containerObj : $('#container'),
-			top : 25,
-			left : -27
-		});
+	//springboot框架提交表单实体对象到后台尽量使用ajax提交，将表单序列化提交	2019.08.31 miki
+	$("#okBtn").on("click", function() {
 
-		//显示表情
-		$("#show_face").click(function() {
-			$('.show_e').html($('#Content').val());
-			$('.show_e').emotionsToHtml();
-		}); */
+		//ckeditor4.12新特性，提交表单前需要更新textAera字段内容	2019.09.02
+		for (instance in CKEDITOR.instances) {
+			CKEDITOR.instances[instance].updateElement();
+		}
+		
+		if (!checkForm()) {
+			var formData = new FormData($("#secret_form")[0]);
+			$.ajax({
+				type : "POST",
+				url : "${host}/secret/publish",
+				data : formData,
+				cache : false,
+				async : false,
+				processData : false, //必须false才会避开jQuery对 formdata 的默认处理
+				contentType : false, //必须false才会自动加上正确的Content-Type
+				success : function(data) {
+					if (data.status == 200) {
+						tipOk("发表成功!!",function(){
+							location.reload();
+						});
+					} else {
+						tipError("发表失败!!" + data.msg);
+					}
+				}
+			});		
+		}
+		return false;	//阻止ajax结束自动刷新页面
+	});
+	
+	
+	//游客进入帖子页面，只能浏览不能评论，若是强行评论，会跳出提示2016.09.24
+	function checkForm(){
+		var result = false;
+		var title = $("#title").val();
+		//敏感词汇判断   2016.12.13@miki 
+		if(forbiddenStr(CKEDITOR.instances.Content.getData())==false){
+			tipError("内容含敏感词汇！请修改后发表 ");
+	        result = true;			
+		}
+		if('${currentUser.nickName}'==''){
+			tipError("请先登陆，再发布！");
+			result = true;
+		}else if (title==""||title==null) {
+			tipError("请填写主题！");
+			result = true;
+		}
+		else if (CKEDITOR.instances.Content.getData().length<10) {
+			tipError("秘密内容最少10个字符！");
+			result = true;
+		}
+		else if (CKEDITOR.instances.Content.getData().length>50) {
+		tipError("内容最多120个字符！");
+		result = true;
+		}
+			
+		return result;					
+	}
+		
+	function tipOk(content,callback){
+		swal({   
+			title: content,   
+			text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',   
+			imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+			html: true,
+			timer: 2000,   
+			showConfirmButton: false
+		},function(){
+				if (callback) {
+					callback();
+				}
+			});
+	};
+	function tipError(content){
+		swal("发表失败", content, "error");
+	};
+	
+	//简单的 敏感词汇验证  2016.12.13 ....时间允许，可以建一个数据库表，存储相关词汇 
+	//定义敏感字符     
+	var forbiddenArray =['吃屎','骚逼','妈逼','麻痹','狗娘养的','傻逼','畜生','尼玛','妈的','反共','草泥马'];
+	//定义函数
+	function forbiddenStr(str){
+		var re = '';		
+		for(var i=0;i<forbiddenArray.length;i++){
+		    if(i==forbiddenArray.length-1)
+		        re+=forbiddenArray[i];
+		    else
+		        re+=forbiddenArray[i]+"|";
+		}
+		//定义正则表示式对象
+		//利用RegExp可以动态生成正则表示式
+		var pattern = new RegExp(re,"g");
+		if(pattern.test(str)){
+		    return false;
+		}else{
+		    return true;
+		}
+	}
 	</script>
 </body>
 </html>

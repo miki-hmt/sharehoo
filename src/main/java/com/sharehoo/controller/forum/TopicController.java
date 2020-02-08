@@ -119,11 +119,12 @@ public class TopicController {
 	* @throws
 	 */
 	@RequestMapping(value="/secret/publish",method = RequestMethod.POST)
-	public String secretTopicSave(Topic topic) throws Exception {
+	@ResponseBody
+	public E3Result secretTopicSave(HttpServletRequest request,HttpServletResponse response,Topic topic) throws Exception {
 		topic.setPublishTime(new Date());
 		topic.setModifyTime(new Date());
 		topicService.saveTopic(topic);
-		return "redirect:";
+		return E3Result.ok();
 	}
 	
 	
