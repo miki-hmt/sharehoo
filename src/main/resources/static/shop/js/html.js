@@ -134,7 +134,7 @@ var userAgent = navigator.userAgent.toLowerCase();
   <div class="col-md-3 pull-left logo clearfix"><a href="http://sharehoo.cn/shop/Shop_home.action" title="下载首页" target="_blank" class="icon"></a><a title="频道首页" href="http://sharehoo.cn/shop/Shop_home.action" class="img '+prodLogo+'"></a></div>\
   <div class="pull-right login-wrap '+loginMark+'">\
     <ul class="btns">\
-  <li class="loginlink"><a href="javascript:void(0)" onclick="javascript:Login()" target="_top">登录&nbsp;</a>|<a  target="_top" href="../register.jsp">&nbsp;注册</a></li>\
+  <li class="loginlink"><a href="javascript:void(0)" onclick="javascript:Login()" target="_top">登录&nbsp;</a>|<a  target="_top" href="../register">&nbsp;注册</a></li>\
       <li class="search">\
         <div class="icon on-search-icon">\
           <div class="wrap">\

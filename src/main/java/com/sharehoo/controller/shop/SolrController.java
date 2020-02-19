@@ -28,6 +28,7 @@ import com.sharehoo.service.SolrJService;
 import com.sharehoo.service.TypeService;
 import com.sharehoo.service.forum.CategoryService;
 import com.sharehoo.service.shop.SourceService;
+import com.sharehoo.util.StringEx;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
 import com.sharehoo.util.forum.StringUtil;
@@ -183,7 +184,7 @@ public class SolrController {
 			model.addAttribute("sourceList", sourceList);
 			long total=sourceService.getCountByCategoryId(Integer.parseInt(categoryId==null ? "0":categoryId));
 			StringBuffer param=new StringBuffer();
-			param.append("categoryId="+categoryId);
+			param.append("categoryId="+(StringEx.isNull(categoryId) ? "0":categoryId));
 			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/categories", total, Integer.parseInt(page), 10,param.toString());
 			model.addAttribute("pageCode", pageCode);
 		}

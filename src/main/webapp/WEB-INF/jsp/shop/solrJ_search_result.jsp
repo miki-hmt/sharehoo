@@ -473,6 +473,9 @@ function KeyP(event){
 				$(this).addClass("cate_cur").siblings("a").removeClass("cate_cur");			
  	    	//var categoryId = $("#categoryid1").attr("bate-id");	
 				var cateId = '${curCategory.id}';
+				if(cateId==''){
+					cateId = 0;
+				}
  				var menuId=menuid;
  				window.location.href="${pageContext.request.contextPath}/shop/source/categories?categoryId="+cateId+"&menuId="+menuId;
  				return false;
