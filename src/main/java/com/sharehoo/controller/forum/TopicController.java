@@ -3,6 +3,7 @@ package com.sharehoo.controller.forum;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +39,7 @@ import com.sharehoo.service.forum.ReplyService;
 import com.sharehoo.service.forum.SectionService;
 import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.UserService;
+import com.sharehoo.util.PostUrlsToBaidu;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.IDUtils;
 import com.sharehoo.util.forum.PageUtil;
@@ -92,6 +94,14 @@ public class TopicController {
 		Section curSection = sectionService.findSectionById(sectionId);
 		model.addAttribute("curSection", curSection);
 		List<Section> sectionList = sectionService.findSectionList(null, null);
+		List<String> urls = new ArrayList<String>();
+		
+		//2020.05.05 miki 推送网站信息到百度爬虫
+		for (Section section : sectionList) {
+			urls.add("http://sharehoo.cn/topic/section/"+section.getId());
+		}
+		PostUrlsToBaidu.postUrl(urls);
+		
 		model.addAttribute("sectionList", sectionList);
 		return "topic/topicAdd";
 	}
@@ -205,7 +215,11 @@ public class TopicController {
 			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();logger.error(e);return E3Result.build(401, "发表失败..", e.getMessage());
-			}
+		}
+		
+		//2020.05.05 miki 推送网站信息到百度爬虫		
+		PostUrlsToBaidu.postUrl("http://sharehoo.cn/"+topic.getCode() + ".html");
+		
 		return E3Result.ok();
 	}
 	
@@ -336,6 +350,10 @@ public class TopicController {
 		}
 		model.addAttribute("topicLastReply", topicLastReply);
 		model.addAttribute("topicReplyCount", topicReplyCount);
+		
+		//2020.05.05 miki 推送网站信息到百度爬虫		
+		PostUrlsToBaidu.postUrl("http://sharehoo.cn/topic/section/"+sectionId);
+		
 		return "topic/topicList";
 	}
 

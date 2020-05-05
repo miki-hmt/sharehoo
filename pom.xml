@@ -327,6 +327,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
+        
+     <!-- 2020.03.15 miki 增加百度云加速的网站访问量接口调用api包 -->
+     <!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
+	<dependency>
+	    <groupId>com.mashape.unirest</groupId>
+	    <artifactId>unirest-java</artifactId>
+	    <version>1.4.9</version>
+	</dependency>
       
    </dependencies>
 

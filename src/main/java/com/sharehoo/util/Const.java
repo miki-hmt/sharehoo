@@ -23,4 +23,5 @@ public class Const {
     public static final String EMPTY = "";
     public static final String FWP = "fwp";
     public static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final SimpleDateFormat SDF_DATE = new SimpleDateFormat("yyyy-MM-dd");
 }

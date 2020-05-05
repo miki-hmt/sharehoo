@@ -114,6 +114,7 @@ function deleteTopics(){
 							<option value="0" ${s_topic.top==0?'selected':'' }>非置顶</option>
 						</select>
 					</td>
+					
 					<td>是否精华:</td>
 					<td>
 						<select name="s_topic.good" style="width: 195px;"><option value="2">全部</option>
@@ -155,7 +156,7 @@ function deleteTopics(){
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${TopicList }" var="topic">
+								<c:forEach items="${topicList }" var="topic">
 									<tr>
 										<td><input type="checkbox" /></td>
 										<td style="text-align: center;vertical-align: middle;">${topic.id }</td>

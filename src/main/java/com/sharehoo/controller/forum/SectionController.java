@@ -46,10 +46,13 @@ public class SectionController {
 	private ZoneService zoneService;
 	
 	@RequestMapping("/admin/sections")
-	public String list(HttpServletRequest request,@PathVariable("page") String page,Model model)throws Exception{
+	public String list(HttpServletRequest request,@RequestParam(value="page") String page,Model model)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
+		
+		Section s_section = new Section();
+		model.addAttribute("s_section", s_section);
 		
 		User master=new User();
 		master.setType(2);

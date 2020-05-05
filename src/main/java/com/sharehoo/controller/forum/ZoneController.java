@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Zone;
@@ -25,7 +26,7 @@ public class ZoneController {
 	private ZoneService zoneService;
 	
 	@RequestMapping("/admin/zones")
-	public String list(@PathVariable("page") String page,Model model,HttpServletRequest request)throws Exception{
+	public String list(@RequestParam(value="page") String page,Model model,HttpServletRequest request)throws Exception{
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
