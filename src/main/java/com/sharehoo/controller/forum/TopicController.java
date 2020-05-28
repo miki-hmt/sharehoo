@@ -33,7 +33,9 @@ import com.sharehoo.entity.forum.Reply;
 import com.sharehoo.entity.forum.Section;
 import com.sharehoo.entity.forum.Topic;
 import com.sharehoo.entity.forum.User;
+import com.sharehoo.entity.shop.Log;
 import com.sharehoo.entity.shop.NewsBanner;
+import com.sharehoo.service.LogService;
 import com.sharehoo.service.forum.NewsBannerService;
 import com.sharehoo.service.forum.ReplyService;
 import com.sharehoo.service.forum.SectionService;
@@ -67,7 +69,8 @@ public class TopicController {
 	private SectionService sectionService;
 	@Resource
 	private UserService userService;
-	
+	@Autowired
+	private LogService logService;
 	
 	@Value("${spring.freemarker.HTML_GEN_PATH}")
 	private String HTML_GEN_PATH;
@@ -100,7 +103,13 @@ public class TopicController {
 		for (Section section : sectionList) {
 			urls.add("http://sharehoo.cn/topic/section/"+section.getId());
 		}
-		PostUrlsToBaidu.postUrl(urls);
+		String result = PostUrlsToBaidu.postUrl(urls);
+		Log log = new Log();
+		log.setTime(new Date());
+		log.setType("commit url");
+		log.setOperation_log(result);
+		log.setUser(currentUser);		
+		logService.save(log);
 		
 		model.addAttribute("sectionList", sectionList);
 		return "topic/topicAdd";
@@ -218,7 +227,13 @@ public class TopicController {
 		}
 		
 		//2020.05.05 miki 推送网站信息到百度爬虫		
-		PostUrlsToBaidu.postUrl("http://sharehoo.cn/"+topic.getCode() + ".html");
+		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/"+topic.getCode() + ".html");
+		Log log = new Log();
+		log.setTime(new Date());
+		log.setType("commit url");
+		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/"+topic.getCode() + ".html"+"提交结果："+result);
+		log.setUser(currentUser);		
+		logService.save(log);
 		
 		return E3Result.ok();
 	}
@@ -352,7 +367,12 @@ public class TopicController {
 		model.addAttribute("topicReplyCount", topicReplyCount);
 		
 		//2020.05.05 miki 推送网站信息到百度爬虫		
-		PostUrlsToBaidu.postUrl("http://sharehoo.cn/topic/section/"+sectionId);
+		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/topic/section/"+sectionId);
+		Log log = new Log();
+		log.setTime(new Date());
+		log.setType("commit url");
+		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/topic/section/"+sectionId+"提交结果："+result);		
+		logService.save(log);
 		
 		return "topic/topicList";
 	}

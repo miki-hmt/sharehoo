@@ -335,7 +335,15 @@
 	    <artifactId>unirest-java</artifactId>
 	    <version>1.4.9</version>
 	</dependency>
-      
+    
+    <!-- 拼音转换工具 -->
+	<dependency>
+	    <groupId>com.github.houbb</groupId>
+	    <artifactId>pinyin</artifactId>
+	    <version>0.1.2</version>
+	</dependency>
+    
+    
    </dependencies>
 
 	<build>

@@ -34,6 +34,7 @@ public class User implements Serializable{
 	private boolean status;    //0表示未激活，1表示激活
 	private String activationCode;	//激活码
 	private String nickNameId;	//用户昵称英文id，用来做url中地址显示如：localhost:8080/sharehoo/blog/miki/articles
+	private Date updateTime;	//用户更新时间
 	
 	private int levelId;    //2017.03.25 author:miki 添加用户等级，和积分属性 
 	private int score;
@@ -177,6 +178,12 @@ public class User implements Serializable{
 	}
 	public void setNickNameId(String nickNameId) {
 		this.nickNameId = nickNameId;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	

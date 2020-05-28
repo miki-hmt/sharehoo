@@ -60,6 +60,7 @@ import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.UserService;
 import com.sharehoo.util.BootPathUtil;
 import com.sharehoo.util.CxCacheUtil;
+import com.sharehoo.util.PinyinUtil;
 import com.sharehoo.util.StringEx;
 import com.sharehoo.util.forum.DateUtil;
 import com.sharehoo.util.forum.E3Result;
@@ -303,6 +304,7 @@ public class UserController {
 				}else{
 					user.setFace(old.getFace());
 				}
+				
 				if(StringUtils.isEmpty(user.getEmail())){
 					user.setEmail(old.getEmail());
 				}
@@ -319,9 +321,15 @@ public class UserController {
 					user.setRegTime(old.getRegTime());
 				}
 				user.setType(old.getType());
+				//密码修改
 				if(!user.getPassword().equals(old.getPassword())) {
 					user.setPassword(new MD5().complie(user.getPassword().trim()));
 				}
+				
+				//获取昵称首字母，组合成博客地址链接
+				String headChar = PinyinUtil.getPinYinHeadChar(user.getNickName());
+				user.setNickNameId(headChar+user.getId());
+				user.setUpdateTime(new Date());
 			} catch (Exception e) {
 				return E3Result.build(401, "修改失败");
 			}				
