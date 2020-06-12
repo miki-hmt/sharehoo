@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,9 +99,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(User user) {
 		List<Object> param=new LinkedList<Object>();
-		StringBuffer hql=new StringBuffer("from User u where u.nickName=? and u.password=?");
-		param.add(user.getNickName());
+		StringBuffer hql=new StringBuffer("from User u where u.password=?");
+		
+		//2020.06.12 miki 适配手机号，邮箱，昵称不同场景下的用户登录
+		hql.append("and u.nickName=? or u.email=? or u.mobile=?");
+		
 		param.add(user.getPassword());
+		param.add(user.getNickName());
+		param.add(user.getNickName());
+		param.add(user.getNickName());
 		return baseDAO.get(hql.toString(), param);
 	}
 
@@ -225,6 +232,18 @@ public class UserServiceImpl implements UserService {
 		String hql = "from User as user where user.status=1 order by user.score desc";
 		List<Object> param = new LinkedList<Object>();
 		return baseDAO.findTopN(hql, param, 20);
+	}
+
+	@Override
+	public boolean existUserWithTelephone(String phone) {
+		// TODO Auto-generated method stub
+		String hql="select count(*) from User where mobile=?";
+		long count=baseDAO.count(hql, new Object[]{phone});
+		if (count>0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	

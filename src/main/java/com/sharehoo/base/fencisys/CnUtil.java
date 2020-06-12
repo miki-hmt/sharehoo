@@ -1,19 +1,30 @@
 package com.sharehoo.base.fencisys;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.sharehoo.util.BootPathUtil;
+
 public class CnUtil {
 	public static List EnFnCi(String key) throws IOException{
-		String filename = "dic.txt";
+		String staticPath = BootPathUtil.getStaticPath();
+		String filename = staticPath+"dic.txt";
 		HashMap hm = new HashMap();
 		HashMap len = new HashMap();
-		GenerateDictionary genDic = new GenerateDictionary();
+		//GenerateDictionary genDic = new GenerateDictionary();
 		Segmentation seg;
-
-		genDic.GenHashDic(filename, hm, len);
-	
+		String s = "";
+		
+		//genDic.GenHashDic(filename, hm, len);
+		BufferedReader in = new BufferedReader(new FileReader(filename));		
+		while ((s = in.readLine()) != null) {
+			hm.put(s, s.length());
+			len.put(s.length(), s);
+		}
+		
 		seg = new Segmentation(hm, len);
 		
 		String FmmTarget = seg.Bmm(key);

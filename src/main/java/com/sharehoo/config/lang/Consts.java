@@ -66,6 +66,8 @@ public interface Consts {
 
 	/* 状态-锁定 */
 	int STATUS_LOCKED = 1;
+	
+	public static final String TAGS = "TAGS_";
 
 	/**
 	 * 排序

@@ -10,7 +10,7 @@ public class GenerateDictionary {
 	public void GenHashDic(String filename, HashMap hm, HashMap len) throws FileNotFoundException, IOException {
 		String s = new String();
 		BufferedReader in = new BufferedReader(
-				new FileReader(GenerateDictionary.class.getClassLoader().getResource("/image_upload/source_upload/file")
+				new FileReader(GenerateDictionary.class.getClassLoader().getResource("")
 						+ "\\" + filename));
 		while ((s = in.readLine()) != null) {
 			hm.put(s, s.length());

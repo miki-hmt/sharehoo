@@ -4,6 +4,12 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class HTTP {
 
@@ -63,4 +69,12 @@ public class HTTP {
         connection.disconnect();
         return result;
     }
+    
+    public static void main(String[] args) {
+		String ss = "周杰伦;2020新歌;mojito";
+		List<String> dd = new ArrayList<String>();
+		String[] split = StringUtils.split(ss, ";");
+		Collections.addAll(dd, split);
+		System.out.println(dd.size());
+	}
 }

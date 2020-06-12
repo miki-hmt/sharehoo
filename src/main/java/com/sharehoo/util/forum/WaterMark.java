@@ -103,7 +103,7 @@ public final static void pressImage(String pressImg, String targetImg,
 			Graphics g = image.createGraphics();
 			g.drawImage(src, 0, 0, wideth, height, null);
 
-			g.setColor(Color.RED);
+			g.setColor(Color.lightGray);
 			g.setFont(new Font(fontName, Font.ITALIC, fontSize)); // 字体设为斜体 2017.05.28
 
 			g.drawString(pressText, wideth - fontSize - x, height - fontSize / 2 - y);
@@ -118,7 +118,8 @@ public final static void pressImage(String pressImg, String targetImg,
 	}
 	
 	public static void main(String[] args) {
-		pressText("sharehoo.cn", "D://aqiyiVideo//ddc.png", "宋体", 1, 2, 25, 160, 200);
+//		pressText("sharehoo.cn", "G://素材//hmt.jpg", "宋体", 1, 2, 30, 160, 200);
+		pressText("sharehoo.cn/黄小妹22170", "G://素材//hmt.jpg", "宋体", 1,2,40, 450, 150);
 	}
 	/*public static void main(String[] args) {
 		pressText("sharehoo.cn", "D://aqiyiVideo//ddc.png", "宋体", 1, 2, 25, 160, 200);

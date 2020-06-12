@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sharehoo.config.lang.Consts;
+import com.sharehoo.dao.jedis.JedisClient;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.entity.shop.Shop;
@@ -44,6 +45,8 @@ public class SourceManageController {
 	private SourceService sourceService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private JedisClient jedisClient;
 	
 	@RequestMapping("/shop/source/upload")
 	@ResponseBody
@@ -106,6 +109,10 @@ public class SourceManageController {
 
 			shopService.save(shop);
 			userService.saveUser(user);
+			
+			//清空redis 店铺tags缓存
+			jedisClient.hdel(Consts.TAGS+shop.getId(), shop.getId()+"");
+			
 		} catch (Exception e) {
 			return E3Result.build(401, "资源发布失败..",e.getMessage());
 		}

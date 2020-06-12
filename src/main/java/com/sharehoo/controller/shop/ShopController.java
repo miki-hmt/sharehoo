@@ -115,11 +115,8 @@ public class ShopController {
 				}else {
 					readlength =readlength + 100*1024;
 					value ="var info={read:"+readlength+",total:"+length+",items:"+1+"}";		//items:"+arg2+"	d多文件上传的时候，使用arg2
-				}
-				
-				
-				CxCacheUtil.getIntance().setValue("read_"+request.getSession().getId(),readlength);
-				
+				}								
+				CxCacheUtil.getIntance().setValue("read_"+request.getSession().getId(),readlength);				
 			}else {
 				value ="var info={read:"+0+",total:"+length+",items:"+1+"}";		//items:"+arg2+"	d多文件上传的时候，使用arg2
 				CxCacheUtil.getIntance().setValue("read_"+request.getSession().getId(),100*1024);
@@ -297,6 +294,11 @@ public class ShopController {
 			PageBean pageBean=new PageBean(Integer.parseInt(page), 6);
 			List<Source> sourceList=sourceService.getSourcesByShopId(shop.getId(), pageBean);
 			model.addAttribute("sourceList", sourceList);
+			
+			//获取标签列表
+			List<String> tags = sourceService.getSourceTagsByShop(shopId);
+			model.addAttribute("tagsByShop", tags);
+			
 			long total=sourceService.getSourceCountByuserId(shop.getUser().getId());
 			StringBuffer param=new StringBuffer();	
 			param.append("shopId="+shopId);

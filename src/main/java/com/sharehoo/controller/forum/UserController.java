@@ -108,6 +108,12 @@ public class UserController {
 	public E3Result register(@RequestParam(value="facelogo",required=false) MultipartFile facelogo,@RequestParam(value="faceFileName",required=false) String faceFileName,
 			User user)throws Exception{
 		
+		//2020.06.12 miki 防止重复提交注册
+		boolean email = userService.existUserWithEmail(user.getEmail());
+		if(email) {
+			return E3Result.build(401, "您已发送过注册信息，请不要重复注册！！");
+		}
+		
 		if (facelogo!=null && facelogo.getSize()>0) {		
 			 //获取项目的static根路径  
 	    	String staticPath = BootPathUtil.getStaticPath();
@@ -219,7 +225,11 @@ public class UserController {
 		} catch (Exception e1) {
 			logger.error("注册服务异常..."+e1);
 			return E3Result.build(401, "注册失败...，请检查相关信息",e1.getMessage());
-		}	
+		}
+		
+		//获取昵称首字母，组合成博客地址链接
+		String headChar = PinyinUtil.getPinYinHeadChar(user.getNickName());
+		user.setNickNameId(headChar+user.getId());
 		userService.saveUser(user);
 		return E3Result.ok();
 	}
@@ -354,6 +364,20 @@ public class UserController {
 		return result;
 	}
 	
+	@RequestMapping("/user/telephone")
+	@ResponseBody
+	public JSONObject existUserWithTelephone(@RequestParam("phone") String phone)throws Exception{
+		boolean exist=userService.existUserWithTelephone(phone);
+		JSONObject result=new JSONObject();
+		if (exist) {
+			result.put("exist", true);
+		} else {
+			result.put("exist", false);
+		}
+		
+		return result;
+	}
+	
 	@RequestMapping("/login")
 	public String toLogin()throws Exception{
 		
@@ -363,7 +387,7 @@ public class UserController {
 	@RequestMapping("/home")
 	public String toHome()throws Exception{
 		
-		return "redirect:/";
+		return "home";
 	}
 	
 	@RequestMapping("/user/email")

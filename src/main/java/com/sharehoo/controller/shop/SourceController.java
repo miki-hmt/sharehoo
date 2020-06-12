@@ -117,6 +117,9 @@ public class SourceController {
 		List<Source> ohterSources=sourceService.getSourcesByshopId(shop.getId());
 		model.addAttribute("ohterSources", ohterSources);
 		
+		List<String> tagsByShop = sourceService.getSourceTagsByShop(shop.getId());
+		model.addAttribute("tags", tagsByShop);
+		
 		if(currentUser!=null){
 			model.addAttribute("currentUser", currentUser);
 			

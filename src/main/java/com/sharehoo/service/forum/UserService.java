@@ -43,6 +43,9 @@ public interface UserService {
 	 */
 	public boolean existUserWithTrueName(String trueName);
 	
+	//2020.06.12 判断是否存在重复手机号
+	public boolean existUserWithTelephone(String phone);
+	
 	public User findUserByTrueName(String trueName);
 	
 	/**

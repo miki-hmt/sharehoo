@@ -1,21 +1,26 @@
 package com.sharehoo.service.impl.shop;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sharehoo.dao.BaseDAO;
+import com.google.gson.Gson;
+import com.sharehoo.config.lang.Consts;
+import com.sharehoo.dao.jedis.JedisClient;
 import com.sharehoo.dao.shop.SourceDao;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Source;
 import com.sharehoo.service.shop.SourceService;
+import com.sharehoo.util.Const;
 import com.sharehoo.util.forum.StringUtil;
 @Transactional
 @Service("sourceService")
@@ -23,6 +28,10 @@ public class SourceServiceImpl implements SourceService {
 	
 	@Resource	//2017.12.20  miki 一定要在这加上resource注解，这是spring的依赖注入，不添加会报空指向异常
 	private SourceDao baseDAO;
+	
+	@Autowired
+	private JedisClient jedisClient;
+	
 	@Override
 	public void save(Source source) {
 		// TODO Auto-generated method stub
@@ -370,5 +379,59 @@ public class SourceServiceImpl implements SourceService {
 			}else {
 				return baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
 			}
+		}
+		
+		
+		/**
+		 * 2020.06.12 miki
+		 * 获取标签列表，优先从redis加载
+		 */
+		@Override
+		public List<String> getSourceTagsByShop(int shopId) {
+			// TODO Auto-generated method stub
+			//先从redis读取
+			String tagsStr = jedisClient.hget(Consts.TAGS+shopId,shopId+"");
+			if(StringUtils.isNoneBlank(tagsStr)) {
+				List<String> list = new Gson().fromJson(tagsStr, List.class);
+				return list;
+			}
+			
+			
+			List<String> tags = new ArrayList<String>();
+			List<Object> param=new LinkedList<Object>();
+			StringBuffer hql=new StringBuffer("from Source");
+			hql.append(" and shop_id = ?");
+			param.add(shopId);
+			
+			hql.append(" order by upload_time desc");
+			List<Source> sources = baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
+			for(Source source : sources) {
+				String tag = source.getTag();
+				if(tag.contains("；")) {
+					String[] tagArray = StringUtils.split(tag, "；");
+					Collections.addAll(tags, tagArray);
+				}
+				if(tag.contains(";")) {
+					String[] tagArray = StringUtils.split(tag, ";");
+					Collections.addAll(tags, tagArray);
+				}
+				
+				if(tag.contains("#")) {
+					String[] tagArray = StringUtils.split(tag, "#");
+					Collections.addAll(tags, tagArray);
+				}
+				
+				if(tag.contains("，")) {
+					String[] tagArray = StringUtils.split(tag, "，");
+					Collections.addAll(tags, tagArray);
+				}
+			}
+			//标签去重	2020.06.12
+			Set<String> tagsSet = new HashSet<String>(tags);
+			
+			//存入redis
+			jedisClient.hset(Consts.TAGS+shopId,shopId+"",new Gson().toJson(tagsSet));
+			
+			return tags;
 		}
 }

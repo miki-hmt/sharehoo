@@ -32,7 +32,10 @@ public class MD5 {
 		return n;
 	}
 	public static void main(String[] args) throws IOException {
+		int num = 10;
+		num+=1;
+		
 		String str = new MD5().complie("miki123456");	//测试密码加密
-		System.out.println(str);
+		System.out.println(str+num);
 	}
 }

@@ -6,6 +6,12 @@ import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.shop.Source;
 
 public interface SourceService {
+	
+	/*
+	 * 2020.06.12 miki 获取店铺标签
+	 */
+	public List<String> getSourceTagsByShop(int shopId);
+	
 	/*
 	 * 2017.07.31 miki 资源类接口实现
 	 */

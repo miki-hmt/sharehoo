@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sharehoo.config.lang.Consts;
+import com.sharehoo.entity.forum.User;
 import com.sharehoo.util.BootPathUtil;
 import com.sharehoo.util.StringEx;
 import com.sharehoo.util.forum.DateUtil;
@@ -56,7 +58,10 @@ public class CKUploadController {
     		@RequestParam("upload") MultipartFile upload,@RequestParam(value="uploadContentType",required=false) String uploadContentType,
     		@RequestParam(value="CKEditorFuncNum",required=false) String CKEditorFuncNum) throws Exception{
     	JSONObject result=new JSONObject(); 
-   
+    	
+    	HttpSession session=request.getSession();
+		User currentUser = (User)session.getAttribute(Consts.CURRENTUSER);
+    	
         // CKEditor提交的很重要的一个参数    
     	String staticPath = BootPathUtil.getStaticPath();
     	
@@ -120,10 +125,10 @@ public class CKUploadController {
            * 服务器图片上传路径E:/eclipse与项目文件/Soft/apache-tomcat-7.0.55/webapps/Forum/images/topicImage/	
          */
         
-        String content=WATER_NARK_CONTENT;
+        String content=WATER_NARK_CONTENT+"/"+currentUser.getNickName();
         String water_path=WATER_MARK_PATH;
         
-        WaterMark.pressText(content,uploadPath+"/"+fileName,"宋体",1,2,40, 280, 1);
+        WaterMark.pressText(content,uploadPath+"/"+fileName,"宋体",1,2,40, 400, 30);
                
         // 结合ckeditor功能
         // 2018.07.28   ckeditor4.10版本之后必须要采用此方式来进行上传
