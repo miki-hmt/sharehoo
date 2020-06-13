@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -317,18 +318,28 @@ public class ShopController {
 		List<Category> categories=categoryService.getCategoryList(null, null);
 		model.addAttribute("categories", categories);
 		
+		//"null"默认:按收入，"view"：按照浏览量	"douNum"：按下载量 	"last"：按最近开通
+		String type = request.getParameter("type");
+		model.addAttribute("type", type);
+		
 		if (StringUtil.isEmpty(page)) {
 			page="1";
 		}
 		PageBean pageBean=new PageBean(Integer.parseInt(page), 12);
 		long total=shopService.getAllShopCount();
-		List<Shop> shopList=shopService.allShops(pageBean);
+		List<Shop> shopList=shopService.allShops(pageBean,type);
 		model.addAttribute("shopList", shopList);
 		List<Shop> rankList=shopService.getShopListByDownNum();
 		model.addAttribute("rankList", rankList);
 		List<Notice> noticeList=noticeService.findDownLoadNoticeList();
 		model.addAttribute("noticeList", noticeList);
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/rank", total, Integer.parseInt(page), 12,null);
+		
+		StringBuffer param=new StringBuffer();
+		if(StringUtils.isNotBlank(type)) {
+			param.append("type="+type);
+		}
+				
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/rank", total, Integer.parseInt(page), 12,param.toString());
 		model.addAttribute("pageCode", pageCode);
 		return "shop/shoplist";
 	}

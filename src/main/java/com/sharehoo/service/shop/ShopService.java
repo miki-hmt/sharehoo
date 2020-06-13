@@ -32,9 +32,9 @@ public interface ShopService {
 	public List<Shop> getNewShops();
 	
 	/*
-	 * 2017.08.17 miki 得到全部店铺列表
+	 * 2020.06.13 miki 得到全部店铺列表,新增字段type
 	 */
-	public List<Shop> allShops(PageBean pageBean);
+	public List<Shop> allShops(PageBean pageBean,String type);
 	
 	public Long getAllShopCount();
 	

@@ -107,7 +107,7 @@ public class TopicController {
 		Log log = new Log();
 		log.setTime(new Date());
 		log.setType("commit url");
-		log.setOperation_log(result);
+		log.setOperation_log("向百度提交17个版本的链接："+result);
 		log.setUser(currentUser);		
 		logService.save(log);
 		
@@ -174,8 +174,8 @@ public class TopicController {
 	@ResponseBody
 	public E3Result save(HttpServletRequest request,HttpServletResponse response,Topic topic) throws Exception {
 
-		final long code = IDUtils.genTopicCode();
-		topic.setCode(code);
+		String code = IDUtils.genTopicCode();
+		topic.setCode("topics/"+code);
 
 		topic.setPublishTime(new Date());
 		topic.setModifyTime(new Date());
@@ -209,7 +209,7 @@ public class TopicController {
 			configuration.setDefaultEncoding("UTF-8");
 			
 			//************** 2019.09.07 miki 在springboot的yml文件中设置freeMarker模板文件的加载路径
-			Template template = configuration.getTemplate("topic.ftl");		
+			Template template = configuration.getTemplate("topic_full.ftl");		
 
 			template.setEncoding("UTF-8");
 			// 创建一个输出流，指定目录及文件名

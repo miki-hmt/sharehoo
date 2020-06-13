@@ -34,7 +34,7 @@ public class Topic implements Serializable{
 	private int good=0;					//是否精华	0为普通；1为精华
 	private int top=0;					//是否置顶	0为普通；1为置顶
 	
-	private Long code;
+	private String code;
 	private List<Reply> replyList=new ArrayList<Reply>();
 	
 	@Id
@@ -118,10 +118,10 @@ public class Topic implements Serializable{
 	public void setTop(int top) {
 		this.top = top;
 	}
-	public Long getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(Long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 

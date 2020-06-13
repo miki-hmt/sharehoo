@@ -391,7 +391,7 @@ public class SourceServiceImpl implements SourceService {
 			// TODO Auto-generated method stub
 			//先从redis读取
 			String tagsStr = jedisClient.hget(Consts.TAGS+shopId,shopId+"");
-			if(StringUtils.isNoneBlank(tagsStr)) {
+			if(StringUtils.isNotBlank(tagsStr)) {
 				List<String> list = new Gson().fromJson(tagsStr, List.class);
 				return list;
 			}

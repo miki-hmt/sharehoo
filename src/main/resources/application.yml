@@ -22,6 +22,8 @@ forum:
         SEARCH_RESULT_ROWS: 10
         SEARCH_TOPIC_RESULT_ROWS: 15
         
+        SECTION_MAP: {"SECTION_1":"java","SECTION_2":"","SECTION_3":"","SECTION_4":"","SECTION_5":"","SECTION_6":"","SECTION_7":"","SECTION_8":"","SECTION_9":"","SECTION_10":"","SECTION_11":"","SECTION_12":"","SECTION_13":"","SECTION_14":"","SECTION_15":"","SECTION_16":""}
+        
         #redis
         YUAN_CHUANG: YUAN_CHUANG
         ADVICE: ADVICE

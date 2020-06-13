@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,13 +25,16 @@ import com.sharehoo.config.lang.Consts;
 import com.sharehoo.dao.jedis.JedisClient;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
+import com.sharehoo.entity.shop.Log;
 import com.sharehoo.entity.shop.Shop;
 import com.sharehoo.entity.shop.Source;
+import com.sharehoo.service.LogService;
 import com.sharehoo.service.forum.UserService;
 import com.sharehoo.service.shop.ShopService;
 import com.sharehoo.service.shop.SourceService;
 import com.sharehoo.util.BootPathUtil;
 import com.sharehoo.util.CxCacheUtil;
+import com.sharehoo.util.PostUrlsToBaidu;
 import com.sharehoo.util.forum.DateUtil;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
@@ -47,6 +51,8 @@ public class SourceManageController {
 	private UserService userService;
 	@Autowired
 	private JedisClient jedisClient;
+	@Autowired
+	private LogService logService;
 	
 	@RequestMapping("/shop/source/upload")
 	@ResponseBody
@@ -66,7 +72,7 @@ public class SourceManageController {
 				//long total = upload.getSize();
 				//*************** 记录上传文件的总大小
 				//CxCacheUtil.getIntance().setValue("total_"+shop.getId(), total);
-				System.out.println("开始统计文件总大小："+upload.getSize()+"---开始时间："+System.currentTimeMillis());
+				logegr.info("开始统计文件总大小："+upload.getSize()+"---开始时间："+System.currentTimeMillis());
 				 //获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();	
 				String realPath = staticPath +Consts.SHOP_UPLOAD_PATH +"/file/"+Consts.SDF_YYYYMM.format(new Date());
@@ -92,9 +98,7 @@ public class SourceManageController {
 		        //Long progress = 0L;		//进度条
 		        
 		        while ((length = is.read(buffer)) > 0) {       
-		            os.write(buffer, 0, length);
-//		            progress += length;
-//		            CxCacheUtil.getIntance().setValue("progress_"+shop.getId(), progress);           
+		            os.write(buffer, 0, length);          
 		        }       
 		        is.close();    
 		        os.close();
@@ -112,6 +116,21 @@ public class SourceManageController {
 			
 			//清空redis 店铺tags缓存
 			jedisClient.hdel(Consts.TAGS+shop.getId(), shop.getId()+"");
+			
+			//提交索引到百度
+			//2020.06.13 miki 推送网站信息到百度爬虫
+			List<String> urls = new ArrayList<String>();
+			
+			urls.add("http://sharehoo.cn/shop/source/"+source.getId());
+			urls.add("http://sharehoo.cn/shop/"+shop.getId());
+			String result = PostUrlsToBaidu.postUrl(urls);
+			Log log = new Log();
+			log.setTime(new Date());
+			
+			log.setType("commit url");		
+			log.setOperation_log("向百度爬虫提交了新增资源链接以及店铺更新链接：提交结果："+result);
+			log.setUser(user);					
+			logService.save(log);
 			
 		} catch (Exception e) {
 			return E3Result.build(401, "资源发布失败..",e.getMessage());

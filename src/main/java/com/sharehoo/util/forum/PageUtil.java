@@ -1,4 +1,7 @@
 package com.sharehoo.util.forum;
+import java.util.Map;
+
+import com.google.gson.Gson;
 
 /**
  * 分页工具类
@@ -6,7 +9,13 @@ package com.sharehoo.util.forum;
  *
  */
 public class PageUtil {
-
+	
+	public static String getHtmlSectionPath(String sectionMap,String sectionId) {
+		Map data = new Gson().fromJson(sectionMap,Map.class);
+		String path = String.valueOf(data.get(sectionId));
+		return path;
+	}
+	
 	/**
 	 * 生成分页代码
 	 * @param targetUrl 目标地址

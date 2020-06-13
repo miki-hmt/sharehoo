@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
@@ -80,10 +81,27 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public List<Shop> allShops(PageBean pageBean) {
+	public List<Shop> allShops(PageBean pageBean,String type) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		StringBuffer hql=new StringBuffer("from Shop");
+		StringBuffer hql=new StringBuffer("from Shop ");
+		if(StringUtils.isNotBlank(type)) {
+			//"null"默认:按收入，"view"：按照浏览量	"downNum"：按下载量 	"last"：按最近开通
+			if(type.equals("downNum")) {
+				hql.append("ORDER BY downNum DESC");
+			}
+			if(type.equals("last")) {
+				hql.append("ORDER BY registerTime DESC");
+			}
+			if(type.equals("view")) {
+				hql.append("ORDER BY douNum DESC");
+			}
+			if(type.equals("douNum")) {
+				hql.append("ORDER BY douNum DESC");
+			}
+		}else {
+			hql.append("ORDER BY douNum DESC");
+		}
 		if (pageBean!=null) {
 			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
 		}else {

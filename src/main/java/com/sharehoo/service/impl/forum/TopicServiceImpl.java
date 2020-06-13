@@ -706,11 +706,11 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
-	public Topic getTopic(long code) {
+	public Topic getTopic(String code) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
 		StringBuffer hql=new StringBuffer("from Topic");
-		if(code>0){
+		if(StringUtils.isNotBlank(code)){
 			hql.append(" and code=?");
 			param.add(code);
 		}

@@ -223,18 +223,66 @@ function htmlencode(s){
               
               <li class="clearfix"><span>排序方式：</span>
                 <label>
-                <a href="#">
-                                      最新
-                </a>                       
-                <a href="#" class="item_cur">
-               	 最热
-               	 </a>
-               	 <a href="#">
-               	 按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
-               	 </a>
-               	 <a href="#">
-               	 按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
-               	 </a>
+                	
+                	<c:choose>
+						<c:when test="${type =='last'}">
+							<a href="http://sharehoo.cn/shop/rank?type=${type}" class="item_cur">
+			                                      最新
+			                </a>
+			                <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 	最热
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 	按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 	按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a> 
+						</c:when>
+						<c:when test="${type =='douNum'}">
+							<a href="http://sharehoo.cn/shop/rank?type=${type}">
+			                                      最新
+			                </a>
+			                <a href="http://sharehoo.cn/shop/rank?type=${type}" class="item_cur">
+			               	 	最热
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 	按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 	按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a> 
+						</c:when>
+						
+						<c:when test="${type =='downNum'}">
+							<a href="http://sharehoo.cn/shop/rank?type=${type}">
+			                                      最新
+			                </a>
+			                <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 	最热
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 	按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}" class="item_cur">
+			               	 	按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a> 
+						</c:when>
+						<c:otherwise>
+							<a href="http://sharehoo.cn/shop/rank?type=${type}">
+			                                      最新
+			                </a>
+			                <a href="http://sharehoo.cn/shop/rank?type=${type}" class="item_cur">
+			               	 	最热
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 	按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 	按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a>	
+						</c:otherwise>
+					</c:choose>                	                                              
                 </label>
               </li>
             </ul>

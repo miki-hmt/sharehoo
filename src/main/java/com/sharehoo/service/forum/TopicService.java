@@ -98,5 +98,5 @@ public interface TopicService {
 	 */
 	public List<Topic> getNewsList(int count);
 	
-	public Topic getTopic(long code);
+	public Topic getTopic(String code);
 }
