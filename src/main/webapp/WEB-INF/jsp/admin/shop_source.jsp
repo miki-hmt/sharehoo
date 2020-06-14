@@ -104,18 +104,20 @@ function resetValue(){
 	
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			
-			<form action="Topic_listAdmin.action" method="post" class="form-search">
-			<table cellpadding="5px;">
+			<form action="${host}/admin/shop/sourceSearch?page=1" method="post" class="form-search">
+			<!--cellpadding负责调节搜素框之间的高度	2020.06.14-->
+			<table cellpadding="15px;">
 				<tr>
+					<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
 					<td>资源标题:</td>
-					<td><input name="s_topic.title" value="${s_topic.title }" type="text" class="input-medium search-query" placeholder="输入资源名字..." style="width: 165px;"/></td>
+					<td><input name="name" type="text" value="${s_source.name }" class="input-medium search-query" placeholder="输入资源名字..." style="width: 165px;"/></td>
 					<td>所属店铺:</td>
-					<td><input name="s_topic.user.nickName" value="${s_topic.user.nickName }" type="text" class="input-medium search-query" placeholder="输入店铺id..." style="width: 165px;"/></td>
+					<td><input name="shop.name" type="text" value="${s_source.shop.shop_name }" class="input-medium search-query" placeholder="输入店铺id..." style="width: 165px;"/></td>
 					<td>所属类型:</td>
 					<td>
-						<select id="section" name="s_topic.section.id" style="width: 165px;"><option value="0">请选择类型...</option>
-							<c:forEach var="section" items="${sectionList }">
-								<option value="${section.id }" ${s_topic.section.id==section.id?'selected':'' }>${section.name }</option>
+						<select id="type" name="type.id" style="width: 165px;"><option value="0">请选择类型...</option>
+							<c:forEach var="type" items="${typeList }">
+								<option value="${type.id }" ${s_source.type.id==type.id?'selected':'' }>${type.name }</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -127,25 +129,20 @@ function resetValue(){
 					<td><input type="text" id="modifyTime" class="input-medium search-query Wdate" onClick="WdatePicker()" name="s_topic.modifyTime" value="<fmt:formatDate value="${s_topic.modifyTime }" type="date" pattern="yyyy-MM-dd"/>" style="width: 165px;"/></td> --%>
 					<td>所属大类:</td>
 					<td>
-						<select name="s_topic.top" style="width: 195px;"><option value="2">全部</option>
-							<option value="1" ${s_topic.top==1?'selected':'' }>置顶</option>
-							<option value="0" ${s_topic.top==0?'selected':'' }>非置顶</option>
+						<select id="category" name="category.id" style="width: 195px;"><option value="0">请选择类变...</option>
+							<c:forEach var="category" items="${categoryList }">
+								<option value="${category.id }" ${s_source.category.id==category.id?'selected':'' }>${category.name }</option>
+							</c:forEach>
 						</select>
 					</td>
 					<td>二级菜单:</td>
 					<td>
-						<select name="s_topic.top" style="width: 195px;"><option value="2">全部</option>
-							<option value="1" ${s_topic.top==1?'selected':'' }>置顶</option>
-							<option value="0" ${s_topic.top==0?'selected':'' }>非置顶</option>
+						<select id="menu" name="menu.id" style="width: 195px;"><option value="0">请选择菜单...</option>
+							<c:forEach var="menu" items="${allMenuList }">
+								<option value="${menu.id }" ${s_source.menu.id==menu.id?'selected':'' }>${menu.name }</option>
+							</c:forEach>
 						</select>
-					</td>
-					<td>是否精华:</td>
-					<td>
-						<select name="s_topic.good" style="width: 195px;"><option value="2">全部</option>
-							<option value="1" ${s_topic.good==1?'selected':'' }>精华</option>
-							<option value="0" ${s_topic.good==0?'selected':'' }>非精华</option>
-						</select>
-					</td>
+					</td>					
 					<td></td>
 					<td>
 						<button type="submit" class="btn btn-primary" title="Search">查询&nbsp;<i class="icon  icon-search"></i></button>

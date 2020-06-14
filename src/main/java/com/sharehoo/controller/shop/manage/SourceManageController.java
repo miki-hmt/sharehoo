@@ -25,10 +25,16 @@ import com.sharehoo.config.lang.Consts;
 import com.sharehoo.dao.jedis.JedisClient;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
+import com.sharehoo.entity.shop.Category;
 import com.sharehoo.entity.shop.Log;
+import com.sharehoo.entity.shop.Menu;
 import com.sharehoo.entity.shop.Shop;
 import com.sharehoo.entity.shop.Source;
+import com.sharehoo.entity.shop.Type;
 import com.sharehoo.service.LogService;
+import com.sharehoo.service.MenuService;
+import com.sharehoo.service.TypeService;
+import com.sharehoo.service.forum.CategoryService;
 import com.sharehoo.service.forum.UserService;
 import com.sharehoo.service.shop.ShopService;
 import com.sharehoo.service.shop.SourceService;
@@ -53,6 +59,13 @@ public class SourceManageController {
 	private JedisClient jedisClient;
 	@Autowired
 	private LogService logService;
+	@Autowired
+	private TypeService typeService;
+	@Autowired
+	private CategoryService categoryService;
+	@Autowired
+	private MenuService menuService;
+	
 	
 	@RequestMapping("/shop/source/upload")
 	@ResponseBody
@@ -176,10 +189,18 @@ public class SourceManageController {
 			if (StringUtil.isEmpty(page)) {
 				page="1";
 			}
+			
+			List<Menu> allMenuList = menuService.getAllMenuList(null);
+			model.addAttribute("allMenuList", allMenuList);
+			List<Category> categoryList = categoryService.getCategoryList(null, null);
+			model.addAttribute("categoryList", categoryList);
+			List<Type> typeList = typeService.getTypeList();
+			model.addAttribute("typeList", typeList);
+			
 			PageBean pageBean=new PageBean(Integer.parseInt(page), 10);
-			List<Source> sourceList=sourceService.allSourceList(pageBean);
+			List<Source> sourceList=sourceService.allSourceList(pageBean,null);
 			model.addAttribute("sourceList", sourceList);
-			long total=sourceService.getAllCount();
+			long total=sourceService.getAllCount(null);
 			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/shop/source", total, Integer.parseInt(page), 10,null);
 			model.addAttribute("pageCode", pageCode);
 		}else {
@@ -196,6 +217,57 @@ public class SourceManageController {
 		model.addAttribute("ul", "download");
 		return "admin/main";
 	} 
+	
+	
+	/*
+	 * 2017.08.21 miki 后台管理搜索资源列表
+	 */
+	@RequestMapping("/admin/shop/sourceSearch")
+	public String searchList(HttpServletRequest request,@RequestParam(value="page",required=false) String page,Model model,Source s_source)throws Exception{
+		HttpSession sessiom=request.getSession();
+		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
+		model.addAttribute("user", user);
+		if (user!=null&&user.getType()==2) {
+			if (StringUtil.isEmpty(page)) {
+				page="1";
+				
+				//如果page为null，则证明是新的查询，直接取参数中的s_source,并将搜索结果放入session  2020.06.14 miki
+				sessiom.setAttribute("s_source", s_source);			
+			}else {
+				//如果是分页进入第二页或者回退上一页，直接取session中的缓存查询参数	2020.06.14 miki
+				s_source = (Source)sessiom.getAttribute("s_source");
+			}					
+						
+			//页面搜索结果回显
+			model.addAttribute("s_source", s_source);
+			
+			List<Menu> allMenuList = menuService.getAllMenuList(null);
+			model.addAttribute("allMenuList", allMenuList);
+			List<Category> categoryList = categoryService.getCategoryList(null, null);
+			model.addAttribute("categoryList", categoryList);
+			List<Type> typeList = typeService.getTypeList();
+			model.addAttribute("typeList", typeList);
+			
+			PageBean pageBean=new PageBean(Integer.parseInt(page), 10);
+			List<Source> sourceList=sourceService.allSourceList(pageBean,s_source);
+			model.addAttribute("sourceList", sourceList);
+			long total=sourceService.getAllCount(s_source);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/shop/sourceSearch", total, Integer.parseInt(page), 10,null);
+			model.addAttribute("pageCode", pageCode);
+		}else {
+			String error="我已经记录你的ip了，再乱来，你就死定了！";
+			model.addAttribute("error", error);
+			return "admin/login";
+		}
+		String mainPage="shop_source.jsp";
+		model.addAttribute("mainPage", mainPage);
+		String crumb1="资源管理";
+		model.addAttribute("crumb1", crumb1);
+		
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "download");
+		return "admin/main";
+	}
 	
 	
 	/*

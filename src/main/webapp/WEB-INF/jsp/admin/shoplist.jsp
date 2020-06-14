@@ -170,11 +170,29 @@ function resetValue(){
 <body>
 	<div class="container-fluid">
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
-			<!-- <button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return openAddDlg()">添加小板块</button>&nbsp;&nbsp;&nbsp;&nbsp; -->
-			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteUsers()">批量删除</a>
+			<form action="${host}/admin/shop/search" method="post" class="form-search">
+			<!--cellpadding负责调节搜素框之间的高度	2020.06.14-->
+			<table cellpadding="15px;">
+				<tr>
+					<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
+					<td>店铺名称:</td>
+					<td><input name="shop_name" type="text" value="${s_shop.shop_name }" class="input-medium search-query" placeholder="输入店铺名字..." style="width: 165px;"/></td>
+					<td>店铺主人:</td>
+					<td><input name="user.nickName" type="text" value="${s_shop.user.nickName }" class="input-medium search-query" placeholder="输入主人昵称..." style="width: 165px;"/></td>
+					<td>店铺标签:</td>
+					<td><input name="tag" type="text" value="${s_shop.tag }" class="input-medium search-query" placeholder="输入店铺标签..." style="width: 165px;"/></td>
+					<td></td>
+					<td>
+						<button type="submit" class="btn btn-primary" title="Search">查询&nbsp;<i class="icon  icon-search"></i></button>
+					</td>
+				</tr>				
+			</table>
+			</form>
+			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteUsers()">批量删除</a>	&nbsp;&nbsp;&nbsp;&nbsp;
 			
-			
-			
+			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteUsers()">按下载量排序</a>
+			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteUsers()">按日期排序</a>
+			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteUsers()">按精品排序</a>									
 		</div>
 		<div class="row-fluid">
 			<div class="span12">

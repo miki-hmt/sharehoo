@@ -155,4 +155,62 @@ public class ShopServiceImpl implements ShopService {
 		
 		return baseDAO.findTopN(hql, null, 5);
 	}
+
+	@Override
+	public List<Shop> searchShops(PageBean pageBean, Shop search_shop) {
+		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
+		StringBuffer hql=new StringBuffer("from Shop ");
+		if(null!=search_shop) {
+			//"null"默认:按收入，"view"：按照浏览量	"downNum"：按下载量 	"last"：按最近开通
+			if(StringUtils.isNotBlank(search_shop.getShop_name())) {
+				hql.append("and shop_name like ?");
+				param.add("%"+search_shop.getShop_name()+"%");
+			}
+			if(StringUtils.isNotBlank(search_shop.getTag())) {
+				hql.append("and tag like ?");
+				param.add("%"+search_shop.getTag()+"%");
+			}
+			if(null!=search_shop.getUser()) {
+				if(StringUtils.isNotBlank(search_shop.getUser().getNickName())) {
+					hql.append("and user.nickName like ?");
+					param.add("%"+search_shop.getUser().getNickName()+"%");
+				}				
+			}			
+		}
+		
+		hql.append("ORDER BY registerTime DESC");
+		if (pageBean!=null) {
+			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
+		}else {
+			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
+		}
+	}
+
+	@Override
+	public Long getSearchShopCount(Shop search_shop) {
+		// TODO Auto-generated method stub
+		List<Object> param=new LinkedList<Object>();
+		StringBuffer hql=new StringBuffer("select count(*) from Shop s ");
+		
+		if(null!=search_shop) {
+			//"null"默认:按收入，"view"：按照浏览量	"downNum"：按下载量 	"last"：按最近开通
+			if(StringUtils.isNotBlank(search_shop.getShop_name())) {
+				hql.append("and shop_name like ? ");
+				param.add("%"+search_shop.getShop_name()+"%");
+			}
+			if(StringUtils.isNotBlank(search_shop.getTag())) {
+				hql.append("and tag like ? ");
+				param.add("%"+search_shop.getTag()+"%");
+			}
+			if(null!=search_shop.getUser()) {
+				if(StringUtils.isNotBlank(search_shop.getUser().getNickName())) {
+					hql.append("and s.user.nickName like ?");
+					param.add("%"+search_shop.getUser().getNickName()+"%");
+				}				
+			}			
+		}
+		
+		return baseDAO.count(hql.toString().replaceFirst("and", "where"), param);
+	}
 }

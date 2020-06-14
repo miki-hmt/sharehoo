@@ -44,11 +44,11 @@ public interface SourceService {
 	/*
 	 * 得到数据库中所有资源	2017.08.15 miki
 	 */
-	public List<Source> allSourceList(PageBean pageBean);
+	public List<Source> allSourceList(PageBean pageBean,Source source);
 	
 	public List<Source> allSourceListByDownNum(PageBean pageBean);
 	
-	public Long getAllCount();
+	public Long getAllCount(Source s_source);
 	
 	/*
 	 * 2017.08.15 miki 通过caategoryId得到资源列表

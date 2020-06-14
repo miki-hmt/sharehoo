@@ -153,10 +153,42 @@ public class SourceServiceImpl implements SourceService {
 	}
 
 	@Override
-	public List<Source> allSourceList(PageBean pageBean) {
+	public List<Source> allSourceList(PageBean pageBean,Source s_source) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		StringBuffer hql=new StringBuffer("from Source");
+		StringBuffer hql=new StringBuffer("from Source s");
+		if(null!=s_source) {
+			if(StringUtils.isNotBlank(s_source.getName())) {
+				hql.append(" and s.name like ?");
+				param.add("%"+s_source.getName()+"%");
+			}
+			if(s_source.getShop()!=null) {
+				if(StringUtils.isNotBlank(s_source.getShop().getShop_name())) {
+					hql.append(" and s.shop.shop_name like ?");
+					param.add("%"+s_source.getShop().getShop_name()+"%");
+				}				
+			}
+			
+			if(null!=s_source.getType()) {
+				if(s_source.getType().getId() > 0) {
+					hql.append(" and s.type.id = ?");
+					param.add(s_source.getType().getId());
+				}			
+			}
+			if(null!=s_source.getMenu()) {
+				if(s_source.getMenu().getId() > 0) {
+					hql.append(" and s.menu.id = ?");
+					param.add(s_source.getMenu().getId());
+				}
+				
+			}
+			if(null!=s_source.getCategory()) {
+				if(s_source.getCategory().getId() > 0) {
+					hql.append(" and s.category.id = ?");
+					param.add(s_source.getCategory().getId());
+				}				
+			}
+		}
 		hql.append(" order by upload_time desc");
 		if (pageBean!=null) {
 			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
@@ -164,12 +196,49 @@ public class SourceServiceImpl implements SourceService {
 			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param);
 		}
 	}
-
+	
+	
+	//2020.06.14 miki 增加资源参数，实现搜索功能
 	@Override
-	public Long getAllCount() {
+	public Long getAllCount(Source s_source) {
 		// TODO Auto-generated method stub
 		List<Object> param=new LinkedList<Object>();
-		StringBuffer hql=new StringBuffer("select count(*) from Source");		
+		StringBuffer hql=new StringBuffer("select count(*) from Source s");	
+		
+		if(null!=s_source) {
+			if(StringUtils.isNotBlank(s_source.getName())) {
+				hql.append(" and s.name like ?");
+				param.add("%"+s_source.getName()+"%");
+			}
+			
+			if(s_source.getShop()!=null) {
+				if(StringUtils.isNotBlank(s_source.getShop().getShop_name())) {
+					hql.append(" and s.shop.shop_name like ?");
+					param.add("%"+s_source.getShop().getShop_name()+"%");
+				}				
+			}
+			
+			if(null!=s_source.getType()) {
+				if(s_source.getType().getId() > 0) {
+					hql.append(" and s.type.id = ?");
+					param.add(s_source.getType().getId());
+				}
+			}
+			if(null!=s_source.getMenu()) {
+				if(s_source.getMenu().getId() > 0) {
+					hql.append(" and s.menu.id = ?");
+					param.add(s_source.getMenu().getId());
+				}
+				
+			}
+			if(null!=s_source.getCategory()) {
+				if(s_source.getCategory().getId() > 0) {
+					hql.append(" and s.category.id = ?");
+					param.add(s_source.getCategory().getId());
+				}				
+			}
+		}
+		
 		return baseDAO.count(hql.toString().replaceFirst("and", "where"), param);
 	}
 

@@ -719,7 +719,7 @@ body {
             <div class="arm__sleeve"></div>
           </div>
         </div>
-      </div>
+      </div>     
     </div>
   </div>
   <div class="ground">
@@ -750,7 +750,7 @@ body {
       </div>
     </div>
     <div class="brains-comic-box">
-      <h1 class="brains__text">店铺尚未激活</h1>
+      <h1 class="brains__text">店铺尚未激活&rArr;</h1>
     </div>
   </div>
 </div>

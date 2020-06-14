@@ -239,6 +239,54 @@ public class ShopManageController {
 		return "admin/main";
 	}
 	
+	
+	/**
+	* @Title: searchList  
+	* @Description: TODO(搜索用户店铺列表)  
+	* @author miki 
+	* @date 2020年6月14日 下午2:07:36   
+	* @throws
+	 */
+	@RequestMapping("/admin/shop/search")
+	public String searchList(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page,Shop s_shop)throws Exception{
+		HttpSession sessiom=request.getSession();
+		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
+		model.addAttribute("user", user);
+		if (user!=null&&user.getType()==2) {
+			if (StringUtil.isEmpty(page)) {
+				page="1";
+				
+				//如果page为null，则证明是新的查询，直接取参数中的s_shop,并将搜索结果放入session  2020.06.14 miki
+				sessiom.setAttribute("s_source", s_shop);	
+			}else {
+				//如果是分页进入第二页或者回退上一页，直接取session中的缓存查询参数	2020.06.14 miki
+				s_shop = (Shop)sessiom.getAttribute("s_shop");
+			}
+			model.addAttribute("s_shop", s_shop);
+		
+			PageBean pageBean=new PageBean(Integer.parseInt(page), 7);
+			
+			List<Shop> shopList=shopService.searchShops(pageBean, s_shop);
+			model.addAttribute("shopList", shopList);
+			long total=shopService.getSearchShopCount(s_shop);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/shop",
+					total, Integer.parseInt(page), 7,null);
+			model.addAttribute("pageCode", pageCode);
+		}else {
+			String error="系统已定位你的ip，再乱来你就死定了！";
+			model.addAttribute("error", error);
+			return "admin/login";
+		}
+		String mainPage="shoplist.jsp";
+		model.addAttribute("mainPage", mainPage);
+		String crumb1="店铺管理";
+		model.addAttribute("crumb1", crumb1);
+		//************** 添加父级菜单自动展开样式	2019.09.11 miki
+		model.addAttribute("ul", "download");	
+		
+		return "admin/main";
+	}
+	
 	/*
 	 * 2017.08.19 miki 后台修改店铺方法实现
 	 */

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${host}/admin/css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+<link rel="stylesheet" href="${host}/admin/css/select2.css" />
 <link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
 <link rel="stylesheet" href="${host}/admin/css/unicorn.grey.css" class="skin-color" />
 

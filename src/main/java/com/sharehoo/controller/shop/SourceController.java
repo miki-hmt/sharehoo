@@ -364,13 +364,13 @@ public class SourceController {
 
 			StringBuffer param=new StringBuffer();
 			param.append("type="+type);
-			long total=sourceService.getAllCount();
+			long total=sourceService.getAllCount(null);
 			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/search/go", total, Integer.parseInt(page), 10,param.toString());
 			model.addAttribute("pageCode", pageCode);
 		}else{
-		List<Source> sourceList=sourceService.allSourceList(pageBean);
+		List<Source> sourceList=sourceService.allSourceList(pageBean,null);
 		model.addAttribute("sourceList", sourceList);
-		long total=sourceService.getAllCount();
+		long total=sourceService.getAllCount(null);
 		String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/search/go", total, Integer.parseInt(page), 10,null);
 		model.addAttribute("pageCode", pageCode);
 		}

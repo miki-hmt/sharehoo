@@ -36,7 +36,18 @@ public interface ShopService {
 	 */
 	public List<Shop> allShops(PageBean pageBean,String type);
 	
+	/**
+	* @Title: searchShops  
+	* @Description: TODO(店铺搜索)  
+	* @author miki 
+	* @date 2020年6月14日 下午2:10:17   
+	* @throws
+	 */
+	public List<Shop> searchShops(PageBean pageBean,Shop search_shop);
+	
 	public Long getAllShopCount();
+	
+	public Long getSearchShopCount(Shop s_shop);
 	
 	/*
 	 * 2017.08.18 通过栏目名匹配店铺列表

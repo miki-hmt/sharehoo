@@ -296,7 +296,7 @@ function Login(){
 	              </span>
 	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >
 	              	<!-- <a href="/vip_code" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a> -->
-	              	<a href="${host}/shop/center" target="_blank">激活店铺</a>
+	              	<a href="${host}/shop/center?激活说明=点击墓碑下方的激活按钮进行激活" target="_blank">激活店铺</a>
 	              </span>
               	</c:when>
 				
