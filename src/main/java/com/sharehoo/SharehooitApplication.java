@@ -25,15 +25,6 @@ import com.sharehoo.dao.impl.BaseDAOImpl;
 @ComponentScan(basePackages = {"com.sharehoo", "org.springframework.web.multipart.commons"})
 public class SharehooitApplication extends SpringBootServletInitializer{
 	
-	/*
-	* 将 multipartResolver 指向我们刚刚创建好的继承 CommonsMultipartResolver 类的自定义文件上传处理类
-	*/
-//	@Bean(name = "multipartResolver")
-//	public MultipartResolver multipartResolver() {
-//		CustomMultipartResolver customMultipartResolver = new CustomMultipartResolver();
-//		return customMultipartResolver;
-//	}
-	
 	/**
 	 * 发布到外部Servlet容器
 	 * 使用外部tomcat部署方式，修改启动Application文件继承SpringBootServletInitializer,实现configure方法		2019.04.03	miki

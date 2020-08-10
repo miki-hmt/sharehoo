@@ -50,7 +50,7 @@ public class TopicSolrJServiceImpl implements TopicSolrJService {
 				document.addField("id", String.valueOf(topic.getId()));
 				document.addField("topic_title", topic.getTitle());
 				document.addField("topic_publishTime", topic.getPublishTime().toString());
-				document.addField("topic_code", String.valueOf(topic.getCode()));
+				document.addField("topic_code", topic.getCode());
 
 				document.addField("topic_section_name", topic.getSection().getName());
 				document.addField("topic_user_name", topic.getUser().getNickName());

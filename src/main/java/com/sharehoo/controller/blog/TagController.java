@@ -1,7 +1,4 @@
 package com.sharehoo.controller.blog;
-
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
