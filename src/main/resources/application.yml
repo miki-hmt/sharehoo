@@ -125,7 +125,7 @@ spring:
     mail:
       host: smtp.163.com
       username: 18738907370@163.com
-      password: pgydyd19940928
+      password: 
       default-encoding: UTF-8
       
     site:
