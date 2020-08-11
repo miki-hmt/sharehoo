@@ -9,6 +9,10 @@
 <title>后台管理</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+
+<!-- 2019.09.11	miki 自定义弹窗 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
 <style type="text/css">
 </style>
 <script type="text/javascript">
@@ -44,7 +48,7 @@ function saveBanner(){
 		 $("#error").html("banner类型不能为空！");
 		 return false;
 	 }
-
+	//2020.08.11 miki 提交新增表单的时候，自增id不要加到表单中，因为新增表单中的id为空，会导致http 400状态码
 	var formData = new FormData($("#fm")[0]);
 	$.ajax({
 		type: "POST",
@@ -66,6 +70,7 @@ function saveBanner(){
 			}
 		}
 	});
+	return false;
  }
 
  function tipOk(content,callback){
@@ -265,58 +270,58 @@ function searchUserByNickName1(userNickName){
 					aria-hidden="true" onclick="return resetValue()">×</button>
 				<h3 id="myModalLabel">增加banner</h3>
 			</div>
-			<!--action="Section_save.action" method="post" enctype="multipart/form-data"  -->
+
 		<form id="fm" action="" method="post" enctype="multipart/form-data">
 			<div class="modal-body">
-				
-					<table>
-						<tr>
-							<td>
-								<label class="control-label" for="name">请输入banner名称：</label>
-							</td>
-							<td>
-								<input id="name" type="text" name="news_name" placeholder="请输入…">
-								<input id="id" type="hidden" name="id">
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<img id="ImgPr" class="pull-left" style="width: 300px; height: 120px;" src="${pageContext.request.contextPath}/${banner.news_img }" />
-							</td>
-							
-						</tr>
-						<tr>
-							<td>
-								<label class="control-label" for="logo">上传logo(900*302px)：</label>
-							</td>
-							<td>
-								<input type="file" id="image" name="image">
-								
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label class="control-label" for="url">图片对应url：</label>
-							</td>
-							<td>
-								<input id="url" type="text" name="url" placeholder="请输入…">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label class="control-label" for="type">类型：</label>
-							</td>
-							<td>
+				<table>
+					<tr>
+						<td>
+							<label class="control-label" for="name">请输入banner名称：</label>
+						</td>
+						<td>
+							<input id="name" type="text" name="news_name" placeholder="请输入…">
+<%--								2020.08.11 miki 提交新增表单的时候，自增id不要加到表单中，因为新增表单中的id为空，会导致http 400状态码--%>
+<%--								<input id="id" type="hidden" name="id">--%>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<img id="ImgPr" class="pull-left" style="width: 300px; height: 120px;" src="${pageContext.request.contextPath}/${banner.news_img }" />
+						</td>
+
+					</tr>
+					<tr>
+						<td>
+							<label class="control-label" for="logo">上传logo(900*302px)：</label>
+						</td>
+						<td>
+							<input type="file" id="image" name="image">
+
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label class="control-label" for="url">图片对应url：</label>
+						</td>
+						<td>
+							<input id="url" type="text" name="url" placeholder="请输入…">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label class="control-label" for="type">类型：</label>
+						</td>
+						<td>
 <%--								<input id="type" type="text" name="type"  placeholder="请输入banner类型">--%>
-								<select id="type" name="type" style="width: 195px;"><option value="">请选择banner类型...</option>
-									<option value="topicBanner"}>topicBanner</option>
-									<option value="recommend"}>recommend</option>
-									<option value="download"}>download</option>
-								</select>
-								<font id="info" style="color: red;"></font>
-							</td>
-						</tr>
-					</table>
+							<select id="type" name="type" style="width: 195px;"><option value="">请选择banner类型...</option>
+								<option value="topicBanner"}>topicBanner</option>
+								<option value="recommend"}>recommend</option>
+								<option value="download"}>download</option>
+							</select>
+							<font id="info" style="color: red;"></font>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</form>
 		<div class="modal-footer">

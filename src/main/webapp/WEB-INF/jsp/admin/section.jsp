@@ -8,6 +8,10 @@
 <title>后台管理</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+
+<!-- 2019.09.11	miki 自定义弹窗 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
 <style type="text/css">
 </style>
 <script type="text/javascript">
@@ -31,6 +35,7 @@ $(function () {
 
     
 function saveSection(){
+	debugger
 	 if ($("#sectionName").val()==null||$("#sectionName").val()=='') {
 		 $("#error").html("请输入小板块名称！");
 		 return false;
@@ -43,12 +48,50 @@ function saveSection(){
 		 $("#error").html("请输入版主昵称！");
 		 return false;
 	 }
-	 /* $.post("Section_save.action", $("#fm").serialize()); */
-	 $("#fm").submit();
-	 alert("保存成功！");
-	 resetValue();
-	 location.reload(true);
+
+	//2020.08.11 miki 提交新增表单的时候，自增id不要加到表单中，因为新增表单中的id为空，会导致http 400状态码
+	var formData = new FormData($("#fm")[0]);
+	$.ajax({
+		type: "POST",
+		url: "${pageContext.request.contextPath}/admin/section/add",
+		data: formData,
+		cache: false,
+		async: false,
+		processData : false,  //必须false才会避开jQuery对 formdata 的默认处理
+		contentType : false,  //必须false才会自动加上正确的Content-Type
+		success: function (data) {
+			console.log("成功");
+			if(data.status==200){
+				tipOk("添加成功",function(){
+					resetValue();
+					location.reload(true);
+				});
+			}else{
+				tipError(data.msg);
+			}
+		}
+	});
+	return false;
  }
+
+ function tipOk(content,callback){
+	 swal({
+		 title: content,
+		 text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',
+		 imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+		 html: true,
+		 timer: 3000,
+		 showConfirmButton: false
+	 },function(){
+		 if (callback) {
+			 callback();
+		 }
+	 });
+ };
+ function tipError(content){
+	 swal("操作失败", content, "error");
+ };
+
  function modifySection(id,name,zone,masterNickName,logo){
 	 $("#myModalLabel1").html("修改小板块");
 	 $("#sid").val(id);
@@ -101,7 +144,7 @@ function resetValue(){
 	 $("#sectionName").val("");
 }
 function searchUserByNickName(userNickName){
-	$.post("Section_getUserByNickName.action",{nickName:userNickName},function(result){
+	$.post("${host}/user/lookup/"+userNickName,{nickName:userNickName},function(result){
 		var result=eval(result);
 		$("#info").html(result.info);
 		$("#masterId").val(result.masterId);
@@ -196,13 +239,15 @@ function searchUserByNickName1(userNickName){
 
 			</div>
 		</div>
+
+		<!-- bootstarp 隐藏版块栏2    新增 小版块 	2020.08.11 miki		  -->
 		<div id="dlg" class="modal hide fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true" onclick="return resetValue()">×</button>
 				<h3 id="myModalLabel">增加小板块</h3>
 			</div>
-			<form id="fm" action="Section_save.action" method="post" enctype="multipart/form-data">
+			<form id="fm" action="" method="post" enctype="multipart/form-data">
 			<div class="modal-body">
 				
 					<table>
@@ -211,7 +256,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="sectionName">请输入小板块名称：</label>
 							</td>
 							<td>
-								<input id="sectionName" type="text" name="section.name" placeholder="请输入…">
+								<input id="sectionName" type="text" name="name" placeholder="请输入…">
 							</td>
 						</tr>
 						<tr>
@@ -226,7 +271,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="logo">上传logo：</label>
 							</td>
 							<td>
-								<input type="file" id="logo" name="logo">
+								<input type="file" id="logo" name="logoFile">
 							</td>
 						</tr>
 						<tr>
@@ -234,7 +279,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="zone">请选择所属大板块：</label>
 							</td>
 							<td>
-								<select id="zone" name="section.zone.id"><option value="">请选择...</option>
+								<select id="zone" name="zone.id"><option value="">请选择...</option>
 									<c:forEach var="zone" items="${zoneList }">
 										<option value="${zone.id }">${zone.name }</option>
 									</c:forEach>
@@ -246,23 +291,24 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="masterNickName">版主：</label>
 							</td>
 							<td>
-								<input id="masterNickName" type="text" name="section.master.nickName" onkeydown="javascript:searchUserByNickName(this.value)" placeholder="请输入昵称回车">
+								<input id="masterNickName" type="text" name="master.nickName" onkeydown="javascript:searchUserByNickName(this.value)" placeholder="请输入昵称回车">
 								<font id="info" style="color: red;"></font>
 							</td>
 						</tr>
 					</table>
-					<input id="id" type="hidden" name="section.id">
-					<input id="masterId" type="hidden" name="section.master.id">
+				<%--								2020.08.11 miki 提交新增表单的时候，自增id不要加到表单中，因为新增表单中的id为空，会导致http 400状态码--%>
+				<%--								<input id="id" type="hidden" name="id">--%>
+					<input id="masterId" type="hidden" name="master.id">
 				
 			</div>
-			<div class="modal-footer">
-				<font id="error" style="color: red;"></font>
-				<button class="btn" data-dismiss="modal" aria-hidden="true"
-					onclick="return resetValue()">关闭</button>
-				<button class="btn btn-primary" onclick="javascript:saveSection()">保存</button>
-				<!-- <button class="btn btn-primary" type="submit">保存</button> -->
-			</div>
 		</form>
+		<div class="modal-footer">
+			<font id="error" style="color: red;"></font>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"
+					onclick="return resetValue()">关闭</button>
+			<button class="btn btn-primary" onclick="javascript:saveSection()">保存</button>
+			<!-- <button class="btn btn-primary" type="submit">保存</button> -->
+		</div>
 	</div>
 
 
