@@ -69,7 +69,7 @@
       <div class="keybq">
         <p><span>关键字词</span>：${article.keywords }</p>
       </div>
-      <div class="bdsharebuttonbox">
+	<div class="bdsharebuttonbox">
       	<a href="#" class="bds_more" data-cmd="more"></a>
       	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
       	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>

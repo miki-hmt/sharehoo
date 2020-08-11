@@ -28,9 +28,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/common.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/shop/css/download_new.css">
 
+
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
-<%-- <script src="${pageContext.request.contextPath}/shop/js/jquery.min.js"></script> --%>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/tingyun-rum.js"></script> --%>
 
 <script type="text/javascript"  src="${pageContext.request.contextPath}/shop/js/jquery-version.js" type="text/javascript"></script>
 <script type='text/javascript' src="${pageContext.request.contextPath}/shop/js/jquery.form.js"></script>

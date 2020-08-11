@@ -261,8 +261,8 @@ background:#fcfcfc; }
 
 
 .r2 .section_R1{ width:216px; float:right; background:#f3f3f3; height:348px; overflow:hidden;}
-.section_R1 .card_{ padding:10px 10px 0; display:block; clear:both; height:66px; overflow:hidden;}
-.section_R1 .card_ img{ width:60px; height:60px; display:inline-block; float:left;}
+.section_R1 .card_{ padding:10px 10px 0; display:block; height:44px; overflow:hidden;float:left;width:34px;}
+.section_R1 .card_ img{ width:34px; height:34px; display:inline-block; float:left;}
 .section_R1 .card_ span{ float:right; width:124px; padding-top:5px; line-height:26px; text-align:left;}
 .section_R1 .card_ span a{ font-weight:bold;font-size:10pt;}
 .section_R1 .card_ span em{font-style:normal;font-size:9pt;}
@@ -286,6 +286,6 @@ background:#fcfcfc; }
 .section_R .paihang li{ background:url() no-repeat scroll -4px center; line-height:28px; height:28px; overflow:hidden;}
 .section_R .paihang li em{ width:40px; text-indent:8px;float:left; font-weight:bold;font-size:10pt;}
 .section_R .paihang li.red em{color:#b31515;}
-.section_R .paihang li a{ width:56px; float:left;font-size:10pt;}
+.section_R .paihang li a{ width:76px; float:left;font-size:10pt;}
 .section_R .paihang li span{ width:100px; float:right;}
 .section_R .paihang li span i{ height:3px; background:#d4b549; margin-top:12px; float:left;}

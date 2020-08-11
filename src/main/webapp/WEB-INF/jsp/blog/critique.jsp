@@ -66,18 +66,18 @@
       </h3>
 	
        <form method="post" id="critique_form">
-			<div style="margin-top:10px;height:39px">
-				<table>
-					<tr>
-						<td><span>验证码:</span></td>
-		      				<td>
-		      					<input id="txtCode" name="imageCode" style="width: 133px; margin-left: 27px;height:30px" placeholder="验证码"/>
-		      					<img id="randImage" src="${host}/imageCode" width="90" height="34" name="randImage" title="点击换一个" 
-										style="vertical-align: middle; margin-top: -35px;margin-left:170px;" onclick="javascript:loadimage();" />
-		      				</td>
-					</tr>
-				</table>
-			</div>
+		<div style="margin-top:10px;height:39px">
+		<table>
+			<tr>
+				<td><span>验证码:</span></td>
+      				<td>
+      					<input id="txtCode" name="imageCode" style="width: 133px; margin-left: 27px;height:30px" placeholder="验证码"/>
+      					<img id="randImage" src="${host}/imageCode" width="90" height="34" name="randImage" title="点击换一个" 
+								style="vertical-align: middle; margin-top: -35px;margin-left:170px;" onclick="javascript:loadimage();" />
+      				</td>
+			</tr>
+		</table>
+		</div>
       		<table>
       			<tr>
       				<td><span>您的昵称:</span></td><td><input id="name" type="text" name="name"/></td>				

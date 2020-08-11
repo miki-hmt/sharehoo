@@ -10,7 +10,6 @@
 <link href="${host}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 <link href="${host}/css/style.css" rel="stylesheet" />
 <link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-<script src="${host}/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${host}/css/emoticon.css" />
 <script src="${host}/js/jquery-1.11.1.js" type="text/javascript"></script>
 <script src="${host}/js/jquery.emoticons.js" type="text/javascript"></script>

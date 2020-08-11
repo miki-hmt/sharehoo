@@ -1,10 +1,9 @@
-server:
+﻿server:
     port: 8080
     servlet:
       context-path: /sharehoo
-      
 shop:
-   solr-host: http://localhost:8081/solr/collection1
+   solr-host: http://106.13.75.153:8010/solr/collection1
    
 forum:
    leavemessage:
@@ -21,8 +20,6 @@ forum:
         #solr_search.jsp--source--count 2018.08.17
         SEARCH_RESULT_ROWS: 10
         SEARCH_TOPIC_RESULT_ROWS: 15
-        
-        SECTION_MAP: {"SECTION_1":"java","SECTION_2":"","SECTION_3":"","SECTION_4":"","SECTION_5":"","SECTION_6":"","SECTION_7":"","SECTION_8":"","SECTION_9":"","SECTION_10":"","SECTION_11":"","SECTION_12":"","SECTION_13":"","SECTION_14":"","SECTION_15":"","SECTION_16":""}
         
         #redis
         YUAN_CHUANG: YUAN_CHUANG
@@ -50,7 +47,7 @@ forum:
 spring:
     #2019.09.10 miki 设置topic的freemarker模板引擎文件的路径
     freemarker:
-        HTML_GEN_PATH: C:/miki/soft/freemarker/topic/
+        HTML_GEN_PATH: D:/soft/freemarker/
         template-loader-path: classpath:/templates/
         #- /templates/
         #- file:./templates/
@@ -69,7 +66,7 @@ spring:
         dbtype: mysql
         dbuser: root
         dbpwd: root
-        dbip: 127.0.0.1   # 10.192.0.190     #
+        dbip:  127.0.0.1  # 10.192.0.190     #127.0.0.1--2019.12.30 miki 改用百度云服务器作为数据库服务器，减少网站服务器的压力
         dbport: 3306
         dbname: db_forum
         #pid: 5899
@@ -95,7 +92,7 @@ spring:
         open-in-view: true
     #2019.09.13 miki 社区首页数据缓存
     redis: 
-        host: 127.0.0.1
+        host: 106.13.75.153
         password:
         port: 6379   
         timeout: 0
@@ -107,8 +104,8 @@ spring:
             max-wait: -1
     data:
         solr:
-          host: http://localhost:8081/solr-topic/collection1
-                          
+          host: http://106.13.75.153:8010/solr-topic/collection1   
+              
     servlet:
         multipart:
             enabled: true
@@ -122,12 +119,7 @@ spring:
         view:
           prefix: /WEB-INF/jsp/
           suffix: .jsp
-    mail:
-      host: smtp.163.com
-      username: 18738907370@163.com
-      password: 
-      default-encoding: UTF-8
-      
+    
     site:
         store:
             root: /data/sharehoo
@@ -141,9 +133,7 @@ spring:
             # 资源域名, resource.domain = true 是有效
             # 配置域名, 将域名的根目录指向 store.root 配置的地址
             # ---------------------------------
-            host: http://localhost:8088/sharehoo
+            host: http://sharehoo.cn
 
 logging:
   file: /../../idp/logs/dip/dip.log #${catalina.home}/../../idp/logs/dip/dip.log
-  level:
-    Root: INFO

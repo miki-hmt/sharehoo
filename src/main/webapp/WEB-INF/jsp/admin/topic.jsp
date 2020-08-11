@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -114,7 +114,6 @@ function deleteTopics(){
 							<option value="0" ${s_topic.top==0?'selected':'' }>非置顶</option>
 						</select>
 					</td>
-					
 					<td>是否精华:</td>
 					<td>
 						<select name="s_topic.good" style="width: 195px;"><option value="2">全部</option>

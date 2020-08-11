@@ -202,8 +202,8 @@
 									</span> -->
 									<h5>
 										用户信息修改：<font style="font-size:8pt;color:red;">${user.nickName }</font>
-										上次修改时间：<font style="font-size:8pt;color:red;">
-											<fmt:formatDate value="${user.updateTime }" pattern="yyyy-MM-dd HH:mm:ss "/>
+										上次修改时间：<font style="font-size:8pt;color:red;">											
+											<fmt:formatDate value="${user.updateTime }" pattern="yyyy-MM-dd HH:mm:ss "/>											
 											</font>
 									</h5>
 								</div>

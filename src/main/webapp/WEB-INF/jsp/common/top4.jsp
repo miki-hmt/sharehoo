@@ -55,6 +55,15 @@ function checkUserLogin(){
 	}
 }
 
+
+function checkUserLoginForSetting(){
+	if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
+		alert("您还未登陆！");
+	} else {
+		window.location.href="${host}/user/modify";
+	}
+}
+
 //底部热门标签关键字搜索  2018.08.23 miki
 
 function check_up(thisform){
@@ -82,7 +91,7 @@ function check_up(thisform){
 
 	<div class="header">
 			<div class="header-con">
-				<a class="header-logo" href="#"><img src="${host}/common/images/logo/logo1.jpg" style="width:40px;height:40px;"><font style="color:white;"></font></a>
+				<a class="header-logo" href="#"><img src="${pageContext.request.contextPath}/common/images/logo/logo1.jpg" style="width:40px;height:40px;"><font style="color:white;"></font></a>
 				
 				<c:choose>
 					
@@ -103,32 +112,50 @@ function check_up(thisform){
 							                  	  		</c:otherwise>
 							                  	  		</c:choose>
 												
-						<a href="javascript:checkUserLogin()" style="color:#FFEC24;margin-left:-4px;text-transform:uppercase;">${currentUser.nickName }</a><font style="color:white;font-size:9pt;">|</font>
-						<a href="${host}/user/center?page=1" target="_blank" title="进入个人中心" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">个人中心</font></a><font style="color: white;font-size:9pt;">|</font>				
-						<a href="${host}/user/center?page=1" target="_blank" style="color:#FFEC24;margin-left:-4px;"><font color="#FFEC24">消息</font><img id="news" src="${host}/common/images/logo/mess.png" style="width:6px;height:24px;display:none;"/></a><font style="color: white;font-size:9pt;">|</font>
-						<a href="javascript:logout()"><font style="color:#FFEC24;margin-left:-4px;">注销</font></a>
+						<a href="javascript:checkUserLoginForSetting()" title="修改我的信息" style="color:#FFEC24;margin-left:-2px;text-transform:uppercase;">
+							<img alt="修改用户信息" src="${pageContext.request.contextPath}/common/images/icon/safe.png"
+										style="width: 32px; height: 32px;margin-left:1px;margin-right:1px;">
+						</a>
+							
+							<font style="color:white;font-size:9pt;">|</font>
+						<a href="${host}/user/center" target="_blank" title="进入个人中心" style="color:#FFEC24;margin-left:-2px;">
+							<img alt="" src="${pageContext.request.contextPath}/common/images/icon/user.png"
+										style="width: 32px; height: 28px;margin-left:1px;margin-right:1px;">
+						</a>
+						<font style="color: white;font-size:9pt;">|</font>				
+						<a href="${host}/user/reply?page=1" target="_blank" title="我的消息" style="color:#FFEC24;margin-left:-2px;">
+							<img alt="我的消息" src="${pageContext.request.contextPath}/common/images/icon/news.png"
+										style="width: 32px; height: 32px;margin-left:1px;">
+							<img id="news" src="${pageContext.request.contextPath}/common/images/logo/mess.png" style="width:6px;height:24px;display:none;"/>
+						</a>
+						<font style="color: white;font-size:9pt;">|</font>
+						<a href="javascript:logout()" title="退出登录">
+							<img alt="退出登录" src="${pageContext.request.contextPath}/common/images/icon/logout6.png"
+										style="width: 30px; height: 30px;margin-left:1px;margin-right:1px;">
+						</a>
 						</font>
 						<c:choose>
 								<c:when test="${(currentUser.face==null||currentUser.face=='')&&currentUser.sex=='男'}">
-								<a href="javascript:checkUserLogin()"style="color:#FFEC24;margin-left:0px;">
+								<a href="javascript:checkUserLogin()" title="${currentUser.nickName }" style="color:#FFEC24;margin-left:0px;">
 									<img alt=""
-										src="${host}/images/user/user0.gif"
+										src="${pageContext.request.contextPath}/images/user/user0.gif"
 										style="width: 32px; height: 32px;"></a>
 								</c:when>
 								<c:when test="${(currentUser.face==null||currentUser.face=='')&&currentUser.sex=='女'}">
-								<a href="javascript:checkUserLogin()" style="color:#FFEC24;margin-left:0px;">	
+								<a href="javascript:checkUserLogin()" title="${currentUser.nickName }" style="color:#FFEC24;margin-left:0px;">	
 									<img alt=""
-										src="${host}/images/user/female.gif"
+										src="${pageContext.request.contextPath}/images/user/female.gif"
 										style="width: 32px; height: 32px;"></a>
 								</c:when>
 								<c:otherwise>
-								<a href="javascript:checkUserLogin()" style="color:#FFEC24;margin-left:0px;">
+								<a href="javascript:checkUserLogin()" title="${currentUser.nickName }" style="color:#FFEC24;margin-left:0px;">
 									
-									<img alt="" src="${host}/${currentUser.face}"
+									<img alt="" src="${pageContext.request.contextPath}/${currentUser.face}"
 										style="width: 32px; height: 32px;margin-right:7px;border:1px solid white;"></a>			
 								</c:otherwise>
+								
 							</c:choose>
-																																									
+							<!--${currentUser.nickName }-->																																		
 						</div>
 					</c:when>
 				<c:otherwise>
@@ -139,17 +166,17 @@ function check_up(thisform){
 						<a href="${host}/user/forget">忘记密码</a>
 					</font>
 				</div>
-			</c:otherwise>
-		</c:choose>
+				</c:otherwise>
+			</c:choose>
 			</div>
 		</div>
 		<div class="news-nav">
 			<div class="container clearfix">
 				<div class="nav-bar">
 					<a href="${host}/home" class="current">首页</a>
-					<a href="http://sharehoo.cn/blog/miki" target="_blank">博客社区<img src="${host}/images/icon/hot.gif"></a>
+					<a href="http://blog.sharehoo.cn" target="_blank">博客社区<img src="${host}/images/icon/hot.gif"></a>
 					<a class=" " href="${host}/shop/index.htm" target="_blank">下载社区<img src="${host}/images/icon/hot.gif"></a>
-					<a class=" " href="${host}/source/w3c/w3c.html" target="_blank">W3C文档</a>
+					<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html" target="_blank">W3C文档</a>
 					<a href="${host}/topic/section/3" target="_blank">社友圈<img src="${host}/images/icon/hot.gif"></a>			
 					<a class=" " href="h5" target="_blank">H5小游戏</a>			
 					<a href="${host}/secret" target="_blank">秘密墙<img src="${host}/images/icon/hot.gif"></a>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--
 scan：当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
 scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒当scan为true时，此属性生效。默认的时间间隔为1分钟。
@@ -55,14 +55,14 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
             -->
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>                        
+            </timeBasedFileNamingAndTriggeringPolicy>                                
         </rollingPolicy>
-        <!-- 此日志文档只记录ERROR级别的 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
+	<!-- 此日志文档只记录ERROR级别的 -->
+	        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+	            <level>ERROR</level>
+	            <onMatch>ACCEPT</onMatch>
+	            <onMismatch>DENY</onMismatch>
+	        </filter>
         <!-- 日志输出格式： -->     
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [ %thread ] - [ %-5level ] [ %logger{50} : %line ] - %msg%n</pattern>

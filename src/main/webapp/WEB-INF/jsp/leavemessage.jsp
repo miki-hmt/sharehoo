@@ -332,9 +332,8 @@ function checkForm(){
 	
 </body>
 <script src="js/index.js"></script>
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/emoticon.css" />
 <script src="${pageContext.request.contextPath }/shop/alert/jquery-1.2.6.js" type="text/javascript"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.funkyUI.js"></script>
 <script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/emoticon.css" />
 </html>

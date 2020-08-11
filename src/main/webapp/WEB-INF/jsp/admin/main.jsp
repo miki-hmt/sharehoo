@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${host}/admin/css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+
+<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
 <link rel="stylesheet" href="${host}/admin/css/select2.css" />
 <link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
 <link rel="stylesheet" href="${host}/admin/css/unicorn.grey.css" class="skin-color" />

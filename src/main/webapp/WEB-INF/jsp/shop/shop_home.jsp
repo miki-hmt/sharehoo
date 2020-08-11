@@ -211,8 +211,8 @@ function validateBuy(){
             <div class="tags">
               <h3>${shop.shop_name }的tag</h3>          
               <div class="content clearfix">
-              	<c:forEach items="${sourceList}" var="source">
-                	<a target="_blank" href="/tag/wpf">${source.tag }</a>
+              	<c:forEach items="${tagsByShop}" var="tag">
+                	<a target="_blank" href="#">${tag}</a>
               	</c:forEach>	              	
              </div>
             </div>

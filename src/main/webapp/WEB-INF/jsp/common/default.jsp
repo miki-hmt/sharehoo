@@ -78,9 +78,9 @@ a:hover{text-decoration:none;}
 </style>
 </head>
 
-<body>
+<body style="background: url(${host}/common/images/bg-v.png);background-repeat:no-repeat;width:auto;">
 <!-- 2017.05.04  网站上半部分  头    -->
-<div style="border:0px solid red;background:#FFFFFF;">
+<div style="border:1px solid #efefef;background:#FFFFFF;align:center;">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/she_files/function.js"></script>
 <div class="club-nav">
@@ -92,11 +92,11 @@ a:hover{text-decoration:none;}
 			 <ul>
 				<li><a href="./source/jquery3.0/jQuery3.1.html"
 					target="_blank" title="jquery3.0">前端样式 </a></li>
-				<li><a href="./source/hibernate/Hibernate.html"
-					target="_blank" title="java，php，c#">后端语言 </a></li>
+				<li><a href=""
+					target="_blank" title="java，php，c#">后端语言</a></li>
 				<li><a href="./source/zhengze/zzbd.html" target="_blank"
 					title="正则表达式">正则表达 </a></li>
-				<li><a href="./source/txt.jsp" target="_blank" title="更多资源">更多文档
+				<li><a href="" target="_blank" title="更多资源">更多文档
 				</a></li>
 			</ul>							        
 	    </li>
@@ -168,9 +168,7 @@ a:hover{text-decoration:none;}
            <dl>
              <dt><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="" target="_blank">
              		<img src="${pageContext.request.contextPath}/${article.image}" alt=""></a></dt>
-             <dd>
-             	<a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" 
-             		title="${article.title }" target="_blank">${article.title }</a></dd>
+             <dd><a href="${pageContext.request.contextPath}/blog/${article.user.nickNameId}/article/${article.id}" title="${article.title }" target="_blank">${article.title}</a></dd>
            </dl>   	  
         </li>
        </c:forEach>        
@@ -208,7 +206,7 @@ a:hover{text-decoration:none;}
 	  <h2 class="modTit" style="margin:0px;padding:0px;"> <strong>发帖达人</strong><span class="modTit-link"></span></h2>
 	  	 <c:forEach items="${userScoreList }" var="user" varStatus="state">
 	      <div class="card_">
-	        <a href="${pageContext.request.contextPath }/blog/${user.nickNameId}" target="_blank">
+	        <a href="${pageContext.request.contextPath }/blog/${user.nickNameId}" title="${user.nickName } 积分：${user.score }" target="_blank">
 	          <img src="${pageContext.request.contextPath}/${user.face}">
 	        </a>
 	        <span>
@@ -307,7 +305,7 @@ a:hover{text-decoration:none;}
 		   </li>     
 		              
 		   <li>         
-			    <em>05</em>          <a href="topic/section/12" target="_blank">游戏开发</a>
+			    <em>05</em>          <a href="topic/section/12" target="_blank">前任(公司)吐槽</a>
 			   <span>  <i style="width:2%;"></i>  </span>       
 		    </li> 
 		              
@@ -379,18 +377,18 @@ a:hover{text-decoration:none;}
 	</div>
 
 
-	
-<div style="width: 1200px; margin: 0 auto;background:#FFFFFF">
+<!--2020.06.05 宽度设为1198px，因为border为1px，两边加起来就有2px，要1200-2-->	
+<div style="width: 1198px; margin: 0 auto;background:#FFFFFF;border:1px solid #efefef;">
 <div id="layout_m_1371438904297" class="layout_m clearfix" style="">
 
-	<!-- 左三个版块内容 -->
+	<!-- 左边版块内容 -->
 <!-- 头层容器 -->	
 <div id="layout_t_1371438904297_1" class="layout_sub layout_in ui-droppable ui-sortable" style="width:500px;">
 
-<!-- 三个小容器 -->
-<c:forEach items="${sectionList }" var="section"  begin="0" end="7" step="1">
+<!-- 左1-4个小容器 -->
+<c:forEach items="${sectionList }" var="section" varStatus="status"  begin="0" end="3" step="1">
 <div id="table_m_1371438909822" class="table_m clearfix ih-60 ui-droppable ui-droppable, ui-sortable" style="border: 0px; margin: 0px 10px 10px 0px; padding: 0px; position: relative;">
-	<div class="table_head" style="height: 25px; line-height: 25px; margin-bottom: 5px; background-image: url(topic/images/daily_tit_bg_10.jpg); background-color: rgb(255, 255, 255); background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
+	<div class="table_head" style="height: 30px; line-height: 25px; margin-bottom: 5px; background-image: url(topic/images/daily_tit_bg_10.jpg); background-color: rgb(255, 255, 255); background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
 		<a href="topic/section/${section.id }" target="_blank">
 			<div class="Tc-18-4">${fn:substring(section.name, 0, 2)}</div>
 			<div class="Tc-18-1">${fn:substring(section.name, 2, 10)}</div>
@@ -399,7 +397,15 @@ a:hover{text-decoration:none;}
 	</div>
 	<div id="content_m_1383014408261" class="content_m" style="width: 150px; margin: 0px 0px 10px; padding: 0px; border: 0px;">
 		<a href="#">
-			<img src="${pageContext.request.contextPath}/${section.logo}" style="height:260px;">
+			<c:choose>
+          	<c:when test="${status.count==1}">
+          		<img src="${pageContext.request.contextPath}/${section.logo}" style="height:278px;">
+          	</c:when>
+          	<c:otherwise>
+          		<img src="${pageContext.request.contextPath}/${section.logo}" style="height:260px;">
+          	</c:otherwise>
+          </c:choose>
+			
 		</a>
 	</div>
 	
@@ -447,6 +453,142 @@ a:hover{text-decoration:none;}
 </div>
 
 </c:forEach>
+
+
+<!-- 左5-6个小容器 -->
+<c:forEach items="${sectionList }" var="section" varStatus="status"  begin="4" end="5" step="1">
+<div id="table_m_1371438909822" class="table_m clearfix ih-60 ui-droppable ui-droppable, ui-sortable" style="border: 0px; margin: 0px 10px 10px 0px; padding: 0px; position: relative;">
+	<div class="table_head" style="height: 25px; line-height: 25px; margin-bottom: 5px; background-image: url(topic/images/daily_tit_bg_10.jpg); background-color: rgb(255, 255, 255); background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
+		<a href="topic/section/${section.id }" target="_blank">
+			<div class="Tc-18-4">${fn:substring(section.name, 0, 2)}</div>
+			<div class="Tc-18-1">${fn:substring(section.name, 2, 10)}</div>
+			<div class="love-more">更多</div>
+		</a>
+	</div>
+	<div id="content_m_1383014408261" class="content_m" style="width: 150px; margin: 0px 0px 10px; padding: 0px; border: 0px;">
+		<a href="#">
+			<c:choose>
+          	<c:when test="${status.count==1}">
+          		<img src="${pageContext.request.contextPath}/${section.logo}" style="height:278px;">
+          	</c:when>
+          	<c:otherwise>
+          		<img src="${pageContext.request.contextPath}/${section.logo}" style="height:260px;">
+          	</c:otherwise>
+          </c:choose>
+			
+		</a>
+	</div>
+	
+	<!-- 版块介绍 -->
+	<div id="content_m_1383015574507" class="content_m" style="width: 330px; margin: 0px 0px 0px 10px; padding: 0px; border: 0px;">
+		<div class="content_list" style="width:330px" data="4.html">
+			<div class="list_s_love ti_1" data="504670793.html">
+				<div class="title_s love-height a_color_1" >
+					<font style="color:#B31515;">最近新帖:</font>${sectionNoReplyTopicCount.get(section)}&nbsp;<font style="color:#B31515;">精华帖:</font>${sectionGoodTopicCount.get(section) }
+					&nbsp;<font style="color:#B31515;">帖子总数:</font>${sectionTopicCount.get(section) }&nbsp;<font style="color:#B31515;">版主：</font><a href="blog/${section.master.nickNameId }" target="_blamk" style="color:#088B23">${section.master.nickName }</a>
+				</div>
+				
+		  </div>		
+	</div>
+</div>
+		
+	<div id="content_m_1383015574507" class="content_m" style="width: 330px; margin: 0px 0px 0px 10px; padding: 0px; border: 0px;">
+		<div class="content_list" style="width:330px" data="4.html">
+		
+			<c:forEach items="${good.get(section) }" var="topic">
+				<div class="list_s_love ti_1" data="504670793.html">
+					<div class="title_s love-height a_color_1">
+
+						<c:choose>
+				          	<c:when test="${topic[3]==null }">
+				          		<a href="${host}/topic/detail/${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
+				          	</c:when>
+				          	<c:otherwise>
+				          		<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
+				          	</c:otherwise>
+				          </c:choose>
+					</div>
+					<div class="nick_s a_color_2" ><a href="blog/${topic[5]}">${topic[2] }</a>
+					</div>
+			  </div>
+			 </c:forEach>			
+		</div>
+	</div>	
+	<!-- 图片文字 -->
+	<div id="content_m_1383030174361" class="content_m" style="width: 150px; margin: 0px 0px 10px; padding: 0px; border: 0px;">
+		<p class="ima_mention"><a href="http://xiangxuanqingya504637218.html
+	" style="color:#ffffff;font-size:9pt;">社区新功能陆续上线当中</a></p>
+	</div>	
+</div>
+</c:forEach>
+
+
+<!-- 左7-8个小容器 -->
+<c:forEach items="${sectionList }" var="section" varStatus="status"  begin="6" end="7" step="1">
+<div id="table_m_1371438909822" class="table_m clearfix ih-60 ui-droppable ui-droppable, ui-sortable" style="border: 0px; margin: 0px 10px 10px 0px; padding: 0px; position: relative;">
+	<div class="table_head" style="height: 25px; line-height: 25px; margin-bottom: 5px; background-image: url(topic/images/daily_tit_bg_10.jpg); background-color: rgb(255, 255, 255); background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
+		<a href="topic/section/${section.id }" target="_blank">
+			<div class="Tc-18-4">${fn:substring(section.name, 0, 2)}</div>
+			<div class="Tc-18-1">${fn:substring(section.name, 2, 10)}</div>
+			<div class="love-more">更多</div>
+		</a>
+	</div>
+	<div id="content_m_1383014408261" class="content_m" style="width: 150px; margin: 0px 0px 10px; padding: 0px; border: 0px;">
+		<a href="#">
+			<c:choose>
+          	<c:when test="${status.count==1}">
+          		<img src="${pageContext.request.contextPath}/${section.logo}" style="height:278px;">
+          	</c:when>
+          	<c:otherwise>
+          		<img src="${pageContext.request.contextPath}/${section.logo}" style="height:260px;">
+          	</c:otherwise>
+          </c:choose>
+			
+		</a>
+	</div>
+	
+	<!-- 版块介绍 -->
+	<div id="content_m_1383015574507" class="content_m" style="width: 330px; margin: 0px 0px 0px 10px; padding: 0px; border: 0px;">
+		<div class="content_list" style="width:330px" data="4.html">
+			<div class="list_s_love ti_1" data="504670793.html">
+				<div class="title_s love-height a_color_1" >
+					<font style="color:#B31515;">最近新帖:</font>${sectionNoReplyTopicCount.get(section)}&nbsp;<font style="color:#B31515;">精华帖:</font>${sectionGoodTopicCount.get(section) }
+					&nbsp;<font style="color:#B31515;">帖子总数:</font>${sectionTopicCount.get(section) }&nbsp;<font style="color:#B31515;">版主：</font><a href="blog/${section.master.nickNameId }" target="_blamk" style="color:#088B23">${section.master.nickName }</a>
+				</div>
+				
+		  </div>		
+	</div>
+</div>
+		
+	<div id="content_m_1383015574507" class="content_m" style="width: 330px; margin: 0px 0px 0px 10px; padding: 0px; border: 0px;">
+		<div class="content_list" style="width:330px" data="4.html">
+		
+			<c:forEach items="${good.get(section) }" var="topic">
+				<div class="list_s_love ti_1" data="504670793.html">
+					<div class="title_s love-height a_color_1">
+
+						<c:choose>
+				          	<c:when test="${topic[3]==null }">
+				          		<a href="${host}/topic/detail/${topic[0] }" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
+				          	</c:when>
+				          	<c:otherwise>
+				          		<a href="http://sharehoo.cn/${topic[3]}.html" target="_blank">${fn:substring(topic[1], 0, 24)}</a>
+				          	</c:otherwise>
+				          </c:choose>
+					</div>
+					<div class="nick_s a_color_2" ><a href="blog/${topic[5]}">${topic[2] }</a>
+					</div>
+			  </div>
+			 </c:forEach>			
+		</div>
+	</div>	
+	<!-- 图片文字 -->
+	<div id="content_m_1383030174361" class="content_m" style="width: 150px; margin: 0px 0px 10px; padding: 0px; border: 0px;">
+		<p class="ima_mention"><a href="http://xiangxuanqingya504637218.html
+	" style="color:#ffffff;font-size:9pt;">社区新功能陆续上线当中</a></p>
+	</div>	
+</div>
+</c:forEach>
 	
 </div>
 	
@@ -467,7 +609,7 @@ a:hover{text-decoration:none;}
 				</a>
 			</div>
 		<div id="content_m_1383017391897" class="content_m" style="width: 150px; margin: 0px 0px 10px; padding: 0px; border: 0px;"><a href="#">
-			<img src="topic/images/141.jpg"  style="height:260px;"></a>
+			<img src="topic/images/142.jpg"  style="height:260px;"></a>
 		</div>
 			<div id="content_m_1383017483899" class="content_m" style="width: 330px; margin: 0px 0px 0px 10px; padding: 0px; border: 0px;">
 				<div class="content_list" style="width:330px" data="4.html">
@@ -487,7 +629,7 @@ a:hover{text-decoration:none;}
 			</div>
 			<div id="content_m_1383030378198" class="content_m" style="width: 150px; margin: 0px 0px 10px; padding: 0px; border: 0px;">
 				<p class="ima_mention">
-					<a href="#" style="color:#ffffff;font-size:9pt;">载人飞船发射成功！  </a></p>
+					<a href="#" style="color:#ffffff;font-size:9pt;">武汉我们与你同在！  </a></p>
 			</div>
 		</div>
 		

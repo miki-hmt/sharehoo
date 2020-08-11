@@ -129,7 +129,7 @@ body {
 
                        /*首页尾部标签设置*/
                        
-#footer{width:100%;height:200px;clear:both;margin:0 0 0 0;background:url(../images/footer_bg.gif) repeat-x center top;}
+#footer{width:100%;height:110px;clear:both;margin:0 0 0 0;background:url(../images/footer_bg.gif) repeat-x center top;}
 .footer_content{width:1000px;margin:auto;color:#dfdfdf;}
 .footer_content a{color:#dfdfdf; text-decoration:none;}
 .footer_left{width:270px; float:left; padding:50px 50px 40px 10px;}

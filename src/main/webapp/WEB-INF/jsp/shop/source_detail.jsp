@@ -523,7 +523,7 @@ function Login(){
 		else{
 			//key=key.replace(/\+/g,"%2B").replace(/\//g,"%2F");
 			key =  encodeURIComponent(keyword)
-			var url="${host}/shop/source/search?keyword="+encodeURIComponent(key);
+			var url="${host}/shop/search?keyword="+encodeURIComponent(key)+"&categoryId=0&typeId=0&menuId=0";
 			window.location.href=url;
 		}
 		return false;
@@ -768,7 +768,7 @@ function Login(){
               		</div>
             	</div>
           	</div>
-          <div class="dl_mar"><a href="/upload" class="upload_res"><i class="fa fa-upload"></i><span>上传资源</span></a>
+          <div class="dl_mar"><a href="${host}/shop/upload.htm" class="upload_res"><i class="fa fa-upload"></i><span>上传资源</span></a>
           </div>
           <!--广告-->
           <div class="dl_mar dl_mar_b">
@@ -780,7 +780,10 @@ function Login(){
             <h4 class="dl_common_t"><span>开发技术热门标签</span>
             </h4>
             <div class="develop_c">
-            		<a href="javascript:void(0);" onclick="javascript:find('python')" title="python" class="tag">python</a>
+			<c:forEach items="${tags}" var="tag">
+				<a href="javascript:void(0);" onclick="javascript:find('${tag}')" title="${tag}" class="tag">${tag}</a>
+			</c:forEach>
+            <a href="javascript:void(0);" onclick="javascript:find('python')" title="python" class="tag">python</a>
 			<a href="javascript:void(0);" onclick="javascript:find('django')" title="django" class="tag">django</a>
 			<a href="javascript:void(0);" onclick="javascript:find('pdf')" title="pdf" class="tag">pdf</a>
 			<a href="javascript:void(0);" onclick="javascript:find('tensorflow')" title="tensorflow" class="tag">tensorflow</a>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -45,9 +45,9 @@
 			$("#error").html("设为推荐不能为空！");
 			return false;
 		}
-		 $.post("${pageContext.request.contextPath}/shop/manage/SourceManage_saveSource.action?sourceId="+sourceId, $("#fm").serialize(),
+		 $.post("${pageContext.request.contextPath}/admin/shop/sourceSave?sourceId="+sourceId, $("#fm").serialize(),
 			 function(result){
- 			if(result.success){
+ 			if(result.status == 200){
  				alert("修改成功！");
  				resetValue();
  				location.reload(true);
@@ -58,11 +58,11 @@
  }
 function sourceDelete(sourceId){
 	if(confirm("店铺关联的所有信息都要删除，确定要删除吗?")){
-		$.post("${pageContext.request.contextPath}/shop/manage/SourceManage_delete.action",{sourceId:sourceId},
+		$.post("${pageContext.request.contextPath}/admin/shop/sourceDelete",{sourceId:sourceId},
 				function(result){
 					var result=eval(result);
-					if(result.info){
-						alert(result.info);
+					if(result.status == 200){
+						alert(result.msg);
 						window.location.reload(true);
 					}
 				}
@@ -104,20 +104,20 @@ function resetValue(){
 	
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			
-			<form action="${host}/admin/shop/sourceSearch?page=1" method="post" class="form-search">
+			<form action="Topic_listAdmin.action" method="post" class="form-search">
 			<!--cellpadding负责调节搜素框之间的高度	2020.06.14-->
 			<table cellpadding="15px;">
 				<tr>
 					<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
 					<td>资源标题:</td>
-					<td><input name="name" type="text" value="${s_source.name }" class="input-medium search-query" placeholder="输入资源名字..." style="width: 165px;"/></td>
+					<td><input name="name" type="text" class="input-medium search-query" placeholder="输入资源名字..." style="width: 165px;"/></td>
 					<td>所属店铺:</td>
-					<td><input name="shop.name" type="text" value="${s_source.shop.shop_name }" class="input-medium search-query" placeholder="输入店铺id..." style="width: 165px;"/></td>
+					<td><input name="user.nickName" type="text" class="input-medium search-query" placeholder="输入店铺id..." style="width: 165px;"/></td>
 					<td>所属类型:</td>
 					<td>
 						<select id="type" name="type.id" style="width: 165px;"><option value="0">请选择类型...</option>
 							<c:forEach var="type" items="${typeList }">
-								<option value="${type.id }" ${s_source.type.id==type.id?'selected':'' }>${type.name }</option>
+								<option value="${type.id }" ${source.type.id==type.id?'selected':'' }>${type.name }</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -131,7 +131,7 @@ function resetValue(){
 					<td>
 						<select id="category" name="category.id" style="width: 195px;"><option value="0">请选择类变...</option>
 							<c:forEach var="category" items="${categoryList }">
-								<option value="${category.id }" ${s_source.category.id==category.id?'selected':'' }>${category.name }</option>
+								<option value="${category.id }" ${source.category.id==category.id?'selected':'' }>${category.name }</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -139,7 +139,7 @@ function resetValue(){
 					<td>
 						<select id="menu" name="menu.id" style="width: 195px;"><option value="0">请选择菜单...</option>
 							<c:forEach var="menu" items="${allMenuList }">
-								<option value="${menu.id }" ${s_source.menu.id==menu.id?'selected':'' }>${menu.name }</option>
+								<option value="${menu.id }" ${source.menu.id==menu.id?'selected':'' }>${menu.name }</option>
 							</c:forEach>
 						</select>
 					</td>					
@@ -243,7 +243,7 @@ function resetValue(){
 								<label class="control-label" for="name">资源名称：</label>
 							</td>
 							<td>
-								<input id="name" type="text" name="source.name" placeholder="导入数据失败！">
+								<input id="name" type="text" name="name" placeholder="导入数据失败！">
 							</td>
 						</tr>								
 											
@@ -252,7 +252,7 @@ function resetValue(){
 								<label class="control-label" for="tag">资源标签：</label>
 							</td>
 							<td>
-								<input id="tag" type="text" name="source.tag" placeholder="导入数据失败！">
+								<input id="tag" type="text" name="tag" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						
@@ -261,7 +261,7 @@ function resetValue(){
 								<label class="control-label" for="size">资源大小：</label>
 							</td>
 							<td>
-								<input id="size" type="text" name="source.size" placeholder="导入数据失败！">
+								<input id="size" type="text" name="size" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						<tr>
@@ -269,7 +269,7 @@ function resetValue(){
 								<label class="control-label" for="douNum">所需豆数数：</label>
 							</td>
 							<td>
-								<input id="douNum" type="text" name="source.douNum" placeholder="导入数据失败！">
+								<input id="douNum" type="text" name="douNum" placeholder="导入数据失败！">
 							</td>
 						</tr>
 						<tr>
@@ -277,12 +277,12 @@ function resetValue(){
 								<label class="control-label" for="good">是否设为推荐：</label>
 							</td>
 							<td>
-								<input id="good" type="text" name="source.good" placeholder="导入数据失败！">								
+								<input id="good" type="text" name="good" placeholder="导入数据失败！">								
 							</td>
 						</tr>					
 									
 					</table>
-					<input id="id" type="hidden" name="source.id">
+					<input id="id" type="hidden" name="id">
 				</form>
 			</div>
 			<div class="modal-footer">

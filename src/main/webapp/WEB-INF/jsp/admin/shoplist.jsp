@@ -174,8 +174,8 @@ function resetValue(){
 			<!--cellpadding负责调节搜素框之间的高度	2020.06.14-->
 			<table cellpadding="15px;">
 				<tr>
-					<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
 					<td>店铺名称:</td>
+					<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
 					<td><input name="shop_name" type="text" value="${s_shop.shop_name }" class="input-medium search-query" placeholder="输入店铺名字..." style="width: 165px;"/></td>
 					<td>店铺主人:</td>
 					<td><input name="user.nickName" type="text" value="${s_shop.user.nickName }" class="input-medium search-query" placeholder="输入主人昵称..." style="width: 165px;"/></td>
@@ -185,7 +185,7 @@ function resetValue(){
 					<td>
 						<button type="submit" class="btn btn-primary" title="Search">查询&nbsp;<i class="icon  icon-search"></i></button>
 					</td>
-				</tr>				
+				</tr>					
 			</table>
 			</form>
 			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteUsers()">批量删除</a>	&nbsp;&nbsp;&nbsp;&nbsp;

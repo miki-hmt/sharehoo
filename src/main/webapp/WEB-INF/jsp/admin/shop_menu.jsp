@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -24,9 +24,9 @@ function openAddDlg(){
 		 $("#error").html("名称不能为空！");
 		 return false;
 	}
-	 $.post("${pageContext.request.contextPath}/shop/manage/Menu_update.action?MenuId="+MenuId, $("#fm").serialize(),
+	 $.post("${pageContext.request.contextPath}/manage/source/updateMenu?MenuId="+MenuId, $("#fm").serialize(),
 			 function(result){
-			if(result){
+			if(result.status ==200){
 				alert("修改成功！");
 				resetValue();
 				location.reload(true);
@@ -46,10 +46,10 @@ function openAddDlg(){
  /*softSectionId对应SoftSection_delete.action里的变量，zoneId表示此处传 的值，softSectionId:zoneId表示将zoneId的值赋给softSectionId */	
 function menuDelete(menuId){
 	if(confirm("确定要删除这条数据吗?")){
-		$.post("${pageContext.request.contextPath}/shop/Menu_delete.action",{menuId:menuId},				
+		$.post("${pageContext.request.contextPath}/manage/source/deleteMenu",{menuId:menuId},				
 				function(result){
 					var result=eval(result);
-					if(result.error){
+					if(result.status == 200){
 						alert("删除成功！");
 						window.location.reload(true);
 					}else{
@@ -92,7 +92,7 @@ function menuDelete(menuId){
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${MenuList }" var="menu">
+								<c:forEach items="${menuList }" var="menu">
 									<tr>
 										<td><input type="checkbox" /></td>
 										<td style="text-align: center;">${menu.id }</td>

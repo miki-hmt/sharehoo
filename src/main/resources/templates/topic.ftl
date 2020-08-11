@@ -4,9 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${topic.title}--IT帮-资讯传播社区</title>
 <meta name="Author" content="miki">
-<meta name="Keywords" content="${topic.title}，课设,下载,博客,论坛,IT资讯,开发心得,干货分享,代码,源码">
-<meta name="Description" content="sharehoo.cn资讯交流平台--专注于程序员开发道路的技术分享，问题解决。
-	会员可以发帖交流与讨论，每个人都有一个个人博客，可以在上面写下自己的心得与感悟。同时提供资源下载，开源源码下载，课程设计，专注于服务大学生。">
+<meta name="Keywords" content="${topic.title}">
 <link href="css/style3.css" rel="stylesheet" type="text/css" />
 <link href="shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>

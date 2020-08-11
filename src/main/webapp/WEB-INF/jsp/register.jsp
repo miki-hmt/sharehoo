@@ -139,7 +139,7 @@ $(function () {
 	}
 
 	function checkEmail(email){	
-		$.post("${host}/user/truename",{email:email},
+		$.post("${host}/user/email",{email:email},
 			function(data){
 				var result=eval(data);
 				if(result.exist){
@@ -153,7 +153,7 @@ $(function () {
 	}
 	
 	function checkTrueName(trueName){	
-		$.post("${host}/user/email",{trueName:trueName},
+		$.post("${host}/user/truename",{trueName:trueName},
 			function(data){
 				var result=eval(data);
 				if(result.exist){
@@ -161,6 +161,20 @@ $(function () {
 					$("#trueName").focus();
 				}else{
 					$("#userTrueNameErrorInfo").html("");
+				}
+			}
+		);
+	}
+	
+	function checkTelephone(phone){	
+		$.post("${host}/user/telephone",{phone:phone},
+			function(data){
+				var result=eval(data);
+				if(result.exist){
+					$("#userTelephoneErrorInfo").html("电话号码已存在，请重新输入！");
+					$("#mobile").focus();
+				}else{
+					$("#userTelephoneErrorInfo").html("");
 				}
 			}
 		);
@@ -247,7 +261,8 @@ $(function () {
 				<label class="control-label" for="moble"></label>
 				<div class="controls">
 					<input class="text input-block-level" type="text" id="mobile"
-						name="mobile" value="${user.mobile }" placeholder="联系方式"/><span class="pull-left"></span>
+						name="mobile" onblur="checkTelephone(this.value)" value="${user.mobile }" placeholder="联系方式"/><span class="pull-left"></span>
+					<font id="userTelephoneErrorInfo" class="pull-right" color="red"></font>
 				</div>
 			</div>
 			
@@ -296,6 +311,8 @@ $(function () {
 						tipOk("注册成功",function(){
 							window.location.href = "${host}/user/welcome?nickName="+nickName;
 						});
+					}else{
+						tipError(data.msg);
 					}
 			   }       
 			});
@@ -369,7 +386,7 @@ $(function () {
 			});
 		};
 		function tipError(content){
-			swal("登录失败", content, "error");
+			swal("注册失败", content, "error");
 		};
 </script>
 </body>

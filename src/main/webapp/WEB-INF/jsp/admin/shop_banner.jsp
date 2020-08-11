@@ -64,9 +64,9 @@ function updateBanner(){
 		 $("#error").html("请输入版主昵称！");
 		 return false;
 	 }
-	 $.post("${pageContext.request.contextPath}/shop/manage/NewsBanner_update.action?bannerId="+bannerId, $("#fm1").serialize(),
+	 $.post("${pageContext.request.contextPath}/admin/newsBanner/update?bannerId="+bannerId, $("#fm1").serialize(),
 			 function(result){
- 			if(result.success){
+ 			if(result.status == 200){
  				alert("修改成功！");
  				resetValue();
  				location.reload(true);
@@ -87,10 +87,10 @@ function updateBanner(){
  }
 function bannerDelete(bannerId){
 	if(confirm("确定要删除这条数据吗?")){
-		$.post("${pageContext.request.contextPath}/shop/manage/NewsBanner_delete.action",{bannerId:bannerId},
+		$.post("${pageContext.request.contextPath}/admin/newsBanner/delete",{bannerId:bannerId},
 				function(result){
 					var result=eval(result);
-					if(result.error){
+					if(result.status == 200){
 						alert("删除成功！");
 						window.location.reload(true);
 						
@@ -230,7 +230,7 @@ function searchUserByNickName1(userNickName){
 				<h3 id="myModalLabel">增加banner</h3>
 			</div>
 			<!--action="Section_save.action" method="post" enctype="multipart/form-data"  -->
-		<form id="fm" action="NewsBanner_save.action" method="post" enctype="multipart/form-data">	
+		<form id="fm" action="${host}/admin/newsBanner/save" method="post" enctype="multipart/form-data">
 			<div class="modal-body">
 				
 					<table>
@@ -306,8 +306,8 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="name">请输入banner名称：</label>
 							</td>
 							<td>
-								<input id="sname" type="text" name="banner.news_name" placeholder="请输入…">
-								<input id="sid" type="hidden" readonly="readonly" name="banner.id">								
+								<input id="sname" type="text" name="news_name" placeholder="请输入…">
+								<input id="sid" type="hidden" readonly="readonly" name="id">
 							</td>
 						</tr>
 						<tr>
@@ -320,7 +320,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="stype">banner类型：</label>
 							</td>
 							<td>
-								<input id="stype" type="text" name="banner.type" placeholder="请输入…">
+								<input id="stype" type="text" name="type" placeholder="请输入…">
 							</td>
 						</tr>
 						<tr>
@@ -328,7 +328,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="stype">banner注释：</label>
 							</td>
 							<td>
-								<input id="snotice" type="text" name="banner.notice" placeholder="请输入…">
+								<input id="snotice" type="text" name="notice" placeholder="请输入…">
 							</td>
 						</tr>
 						<tr>
@@ -336,7 +336,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="surl">url：</label>
 							</td>
 							<td>
-								<input id="surl" type="text" name="banner.url" placeholder="请输入_">
+								<input id="surl" type="text" name="url" placeholder="请输入_">
 								<font id="info1" style="color: red;"></font>
 							</td>
 						</tr>

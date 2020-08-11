@@ -7,8 +7,8 @@
 <html>
 <head>
 	
-	<script src="js/jquery-1.11.1.js" type="text/javascript"></script>
-	<script src="js/jquery.emoticons.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.emoticons.js" type="text/javascript"></script>
 	
 	<link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 	<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet" />

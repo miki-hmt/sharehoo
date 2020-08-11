@@ -209,9 +209,9 @@ padding:-4px 0;
 </div>
 
 
-                                 <!-- 2016.09.21修改 -->
+                                 <!-- 2020.02.07修改 移除:height:900px;自适应长度-->
                                  
-<div style=" width: 1200px;height:900px; margin: 0 auto;background:url('${host}/images/rw2.png');margin-top:-9px;background-color:#FFFFFF;border:0px solid #AC9B8B;box-shadow:2px 5px 5px rgba(0,0,0,0.8);">
+<div style=" width: 1200px; margin: 0 auto;background:url('${host}/images/rw2.png');margin-top:-9px;background-color:#FFFFFF;border:0px solid #AC9B8B;box-shadow:2px 5px 5px rgba(0,0,0,0.8);">
 
 <div style="width: 1200px; margin: 0 auto;">
 	<div style="margin-bottom: 10px;">	

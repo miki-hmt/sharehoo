@@ -8,7 +8,7 @@
       <c:forEach items="${tags }" var="tag">
       	<li class="rnav4 "><a href="#">${tag }</a></li>
       </c:forEach>
-      <li class="rnav1 "><a href="#" onClick="openWin('${host}/tag/add/${user.id}','tag','550','600')">添加+</a></li>
+      <li class="rnav1 "><a href="#" onClick="openWin('${host}/tag/add/${user.id}','tag','500','550')">添加+</a></li>
  </div>
  <script type="text/javascript">
  	function openWin(url,name,iWidth,iHeight) { 

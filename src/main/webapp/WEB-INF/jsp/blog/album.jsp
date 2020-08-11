@@ -65,7 +65,7 @@
         <a href="#" target="_blank" class="more"></a>
       </h3>
        <form id="album_form" method="post" >
-       		<div style="margin-top:10px;height:39px">
+		<div style="margin-top:10px;height:39px">
 				<table>
 					<tr>
 						<td><span>验证码:</span></td>

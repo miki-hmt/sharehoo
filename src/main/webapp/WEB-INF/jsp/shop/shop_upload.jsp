@@ -365,7 +365,7 @@
 						}else{
 							$("#progress").html(percent+"%");	
 						}					
-										
+						$("#progress").html(percent+"%");					
 						$("#upload_name").html("【"+info.items+"/"+file.files.length+"】"+file.files[(info.items-1)].name+"【"+percent+"%】");
 					}
 				}

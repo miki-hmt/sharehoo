@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>资源分类 - sharehoo.cn</title>
+<title>精品铺子 - sharehoo.cn</title>
 <meta name="description" content="下载频道 - sharehoo.cn" />
 <meta name="keywords" content="" />
 <meta name="author" content="sharehoo" />
@@ -150,7 +150,7 @@ function htmlencode(s){
 	<div class="container clearfix">
 		<div class="nav-bar">
 			<a href="${host}/shop/index.htm">首页</a>
-			<a href="${pageContext.request.contextPath}/shop/${host}/shop/source/categories" target="_blank">资源分类</a>
+			<a href="${host}/shop/source/categories" target="_blank">资源分类</a>
 			<a href="${host}/shop/rank" target="_blank" class="current">精品铺子</a>
 			<a class=" " href="http://sharehoo.cn/topic/section/4" target="_blank">赏金平台</a>
 			<a href="${host}/shop/download/rank" target="_blank">下载排行</a>			
@@ -223,66 +223,79 @@ function htmlencode(s){
               
               <li class="clearfix"><span>排序方式：</span>
                 <label>
-                	
                 	<c:choose>
 						<c:when test="${type =='last'}">
-							<a href="http://sharehoo.cn/shop/rank?type=${type}" class="item_cur">
-			                                      最新
+							<a href="http://sharehoo.cn/shop/rank?type=last" class="item_cur">
+			                    最新
 			                </a>
-			                <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			                <a href="http://sharehoo.cn/shop/rank?type=douNum">
 			               	 	最热
 			               	 </a>
-			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 <a href="http://sharehoo.cn/shop/rank?type=view">
 			               	 	按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
 			               	 </a>
-			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 <a href="http://sharehoo.cn/shop/rank?type=downNum">
 			               	 	按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
 			               	 </a> 
 						</c:when>
 						<c:when test="${type =='douNum'}">
-							<a href="http://sharehoo.cn/shop/rank?type=${type}">
-			                                      最新
+							<a href="http://sharehoo.cn/shop/rank?type=last">
+			                    最新
 			                </a>
-			                <a href="http://sharehoo.cn/shop/rank?type=${type}" class="item_cur">
+			                <a href="http://sharehoo.cn/shop/rank?type=douNum" class="item_cur">
 			               	 	最热
 			               	 </a>
-			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 <a href="http://sharehoo.cn/shop/rank?type=view">
 			               	 	按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
 			               	 </a>
-			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 <a href="http://sharehoo.cn/shop/rank?type=downNum">
 			               	 	按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
 			               	 </a> 
 						</c:when>
 						
 						<c:when test="${type =='downNum'}">
-							<a href="http://sharehoo.cn/shop/rank?type=${type}">
+							<a href="http://sharehoo.cn/shop/rank?type=last">
 			                                      最新
 			                </a>
-			                <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			                <a href="http://sharehoo.cn/shop/rank?type=douNum">
 			               	 	最热
 			               	 </a>
-			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 <a href="http://sharehoo.cn/shop/rank?type=view">
 			               	 	按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
 			               	 </a>
-			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}" class="item_cur">
+			               	 <a href="http://sharehoo.cn/shop/rank?type=downNum" class="item_cur">
+			               	 	按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a> 
+						</c:when>
+						<c:when test="${type =='view'}">
+							<a href="http://sharehoo.cn/shop/rank?type=last">
+			                                      最新
+			                </a>
+			                <a href="http://sharehoo.cn/shop/rank?type=douNum">
+			               	 	最热
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=view" class="item_cur">
+			               	 	按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
+			               	 </a>
+			               	 <a href="http://sharehoo.cn/shop/rank?type=downNum">
 			               	 	按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
 			               	 </a> 
 						</c:when>
 						<c:otherwise>
-							<a href="http://sharehoo.cn/shop/rank?type=${type}">
+							<a href="http://sharehoo.cn/shop/rank?type=last">
 			                                      最新
 			                </a>
-			                <a href="http://sharehoo.cn/shop/rank?type=${type}" class="item_cur">
+			                <a href="http://sharehoo.cn/shop/rank?type=douNum" class="item_cur">
 			               	 	最热
 			               	 </a>
-			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 <a href="http://sharehoo.cn/shop/rank?type=view">
 			               	 	按浏览量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
 			               	 </a>
-			               	 <a href="http://sharehoo.cn/shop/rank?type=${type}">
+			               	 <a href="http://sharehoo.cn/shop/rank?type=downNum">
 			               	 	按下载量<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">
 			               	 </a>	
 						</c:otherwise>
-					</c:choose>                	                                              
+					</c:choose>
                 </label>
               </li>
             </ul>
@@ -301,54 +314,54 @@ function htmlencode(s){
 		              </span>
 	             </dt>
 	             <dd>
-	              <a href="/album/detail/707" target="_blank" class="album_cate_t"><font style="font-size:9pt;">主要业务：${shop.tag }</font></a>
+	              <a href="${host}/shop/${shop.id}" target="_blank" class="album_cate_t"><font style="font-size:9pt;">主要业务：${shop.tag }</font></a>
 	              	
 	              
-	              <div class="album_cate_b"><a href="/user/youngalmond11" class="album_per_img">
+	              <div class="album_cate_b"><a href="${host}/shop/${shop.id}" class="album_per_img">
 		              <img src="${pageContext.request.contextPath}/${shop.user.face}" style="margin-left:9px;">
 		              </a>
-		              <a href="/user/youngalmond11/album" class="album_per_name"><font style="font-size:9pt;color:gray;">${shop.user.nickName }</font></a>
+		              <a href="${host}/shop/${shop.id}" class="album_per_name"><font style="font-size:9pt;color:gray;">${shop.user.nickName }</font></a>
 		              <font style="font-size:9pt;color:gray;">           	
 	              		<c:choose>
 			              	<c:when test="${shop.douNum<50 }">
 			              		<p class="right clearfix"><img alt="等级：1" src="${pageContext.request.contextPath}/shop/images/level/down1.png" width="48px" height="16px">
-					              	等级：青铜小菜鸡
+					              	等级：青铜小菜鸡 <img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">${shop.douNum} 豆
 								</p>
 			              	</c:when>
 			              	<c:when test="${shop.douNum>49 && shop.douNum<100 }">
 			              		<p class="right clearfix"><img alt="等级：2" src="${pageContext.request.contextPath}/shop/images/level/down2.png" width="48px" height="16px">
-					              	等级：白银小胸弟
+					              	等级：白银小胸弟 <img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">${shop.douNum} 豆
 								</p>		              		
 			              	</c:when>
 			              	
 			              	<c:when test="${shop.douNum>99 && shop.douNum<150 }">
 			              		<p class="right clearfix"><img alt="等级：3" src="${pageContext.request.contextPath}/shop/images/level/down3.png" width="48px" height="16px">
-					              	等级：黄金小搭档
+					              	等级：黄金小搭档 <img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">${shop.douNum} 豆	
 								</p>
 			              	</c:when>
 			              	<c:when test="${shop.douNum>149 && shop.douNum<200 }">
 			              		<p class="right clearfix"><img alt="等级：4" src="${pageContext.request.contextPath}/shop/images/level/down4.png" width="48px" height="16px">
-					              	等级：白金大胸弟
+					              	等级：白金大胸弟 <img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">${shop.douNum} 豆
 								</p>
 			              	</c:when>
 			              	<c:when test="${shop.douNum>199 && shop.douNum<300 }">
 			              		<p class="right clearfix"><img alt="等级：5" src="${pageContext.request.contextPath}/shop/images/level/down5.png" width="48px" height="16px">
-					              	等级：钻石当家
+					              	等级：钻石当家	<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">${shop.douNum} 豆
 								</p>
 			              	</c:when>
 			              	<c:when test="${shop.douNum>299 && shop.douNum<400}">
 			              		<p class="right clearfix"><img alt="等级：6" src="${pageContext.request.contextPath}/shop/images/level/down6.png" width="48px" height="16px">
-					             	等级：超凡大师
+					             	等级：超凡大师	<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">${shop.douNum} 豆
 								</p>
 			              	</c:when>
 			              	<c:when test="${shop.douNum>399 }">
 			              		<p class="right clearfix"><img alt="等级：7" src="${pageContext.request.contextPath}/shop/images/level/down7.png" width="48px" height="16px">
-					              	等级：最强王者
+					              	等级：最强王者	<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">${shop.douNum} 豆
 								</p>
 			              	</c:when>
 			              	<c:otherwise>
 			              		<p class="right clearfix"><img alt="等级：0" src="${pageContext.request.contextPath}/shop/images/level/down7.png" width="48px" height="16px">
-					             	等级：辣鸡塑料
+					             	等级：辣鸡塑料	<img src="${pageContext.request.contextPath}/shop/images/logo/arrow_down.png" alt="img">${shop.douNum} 豆
 								</p>		              	
 			              	</c:otherwise>
 		                 </c:choose>

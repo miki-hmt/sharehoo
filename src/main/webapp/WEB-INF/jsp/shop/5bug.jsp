@@ -7,6 +7,7 @@
 
 <!-- 2019.09.03 自定义弹窗所需插件 -->
 <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
 <script src="${host}/sweetalert/sweetalert.min.js"></script>
 
@@ -719,7 +720,7 @@ body {
             <div class="arm__sleeve"></div>
           </div>
         </div>
-      </div>     
+      </div>	
     </div>
   </div>
   <div class="ground">
@@ -746,11 +747,12 @@ body {
         <h1 class="headers">安息</h1>
         <h5 class="headers">"&nbsp;&nbsp;喝了很多咖啡的sharehoo社区管理员。"</h5>
         <p class="headers">miki</p>
-	<h6 class="headers"><a href="JavaScript:void(0)" onclick="javascript:validateLogin()" style="color:white;text-decoration:none;"><span style="border:1px solid white;">激活店铺❀</span></a></h6>
+	<h6 class="headers"><a href="JavaScript:void(0)" onclick="javascript:validateLogin()" style="color:white;text-decoration:none;font-size:14px"><span style="border:1px solid white;">激活店铺❀</span></a></h6>
       </div>
     </div>
     <div class="brains-comic-box">
-      <h1 class="brains__text">店铺尚未激活&rArr;</h1>
+      <h2 class="brains__text">墓碑下方激活</h2>
+	
     </div>
   </div>
 </div>

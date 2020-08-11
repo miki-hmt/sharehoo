@@ -63,7 +63,7 @@ function logout() {
 
 function login(){
 	var curPage=window.location.href;
-	window.location.href="http://sharehoo.cn/login?prePage="+http://sharehoo.cn/topic/detail/${id};
+	window.location.href="http://sharehoo.cn/login?prePage=http://sharehoo.cn/topic/detail/${id}";
 }
 
 function checkUserLogin(){

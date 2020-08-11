@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
 <log4j:configuration>
@@ -22,9 +22,9 @@
         </filter>
     </appender>
     <!-- 输出日志到文件 -->
-    <appender name="fileAppender" class="org.apache.log4j.FileAppender">
+    <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
         <!-- 输出文件全路径名 -->
-        <param name="File" value="${catalina.home}/../../idp/logs/sharehoo/sharehoo-log4j.log"/>
+        <param name="File" value="${catalina.home}/../idp/logs/sharehoo/sharehoo-log4j.log"/>
         <!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件 -->
         <param name="Append" value="false"/>
         <param name="Threshold" value="ERROR"/>
@@ -43,7 +43,7 @@
     <!-- FileAppender子类 -->
     <appender name="rollingAppender" class="org.apache.log4j.RollingFileAppender">
         <!-- 日志文件全路径名 -->
-        <param name="File" value="${catalina.home}/../../idp/logs/sharehoo/sharehoo-log4j.log"/>
+        <param name="File" value="${catalina.home}/../idp/logs/sharehoo/sharehoo-log4j.log"/>
         <param name="Threshold" value="ERROR"/>
         <!--是否在已存在的文件追加写：默认时true，若为false则每次启动都会删除并重新新建文件 -->
         <param name="Append" value="true"/>
@@ -62,7 +62,7 @@
     <!-- 日志输出到文件，可以配置多久产生一个新的日志信息文件 -->
     <appender name="dailyRollingAppender" class="org.apache.log4j.DailyRollingFileAppender">
         <!--文件文件全路径名-->
-        <param name="File" value="${catalina.home}/../../idp/logs/sharehoo/sharehoo-log4j.log"/>
+        <param name="File" value="${catalina.home}/../idp/logs/sharehoo/sharehoo-log4j.log"/>
         <param name="Threshold" value="ERROR"/>
         <param name="Append" value="true"/>
         <!--设置日志备份频率，默认：为每天一个日志文件-->
