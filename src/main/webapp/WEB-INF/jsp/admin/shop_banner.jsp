@@ -31,6 +31,7 @@ function openAddDlg(){
      
      
 function saveBanner(){
+	debugger
 	 if ($("#name").val()==null||$("#name").val()=='') {
 		 $("#error").html("请输入小板块名称！");
 		 return false;
@@ -43,12 +44,47 @@ function saveBanner(){
 		 $("#error").html("banner类型不能为空！");
 		 return false;
 	 }
-	 $("#fm").submit();
-	 alert("保存成功！");
-	 resetValue();
-	 location.reload(true);
+
+	var formData = new FormData($("#fm")[0]);
+	$.ajax({
+		type: "POST",
+		url: "${pageContext.request.contextPath}/admin/newsBanner/save",
+		data: formData,
+		cache: false,
+		async: false,
+		processData : false,  //必须false才会避开jQuery对 formdata 的默认处理
+		contentType : false,  //必须false才会自动加上正确的Content-Type
+		success: function (data) {
+			console.log("成功");
+			if(data.status==200){
+				tipOk("添加成功",function(){
+					resetValue();
+					location.reload(true);
+				});
+			}else{
+				tipError(data.msg);
+			}
+		}
+	});
  }
- 
+
+ function tipOk(content,callback){
+	 swal({
+		 title: content,
+		 text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',
+		 imageUrl: "${host}/sweetalert/images/thumbs-up.jpg",
+		 html: true,
+		 timer: 3000,
+		 showConfirmButton: false
+	 },function(){
+		 if (callback) {
+			 callback();
+		 }
+	 });
+ };
+ function tipError(content){
+	 swal("操作失败", content, "error");
+ };
  
 function updateBanner(){
 	var bannerId=$("#sid").val();
@@ -230,7 +266,7 @@ function searchUserByNickName1(userNickName){
 				<h3 id="myModalLabel">增加banner</h3>
 			</div>
 			<!--action="Section_save.action" method="post" enctype="multipart/form-data"  -->
-		<form id="fm" action="${host}/admin/newsBanner/save" method="post" enctype="multipart/form-data">
+		<form id="fm" action="" method="post" enctype="multipart/form-data">
 			<div class="modal-body">
 				
 					<table>
@@ -239,8 +275,8 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="name">请输入banner名称：</label>
 							</td>
 							<td>
-								<input id="name" type="text" name="banner.news_name" placeholder="请输入…">
-								<input id="id" type="hidden" name="banner.id">
+								<input id="name" type="text" name="news_name" placeholder="请输入…">
+								<input id="id" type="hidden" name="id">
 							</td>
 						</tr>
 						<tr>
@@ -263,7 +299,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="url">图片对应url：</label>
 							</td>
 							<td>
-								<input id="url" type="text" name="banner.url" placeholder="请输入…">
+								<input id="url" type="text" name="url" placeholder="请输入…">
 							</td>
 						</tr>
 						<tr>
@@ -271,22 +307,25 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="type">类型：</label>
 							</td>
 							<td>
-								<input id="type" type="text" name="banner.type"  placeholder="请输入banner类型">
+<%--								<input id="type" type="text" name="type"  placeholder="请输入banner类型">--%>
+								<select id="type" name="type" style="width: 195px;"><option value="">请选择banner类型...</option>
+									<option value="topicBanner"}>topicBanner</option>
+									<option value="recommend"}>recommend</option>
+									<option value="download"}>download</option>
+								</select>
 								<font id="info" style="color: red;"></font>
 							</td>
 						</tr>
 					</table>
-			</div>			
-			<div class="modal-footer">
-				<font id="error" style="color: red;"></font>
-				<button class="btn" data-dismiss="modal" aria-hidden="true"
-					onclick="return resetValue()">关闭</button>
-				<button class="btn btn-primary" onclick="javascript:saveBanner()">保存</button>
-				<!-- <button class="btn btn-primary" type="submit">保存</button> -->
 			</div>
-			
 		</form>
-		
+		<div class="modal-footer">
+			<font id="error" style="color: red;"></font>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"
+					onclick="return resetValue()">关闭</button>
+			<button class="btn btn-primary" onclick="javascript:saveBanner()">保存</button>
+			<!-- <button class="btn btn-primary" type="submit">保存</button> -->
+		</div>
 	</div>
 		
 		<!-- bootstarp 隐藏版块栏2    修改 小版块 	2017.05.28		  -->
