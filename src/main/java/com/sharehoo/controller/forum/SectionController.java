@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,17 +82,17 @@ public class SectionController {
 	   
 	
 	//上传logo文件保存方法实现
-	@RequestMapping("/admin/section/add")
-	public E3Result save(@RequestBody Section section,@RequestParam("logo") MultipartFile logo,
-			@PathVariable("logoFileName") String logoFileName)throws Exception{
-		if (logo != null && logo.getSize()>0) {
+	@PostMapping("/admin/section/add")
+	@ResponseBody
+	public E3Result save(Section section,@RequestParam("logoFile") MultipartFile logoFile)throws Exception{
+		if (logoFile != null && logoFile.getSize()>0) {
 			
 			//获取项目的static根路径  
 	    	String staticPath = BootPathUtil.getStaticPath();
-	    	if(logo.getSize()>600*1024*3) {
+	    	if(logoFile.getSize()>600*1024*3) {
 	    		return E3Result.build(401, "上传文件限制在3M以内哦");
 	    	}
-	    	logoFileName = logo.getOriginalFilename();
+	    	String logoFileName = logoFile.getOriginalFilename();
 			String imageName=DateUtil.getCurrentDateStr();
 			String realPath = staticPath +"/images/logo/"+Consts.SDF_YYYYMM.format(new Date()); 
 			String imageFile=imageName+"."+logoFileName.split("\\.")[1];
@@ -100,7 +101,7 @@ public class SectionController {
 			if(!savePath.exists()) {
 				savePath.mkdirs();
 			}		
-			InputStream is = logo.getInputStream();    	    
+			InputStream is = logoFile.getInputStream();    	    
 	          
 	        File toFile = new File(realPath, imageFile);    
 	        OutputStream os = new FileOutputStream(toFile);       
