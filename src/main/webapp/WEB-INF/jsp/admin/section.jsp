@@ -31,8 +31,25 @@ function openAddDlg(){
 $(function () {
 	$("#slogo").uploadPreview({ Img: "sImgPr", Width: 220, Height: 220 });
 });
-   
 
+//2020.08.11 删除
+function sectionDelete(sectionId){
+ if(confirm("确定要删除这条数据吗?")){
+	 $.post("${pageContext.request.contextPath}/admin/section/delete/"+sectionId,{sectionId:sectionId},
+			 function(result){
+				 var result=eval(result);
+				 if(result.success){
+					 tipOk("操作成功",function(){
+						 resetValue();
+						 location.reload(true);
+					 });
+				 }else{
+					 tipError("操作失败");
+				 }
+			 }
+	 );
+ }
+}
     
 function saveSection(){
 	debugger
@@ -50,6 +67,7 @@ function saveSection(){
 	 }
 
 	//2020.08.11 miki 提交新增表单的时候，自增id不要加到表单中，因为新增表单中的id为空，会导致http 400状态码
+	//2020.08.11 miki 注意上传文件的字段名不能与表单对象中的属性值同名，否则会400异常
 	var formData = new FormData($("#fm")[0]);
 	$.ajax({
 		type: "POST",
@@ -100,21 +118,8 @@ function saveSection(){
 	 $("#smasterNickName").val(masterNickName);
 	 $("#sImgPr").attr("src","${pageContext.request.contextPath}/"+logo);
  }
-function sectionDelete(sectionId){
-	if(confirm("确定要删除这条数据吗?")){
-		$.post("Section_delete.action",{sectionId:sectionId},
-				function(result){
-					var result=eval(result);
-					if(result.error){
-						alert(result.error);
-					}else{
-						alert("删除成功！");
-						window.location.reload(true);
-					}
-				}
-			);
-	}
-}
+
+
 function deleteSections(){
 	var selectedSpan=$(".checked").parent().parent().next("td");
 	if(selectedSpan.length==0){
@@ -271,6 +276,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="logo">上传logo：</label>
 							</td>
 							<td>
+								<!--2020.08.11 miki 注意上传文件的字段名不能与表单对象中的属性值同名，否则会400异常-->
 								<input type="file" id="logo" name="logoFile">
 							</td>
 						</tr>
