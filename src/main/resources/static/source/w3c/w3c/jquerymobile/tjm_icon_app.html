@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../../code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" tppabs="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="../../code.jquery.com/jquery-1.8.3.min.js" tppabs="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="../../code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js" tppabs="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="pageone">
+  <div data-role="header">
+  <h1>带有图标的按钮</h1>
+  </div>
+
+  <div data-role="content">
+    <a href="#home" data-role="button" data-inline="true" data-rel="dialog" data-icon="home">首页</a>
+    <a href="#options" data-role="button" data-inline="true" data-rel="dialog" data-icon="grid">选项</a>
+    <a href="#search" data-role="button" data-inline="true" data-rel="dialog" data-icon="search">搜索</a>
+    <a href="#pagetwo" data-role="button" data-icon="arrow-r" data-iconpos="right">下一页</a>
+    <a href="#info" data-role="button" data-rel="dialog" data-icon="info" data-iconpos="top">信息</a>
+  </div>
+
+  <div data-role="footer">
+  <h1>页脚文本</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="pagetwo">
+  <div data-role="header">
+  <h1>带有图标的按钮</h1>
+  </div>
+
+  <div data-role="content">
+    <a href="#pageone" data-role="button" data-icon="back" data-inline="true">返回</a>
+    <a href="#pageone" data-role="button" data-icon="arrow-l">上一页</a>
+    <a href="#info" data-role="button" data-rel="dialog" data-icon="info" data-iconpos="top">信息</a>
+  </div>
+
+  <div data-role="footer">
+  <h1>页脚文本</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="home">
+  <div data-role="header">
+  <h1>首页</h1>
+  </div>
+
+  <div data-role="content">
+  <p>家是心之所在！</p>
+  <a href="#pageone" data-role="button" data-inline="true" data-icon="back">返回</a>
+  </div>
+
+  <div data-role="footer">
+  <h1>页脚文本</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="options">
+  <div data-role="header">
+  <h1>选项</h1>
+  </div>
+
+  <div data-role="content">
+  <p>您刚敲击了选项按钮！</p>
+  <a href="#pageone" data-role="button" data-inline="true" data-icon="back">返回</a>
+  </div>
+
+  <div data-role="footer">
+  <h1>页脚文本</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="search">
+  <div data-role="header">
+  <h1>搜索</h1>
+  </div>
+
+  <div data-role="content">
+  <p>没有搜索结果！</p>
+  <a href="#pageone" data-role="button" data-inline="true" data-icon="back">返回</a>
+  </div>
+
+  <div data-role="footer">
+  <h1>页脚文本</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="info">
+  <div data-role="header">
+  <h1>信息</h1>
+  </div>
+
+  <div data-role="content">
+  <p>jQuery Mobile 很有趣！</p>
+  </div>
+
+  <div data-role="footer">
+  <h1>页脚文本</h1>
+  </div>
+</div> 
+
+
+</body>
+</html>

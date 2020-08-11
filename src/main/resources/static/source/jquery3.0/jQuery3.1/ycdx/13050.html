@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>deferred.isRejected()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">deferred.isRejected()<span class="g-bg-red margin-l-5">1.7-</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;deferred.isRejected()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Boolean</code> 
+	</p>
+	<p>
+	</p>
+	<div class="entry-wrapper">
+		<p class="desc">
+			<strong>描述：</strong> 确定一个Deferred（延迟）对象是否已被拒绝。
+		</p>
+		<ul class="signatures">
+			<li class="signature" id="deferred-isRejected">
+				<h4 class="name">
+					<span class="version-details">V : 1.5</span>deferred.isRejected()
+				</h4>
+				<ul>
+					<li>
+						<div class="null-signature">
+							这个方法不接受任何参数
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<div class="longdesc" id="entry-longdesc">
+			<p>
+				从jQuery1.7开始，这个 API已经过时;
+请使用<code>deferred.state()</code> 代替。
+			</p>
+			<p>
+				如果Deferred（延迟）对象是在被拒绝的状态，则返回<code>true</code>，这意味着要么<code>deferred.reject()</code>或者<code>deferred.rejectWith()</code>已经在对象上被调用过，并且 failCallbacks 已经被调用过（或者正处于被调用的阶段）。
+			</p>
+			<p>
+				请注意，Deferred（延迟）对象可以有三种状态：挂起（pending），解决（resolved），或拒绝（rejected）;使用<code>deferred.isResolved()</code>来判断延迟对象是否在解决状态。这些方法在调试时非常有用，例如，以确定是否递延已经解决，即使你在代码中打算拒绝。
+			</p>
+		</div>
+	</div>
+	<p>
+	</p>
+	<div class="longdesc">
+		<p class="outmoded">
+		</p>
+		<p>
+		</p>
+		<p>
+		</p>
+	</div>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

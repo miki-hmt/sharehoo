@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>each(callback)</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">each(callback)</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.each( function(index, Element) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+</div>
+<p class="desc">
+	<strong>描述：</strong>遍历一个jQuery对象，为每个匹配元素执行一个函数。
+</p>
+<ul class="signatures">
+	<li class="signature" id="each-functionindex--Element">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.each( function(index, Element) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>function(index, Element)</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28">Function</a>()
+				</div>
+				<div>
+					为每个匹配元素执行的一个函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>.each()</code> 方法用来让DOM循环结构更简单更不易出错。它会迭代jQuery对象中的每一个DOM元素。每次回调函数执行时，会传递当前循环次数作为参数(从0开始计数)。更重要的是，回调函数是在当前DOM元素为上下文的语境中触发的。因此关键字 <code>this</code> 总是指向这个元素。
+	</p>
+	<p>
+		假设页面上有这样一个简单的无序列表。
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;ul&gt;
+    &lt;li&gt;foo&lt;/li&gt;
+    &lt;li&gt;bar&lt;/li&gt;
+&lt;/ul&gt;</pre>
+	</div>
+	<p>
+		你可以选中并迭代这些列表：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( "li" ).each(function( index ) {
+  console.log( index + ": "" + $(this).text() );
+});</pre>
+	</div>
+	<p>
+		列表中每一项会显示在下面的消息中：
+	</p>
+	<p>
+		<span class="output">0: foo</span> <br />
+<span class="output">1: bar</span> 
+	</p>
+	<p>
+		我们可以通过返回 <code>false</code>以便在回调函数内中止循环。
+	</p>
+	<p>
+		注意: jQuery的方法，返回一个jQuery对象遍历jQuery集合中的元素 - 被称为隐式<i>迭代</i>的过程。当这种情况发生时，它通常不需要显式地循环的<code>.each()</code>方法：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">// The .each() method is unnecessary here:
+$( "li" ).each(function() {
+  $(this).addClass( "foo" );
+});
+ 
+// Instead, you should rely on implicit iteration:
+$( "li" ).addClass( "bar" );</pre>
+	</div>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h2 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h2>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">遍历三个div并设置它们的color属性。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:red; text-align:center; cursor:pointer;
+        font-weight:bolder; width:300px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div&gt;Click here&lt;/div&gt;
+  &lt;div&gt;to iterate through&lt;/div&gt;
+  &lt;div&gt;these divs.&lt;/div&gt;
+&lt;script&gt;
+    $(document.body).click(function () {
+      $( "div" ).each(function (i) {
+        if ( this.style.color != "blue" ) {
+          this.style.color = "blue";
+        } else {
+          this.style.color = "";
+        }
+      });
+    });
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/7997" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例<span class="desc"></span>
+	</h4>
+	<p>
+		<span class="desc">如果你不想要普通的DOM元素，而想获得的是jQuery对象的话，使用<code>$(this)</code>函数。例如：</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  ul { font-size:18px; margin:0; }
+  span { color:blue; text-decoration:underline; cursor:pointer; }
+  .example { font-style:italic; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  To do list: &lt;span&gt;(click here to change)&lt;/span&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Eat&lt;/li&gt;
+    &lt;li&gt;Sleep&lt;/li&gt;
+ 
+    &lt;li&gt;Be merry&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;script&gt;
+    $( "span" ).click(function () {
+      $( "li" ).each(function(){
+        $( this ).toggleClass( "example" );
+      });
+    });
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/7998" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div>
+<h4>
+	实例<span class="desc"></span>
+</h4>
+<p>
+	<span class="desc">你可以使用 'return' 来提前结束 each() 循环。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { width:40px; height:40px; margin:5px; float:left;
+        border:2px blue solid; text-align:center; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button&gt;Change colors&lt;/button&gt;
+  &lt;span&gt;&lt;/span&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+ 
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div id="stop"&gt;Stop here&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+ 
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+    $( "button" ).click(function () {
+      $( "div" ).each(function ( index, domEle) {
+        // domEle == this
+        $( domEle ).css( "backgroundColor", "yellow" );
+        if ( $(this).is( "#stop" ) ) {
+          $( "span" ).text( "Stopped at div index #" + index );
+          return false;
+        }
+      });
+    });
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7999" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

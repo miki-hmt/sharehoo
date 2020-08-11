@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>unload()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">unload()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.unload( handler(eventObject) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>为 JavaScript 的 "unload" 事件绑定一个处理函数。
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.unload( handler )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>handler</strong> 
+				</div>
+				<div>
+					类型: Function( Event eventObject )
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.unload(
+                [eventData ], handler )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>eventData</strong> 
+				</div>
+				<div>
+					类型: Anything
+				</div>
+				<div>
+					一个普通对象，它包含的数据键值对映射将被传递给事件处理程序。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler</strong> 
+				</div>
+				<div>
+					类型: Function( Event eventObject )
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		这个方法是<code>.bind('unload', handler)</code>的简写。
+	</p>
+	<p>
+		当用户离开这个页面时，就会触发<code>window</code>元素上的<code>unload</code>事件。这意味着很多情况会触发这个事件。用户可以点击一个链接，离开页面，或在地址栏输入一个新的URL。前进和后退按钮会触发该事件。关闭浏览器窗口，将导致该事件被触发。即使重新加载页面首先会创建一个<code>unload</code>事件。
+	</p>
+	<div class="warning">
+		<p>
+			<code>unload</code>事件的处理器在浏览器的各个版本中可能有变化的。例如，Firefox的某些版本中会跟着一个链接触发该事件，但当窗口被关闭时不会触发。在实际使用中，应在所有支持的浏览器中进行测试，并且和类似的<code>beforeunload</code>事件对比。
+		</p>
+	</div>
+	<p>
+		任何 <code>unload</code>事件处理程序必须绑定到 <code>window</code> 对象:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( window ).unload(function() {
+  return "Handler for .unload() called.";
+});</pre>
+	</div>
+	<p>
+		这些代码执行后，浏览器离开当前页面时，将显示警报（alert）。不可能用事件对象的<code>.preventDefault()</code>方法取消<code>unload</code>事件。当用户离开该页面，需要使用脚本进行一些清理工作的场合，可以使用该事件。
+	</p>
+</div>
+<h3>
+	Additional Notes（其他注意事项）:
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			<code>.unload()</code>方法只是作为<code>.on( "unload", handler )</code>的一个速记写法，移除该事件可以使用<code>.off(
+                            "unload"
+                            )</code>。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">当离开页面时显示一个提示框：</span> 
+</p>
+<pre class="prettyprint lang-js">$( window ).unload(function() {
+  return "Bye now!";
+});</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

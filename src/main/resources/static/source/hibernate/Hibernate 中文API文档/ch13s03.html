@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>13.3.&#160;StatelessSession (无状态session)接口</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch13.html" title="第&#160;13&#160;章&#160;批量处理（Batch processing）">
+<link rel="prev" href="ch13s02.html" title="13.2.&#160;批量更新（Batch updates）">
+<link rel="next" href="ch13s04.html" title="13.4.&#160;DML(数据操作语言)风格的操作(DML-style operations)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="batch-statelesssession"></a>13.3.&#160;StatelessSession (无状态session)接口</h2></div></div></div>
+<p>
+            作为选择，Hibernate提供了基于命令的API，可以用detached object的形式把数据以流的方法加入到数据库，或从数据库输出。<code class="literal">StatelessSession</code>没有持久化上下文，也不提供多少高层的生命周期语义。特别是，无状态session不实现第一级cache,也不和第二级缓存，或者查询缓存交互。它不实现事务化写，也不实现脏数据检查。用stateless session进行的操作甚至不级联到关联实例。stateless session忽略集合类(Collections)。通过stateless session进行的操作不触发Hibernate的事件模型和拦截器。无状态session对数据的混淆现象免疫，因为它没有第一级缓存。无状态session是低层的抽象，和低层JDBC相当接近。
+        </p>
+<pre class="programlisting">StatelessSession session = sessionFactory.openStatelessSession();
+Transaction tx = session.beginTransaction();
+   
+ScrollableResults customers = session.getNamedQuery("GetCustomers")
+    .scroll(ScrollMode.FORWARD_ONLY);
+while ( customers.next() ) {
+    Customer customer = (Customer) customers.get(0);
+    customer.updateStuff(...);
+    session.update(customer);
+}
+   
+tx.commit();
+session.close();</pre>
+<p>
+            注意在上面的例子中，查询返回的<code class="literal">Customer</code>实例立即被脱管(detach)。它们与任何持久化上下文都没有关系。
+        </p>
+<p>
+            <code class="literal">StatelessSession</code> 接口定义的<code class="literal">insert(), update()</code> 和 <code class="literal">delete()</code>操作是直接的数据库行级别操作，其结果是立刻执行一条<code class="literal">INSERT, UPDATE</code> 或 <code class="literal">DELETE</code> 语句。因此，它们的语义和<code class="literal">Session</code> 接口定义的<code class="literal">save(), saveOrUpdate()</code> 和<code class="literal">delete()</code> 操作有很大的不同。
+        </p>
+</div></body>
+</html>

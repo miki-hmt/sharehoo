@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>fadeTo()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">fadeTo()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.fadeTo( duration, opacity [, complete ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>调整匹配元素的透明度。
+</p>
+<ul class="signatures">
+	<li class="signature" id="fadeTo-duration-opacity-complete">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.fadeTo( duration, opacity [, complete ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>duration</strong> 
+				</div>
+				<div>
+					类型: String,Number
+				</div>
+				<div>
+					一个字符串或者数字决定动画将运行多久。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>opacity</strong> 
+				</div>
+				<div>
+					类型: Number
+				</div>
+				<div>
+					0和1之间的数字表示目标元素的不透明度。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>complete</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					在动画完成时执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="fadeTo-duration-opacity-easing-complete">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.fadeTo( duration, opacity [, easing ] [, complete ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>duration</strong> 
+				</div>
+				<div>
+					类型: String,Number
+				</div>
+				<div>
+					一个字符串或者数字决定动画将运行多久。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>opacity</strong> 
+				</div>
+				<div>
+					类型: Number
+				</div>
+				<div>
+					0和1之间的数字表示目标元素的不透明度。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>easing</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					一个字符串，表示动画过渡使用哪种缓动函数。（译者注：jQuery自身提供"linear" 和 "swing"，其他可以使用相关的插件）
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>complete</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					在动画完成时执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>.fadeTo()</code> 方法通过匹配元素的不透明度做动画效果。
+	</p>
+	<p>
+		延时时间是以毫秒为单位的，数值越大，动画越慢，不是越快。字符串 <code>'fast'</code> 和 <code>'slow'</code> 分别代表200和600毫秒的延时。如果提供任何其他字符串，或者这个<code>duration</code>参数被省略，那么默认使用<code>400</code>毫秒的延时。和其他效果方法不同，<code>.fadeTo()</code>需要明确的指定<code>duration</code>参数。
+	</p>
+	<p>
+		如果提供回调函数参数，回调函数会在动画完成的时候调用。这个对于将不同的动画串联在一起按顺序排列是非常有用的。这个回调函数不设置任何参数，但是<code>this</code>指向执行动画的DOM元素。如果多个元素一起做动画效果，值得注意的是这个回调函数在每个匹配元素上执行一次。这个动画不是作为一个整体。
+	</p>
+	<p>
+		我们可以给任何元素做动画，比如一个简单的图片：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div id="clickme"&gt;
+    Click here
+  &lt;/div&gt;
+  &lt;img id="book" src="book.png" alt="" width="100" height="123" /&gt;
+  With the element initially shown, we can dim it slowly:
+  $('#clickme').click(function() {
+    $('#book').fadeTo('slow', 0.5, function() {
+      // Animation complete.
+    });
+  });</pre>
+	</div>
+	<p>
+		将<code>duration</code>设置为<code>0</code>，这个方法只是改变<code>opacity</code> CSS属性，所以<code>.fadeTo(0, opacity)</code>和<code>.css('opacity', opacity)</code>是一样的效果。
+	</p>
+</div>
+<h3>
+	Additional Notes:(其他注意事项：)
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			所有jQuery效果，包括<code>.fadeTo()</code>,都能通过设置<code>jQuery.fx.off = true</code>全局的关闭，效果等同于持续时间设置为0。更多信息查看 <code>jQuery.fx.off</code>.
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">把第一个段落的透明度渐变成 0.33 (33%，大约三分之一透明度), 用时 600 毫秒。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;
+Click this paragraph to see it fade.
+&lt;/p&gt;
+ 
+&lt;p&gt;
+Compare to this one that won't fade.
+&lt;/p&gt;
+&lt;script&gt;
+$("p:first").click(function () {
+$(this).fadeTo("slow", 0.33);
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8231" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">每次点击后把 div 渐变成随机透明度，用时 200 毫秒。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+p { width:80px; margin:0; padding:5px; }
+div { width:40px; height:40px; position:absolute; }
+div#one { top:0; left:0; background:#f00; }
+div#two { top:20px; left:20px; background:#0f0; }
+div#three { top:40px; left:40px; background:#00f; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;And this is the library that John built...&lt;/p&gt;
+ 
+&lt;div id="one"&gt;&lt;/div&gt;
+&lt;div id="two"&gt;&lt;/div&gt;
+&lt;div id="three"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("div").click(function () {
+$(this).fadeTo("fast", Math.random());
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8230" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">找到正确答案！渐变耗时 250 毫秒，并且在完成后改变字体样式。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div, p { width:80px; height:40px; top:0; margin:0;
+position:absolute; padding-top:8px; }
+p { background:#fcc; text-align:center; }
+div { background:blue; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Wrong&lt;/p&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;p&gt;Wrong&lt;/p&gt;
+&lt;div&gt;&lt;/div&gt;
+ 
+&lt;p&gt;Right!&lt;/p&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+var getPos = function (n) {
+  return (Math.floor(n) * 90) + "px";
+};
+$("p").each(function (n) {
+  var r = Math.floor(Math.random() * 3);
+  var tmp = $(this).text();
+  $(this).text($("p:eq(" + r + ")").text());
+  $("p:eq(" + r + ")").text(tmp);
+  $(this).css("left", getPos(n));
+});
+$("div").each(function (n) {
+  $(this).css("left", getPos(n));
+})
+.css("cursor", "pointer")
+.click(function () {
+    $(this).fadeTo(250, 0.25, function () {
+      $(this).css("cursor", "")
+        .prev().css({"font-weight": "bolder",
+                     "font-style": "italic"});
+        });
+    });
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8229" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

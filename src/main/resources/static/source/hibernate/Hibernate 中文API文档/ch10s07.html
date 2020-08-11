@@ -1,0 +1,96 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>10.7.&#160;自动状态检测</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch10.html" title="第&#160;10&#160;章&#160;与对象共事">
+<link rel="prev" href="ch10s06.html" title="10.6.&#160;修改脱管(Detached)对象">
+<link rel="next" href="ch10s08.html" title="10.8.&#160;删除持久对象">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="objectstate-saveorupdate"></a>10.7.&#160;自动状态检测</h2></div></div></div>
+<p>
+            Hibernate的用户曾要求一个既可自动分配新持久化标识(identifier)保存瞬时(transient)对象，又可更新/重新关联脱管(detached)实例的通用方法。
+            <code class="literal">saveOrUpdate()</code>方法实现了这个功能。
+        </p>
+<pre class="programlisting">// in the first session
+Cat cat = (Cat) firstSession.load(Cat.class, catID);
+
+// in a higher tier of the application
+Cat mate = new Cat();
+cat.setMate(mate);
+
+// later, in a new session
+secondSession.saveOrUpdate(cat);   // update existing state (cat has a non-null id)
+secondSession.saveOrUpdate(mate);  // save the new instance (mate has a null id)</pre>
+<p>
+            <code class="literal">saveOrUpdate()</code>用途和语义可能会使新用户感到迷惑。
+			首先，只要你没有尝试在某个session中使用来自另一session的实例，你就应该不需要使用<code class="literal">update()</code>，
+            <code class="literal">saveOrUpdate()</code>，或<code class="literal">merge()</code>。有些程序从来不用这些方法。
+        </p>
+<p>
+            通常下面的场景会使用<code class="literal">update()</code>或<code class="literal">saveOrUpdate()</code>：
+        </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                    程序在第一个session中加载对象
+                </p></li>
+<li><p>
+                    该对象被传递到表现层
+                </p></li>
+<li><p>
+					对象发生了一些改动
+                </p></li>
+<li><p>
+					该对象被返回到业务逻辑层
+                </p></li>
+<li><p>
+                    程序调用第二个session的<code class="literal">update()</code>方法持久这些改动
+                </p></li>
+</ul></div>
+<p>
+            <code class="literal">saveOrUpdate()</code>做下面的事:
+        </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                    如果对象已经在本session中持久化了，不做任何事
+                </p></li>
+<li><p>
+                	如果另一个与本session关联的对象拥有相同的持久化标识(identifier)，抛出一个异常
+                </p></li>
+<li><p>
+					如果对象没有持久化标识(identifier)属性，对其调用<code class="literal">save()</code>
+                </p></li>
+<li><p>
+                	如果对象的持久标识(identifier)表明其是一个新实例化的对象，对其调用<code class="literal">save()</code>
+                </p></li>
+<li><p>
+              		如果对象是附带版本信息的（通过<code class="literal">&lt;version&gt;</code>或<code class="literal">&lt;timestamp&gt;</code>）
+					并且版本属性的值表明其是一个新实例化的对象，<code class="literal">save()</code>它。
+                </p></li>
+<li><p>
+                    否则<code class="literal">update()</code> 这个对象
+                </p></li>
+</ul></div>
+<p>
+            <code class="literal">merge()</code>可非常不同:
+        </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                	如果session中存在相同持久化标识(identifier)的实例，用用户给出的对象的状态覆盖旧有的持久实例
+                </p></li>
+<li><p>
+                	如果session没有相应的持久实例，则尝试从数据库中加载，或创建新的持久化实例
+                </p></li>
+<li><p>
+					最后返回该持久实例
+                </p></li>
+<li><p>
+                	用户给出的这个对象没有被关联到session上，它依旧是脱管的
+                </p></li>
+</ul></div>
+</div></body>
+</html>

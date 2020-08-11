@@ -1,0 +1,1370 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="CHM Editor">
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="手册网">
+    <param name="Local" value="page_1.html">
+    <param name="ImageNumber" value="11">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="HIBERNATE - 符合Java习惯的关系数据库持久化">
+    <param name="Local" value="index.html">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="前言">
+      <param name="Local" value="pr01.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="翻译说明">
+        <param name="Local" value="pr01.html#preface-translate-comments-zh-cn">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="版权声明">
+        <param name="Local" value="pr01s02.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="Hibernate入门">
+      <param name="Local" value="ch01.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="前言">
+        <param name="Local" value="ch01.html#tutorial-intro">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="第一部分 － 第一个Hibernate应用程序">
+        <param name="Local" value="ch01s02.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="第一个class">
+          <param name="Local" value="ch01s02.html#tutorial-firstapp-firstclass">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="映射文件">
+          <param name="Local" value="ch01s02.html#tutorial-firstapp-mapping">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Hibernate配置">
+          <param name="Local" value="ch01s02.html#tutorial-firstapp-configuration">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="用Ant构建">
+          <param name="Local" value="ch01s02.html#tutorial-firstapp-ant">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="启动和辅助类">
+          <param name="Local" value="ch01s02.html#tutorial-firstapp-helpers">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="加载并存储对象">
+          <param name="Local" value="ch01s02.html#tutorial-firstapp-workingpersistence">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="第二部分 － 关联映射">
+        <param name="Local" value="ch01s03.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="映射Person类">
+          <param name="Local" value="ch01s03.html#tutorial-associations-mappinguser">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="单向Set-based的关联">
+          <param name="Local" value="ch01s03.html#tutorial-associations-unidirset">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使关联工作">
+          <param name="Local" value="ch01s03.html#tutorial-associations-working">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="值类型的集合">
+          <param name="Local" value="ch01s03.html#tutorial-associations-valuecollections">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="双向关联">
+          <param name="Local" value="ch01s03.html#tutorial-associations-bidirectional">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使双向连起来">
+          <param name="Local" value="ch01s03.html#tutorial-associations-usingbidir">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="第三部分 - EventManager web应用程序">
+        <param name="Local" value="ch01s04.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="编写基本的servlet">
+          <param name="Local" value="ch01s04.html#tutorial-webapp-servlet">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="处理与渲染">
+          <param name="Local" value="ch01s04.html#tutorial-webapp-processing">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="部署与测试">
+          <param name="Local" value="ch01s04.html#tutorial-webapp-deploy">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="总结">
+        <param name="Local" value="ch01s05.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="体系结构(Architecture)">
+      <param name="Local" value="ch02.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="概况(Overview)">
+        <param name="Local" value="ch02.html#architecture-overview">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="实例状态">
+        <param name="Local" value="ch02s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="JMX整合">
+        <param name="Local" value="ch02s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="对JCA的支持">
+        <param name="Local" value="ch02s04.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="上下文相关的（Contextual）Session">
+        <param name="Local" value="ch02s05.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="配置">
+      <param name="Local" value="ch03.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="可编程的配置方式">
+        <param name="Local" value="ch03.html#configuration-programmatic">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="获得SessionFactory">
+        <param name="Local" value="ch03s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="JDBC连接">
+        <param name="Local" value="ch03s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="可选的配置属性">
+        <param name="Local" value="ch03s04.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="SQL方言">
+          <param name="Local" value="ch03s04.html#configuration-optional-dialects">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="外连接抓取(Outer Join Fetching)">
+          <param name="Local" value="ch03s04.html#configuration-optional-outerjoin">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="二进制流 (Binary Streams)">
+          <param name="Local" value="ch03s04.html#configuration-optional-binarystreams">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="二级缓存与查询缓存">
+          <param name="Local" value="ch03s04.html#configuration-optional-cacheprovider">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="查询语言中的替换">
+          <param name="Local" value="ch03s04.html#configuration-optional-querysubstitution">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Hibernate的统计(statistics)机制">
+          <param name="Local" value="ch03s04.html#configuration-optional-statistics">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="日志">
+        <param name="Local" value="ch03s05.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="实现NamingStrategy">
+        <param name="Local" value="ch03s06.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="XML配置文件">
+        <param name="Local" value="ch03s07.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="J2EE应用程序服务器的集成">
+        <param name="Local" value="ch03s08.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="事务策略配置">
+          <param name="Local" value="ch03s08.html#configuration-optional-transactionstrategy">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="JNDI绑定的SessionFactory">
+          <param name="Local" value="ch03s08.html#configuration-optional-jndi">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="在JTA环境下使用Current Session context (当前session上下文)管理">
+          <param name="Local" value="ch03s08.html#configuration-j2ee-currentsession">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="JMX部署">
+          <param name="Local" value="ch03s08.html#configuration-j2ee-jmx">
+          </OBJECT>
+      </UL>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="持久化类(Persistent Classes)">
+      <param name="Local" value="ch04.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="一个简单的POJO例子">
+        <param name="Local" value="ch04.html#persistent-classes-pojo">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="实现一个默认的（即无参数的）构造方法（constructor）">
+          <param name="Local" value="ch04.html#persistent-classes-pojo-constructor">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="提供一个标识属性（identifier property）（可选）">
+          <param name="Local" value="ch04.html#persistent-classes-pojo-identifier">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用非final的类 (可选)">
+          <param name="Local" value="ch04.html#persistent-classes-pojo-final">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="为持久化字段声明访问器(accessors)和是否可变的标志(mutators)(可选)">
+          <param name="Local" value="ch04.html#persistent-classes-pojo-accessors">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="实现继承（Inheritance）">
+        <param name="Local" value="ch04s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="实现equals()和hashCode()">
+        <param name="Local" value="ch04s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="动态模型(Dynamic models)">
+        <param name="Local" value="ch04s04.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="元组片断映射(Tuplizers)">
+        <param name="Local" value="ch04s05.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="对象/关系数据库映射基础(Basic O/R Mapping)">
+      <param name="Local" value="ch05.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="映射定义（Mapping declaration）">
+        <param name="Local" value="ch05.html#mapping-declaration">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Doctype">
+          <param name="Local" value="ch05.html#mapping-declaration-doctype">
+          </OBJECT>
+        <UL>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="EntityResolver">
+            <param name="Local" value="ch05.html#mapping-declaration-entity-resolution">
+            </OBJECT>
+        </UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="hibernate-mapping">
+          <param name="Local" value="ch05.html#mapping-declaration-mapping">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="class">
+          <param name="Local" value="ch05.html#mapping-declaration-class">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="id">
+          <param name="Local" value="ch05.html#mapping-declaration-id">
+          </OBJECT>
+        <UL>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="Generator">
+            <param name="Local" value="ch05.html#mapping-declaration-id-generator">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="高/低位算法（Hi/Lo Algorithm）">
+            <param name="Local" value="ch05.html#mapping-declaration-id-hilo">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="UUID算法（UUID Algorithm ）">
+            <param name="Local" value="ch05.html#mapping-declaration-id-uuid">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="标识字段和序列（Identity columns and Sequences）">
+            <param name="Local" value="ch05.html#mapping-declaration-id-sequences">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="程序分配的标识符（Assigned Identifiers）">
+            <param name="Local" value="ch05.html#mapping-declaration-id-assigned">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="触发器实现的主键生成器（Primary keys assigned by triggers）">
+            <param name="Local" value="ch05.html#mapping-declaration-id-select">
+            </OBJECT>
+        </UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="composite-id">
+          <param name="Local" value="ch05.html#mapping-declaration-compositeid">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="鉴别器（discriminator）">
+          <param name="Local" value="ch05.html#mapping-declaration-discriminator">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="版本（version）(可选)">
+          <param name="Local" value="ch05.html#mapping-declaration-version">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="timestamp (可选)">
+          <param name="Local" value="ch05.html#mapping-declaration-timestamp">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="property">
+          <param name="Local" value="ch05.html#mapping-declaration-property">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="多对一（many-to-one）">
+          <param name="Local" value="ch05.html#mapping-declaration-manytoone">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对一">
+          <param name="Local" value="ch05.html#mapping-declaration-onetoone">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="自然ID(natural-id)">
+          <param name="Local" value="ch05.html#mapping-declaration-naturalid">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="组件(component), 动态组件(dynamic-component)">
+          <param name="Local" value="ch05.html#mapping-declaration-component">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="properties">
+          <param name="Local" value="ch05.html#mapping-declaration-properties">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="子类(subclass)">
+          <param name="Local" value="ch05.html#mapping-declaration-subclass">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="连接的子类(joined-subclass)">
+          <param name="Local" value="ch05.html#mapping-declaration-joinedsubclass">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="联合子类(union-subclass)">
+          <param name="Local" value="ch05.html#mapping-declaration-unionsubclass">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="连接(join)">
+          <param name="Local" value="ch05.html#mapping-declaration-join">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="键(key)">
+          <param name="Local" value="ch05.html#mapping-declaration-key">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="字段和规则元素（column and formula elements）">
+          <param name="Local" value="ch05.html#mapping-column">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="引用(import)">
+          <param name="Local" value="ch05.html#mapping-declaration-import">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="any">
+          <param name="Local" value="ch05.html#mapping-types-anymapping">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Hibernate 的类型">
+        <param name="Local" value="ch05s02.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="实体(Entities)和值(values)">
+          <param name="Local" value="ch05s02.html#mapping-types-entitiesvalues">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="基本值类型">
+          <param name="Local" value="ch05s02.html#mapping-types-basictypes">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="自定义值类型">
+          <param name="Local" value="ch05s02.html#mapping-types-custom">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="多次映射同一个类">
+        <param name="Local" value="ch05s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="SQL中引号包围的标识符">
+        <param name="Local" value="ch05s04.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="其他元数据(Metadata)">
+        <param name="Local" value="ch05s05.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用 XDoclet 标记">
+          <param name="Local" value="ch05s05.html#mapping-xdoclet">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用 JDK 5.0 的注解(Annotation)">
+          <param name="Local" value="ch05s05.html#mapping-annotations">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="数据库生成属性（Generated Properties）">
+        <param name="Local" value="ch05s06.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="辅助数据库对象(Auxiliary Database Objects)">
+        <param name="Local" value="ch05s07.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="集合类(Collections)映射">
+      <param name="Local" value="ch06.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="持久化集合类(Persistent collections)">
+        <param name="Local" value="ch06.html#collections-persistent">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="集合映射（ Collection mappings ）">
+        <param name="Local" value="ch06s02.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="集合外键(Collection foreign keys)">
+          <param name="Local" value="ch06s02.html#collections-foreignkeys">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="集合元素（Collection elements）">
+          <param name="Local" value="ch06s02.html#collections-elements">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="索引集合类(Indexed collections)">
+          <param name="Local" value="ch06s02.html#collections-indexed">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="值集合于多对多关联(Collections of values and many-to-many associations)">
+          <param name="Local" value="ch06s02.html#collections-ofvalues">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对多关联（One-to-many Associations）">
+          <param name="Local" value="ch06s02.html#collections-onetomany">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="高级集合映射（Advanced collection mappings）">
+        <param name="Local" value="ch06s03.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="有序集合（Sorted collections）">
+          <param name="Local" value="ch06s03.html#collections-sorted">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="双向关联（Bidirectional associations）">
+          <param name="Local" value="ch06s03.html#collections-bidirectional">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="双向关联，涉及有序集合类">
+          <param name="Local" value="ch06s03.html#collections-indexedbidirectional">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="三重关联（Ternary associations）">
+          <param name="Local" value="ch06s03.html#collections-ternary">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用<idbag>">
+          <param name="Local" value="ch06s03.html#collections-idbag">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="集合例子（Collection example）">
+        <param name="Local" value="ch06s04.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="关联关系映射">
+      <param name="Local" value="ch07.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="介绍">
+        <param name="Local" value="ch07.html#assoc-intro">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="单向关联（Unidirectional associations）">
+        <param name="Local" value="ch07s02.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="多对一(many to one)">
+          <param name="Local" value="ch07s02.html#assoc-unidirectional-m21">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对一（one to one）">
+          <param name="Local" value="ch07s02.html#assoc-unidirectional-121">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对多（one to many）">
+          <param name="Local" value="ch07s02.html#assoc-unidirectional-12m">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="使用连接表的单向关联（Unidirectional associations with join tables）">
+        <param name="Local" value="ch07s03.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对多(one to many)">
+          <param name="Local" value="ch07s03.html#assoc-unidirectional-join-12m">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="多对一（many to one）">
+          <param name="Local" value="ch07s03.html#assoc-unidirectional-join-m21">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对一（one to one）">
+          <param name="Local" value="ch07s03.html#assoc-unidirectional-join-121">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="多对多（many to many）">
+          <param name="Local" value="ch07s03.html#assoc-unidirectional-join-m2m">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="双向关联（Bidirectional associations）">
+        <param name="Local" value="ch07s04.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对多（one to many) / 多对一（many to one）">
+          <param name="Local" value="ch07s04.html#assoc-bidirectional-m21">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对一（one to one）">
+          <param name="Local" value="ch07s04.html#assoc-bidirectional-121">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="使用连接表的双向关联（Bidirectional associations with join tables）">
+        <param name="Local" value="ch07s05.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对多（one to many） /多对一（ many to one）">
+          <param name="Local" value="ch07s05.html#assoc-bidirectional-join-12m">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一对一（one to one）">
+          <param name="Local" value="ch07s05.html#assoc-bidirectional-join-121">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="多对多（many to many）">
+          <param name="Local" value="ch07s05.html#assoc-bidirectional-join-m2m">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="更复杂的关联映射">
+        <param name="Local" value="ch07s06.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="组件（Component）映射">
+      <param name="Local" value="ch08.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="依赖对象（Dependent objects）">
+        <param name="Local" value="ch08.html#components-dependentobjects">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="在集合中出现的依赖对象 (Collections of dependent objects)">
+        <param name="Local" value="ch08s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="组件作为Map的索引（Components as Map indices ）">
+        <param name="Local" value="ch08s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="组件作为联合标识符(Components as composite identifiers)">
+        <param name="Local" value="ch08s04.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="动态组件 （Dynamic components）">
+        <param name="Local" value="ch08s05.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="继承映射(Inheritance Mappings)">
+      <param name="Local" value="ch09.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="三种策略">
+        <param name="Local" value="ch09.html#inheritance-strategies">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="每个类分层结构一张表(Table per class hierarchy)">
+          <param name="Local" value="ch09.html#inheritance-tableperclass">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="每个子类一张表(Table per subclass)">
+          <param name="Local" value="ch09.html#inheritance-tablepersubclass">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="每个子类一张表(Table per subclass)，使用辨别标志(Discriminator)">
+          <param name="Local" value="ch09.html#inheritance-tablepersubclass-discriminator">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="混合使用“每个类分层结构一张表”和“每个子类一张表”">
+          <param name="Local" value="ch09.html#inheritance-mixing-tableperclass-tablepersubclass">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="每个具体类一张表(Table per concrete class)">
+          <param name="Local" value="ch09.html#inheritance-tableperconcrete">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Table per concrete class, using implicit polymorphism">
+          <param name="Local" value="ch09.html#inheritance-tableperconcreate-polymorphism">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="隐式多态和其他继承映射混合使用">
+          <param name="Local" value="ch09.html#inheritace-mixingpolymorphism">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="限制">
+        <param name="Local" value="ch09s02.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="与对象共事">
+      <param name="Local" value="ch10.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Hibernate对象状态(object states)">
+        <param name="Local" value="ch10.html#objectstate-overview">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="使对象持久化">
+        <param name="Local" value="ch10s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="装载对象">
+        <param name="Local" value="ch10s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="查询">
+        <param name="Local" value="ch10s04.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="执行查询">
+          <param name="Local" value="ch10s04.html#objectstate-querying-executing">
+          </OBJECT>
+        <UL>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="迭代式获取结果(Iterating results)">
+            <param name="Local" value="ch10s04.html#objectstate-querying-executing-iterate">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="返回元组(tuples)的查询">
+            <param name="Local" value="ch10s04.html#objectstate-querying-executing-tuples">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="标量(Scalar)结果">
+            <param name="Local" value="ch10s04.html#objectstate-querying-executing-scalar">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="绑定参数">
+            <param name="Local" value="ch10s04.html#objectstate-querying-executing-parameters">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="分页">
+            <param name="Local" value="ch10s04.html#objectstate-querying-executing-pagination">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="可滚动遍历(Scrollable iteration)">
+            <param name="Local" value="ch10s04.html#objectstate-querying-executing-scrolling">
+            </OBJECT>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="外置命名查询(Externalizing named queries)">
+            <param name="Local" value="ch10s04.html#objectstate-querying-executing-named">
+            </OBJECT>
+        </UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="过滤集合">
+          <param name="Local" value="ch10s04.html#objectstate-filtering">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="条件查询(Criteria queries)">
+          <param name="Local" value="ch10s04.html#objecstate-querying-criteria">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用原生SQL的查询">
+          <param name="Local" value="ch10s04.html#objectstate-querying-nativesql">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="修改持久对象">
+        <param name="Local" value="ch10s05.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="修改脱管(Detached)对象">
+        <param name="Local" value="ch10s06.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="自动状态检测">
+        <param name="Local" value="ch10s07.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="删除持久对象">
+        <param name="Local" value="ch10s08.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="在两个不同数据库间复制对象">
+        <param name="Local" value="ch10s09.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Session刷出(flush)">
+        <param name="Local" value="ch10s10.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="传播性持久化(transitive persistence)">
+        <param name="Local" value="ch10s11.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="使用元数据">
+        <param name="Local" value="ch10s12.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="事务和并发">
+      <param name="Local" value="ch11.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Session和事务范围(transaction scope)">
+        <param name="Local" value="ch11.html#transactions-basics">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="操作单元(Unit of work)">
+          <param name="Local" value="ch11.html#transactions-basics-uow">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="长对话">
+          <param name="Local" value="ch11.html#transactions-basics-apptx">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="关注对象标识(Considering object identity)">
+          <param name="Local" value="ch11.html#transactions-basics-identity">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="常见问题">
+          <param name="Local" value="ch11.html#transactions-basics-issues">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="数据库事务声明">
+        <param name="Local" value="ch11s02.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="非托管环境">
+          <param name="Local" value="ch11s02.html#transactions-demarcation-nonmanaged">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用JTA">
+          <param name="Local" value="ch11s02.html#transactions-demarcation-jta">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="异常处理">
+          <param name="Local" value="ch11s02.html#transactions-demarcation-exceptions">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="事务超时">
+          <param name="Local" value="ch11s02.html#transactions-demarcation-timeout">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="乐观并发控制(Optimistic concurrency control)">
+        <param name="Local" value="ch11s03.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="应用程序级别的版本检查(Application version checking)">
+          <param name="Local" value="ch11s03.html#transactions-optimistic-manual">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="扩展周期的session和自动版本化">
+          <param name="Local" value="ch11s03.html#transactions-optimistic-longsession">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="脱管对象(deatched object)和自动版本化">
+          <param name="Local" value="ch11s03.html#transactions-optimistic-detached">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="定制自动版本化行为">
+          <param name="Local" value="ch11s03.html#transactions-optimistic-customizing">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="悲观锁定(Pessimistic Locking)">
+        <param name="Local" value="ch11s04.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="连接释放模式(Connection Release Modes)">
+        <param name="Local" value="ch11s05.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="拦截器与事件(Interceptors and events)">
+      <param name="Local" value="ch12.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="拦截器(Interceptors)">
+        <param name="Local" value="ch12.html#objectstate-interceptors">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="事件系统(Event system)">
+        <param name="Local" value="ch12s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Hibernate的声明式安全机制">
+        <param name="Local" value="ch12s03.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="批量处理（Batch processing）">
+      <param name="Local" value="ch13.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="批量插入（Batch inserts）">
+        <param name="Local" value="ch13.html#batch-inserts">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="批量更新（Batch updates）">
+        <param name="Local" value="ch13s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="StatelessSession (无状态session)接口">
+        <param name="Local" value="ch13s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="DML(数据操作语言)风格的操作(DML-style operations)">
+        <param name="Local" value="ch13s04.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="HQL: Hibernate查询语言">
+      <param name="Local" value="ch14.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="大小写敏感性问题">
+        <param name="Local" value="ch14.html#queryhql-casesensitivity">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="from子句">
+        <param name="Local" value="ch14s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="关联(Association)与连接(Join)">
+        <param name="Local" value="ch14s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="join 语法的形式">
+        <param name="Local" value="ch14s04.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="select子句">
+        <param name="Local" value="ch14s05.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="聚集函数">
+        <param name="Local" value="ch14s06.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="多态查询">
+        <param name="Local" value="ch14s07.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="where子句">
+        <param name="Local" value="ch14s08.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="表达式">
+        <param name="Local" value="ch14s09.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="order by子句">
+        <param name="Local" value="ch14s10.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="group by子句">
+        <param name="Local" value="ch14s11.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="子查询">
+        <param name="Local" value="ch14s12.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="HQL示例">
+        <param name="Local" value="ch14s13.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="批量的UPDATE和DELETE">
+        <param name="Local" value="ch14s14.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="小技巧 &amp; 小窍门">
+        <param name="Local" value="ch14s15.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="条件查询(Criteria Queries)">
+      <param name="Local" value="ch15.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="创建一个Criteria 实例">
+        <param name="Local" value="ch15.html#querycriteria-creating">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="限制结果集内容">
+        <param name="Local" value="ch15s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="结果集排序">
+        <param name="Local" value="ch15s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="关联">
+        <param name="Local" value="ch15s04.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="动态关联抓取">
+        <param name="Local" value="ch15s05.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="查询示例">
+        <param name="Local" value="ch15s06.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="投影(Projections)、聚合（aggregation）和分组（grouping）">
+        <param name="Local" value="ch15s07.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="离线(detached)查询和子查询">
+        <param name="Local" value="ch15s08.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="根据自然标识查询(Queries by natural identifier)">
+        <param name="Local" value="ch15s09.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="Native SQL查询">
+      <param name="Local" value="ch16.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="使用SQLQuery">
+        <param name="Local" value="ch16.html#querysql-creating">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="标量查询（Scalar queries）">
+          <param name="Local" value="ch16.html#id530151">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="实体查询(Entity queries)">
+          <param name="Local" value="ch16.html#id530325">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="处理关联和集合类(Handling associations and collections)">
+          <param name="Local" value="ch16.html#id530441">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="返回多个实体(Returning multiple entities)">
+          <param name="Local" value="ch16.html#id530542">
+          </OBJECT>
+        <UL>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="别名和属性引用(Alias and property references)">
+            <param name="Local" value="ch16.html#querysql-aliasreferences">
+            </OBJECT>
+        </UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="返回非受管实体(Returning non-managed entities)">
+          <param name="Local" value="ch16.html#id531006">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="处理继承（Handling inheritance）">
+          <param name="Local" value="ch16.html#id531071">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="参数（Parameters）">
+          <param name="Local" value="ch16.html#id531088">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="命名SQL查询">
+        <param name="Local" value="ch16s02.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用return-property来明确地指定字段/别名">
+          <param name="Local" value="ch16s02.html#propertyresults">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用存储过程来查询">
+          <param name="Local" value="ch16s02.html#sp_query">
+          </OBJECT>
+        <UL>
+          <LI> <OBJECT type="text/sitemap">
+            <param name="Name" value="使用存储过程的规则和限制">
+            <param name="Local" value="ch16s02.html#querysql-limits-storedprocedures">
+            </OBJECT>
+        </UL>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="定制SQL用来create，update和delete">
+        <param name="Local" value="ch16s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="定制装载SQL">
+        <param name="Local" value="ch16s04.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="过滤数据">
+      <param name="Local" value="ch17.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Hibernate 过滤器(filters)">
+        <param name="Local" value="ch17.html#objectstate-filters">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="XML映射">
+      <param name="Local" value="ch18.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="用XML数据进行工作">
+        <param name="Local" value="ch18.html#xml-intro">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="指定同时映射XML和类">
+          <param name="Local" value="ch18.html#xml-intro-mapping">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="只定义XML映射">
+          <param name="Local" value="ch18.html#xml-onlyxml">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="XML映射元数据">
+        <param name="Local" value="ch18s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="操作XML数据">
+        <param name="Local" value="ch18s03.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="提升性能">
+      <param name="Local" value="ch19.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="抓取策略(Fetching strategies)">
+        <param name="Local" value="ch19.html#performance-fetching">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="操作延迟加载的关联">
+          <param name="Local" value="ch19.html#performance-fetching-lazy">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="调整抓取策略（Tuning fetch strategies）">
+          <param name="Local" value="ch19.html#performance-fetching-custom">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="单端关联代理（Single-ended association proxies）">
+          <param name="Local" value="ch19.html#performance-fetching-proxies">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="实例化集合和代理（Initializing collections and proxies）">
+          <param name="Local" value="ch19.html#performance-fetching-initialization">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用批量抓取（Using batch fetching）">
+          <param name="Local" value="ch19.html#performance-fetching-batch">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用子查询抓取（Using subselect fetching）">
+          <param name="Local" value="ch19.html#performance-fetching-subselect">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用延迟属性抓取（Using lazy property fetching）">
+          <param name="Local" value="ch19.html#performance-fetching-lazyproperties">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="二级缓存（The Second Level Cache）">
+        <param name="Local" value="ch19s02.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="缓存映射（Cache mappings）">
+          <param name="Local" value="ch19s02.html#performance-cache-mapping">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="策略：只读缓存（Strategy: read only）">
+          <param name="Local" value="ch19s02.html#performance-cache-readonly">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="策略:读/写缓存（Strategy: read/write）">
+          <param name="Local" value="ch19s02.html#performance-cache-readwrite">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="策略:非严格读/写缓存（Strategy: nonstrict read/write）">
+          <param name="Local" value="ch19s02.html#performance-cache-nonstrict">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="策略:事务缓存（transactional）">
+          <param name="Local" value="ch19s02.html#performance-cache-transactional">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="管理缓存（Managing the caches）">
+        <param name="Local" value="ch19s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="查询缓存（The Query Cache）">
+        <param name="Local" value="ch19s04.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="理解集合性能（Understanding Collection performance）">
+        <param name="Local" value="ch19s05.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="分类（Taxonomy）">
+          <param name="Local" value="ch19s05.html#performance-collections-taxonomy">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Lists, maps 和sets用于更新效率最高">
+          <param name="Local" value="ch19s05.html#performance-collections-mostefficientupdate">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Bag和list是反向集合类中效率最高的">
+          <param name="Local" value="ch19s05.html#performance-collections-mostefficentinverse">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="一次性删除（One shot delete）">
+          <param name="Local" value="ch19s05.html#performance-collections-oneshotdelete">
+          </OBJECT>
+      </UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="监测性能（Monitoring performance）">
+        <param name="Local" value="ch19s06.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="监测SessionFactory">
+          <param name="Local" value="ch19s06.html#performance-monitoring-sf">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="数据记录（Metrics）">
+          <param name="Local" value="ch19s06.html#performance-monitoring-metrics">
+          </OBJECT>
+      </UL>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="工具箱指南">
+      <param name="Local" value="ch20.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Schema自动生成（Automatic schema generation）">
+        <param name="Local" value="ch20.html#toolsetguide-s1">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="对schema定制化(Customizing the schema)">
+          <param name="Local" value="ch20.html#toolsetguide-s1-2">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="运行该工具">
+          <param name="Local" value="ch20.html#toolsetguide-s1-3">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="属性(Properties)">
+          <param name="Local" value="ch20.html#toolsetguide-s1-4">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用Ant(Using Ant)">
+          <param name="Local" value="ch20.html#toolsetguide-s1-5">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="对schema的增量更新(Incremental schema updates)">
+          <param name="Local" value="ch20.html#toolsetguide-s1-6">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="用Ant来增量更新schema(Using Ant for incremental schema updates)">
+          <param name="Local" value="ch20.html#toolsetguide-s1-7">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Schema 校验">
+          <param name="Local" value="ch20.html#toolsetguide-s1-8">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="使用Ant进行schema校验">
+          <param name="Local" value="ch20.html#toolsetguide-s1-9">
+          </OBJECT>
+      </UL>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="示例：父子关系(Parent Child Relationships)">
+      <param name="Local" value="ch21.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="关于collections需要注意的一点">
+        <param name="Local" value="ch21.html#example-parentchild-collections">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="双向的一对多关系(Bidirectional one-to-many)">
+        <param name="Local" value="ch21s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="级联生命周期（Cascading lifecycle）">
+        <param name="Local" value="ch21s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="级联与未保存值（Cascades and unsaved-value）">
+        <param name="Local" value="ch21s04.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="结论">
+        <param name="Local" value="ch21s05.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="示例：Weblog 应用程序">
+      <param name="Local" value="ch22.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="持久化类">
+        <param name="Local" value="ch22.html#example-weblog-classes">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Hibernate 映射">
+        <param name="Local" value="ch22s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Hibernate 代码">
+        <param name="Local" value="ch22s03.html">
+        </OBJECT>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="示例：复杂映射实例">
+      <param name="Local" value="ch23.html">
+      </OBJECT>
+    <UL>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Employer（雇主)/Employee(雇员)">
+        <param name="Local" value="ch23.html#example-mappings-emp">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Author(作家)/Work(作品)">
+        <param name="Local" value="ch23s02.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="Customer(客户)/Order(订单)/Product(产品)">
+        <param name="Local" value="ch23s03.html">
+        </OBJECT>
+      <LI> <OBJECT type="text/sitemap">
+        <param name="Name" value="杂例">
+        <param name="Local" value="ch23s04.html">
+        </OBJECT>
+      <UL>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Typed">
+          <param name="Local" value="ch23s04.html#example-mappings-typed-onetone">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Composite key example">
+          <param name="Local" value="ch23s04.html#example-mappings-composite-key">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="共有组合键属性的多对多(Many-to-many with shared composite key attribute)">
+          <param name="Local" value="ch23s04.html#example-mappings-composite-key-manytomany">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Content based discrimination">
+          <param name="Local" value="ch23s04.html#example-mappings-content-discrimination">
+          </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
+          <param name="Name" value="Associations on alternate keys">
+          <param name="Local" value="ch23s04.html#example-mappings-association-alternatekeys">
+          </OBJECT>
+      </UL>
+    </UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="最佳实践(Best Practices)">
+      <param name="Local" value="ch24.html">
+      </OBJECT>
+  </UL>
+</UL>
+</BODY></HTML>

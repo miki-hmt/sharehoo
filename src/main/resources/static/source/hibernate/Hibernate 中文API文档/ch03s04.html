@@ -1,0 +1,877 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>3.4.&#160; 可选的配置属性</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch03.html" title="第&#160;3&#160;章&#160; 配置">
+<link rel="prev" href="ch03s03.html" title="3.3.&#160; JDBC连接">
+<link rel="next" href="ch03s05.html" title="3.5.&#160; 日志">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="configuration-optional"></a>3.4.&#160;
+            可选的配置属性
+        </h2></div></div></div>
+<p>
+            有大量属性能用来控制Hibernate在运行期的行为. 它们都是可选的, 并拥有适当的默认值.
+        </p>
+<p>
+            <span class="emphasis"><em>警告: 其中一些属性是"系统级(system-level)的".</em></span>
+            系统级属性只能通过<code class="literal">java -Dproperty=value</code>或
+            <code class="literal">hibernate.properties</code>来设置, 而<span class="emphasis"><em>不能</em></span>用上面描述的其他方法来设置.
+        </p>
+<div class="table">
+<a name="configuration-optional-properties"></a><p class="title"><b>表&#160;3.3.&#160;
+                Hibernate配置属性
+            </b></p>
+<div class="table-contents"><table summary="
+                Hibernate配置属性
+            " border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                            属性名
+                        </th>
+<th>
+                            用途
+                        </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                            <code class="literal">hibernate.dialect</code>
+                        </td>
+<td>
+                            一个Hibernate <code class="literal">Dialect</code>类名允许Hibernate针对特定的关系数据库生成优化的SQL.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">full.classname.of.Dialect</code>
+               
+             </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.show_sql</code>
+                        </td>
+<td>
+                            输出所有SQL语句到控制台.
+							有一个另外的选择是把<code class="literal">org.hibernate.SQL</code>这个log category设为<code class="literal">debug</code>。
+                            <p>
+                                <span class="strong"><strong>eg.</strong></span> 
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.format_sql</code>
+                        </td>
+<td>
+                            在log和console中打印出更漂亮的SQL。
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.default_schema</code>
+                        </td>
+<td>
+                            在生成的SQL中, 将给定的schema/tablespace附加于非全限定名的表名上.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">SCHEMA_NAME</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.default_catalog</code>
+                        </td>
+<td>
+                            在生成的SQL中, 将给定的catalog附加于非全限定名的表名上.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">CATALOG_NAME</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.session_factory_name</code>
+                        </td>
+<td>
+                            <code class="literal">SessionFactory</code>创建后，将自动使用这个名字绑定到JNDI中.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">jndi/composite/name</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.max_fetch_depth</code>
+                        </td>
+<td>
+                            为单向关联(一对一, 多对一)的外连接抓取（outer join fetch）树设置最大深度.
+                            值为<code class="literal">0</code>意味着将关闭默认的外连接抓取.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                建议在<code class="literal">0</code>到<code class="literal">3</code>之间取值
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.default_batch_fetch_size</code>
+                        </td>
+<td>
+                            为Hibernate关联的批量抓取设置默认数量.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                建议的取值为<code class="literal">4</code>, <code class="literal">8</code>, 
+                                和<code class="literal">16</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.default_entity_mode</code>
+                        </td>
+<td>
+                            为由这个<code class="literal">SessionFactory</code>打开的所有Session指定默认的实体表现模式.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">dynamic-map</code>, <code class="literal">dom4j</code>,
+                                <code class="literal">pojo</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.order_updates</code>
+                        </td>
+<td>
+                            强制Hibernate按照被更新数据的主键，为SQL更新排序。这么做将减少在高并发系统中事务的死锁。
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.generate_statistics</code>
+                        </td>
+<td>
+                            如果开启, Hibernate将收集有助于性能调节的统计数据.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.use_identifer_rollback</code>
+                        </td>
+<td>
+                            如果开启, 在对象被删除时生成的标识属性将被重设为默认值.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.use_sql_comments</code>
+                        </td>
+<td>
+                            如果开启, Hibernate将在SQL中生成有助于调试的注释信息, 默认值为<code class="literal">false</code>.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><div class="table">
+<a name="configuration-jdbc-properties"></a><p class="title"><b>表&#160;3.4.&#160;
+                Hibernate JDBC和连接(connection)属性
+            </b></p>
+<div class="table-contents"><table summary="
+                Hibernate JDBC和连接(connection)属性
+            " border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                            属性名
+                        </th>
+<th>
+                            用途
+                        </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                            <code class="literal">hibernate.jdbc.fetch_size</code>
+                        </td>
+<td>
+                            非零值，指定JDBC抓取数量的大小 (调用<code class="literal">Statement.setFetchSize()</code>).
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.jdbc.batch_size</code>
+                        </td>
+<td>
+                            非零值，允许Hibernate使用JDBC2的批量更新.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                建议取<code class="literal">5</code>到<code class="literal">30</code>之间的值
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.jdbc.batch_versioned_data</code>
+                        </td>
+<td>
+                            如果你想让你的JDBC驱动从<code class="literal">executeBatch()</code>返回正确的行计数 , 
+                            那么将此属性设为<code class="literal">true</code>(开启这个选项通常是安全的). 
+                            同时，Hibernate将为自动版本化的数据使用批量DML. 默认值为<code class="literal">false</code>.
+                            <p>
+                                <span class="strong"><strong>eg.</strong></span>
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.jdbc.factory_class</code>
+                        </td>
+<td>
+                            选择一个自定义的<code class="literal">Batcher</code>. 多数应用程序不需要这个配置属性.
+                            <p>
+                                <span class="strong"><strong>eg.</strong></span>
+                                <code class="literal">classname.of.Batcher</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.jdbc.use_scrollable_resultset</code>
+                        </td>
+<td>
+                            允许Hibernate使用JDBC2的可滚动结果集.
+                            只有在使用用户提供的JDBC连接时，这个选项才是必要的, 
+                            否则Hibernate会使用连接的元数据.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.jdbc.use_streams_for_binary</code>
+                        </td>
+<td>
+                            在JDBC读写<code class="literal">binary (二进制)</code>或<code class="literal">serializable (可序列化)</code>
+                            的类型时使用流(stream)(系统级属性).
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.jdbc.use_get_generated_keys</code>
+                        </td>
+<td>
+                            在数据插入数据库之后，允许使用JDBC3 <code class="literal">PreparedStatement.getGeneratedKeys()</code>
+                            来获取数据库生成的key(键)。需要JDBC3+驱动和JRE1.4+, 如果你的数据库驱动在使用Hibernate的标
+                            识生成器时遇到问题，请将此值设为false. 默认情况下将使用连接的元数据来判定驱动的能力.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                <code class="literal">true|false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.connection.provider_class</code>
+                        </td>
+<td>
+                            自定义<code class="literal">ConnectionProvider</code>的类名, 此类用来向Hibernate提供JDBC连接.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">classname.of.ConnectionProvider</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                        <code class="literal">hibernate.connection.isolation</code>
+                    </td>
+<td>
+                        设置JDBC事务隔离级别. 查看<code class="literal">java.sql.Connection</code>来了解各个值的具体意义, 
+                        但请注意多数数据库都不支持所有的隔离级别.
+                        <p>
+                            <span class="strong"><strong>取值</strong></span> 
+                            <code class="literal">1, 2, 4, 8</code>
+                        </p>
+                    </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.connection.autocommit</code>
+                        </td>
+<td>
+                            允许被缓存的JDBC连接开启自动提交(autocommit) (不建议).
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.connection.release_mode</code>
+                        </td>
+<td>
+                            指定Hibernate在何时释放JDBC连接. 默认情况下,直到Session被显式关闭或被断开连接时,才会释放JDBC连接. 
+                            对于应用程序服务器的JTA数据源, 你应当使用<code class="literal">after_statement</code>, 这样在每次JDBC调用后，都会主动的释放连接. 
+                            对于非JTA的连接, 使用<code class="literal">after_transaction</code>在每个事务结束时释放连接是合理的. 
+                            <code class="literal">auto</code>将为JTA和CMT事务策略选择<code class="literal">after_statement</code>, 
+                            为JDBC事务策略选择<code class="literal">after_transaction</code>.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                <code class="literal">auto</code> (默认) | <code class="literal">on_close</code> |
+                                <code class="literal">after_transaction</code> | <code class="literal">after_statement</code>
+                            </p>
+                            <p>
+
+                                注意,这些设置仅对通过<code class="literal">SessionFactory.openSession</code>得到的<code class="literal">Session</code>起作用。对于通过<code class="literal">SessionFactory.getCurrentSession</code>得到的<code class="literal">Session</code>，所配置的<code class="literal">CurrentSessionContext</code>实现控制这些<code class="literal">Session</code>的连接释放模式。请参阅<a href="ch02s05.html" title="2.5.&#160;上下文相关的（Contextual）Session">第&#160;2.5&#160;节 “上下文相关的（Contextual）Session”</a>。
+                            </p>
+
+
+  	                    </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.connection.<span class="emphasis"><em>&lt;propertyName&gt;</em></span></code>
+                        </td>
+<td>
+                            将JDBC属性<code class="literal">propertyName</code>传递到<code class="literal">DriverManager.getConnection()</code>中去.
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.jndi.<span class="emphasis"><em>&lt;propertyName&gt;</em></span></code>
+                        </td>
+<td>
+                            将属性<code class="literal">propertyName</code>传递到JNDI <code class="literal">InitialContextFactory</code>中去.
+                        </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><div class="table">
+<a name="configuration-cache-properties"></a><p class="title"><b>表&#160;3.5.&#160;
+                Hibernate缓存属性
+            </b></p>
+<div class="table-contents"><table summary="
+                Hibernate缓存属性
+            " border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                            属性名
+                        </th>
+<th>
+                            用途
+                        </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                            <code class="literal">hibernate.cache.provider_class</code>
+                        </td>
+<td>
+                            自定义的<code class="literal">CacheProvider</code>的类名.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">classname.of.CacheProvider</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.cache.use_minimal_puts</code>
+                        </td>
+<td>
+                            以频繁的读操作为代价, 优化二级缓存来最小化写操作. 在Hibernate3中，这个设置对的集群缓存非常有用, 
+                            对集群缓存的实现而言，默认是开启的.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">true|false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.cache.use_query_cache</code>
+                        </td>
+<td>
+                            允许查询缓存, 个别查询仍然需要被设置为可缓存的.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">true|false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.cache.use_second_level_cache</code>
+                        </td>
+<td>
+                            能用来完全禁止使用二级缓存. 对那些在类的映射定义中指定<code class="literal">&lt;cache&gt;</code>的类，会默认开启二级缓存.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">true|false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.cache.query_cache_factory</code>
+                        </td>
+<td>
+                            自定义实现<code class="literal">QueryCache</code>接口的类名,
+                            默认为内建的<code class="literal">StandardQueryCache</code>.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                <code class="literal">classname.of.QueryCache</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.cache.region_prefix</code>
+                        </td>
+<td>
+                            二级缓存区域名的前缀.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">prefix</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.cache.use_structured_entries</code>
+                        </td>
+<td>
+                            强制Hibernate以更人性化的格式将数据存入二级缓存.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span>
+                                <code class="literal">true|false</code>
+                            </p>
+                        </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><div class="table">
+<a name="configuration-transaction-properties"></a><p class="title"><b>表&#160;3.6.&#160;
+                Hibernate事务属性
+            </b></p>
+<div class="table-contents"><table summary="
+                Hibernate事务属性
+            " border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                            属性名
+                        </th>
+<th>
+                            用途
+                        </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                            <code class="literal">hibernate.transaction.factory_class</code>
+                        </td>
+<td>
+                            一个<code class="literal">TransactionFactory</code>的类名, 用于Hibernate <code class="literal">Transaction</code> API
+                            (默认为<code class="literal">JDBCTransactionFactory</code>).
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">classname.of.TransactionFactory</code>
+                            </p>                            
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">jta.UserTransaction</code>
+                        </td>
+<td>
+                            一个JNDI名字，被<code class="literal">JTATransactionFactory</code>用来从应用服务器获取JTA <code class="literal">UserTransaction</code>.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">jndi/composite/name</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.transaction.manager_lookup_class</code>
+                        </td>
+<td>
+                            一个<code class="literal">TransactionManagerLookup</code>的类名
+                            - 当使用JVM级缓存，或在JTA环境中使用hilo生成器的时候需要该类.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">classname.of.TransactionManagerLookup</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.transaction.flush_before_completion</code>
+                        </td>
+<td>
+                            如果开启, session在事务完成后将被自动清洗(flush)。 现在更好的方法是使用自动session上下文管理。请参见<a href="ch02s05.html" title="2.5.&#160;上下文相关的（Contextual）Session">第&#160;2.5&#160;节 “上下文相关的（Contextual）Session”</a>。
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.transaction.auto_close_session</code>
+                        </td>
+<td>
+                            如果开启, session在事务完成后将被自动关闭。 现在更好的方法是使用自动session上下文管理。请参见<a href="ch02s05.html" title="2.5.&#160;上下文相关的（Contextual）Session">第&#160;2.5&#160;节 “上下文相关的（Contextual）Session”</a>。
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><div class="table">
+<a name="configuration-misc-properties"></a><p class="title"><b>表&#160;3.7.&#160;
+                其他属性
+            </b></p>
+<div class="table-contents"><table summary="
+                其他属性
+            " border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                            属性名
+                            </th>
+<th>
+                            用途
+                        </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                            <code class="literal">hibernate.current_session_context_class</code>
+                        </td>
+<td>
+                            为"当前"
+                            <code class="literal">Session</code>指定一个(自定义的)策略。关于内置策略的详情，请参见<a href="ch02s05.html" title="2.5.&#160;上下文相关的（Contextual）Session">第&#160;2.5&#160;节 “上下文相关的（Contextual）Session”</a> 。
+                            <p>
+                                <span class="strong"><strong>eg.</strong></span>
+                                <code class="literal">jta</code> | <code class="literal">thread</code> |
+                                <code class="literal">managed</code> | <code class="literal">custom.Class</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.query.factory_class</code>
+                        </td>
+<td>
+                            选择HQL解析器的实现.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">org.hibernate.hql.ast.ASTQueryTranslatorFactory</code> or
+                                <code class="literal">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.query.substitutions</code>
+                        </td>
+<td>
+                            将Hibernate查询中的符号映射到SQL查询中的符号
+                            (符号可能是函数名或常量名字).
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">hqlLiteral=SQL_LITERAL, hqlFunction=SQLFUNC</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.hbm2ddl.auto</code>
+                        </td>
+<td>
+                            在<code class="literal">SessionFactory</code>创建时，自动检查数据库结构，或者将数据库schema的DDL导出到数据库. 使用
+                            <code class="literal">create-drop</code>时,在显式关闭<code class="literal">SessionFactory</code>时，将drop掉数据库schema.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">validate</code> | <code class="literal">update</code> | 
+                                <code class="literal">create</code> | <code class="literal">create-drop</code>
+                            </p>
+                        </td>
+</tr>
+<tr>
+<td>
+                            <code class="literal">hibernate.cglib.use_reflection_optimizer</code>
+                        </td>
+<td>
+                            开启CGLIB来替代运行时反射机制(系统级属性). 反射机制有时在除错时比较有用. 
+                            注意即使关闭这个优化, Hibernate还是需要CGLIB. 你不能在<code class="literal">hibernate.cfg.xml</code>中设置此属性.
+                            <p>
+                                <span class="strong"><strong>取值</strong></span> 
+                                <code class="literal">true</code> | <code class="literal">false</code>
+                            </p>
+                        </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-optional-dialects"></a>3.4.1.&#160;
+                SQL方言
+            </h3></div></div></div>
+<p>
+                你应当总是为你的数据库将<code class="literal">hibernate.dialect</code>属性设置成正确的
+                <code class="literal">org.hibernate.dialect.Dialect</code>子类. 如果你指定一种方言, 
+                Hibernate将为上面列出的一些属性使用合理的默认值, 为你省去了手工指定它们的功夫.
+            </p>
+<div class="table">
+<a name="sql-dialects"></a><p class="title"><b>表&#160;3.8.&#160;
+                    Hibernate SQL方言 (<code class="literal">hibernate.dialect</code>)
+                </b></p>
+<div class="table-contents"><table summary="
+                    Hibernate SQL方言 (hibernate.dialect)
+                " border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>RDBMS</th>
+<th>
+                                方言
+                            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>DB2</td>
+<td><code class="literal">org.hibernate.dialect.DB2Dialect</code></td>
+</tr>
+<tr>
+<td>DB2 AS/400</td>
+<td><code class="literal">org.hibernate.dialect.DB2400Dialect</code></td>
+</tr>
+<tr>
+<td>DB2 OS390</td>
+<td><code class="literal">org.hibernate.dialect.DB2390Dialect</code></td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td><code class="literal">org.hibernate.dialect.PostgreSQLDialect</code></td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td><code class="literal">org.hibernate.dialect.MySQLDialect</code></td>
+</tr>
+<tr>
+<td>MySQL with InnoDB</td>
+<td><code class="literal">org.hibernate.dialect.MySQLInnoDBDialect</code></td>
+</tr>
+<tr>
+<td>MySQL with MyISAM</td>
+<td><code class="literal">org.hibernate.dialect.MySQLMyISAMDialect</code></td>
+</tr>
+<tr>
+<td>Oracle (any version)</td>
+<td><code class="literal">org.hibernate.dialect.OracleDialect</code></td>
+</tr>
+<tr>
+<td>Oracle 9i/10g</td>
+<td><code class="literal">org.hibernate.dialect.Oracle9Dialect</code></td>
+</tr>
+<tr>
+<td>Sybase</td>
+<td><code class="literal">org.hibernate.dialect.SybaseDialect</code></td>
+</tr>
+<tr>
+<td>Sybase Anywhere</td>
+<td><code class="literal">org.hibernate.dialect.SybaseAnywhereDialect</code></td>
+</tr>
+<tr>
+<td>Microsoft SQL Server</td>
+<td><code class="literal">org.hibernate.dialect.SQLServerDialect</code></td>
+</tr>
+<tr>
+<td>SAP DB</td>
+<td><code class="literal">org.hibernate.dialect.SAPDBDialect</code></td>
+</tr>
+<tr>
+<td>Informix</td>
+<td><code class="literal">org.hibernate.dialect.InformixDialect</code></td>
+</tr>
+<tr>
+<td>HypersonicSQL</td>
+<td><code class="literal">org.hibernate.dialect.HSQLDialect</code></td>
+</tr>
+<tr>
+<td>Ingres</td>
+<td><code class="literal">org.hibernate.dialect.IngresDialect</code></td>
+</tr>
+<tr>
+<td>Progress</td>
+<td><code class="literal">org.hibernate.dialect.ProgressDialect</code></td>
+</tr>
+<tr>
+<td>Mckoi SQL</td>
+<td><code class="literal">org.hibernate.dialect.MckoiDialect</code></td>
+</tr>
+<tr>
+<td>Interbase</td>
+<td><code class="literal">org.hibernate.dialect.InterbaseDialect</code></td>
+</tr>
+<tr>
+<td>Pointbase</td>
+<td><code class="literal">org.hibernate.dialect.PointbaseDialect</code></td>
+</tr>
+<tr>
+<td>FrontBase</td>
+<td><code class="literal">org.hibernate.dialect.FrontbaseDialect</code></td>
+</tr>
+<tr>
+<td>Firebird</td>
+<td><code class="literal">org.hibernate.dialect.FirebirdDialect</code></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break">
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-optional-outerjoin"></a>3.4.2.&#160;
+                外连接抓取(Outer Join Fetching)
+            </h3></div></div></div>
+<p>
+                如果你的数据库支持ANSI, Oracle或Sybase风格的外连接, <span class="emphasis"><em>外连接抓取</em></span>通常能通过限制往返数据库次数
+                (更多的工作交由数据库自己来完成)来提高效率. 外连接抓取允许在单个<code class="literal">SELECT</code>SQL语句中，
+                通过many-to-one, one-to-many, many-to-many和one-to-one关联获取连接对象的整个对象图.
+            </p>
+<p>
+                将<code class="literal">hibernate.max_fetch_depth</code>设为<code class="literal">0</code>能在<span class="emphasis"><em>全局</em></span>
+                范围内禁止外连接抓取. 设为<code class="literal">1</code>或更高值能启用one-to-one和many-to-oneouter关联的外连接抓取, 它们通过
+                <code class="literal">fetch="join"</code>来映射.
+            </p>
+<p>
+                参见<a href="ch19.html#performance-fetching" title="19.1.&#160;
+			抓取策略(Fetching strategies)
+		">第&#160;19.1&#160;节 “
+			抓取策略(Fetching strategies)
+		”</a>获得更多信息.
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-optional-binarystreams"></a>3.4.3.&#160;
+                二进制流 (Binary Streams)
+            </h3></div></div></div>
+<p>
+                Oracle限制那些通过JDBC驱动传输的<code class="literal">字节</code>数组的数目. 如果你希望使用<code class="literal">二进值 (binary)</code>或
+                <code class="literal">可序列化的 (serializable)</code>类型的大对象, 你应该开启
+                <code class="literal">hibernate.jdbc.use_streams_for_binary</code>属性.
+                <span class="emphasis"><em>这是系统级属性.</em></span>
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-optional-cacheprovider"></a>3.4.4.&#160;
+                二级缓存与查询缓存
+            </h3></div></div></div>
+<p>
+                以<code class="literal">hibernate.cache</code>为前缀的属性允许你在Hibernate中，使用进程或群集范围内的二级缓存系统.
+                参见<a href="ch19s02.html" title="19.2.&#160;二级缓存（The Second Level Cache）
+		">第&#160;19.2&#160;节 “二级缓存（The Second Level Cache）
+		”</a>获取更多的详情.
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-optional-querysubstitution"></a>3.4.5.&#160;
+                查询语言中的替换
+            </h3></div></div></div>
+<p>
+                你可以使用<code class="literal">hibernate.query.substitutions</code>在Hibernate中定义新的查询符号.
+                例如:         
+            </p>
+<pre class="programlisting">hibernate.query.substitutions true=1, false=0</pre>
+<p>
+                将导致符号<code class="literal">true</code>和<code class="literal">false</code>在生成的SQL中被翻译成整数常量.
+            </p>
+<pre class="programlisting">hibernate.query.substitutions toLowercase=LOWER</pre>
+<p>
+                将允许你重命名SQL中的<code class="literal">LOWER</code>函数.
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-optional-statistics"></a>3.4.6.&#160;
+                Hibernate的统计(statistics)机制
+            </h3></div></div></div>
+<p>
+                如果你开启<code class="literal">hibernate.generate_statistics</code>, 那么当你通过
+                <code class="literal">SessionFactory.getStatistics()</code>调整正在运行的系统时，Hibernate将导出大量有用的数据.
+                Hibernate甚至能被配置成通过JMX导出这些统计信息. 参考<code class="literal">org.hibernate.stats</code>中接口的Javadoc，以获得更多信息.
+            </p>
+</div>
+</div></body>
+</html>

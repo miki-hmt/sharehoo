@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>unwrap()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">unwrap()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.unwrap()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>将匹配元素集合的父级元素删除，保留自身（和兄弟元素，如果存在）在原来的位置。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="unwrap">
+			<h4 class="name">
+				<span class="version-details">V : 1.4</span>.unwrap()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 3.0</span>.unwrap( [selector ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>selector</strong> 
+					</div>
+					<div>
+						类型: String
+					</div>
+					<div>
+						一个选择器，用来检查匹配的父元素。如果一个元素的父不匹配该选择器，该元素将不会被解开。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>.unwrap()</code>删除元素的父级元素。和 <code>.wrap()</code>的功能相反。匹配的元素（以及他们的兄弟元素，如果有的话）取代他们的父母在DOM结构。
+		</p>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h2 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h2>
+</header>
+	<p>
+		<span class="desc">在每个段落外层加上div或者删除div</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;unwrap demo&lt;/title&gt;
+  &lt;style&gt;
+  div {
+    border: 2px solid blue;
+  }
+  p {
+    background: yellow;
+    margin: 4px;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button&gt;wrap/unwrap&lt;/button&gt;
+&lt;p&gt;Hello&lt;/p&gt;
+&lt;p&gt;cruel&lt;/p&gt;
+&lt;p&gt;World&lt;/p&gt;
+&lt;script&gt;
+var pTags = $( "p" );
+$( "button" ).click(function() {
+  if ( pTags.parent().is( "div" ) ) {
+    pTags.unwrap();
+  } else {
+    pTags.wrap( "&lt;div&gt;&lt;/div&gt;" );
+  }
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8078" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+	<p>
+	</p>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

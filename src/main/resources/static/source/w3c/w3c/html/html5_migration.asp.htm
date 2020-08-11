@@ -1,0 +1,843 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>HTML5 迁移</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>HTML 基础教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/html/index.asp" title="HTML 教程">HTML 教程</a></li>
+<li><a href="html_jianjie.asp.htm" tppabs="http://www.w3school.com.cn/html/html_jianjie.asp" title="HTML 简介">HTML 简介</a></li>
+<li><a href="html_editors.asp.htm" tppabs="http://www.w3school.com.cn/html/html_editors.asp" title="HTML 编辑器">HTML 编辑器</a></li>
+<li><a href="html_basic.asp.htm" tppabs="http://www.w3school.com.cn/html/html_basic.asp" title="HTML 基础 - 四个实例">HTML 基础</a></li>
+<li><a href="html_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_elements.asp" title="HTML 元素">HTML 元素</a></li>
+<li><a href="html_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_attributes.asp" title="HTML 属性">HTML 属性</a></li>
+<li><a href="html_headings.asp.htm" tppabs="http://www.w3school.com.cn/html/html_headings.asp" title="HTML 标题">HTML 标题</a></li>
+<li><a href="html_paragraphs.asp.htm" tppabs="http://www.w3school.com.cn/html/html_paragraphs.asp" title="HTML 段落">HTML 段落</a></li>
+<li><a href="html_styles.asp.htm" tppabs="http://www.w3school.com.cn/html/html_styles.asp" title="HTML 样式 - CSS">HTML 样式</a></li>
+<li><a href="html_formatting.asp.htm" tppabs="http://www.w3school.com.cn/html/html_formatting.asp" title="HTML 文本格式化">HTML 格式化</a></li>
+<li><a href="html_quotation_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quotation_elements.asp" title="HTML 链接">HTML 引用</a></li>
+<li><a href="html_computercode_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_computercode_elements.asp" title="HTML 链接">HTML 计算机代码</a></li>
+<li><a href="html_comments.asp.htm" tppabs="http://www.w3school.com.cn/html/html_comments.asp" title="HTML 链接">HTML 注释</a></li>
+<li><a href="html_css.asp.htm" tppabs="http://www.w3school.com.cn/html/html_css.asp" title="HTML 样式 - CSS">HTML CSS</a></li>
+<li><a href="html_links.asp.htm" tppabs="http://www.w3school.com.cn/html/html_links.asp" title="HTML 链接">HTML 链接</a></li>
+<li><a href="html_images.asp.htm" tppabs="http://www.w3school.com.cn/html/html_images.asp" title="HTML 图像">HTML 图像</a></li>
+<li><a href="html_tables.asp.htm" tppabs="http://www.w3school.com.cn/html/html_tables.asp" title="HTML 表格">HTML 表格</a></li>
+<li><a href="html_lists.asp.htm" tppabs="http://www.w3school.com.cn/html/html_lists.asp" title="HTML 列表">HTML 列表</a></li>
+<li><a href="html_blocks.asp.htm" tppabs="http://www.w3school.com.cn/html/html_blocks.asp" title="HTML &lt;div&gt; 和 &lt;span&gt;">HTML 块</a></li>
+<li><a href="html_classes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_classes.asp" title="HTML 布局">HTML 类</a></li>
+<li><a href="html_layout.asp.htm" tppabs="http://www.w3school.com.cn/html/html_layout.asp" title="HTML 布局">HTML 布局</a></li>
+<li><a href="html_responsive.asp.htm" tppabs="http://www.w3school.com.cn/html/html_responsive.asp" title="HTML 布局">HTML 响应式设计</a></li>
+<li><a href="html_frames.asp.htm" tppabs="http://www.w3school.com.cn/html/html_frames.asp" title="HTML 框架">HTML 框架</a></li>
+<li><a href="html_iframe.asp.htm" tppabs="http://www.w3school.com.cn/html/html_iframe.asp" title="HTML Iframe">HTML 内联框架</a></li>
+<li><a href="html_backgrounds.asp.htm" tppabs="http://www.w3school.com.cn/html/html_backgrounds.asp" title="HTML 背景">HTML 背景</a></li>
+<li><a href="html_scripts.asp.htm" tppabs="http://www.w3school.com.cn/html/html_scripts.asp" title="HTML 脚本">HTML 脚本</a></li>
+<li><a href="html_head.asp.htm" tppabs="http://www.w3school.com.cn/html/html_head.asp" title="HTML 头部元素">HTML 头部</a></li>
+<li><a href="html_entities.asp.htm" tppabs="http://www.w3school.com.cn/html/html_entities.asp" title="HTML 实体">HTML 实体</a></li>
+<li><a href="html_url.asp.htm" tppabs="http://www.w3school.com.cn/html/html_url.asp" title="HTML 统一资源定位器">HTML URL</a></li>
+<li><a href="html_urlencode.asp.htm" tppabs="http://www.w3school.com.cn/html/html_urlencode.asp" title="HTML URL 编码">HTML URL 编码</a></li>
+<li><a href="html_webserver.asp.htm" tppabs="http://www.w3school.com.cn/html/html_webserver.asp" title="HTML Web 服务器">HTML Web 服务器</a></li>
+<li><a href="html_colors.asp.htm" tppabs="http://www.w3school.com.cn/html/html_colors.asp" title="HTML 颜色">HTML 颜色</a></li>
+<li><a href="html_colornames.asp.htm" tppabs="http://www.w3school.com.cn/html/html_colornames.asp" title="HTML 颜色名">HTML 颜色名</a></li>
+<li><a href="html_doctype.asp.htm" tppabs="http://www.w3school.com.cn/html/html_doctype.asp" title="HTML &lt;!DOCTYPE&gt;">HTML 文档类型</a></li>
+<li><a href="html_quick.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quick.asp" title="HTML 4.01 速查手册">HTML 速查手册</a></li>
+</ul>
+<h2>HTML XHTML</h2>
+<ul>
+<li><a href="html_xhtml.asp.htm" tppabs="http://www.w3school.com.cn/html/html_xhtml.asp" title="XHTML 简介">XHTML 简介</a></li>
+<li><a href="html_xhtml_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_xhtml_elements.asp" title="XHTML - 元素">XHTML 元素</a></li>
+<li><a href="html_xhtml_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_xhtml_attributes.asp" title="XHTML - 属性">XHTML 属性</a></li>
+</ul>
+<h2>HTML 表单</h2>
+<ul>
+<li><a href="html_forms.asp.htm" tppabs="http://www.w3school.com.cn/html/html_forms.asp" title="HTML 表单和输入">HTML 表单</a></li>
+<li><a href="html_form_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_form_elements.asp" title="HTML 表单元素">HTML 表单元素</a></li>
+<li><a href="html_form_input_types.asp.htm" tppabs="http://www.w3school.com.cn/html/html_form_input_types.asp" title="HTML Input 类型">HTML 输入类型</a></li>
+<li><a href="html_form_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_form_attributes.asp" title="HTML 输入属性">HTML 输入属性</a></li>
+</ul>
+<h2>HTML5</h2>
+<ul>
+<li><a href="html5_intro.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_intro.asp" title="HTML5 简介">HTML5 简介</a></li>
+<li><a href="html5_browsers.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_browsers.asp" title="HTML5 浏览器支持">HTML5 支持</a></li>
+<li><a href="html5_new_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_new_elements.asp" title="HTML5 视频">HTML5 元素</a></li>
+<li><a href="html5_semantic_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_semantic_elements.asp" title="HTML5 Video + DOM">HTML5 语义</a></li>
+<li class="currentLink"><a href="html5_migration.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_migration.asp" title="HTML5 音频">HTML5 迁移</a></li>
+<li><a href="html5_syntax.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_syntax.asp" title="HTML5 拖放">HTML5 代码约定</a></li>
+</ul>
+<h2>HTML 图形</h2>
+<ul>
+<li><a href="html5_canvas.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_canvas.asp" title="HTML5 Canvas">HTML5 画布</a></li>
+<li><a href="html5_svg.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_svg.asp" title="HTML5 内联 SVG">HTML5 SVG</a></li>
+<li><a href="html5_canvas_vs_svg.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_canvas_vs_svg.asp" title="HTML5 Canvas vs. SVG">HTML5 画布 vs SVG</a></li>
+</ul>
+<h2>HTML 媒体</h2>
+<ul>
+<li><a href="html_media.asp.htm" tppabs="http://www.w3school.com.cn/html/html_media.asp" title="HTML 多媒体">HTML 媒体</a></li>
+<li><a href="html_object.asp.htm" tppabs="http://www.w3school.com.cn/html/html_object.asp" title="HTML Object 元素">HTML 对象</a></li>
+<li><a href="html_audio.asp.htm" tppabs="http://www.w3school.com.cn/html/html_audio.asp" title="HTML 音频">HTML 音频</a></li>
+<li><a href="html_video.asp.htm" tppabs="http://www.w3school.com.cn/html/html_video.asp" title="HTML 视频">HTML 视频</a></li>
+</ul>
+<h2>HTML API</h2>
+<ul>
+<li><a href="html5_geolocation.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_geolocation.asp" title="HTML5 地理定位">HTML5 地理定位</a></li>
+<li><a href="html5_draganddrop.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_draganddrop.asp" title="HTML5 拖放">HTML5 拖放</a></li>
+<li><a href="html5_webstorage.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_webstorage.asp" title="HTML5 Web 存储">HTML5 Web 存储</a></li>
+<li><a href="html5_app_cache.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_app_cache.asp" title="HTML 5 应用程序缓存">HTML5 应用缓存</a></li>
+<li><a href="html5_webworkers.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_webworkers.asp" title="HTML5 Web Workers">HTML5 Web Workers</a></li>
+<li><a href="html5_serversentevents.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_serversentevents.asp" title="HTML5 服务器发送事件">HTML5 SSE</a></li>
+</ul>
+<h2>实例/测验/总结</h2>
+<ul>
+<li><a href="../example/html_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/html_examples.asp" title="HTML 实例">HTML 实例</a></li>
+<li><a href="html_quiz.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quiz.asp" title="HTML 测验">HTML 测验</a></li>
+<li><a href="html_summary.asp.htm" tppabs="http://www.w3school.com.cn/html/html_summary.asp" title="HTML 总结">HTML 总结</a></li>
+</ul>
+<h2>HTML 参考手册</h2>
+<ul>
+<li><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp" title="HTML 4.01 / XHTML 1.0 参考手册">HTML 标签列表</a></li>
+<li><a href="../tags/html_ref_standardattributes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_standardattributes.asp" title="HTML 标准属性">HTML 属性</a></li>
+<li><a href="../tags/html_ref_eventattributes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_eventattributes.asp" title="HTML 事件属性">HTML 事件</a></li>
+<li><a href="../tags/html_ref_dtd.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_dtd.asp" title="HTML 元素与合法的 Doctype">HTML 合法 DTD</a></li>
+<li><a href="../tags/html_ref_colornames.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_colornames.asp" title="HTML 颜色名">HTML 颜色名</a></li>
+<li><a href="../tags/html_ref_charactersets.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_charactersets.asp" title="HTML 字符集">HTML 字符集</a></li>
+<li><a href="../tags/html_ref_ascii.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_ascii.asp" title="HTML ASCII 参考手册">HTML ASCII</a></li>
+<li><a href="../tags/html_ref_entities.html" tppabs="http://www.w3school.com.cn/tags/html_ref_entities.html" title="HTML ISO-8859-1 参考手册">HTML ISO-8859-1</a></li>
+<li><a href="../tags/html_ref_symbols.html" tppabs="http://www.w3school.com.cn/tags/html_ref_symbols.html" title="HTML 4.01 符号实体">HTML 符号</a></li>
+<li><a href="../tags/html_ref_urlencode.html" tppabs="http://www.w3school.com.cn/tags/html_ref_urlencode.html" title="HTML URL 编码">HTML URL 编码</a></li>
+<li><a href="../tags/html_ref_language_codes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_language_codes.asp" title="HTML 语言代码参考手册">HTML 语言代码</a></li>
+<li><a href="../tags/html_ref_httpmessages.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_httpmessages.asp" title="HTML 状态消息">HTML 消息</a></li>
+</ul>
+<h2>HTML5</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/html/index.asp" title="HTML5 教程">HTML5 教程</a></li>
+<li><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp" title="HTML5 参考手册">HTML5 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+
+<h1>HTML5 迁移</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="html5_semantic_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_semantic_elements.asp" title="HTML5 Video + DOM">HTML5 语义</a></li>
+<li class="next"><a href="html5_syntax.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_syntax.asp" title="HTML5 拖放">HTML5 代码约定</a></li>
+</ul>
+</div>
+
+
+<div>
+<h2>从 HTML4 迁移至 HTML5</h2>
+
+<p>本章讲解如何从一张典型的 HTML4 页面迁移至典型的 HTML5。</p>
+
+<p>本章演示如何把一张已有的 HTML4 页面转换为 HTML5 页面，在不破坏如何原始内容和结构的情况下。</p>
+
+<p>注释：您可以使用相同的技巧从 HTML4 以及 XHTML 迁移至 HTML5。</p>
+
+<table style="text-align:center; font-size:14px; border-collapse:separate; border-spacing:15px;" class="dataintable">
+<tr>
+<th style="width:50%; text-align:center; background-color:#fff; border:0px;">典型的 HTML4</th>
+<th style="width:50%; text-align:center; background-color:#fff; border:0px;">典型的 HTML5</th>
+</tr>
+
+<tr>
+<td>&lt;div id=&quot;header&quot;&gt;</td>
+<td>&lt;header&gt;</td>
+</tr>
+
+<tr>
+<td>&lt;div id=&quot;menu&quot;&gt;</td>
+<td>&lt;nav&gt;</td>
+</tr>
+
+<tr>
+<td>&lt;div id=&quot;content&quot;&gt;</td>
+<td>&lt;section&gt;</td>
+</tr>
+
+<tr>
+<td>&lt;div id=&quot;post&quot;&gt;</td>
+<td>&lt;article&gt;</td>
+</tr>
+
+<tr>
+<td>&lt;div id=&quot;footer&quot;&gt;</td>
+<td>&lt;footer&gt;</td>
+</tr>
+</table>
+</div>
+
+
+<div>
+<h2>典型的 HTML4 页面</h2>
+
+<h3>实例</h3>
+
+<pre>
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; 
+&quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;
+&lt;title&gt;HTML4&lt;/title&gt;
+&lt;style&gt;
+  body {font-family:Verdana,sans-serif;font-size:0.8em;}
+  div#header,div#footer,div#content,div#post 
+  {border:1px solid grey;margin:5px;margin-bottom:15px;padding:8px;background-color:white;}
+  div#header,div#footer {color:white;background-color:#444;margin-bottom:5px;}
+  div#content {background-color:#ddd;}
+  div#menu ul {margin:0;padding:0;}
+  div#menu ul li {display:inline; margin:5px;}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div id=&quot;header&quot;&gt;
+  &lt;h1&gt;Monday Times&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;menu&quot;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;News&lt;/li&gt;
+    &lt;li&gt;Sports&lt;/li&gt;
+    &lt;li&gt;Weather&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;content&quot;&gt;
+&lt;h2&gt;News Section&lt;/h2&gt;
+
+&lt;div id=&quot;post&quot;&gt;
+  &lt;h2&gt;News Article&lt;/h2&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;post&quot;&gt;
+  &lt;h2&gt;News Article&lt;/h2&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id=&quot;footer&quot;&gt;
+  &lt;p&gt;&amp;copy; 2014 Monday Times. All rights reserved.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html4_skeleton.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html4_skeleton">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>更改为 HTML5 Doctype</h2>
+
+<p>修改文档类型，从 HTML4 doctype：</p>
+
+<pre>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; 
+&quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</pre>
+
+<p>修改为 HTML5 doctype：</p>
+
+<pre>&lt;!DOCTYPE html&gt;</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton_1.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton_1">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>更改为 HTML5 编码</h2>
+
+<p>修改编码信息，从 HTML4：</p>
+
+<pre>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;</pre>
+
+<p>改为 HTML5：</p>
+
+<pre>&lt;meta charset=&quot;utf-8&quot;&gt;</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton_2.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton_2">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>添加 shiv</h2>
+
+<p>所有现代浏览器都支持 HTML5 语义元素。</p>
+
+<p>此外，您可以“教授”老式浏览器如何处理“未知元素”。</p>
+
+<p>为 Internet Explorer 支持而添加的 shiv：</p>
+
+<pre>
+&lt;!--[if lt IE 9]&gt;
+  &lt;script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton_3.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton_3">亲自试一试</a></p>
+
+<p>注释：请在 HTML5 浏览器支持中阅读更多有关 shiv 的知识。</p>
+</div>
+
+
+<div>
+<h2>为 HTML5 语义元素添加 CSS</h2>
+
+<p>请看已有的 CSS 样式：</p>
+
+<pre>
+div#header,div#footer,div#content,div#post {
+    border:1px solid grey;margin:5px;margin-bottom:15px;padding:8px;background-color:white;
+}
+div#header,div#footer {
+    color:white;background-color:#444;margin-bottom:5px;
+}
+div#content {
+    background-color:#ddd;
+}
+div#menu ul {
+    margin:0;padding:0;
+}
+div#menu ul li {
+    display:inline; margin:5px;
+}
+Duplicate with equal CSS styles for HTML5 semantic elements:
+
+header,footer,section,article {
+    border:1px solid grey;margin:5px;margin-bottom:15px;padding:8px;background-color:white;
+}
+header,footer {
+    color:white;background-color:#444;margin-bottom:5px;
+}
+section {
+    background-color:#ddd;
+}
+nav ul  {
+    margin:0;padding:0;
+}
+nav ul li {
+    display:inline; margin:5px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton_4.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton_4">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>更改为 HTML5 &lt;header&gt; 和 &lt;footer&gt;</h2>
+
+<p>把 id=&quot;header&quot; 和 id=&quot;footer&quot; 的 &lt;div&gt; 元素：</p>
+
+<pre>
+&lt;div id=&quot;header&quot;&gt;
+  &lt;h1&gt;Monday Times&lt;/h1&gt;
+&lt;/div&gt;
+.
+.
+.
+&lt;div id=&quot;footer&quot;&gt;
+  &lt;p&gt;&amp;copy; 2014 W3Schools. All rights reserved.&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+
+<p>修改为 HTML5 语义元素 &lt;header&gt; 和 &lt;footer&gt;：</p>
+
+<pre>
+&lt;header&gt;
+  &lt;h1&gt;Monday Times&lt;/h1&gt;
+&lt;/header&gt;
+.
+.
+.
+&lt;footer&gt;
+  &lt;p&gt;&copy; 2014 W3Schools. All rights reserved.&lt;/p&gt;
+&lt;/footer&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton_5.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton_5">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>更改为 HTML5 &lt;nav&gt;</h2>
+
+<p>把 id=&quot;menu&quot; 的 &lt;div&gt; 元素：</p>
+
+<pre>
+&lt;div id=&quot;menu&quot;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;News&lt;/li&gt;
+    &lt;li&gt;Sports&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Weather&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+
+<p>修改为 HTML5 语义元素 &lt;nav&gt;：</p>
+
+<pre>
+&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;News&lt;/li&gt;
+    &lt;li&gt;Sports&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Weather&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton_6.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton_6">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>更改为 HTML5 &lt;section&gt;</h2>
+
+<p>把 id=&quot;content&quot; 的 the &lt;div&gt; 元素：</p>
+
+<pre>
+&lt;div id=&quot;content&quot;&gt;
+.
+.
+.
+&lt;/div&gt;
+</pre>
+
+<p>修改为 HTML5 语义元素 &lt;section&gt;：</p>
+
+<pre>
+&lt;section&gt;
+.
+.
+.
+&lt;/section&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton_7.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton_7">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>更改为 HTML5 &lt;article&gt;</h2>
+
+<p>把 class=&quot;post&quot; 的所有 &lt;div&gt; 元素：</p>
+
+<pre>
+&lt;div class=&quot;post&quot;&gt;
+  &lt;h2&gt;News Article&lt;/h2&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+&lt;/div&gt;
+</pre>
+
+<p>修改为 HTML5 语义元素 &lt;article&gt;：</p>
+
+<pre>
+&lt;article&gt;
+  &lt;h2&gt;News Article&lt;/h2&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+&lt;/article&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton_8.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton_8">亲自试一试</a></p>
+
+<p>删除这些“不再需要的”样式：</p>
+
+<pre>
+div#header,div#footer,div#content,div#post {
+    border:1px solid grey;margin:5px;margin-bottom:15px;padding:8px;background-color:white;
+}
+div#header,div#footer {
+    color:white;background-color:#444;margin-bottom:5px;
+}
+div#content {
+    background-color:#ddd;
+}
+div#menu ul {
+    margin:0;padding:0;
+}
+div#menu ul li {
+    display:inline; margin:5px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton_9.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton_9">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>典型的 HTML5 页面</h2>
+
+<p>最后您可以删除 &lt;head&gt; 标签。HTML5 中不再需要它们：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;title&gt;HTML5&lt;/title&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+
+&lt;!--[if lt IE 9]&gt;
+&lt;script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
+&lt;/script&gt;
+&lt;![endif]--&gt;
+
+&lt;style&gt;
+body {
+    font-family:Verdana,sans-serif;font-size:0.8em;
+}
+header,footer,section,article {
+    border:1px solid grey;
+    margin:5px;margin-bottom:15px;padding:8px;
+    background-color:white;
+}
+header,footer {
+    color:white;background-color:#444;margin-bottom:5px;
+}
+section {
+    background-color:#ddd;
+}
+nav ul {
+    margin:0;padding:0;
+}
+nav ul li {
+    display:inline; margin:5px;
+}
+&lt;/style&gt;
+&lt;body&gt;
+
+&lt;header&gt;
+  &lt;h1&gt;Monday Times&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;News&lt;/li&gt;
+    &lt;li&gt;Sports&lt;/li&gt;
+    &lt;li&gt;Weather&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;section&gt;
+&lt;h2&gt;News Section&lt;/h2&gt;
+
+&lt;div id=&quot;post&quot;&gt;
+  &lt;h2&gt;News Article&lt;/h2&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;post&quot;&gt;
+&lt;h2&gt;News Article&lt;/h2&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+  &lt;p&gt;Ipsum lurum hurum turum ipsum lurum hurum turum ipsum lurum hurum turum ipsum 
+  lurum hurum turum.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;&amp;copy; 2014 Monday Times. All rights reserved.&lt;/p&gt;
+&lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_html5_skeleton.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_html5_skeleton">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>&lt;article&gt; &lt;section&gt; 与 &lt;div&gt; 之间的差异</h2>
+
+<p>在 HTML5 标准中，&lt;article&gt; &lt;section&gt; 与 &lt;div&gt; 之间的差异很小，令人困惑。</p>
+
+<p>在 HTML5 标准中，&lt;section&gt; 元素被定位为相关元素的块。</p>
+
+<p>&lt;article&gt; 元素被定义为相关元素的完整的自包含块。</p>
+
+<p>&lt;div&gt; 元素被定义为子元素的块。</p>
+
+<p>如何理解呢？</p>
+
+<p>在上面的例子中，我们曾使用  &lt;section&gt; 作为相关 &lt;articles&gt; 的容器。</p>
+
+<p>但是，我们也能够把 &lt;article&gt; 用作文章的容器。</p>
+
+<p>下面是一些不同的例子：</p>
+
+<pre>
+&lt;article&gt; 中的 &lt;article&gt;：
+
+&lt;article&gt;
+
+&lt;h2&gt;Famous Cities&lt;/h2&gt;
+
+&lt;article&gt;
+&lt;h2&gt;London&lt;/h2&gt;
+&lt;p&gt;London is the capital city of England. It is the most populous city in the United Kingdom,
+with a metropolitan area of over 13 million inhabitants.&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;article&gt;
+&lt;h2&gt;Paris&lt;/h2&gt;
+&lt;p&gt;Paris is the capital and most populous city of France.&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;article&gt;
+&lt;h2&gt;Tokyo&lt;/h2&gt;
+&lt;p&gt;Tokyo is the capital of Japan, the center of the Greater Tokyo Area,
+and the most populous metropolitan area in the world.&lt;/p&gt;
+&lt;/article&gt;
+
+&lt;/article&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html5_html5_skeleton_2.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_html5_skeleton_2">亲自试一试</a></p>
+
+<pre>
+&lt;article&gt; 中的 &lt;div&gt;：
+
+&lt;article&gt;
+
+&lt;h2&gt;Famous Cities&lt;/h2&gt;
+
+&lt;div class=&quot;city&quot;&gt;
+&lt;h2&gt;London&lt;/h2&gt;
+&lt;p&gt;London is the capital city of England. It is the most populous city in the United Kingdom,
+with a metropolitan area of over 13 million inhabitants.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;city&quot;&gt;
+&lt;h2&gt;Paris&lt;/h2&gt;
+&lt;p&gt;Paris is the capital and most populous city of France.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;city&quot;&gt;
+&lt;h2&gt;Tokyo&lt;/h2&gt;
+&lt;p&gt;Tokyo is the capital of Japan, the center of the Greater Tokyo Area,
+and the most populous metropolitan area in the world.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/article&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html5_html5_skeleton_3.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_html5_skeleton_3">亲自试一试</a></p>
+
+<pre>
+&lt;article&gt; 中的 &lt;section&gt; 中的 &lt;div&gt;：
+
+&lt;article&gt;
+
+&lt;section&gt;
+&lt;h2&gt;Famous Cities&lt;/h2&gt;
+
+&lt;div class=&quot;city&quot;&gt;
+&lt;h2&gt;London&lt;/h2&gt;
+&lt;p&gt;London is the capital city of England. It is the most populous city in the United Kingdom,
+with a metropolitan area of over 13 million inhabitants.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;city&quot;&gt;
+&lt;h2&gt;Paris&lt;/h2&gt;
+&lt;p&gt;Paris is the capital and most populous city of France.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;city&quot;&gt;
+&lt;h2&gt;Tokyo&lt;/h2&gt;
+&lt;p&gt;Tokyo is the capital of Japan, the center of the Greater Tokyo Area,
+and the most populous metropolitan area in the world.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h2&gt;Famous Countries&lt;/h2&gt;
+
+&lt;div class=&quot;country&quot;&gt;
+&lt;h2&gt;England&lt;/h2&gt;
+&lt;p&gt;London is the capital city of England. It is the most populous city in the United Kingdom,
+with a metropolitan area of over 13 million inhabitants.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;country&quot;&gt;
+&lt;h2&gt;France&lt;/h2&gt;
+&lt;p&gt;Paris is the capital and most populous city of France.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;country&quot;&gt;
+&lt;h2&gt;Japan&lt;/h2&gt;
+&lt;p&gt;Tokyo is the capital of Japan, the center of the Greater Tokyo Area,
+and the most populous metropolitan area in the world.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;/article&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html5_html5_skeleton_4.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_html5_skeleton_4">亲自试一试</a></p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="html5_semantic_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_semantic_elements.asp" title="HTML5 Video + DOM">HTML5 语义</a></li>
+<li class="next"><a href="html5_syntax.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_syntax.asp" title="HTML5 拖放">HTML5 代码约定</a></li>
+</ul>
+</div>
+
+
+<div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- W3School 正文底部广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="9384069314"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp">HTML 参考手册</a></h5>
+<h5 id="tools_example"><a href="../example/html_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/html_examples.asp">HTML 实例</a></h5>
+<h5 id="tools_quiz"><a href="html_quiz.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quiz.asp">HTML 测验</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

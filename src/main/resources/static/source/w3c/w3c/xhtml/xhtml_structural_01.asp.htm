@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>XHTML 结构化之一：使用 XHTML 重构网站</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div><div id="navsecond">
+
+<div id="course"><h2>XHTML 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/index.asp" title="XHTML 教程">XHTML 首页</a></li>
+<li><a href="xhtml_intro.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_intro.asp" title="XHTML 简介">XHTML 简介</a></li>
+<li><a href="xhtml_why.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_why.asp" title="为什么要使用XHTML？">XHTML Why</a></li>
+<li><a href="xhtml_html.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_html.asp" title="XHTML 与 HTML 之间的差异">XHTML v HTML</a></li>
+<li><a href="xhtml_syntax.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_syntax.asp" title="XHTML 语法">XHTML 语法</a></li>
+<li><a href="xhtml_dtd.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_dtd.asp" title="XHTML DTD">XHTML DTD</a></li>
+<li><a href="xhtml_howto.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_howto.asp" title="如何升级至 XHTML？">XHTML HowTo</a></li>
+<li><a href="xhtml_validate.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_validate.asp" title="XHTML 验证">XHTML 验证</a></li>
+<li><a href="xhtml_modules.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_modules.asp" title="XHTML 模块">XHTML 模块</a></li>
+<li><a href="xhtml_standardattributes.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_standardattributes.asp" title="XHTML 标准属性">XHTML 属性</a></li>
+<li><a href="xhtml_eventattributes.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_eventattributes.asp" title="XHTML 事件属性">XHTML 事件</a></li>
+<li><a href="xhtml_summary.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_summary.asp" title="XHTML 总结">XHTML 总结</a></li>
+</ul>
+<h2>XHTML 高级教程</h2>
+<ul>
+<li class="currentLink"><a href="xhtml_structural_01.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_structural_01.asp" title="XHTML 结构化之一：使用 XHTML 重构网站">XHTML 结构化 1</a></li>
+<li><a href="xhtml_structural_02.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_structural_02.asp" title="XHTML 结构化之二：案例分析：W3school 的结构化标记">XHTML 结构化 2</a></li>
+</ul>
+<h2>XHTML 测验</h2>
+<ul>
+<li><a href="xhtml_quiz.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_quiz.asp" title="XHTML 测验">XHTML 测验</a></li>
+</ul>
+<h2>XHTML 参考手册</h2>
+<ul>
+<li><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp" title="HTML 4.01 / XHTML 1.0 参考手册">XHTML 标签列表</a></li>
+<li><a href="../tags/html_ref_standardattributes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_standardattributes.asp" title="HTML 标准属性">XHTML 属性</a></li>
+<li><a href="../tags/html_ref_eventattributes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_eventattributes.asp" title="HTML 事件属性">XHTML 事件</a></li>
+<li><a href="../tags/html_ref_dtd.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_dtd.asp" title="HTML 元素与合法的 Doctype">XHTML 合法 DTD</a></li>
+<li><a href="../tags/html_ref_colornames.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_colornames.asp" title="HTML 颜色名">XHTML 颜色名</a></li>
+<li><a href="../tags/html_ref_charactersets.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_charactersets.asp" title="HTML 字符集">XHTML 字符集</a></li>
+<li><a href="../tags/html_ref_ascii.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_ascii.asp" title="HTML ASCII 参考手册">XHTML ASCII</a></li>
+<li><a href="../tags/html_ref_entities.html" tppabs="http://www.w3school.com.cn/tags/html_ref_entities.html" title="HTML ISO-8859-1 参考手册">XHTML ISO-8859-1</a></li>
+<li><a href="../tags/html_ref_symbols.html" tppabs="http://www.w3school.com.cn/tags/html_ref_symbols.html" title="HTML 4.01 符号实体">XHTML 符号</a></li>
+<li><a href="../tags/html_ref_urlencode.html" tppabs="http://www.w3school.com.cn/tags/html_ref_urlencode.html" title="HTML URL 编码">XHTML URL 编码</a></li>
+<li><a href="../tags/html_ref_language_codes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_language_codes.asp" title="HTML 语言代码参考手册">XHTML 语言代码</a></li>
+<li><a href="../tags/html_ref_httpmessages.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_httpmessages.asp" title="HTML 状态消息">XHTML 消息</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XHTML 结构化之一：使用 XHTML 重构网站</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="xhtml_summary.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_summary.asp" title="XHTML 总结">XHTML 总结</a></li>
+<li class="next"><a href="xhtml_structural_02.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_structural_02.asp" title="XHTML 结构化之二：案例分析：W3school 的结构化标记">XHTML 结构化 2</a></li>
+</ul>
+</div>
+
+<div>
+<p>我们曾经为本节撰写的标题是：“XHTML : 简单的规则，容易的方针。”原因之一是，本节讨论的规则和方针是简单和容易的。原因之二是，一本简单和容易的 WEB 设计图书，就像超级市场的新式的免费商品一样，虽然常见却可以有效地吸引人的眼球，这样的东西可以刺激人的兴趣，并且鼓励人们尝试。</p>
+
+<p>我确实希望本节的内容可以激发你的兴趣，并鼓励你去尝试。为什么这么说呢？因为一旦你掌握了本章包含的简单容易的理念，你就会重新思考网页运作的方式，并开始改变建造它们的方法。然而我并不希望你只是将代码重新改写一遍。我希望你可以实实在在地以另一种方式思考和工作。</p>
+<p>另一方面，重构才是 XHTML 真正的意义。</p>
+
+<p>在本章，我们将研究结构化标记的机制和涵义。如果你正在将网站标准融入你的开发项目，你或许会觉得本章的内容有些熟悉。不过即便是这方面的老手，也会从本章发现意外的收获。</p>
+</div>
+
+
+<div>
+<h2>XHTML 规则概要</h2>
+
+<p>将传统的 HTML 转换为 XHTML 1.0 是快捷且无痛的，只要你遵守一些简单的规则和容易的方针。不管是否使用过 HTML，都不会妨碍你使用 XHTML。</p>
+
+<ul>
+<li>使用恰当的文档类型声明和命名空间。</li>
+<li>使用 meta 元素声明你的内容类型。</li>
+<li>使用小写字母书写所有的元素和属性。</li>
+<li>为所有的属性值加引号。</li>
+<li>为所有的属性分配值。</li>
+<li>关闭所有的标签。</li>
+<li>使用空格和斜线关闭空标签。</li>
+<li>不要在注释中写双下划线。</li>
+<li>确保小于号及和号为 &lt; 和 &amp;</li>
+</ul>
+
+<h3>Unicode 和其他字符集</h3>
+
+<p>XML、XHTML、和HTML 4.0 文档的默认字符集是 Unicode，一个由 Unicode 联盟定义的标准。Unicode 是一套全面的字符集，它为每个字符提供了一个特定的唯一的数字，不论平台、程序和语言。Unicode 也是我们拥有的最接近通用字母表的事物，尽管它并不是一个字母表，而是一套数字映射方案。</p>
+
+<p>尽管 Unicode 是 web 文档默认的字符集，开发人员依然可以自由地选择更适合他们的其他字符集。比方说，美国和西欧的网站常常使用 ISO-8859-1 (Latin-1) 编码，而中华人民共和国的国家标准是 gb2312。</p>
+</div>
+
+
+<div>
+<h2>为表达语义而标记文档，而不是为了样式</h2>
+
+<p>记住：请最大限度地使用 CSS 来进行布局。在 web 标准的世界里，XHTML 标记与表现无关，它只与文档结构有关。</p>
+
+<p>结构良好的文档可以向浏览器传达尽可能多的语义，不论是浏览器位于掌上电脑还是时髦的桌面图形浏览器。结构良好的文档都能向用户传达可视化的语义，即使是在老的浏览器，或是在被用户关闭了 CSS 的现代浏览器中。</p>
+
+<p>不是每个站点都能立即抛弃 HTML 表格布局。CSS 的发明者，W3C，直到 2002 年 11 月才将官方网站转换为 CSS 布局。然而，即使是顽固的唯标准主义者也不总是将表现从结构中完全分离处理，至少在 XHTML 1 中是做不到的。但是现在，我们可以向这个理想迈出重大的一步，通过将表现从结构中分离（或者说将数据从设计中），即使是混合的传统的布局也可从中受益。</p>
+
+<p>下面有一些提示，可以帮助你通过更结构化的方式进行思维：</p>
+
+
+<h3>提纲内的色彩</h3>
+
+<p>在语法学校，我们中的大部分人都被迫使用标准的提纲格式来写文章。现在，我们成为了设计师，可以多么自由地摆脱提纲的限制，然后大胆地投身于独特的个人表达的自由领域（也许我们的宣传册和商业站点还不是那么独特和个人化）。但是至少我们不会再受到提纲的困扰了。</p>
+
+<p>实际上，依照 HTML，我们应该将内容结构化为有组织的层级。在浏览器不支持 CSS 的时期，我们无法在交付可供销售的布局的同时做到这一点。但是今天，在将我们的设计不折不扣地实现的同时，我们有能力交付内在结构良好的文档。</p>
+
+<p>当你将供网络使用的文本进行标记，或者当你将已有的文本文档转换为网页时，请使用传统提纲的这些条目进行思考。</p>
+
+<pre>
+&lt;h1&gt;我的主题&lt;/h1&gt;
+&lt;p&gt;介绍性文字&lt;/p&gt;
+&lt;h2&gt;补充性的观点&lt;/h2&gt;
+&lt;p&gt;相关文字&lt;/p&gt;
+</pre>
+
+<p>同时，避免使用已被废弃的 HTML 元素比如 &lt;font&gt;，或者无语义的元素比如 &lt;br /&gt;，来模拟其实不存在的逻辑结构。</p>
+
+<p>比如，不要像这样做：</p>
+
+<pre>
+&lt;font size=&quot;7&quot;&gt;我的主题&lt;/font&gt;&lt;br /&gt;
+介绍性文字&lt;br /&gt;&lt;br /&gt;
+&lt;font size=&quot;6&quot;&gt;补充性的观点&lt;/font&gt;&lt;br /&gt;
+相关文字&lt;br /&gt;
+</pre>
+
+
+<h3>根据它们的意义使用元素，而不是根据它们的外观</h3>
+
+<p>我们中一些人已经陷在了一个坏习惯中，当我们仅仅需要一个大号字的文本时使用h1，或者在我们需要在前面加一个圆点符号时使用 li。就像我们在前面的章节讨论过的，浏览器一直都习惯于将设计属性强加于 HTML 元素之上。我们都一直习惯于认为，h1 意味着大号字，而li意味着圆点，或者 blockquote 意味着文本缩进。我们中的大多数人还在使用结构化元素模拟表现效果的方式来胡乱地写作 HTML。</p>
+
+<p>同样地，假如设计师希望所有的标题使用相同的字号，她会将所有的标题设置为 h1，即使这么做毫无结构化语义可言。</p>
+
+<pre>&lt;h1&gt;这是主标题，在我将文本按照提纲格式组织的情况下。&lt;/h1&gt;
+&lt;h1&gt;这不是主标题，但是我希望它与上面的标题使用一样的字体，但是我不知该如何使用CSS。&lt;/h1&gt;
+&lt;h1&gt;这根本不是一个标题。但是我非常希望页面中的文字使用相同的字体，以达到我希望的，
+如果我了解CSS，就可以在不打乱文档结构的情况下达到这个设计。&lt;/h1&gt;</pre>
+
+<p>我们必须把我们的小把戏放到一边，然后开始根据元素的语义来使用它们，而不是根据它们看上去的样子。实际上，h1可以成为你希望的任何样子。通过 CSS，h1 可以成为非粗体的小号的罗马字体，而 p 文本可以成为粗体的大号字，li 也可以没有圆点（你或者可以使用小猫小狗或者公司标志的 PNG,GIF 或者 JPEG 图片取而代之）等等。</p>
+
+<p>从今天开始，我们将要使用 CSS 来决定元素的外观。我们甚至可以根据元素在页面中或者在站点中所在的位置来改变它们的外观。
+CSS 可以将表现从结构中彻底抽离，并且允许你按照你喜欢的样式来格式化任何元素。</p>
+
+<pre>h1, h2, h3, h4, h5, h6 {
+	font-family: georgia, palatino, &quot;New Century Schoolbook&quot;,
+	times, serif;
+	font-weight: normal;
+	font-size: 2em;
+	margin-top: 1em;
+	margin-bottom: 0;
+	}
+</pre>
+
+<p>你为什么要这么做呢？这么做的目的是为了在图形浏览器中获得品牌化的外观和感觉的同时，在文本浏览器、无线设备、HTML 格式的电子邮件中，文档的结构得到保留。</p>
+
+<p>我们并不想在关于 XHTML 的章节讲述更多 CSS 方面的技术。我们只是希望展示文档结构和可视表达是两个完全不同的事物，并且结构化元素应被用来转换文本，而不是强加显示效果。</p>
+
+
+<h3>使用结构化元素，而不是无意义的垃圾</h3>
+
+<p>由于我们已经忘记或者根本不知道 HTML 和 XHTML 的用途是传达结构化的意义，许多 HTML 争论者这样使用标签来插入列表：</p>
+
+<pre>项目一&lt;br /&gt;
+项目二&lt;br /&gt;
+项目三&lt;br /&gt;</pre>
+
+<p>考虑一下使用有序或者无序列表取而代之：</p>
+
+<pre>&lt;ul&gt;
+&lt;li&gt;项目一&lt;/li&gt;
+&lt;li&gt;项目二&lt;/li&gt;
+&lt;li&gt;项目三&lt;/li&gt;
+&lt;/ul&gt;</pre>
+
+<p>&quot;但是li给我一个圆点，而我不需要圆点！&quot;你也许会这么说。根据上面的章节，CSS不对元素被期望的外观做任何假定。它等待你来告诉它你所期待的元素外观。关闭圆点是 CSS 的最基本的能力。它有能力使列表看起来和普通文本没有两样，也可以使列表看起来像图形导航栏，具有完整的反转效果。</p>
+
+<p>所以，请使用列表元素来标记列表。相似地，使用 strong 来代替 b，使用 em 代替 i，等等。在大多数桌面浏览器缺省状态下，strong 的显示效果和 b 相同，而 em 和 i 相同，同时也可以在不破坏文档结构的情况下创建你期待的视觉效果。</p>
+
+<p>尽管 CSS 不会为任何元素的显示作假设，浏览器却作了很多假设，并且我们还没有碰到一个将 strong 显示为其他效果而不是粗体字的浏览器（除非是被设计师创建的 CSS 指示以其他方式显示）。假如你担心某个陌生的浏览器不会将 strong 显示为粗体字，你可以编写这么一条 CSS 规则：</p>
+
+<pre>strong {
+	font-weight: bold;
+	font-style: normal;
+	}
+</pre>
+</div>
+
+
+<div>
+<h2>视觉元素和结构</h2>
+
+<p>web 标准不仅要求我们使用何种科技，而且还要遵守使用这些技术的方式。使用 XHTML 来编写标记，同时使用 CSS 来处理一部分或者全部的布局，并不一定会使站点更易用更轻便，同时节约多少带宽。就像我们在早期使用的技术那样，XHTML 和 CSS 也会被误用和滥用。冗长的 XHTML 和冗长的 HTML 一样，都会浪费用户的带宽和时间。冗长的过度的 CSS 也不能完全的代替表现 HTML 代码；这只不过是一种糟糕的东西被另一种代替了而已。</p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="xhtml_summary.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_summary.asp" title="XHTML 总结">XHTML 总结</a></li>
+<li class="next"><a href="xhtml_structural_02.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_structural_02.asp" title="XHTML 结构化之二：案例分析：W3school 的结构化标记">XHTML 结构化 2</a></li>
+</ul>
+</div>
+
+<div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- W3School 正文底部广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="9384069314"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp">HTML 参考手册</a></h5>
+<h5 id="tools_example"><a href="../example/html_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/html_examples.asp">HTML 实例</a></h5>
+<h5 id="tools_quiz"><a href="xhtml_quiz.asp.htm" tppabs="http://www.w3school.com.cn/xhtml/xhtml_quiz.asp">HTML 测验</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

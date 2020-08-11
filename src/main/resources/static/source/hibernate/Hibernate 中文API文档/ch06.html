@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;6&#160;章&#160;集合类(Collections)映射</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch05s07.html" title="5.7.&#160;辅助数据库对象(Auxiliary Database Objects)">
+<link rel="next" href="ch06s02.html" title="6.2.&#160;集合映射（ Collection mappings ）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="collections"></a>第&#160;6&#160;章&#160;集合类(Collections)映射</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch06.html#collections-persistent">6.1. 持久化集合类(Persistent collections)</a></span></dt>
+<dt><span class="sect1"><a href="ch06s02.html">6.2. 集合映射（ Collection mappings ）</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch06s02.html#collections-foreignkeys">6.2.1. 集合外键(Collection foreign keys)</a></span></dt>
+<dt><span class="sect2"><a href="ch06s02.html#collections-elements">6.2.2. 集合元素（Collection elements）</a></span></dt>
+<dt><span class="sect2"><a href="ch06s02.html#collections-indexed">6.2.3. 索引集合类(Indexed collections)</a></span></dt>
+<dt><span class="sect2"><a href="ch06s02.html#collections-ofvalues">6.2.4. 值集合于多对多关联(Collections of values and many-to-many associations)</a></span></dt>
+<dt><span class="sect2"><a href="ch06s02.html#collections-onetomany">6.2.5. 一对多关联（One-to-many Associations）</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch06s03.html">6.3. 高级集合映射（Advanced collection mappings）</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch06s03.html#collections-sorted">6.3.1. 有序集合（Sorted collections）</a></span></dt>
+<dt><span class="sect2"><a href="ch06s03.html#collections-bidirectional">6.3.2. 双向关联（Bidirectional associations）</a></span></dt>
+<dt><span class="sect2"><a href="ch06s03.html#collections-indexedbidirectional">6.3.3. 双向关联，涉及有序集合类</a></span></dt>
+<dt><span class="sect2"><a href="ch06s03.html#collections-ternary">6.3.4. 三重关联（Ternary associations）</a></span></dt>
+<dt><span class="sect2"><a href="ch06s03.html#collections-idbag">6.3.5. <code class="literal">使用&lt;idbag&gt;</code></a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch06s04.html">6.4. 集合例子（Collection example）</a></span></dt>
+</dl>
+</div>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="collections-persistent"></a>6.1.&#160;持久化集合类(Persistent collections)</h2></div></div></div>
+<p><a name="collections-persistent-translate-comment"></a>
+            (译者注：在阅读本章的时候，以后整个手册的阅读过程中，我们都会面临一个名词方面的问题，那就是“集合”。"Collections"和"Set"在中文里对应都被翻译为“集合”，但是他们的含义很不一样。Collections是一个超集，Set是其中的一种。大部分情况下，本译稿中泛指的未加英文注明的“集合”，都应当理解为“Collections”。在有些二者同时出现，可能造成混淆的地方，我们用“集合类”来特指“Collecions”,“集合(Set)”来指"Set"，一般都会在后面的括号中给出英文。希望大家在阅读时联系上下文理解，不要造成误解。
+            与此同时，“元素”一词对应的英文“element”，也有两个不同的含义。其一为集合的元素，是内存中的一个变量；另一含义则是XML文档中的一个标签所代表的元素。也请注意区别。
+            本章中,特别是后半部分是需要反复阅读才能理解清楚的。如果遇到任何疑问,请记住,英文版本的reference是惟一标准的参考资料。)
+            </p>
+<p>
+            Hibernate要求持久化集合值字段必须声明为接口，比如：
+        </p>
+<pre class="programlisting">public class Product {
+    private String serialNumber;
+    private Set parts = new HashSet();
+    
+    public Set getParts() { return parts; }
+    void setParts(Set parts) { this.parts = parts; }
+    public String getSerialNumber() { return serialNumber; }
+    void setSerialNumber(String sn) { serialNumber = sn; }
+}</pre>
+<p>
+            实际的接口可能是<code class="literal">java.util.Set</code>,
+            <code class="literal">java.util.Collection</code>, <code class="literal">java.util.List</code>,
+            <code class="literal">java.util.Map</code>, <code class="literal">java.util.SortedSet</code>,
+            <code class="literal">java.util.SortedMap</code> 或者...任何你喜欢的类型！("任何你喜欢的类型" 代表你需要编写           <code class="literal">org.hibernate.usertype.UserCollectionType</code>的实现.)
+        </p>
+<p>
+            注意我们是如何用一个<code class="literal">HashSet</code>实例来初始化实例变量的.这是用于初始化新创建(尚未持久化)的类实例中集合值属性的最佳方法。当你持久化这个实例时——比如通过调用<code class="literal">persist()</code>——Hibernate 会自动把<code class="literal">HashSet</code>替换为Hibernate自己的<code class="literal">Set</code>实现。观察下面的错误：
+        </p>
+<pre class="programlisting">Cat cat = new DomesticCat();
+Cat kitten = new DomesticCat();
+....
+Set kittens = new HashSet();
+kittens.add(kitten);
+cat.setKittens(kittens);
+session.persist(cat);
+kittens = cat.getKittens(); //Okay, kittens collection is a Set
+(HashSet) cat.getKittens(); //Error!</pre>
+<p>
+                    根据不同的接口类型，被Hibernate注射的持久化集合类的表现类似<code class="literal">HashMap</code>, <code class="literal">HashSet</code>,
+            <code class="literal">TreeMap</code>, <code class="literal">TreeSet</code> or
+            <code class="literal">ArrayList</code>。
+		</p>
+<p>
+        	集合类实例具有值类型的通常行为。当被持久化对象引用后，他们会自动被持久化，当不再被引用后，自动被删除。假若实例被从一个持久化对象传递到另一个，它的元素可能从一个表转移到另一个表。两个实体不能共享同一个集合类实例的引用。因为底层关系数据库模型的原因，集合值属性无法支持空值语义；Hibernate对空的集合引用和空集合不加区别。
+        </p>
+<p>
+        你不需要过多的为此担心。就如同你平时使用普通的Java集合类一样来使用持久化集合类。只是要确认你理解了双向关联的语义（后文讨论）。
+        </p>
+</div>
+</div></body>
+</html>

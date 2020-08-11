@@ -1,0 +1,101 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;22&#160;章&#160;示例：Weblog 应用程序</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch21s05.html" title="21.5.&#160;结论">
+<link rel="next" href="ch22s02.html" title="22.2.&#160;Hibernate 映射">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="example-weblog"></a>第&#160;22&#160;章&#160;示例：Weblog 应用程序</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch22.html#example-weblog-classes">22.1. 持久化类</a></span></dt>
+<dt><span class="sect1"><a href="ch22s02.html">22.2. Hibernate 映射</a></span></dt>
+<dt><span class="sect1"><a href="ch22s03.html">22.3. Hibernate 代码</a></span></dt>
+</dl>
+</div>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="example-weblog-classes"></a>22.1.&#160;持久化类</h2></div></div></div>
+<p>        	下面的持久化类表示一个weblog和在其中张贴的一个贴子。他们是标准的父/子关系模型，但是我们会用一个有序包（ordered bag)而非集合(set)。
+        </p>
+<pre class="programlisting">package eg;
+
+import java.util.List;
+
+public class Blog {
+    private Long _id;
+    private String _name;
+    private List _items;
+
+    public Long getId() {
+        return _id;
+    }
+    public List getItems() {
+        return _items;
+    }
+    public String getName() {
+        return _name;
+    }
+    public void setId(Long long1) {
+        _id = long1;
+    }
+    public void setItems(List list) {
+        _items = list;
+    }
+    public void setName(String string) {
+        _name = string;
+    }
+}</pre>
+<pre class="programlisting">package eg;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+
+public class BlogItem {
+    private Long _id;
+    private Calendar _datetime;
+    private String _text;
+    private String _title;
+    private Blog _blog;
+
+    public Blog getBlog() {
+        return _blog;
+    }
+    public Calendar getDatetime() {
+        return _datetime;
+    }
+    public Long getId() {
+        return _id;
+    }
+    public String getText() {
+        return _text;
+    }
+    public String getTitle() {
+        return _title;
+    }
+    public void setBlog(Blog blog) {
+        _blog = blog;
+    }
+    public void setDatetime(Calendar calendar) {
+        _datetime = calendar;
+    }
+    public void setId(Long long1) {
+        _id = long1;
+    }
+    public void setText(String string) {
+        _text = string;
+    }
+    public void setTitle(String string) {
+        _title = string;
+    }
+}</pre>
+</div>
+</div></body>
+</html>

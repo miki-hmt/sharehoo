@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.get()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.get()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.get( url [, data ] [, success ] [, dataType ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：XMLHttpRequest
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>使用一个HTTP GET请求从服务器加载数据。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span><span class="icon-link"></span>jQuery.get( url [, data ] [, success ] [, dataType ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>url</strong> 
+					</div>
+					<div>
+						类型:<a href="http://www.shouce.ren/api/view/a/13081#articleHeader0">String</a> 
+					</div>
+					<div>
+						一个包含发送请求的URL字符串.
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>data</strong> 
+					</div>
+					<div>
+						类型:<a href="http://www.shouce.ren/api/view/a/13081#articleHeader25">PlainObject</a> or String
+					</div>
+					<div>
+						一个普通对象或字符串，通过请求发送给服务器。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>success</strong> 
+					</div>
+					<div>
+						类型:<a href="http://www.shouce.ren/api/view/a/13081#articleHeader28">Function</a>( <a href="http://www.shouce.ren/api/view/a/13081#articleHeader25">PlainObject</a> data, String textStatus, jqXHR jqXHR )
+					</div>
+					<div>
+						当请求成功后执行的回调函数。
+                                        如果提供<code>dataType</code>选项，那么这个<code>success</code>选项是必须的，
+                                    但你可以使用<code>null</code>或<a href="http://www.shouce.ren/api/view/a/13016" class="book-a"><code>jQuery.noop</code></a>作为占位符。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>dataType</strong> 
+					</div>
+					<div>
+						类型:String
+					</div>
+					<div>
+						从服务器返回的预期的数据类型。默认：智能猜测（xml, json, script, text，html）。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.12/2.2</span><span class="icon-link"></span>jQuery.get(
+                [settings ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>settings</strong> 
+					</div>
+					<div>
+						类型:<a href="http://www.shouce.ren/api/view/a/13081#articleHeader25">PlainObject</a> 
+					</div>
+					<div>
+						一组用于配置Ajax请求的键/值对。除了<code>url</code>以外的所有选项属性都是可选的。任何默认选项可以用<a href="http://www.shouce.ren/api/view/a/12874" class="book-a">$.ajaxSetup()</a>进行设置。所有选项设置的完整列表，请参阅<a href="http://www.shouce.ren/api/view/a/12861" class="book-a">jQuery.ajax( settings )</a>。
+                                            type（类型）选项将自动设置为<code>GET</code>。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			这是一个Ajax功能的缩写，这相当于:
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.ajax({
+  url: url,
+  data: data,
+  success: success,
+  data类型:dataType
+});</pre>
+		</div>
+		<p>
+			<code>success</code> 回调函数会传入返回的数据，是根据MIME类型的响应，它可能返回的数据类型包括XML根节点, 字符串, JavaScript 文件, 或者 JSON 对象。 同时还会传入描述响应状态的字符串。
+		</p>
+		<p>
+			<strong>在jQuery 1.5</strong>，<code>success</code>回调函数还传递一个<span class="book-a">“jqXHR”对象</span> （ <strong>在</strong> jQuery <strong>1.4中</strong> ，它传递的是<code>XMLHttpRequest</code>对象）。然而，由于JSONP形式和跨域的GET请求不使用<abbr title="XmlHttpRequest">XHR</abbr>，在这些情况下， <code>jqXHR</code>和<code>textStatus</code>参数传递给success（成功）回调是 undefined 。
+		</p>
+		<p>
+			大多数实现将指定一个成功的回调处理程序：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.get('ajax/test.html', function(data) {
+  $('.result').html(data);
+  alert('Load was performed.');
+});</pre>
+		</div>
+		<p>
+			这个示例所请求到的HTML代码片段插在页面中。
+		</p>
+		<h4 id="jqxhr-object">
+			The jqXHR Object（jqXHR 对象）
+		</h4>
+		<p>
+			<strong>从jQuery 1.5开始</strong>，所有jQuery的Ajax方法都返回一个<code>XMLHTTPRequest</code>对象的超集。这个通过<code>$.get()</code>方法返回的jQuery XHR对象，或“jqXHR，”实现了 Promise 接口，使它拥有 Promise 的所有属性，方法和行为<code>jqXHR.done()</code> (表示成功), <code>jqXHR.fail() (表示错误)</code>, 和 <code>jqXHR.always()</code> (表示完成, 无论是成功或错误；在jQuery 1.6 中添加) 方法接受一个函数参数，用来请求终止时被调用。关于这个函数接收参数的详细信息，请参阅 <a href="http://www.shouce.ren/api/view/a/12861" class="book-a">jqXHR Object</a> 文档中的 $.ajax() 章节。
+		</p>
+		<p>
+			Promise 接口也允许jQuery的Ajax方法, 包括 <code>$.get()</code>, 在一个单独的请求中关联到 <code>.done()</code>, <code>.fail()</code>, 和 <code>.always()</code> 回调函数， 甚至允许你在请求已经结束后，指派回调函数。如果该请求已经完成，则回调函数会被立刻调用。
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">// Assign handlers immediately after making the request,
+  // and remember the jqxhr object for this request
+  var jqxhr = $.get("example.php", function() {
+    alert("success");
+  })
+  .success(function() { alert("second success"); })
+  .error(function() { alert("error"); })
+  .complete(function() { alert("complete"); });
+ 
+  // perform other work here ...
+ 
+  // Set another completion function for the request above
+  jqxhr.complete(function(){ alert("second complete"); });</pre>
+		</div>
+		<h4>
+			Deprecation Notice（推荐使用的注意事项：）
+		</h4>
+		<p>
+			<code>jqXHR.success()</code>, <code>jqXHR.error()</code>, 和 <code>jqXHR.complete()</code> 回调方法 <del>在jQuery 1.5中引进， <strong>在jQuery 1.8中不赞成使用，已经过时</strong>。他们最终将被取消（移除），你的代码应该为次做好准备，</del> 从jQuery 3.0开始被删除，你可以使用 <code>jqXHR.done()</code>, <code>jqXHR.fail()</code>, 和 <code>jqXHR.always()</code> 代替.
+		</p>
+	</div>
+	<h3>
+		Additional Notes:（其他注意事项：）
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				由于浏览器的安全限制，大多数“Ajax”的要求，均采用<a title="维基百科上的同源策略" href="http://en.wikipedia.org/wiki/Same_origin_policy">同一起源的政策</a> ;即无法从不同的域，子域或协议中正确接收数据。
+			</li>
+			<li>
+				如果一个jQuery.get（）请求返回一个错误代码，它会静静的失败，除非脚本调用全局的<a href="http://www.shouce.ren/api/view/a/12868" class="book-a">.ajaxError（）</a>方法。在jQuery 1.5， 通过jQuery.get()返回的<code>jqXHR</code>对象的<code>.error()</code>方法也可用于错误处理。
+			</li>
+			<li>
+				Script和JSONP形式请求不受同源策略的限制。
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<div class="entry-example" id="example-0">
+		<h4>
+			实例<span class="desc"></span> 
+		</h4>
+		<p>
+			<span class="desc">请求 test.php 页面, 但是忽略返回结果.</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$.get("test.php");</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-1">
+		<h4>
+			实例<span class="desc"></span> 
+		</h4>
+		<p>
+			<span class="desc">请求 test.php 页面 并且发送url参数(虽然仍然忽视返回的结果)。</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$.get("test.php", { name: "John", time: "2pm" } );</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-2">
+		<h4>
+			实例<span class="desc"></span> 
+		</h4>
+		<p>
+			<span class="desc">传递数组形式data参数给服务器 (虽然仍然忽视返回的结果).</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js"> $.get("test.php", { 'choices[]': ["Jon", "Susan"]} );</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-3">
+		<h4>
+			实例<span class="desc"></span> 
+		</h4>
+		<p>
+			<span class="desc">Alert 从 test.php请求的数据结果 (HTML 或者 XML,取决于返回的结果).</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$.get("test.php", function(data){
+&nbsp;&nbsp;&nbsp;&nbsp;alert("Data Loaded: " + data);
+});</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-4">
+		<h4>
+			实例<span class="desc"></span> 
+		</h4>
+		<p>
+			<span class="desc">Alert 从 test.cgi请求并且发送url参数的数据结果 (HTML 或者 XML,取决于返回的结果).</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$.get("test.cgi", { name: "John", time: "2pm" },
+&nbsp;&nbsp; function(data){
+&nbsp;&nbsp;&nbsp;&nbsp; alert("Data Loaded: " + data);
+});</pre>
+		</div>
+	</div>
+	<h4>
+		实例<span class="desc"></span> 
+	</h4>
+	<p>
+		<span class="desc">获取test.php的页面已返回的JSON格式的内容  (<code>&lt;?php echo json_encode(array("name"=&gt;"John","time"=&gt;"2pm")); ?&gt;</code>), 并且加到页面中.</span> 
+	</p>
+<pre class="prettyprint lang-js">$.get("test.php",
+   function(data){
+     $('body').append( "Name: " + data.name ) // John
+              .append( "Time: " + data.time ); //  2pm
+   }, "json");</pre>
+</div>
+<br />
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

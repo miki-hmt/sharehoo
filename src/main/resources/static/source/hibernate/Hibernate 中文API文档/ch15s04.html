@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>15.4.&#160;关联</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch15.html" title="第&#160;15&#160;章&#160; 条件查询(Criteria Queries)">
+<link rel="prev" href="ch15s03.html" title="15.3.&#160;结果集排序">
+<link rel="next" href="ch15s05.html" title="15.5.&#160;动态关联抓取">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="querycriteria-associations"></a>15.4.&#160;关联</h2></div></div></div>
+<p>
+            你可以使用<code class="literal">createCriteria()</code>非常容易的在互相关联的实体间建立
+            约束。
+        </p>
+<pre class="programlisting">List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.like("name", "F%") )
+    .createCriteria("kittens")
+        .add( Restrictions.like("name", "F%") )
+    .list();</pre>
+<p>
+            注意第二个 <code class="literal">createCriteria()</code>返回一个新的
+            <code class="literal">Criteria</code>实例，该实例引用<code class="literal">kittens</code> 集合中的元素。
+        </p>
+<p>
+            接下来，替换形态在某些情况下也是很有用的。
+        </p>
+<pre class="programlisting">List cats = sess.createCriteria(Cat.class)
+    .createAlias("kittens", "kt")
+    .createAlias("mate", "mt")
+    .add( Restrictions.eqProperty("kt.name", "mt.name") )
+    .list();</pre>
+<p>
+            
+            (<code class="literal">createAlias()</code>并不创建一个新的
+            <code class="literal">Criteria</code>实例。)
+        </p>
+<p>
+            <code class="literal">Cat</code>实例所保存的之前两次查询所返回的kittens集合是
+            <span class="emphasis"><em>没有</em></span>被条件预过滤的。如果你希望只获得符合条件的kittens，
+            你必须使用<code class="literal">ResultTransformer</code>。
+            
+        </p>
+<pre class="programlisting">List cats = sess.createCriteria(Cat.class)
+    .createCriteria("kittens", "kt")
+        .add( Restrictions.eq("name", "F%") )
+    .setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP)
+    .list();
+Iterator iter = cats.iterator();
+while ( iter.hasNext() ) {
+    Map map = (Map) iter.next();
+    Cat cat = (Cat) map.get(Criteria.ROOT_ALIAS);
+    Cat kitten = (Cat) map.get("kt");
+}</pre>
+</div></body>
+</html>

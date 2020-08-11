@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>15.6.&#160;查询示例</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch15.html" title="第&#160;15&#160;章&#160; 条件查询(Criteria Queries)">
+<link rel="prev" href="ch15s05.html" title="15.5.&#160;动态关联抓取">
+<link rel="next" href="ch15s07.html" title="15.7.&#160;投影(Projections)、聚合（aggregation）和分组（grouping）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="querycriteria-examples"></a>15.6.&#160;查询示例</h2></div></div></div>
+<p>
+            <code class="literal">org.hibernate.criterion.Example</code>类允许你通过一个给定实例
+            构建一个条件查询。
+        </p>
+<pre class="programlisting">Cat cat = new Cat();
+cat.setSex('F');
+cat.setColor(Color.BLACK);
+List results = session.createCriteria(Cat.class)
+    .add( Example.create(cat) )
+    .list();</pre>
+<p>
+           版本属性、标识符和关联被忽略。默认情况下值为null的属性将被排除。
+        </p>
+<p>
+           你可以自行调整<code class="literal">Example</code>使之更实用。
+        </p>
+<pre class="programlisting">Example example = Example.create(cat)
+    .excludeZeroes()           //exclude zero valued properties
+    .excludeProperty("color")  //exclude the property named "color"
+    .ignoreCase()              //perform case insensitive string comparisons
+    .enableLike();             //use like for string comparisons
+List results = session.createCriteria(Cat.class)
+    .add(example)
+    .list();</pre>
+<p>
+            你甚至可以使用examples在关联对象上放置条件。
+        </p>
+<pre class="programlisting">List results = session.createCriteria(Cat.class)
+    .add( Example.create(cat) )
+    .createCriteria("mate")
+        .add( Example.create( cat.getMate() ) )
+    .list();</pre>
+</div></body>
+</html>

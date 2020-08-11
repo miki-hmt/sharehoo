@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>15.3.&#160;结果集排序</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch15.html" title="第&#160;15&#160;章&#160; 条件查询(Criteria Queries)">
+<link rel="prev" href="ch15s02.html" title="15.2.&#160;限制结果集内容">
+<link rel="next" href="ch15s04.html" title="15.4.&#160;关联">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="querycriteria-ordering"></a>15.3.&#160;结果集排序</h2></div></div></div>
+<p>
+            你可以使用<code class="literal">org.hibernate.criterion.Order</code>来为查询结果排序。
+        </p>
+<pre class="programlisting">List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.like("name", "F%")
+    .addOrder( Order.asc("name") )
+    .addOrder( Order.desc("age") )
+    .setMaxResults(50)
+    .list();</pre>
+<pre class="programlisting">List cats = sess.createCriteria(Cat.class)
+    .add( Property.forName("name").like("F%") )
+    .addOrder( Property.forName("name").asc() )
+    .addOrder( Property.forName("age").desc() )
+    .setMaxResults(50)
+    .list();</pre>
+</div></body>
+</html>

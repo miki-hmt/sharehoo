@@ -1,0 +1,1617 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="CHM Editor">
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="ExWindow Styles" value="0x200">
+	<param name="Window Styles" value="0x800025">
+	<param name="Font" value="MS Sans Serif,9,0">
+</OBJECT>
+<UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="jQuery 3.1 参考手册 速查表">
+    <param name="Local" value="核心/12780.html">
+    <param name="ImageNumber" value="13">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="手册网">
+    <param name="Local" value="shouce.htm">
+    <param name="ImageNumber" value="15">
+    </OBJECT>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="核心">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="$.data()">
+      <param name="Local" value="核心/12793.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="clearQueue()">
+      <param name="Local" value="核心/12796.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="context">
+      <param name="Local" value="核心/12788.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="data()">
+      <param name="Local" value="核心/12791.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="dequeue()">
+      <param name="Local" value="核心/12795.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="each(callback)">
+      <param name="Local" value="核心/12784.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="get()">
+      <param name="Local" value="核心/12789.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="index()">
+      <param name="Local" value="核心/12790.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery([sel,[context]])">
+      <param name="Local" value="核心/13078.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery(callback)">
+      <param name="Local" value="核心/12782.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery(html,[ownerDocument])">
+      <param name="Local" value="核心/12781.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.extend()">
+      <param name="Local" value="核心/12798.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.fn.extend()">
+      <param name="Local" value="核心/12797.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.holdReady(hold)">
+      <param name="Local" value="核心/12783.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.noConflict()">
+      <param name="Local" value="核心/12799.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="length">
+      <param name="Local" value="核心/12786.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="queue()">
+      <param name="Local" value="核心/12794.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="removeData()">
+      <param name="Local" value="核心/12792.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="selector">
+      <param name="Local" value="核心/12787.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="size()">
+      <param name="Local" value="核心/12785.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="选择器">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="#id">
+      <param name="Local" value="选择器/12800.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="*">
+      <param name="Local" value="选择器/12803.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=".class">
+      <param name="Local" value="选择器/12802.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":animated">
+      <param name="Local" value="选择器/12819.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":button">
+      <param name="Local" value="选择器/12854.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":checkbox">
+      <param name="Local" value="选择器/12850.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":checked">
+      <param name="Local" value="选择器/12858.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":contains(text)">
+      <param name="Local" value="选择器/12823.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":disabled">
+      <param name="Local" value="选择器/12857.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":empty">
+      <param name="Local" value="选择器/12824.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":enabled">
+      <param name="Local" value="选择器/12856.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":eq(index)">
+      <param name="Local" value="选择器/12813.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":even">
+      <param name="Local" value="选择器/12811.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":file">
+      <param name="Local" value="选择器/12855.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":first">
+      <param name="Local" value="选择器/12809.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":first-child">
+      <param name="Local" value="选择器/12836.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":first-of-type">
+      <param name="Local" value="选择器/12837.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":focus">
+      <param name="Local" value="选择器/12820.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":gt(index)">
+      <param name="Local" value="选择器/12814.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":has(selector)">
+      <param name="Local" value="选择器/12825.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":header">
+      <param name="Local" value="选择器/12818.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":hidden">
+      <param name="Local" value="选择器/12827.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":image">
+      <param name="Local" value="选择器/12852.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":input">
+      <param name="Local" value="选择器/12846.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":lang(language)">
+      <param name="Local" value="选择器/12815.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":last()">
+      <param name="Local" value="选择器/12816.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":last-child">
+      <param name="Local" value="选择器/12838.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":last-of-type">
+      <param name="Local" value="选择器/12839.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":lt(index)">
+      <param name="Local" value="选择器/12817.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":not(selector)">
+      <param name="Local" value="选择器/12810.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":nth-child">
+      <param name="Local" value="选择器/12840.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":nth-last-child(n|even|odd|formula)">
+      <param name="Local" value="选择器/12841.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":nth-last-of-type()">
+      <param name="Local" value="选择器/12842.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":nth-of-type()">
+      <param name="Local" value="选择器/12843.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":odd">
+      <param name="Local" value="选择器/12812.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":only-child">
+      <param name="Local" value="选择器/12844.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":only-of-type">
+      <param name="Local" value="选择器/12845.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":parent">
+      <param name="Local" value="选择器/12826.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":password">
+      <param name="Local" value="选择器/12848.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":radio">
+      <param name="Local" value="选择器/12849.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":reset">
+      <param name="Local" value="选择器/12853.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":root">
+      <param name="Local" value="选择器/12821.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":selected">
+      <param name="Local" value="选择器/12859.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":submit">
+      <param name="Local" value="选择器/12851.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":target">
+      <param name="Local" value="选择器/12822.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":text">
+      <param name="Local" value="选择器/12847.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value=":visible">
+      <param name="Local" value="选择器/12828.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="[attribute!=value]">
+      <param name="Local" value="选择器/12831.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="[attribute$=value]">
+      <param name="Local" value="选择器/12833.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="[attribute*=value]">
+      <param name="Local" value="选择器/12834.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="[attribute]">
+      <param name="Local" value="选择器/12829.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="[attribute^=value]">
+      <param name="Local" value="选择器/12832.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="[attribute|=value]">
+      <param name="Local" value="选择器/13080.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="[attribute~=value]">
+      <param name="Local" value="选择器/13079.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="[attribute=value]">
+      <param name="Local" value="选择器/12830.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="[selector1][selector2][selectorN]">
+      <param name="Local" value="选择器/12835.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="ancestor descendant">
+      <param name="Local" value="选择器/12805.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="element">
+      <param name="Local" value="选择器/12801.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="parent > child">
+      <param name="Local" value="选择器/12806.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="prev ~ siblings">
+      <param name="Local" value="选择器/12808.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="prev + next">
+      <param name="Local" value="选择器/12807.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="selector1,selector2,selectorN">
+      <param name="Local" value="选择器/12804.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="AJAX">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="$.ajaxPrefilter()">
+      <param name="Local" value="AJAX/12873.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="ajaxComplete()">
+      <param name="Local" value="AJAX/12867.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="ajaxError()">
+      <param name="Local" value="AJAX/12868.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="ajaxSend()">
+      <param name="Local" value="AJAX/12869.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="ajaxStart()">
+      <param name="Local" value="AJAX/12870.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="ajaxStop()">
+      <param name="Local" value="AJAX/12871.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="ajaxSuccess()">
+      <param name="Local" value="AJAX/12872.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.ajax()">
+      <param name="Local" value="AJAX/12861.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.ajaxSetup()">
+      <param name="Local" value="AJAX/12874.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.ajaxTransport()">
+      <param name="Local" value="AJAX/13083.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.get()">
+      <param name="Local" value="AJAX/12863.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.getJSON()">
+      <param name="Local" value="AJAX/12864.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.getScript()">
+      <param name="Local" value="AJAX/12865.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.post()">
+      <param name="Local" value="AJAX/12866.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="load()">
+      <param name="Local" value="AJAX/12862.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="serialize()">
+      <param name="Local" value="AJAX/12875.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="serializeArray()">
+      <param name="Local" value="AJAX/12876.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="属性">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="addClass()">
+      <param name="Local" value="属性/12881.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="attr()">
+      <param name="Local" value="属性/12877.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="html()">
+      <param name="Local" value="属性/12884.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="prop()">
+      <param name="Local" value="属性/12879.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="removeAttr()">
+      <param name="Local" value="属性/12878.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="removeClass()">
+      <param name="Local" value="属性/12882.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="removeProp()">
+      <param name="Local" value="属性/12880.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="text()">
+      <param name="Local" value="属性/12885.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="toggleClass()">
+      <param name="Local" value="属性/12883.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="val()">
+      <param name="Local" value="属性/12886.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="CSS">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="$.escapeSelector(selector)">
+      <param name="Local" value="CSS/12860.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="css()">
+      <param name="Local" value="CSS/12887.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="height()">
+      <param name="Local" value="CSS/12893.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="innerHeight()">
+      <param name="Local" value="CSS/12895.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="innerWidth()">
+      <param name="Local" value="CSS/12896.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.cssHooks">
+      <param name="Local" value="CSS/12888.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="offset()">
+      <param name="Local" value="CSS/12889.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="outerHeight()">
+      <param name="Local" value="CSS/12897.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="outerWidth()">
+      <param name="Local" value="CSS/12898.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="position()">
+      <param name="Local" value="CSS/12890.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="scrollLeft()">
+      <param name="Local" value="CSS/12892.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="scrollTop()">
+      <param name="Local" value="CSS/12891.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="width()">
+      <param name="Local" value="CSS/12894.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="文档处理">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="after()">
+      <param name="Local" value="文档处理/12903.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="append()">
+      <param name="Local" value="文档处理/12899.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="appendTo()">
+      <param name="Local" value="文档处理/12900.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="before()">
+      <param name="Local" value="文档处理/12904.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="clone()">
+      <param name="Local" value="文档处理/12916.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="detach()">
+      <param name="Local" value="文档处理/12915.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="empty()">
+      <param name="Local" value="文档处理/12913.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="insertAfter()">
+      <param name="Local" value="文档处理/12905.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="insertBefore()">
+      <param name="Local" value="文档处理/12906.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="prepend()">
+      <param name="Local" value="文档处理/12901.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="prependTo()">
+      <param name="Local" value="文档处理/12902.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="remove()">
+      <param name="Local" value="文档处理/12914.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="replaceAll()">
+      <param name="Local" value="文档处理/12912.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="replaceWith()">
+      <param name="Local" value="文档处理/12911.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="unwrap()">
+      <param name="Local" value="文档处理/12908.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="wrap()">
+      <param name="Local" value="文档处理/12907.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="wrapAll()">
+      <param name="Local" value="文档处理/12909.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="wrapInner()">
+      <param name="Local" value="文档处理/12910.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="筛选">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="add()">
+      <param name="Local" value="筛选/12941.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="addBack()">
+      <param name="Local" value="筛选/12943.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="andSelf()">
+      <param name="Local" value="筛选/12942.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="children()">
+      <param name="Local" value="筛选/12927.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="closest()">
+      <param name="Local" value="筛选/12928.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="contents()">
+      <param name="Local" value="筛选/12944.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="end()">
+      <param name="Local" value="筛选/12945.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="eq()">
+      <param name="Local" value="筛选/12917.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="filter()">
+      <param name="Local" value="筛选/12921.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="find()">
+      <param name="Local" value="筛选/12929.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="first()">
+      <param name="Local" value="筛选/12918.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="has()">
+      <param name="Local" value="筛选/12924.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="hasClass()">
+      <param name="Local" value="筛选/12920.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="is()">
+      <param name="Local" value="筛选/12922.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="last()">
+      <param name="Local" value="筛选/12919.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="map()">
+      <param name="Local" value="筛选/12923.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="next()">
+      <param name="Local" value="筛选/12930.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="nextAll()">
+      <param name="Local" value="筛选/12931.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="nextUntil()">
+      <param name="Local" value="筛选/12932.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="not()">
+      <param name="Local" value="筛选/12925.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="offsetParent()">
+      <param name="Local" value="筛选/12933.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="parent()">
+      <param name="Local" value="筛选/12934.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="parents()">
+      <param name="Local" value="筛选/12935.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="parentsUntil()">
+      <param name="Local" value="筛选/12936.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="prev()">
+      <param name="Local" value="筛选/12937.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="prevAll()">
+      <param name="Local" value="筛选/12938.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="prevUntil()">
+      <param name="Local" value="筛选/12939.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="siblings()">
+      <param name="Local" value="筛选/12940.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="slice()">
+      <param name="Local" value="筛选/12926.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="事件">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="bind()">
+      <param name="Local" value="事件/12949.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="blur()">
+      <param name="Local" value="事件/12960.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="change()">
+      <param name="Local" value="事件/12961.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="click()">
+      <param name="Local" value="事件/12962.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="dblclick()">
+      <param name="Local" value="事件/12963.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="delegate()">
+      <param name="Local" value="事件/12956.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="die()">
+      <param name="Local" value="事件/12955.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="error()">
+      <param name="Local" value="事件/12964.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="focus()">
+      <param name="Local" value="事件/12965.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="focusin()">
+      <param name="Local" value="事件/12966.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="focusout()">
+      <param name="Local" value="事件/12967.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="hover()">
+      <param name="Local" value="事件/12958.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="keydown()">
+      <param name="Local" value="事件/12968.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="keypress()">
+      <param name="Local" value="事件/12969.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="keyup()">
+      <param name="Local" value="事件/12970.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="live()">
+      <param name="Local" value="事件/12954.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="mousedown()">
+      <param name="Local" value="事件/12971.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="mouseenter()">
+      <param name="Local" value="事件/12972.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="mouseleave()">
+      <param name="Local" value="事件/12973.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="mousemove()">
+      <param name="Local" value="事件/12974.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="mouseout()">
+      <param name="Local" value="事件/12975.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="mouseover()">
+      <param name="Local" value="事件/12976.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="mouseup()">
+      <param name="Local" value="事件/12977.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="off()">
+      <param name="Local" value="事件/12948.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="on()">
+      <param name="Local" value="事件/12947.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="one()">
+      <param name="Local" value="事件/12950.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="ready()">
+      <param name="Local" value="事件/12946.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="resize()">
+      <param name="Local" value="事件/12978.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="scroll()">
+      <param name="Local" value="事件/12979.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="select()">
+      <param name="Local" value="事件/12980.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="submit()">
+      <param name="Local" value="事件/12981.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="toggle()">
+      <param name="Local" value="事件/12959.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="trigger()">
+      <param name="Local" value="事件/12951.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="triggerHandler()">
+      <param name="Local" value="事件/12952.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="unbind()">
+      <param name="Local" value="事件/12953.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="undelegate()">
+      <param name="Local" value="事件/12957.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="unload()">
+      <param name="Local" value="事件/12982.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="效果">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="animate()">
+      <param name="Local" value="效果/12992.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="delay()">
+      <param name="Local" value="效果/12994.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="fadeIn()">
+      <param name="Local" value="效果/12988.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="fadeOut()">
+      <param name="Local" value="效果/12989.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="fadeTo()">
+      <param name="Local" value="效果/12990.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="fadeToggle()">
+      <param name="Local" value="效果/12991.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="finish()">
+      <param name="Local" value="效果/12995.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="hide()">
+      <param name="Local" value="效果/12984.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.fx.interval">
+      <param name="Local" value="效果/12997.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.fx.off">
+      <param name="Local" value="效果/12996.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="show()">
+      <param name="Local" value="效果/12983.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="slideDown()">
+      <param name="Local" value="效果/12985.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="slideToggle()">
+      <param name="Local" value="效果/12987.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="slideUp()">
+      <param name="Local" value="效果/12986.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="stop()">
+      <param name="Local" value="效果/12993.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="工具">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="$.fn.jquery">
+      <param name="Local" value="工具/13029.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.boxModel">
+      <param name="Local" value="工具/13001.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.browser">
+      <param name="Local" value="工具/12999.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.browser.version">
+      <param name="Local" value="工具/13000.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.contains()">
+      <param name="Local" value="工具/13018.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.each()">
+      <param name="Local" value="工具/13002.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.error()">
+      <param name="Local" value="工具/13028.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.extend()">
+      <param name="Local" value="工具/13003.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.grep()">
+      <param name="Local" value="工具/13004.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.inArray()">
+      <param name="Local" value="工具/13009.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.isArray()">
+      <param name="Local" value="工具/13020.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.isEmptyObject()">
+      <param name="Local" value="工具/13022.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.isFunction()">
+      <param name="Local" value="工具/13021.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.isNumeric()">
+      <param name="Local" value="工具/13025.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.isPlainObject()">
+      <param name="Local" value="工具/13023.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.isWindow()">
+      <param name="Local" value="工具/13024.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.makeArray()">
+      <param name="Local" value="工具/13007.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.map()">
+      <param name="Local" value="工具/13008.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.merge()">
+      <param name="Local" value="工具/13011.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.noop">
+      <param name="Local" value="工具/13016.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.param()">
+      <param name="Local" value="工具/13027.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.parseHTML()">
+      <param name="Local" value="工具/13082.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.parseJSON()">
+      <param name="Local" value="工具/13014.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.parseXML()">
+      <param name="Local" value="工具/13015.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.proxy()">
+      <param name="Local" value="工具/13017.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.sub()">
+      <param name="Local" value="工具/13005.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.support">
+      <param name="Local" value="工具/12998.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.toArray()">
+      <param name="Local" value="工具/13010.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.trim()">
+      <param name="Local" value="工具/13026.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.type()">
+      <param name="Local" value="工具/13019.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.unique()">
+      <param name="Local" value="工具/13012.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.uniqueSort()">
+      <param name="Local" value="工具/13013.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.when()">
+      <param name="Local" value="工具/13006.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="事件对象">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.currentTarget">
+      <param name="Local" value="事件对象/13030.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.data">
+      <param name="Local" value="事件对象/13031.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.delegateTarget">
+      <param name="Local" value="事件对象/13032.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.isDefaultPrevented()">
+      <param name="Local" value="事件对象/13033.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.isImmediatePropagationStopped()">
+      <param name="Local" value="事件对象/13034.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.isPropagationStopped()">
+      <param name="Local" value="事件对象/13035.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.namespace">
+      <param name="Local" value="事件对象/13036.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.pageX">
+      <param name="Local" value="事件对象/13037.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.pageY">
+      <param name="Local" value="事件对象/13038.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.preventDefault()">
+      <param name="Local" value="事件对象/13039.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.relatedTarget">
+      <param name="Local" value="事件对象/13040.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.result">
+      <param name="Local" value="事件对象/13041.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.stopImmediatePropagation()">
+      <param name="Local" value="事件对象/13042.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.stopPropagation()">
+      <param name="Local" value="事件对象/13043.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.target">
+      <param name="Local" value="事件对象/13044.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.timeStamp">
+      <param name="Local" value="事件对象/13045.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.type">
+      <param name="Local" value="事件对象/13046.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="event.which">
+      <param name="Local" value="事件对象/13047.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="延迟对象">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.always()">
+      <param name="Local" value="延迟对象/13059.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.done()">
+      <param name="Local" value="延迟对象/13048.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.fail()">
+      <param name="Local" value="延迟对象/13049.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.isRejected()">
+      <param name="Local" value="延迟对象/13050.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.isResolved()">
+      <param name="Local" value="延迟对象/13051.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.notify()">
+      <param name="Local" value="延迟对象/13060.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.notifyWith()">
+      <param name="Local" value="延迟对象/13061.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.pipe()">
+      <param name="Local" value="延迟对象/13058.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.progress()">
+      <param name="Local" value="延迟对象/13062.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.promise()">
+      <param name="Local" value="延迟对象/13057.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.reject()">
+      <param name="Local" value="延迟对象/13052.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.rejectWith()">
+      <param name="Local" value="延迟对象/13053.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.resolve()">
+      <param name="Local" value="延迟对象/13054.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.resolveWith()">
+      <param name="Local" value="延迟对象/13055.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.state()">
+      <param name="Local" value="延迟对象/13063.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="deferred.then()">
+      <param name="Local" value="延迟对象/13056.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="回调函数">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.add()">
+      <param name="Local" value="回调函数/13064.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.disable()">
+      <param name="Local" value="回调函数/13065.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.empty()">
+      <param name="Local" value="回调函数/13066.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.fire()">
+      <param name="Local" value="回调函数/13067.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.fired()">
+      <param name="Local" value="回调函数/13068.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.fireWith()">
+      <param name="Local" value="回调函数/13069.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.has()">
+      <param name="Local" value="回调函数/13070.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.lock()">
+      <param name="Local" value="回调函数/13071.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.locked()">
+      <param name="Local" value="回调函数/13072.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="callbacks.remove()">
+      <param name="Local" value="回调函数/13073.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="jQuery.callbacks()">
+      <param name="Local" value="回调函数/13074.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+  <LI> <OBJECT type="text/sitemap">
+    <param name="Name" value="附录">
+    <param name="ImageNumber" value="1">
+    </OBJECT>
+  <UL>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="JavaScript 类型">
+      <param name="Local" value="附录/13081.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="HTML5速查表">
+      <param name="Local" value="附录/13076.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+    <LI> <OBJECT type="text/sitemap">
+      <param name="Name" value="正则表达式速查表">
+      <param name="Local" value="附录/13075.html">
+      <param name="ImageNumber" value="11">
+      </OBJECT>
+  </UL>
+</UL>
+</BODY></HTML>

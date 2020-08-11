@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>5.6.&#160;数据库生成属性（Generated Properties）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch05.html" title="第&#160;5&#160;章&#160;对象/关系数据库映射基础(Basic O/R Mapping)">
+<link rel="prev" href="ch05s05.html" title="5.5.&#160;其他元数据(Metadata)">
+<link rel="next" href="ch05s07.html" title="5.7.&#160;辅助数据库对象(Auxiliary Database Objects)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="mapping-generated"></a>5.6.&#160;数据库生成属性（Generated Properties）</h2></div></div></div>
+<p>
+            Generated properties指的是其值由数据库生成的属性。一般来说，如果对象有任何属性由数据库生成值，Hibernate应用程序需要进行<code class="literal">刷新(refresh)</code>。但如果把属性标明为generated，就可以转由Hibernate来负责这个动作。实际上。对定义了generated properties的实体,每当Hibernate执行一条SQL INSERT或者UPDATE语句，会立刻执行一条select来获得生成的值。
+        </p>
+<p>
+            被标明为generated的属性还必须是 non-insertable和 non-updateable的。只有<a href="ch05.html#mapping-declaration-version" title="5.1.7.&#160;版本（version）(可选)">第&#160;5.1.7&#160;节 “版本（version）(可选)”</a>，<a href="ch05.html#mapping-declaration-timestamp" title="5.1.8.&#160;timestamp (可选)">第&#160;5.1.8&#160;节 “timestamp (可选)”</a>和<a href="ch05.html#mapping-declaration-property" title="5.1.9.&#160;property">第&#160;5.1.9&#160;节 “property”</a>可以被标明为generated。
+        </p>
+<p>
+		    <code class="literal">never</code> (默认) 标明此属性值不是从数据库中生成。
+	    </p>
+<p>
+		    <code class="literal">insert</code> - 标明此属性值在insert的时候生成，但是不会在随后的update时重新生成。比如说创建日期就归属于这类。注意虽然<a href="ch05.html#mapping-declaration-version" title="5.1.7.&#160;版本（version）(可选)">第&#160;5.1.7&#160;节 “版本（version）(可选)”</a>和<a href="ch05.html#mapping-declaration-timestamp" title="5.1.8.&#160;timestamp (可选)">第&#160;5.1.8&#160;节 “timestamp (可选)”</a>属性可以被标注为generated，但是不适用这个选项...
+	    </p>
+<p>
+		    <code class="literal">always</code> - 标明此属性值在insert和update时都会被生成。
+	    </p>
+</div></body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>10.8.&#160;删除持久对象</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch10.html" title="第&#160;10&#160;章&#160;与对象共事">
+<link rel="prev" href="ch10s07.html" title="10.7.&#160;自动状态检测">
+<link rel="next" href="ch10s09.html" title="10.9.&#160;在两个不同数据库间复制对象">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="objectstate-deleting"></a>10.8.&#160;删除持久对象</h2></div></div></div>
+<p>
+            使用<code class="literal">Session.delete()</code>会把对象的状态从数据库中移除。
+            当然，你的应用程序可能仍然持有一个指向已删除对象的引用。所以，最好这样理解：<code class="literal">delete()</code>的用途是把一个持久实例变成瞬时(transient)实例。
+        </p>
+<pre class="programlisting">sess.delete(cat);</pre>
+<p>
+            你可以用你喜欢的任何顺序删除对象，不用担心外键约束冲突。当然，如果你搞错了顺序，还是有可能引发在外键字段定义的<code class="literal">NOT NULL</code>约束冲突。
+            例如你删除了父对象，但是忘记删除孩子们。
+        </p>
+</div></body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>12.2.&#160; 事件系统(Event system)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch12.html" title="第&#160;12&#160;章&#160; 拦截器与事件(Interceptors and events)">
+<link rel="prev" href="ch12.html" title="第&#160;12&#160;章&#160; 拦截器与事件(Interceptors and events)">
+<link rel="next" href="ch12s03.html" title="12.3.&#160; Hibernate的声明式安全机制">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="objectstate-events"></a>12.2.&#160;
+		事件系统(Event system)
+		</h2></div></div></div>
+<p>
+		    如果需要响应持久层的某些特殊事件，你也可以使用Hibernate3的事件框架。
+			该事件系统可以用来替代拦截器，也可以作为拦截器的补充来使用。
+		    
+        </p>
+<p>
+                    基本上，<code class="literal">Session</code>接口的每个方法都有相对应的事件。比如
+			<code class="literal">LoadEvent</code>，<code class="literal">FlushEvent</code>，等等（查阅XML配置文件
+			的DTD，以及<code class="literal">org.hibernate.event</code>包来获得所有已定义的事件的列表）。当某个方
+			法被调用时，Hibernate <code class="literal">Session</code>会生成一个相对应的事件并激活所
+			有配置好的事件监听器。系统预设的监听器实现的处理过程就是被监听的方法要做的（被监听的方法所做的其实仅仅是激活监听器，
+                        “实际”的工作是由监听器完成的）。不过，你可以自由地选择实现
+			一个自己定制的监听器（比如，实现并注册用来处理处理<code class="literal">LoadEvent</code>的<code class="literal">LoadEventListener</code>接口），
+                        来负责处理所有的调用<code class="literal">Session</code>的<code class="literal">load()</code>方法的请求。
+        </p>
+<p>
+		    监听器应该被看作是单例(singleton)对象，也就是说，所有同类型的事件的处理共享同一个监听器实例，因此监听器
+			不应该保存任何状态（也就是不应该使用成员变量）。
+        </p>
+<p>
+                    用户定制的监听器应该实现与所要处理的事件相对应的接口，或者从一个合适的基类继承（甚至是从Hibernate自带的默认事件监听器类继承，
+                        为了方便你这样做，这些类都被声明成non-final的了）。用户定制的监听器可以通过编程使用<code class="literal">Configuration</code>对象
+                        来注册，也可以在Hibernate的XML格式的配置文件中进行声明（不支持在Properties格式的配置文件声明监听器）。
+                        下面是一个用户定制的加载事件(load event)的监听器：
+        </p>
+<pre class="programlisting">public class MyLoadListener implements LoadEventListener {
+    // this is the single method defined by the LoadEventListener interface
+    public void onLoad(LoadEvent event, LoadEventListener.LoadType loadType)
+            throws HibernateException {
+        if ( !MySecurity.isAuthorized( event.getEntityClassName(), event.getEntityId() ) ) {
+            throw MySecurityException("Unauthorized access");
+        }
+    }
+}</pre>
+<p>
+		    你还需要修改一处配置，来告诉Hibernate，除了默认的监听器，还要附加选定的监听器。
+        </p>
+<pre class="programlisting">&lt;hibernate-configuration&gt;
+    &lt;session-factory&gt;
+        ...
+        &lt;event type="load"&gt;
+            &lt;listener class="com.eg.MyLoadListener"/&gt;
+            &lt;listener class="org.hibernate.event.def.DefaultLoadEventListener"/&gt;
+        &lt;/event&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;</pre>
+<p>
+		    看看用另一种方式，通过编程的方式来注册它。
+        </p>
+<pre class="programlisting">Configuration cfg = new Configuration();
+LoadEventListener[] stack = { new MyLoadListener(), new DefaultLoadEventListener() };
+cfg.EventListeners().setLoadEventListeners(stack);</pre>
+<p>
+		    通过在XML配置文件声明而注册的监听器不能共享实例。如果在多个<code class="literal">&lt;listener/&gt;</code>节点中使用
+			了相同的类的名字，则每一个引用都将会产生一个独立的实例。如果你需要在多个监听器类型之间共享
+			监听器的实例，则你必须使用编程的方式来进行注册。
+        </p>
+<p>
+                    为什么我们实现了特定监听器的接口，在注册的时候还要明确指出我们要注册哪个事件的监听器呢？
+                    这是因为一个类可能实现多个监听器的接口。在注册的时候明确指定要监听的事件，可以让启用或者禁用对某个事件的监听的配置工作简单些。
+        </p>
+</div></body>
+</html>

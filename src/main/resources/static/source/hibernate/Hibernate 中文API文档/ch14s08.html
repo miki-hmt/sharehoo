@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>14.8.&#160;where子句</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch14.html" title="第&#160;14&#160;章&#160;HQL: Hibernate查询语言">
+<link rel="prev" href="ch14s07.html" title="14.7.&#160;多态查询">
+<link rel="next" href="ch14s09.html" title="14.9.&#160;表达式">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="queryhql-where"></a>14.8.&#160;where子句</h2></div></div></div>
+<p>
+            <code class="literal">where</code>子句允许你将返回的实例列表的范围缩小.
+            如果没有指定别名，你可以使用属性名来直接引用属性:
+        </p>
+<pre class="programlisting">from Cat where name='Fritz'</pre>
+<p>
+        	如果指派了别名，需要使用完整的属性名:
+        </p>
+<pre class="programlisting">from Cat as cat where cat.name='Fritz'</pre>
+<p>
+            返回名为（属性name等于）'Fritz'的<code class="literal">Cat</code>类的实例。 
+        </p>
+<pre class="programlisting">select foo 
+from Foo foo, Bar bar
+where foo.startDate = bar.date</pre>
+<p>
+            将返回所有满足下面条件的<code class="literal">Foo</code>类的实例：
+            存在如下的<code class="literal">bar</code>的一个实例，其<code class="literal">date</code>属性等于
+            <code class="literal">Foo</code>的<code class="literal">startDate</code>属性。
+            复合路径表达式使得<code class="literal">where</code>子句非常的强大，考虑如下情况：
+        </p>
+<pre class="programlisting">from Cat cat where cat.mate.name is not null</pre>
+<p>
+            该查询将被翻译成为一个含有表连接（内连接）的SQL查询。如果你打算写像这样的查询语句
+        </p>
+<pre class="programlisting">from Foo foo  
+where foo.bar.baz.customer.address.city is not null</pre>
+<p>
+            在SQL中，你为达此目的将需要进行一个四表连接的查询。
+        </p>
+<p>
+            <code class="literal">=</code>运算符不仅可以被用来比较属性的值，也可以用来比较实例：
+        </p>
+<pre class="programlisting">from Cat cat, Cat rival where cat.mate = rival.mate</pre>
+<pre class="programlisting">select cat, mate 
+from Cat cat, Cat mate
+where cat.mate = mate</pre>
+<p>
+            特殊属性（小写）<code class="literal">id</code>可以用来表示一个对象的唯一的标识符。（你也可以使用该对象的属性名。）
+        </p>
+<pre class="programlisting">from Cat as cat where cat.id = 123
+
+from Cat as cat where cat.mate.id = 69</pre>
+<p>
+            第二个查询是有效的。此时不需要进行表连接！
+        </p>
+<p>
+            同样也可以使用复合标识符。比如<code class="literal">Person</code>类有一个复合标识符，它由<code class="literal">country</code>属性 
+            与<code class="literal">medicareNumber</code>属性组成。
+        </p>
+<pre class="programlisting">from bank.Person person
+where person.id.country = 'AU' 
+    and person.id.medicareNumber = 123456</pre>
+<pre class="programlisting">from bank.Account account
+where account.owner.id.country = 'AU' 
+    and account.owner.id.medicareNumber = 123456</pre>
+<p>
+            第二个查询也不需要进行表连接。
+        </p>
+<p>
+            同样的，特殊属性<code class="literal">class</code>在进行多态持久化的情况下被用来存取一个实例的鉴别值（discriminator value）。
+            一个嵌入到where子句中的Java类的名字将被转换为该类的鉴别值。
+        </p>
+<pre class="programlisting">from Cat cat where cat.class = DomesticCat</pre>
+<p>
+            你也可以声明一个属性的类型是组件或者复合用户类型（以及由组件构成的组件等等）。永远不要尝试使用以组件类型来结尾的路径表达式（path-expression）
+            （与此相反，你应当使用组件的一个属性来结尾）。
+            举例来说，如果<code class="literal">store.owner</code>含有一个包含了组件的实体<code class="literal">address</code>
+        </p>
+<pre class="programlisting">store.owner.address.city    // 正确
+store.owner.address         // 错误!</pre>
+<p>
+            一个“任意”类型有两个特殊的属性<code class="literal">id</code>和<code class="literal">class</code>,
+            来允许我们按照下面的方式表达一个连接（<code class="literal">AuditLog.item</code>
+            是一个属性，该属性被映射为<code class="literal">&lt;any&gt;</code>）。
+        </p>
+<pre class="programlisting">from AuditLog log, Payment payment 
+where log.item.class = 'Payment' and log.item.id = payment.id</pre>
+<p>
+            注意，在上面的查询与句中，<code class="literal">log.item.class</code> 和 <code class="literal">payment.class</code>
+            将涉及到完全不同的数据库中的列。
+        </p>
+</div></body>
+</html>

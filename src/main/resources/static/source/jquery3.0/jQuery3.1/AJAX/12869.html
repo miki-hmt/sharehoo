@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>ajaxSend()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">ajaxSend()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.ajaxSend( handler(event, jqXHR, ajaxOptions) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>在Ajax请求发送之前绑定一个要执行的函数，这是一个 Ajax Event.
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="ajaxSend-handlerevent--jqXHR--ajaxOptions">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.ajaxSend( handler(event, jqXHR, ajaxOptions) )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>handler(event, jqXHR, ajaxOptions)</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28" target="_blank">Function</a>()
+					</div>
+					<div>
+						被调用的函数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			每当一个Ajax请求即将发送，jQuery就会触发<code>ajaxSend</code>事件，在这个时间点所有处理函数都会使用<code>.ajaxSend()</code>方法注册并执行。
+		</p>
+		<p>
+			观察这种方法，建立一个基本的Ajax加载请求：
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="trigger"&gt;Trigger&lt;/div&gt;
+&lt;div class="result"&gt;&lt;/div&gt;
+&lt;div class="log"&gt;&lt;/div&gt;</pre>
+		</div>
+		<p>
+			在document上绑定事件处理器：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$(document).ajaxSend(function() {
+  $( ".log" ).text( "Triggered ajaxSend handler." );
+});</pre>
+		</div>
+		<p>
+			现在，我们可以使用任何的jQuery方法构建一个Ajax请求：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( ".trigger" ).click(function() {
+  $( ".result" ).load( "ajax/test.html" );
+});</pre>
+		</div>
+		<p>
+			当我们点击class为 <code>trigger</code> 的元素并且Ajax请求即将开始，这个信息就会显示。
+		</p>
+		<p>
+			<strong>注，这段在官网的原文中已经被删除:</strong> 因为<code>.ajaxComplete()</code> 是作为一个jQuery对象实例方法去执行的，回调函数中，我们可以用<code>this</code>关键字作为指定的元素。
+		</p>
+		<p>
+			无论哪一个Ajax请求被发送，所有<code>ajaxSend</code>处理器都将被执行。如果我们必须区分不同的请求,我们可以使参数传递给这个处理器。 每次<code>ajaxSend</code> 处理器执行，它传递事件对象，<code>jqXHR</code>对象（在 jQuery 1.4中是<code><abbr title="XMLHttpRequest">XMLHttpRequest</abbr></code>对象），和用来创建请求的设置（<a href="http://www.shouce.ren/api/view/a/12861" class="book-a">settings object</a>）对象。如果请求失败，因为JavaScript抛出一个异常，并且作为第四个参数的异常对象被传递给处理程序。举个示例,我们能限制我们的回调到只处理事件处理某一特定的URL:
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$(document).ajaxSend(function(event, jqxhr, settings) {
+  if ( settings.url == "ajax/test.html" ) {
+    $( ".log" ).text( "Triggered ajaxSend handler." );
+  }
+});</pre>
+		</div>
+	</div>
+	<h3>
+		其他注意事项：
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				在jQuery1.9中，jQuery全局AJAX事件的所有处理程序，
+                    包括哪些<code>.ajaxSend()</code>添加的方法，<em>必须</em> 附加到 <code>document</code>上。
+			</li>
+			<li>
+				如果 <code><a href="http://www.shouce.ren/api/view/a/12861" class="book-a">$.ajax()</a></code> 或 <code><a href="http://www.shouce.ren/api/view/a/12874" class="book-a">$.ajaxSetup()</a></code>调用时， <code>global</code> 选项设置为 <code>false</code>， <code>.ajaxSend()</code>将不会触发。
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		AJAX 请求发送前显示信息。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code> $("#msg").ajaxSend(function(evt, request, settings){
+   $(this).append("&lt;li&gt;开始请求: " + settings.url + "&lt;/li&gt;");
+ });</code></pre>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

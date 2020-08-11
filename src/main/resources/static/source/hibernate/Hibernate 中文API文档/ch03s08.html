@@ -1,0 +1,250 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>3.8.&#160; J2EE应用程序服务器的集成</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch03.html" title="第&#160;3&#160;章&#160; 配置">
+<link rel="prev" href="ch03s07.html" title="3.7.&#160; XML配置文件">
+<link rel="next" href="ch04.html" title="第&#160;4&#160;章&#160;持久化类(Persistent Classes)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="configuration-j2ee"></a>3.8.&#160;
+            J2EE应用程序服务器的集成
+        </h2></div></div></div>
+<p>
+            针对J2EE体系,Hibernate有如下几个集成的方面:
+        </p>
+<div class="itemizedlist"><ul type="disc"><li><p>
+                <span class="emphasis"><em>容器管理的数据源(Container-managed datasources)</em></span>: 
+                Hibernate能使用通过容器管理，并由JNDI提供的JDBC连接. 通常, 特别是当处理多个数据源的分布式事务的时候, 
+                由一个JTA兼容的<code class="literal">TransactionManager</code>和一个
+                <code class="literal">ResourceManager</code>来处理事务管理(CMT, 容器管理的事务). 当然你可以通过
+                编程方式来划分事务边界(BMT, Bean管理的事务). 或者为了代码的可移植性，你也也许会想使用可选的
+                Hibernate <code class="literal">Transaction</code> API.
+                </p></li></ul></div>
+<div class="itemizedlist"><ul type="disc"><li><p>
+                <span class="emphasis"><em>自动JNDI绑定</em></span>: Hibernate可以在启动后将
+                <code class="literal">SessionFactory</code>绑定到JNDI.
+                </p></li></ul></div>
+<div class="itemizedlist"><ul type="disc"><li><p>
+                <span class="emphasis"><em>JTA Session绑定:</em></span> Hibernate <code class="literal">Session</code>
+                可以自动绑定到JTA事务作用的范围. 只需简单地从JNDI查找<code class="literal">SessionFactory</code>并获得当前的
+                <code class="literal">Session</code>. 当JTA事务完成时, 让Hibernate来处理
+                <code class="literal">Session</code>的清洗(flush)与关闭. 事务的划分可以是声明式的(CMT),也可以是编程式的(BMT/UserTransaction).
+                </p></li></ul></div>
+<div class="itemizedlist"><ul type="disc"><li><p>
+                <span class="emphasis"><em>JMX部署:</em></span> 如果你使用支持JMX应用程序服务器(如, JBoss AS), 那么你可以选择将Hibernate部署成托管MBean. 
+                这将为你省去一行从<code class="literal">Configuration</code>构建<code class="literal">SessionFactory</code>的启动代码. 
+                容器将启动你的<code class="literal">HibernateService</code>, 并完美地处理好服务间的依赖关系 (在Hibernate启动前，数据源必须是可用的，等等).
+                </p></li></ul></div>
+<p>
+            如果应用程序服务器抛出"connection containment"异常, 根据你的环境，也许该将配置属性
+            <code class="literal">hibernate.connection.release_mode</code>设为<code class="literal">after_statement</code>.
+        </p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-optional-transactionstrategy"></a>3.8.1.&#160;
+                事务策略配置
+            </h3></div></div></div>
+<p>
+                在你的架构中，Hibernate的<code class="literal">Session</code> API是独立于任何事务分界系统的. 
+                如果你让Hibernate通过连接池直接使用JDBC, 你需要调用JDBC API来打开和关闭你的事务. 
+                如果你运行在J2EE应用程序服务器中, 你也许想用Bean管理的事务并在需要的时候调用JTA API和<code class="literal">UserTransaction</code>.
+            </p>
+<p>
+                为了让你的代码在两种(或其他)环境中可以移植，我们建议使用可选的Hibernate <code class="literal">Transaction</code> API, 
+                它包装并隐藏了底层系统. 你必须通过设置Hibernate配置属性<code class="literal">hibernate.transaction.factory_class</code>来指定
+                一个<code class="literal">Transaction</code>实例的工厂类.
+            </p>
+<p>
+                有三个标准(内建)的选择:
+            </p>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="literal">org.hibernate.transaction.JDBCTransactionFactory</code></span></dt>
+<dd><p>
+                            委托给数据库(JDBC)事务（默认）
+                        </p></dd>
+<dt><span class="term"><code class="literal">org.hibernate.transaction.JTATransactionFactory</code></span></dt>
+<dd><p>
+                            如果在上下文环境中存在运行着的事务(如, EJB会话Bean的方法), 则委托给容器管
+                            理的事务, 否则，将启动一个新的事务，并使用Bean管理的事务.
+                        </p></dd>
+<dt><span class="term"><code class="literal">org.hibernate.transaction.CMTTransactionFactory</code></span></dt>
+<dd><p>
+                            委托给容器管理的JTA事务
+                        </p></dd>
+</dl></div>
+<p>
+                你也可以定义属于你自己的事务策略 (如, 针对CORBA的事务服务)
+            </p>
+<p>
+                Hibernate的一些特性 (比如二级缓存, Contextual Sessions with JTA等等)需要访问在托管环境中的JTA <code class="literal">TransactionManager</code>. 
+                由于J2EE没有标准化一个单一的机制,Hibernate在应用程序服务器中，你必须指定Hibernate如何获得<code class="literal">TransactionManager</code>的引用:
+            </p>
+<div class="table">
+<a name="jtamanagerlookup"></a><p class="title"><b>表&#160;3.10.&#160;JTA TransactionManagers</b></p>
+<div class="table-contents"><table summary="JTA TransactionManagers" border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                                Transaction工厂类
+                            </th>
+<th align="center">
+                                应用程序服务器
+                            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code class="literal">org.hibernate.transaction.JBossTransactionManagerLookup</code></td>
+<td align="center">JBoss</td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction.WeblogicTransactionManagerLookup</code></td>
+<td align="center">Weblogic</td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction.WebSphereTransactionManagerLookup</code></td>
+<td align="center">WebSphere</td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction.WebSphereExtendedJTATransactionLookup</code></td>
+<td align="center">WebSphere 6</td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction.OrionTransactionManagerLookup</code></td>
+<td align="center">Orion</td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction.ResinTransactionManagerLookup</code></td>
+<td align="center">Resin</td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction.JOTMTransactionManagerLookup</code></td>
+<td align="center">JOTM</td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction.JOnASTransactionManagerLookup</code></td>
+<td align="center">JOnAS</td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction.JRun4TransactionManagerLookup</code></td>
+<td align="center">JRun4</td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction.BESTransactionManagerLookup</code></td>
+<td align="center">Borland ES</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break">
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-optional-jndi"></a>3.8.2.&#160;
+                JNDI绑定的<code class="literal">SessionFactory</code>
+            </h3></div></div></div>
+<p>
+                与JNDI绑定的Hibernate的<code class="literal">SessionFactory</code>能简化工厂的查询，简化创建新的<code class="literal">Session</code>. 
+                需要注意的是这与JNDI绑定<code class="literal">Datasource</code>没有关系, 它们只是恰巧用了相同的注册表!
+            </p>
+<p>
+                如果你希望将<code class="literal">SessionFactory</code>绑定到一个JNDI的名字空间, 
+                用属性<code class="literal">hibernate.session_factory_name</code>指定一个名字(如, <code class="literal">java:hibernate/SessionFactory</code>). 
+                如果不设置这个属性, <code class="literal">SessionFactory</code>将不会被绑定到JNDI中. (在以只读JNDI为默认实现的环境中，这个设置尤其有用, 如Tomcat.)
+            </p>
+<p>
+                在将<code class="literal">SessionFactory</code>绑定至JNDI时, Hibernate将使用<code class="literal">hibernate.jndi.url</code>, 
+                和<code class="literal">hibernate.jndi.class</code>的值来实例化初始环境(initial context). 
+                如果它们没有被指定, 将使用默认的<code class="literal">InitialContext</code>.
+            </p>
+<p>
+                在你调用<code class="literal">cfg.buildSessionFactory()</code>后, Hibernate会自动将<code class="literal">SessionFactory</code>注册到JNDI.
+                这意味这你至少需要在你应用程序的启动代码(或工具类)中完成这个调用, 除非你使用<code class="literal">HibernateService</code>来做JMX部署 (见后面讨论).
+            </p>
+<p>
+                假若你使用JNDI <code class="literal">SessionFactory</code>,EJB或者任何其它类都可以从JNDI中找到此<code class="literal">SessionFactory</code>。
+            </p>
+<p>
+                我们建议，在受管理的环境中，把<code class="literal">SessionFactory</code>绑定到JNDI，在其它情况下，使用一个<code class="literal">static(静态的)</code>singleton。为了在你的应用程序代码中隐藏这些细节，我们还建议你用一个helper类把实际查找<code class="literal">SessionFactory</code>的代码隐藏起来,比如<code class="literal">HibernateUtil.getSessionFactory()</code>。注意，这个类也就可以方便地启动Hibernate，参见第一章。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-j2ee-currentsession"></a>3.8.3.&#160;在JTA环境下使用Current Session context (当前session上下文)管理</h3></div></div></div>
+<p>
+	            在Hibernate中，管理<code class="literal">Session</code>和transaction最好的方法是自动的"当前"<code class="literal">Session</code>管理。请参见<a href="ch02s05.html" title="2.5.&#160;上下文相关的（Contextual）Session">第&#160;2.5&#160;节 “上下文相关的（Contextual）Session”</a>一节的讨论。使用<code class="literal">"jta"</code>session上下文，假若在当前JTA事务中还没有Hibernate<code class="literal">Session</code>关联，第一次<code class="literal">sessionFactory.getCurrentSession()</code>调用会启动一个Session,并关联到当前的JTA事务。在<code class="literal">"jta"</code>上下文中调用<code class="literal">getCurrentSession()</code>获得的<code class="literal">Session</code>，会被设置为在transaction关闭的时候自动flush（清洗）、在transaction关闭之后自动关闭，每句语句之后主动释放JDBC连接。这就可以根据JTA事务的生命周期来管理与之关联的<code class="literal">Session</code>，用户代码中就可以不再考虑这些管理。你的代码也可以通过<code class="literal">UserTransaction</code>用编程方式使用JTA，或者(我们建议，为了便于移植代码）使用Hibernate的<code class="literal">Transaction</code> API来设置transaction边界。如果你的代码运行在EJB容器中，建议对CMT使用声明式事务声明。
+	            
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="configuration-j2ee-jmx"></a>3.8.4.&#160;
+                JMX部署
+            </h3></div></div></div>
+<p>
+                为了将<code class="literal">SessionFactory</code>注册到JNDI中，<code class="literal">cfg.buildSessionFactory()</code>这行代码仍需在某处被执行.
+                你可在一个<code class="literal">static</code>初始化块(像<code class="literal">HibernateUtil</code>中的那样)中执行它或将Hibernate部署为一个<span class="emphasis"><em>托管的服务</em></span>.
+            </p>
+<p>
+                为了部署在一个支持JMX的应用程序服务器上，Hibernate和
+                <code class="literal">org.hibernate.jmx.HibernateService</code>一同分发，如Jboss AS。
+                实际的部署和配置是由应用程序服务器提供者指定的. 这里是JBoss 4.0.x的<code class="literal">jboss-service.xml</code>样例:
+            </p>
+<pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;server&gt;
+
+&lt;mbean code="org.hibernate.jmx.HibernateService"
+    name="jboss.jca:service=HibernateFactory,name=HibernateFactory"&gt;
+
+    &lt;!-- 必须的服务 --&gt;
+    &lt;depends&gt;jboss.jca:service=RARDeployer&lt;/depends&gt;
+    &lt;depends&gt;jboss.jca:service=LocalTxCM,name=HsqlDS&lt;/depends&gt;
+
+    &lt;!-- 将Hibernate服务绑定到JNDI --&gt;
+    &lt;attribute name="JndiName"&gt;java:/hibernate/SessionFactory&lt;/attribute&gt;
+
+    &lt;!-- 数据源设置 --&gt;
+    &lt;attribute name="Datasource"&gt;java:HsqlDS&lt;/attribute&gt;
+    &lt;attribute name="Dialect"&gt;org.hibernate.dialect.HSQLDialect&lt;/attribute&gt;
+
+    &lt;!-- 事务集成 --&gt;
+    &lt;attribute name="TransactionStrategy"&gt;
+        org.hibernate.transaction.JTATransactionFactory&lt;/attribute&gt;
+    &lt;attribute name="TransactionManagerLookupStrategy"&gt;
+        org.hibernate.transaction.JBossTransactionManagerLookup&lt;/attribute&gt;
+    &lt;attribute name="FlushBeforeCompletionEnabled"&gt;true&lt;/attribute&gt;
+    &lt;attribute name="AutoCloseSessionEnabled"&gt;true&lt;/attribute&gt;
+
+    &lt;!-- 抓取选项 --&gt;
+    &lt;attribute name="MaximumFetchDepth"&gt;5&lt;/attribute&gt;
+
+    &lt;!-- 二级缓存 --&gt;
+    &lt;attribute name="SecondLevelCacheEnabled"&gt;true&lt;/attribute&gt;
+    &lt;attribute name="CacheProviderClass"&gt;org.hibernate.cache.EhCacheProvider&lt;/attribute&gt;
+    &lt;attribute name="QueryCacheEnabled"&gt;true&lt;/attribute&gt;
+
+    &lt;!-- 日志 --&gt;
+    &lt;attribute name="ShowSqlEnabled"&gt;true&lt;/attribute&gt;
+
+    &lt;!-- 映射定义文件 --&gt;
+    &lt;attribute name="MapResources"&gt;auction/Item.hbm.xml,auction/Category.hbm.xml&lt;/attribute&gt;
+
+&lt;/mbean&gt;
+
+&lt;/server&gt;</pre>
+<p>
+                这个文件是部署在<code class="literal">META-INF</code>目录下的, 并会被打包到以<code class="literal">.sar</code> (service archive)为扩展名的JAR文件中.
+                同时，你需要将Hibernate、它所需要的第三方库、你编译好的持久化类以及你的映射定义文件打包进同一个文档. 
+                你的企业Bean(一般为会话Bean)可能会被打包成它们自己的JAR文件, 但你也许会将EJB JAR文件一同包含进能独立(热)部署的主服务文档.
+                参考JBoss AS文档以了解更多的JMX服务与EJB部署的信息.
+            </p>
+</div>
+</div></body>
+</html>

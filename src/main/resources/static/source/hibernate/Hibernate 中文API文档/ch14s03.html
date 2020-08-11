@@ -1,0 +1,86 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>14.3.&#160;关联(Association)与连接(Join)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch14.html" title="第&#160;14&#160;章&#160;HQL: Hibernate查询语言">
+<link rel="prev" href="ch14s02.html" title="14.2.&#160;from子句">
+<link rel="next" href="ch14s04.html" title="14.4.&#160;join 语法的形式">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="queryhql-joins"></a>14.3.&#160;关联(Association)与连接(Join)</h2></div></div></div>
+<p>
+            我们也可以为相关联的实体甚至是对一个集合中的全部元素指定一个别名, 这时要使用关键字<code class="literal">join</code>。
+        </p>
+<pre class="programlisting">from Cat as cat 
+    inner join cat.mate as mate
+    left outer join cat.kittens as kitten</pre>
+<pre class="programlisting">from Cat as cat left join cat.mate.kittens as kittens</pre>
+<pre class="programlisting">from Formula form full join form.parameter param</pre>
+<p>
+            受支持的连接类型是从ANSI SQL中借鉴来的。
+        </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                    <code class="literal">inner join</code>（内连接）
+                </p></li>
+<li><p>
+                    <code class="literal">left outer join</code>（左外连接）
+                </p></li>
+<li><p>
+                    <code class="literal">right outer join</code>（右外连接）
+                </p></li>
+<li><p>
+                    <code class="literal">full join</code> (全连接，并不常用)
+                </p></li>
+</ul></div>
+<p>
+            语句<code class="literal">inner join</code>, <code class="literal">left outer join</code> 以及
+            <code class="literal">right outer join</code> 可以简写。
+        </p>
+<pre class="programlisting">from Cat as cat 
+    join cat.mate as mate
+    left join cat.kittens as kitten</pre>
+<p>
+            通过HQL的<code class="literal">with</code>关键字，你可以提供额外的join条件。
+        </p>
+<pre class="programlisting">from Cat as cat 
+    left join cat.kittens as kitten 
+        with kitten.bodyWeight &gt; 10.0</pre>
+<p>
+            还有，一个"fetch"连接允许仅仅使用一个选择语句就将相关联的对象或一组值的集合随着他们的父对象的初始化而被初始化，这种方法在使用到集合的情况下尤其有用，对于关联和集合来说，它有效的代替了映射文件中的外联接
+            与延迟声明（lazy declarations）. 查看
+            <a href="ch19.html#performance-fetching" title="19.1.&#160;
+			抓取策略(Fetching strategies)
+		">第&#160;19.1&#160;节 “
+			抓取策略(Fetching strategies)
+		”</a> 以获得等多的信息。
+        </p>
+<pre class="programlisting">from Cat as cat 
+    inner join fetch cat.mate
+    left join fetch cat.kittens</pre>
+<p>
+            一个fetch连接通常不需要被指定别名, 因为相关联的对象不应当被用在
+            <code class="literal">where</code> 子句 (或其它任何子句)中。同时，相关联的对象
+            并不在查询的结果中直接返回，但可以通过他们的父对象来访问到他们。
+        </p>
+<pre class="programlisting">from Cat as cat 
+    inner join fetch cat.mate
+    left join fetch cat.kittens child
+    left join fetch child.kittens</pre>
+<p>
+            假若使用<code class="literal">iterate()</code>来调用查询，请注意<code class="literal">fetch</code>构造是不能使用的(<code class="literal">scroll()</code> 可以使用)。<code class="literal">fetch</code>也不应该与<code class="literal">setMaxResults()</code> 或<code class="literal">setFirstResult()</code>共用，这是因为这些操作是基于结果集的，而在预先抓取集合类时可能包含重复的数据，也就是说无法预先知道精确的行数。<code class="literal">fetch</code>还不能与独立的 <code class="literal">with</code>条件一起使用。通过在一次查询中fetch多个集合，可以制造出笛卡尔积，因此请多加注意。对bag映射来说，同时join fetch多个集合角色可能在某些情况下给出并非预期的结果，也请小心。最后注意，使用<code class="literal">full join fetch</code> 与 <code class="literal">right join fetch</code>是没有意义的。
+        </p>
+<p>
+            如果你使用属性级别的延迟获取（lazy fetching）（这是通过重新编写字节码实现的），可以使用 <code class="literal">fetch  
+all properties</code> 
+            来强制Hibernate立即取得那些原本需要延迟加载的属性（在第一个查询中）。
+
+        </p>
+<pre class="programlisting">from Document fetch all properties order by name</pre>
+<pre class="programlisting">from Document doc fetch all properties where lower(doc.name) like '%cats%'</pre>
+</div></body>
+</html>

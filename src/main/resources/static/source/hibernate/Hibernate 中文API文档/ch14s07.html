@@ -1,0 +1,36 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>14.7.&#160;多态查询</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch14.html" title="第&#160;14&#160;章&#160;HQL: Hibernate查询语言">
+<link rel="prev" href="ch14s06.html" title="14.6.&#160;聚集函数">
+<link rel="next" href="ch14s08.html" title="14.8.&#160;where子句">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="queryhql-polymorphism"></a>14.7.&#160;多态查询</h2></div></div></div>
+<p>
+            一个如下的查询语句:
+        </p>
+<pre class="programlisting">from Cat as cat</pre>
+<p>
+            不仅返回<code class="literal">Cat</code>类的实例, 也同时返回子类
+            <code class="literal">DomesticCat</code>的实例. Hibernate 可以在<code class="literal">from</code>子句中指定<span class="emphasis"><em>任何</em></span> 
+            Java 类或接口. 查询会返回继承了该类的所有持久化子类
+            的实例或返回声明了该接口的所有持久化类的实例。下面的查询语句返回所有的被持久化的对象：        
+       </p>
+<pre class="programlisting">from java.lang.Object o</pre>
+<p>
+            接口<code class="literal">Named</code> 可能被各种各样的持久化类声明：
+        </p>
+<pre class="programlisting">from Named n, Named m where n.name = m.name</pre>
+<p>
+            注意，最后的两个查询将需要超过一个的SQL <code class="literal">SELECT</code>.这表明<code class="literal">order by</code>子句
+            没有对整个结果集进行正确的排序.
+            (这也说明你不能对这样的查询使用<code class="literal">Query.scroll()</code>方法.)
+        </p>
+</div></body>
+</html>

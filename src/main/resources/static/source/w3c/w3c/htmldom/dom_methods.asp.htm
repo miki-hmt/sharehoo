@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>HTML DOM 方法</title>
+
+</head>
+
+<body class="browserscripting">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>HTML DOM</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/index.asp" title="HTML DOM 教程">DOM 教程</a></li>
+<li><a href="dom_intro.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_intro.asp" title="HTML DOM 简介">DOM 简介</a></li>
+<li><a href="dom_nodes.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_nodes.asp" title="HTML DOM 节点">DOM 节点</a></li>
+<li class="currentLink"><a href="dom_methods.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_methods.asp" title="HTML DOM 方法">DOM 方法</a></li>
+<li><a href="dom_properties.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_properties.asp" title="HTML DOM 属性">DOM 属性</a></li>
+<li><a href="dom_using.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_using.asp" title="HTML DOM 访问">DOM 访问</a></li>
+<li><a href="dom_modify.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_modify.asp" title="HTML DOM 修改">DOM 修改</a></li>
+<li><a href="dom_content.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_content.asp" title="HTML DOM 内容">DOM 内容</a></li>
+<li><a href="dom_elements.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_elements.asp" title="HTML DOM 元素">DOM 元素</a></li>
+<li><a href="dom_events.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_events.asp" title="HTML DOM 事件">DOM 事件</a></li>
+<li><a href="dom_navigation.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_navigation.asp" title="HTML DOM 导航">DOM 导航</a></li>
+<li><a href="dom_summary.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_summary.asp" title="您已经学习了 HTML DOM，接下来的学习内容是什么呢？">DOM 总结</a></li>
+</ul>
+<h2>DOM 实例</h2>
+<ul>
+<li><a href="../example/hdom_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/hdom_examples.asp" title="HTML DOM 实例">DOM 实例</a></li>
+</ul>
+<h2>DOM 参考手册</h2>
+<ul>
+<li><a href="../jsref/index.asp.htm" tppabs="http://www.w3school.com.cn/jsref/index.asp" title="JavaScript 和 HTML DOM 参考手册">DOM 参考</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>HTML DOM 方法</h1>
+
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="dom_nodes.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_nodes.asp" title="HTML DOM 节点">DOM 节点</a></li>
+<li class="next"><a href="dom_properties.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_properties.asp" title="HTML DOM 属性">DOM 属性</a></li>
+</ul>
+</div>
+
+
+<div id="intro">
+<p>方法是我们可以在节点（HTML 元素）上执行的动作。</p>
+</div>
+
+
+<div>
+<h2>编程接口</h2>
+
+<p>可通过 JavaScript （以及其他编程语言）对 HTML DOM 进行访问。</p>
+
+<p>所有 HTML 元素被定义为对象，而编程接口则是对象方法和对象属性。</p>
+
+<p>方法是您能够执行的动作（比如添加或修改元素）。</p>
+
+<p>属性是您能够获取或设置的值（比如节点的名称或内容）。</p>
+</div>
+
+
+<div>
+<h2>getElementById() 方法</h2>
+
+<p>getElementById() 方法返回带有指定 ID 的元素：</p>
+
+<h3>例子</h3>
+
+<pre>var element=document.getElementById(&quot;intro&quot;);</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=dom_getelementbyid.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=dom_getelementbyid">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>HTML DOM 对象 - 方法和属性</h2>
+
+<p>一些常用的 HTML DOM 方法：</p>
+
+<ul>
+<li>getElementById(id) - 获取带有指定 id 的节点（元素）</li>
+<li>appendChild(node) - 插入新的子节点（元素）</li>
+<li>removeChild(node) - 删除子节点（元素）</li>
+</ul>
+
+<p>一些常用的 HTML DOM 属性：</p>
+
+<ul>
+<li>innerHTML - 节点（元素）的文本值</li>
+<li>parentNode - 节点（元素）的父节点</li>
+<li>childNodes - 节点（元素）的子节点</li>
+<li>attributes - 节点（元素）的属性节点</li>
+</ul>
+
+<p>您将在本教程的下一章中学到更多有关属性的知识。</p>
+</div>
+
+
+<div>
+<h2>现实生活中的对象</h2>
+
+<p>某个人是一个对象。</p>
+
+<p>人的方法可能是 eat(), sleep(), work(), play() 等等。</p>
+
+<p>所有人都有这些方法，但会在不同时间执行它们。</p>
+
+<p>一个人的属性包括姓名、身高、体重、年龄、性别等等。</p>
+
+<p>所有人都有这些属性，但它们的值因人而异。</p>
+</div>
+
+
+<div>
+<h2>一些 DOM 对象方法</h2>
+
+<p>这里提供一些您将在本教程中学到的常用方法：</p>
+
+<table class="dataintable">
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>getElementById()</td>
+<td>返回带有指定 ID 的元素。</td>
+</tr>
+
+<tr>
+<td>getElementsByTagName()</td>
+<td>返回包含带有指定标签名称的所有元素的节点列表（集合/节点数组）。</td>
+</tr>
+
+<tr>
+<td>getElementsByClassName()</td>
+<td>返回包含带有指定类名的所有元素的节点列表。</td>
+</tr>
+
+<tr>
+<td>appendChild()</td>
+<td>把新的子节点添加到指定节点。</td>
+</tr>
+
+<tr>
+<td>removeChild()</td>
+<td>删除子节点。</td>
+</tr>
+
+<tr>
+<td>replaceChild()</td>
+<td>替换子节点。</td>
+</tr>
+
+<tr>
+<td>insertBefore()</td>
+<td>在指定的子节点前面插入新的子节点。</td>
+</tr>
+
+<tr>
+<td>createAttribute()</td>
+<td>创建属性节点。</td>
+</tr>
+
+<tr>
+<td>createElement()</td>
+<td>创建元素节点。</td>
+</tr>
+
+<tr>
+<td>createTextNode()</td>
+<td>创建文本节点。</td>
+</tr>
+
+<tr>
+<td>getAttribute()</td>
+<td>返回指定的属性值。</td>
+</tr>
+
+<tr>
+<td>setAttribute()</td>
+<td>把指定属性设置或修改为指定的值。</td>
+</tr>
+</table>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="dom_nodes.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_nodes.asp" title="HTML DOM 节点">DOM 节点</a></li>
+<li class="next"><a href="dom_properties.asp.htm" tppabs="http://www.w3school.com.cn/htmldom/dom_properties.asp" title="HTML DOM 属性">DOM 属性</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../jsref/index.asp.htm" tppabs="http://www.w3school.com.cn/jsref/index.asp">HTML DOM 参考手册</a></h5>
+<h5 id="tools_example"><a href="../example/hdom_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/hdom_examples.asp">HTML DOM 实例</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

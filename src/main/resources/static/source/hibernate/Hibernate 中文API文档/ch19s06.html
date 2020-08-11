@@ -1,0 +1,129 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>19.6.&#160; 监测性能（Monitoring performance）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch19.html" title="第&#160;19&#160;章&#160;提升性能">
+<link rel="prev" href="ch19s05.html" title="19.5.&#160; 理解集合性能（Understanding Collection performance）">
+<link rel="next" href="ch20.html" title="第&#160;20&#160;章&#160;工具箱指南">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="performance-monitoring"></a>19.6.&#160;
+		监测性能（Monitoring performance）
+		</h2></div></div></div>
+<p>
+			没有监测和性能参数而进行优化是毫无意义的。Hibernate为其内部操作提供了一系列的示意图，因此可以从
+			每个<code class="literal">SessionFactory</code>抓取其统计数据。
+        </p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-monitoring-sf"></a>19.6.1.&#160;
+			监测SessionFactory	
+			</h3></div></div></div>
+<p>
+				你可以有两种方式访问<code class="literal">SessionFactory</code>的数据记录，第一种就是自己直接调用
+				<code class="literal">sessionFactory.getStatistics()</code>方法读取、显示<code class="literal">统计</code>数据。
+            </p>
+<p>
+				此外，如果你打开<code class="literal">StatisticsService</code> MBean选项，那么Hibernate则可以使用JMX技术
+				发布其数据记录。你可以让应用中所有的<code class="literal">SessionFactory</code>同时共享一个MBean，也可以每个
+				SessionFactory分配一个MBean。下面的代码即是其演示代码：
+            </p>
+<pre class="programlisting">// MBean service registration for a specific SessionFactory
+Hashtable tb = new Hashtable();
+tb.put("type", "statistics");
+tb.put("sessionFactory", "myFinancialApp");
+ObjectName on = new ObjectName("hibernate", tb); // MBean object name
+
+StatisticsService stats = new StatisticsService(); // MBean implementation
+stats.setSessionFactory(sessionFactory); // Bind the stats to a SessionFactory
+server.registerMBean(stats, on); // Register the Mbean on the server</pre>
+<pre class="programlisting">// MBean service registration for all SessionFactory's
+Hashtable tb = new Hashtable();
+tb.put("type", "statistics");
+tb.put("sessionFactory", "all");
+ObjectName on = new ObjectName("hibernate", tb); // MBean object name
+
+StatisticsService stats = new StatisticsService(); // MBean implementation
+server.registerMBean(stats, on); // Register the MBean on the server</pre>
+<p>
+				
+				TODO：仍需要说明的是：在第一个例子中，我们直接得到和使用MBean；而在第二个例子中，在使用MBean之前
+				我们则需要给出SessionFactory的JNDI名，使用<code class="literal">hibernateStatsBean.setSessionFactoryJNDIName("my/JNDI/Name")</code>
+				得到SessionFactory，然后将MBean保存于其中。
+            </p>
+<p>
+				你可以通过以下方法打开或关闭<code class="literal">SessionFactory</code>的监测功能：
+            </p>
+<div class="itemizedlist"><ul type="disc"><li><p>
+						
+						在配置期间，将<code class="literal">hibernate.generate_statistics</code>设置为<code class="literal">true</code>或<code class="literal">false</code>；
+                    </p></li></ul></div>
+<div class="itemizedlist"><ul type="disc"><li><p>
+						
+						在运行期间，则可以可以通过<code class="literal">sf.getStatistics().setStatisticsEnabled(true)</code>
+                        或<code class="literal">hibernateStatsBean.setStatisticsEnabled(true)</code>
+                    </p></li></ul></div>
+<p>
+				你也可以在程序中调用<code class="literal">clear()</code>方法重置统计数据，调用<code class="literal">logSummary()</code>
+				在日志中记录（info级别）其总结。				
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-monitoring-metrics"></a>19.6.2.&#160;
+			数据记录（Metrics）
+			</h3></div></div></div>
+<p>
+				Hibernate提供了一系列数据记录，其记录的内容包括从最基本的信息到与具体场景的特殊信息。所有的测量值都可以由
+				<code class="literal">Statistics</code>接口进行访问，主要分为三类：
+            </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+						使用<code class="literal">Session</code>的普通数据记录，例如打开的Session的个数、取得的JDBC的连接数等；
+                    </p></li>
+<li><p>
+						实体、集合、查询、缓存等内容的统一数据记录
+                    </p></li>
+<li><p>
+						和具体实体、集合、查询、缓存相关的详细数据记录
+                    </p></li>
+</ul></div>
+<p>
+				例如：你可以检查缓存的命中成功次数，缓存的命中失败次数，实体、集合和查询的使用概率，查询的平均时间等。请注意
+				Java中时间的近似精度是毫秒。Hibernate的数据精度和具体的JVM有关，在有些平台上其精度甚至只能精确到10秒。
+            </p>
+<p>
+				你可以直接使用getter方法得到全局数据记录（例如，和具体的实体、集合、缓存区无关的数据），你也可以在具体查询中通过标记实体名、
+				或HQL、SQL语句得到某实体的数据记录。请参考<code class="literal">Statistics</code>、<code class="literal">EntityStatistics</code>、
+                <code class="literal">CollectionStatistics</code>、<code class="literal">SecondLevelCacheStatistics</code>、
+                和<code class="literal">QueryStatistics</code>的API文档以抓取更多信息。下面的代码则是个简单的例子：
+            </p>
+<pre class="programlisting">Statistics stats = HibernateUtil.sessionFactory.getStatistics();
+
+double queryCacheHitCount  = stats.getQueryCacheHitCount();
+double queryCacheMissCount = stats.getQueryCacheMissCount();
+double queryCacheHitRatio =
+  queryCacheHitCount / (queryCacheHitCount + queryCacheMissCount);
+
+log.info("Query Hit ratio:" + queryCacheHitRatio);
+
+EntityStatistics entityStats =
+  stats.getEntityStatistics( Cat.class.getName() );
+long changes =
+        entityStats.getInsertCount()
+        + entityStats.getUpdateCount()
+        + entityStats.getDeleteCount();
+log.info(Cat.class.getName() + " changed " + changes + "times"  );</pre>
+<p>
+				如果你想得到所有实体、集合、查询和缓存区的数据，你可以通过以下方法获得实体、集合、查询和缓存区列表：
+				<code class="literal">getQueries()</code>、<code class="literal">getEntityNames()</code>、
+				<code class="literal">getCollectionRoleNames()</code>和
+                <code class="literal">getSecondLevelCacheRegionNames()</code>。
+            </p>
+</div>
+</div></body>
+</html>

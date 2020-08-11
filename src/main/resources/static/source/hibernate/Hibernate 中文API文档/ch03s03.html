@@ -1,0 +1,210 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>3.3.&#160; JDBC连接</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch03.html" title="第&#160;3&#160;章&#160; 配置">
+<link rel="prev" href="ch03s02.html" title="3.2.&#160; 获得SessionFactory">
+<link rel="next" href="ch03s04.html" title="3.4.&#160; 可选的配置属性">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="configuration-hibernatejdbc"></a>3.3.&#160;
+            JDBC连接
+        </h2></div></div></div>
+<p>
+            通常你希望<code class="literal">SessionFactory</code>来为你创建和缓存(pool)JDBC连接. 如果你采用这种方式, 
+            只需要如下例所示那样，打开一个<code class="literal">Session</code>:
+        </p>
+<pre class="programlisting">Session session = sessions.openSession(); // open a new Session</pre>
+<p>
+            一旦你需要进行数据访问时, 就会从连接池(connection pool)获得一个JDBC连接.
+        </p>
+<p>
+            为了使这种方式工作起来, 我们需要向Hibernate传递一些JDBC连接的属性.
+            所有Hibernate属性的名字和语义都在<code class="literal">org.hibernate.cfg.Environment</code>中定义. 
+            我们现在将描述JDBC连接配置中最重要的设置.
+        </p>
+<p>
+            如果你设置如下属性，Hibernate将使用<code class="literal">java.sql.DriverManager</code>来获得(和缓存)JDBC连接 :
+        </p>
+<div class="table">
+<a name="id453995"></a><p class="title"><b>表&#160;3.1.&#160;
+                Hibernate JDBC属性
+            </b></p>
+<div class="table-contents"><table summary="
+                Hibernate JDBC属性
+            " border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                            属性名
+                        </th>
+<th>
+                            用途
+                        </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                    <code class="literal">hibernate.connection.driver_class</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>jdbc驱动类</em></span>
+                </td>
+</tr>
+<tr>
+<td>
+                    <code class="literal">hibernate.connection.url</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>jdbc URL</em></span>
+                </td>
+</tr>
+<tr>
+<td>
+                    <code class="literal">hibernate.connection.username</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>数据库用户</em></span>
+                </td>
+</tr>
+<tr>
+<td>
+                    <code class="literal">hibernate.connection.password</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>数据库用户密码</em></span>
+                </td>
+</tr>
+<tr>
+<td>
+                    <code class="literal">hibernate.connection.pool_size</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>连接池容量上限数目</em></span>
+                </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><p>
+            但Hibernate自带的连接池算法相当不成熟. 
+            它只是为了让你快些上手<span class="emphasis"><em>，并不适合用于产品系统</em></span>或性能测试中。
+            出于最佳性能和稳定性考虑你应该使用第三方的连接池。只需要用特定连接池的设置替换
+            <code class="literal">hibernate.connection.pool_size</code>即可。这将关闭Hibernate自带的连接池.
+            例如, 你可能会想用C3P0.
+        </p>
+<p>
+            C3P0是一个随Hibernate一同分发的开源的JDBC连接池, 它位于<code class="literal">lib</code>目录下。
+            如果你设置了<code class="literal">hibernate.c3p0.*</code>相关的属性, Hibernate将使用
+            <code class="literal">C3P0ConnectionProvider</code>来缓存JDBC连接. 如果你更原意使用Proxool, 请参考发
+            行包中的<code class="literal">hibernate.properties</code>并到Hibernate网站获取更多的信息.
+        </p>
+<p>
+            这是一个使用C3P0的<code class="literal">hibernate.properties</code>样例文件:
+        </p>
+<a name="c3p0-configuration"></a><pre class="programlisting">hibernate.connection.driver_class = org.postgresql.Driver
+hibernate.connection.url = jdbc:postgresql://localhost/mydatabase
+hibernate.connection.username = myuser
+hibernate.connection.password = secret
+hibernate.c3p0.min_size=5
+hibernate.c3p0.max_size=20
+hibernate.c3p0.timeout=1800
+hibernate.c3p0.max_statements=50
+hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect</pre>
+<p>
+            为了能在应用程序服务器(application server)中使用Hibernate, 应当总是将Hibernate
+            配置成从注册在JNDI中的<code class="literal">Datasource</code>处获得连接，你至少需要设置下列属性中的一个:
+        </p>
+<div class="table">
+<a name="id454271"></a><p class="title"><b>表&#160;3.2.&#160;
+                Hibernate数据源属性
+            </b></p>
+<div class="table-contents"><table summary="
+                Hibernate数据源属性
+            " border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                            属性名
+                        </th>
+<th>
+                            用途
+                        </th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+                    <code class="literal">hibernate.connection.datasource</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>数据源JNDI名字</em></span>
+                </td>
+</tr>
+<tr>
+<td>
+                    <code class="literal">hibernate.jndi.url</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>JNDI提供者的URL</em></span> (可选)
+                </td>
+</tr>
+<tr>
+<td>
+                    <code class="literal">hibernate.jndi.class</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>JNDI <code class="literal">InitialContextFactory</code>类</em></span> (可选)
+                </td>
+</tr>
+<tr>
+<td>
+                    <code class="literal">hibernate.connection.username</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>数据库用户</em></span> (可选)
+                </td>
+</tr>
+<tr>
+<td>
+                    <code class="literal">hibernate.connection.password</code>
+                </td>
+<td>
+                    <span class="emphasis"><em>数据库用户密码</em></span> (可选)
+                </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><p>
+            这是一个使用应用程序服务器提供的JNDI数据源的<code class="literal">hibernate.properties</code>样例文件:
+        </p>
+<pre class="programlisting">hibernate.connection.datasource = java:/comp/env/jdbc/test
+hibernate.transaction.factory_class = \
+    org.hibernate.transaction.JTATransactionFactory
+hibernate.transaction.manager_lookup_class = \
+    org.hibernate.transaction.JBossTransactionManagerLookup
+hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect</pre>
+<p>
+            从JNDI数据源获得的JDBC连接将自动参与到应用程序服务器中容器管理的事务(container-managed transactions)中去.
+        </p>
+<p>
+            任何连接(connection)属性的属性名都要以"<code class="literal">hibernate.connnection</code>"开头. 
+            例如, 你可能会使用<code class="literal">hibernate.connection.charSet</code>来指定字符集<code class="literal">charSet</code>.
+        </p>
+<p>
+            通过实现<code class="literal">org.hibernate.connection.ConnectionProvider</code>接口，你可以定义属于
+            你自己的获得JDBC连接的插件策略。通过设置<code class="literal">hibernate.connection.provider_class</code>，
+            你可以选择一个自定义的实现.
+        </p>
+</div></body>
+</html>

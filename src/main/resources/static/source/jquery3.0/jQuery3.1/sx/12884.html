@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>html()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">html()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.html()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>String</code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>获取集合中第一个匹配元素的HTML内容
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="html">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.html()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接收任何元素。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			获取集合中第一个匹配元素的HTML内容
+		</p>
+		<p>
+			在一个 HTML 文档中, 我们可以使用 <code>.html()</code> 方法来获取任意一个元素的内容。 如果选择器匹配多个元素，那么只有第一个匹配元素的 HTML 内容会被获取。 考虑下面的代码：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('div.demo-container').html();</pre>
+		</div>
+		<p>
+			下文的获取的<code>&lt;div&gt;</code>的内容， 必定是在文档中的第一个<code>class="demo-container"</code>的div中获取的：
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="demo-container"&gt;
+   &lt;div class="demo-box"&gt;Demonstration Box&lt;/div&gt;
+&lt;/div&gt;</pre>
+		</div>
+		<p>
+			结果如下:
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="demo-box"&gt;Demonstration Box&lt;/div&gt;</pre>
+		</div>
+		<p>
+			这种方法使用浏览器的<code>innerHTML</code> 属性。有些浏览器返回的结果可能不是原始文档的 HTML 源代码。例如，如果属性值只包含字母数字字符，Internet Explorer有时丢弃包裹属性值的引号。
+		</p>
+	</div>
+	<h3>
+		其他注意事项：
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				设计上，一些jQuery的构造函数或方法接受一个HTML字符串
+                —— <code>jQuery()</code>, <code>.append()</code>, <code>.after()</code>等
+                ——
+                有可能执行代码。
+                这可能造成注入脚本标记或使用HTML属性的执行代码
+                （例如，<code>&lt;img onload=""&gt;</code>）。
+                不要使用这些方法插入来自不受信任来源的字符串，
+                如URL查询参数，cookies或表单输入。
+                这样做可能引起跨站点脚本（XSS）漏洞。
+                添加内容到文档之前应该删除或过滤掉任何用户输入。
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		无参数 实例
+	</h4>
+	<p>
+		返回p元素的内容。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$('p').html();</code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	点击段落将HTML转化为文本
+</p>
+<p>
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;html demo&lt;/title&gt;
+  &lt;style&gt;
+  p {
+    margin: 8px;
+    font-size: 20px;
+    color: blue;
+    cursor: pointer;
+  }
+  b {
+    text-decoration: underline;
+  }
+  button {
+    cursor: pointer;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p&gt;
+  &lt;b&gt;Click&lt;/b&gt; to change the &lt;span id="tag"&gt;html&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  to a &lt;span id="text"&gt;text&lt;/span&gt; node.
+&lt;/p&gt;
+&lt;p&gt;
+  This &lt;button name="nada"&gt;button&lt;/button&gt; does nothing.
+&lt;/p&gt;
+ 
+&lt;script&gt;
+$( "p" ).click(function() {
+  var htmlString = $( this ).html();
+  $( this ).text( htmlString );
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7982" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p>
+<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;.html( htmlString )
+	</blockquote>
+</h3>
+<p>
+	返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+</p>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>设置每一个匹配元素的html内容。
+</p>
+<ul class="signatures">
+	<li class="signature" id="html-htmlString">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.html( htmlString )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>htmlString</strong> 
+				</div>
+				<div>
+					类型: <code>String</code> 
+				</div>
+				<div>
+					用来设置每个匹配元素的一个HTML 字符串。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="html-functionindex--oldhtml">
+		<h4 class="name">
+			<span class="version-details">V : 1.4</span>.html( function(index, oldhtml) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>function(index, oldhtml)</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28" target="_blank">Function</a>()
+				</div>
+				<div>
+					用来返回设置HTML内容的一个函数。接收元素的索引位置和元素原先的HTML作为参数。jQuery的调用这个函数之前会清空元素;使用oldhtml参数引用先前的内容。在这个函数中，<code>this</code>指向元素集合中的当前元素。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc-1">
+	<p>
+		这个 <code>.html()</code> 方法对 XML 文档无效.
+	</p>
+	<p>
+		我们可以使用 <code>.html()</code> 来设置元素的内容，这些元素中的任何内容会完全被新的内容取代。此外，用新的内容替换这些元素前，jQuery从子元素删除其他结构，如数据和事件处理程序。（手册网注：这样可以防止内存溢出。）
+	</p>
+	<p>
+		考虑以下的HTML：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="demo-container"&gt;
+  &lt;div class="demo-box"&gt;Demonstration Box&lt;/div&gt;
+&lt;/div&gt;</pre>
+	</div>
+	<p>
+		我们可以像这样设置 <code>&lt;div class="demo-container"&gt;</code>的HTML内容：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('div.demo-container')
+  .html('&lt;p&gt;All new content. &lt;em&gt;You bet!&lt;/em&gt;&lt;/p&gt;');</pre>
+	</div>
+	<p>
+		这行代码将替换 <code>&lt;div class="demo-container"&gt;</code>里的所有内容
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="demo-container"&gt;
+  &lt;p&gt;All new content. &lt;em&gt;You bet!&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;</pre>
+	</div>
+	<p>
+		在 jQuery 1.4中, <code>.html()</code> 方法允许我们通过函数来传递HTML内容。
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('div.demo-container').html(function() {
+  var emph = '&lt;em&gt;' + $('p').length + ' paragraphs!&lt;/em&gt;';
+  return '&lt;p&gt;All new content for ' + emph + '&lt;/p&gt;';
+});</pre>
+	</div>
+	<p>
+		给定一个拥有6个段落的HTML文档，在这个示例中将设置 <code>&lt;p&gt;All new content for &lt;em&gt;6 paragraphs!&lt;/em&gt;&lt;/p&gt;</code>为<code>&lt;div class="demo-container"&gt;</code>的新HTML内容。
+	</p>
+	<p>
+		这种方法使用浏览器的<code>innerHTML</code> 属性。有些浏览器可能不完全复制所提供的HTML源代码生成DOM。例如，Internet Explorer的版本8之前转换所有链接的<code>href</code>属性为绝对URL路径，和Internet Explorer第9版之前，不增加一个单独的<a href="http://code.google.com/p/html5shiv/">兼容层</a>的情况下，将无法正确处理HTML5元素。
+	</p>
+	<p>
+		要设置一个<code>&lt;script&gt;</code>元素的内容，
+        其不包含HTML，
+        使用的 <a href="http://www.shouce.ren/api/view/a/12885" class="book-a"><code>.text()</code></a>方法，而不是<code>.html()</code>。
+	</p>
+	<p>
+		<strong>注意:</strong> 在Internet Explorer中，包括第9版，
+&nbsp;设置HTML元素的文本内容可能会破坏其子节点的文本节点，结果导致子节点的文本节点从文档中被删除。如果你想保留这些 DOM 元素的引用，需要他们将保持不变，请使用<code>.empty().html(string)</code>来代替<code>.html(string)</code>，以便从文档中删除元素之前的元素被分配到新的字符串。
+	</p>
+</div>
+<h3>
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<h4>
+	参数val 实例
+</h4>
+<p>
+	设置所有 p 元素的内容
+</p>
+<h5>
+	jQuery 代码:
+</h5>
+<pre><code>$("p").html("Hello &lt;b&gt;world&lt;/b&gt;!");</code></pre>
+<h4>
+	回调函数实例
+</h4>
+<p>
+	使用函数来设置所有匹配元素的内容。
+</p>
+<h5>
+	jQuery 代码:
+</h5>
+<pre><code>$("p").html(function(n){
+    return "这个 p 元素的 index 是：" + n;
+    });</code></pre>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	为每个div设置一些内容。
+</p>
+<p>
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;html demo&lt;/title&gt;
+  &lt;style&gt;
+  .red {
+    color: red;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;span&gt;Hello&lt;/span&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+$( "div" ).html( "&lt;span class='red'&gt;Hello &lt;b&gt;Again&lt;/b&gt;&lt;/span&gt;" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7983" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<h4>
+	实例
+</h4>
+<p>
+	添加了一些html到每个div，然后立刻做进一步的操作来插入的HTML。
+</p>
+<p>
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;html demo&lt;/title&gt;
+  &lt;style&gt;
+  div {
+    color: blue;
+    font-size: 18px;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+$( "div" ).html( "&lt;b&gt;Wow!&lt;/b&gt; Such excitement..." );
+$( "div b" )
+  .append( document.createTextNode( "!!!" ) )
+  .css( "color", "red" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<a href="http://www.shouce.ren/study/api/s/7984" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

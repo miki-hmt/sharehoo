@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>14.11.&#160;group by子句</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch14.html" title="第&#160;14&#160;章&#160;HQL: Hibernate查询语言">
+<link rel="prev" href="ch14s10.html" title="14.10.&#160;order by子句">
+<link rel="next" href="ch14s12.html" title="14.12.&#160;子查询">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="queryhql-grouping"></a>14.11.&#160;group by子句</h2></div></div></div>
+<p>
+            一个返回聚集值(aggregate values)的查询可以按照一个返回的类或组件（components)中的任何属性（property）进行分组：
+        </p>
+<pre class="programlisting">select cat.color, sum(cat.weight), count(cat) 
+from Cat cat
+group by cat.color</pre>
+<pre class="programlisting">select foo.id, avg(name), max(name) 
+from Foo foo join foo.names name
+group by foo.id</pre>
+<p>
+            <code class="literal">having</code>子句在这里也允许使用.
+        </p>
+<pre class="programlisting">select cat.color, sum(cat.weight), count(cat) 
+from Cat cat
+group by cat.color 
+having cat.color in (eg.Color.TABBY, eg.Color.BLACK)</pre>
+<p>
+            如果底层的数据库支持的话(例如不能在MySQL中使用)，SQL的一般函数与聚集函数也可以出现
+            在<code class="literal">having</code>与<code class="literal">order by</code> 子句中。    
+        </p>
+<pre class="programlisting">select cat
+from Cat cat
+    join cat.kittens kitten
+group by cat.id, cat.name, cat.other, cat.properties
+having avg(kitten.weight) &gt; 100
+order by count(kitten) asc, sum(kitten.weight) desc</pre>
+<p>
+            注意<code class="literal">group by</code>子句与
+            <code class="literal">order by</code>子句中都不能包含算术表达式（arithmetic expressions）.
+            
+			也要注意Hibernate目前不会扩展group的实体,因此你不能写<code class="literal">group by cat</code>,除非<code class="literal">cat</code>的所有属性都不是聚集的(non-aggregated)。你必须明确的列出所有的非聚集属性。
+        </p>
+</div></body>
+</html>

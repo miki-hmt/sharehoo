@@ -1,0 +1,165 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>11.3.&#160;乐观并发控制(Optimistic concurrency control)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch11.html" title="第&#160;11&#160;章&#160;事务和并发">
+<link rel="prev" href="ch11s02.html" title="11.2.&#160;数据库事务声明">
+<link rel="next" href="ch11s04.html" title="11.4.&#160;悲观锁定(Pessimistic Locking)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="transactions-optimistic"></a>11.3.&#160;乐观并发控制(Optimistic concurrency control)</h2></div></div></div>
+<p>
+            唯一能够同时保持高并发和高可伸缩性的方法就是使用带版本化的乐观并发控制。版本检查使用版本号、
+            或者时间戳来检测更新冲突（并且防止更新丢失）。Hibernate为使用乐观并发控制的代码提供了三种可
+            能的方法，应用程序在编写这些代码时，可以采用它们。我们已经在前面应用程序对话那部分展示了
+            乐观并发控制的应用场景，此外，在单个数据库事务范围内，版本检查也提供了防止更新丢失的好处。
+        </p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-optimistic-manual"></a>11.3.1.&#160;应用程序级别的版本检查(Application version checking)</h3></div></div></div>
+<p>                
+								 未能充分利用Hibernate功能的实现代码中，每次和数据库交互都需要一个新的
+								 <code class="literal">Session</code>，而且开发人员必须在显示数据之前从数据库中重
+								 新载入所有的持久化对象实例。这种方式迫使应用程序自己实现版本检查来确保
+								 对话事务的隔离，从数据访问的角度来说是最低效的。这种使用方式和
+								 entity EJB最相似。
+            </p>
+<pre class="programlisting">// foo is an instance loaded by a previous Session
+session = factory.openSession();
+Transaction t = session.beginTransaction();
+
+int oldVersion = foo.getVersion();
+session.load( foo, foo.getKey() ); // load the current state
+if ( oldVersion!=foo.getVersion ) throw new StaleObjectStateException();
+foo.setProperty("bar");
+
+t.commit();
+session.close();</pre>
+<p>
+                <code class="literal">version</code> 属性使用 <code class="literal">&lt;version&gt;</code>来映射，如果对象
+                是脏数据，在同步的时候，Hibernate会自动增加版本号。
+            </p>
+<p>
+								当然，如果你的应用是在一个低数据并发环境下，并不需要版本检查的话，你照样可以使用
+								这种方式，只不过跳过版本检查就是了。在这种情况下，<span class="emphasis"><em>最晚提交生效</em></span>
+								（<span class="emphasis"><em>last commit wins</em></span>）就是你的长对话的默认处理策略。
+								请记住这种策略可能会让应用软件的用户感到困惑，因为他们有可能会碰上更新丢失掉却没
+								有出错信息，或者需要合并更改冲突的情况。
+            </p>
+<p>
+                很明显，手工进行版本检查只适合于某些软件规模非常小的应用场景，对于大多数软件应用场景
+                来说并不现实。通常情况下，不仅是单个对象实例需要进行版本检查，整个被修改过的关
+                联对象图也都需要进行版本检查。作为标准设计范例，Hibernate使用扩展周期的
+                <code class="literal">Session</code>的方式，或者脱管对象实例的方式来提供自动版本检查。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-optimistic-longsession"></a>11.3.2.&#160;扩展周期的session和自动版本化</h3></div></div></div>
+<p>
+               单个 <code class="literal">Session</code>实例和它所关联的所有持久化对象实例都被用于整个
+               对话，这被称为<span class="emphasis"><em>session-per-conversation</em></span>。Hibernate在同步的时候进行对象实例的版本检查，如果检测到并发修
+               改则抛出异常。由开发人员来决定是否需要捕获和处理这个异常（通常的抉择是给用户
+               提供一个合并更改，或者在无脏数据情况下重新进行业务对话的机会）。
+            </p>
+<p>
+               在等待用户交互的时候， <code class="literal">Session</code> 断开底层的JDBC连接。这种方式
+               以数据库访问的角度来说是最高效的方式。应用程序不需要关心版本检查或脱管对象实例
+               的重新关联，在每个数据库事务中，应用程序也不需要载入读取对象实例。
+            </p>
+<pre class="programlisting">// foo is an instance loaded earlier by the old session
+Transaction t = session.beginTransaction(); // Obtain a new JDBC connection, start transaction
+
+foo.setProperty("bar");
+
+session.flush();    // Only for last transaction in conversation
+t.commit();         // Also return JDBC connection
+session.close();    // Only for last transaction in conversation</pre>
+<p>
+                <code class="literal">foo</code>对象知道它是在哪个<code class="literal">Session</code>中被装入的。在一个旧session中开启一个新的数据库事务，会导致session获取一个新的连接，并恢复session的功能。将数据库事务提交，使得session从JDBC连接断开，并将此连接交还给连接池。在重新连接之后，要强制对你没有更新的数据进行一次版本检查，你可以对所有可能被其他事务修改过的对象，使用参数<code class="literal">LockMode.READ</code>来调用<code class="literal">Session.lock()</code>。你不用lock任何你<span class="emphasis"><em>正在</em></span>更新的数据。一般你会在扩展的<code class="literal">Session</code>上设置<code class="literal">FlushMode.NEVER</code>，因此只有最后一个数据库事务循环才会真正的吧整个对话中发生的修改发送到数据库。因此，只有这最后一次数据库事务才会包含<code class="literal">flush()</code>操作，然后在整个对话结束后，还要<code class="literal">close()</code>这个session。
+            </p>
+<p>
+                如果在用户思考的过程中，<code class="literal">Session</code>因为太大了而不能保存，那么这种模式是有
+                问题的。举例来说，一个<code class="literal">HttpSession</code>应该尽可能的小。由于
+                <code class="literal">Session</code>是一级缓存，并且保持了所有被载入过的对象，因此
+                我们只应该在那些少量的request/response情况下使用这种策略。你应该只把一个<code class="literal">Session</code>用于单个对话，因为它很快就会出现脏数据。
+            </p>
+<p>
+                （注意，早期的Hibernate版本需要明确的对<code class="literal">Session</code>进行disconnec和reconnect。这些方法现在已经过时了，打开事务和关闭事务会起到同样的效果。）
+            </p>
+<p>
+                此外，也请注意，你应该让与数据库连接断开的<code class="literal">Session</code>对持久层保持
+                关闭状态。换句话说，在三层环境中，使用有状态的EJB session bean来持有<code class="literal">Session</code>，
+                而不要把它传递到web层（甚至把它序列化到一个单独的层），保存在<code class="literal">HttpSession</code>中。
+            </p>
+<p>
+                扩展session模式，或者被称为<span class="emphasis"><em>每次对话一个session(session-per-conversation)</em></span>, 在与自动管理当前session上下文联用的时候会更困难。你需要提供你自己的<code class="literal">CurrentSessionContext</code>实现。请参阅Hibernate Wiki以获得示例。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-optimistic-detached"></a>11.3.3.&#160;脱管对象(deatched object)和自动版本化</h3></div></div></div>
+<p>
+                这种方式下，与持久化存储的每次交互都发生在一个新的<code class="literal">Session</code>中。
+                然而，同一持久化对象实例可以在多次与数据库的交互中重用。应用程序操纵脱管对象实例
+                的状态，这个脱管对象实例最初是在另一个<code class="literal">Session</code> 中载入的，然后
+                调用 <code class="literal">Session.update()</code>，<code class="literal">Session.saveOrUpdate()</code>, 或者
+                <code class="literal">Session.merge()</code> 来重新关联该对象实例。
+            </p>
+<pre class="programlisting">// foo is an instance loaded by a previous Session
+foo.setProperty("bar");
+session = factory.openSession();
+Transaction t = session.beginTransaction();
+session.saveOrUpdate(foo); // Use merge() if "foo" might have been loaded already
+t.commit();
+session.close();</pre>
+<p>
+                Hibernate会再一次在同步的时候检查对象实例的版本，如果发生更新冲突，就抛出异常。
+            </p>
+<p>
+                如果你确信对象没有被修改过，你也可以调用<code class="literal">lock()</code> 来设置
+                <code class="literal">LockMode.READ</code>（绕过所有的缓存，执行版本检查），从而取
+                代 <code class="literal">update()</code>操作。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-optimistic-customizing"></a>11.3.4.&#160;定制自动版本化行为</h3></div></div></div>
+<p>
+               对于特定的属性和集合，通过为它们设置映射属性<code class="literal">optimistic-lock</code>的值
+               为<code class="literal">false</code>，来禁止Hibernate的版本自动增加。这样的话，如果该属性
+               脏数据，Hibernate将不再增加版本号。
+            </p>
+<p>
+								遗留系统的数据库Schema通常是静态的，不可修改的。或者，其他应用程序也可能访问同一数据
+								库，根本无法得知如何处理版本号，甚至时间戳。在以上的所有场景中，实现版本化不能依靠
+								数据库表的某个特定列。在<code class="literal">&lt;class&gt;</code>的映射中设置
+								<code class="literal">optimistic-lock="all"</code>可以在没有版本或者时间戳属性映射的情况下实现
+								版本检查，此时Hibernate将比较一行记录的每个字段的状态。请注意，只有当Hibernate能够比
+								较新旧状态的情况下，这种方式才能生效，也就是说，
+								你必须使用单个长生命周期<code class="literal">Session</code>模式，而不能使用
+								session-per-request-with-detached-objects模式。
+            </p>
+<p>
+               有些情况下，只要更改不发生交错，并发修改也是允许的。当你在<code class="literal">&lt;class&gt;</code>
+               的映射中设置<code class="literal">optimistic-lock="dirty"</code>，Hibernate在同步的时候将只比较有脏
+               数据的字段。
+            </p>
+<p>
+                在以上所有场景中，不管是专门设置一个版本/时间戳列，还是进行全部字段/脏数据字段比较，
+                Hibernate都会针对每个实体对象发送一条<code class="literal">UPDATE</code>（带有相应的
+                <code class="literal">WHERE</code>语句 ）的SQL语句来执行版本检查和数据更新。如果你对关联实体
+                设置级联关系使用传播性持久化（transitive persistence），那么Hibernate可能会执行不必
+                要的update语句。这通常不是个问题，但是数据库里面对<span class="emphasis"><em>on update</em></span>点火
+                的触发器可能在脱管对象没有任何更改的情况下被触发。因此，你可以在
+                <code class="literal">&lt;class&gt;</code>的映射中，通过设置<code class="literal">select-before-update="true"</code>
+                来定制这一行为，强制Hibernate <code class="literal">SELECT</code>这个对象实例，从而保证，
+                在更新记录之前，对象的确是被修改过。
+            </p>
+</div>
+</div></body>
+</html>

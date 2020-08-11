@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>:target</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">:target<span class="g-bg-red margin-l-5">1.9+</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;target selector
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<div class="entry-wrapper">
+		<p class="desc">
+			<strong>描述：</strong> 选择由文档URI的格式化识别码表示的目标元素。
+		</p>
+		<ul class="signatures">
+			<li class="signature">
+				<h4 class="name">
+					<span class="version-details">V : 1.9</span>jQuery( ":target" )
+				</h4>
+			</li>
+		</ul>
+		<div class="longdesc" id="entry-longdesc">
+			<p>
+				如果文档的URI包含一个格式化的标识符，或hash（哈希），
+然后<code>:target</code>选择器将匹配ID和标识符相匹配的元素。
+&nbsp;例如，给定的URI http://example.com/#foo， <code>$( "p:target" )</code>，将选择<code>&lt;p id="foo"&gt;</code>元素。
+			</p>
+			<p>
+				这个不寻常的用法，可进一步讨论中找到 <a href="http://www.w3.org/TR/css3-selectors/#target-pseudo" target="_blank">W3C CSS specification</a>.
+			</p>
+		</div>
+	</div>
+	<p>
+	</p>
+	<div class="longdesc">
+		<p>
+		</p>
+		<p>
+			<a href="http://www.w3.org/TR/css3-selectors/#nth-child-pseudo"></a> 
+		</p>
+	</div>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

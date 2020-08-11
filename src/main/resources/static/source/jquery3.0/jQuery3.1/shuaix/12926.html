@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>slice()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">slice()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.slice( start [, end ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>根据指定的下标范围，过滤匹配的元素集合，并生成一个新的 jQuery 对象。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="slice-start-end">
+			<h4 class="name">
+				<span class="version-details">V : 1.1.4</span>.slice( start [, end ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>start</strong> 
+					</div>
+					<div>
+						类型: Integer
+					</div>
+					<div>
+						一个整数，从 0 开始计数的下标。代表将要被选择的元素的起始下标。如果指定的下标是一个负数，那么代表从末尾开始计数。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>end</strong> 
+					</div>
+					<div>
+						类型: Integer
+					</div>
+					<div>
+						一个整数，从 0 开始计数的下标。代表将要被选择的元素的结束下标。如果指定的下标是一个负数，那么代表从末尾开始计数。如果忽略此参数，则选择的范围是从 start 开始，一直到最后。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			如果提供的jQuery代表了一组DOM元素，<code>.slice()</code>方法从匹配元素的子集中构造一个新的jQuery对象。所提供的<code>start</code>索引标识的设置一个集合中的元素的位置;如果<code>end</code>被省略，这个元素之后的所有元素将包含在结果中。
+		</p>
+		<p>
+			考虑一个页上有一个简单的列表：
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;ul&gt;
+  &lt;li&gt;list item 1&lt;/li&gt;
+  &lt;li&gt;list item 2&lt;/li&gt;
+  &lt;li&gt;list item 3&lt;/li&gt;
+  &lt;li&gt;list item 4&lt;/li&gt;
+  &lt;li&gt;list item 5&lt;/li&gt;
+&lt;/ul&gt;</pre>
+		</div>
+		<p>
+			我们可以应用此方法到列表集合：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').slice(2).css('background-color', 'red');</pre>
+		</div>
+		<p>
+			上述代码的执行结果是，第 3，4，5 项列表项的背景色变成了红色。注意，索引是从 0 开始计数的，并且代表的是 jQuery 对象中的元素位置，而不是在 DOM 树中的位置。
+		</p>
+		<p>
+			end 参数允许我们进一步限制所选择的元素。例如：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').slice(2, 4).css('background-color', 'red');</pre>
+		</div>
+		<p>
+			现在，只有第 3 和第 4 项列表项会被选中。索引依然是从 0 开始计数的，但是在被选中的元素中不包括 <code>end</code> 参数所指定的元素。
+		</p>
+		<h4>
+			Negative Indices（负索引）
+		</h4>
+		<p>
+			jQuery的<code>.slice()</code>方法是仿照的JavaScript 数组的.slice()方法。其中的一个功能就是允许传入负的 <code>start</code> 和 <code>end</code> 参数。如果传递的是负数，那么下标位置是从结尾开始的，而不是从起始位置开始。例如：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').slice(-2, -1).css('background-color', 'red');</pre>
+		</div>
+		<p>
+			这一次只有项4是变成了红色，因为它是唯一满足条件的列表项，即被选中的元素是从倒数第二个元素(<code>-2</code>)开始到最后一个元素(<code>-1</code> )（不含此元素）之间的元素。
+		</p>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h3 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+</header>
+	<div class="entry-example" id="example-0">
+		<h4>
+			实例
+		</h4>
+		<p>
+			<span class="desc">将随机选中的范围内的 div 变成黄色。</span> 
+		</p>
+		<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { width:40px; height:40px; margin:10px; float:left;
+        border:2px solid blue; }
+  span { color:red; font-weight:bold; }
+  button { margin:5px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;&lt;button&gt;Turn slice yellow&lt;/button&gt;
+  &lt;span&gt;Click the button!&lt;/span&gt;&lt;/p&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+ 
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+ 
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+function colorEm() {
+  var $div = $("div");
+  var start = Math.floor(Math.random() *
+                         $div.length);
+  var end = Math.floor(Math.random() *
+                       ($div.length - start)) +
+                       start + 1;
+  if (end == $div.length) end = undefined;
+  $div.css("background", "");
+  if (end)
+    $div.slice(start, end).css("background", "yellow");
+   else
+    $div.slice(start).css("background", "yellow");
+ 
+  $("span").text('$("div").slice(' + start +
+                 (end ? ', ' + end : '') +
+                 ').css("background", "yellow");');
+}
+ 
+$("button").click(colorEm);
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+		</div>
+		<p>
+			<a href="http://www.shouce.ren/study/api/s/8114" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+		</p>
+	</div>
+	<div class="entry-example" id="example-1">
+		<h4>
+			实例
+		</h4>
+		<p>
+			<span class="desc">假设共有三个段落，选择所有的段落，并进行 slice 操作，选择的范围只包含第一个元素。</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("p").slice(0, 1).wrapInner("&lt;b&gt;&lt;/b&gt;");</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-2">
+		<h4>
+			实例
+		</h4>
+		<p>
+			<span class="desc">假设共有三个段落，选择所有的段落，并进行 slice 操作，选择的范围只包含第一个和第二个元素。</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("p").slice(0, 2).wrapInner("&lt;b&gt;&lt;/b&gt;");</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-3">
+		<h4>
+			实例
+		</h4>
+		<p>
+			<span class="desc">假设共有三个段落，选择所有的段落，并进行 slice 操作，选择的范围只包含第二个元素。</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("p").slice(1, 2).wrapInner("&lt;b&gt;&lt;/b&gt;");</pre>
+		</div>
+	</div>
+	<div class="entry-example" id="example-4">
+		<h4>
+			实例
+		</h4>
+		<p>
+			<span class="desc">假设共有三个段落，选择所有的段落，并进行 slice 操作，选择的范围只包含第二个和第三个元素。</span> 
+		</p>
+		<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("p").slice(1).wrapInner("&lt;b&gt;&lt;/b&gt;");</pre>
+		</div>
+	</div>
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">假设共有三个段落，选择所有的段落，并进行 slice 操作，选择的范围只包含第三个元素。</span> 
+	</p>
+<pre class="prettyprint lang-js">$("p").slice(-1).wrapInner("&lt;b&gt;&lt;/b&gt;");</pre>
+	<p>
+	</p>
+</div>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

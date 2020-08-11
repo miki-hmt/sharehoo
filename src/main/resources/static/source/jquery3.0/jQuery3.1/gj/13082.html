@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.parseHTML()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.parseHTML()<span class="g-bg-red margin-l-5">1.8+</span></h1>
+	<hr>
+		<p class="desc">
+	<strong></strong> 
+</p>
+<blockquote>
+	<strong>概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.parseHTML( data [, context ] [, keepScripts ] )</strong> 
+</blockquote>
+<p>
+	返回: <code>Array</code>
+</p>
+<p>
+</p>
+<p class="desc">
+	将字符串解析到一个DOM节点的数组中。
+</p>
+<h3 class="desc">
+	<blockquote>
+		参数<br />
+	</blockquote>
+</h3>
+<ul class="signatures">
+	<li class="signature" id="jQuery-parseHTML-data-context-keepScripts">
+		<h4 class="name">
+			<span class="version-details">V: 1.8</span>jQuery.parseHTML( data [, context ] [, keepScripts ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>data</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					用来解析的HTML字符串。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>context</strong> (默认: <code>document</code>)
+				</div>
+				<div>
+					类型: Element
+				</div>
+				<div>
+					DOM元素的上下文，在这个上下文中将创建的HTML片段。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>keepScripts</strong> (默认: <code>false</code>)
+				</div>
+				<div>
+					类型: Boolean
+				</div>
+				<div>
+					一个布尔值，表明是否在传递的HTML字符串中包含脚本。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>jQuery.parseHTML</code>使用原生方法将字符串转换为一个DOM节点的集合，然后可以插入到文档。
+        这些方法渲染所有尾随或前导文本（即使只是空格）。
+        为了防止尾随/前导空格被转换为文本节点，你可以通过将HTML字符串传递给<a href="http://www.shouce.ren/api/view/a/13026" class="book-a"><code>jQuery
+        .trim</code></a>。
+	</p>
+	<p>
+		默认情况下，如果没有指定或给定<code>null</code> 或 <code>undefined</code>，<code>context</code>是当前的<code>document</code>。如果HTML被用在另一个document中，比如一个iframe，该frame的文件可以使用。
+	</p>
+	<p>
+		在3.0中，这种默认行为已经被改变。如果没有指定<code>context</code>，或者给定值为<code>null</code> 或 <code>undefined</code>，那么将使用一个新的<code>document</code>。这有可能会提高安全性，因为当HTML解析时，内嵌的事件将不会执行。一旦解析的HTML注入到文档中它会执行，但是这给工具一个机会，遍历创建DOM和删除任何东西被视为不安全。这种改进并不适用于<code>jQuery.parseHTML</code>的内部使用，因为他们通常传递给当前文档。因此，如类似<code>$( "#log" ).append( $( htmlString ) )</code>的声明，仍然受制于恶意代码注入。
+	</p>
+	<h2>
+		Security Considerations（安全注意事项）
+	</h2>
+	<p>
+		大多数的jQuery的API接受的HTML字符串将运行所包含在HTML中的脚本。<code>jQuery.parseHTML</code>不运行HTML中解析出来的脚本，除非 <code>keepScripts</code>参数为<code>true</code>。然而，它仍然是可能在大多数环境中间接地执行脚本，例如通过<code>&lt;img onerror&gt;</code>属性。调用者应该意识到这一点，并通过清理或避免任何不可信来源的输入，如URL或cookies，来防止它。为了未来的兼容性，当<code>keepScripts</code>为不确定的或<code>false</code>时，调用者不应该依赖于这个能力来运行<em>任何</em>脚本内容。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<h4>
+	<span class="desc">描述<br />
+</span> 
+</h4>
+<p>
+	<span class="desc">Create an array of Dom nodes using an HTML string and insert it into a div.</span> 
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div id="log"&gt;
+  &lt;h3&gt;Content:&lt;/h3&gt;
+&lt;/div&gt;
+ 
+&lt;script&gt;
+var $log = $( "#log" ),
+    str = "hello, &lt;b&gt;my name is&lt;/b&gt; jQuery.",
+    html = $.parseHTML( str ),
+    nodeNames = [];
+ 
+// Append the parsed HTML
+$log.append( html );
+ 
+// Gather the parsed HTML's node names
+$.each( html, function( i, el ) {
+    nodeNames[i] = "&lt;li&gt;" + el.nodeName + "&lt;/li&gt;";
+});
+ 
+// Insert the node names
+$log.append( "&lt;h3&gt;Node Names:&lt;/h3&gt;" );
+$( "&lt;ol&gt;&lt;/ol&gt;" )
+  .append( nodeNames.join( "" ) )
+  .appendTo( $log );
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7993" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>addBack()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">addBack()<span class="g-bg-red margin-l-5">1.9+</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.addBack( [selector ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>添加堆栈中元素集合到当前集合，一个选择性的过滤选择器。
+</p>
+<ul class="signatures">
+	<li class="signature" id="addBack-selector">
+		<h4 class="name">
+			<span class="version-details">V : 1.8</span>.addBack(  [selector ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: Selector
+				</div>
+				<div>
+					一个字符串，其中包含一个选择器表达式，匹配当前元素集合不包括在内的元素
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		如上所述在讨论中的<code>.end()</code>，&nbsp;jQuery对象维护一个堆栈内部来跟踪匹配的元素集合的变化。当一个DOM遍历方法被调用时，新的元素集合推入到堆栈中。&nbsp;如果还需要包含先前的元素集合，<code>.addBack()</code> 可以提供帮助。
+	</p>
+	<p>
+		考虑一个页面，一个简单的列表就可以了：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;ul&gt;
+   &lt;li&gt;list item 1&lt;/li&gt;
+   &lt;li&gt;list item 2&lt;/li&gt;
+   &lt;li class="third-item"&gt;list item 3&lt;/li&gt;
+   &lt;li&gt;list item 4&lt;/li&gt;
+   &lt;li&gt;list item 5&lt;/li&gt;
+&lt;/ul&gt;</pre>
+	</div>
+	<p>
+		下面的代码的返回结果是后面3，4和5项是一个红色的背景：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li.third-item').nextAll().addBack()
+  .css('background-color', 'red');</pre>
+	</div>
+	<p>
+		首先，初始选择位于第3项，初始化堆栈集合只包含这项。调用<code>.nextAll()</code> 后将第4和第5项推入堆栈。最后，调用<code>.addBack()</code> 合并这两个组元素在一起，创建一个jQuery对象，指向所有三个项元素（按照文档中的顺序）：<code>{[&lt;li.third-item&gt;,&lt;li&gt;,&lt;li&gt; ]}</code> 
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc"> <code>.addBack()</code>方法导致前一组遍历堆栈中的DOM元素被添加到当前组。
+&nbsp;在第一个示例中，堆栈包含组的结果来自<code>.find("p")</code>。
+在第二个示例中，<code>.addBack()</code>将之前组的元素添加到堆栈中 - 
+在这种情况下（<code>$("div.after-addback")</code> - 到当前集合，
+选择了两个div和其封闭的段落。 </span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+p, div { margin:5px; padding:5px; }
+.border { border: 2px solid red; }
+.background { background:yellow; }
+.left, .right { width: 45%; float: left;}
+.right { margin-left:3%; }
+    &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div class="left"&gt;
+  &lt;p&gt;&lt;strong&gt;Before &lt;code&gt;addBack()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+  &lt;div class="before-addback"&gt;
+    &lt;p&gt;First Paragraph&lt;/p&gt;
+    &lt;p&gt;Second Paragraph&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="right"&gt;
+  &lt;p&gt;&lt;strong&gt;After &lt;code&gt;addBack()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+  &lt;div class="after-addback"&gt;
+    &lt;p&gt;First Paragraph&lt;/p&gt;
+    &lt;p&gt;Second Paragraph&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+ 
+&lt;script&gt;
+$("div.left, div.right").find("div, div &gt; p").addClass("border");
+ 
+// First Example
+$("div.before-addback").find("p").addClass("background");
+ 
+// Second Example
+$("div.after-addback").find("p").addBack().addClass("background");
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8146" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

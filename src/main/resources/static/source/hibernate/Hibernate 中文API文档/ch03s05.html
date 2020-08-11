@@ -1,0 +1,119 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>3.5.&#160; 日志</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch03.html" title="第&#160;3&#160;章&#160; 配置">
+<link rel="prev" href="ch03s04.html" title="3.4.&#160; 可选的配置属性">
+<link rel="next" href="ch03s06.html" title="3.6.&#160; 实现NamingStrategy">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="configuration-logging"></a>3.5.&#160;
+            日志
+        </h2></div></div></div>
+<p>
+            Hibernate使用Apache commons-logging来为各种事件记录日志.
+        </p>
+<p>
+            commons-logging将直接输出到Apache Log4j(如果在类路径中包括<code class="literal">log4j.jar</code>)或
+            JDK1.4 logging (如果运行在JDK1.4或以上的环境下). 你可以从<code class="literal">http://jakarta.apache.org</code>
+                下载Log4j. 要使用Log4j，你需要将<code class="literal">log4j.properties</code>文件放置在类路径下, 随Hibernate
+                一同分发的样例属性文件在<code class="literal">src/</code>目录下.
+        </p>
+<p>
+            我们强烈建议你熟悉一下Hibernate的日志消息. 在不失可读性的前提下，
+            我们做了很多工作，使Hibernate的日志可能地详细. 这是必要的查错利器.
+             最令人感兴趣的日志分类有如下这些:
+        </p>
+<div class="table">
+<a name="log-categories"></a><p class="title"><b>表&#160;3.9.&#160;
+                    Hibernate日志类别
+                </b></p>
+<div class="table-contents"><table summary="
+                    Hibernate日志类别
+                " border="1">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th>
+                                类别
+                            </th>
+<th>
+                                功能
+                            </th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code class="literal">org.hibernate.SQL</code></td>
+<td>
+                                在所有SQL DML语句被执行时为它们记录日志
+                            </td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.type</code></td>
+<td>
+                                为所有JDBC参数记录日志
+                            </td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.tool.hbm2ddl</code></td>
+<td>
+                                在所有SQL DDL语句执行时为它们记录日志
+                            </td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.pretty</code></td>
+<td>
+                                在session清洗(flush)时，为所有与其关联的实体(最多20个)的状态记录日志
+                            </td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.cache</code></td>
+<td>
+                                为所有二级缓存的活动记录日志
+                            </td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.transaction</code></td>
+<td>
+                                为事务相关的活动记录日志
+                            </td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.jdbc</code></td>
+<td>
+                                为所有JDBC资源的获取记录日志
+                            </td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.hql.AST</code></td>
+<td>
+                                在解析查询的时候,记录HQL和SQL的AST分析日志
+                            </td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate.secure</code></td>
+<td>
+                                为JAAS认证请求做日志
+                            </td>
+</tr>
+<tr>
+<td><code class="literal">org.hibernate</code></td>
+<td>
+                                为任何Hibernate相关信息做日志 (信息量较大, 但对查错非常有帮助)
+                            </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><p>
+            在使用Hibernate开发应用程序时, 你应当总是为<code class="literal">org.hibernate.SQL</code>
+            开启<code class="literal">debug</code>级别的日志记录,或者开启<code class="literal">hibernate.show_sql</code>属性。
+        </p>
+</div></body>
+</html>

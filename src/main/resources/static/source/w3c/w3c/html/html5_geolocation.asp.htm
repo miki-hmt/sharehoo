@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>HTML5 地理定位</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>HTML 基础教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/html/index.asp" title="HTML 教程">HTML 教程</a></li>
+<li><a href="html_jianjie.asp.htm" tppabs="http://www.w3school.com.cn/html/html_jianjie.asp" title="HTML 简介">HTML 简介</a></li>
+<li><a href="html_editors.asp.htm" tppabs="http://www.w3school.com.cn/html/html_editors.asp" title="HTML 编辑器">HTML 编辑器</a></li>
+<li><a href="html_basic.asp.htm" tppabs="http://www.w3school.com.cn/html/html_basic.asp" title="HTML 基础 - 四个实例">HTML 基础</a></li>
+<li><a href="html_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_elements.asp" title="HTML 元素">HTML 元素</a></li>
+<li><a href="html_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_attributes.asp" title="HTML 属性">HTML 属性</a></li>
+<li><a href="html_headings.asp.htm" tppabs="http://www.w3school.com.cn/html/html_headings.asp" title="HTML 标题">HTML 标题</a></li>
+<li><a href="html_paragraphs.asp.htm" tppabs="http://www.w3school.com.cn/html/html_paragraphs.asp" title="HTML 段落">HTML 段落</a></li>
+<li><a href="html_styles.asp.htm" tppabs="http://www.w3school.com.cn/html/html_styles.asp" title="HTML 样式 - CSS">HTML 样式</a></li>
+<li><a href="html_formatting.asp.htm" tppabs="http://www.w3school.com.cn/html/html_formatting.asp" title="HTML 文本格式化">HTML 格式化</a></li>
+<li><a href="html_quotation_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quotation_elements.asp" title="HTML 链接">HTML 引用</a></li>
+<li><a href="html_computercode_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_computercode_elements.asp" title="HTML 链接">HTML 计算机代码</a></li>
+<li><a href="html_comments.asp.htm" tppabs="http://www.w3school.com.cn/html/html_comments.asp" title="HTML 链接">HTML 注释</a></li>
+<li><a href="html_css.asp.htm" tppabs="http://www.w3school.com.cn/html/html_css.asp" title="HTML 样式 - CSS">HTML CSS</a></li>
+<li><a href="html_links.asp.htm" tppabs="http://www.w3school.com.cn/html/html_links.asp" title="HTML 链接">HTML 链接</a></li>
+<li><a href="html_images.asp.htm" tppabs="http://www.w3school.com.cn/html/html_images.asp" title="HTML 图像">HTML 图像</a></li>
+<li><a href="html_tables.asp.htm" tppabs="http://www.w3school.com.cn/html/html_tables.asp" title="HTML 表格">HTML 表格</a></li>
+<li><a href="html_lists.asp.htm" tppabs="http://www.w3school.com.cn/html/html_lists.asp" title="HTML 列表">HTML 列表</a></li>
+<li><a href="html_blocks.asp.htm" tppabs="http://www.w3school.com.cn/html/html_blocks.asp" title="HTML &lt;div&gt; 和 &lt;span&gt;">HTML 块</a></li>
+<li><a href="html_classes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_classes.asp" title="HTML 布局">HTML 类</a></li>
+<li><a href="html_layout.asp.htm" tppabs="http://www.w3school.com.cn/html/html_layout.asp" title="HTML 布局">HTML 布局</a></li>
+<li><a href="html_responsive.asp.htm" tppabs="http://www.w3school.com.cn/html/html_responsive.asp" title="HTML 布局">HTML 响应式设计</a></li>
+<li><a href="html_frames.asp.htm" tppabs="http://www.w3school.com.cn/html/html_frames.asp" title="HTML 框架">HTML 框架</a></li>
+<li><a href="html_iframe.asp.htm" tppabs="http://www.w3school.com.cn/html/html_iframe.asp" title="HTML Iframe">HTML 内联框架</a></li>
+<li><a href="html_backgrounds.asp.htm" tppabs="http://www.w3school.com.cn/html/html_backgrounds.asp" title="HTML 背景">HTML 背景</a></li>
+<li><a href="html_scripts.asp.htm" tppabs="http://www.w3school.com.cn/html/html_scripts.asp" title="HTML 脚本">HTML 脚本</a></li>
+<li><a href="html_head.asp.htm" tppabs="http://www.w3school.com.cn/html/html_head.asp" title="HTML 头部元素">HTML 头部</a></li>
+<li><a href="html_entities.asp.htm" tppabs="http://www.w3school.com.cn/html/html_entities.asp" title="HTML 实体">HTML 实体</a></li>
+<li><a href="html_url.asp.htm" tppabs="http://www.w3school.com.cn/html/html_url.asp" title="HTML 统一资源定位器">HTML URL</a></li>
+<li><a href="html_urlencode.asp.htm" tppabs="http://www.w3school.com.cn/html/html_urlencode.asp" title="HTML URL 编码">HTML URL 编码</a></li>
+<li><a href="html_webserver.asp.htm" tppabs="http://www.w3school.com.cn/html/html_webserver.asp" title="HTML Web 服务器">HTML Web 服务器</a></li>
+<li><a href="html_colors.asp.htm" tppabs="http://www.w3school.com.cn/html/html_colors.asp" title="HTML 颜色">HTML 颜色</a></li>
+<li><a href="html_colornames.asp.htm" tppabs="http://www.w3school.com.cn/html/html_colornames.asp" title="HTML 颜色名">HTML 颜色名</a></li>
+<li><a href="html_doctype.asp.htm" tppabs="http://www.w3school.com.cn/html/html_doctype.asp" title="HTML &lt;!DOCTYPE&gt;">HTML 文档类型</a></li>
+<li><a href="html_quick.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quick.asp" title="HTML 4.01 速查手册">HTML 速查手册</a></li>
+</ul>
+<h2>HTML XHTML</h2>
+<ul>
+<li><a href="html_xhtml.asp.htm" tppabs="http://www.w3school.com.cn/html/html_xhtml.asp" title="XHTML 简介">XHTML 简介</a></li>
+<li><a href="html_xhtml_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_xhtml_elements.asp" title="XHTML - 元素">XHTML 元素</a></li>
+<li><a href="html_xhtml_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_xhtml_attributes.asp" title="XHTML - 属性">XHTML 属性</a></li>
+</ul>
+<h2>HTML 表单</h2>
+<ul>
+<li><a href="html_forms.asp.htm" tppabs="http://www.w3school.com.cn/html/html_forms.asp" title="HTML 表单和输入">HTML 表单</a></li>
+<li><a href="html_form_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_form_elements.asp" title="HTML 表单元素">HTML 表单元素</a></li>
+<li><a href="html_form_input_types.asp.htm" tppabs="http://www.w3school.com.cn/html/html_form_input_types.asp" title="HTML Input 类型">HTML 输入类型</a></li>
+<li><a href="html_form_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_form_attributes.asp" title="HTML 输入属性">HTML 输入属性</a></li>
+</ul>
+<h2>HTML5</h2>
+<ul>
+<li><a href="html5_intro.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_intro.asp" title="HTML5 简介">HTML5 简介</a></li>
+<li><a href="html5_browsers.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_browsers.asp" title="HTML5 浏览器支持">HTML5 支持</a></li>
+<li><a href="html5_new_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_new_elements.asp" title="HTML5 视频">HTML5 元素</a></li>
+<li><a href="html5_semantic_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_semantic_elements.asp" title="HTML5 Video + DOM">HTML5 语义</a></li>
+<li><a href="html5_migration.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_migration.asp" title="HTML5 音频">HTML5 迁移</a></li>
+<li><a href="html5_syntax.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_syntax.asp" title="HTML5 拖放">HTML5 代码约定</a></li>
+</ul>
+<h2>HTML 图形</h2>
+<ul>
+<li><a href="html5_canvas.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_canvas.asp" title="HTML5 Canvas">HTML5 画布</a></li>
+<li><a href="html5_svg.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_svg.asp" title="HTML5 内联 SVG">HTML5 SVG</a></li>
+<li><a href="html5_canvas_vs_svg.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_canvas_vs_svg.asp" title="HTML5 Canvas vs. SVG">HTML5 画布 vs SVG</a></li>
+</ul>
+<h2>HTML 媒体</h2>
+<ul>
+<li><a href="html_media.asp.htm" tppabs="http://www.w3school.com.cn/html/html_media.asp" title="HTML 多媒体">HTML 媒体</a></li>
+<li><a href="html_object.asp.htm" tppabs="http://www.w3school.com.cn/html/html_object.asp" title="HTML Object 元素">HTML 对象</a></li>
+<li><a href="html_audio.asp.htm" tppabs="http://www.w3school.com.cn/html/html_audio.asp" title="HTML 音频">HTML 音频</a></li>
+<li><a href="html_video.asp.htm" tppabs="http://www.w3school.com.cn/html/html_video.asp" title="HTML 视频">HTML 视频</a></li>
+</ul>
+<h2>HTML API</h2>
+<ul>
+<li class="currentLink"><a href="html5_geolocation.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_geolocation.asp" title="HTML5 地理定位">HTML5 地理定位</a></li>
+<li><a href="html5_draganddrop.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_draganddrop.asp" title="HTML5 拖放">HTML5 拖放</a></li>
+<li><a href="html5_webstorage.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_webstorage.asp" title="HTML5 Web 存储">HTML5 Web 存储</a></li>
+<li><a href="html5_app_cache.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_app_cache.asp" title="HTML 5 应用程序缓存">HTML5 应用缓存</a></li>
+<li><a href="html5_webworkers.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_webworkers.asp" title="HTML5 Web Workers">HTML5 Web Workers</a></li>
+<li><a href="html5_serversentevents.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_serversentevents.asp" title="HTML5 服务器发送事件">HTML5 SSE</a></li>
+</ul>
+<h2>实例/测验/总结</h2>
+<ul>
+<li><a href="../example/html_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/html_examples.asp" title="HTML 实例">HTML 实例</a></li>
+<li><a href="html_quiz.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quiz.asp" title="HTML 测验">HTML 测验</a></li>
+<li><a href="html_summary.asp.htm" tppabs="http://www.w3school.com.cn/html/html_summary.asp" title="HTML 总结">HTML 总结</a></li>
+</ul>
+<h2>HTML 参考手册</h2>
+<ul>
+<li><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp" title="HTML 4.01 / XHTML 1.0 参考手册">HTML 标签列表</a></li>
+<li><a href="../tags/html_ref_standardattributes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_standardattributes.asp" title="HTML 标准属性">HTML 属性</a></li>
+<li><a href="../tags/html_ref_eventattributes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_eventattributes.asp" title="HTML 事件属性">HTML 事件</a></li>
+<li><a href="../tags/html_ref_dtd.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_dtd.asp" title="HTML 元素与合法的 Doctype">HTML 合法 DTD</a></li>
+<li><a href="../tags/html_ref_colornames.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_colornames.asp" title="HTML 颜色名">HTML 颜色名</a></li>
+<li><a href="../tags/html_ref_charactersets.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_charactersets.asp" title="HTML 字符集">HTML 字符集</a></li>
+<li><a href="../tags/html_ref_ascii.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_ascii.asp" title="HTML ASCII 参考手册">HTML ASCII</a></li>
+<li><a href="../tags/html_ref_entities.html" tppabs="http://www.w3school.com.cn/tags/html_ref_entities.html" title="HTML ISO-8859-1 参考手册">HTML ISO-8859-1</a></li>
+<li><a href="../tags/html_ref_symbols.html" tppabs="http://www.w3school.com.cn/tags/html_ref_symbols.html" title="HTML 4.01 符号实体">HTML 符号</a></li>
+<li><a href="../tags/html_ref_urlencode.html" tppabs="http://www.w3school.com.cn/tags/html_ref_urlencode.html" title="HTML URL 编码">HTML URL 编码</a></li>
+<li><a href="../tags/html_ref_language_codes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_language_codes.asp" title="HTML 语言代码参考手册">HTML 语言代码</a></li>
+<li><a href="../tags/html_ref_httpmessages.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_httpmessages.asp" title="HTML 状态消息">HTML 消息</a></li>
+</ul>
+<h2>HTML5</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/html/index.asp" title="HTML5 教程">HTML5 教程</a></li>
+<li><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp" title="HTML5 参考手册">HTML5 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+
+<h1>HTML5 地理定位</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="html_video.asp.htm" tppabs="http://www.w3school.com.cn/html/html_video.asp" title="HTML 视频">HTML 视频</a></li>
+<li class="next"><a href="html5_draganddrop.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_draganddrop.asp" title="HTML5 拖放">HTML5 拖放</a></li>
+</ul>
+</div>
+
+
+<div id="intro">
+<p><strong>HTML5 Geolocation（地理定位）用于定位用户的位置。</strong></p>
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html5_geolocation_map_script.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_geolocation_map_script">亲自试一试：在谷歌地图上显示您的位置</a></p>
+</div>
+
+
+<div>
+<h2>定位用户的位置</h2>
+
+<p>HTML5 Geolocation API 用于获得用户的地理位置。</p>
+
+<p>鉴于该特性可能侵犯用户的隐私，除非用户同意，否则用户位置信息是不可用的。</p>
+</div>
+
+
+<div>
+<h2>浏览器支持</h2>
+
+<p>Internet Explorer 9、Firefox、Chrome、Safari 以及 Opera 支持地理定位。</p>
+
+<p class="note"><span>注释：</span>对于拥有 GPS 的设备，比如 iPhone，地理定位更加精确。</p>
+</div>
+
+
+<div>
+<h2>HTML5 - 使用地理定位</h2>
+
+<p>请使用 getCurrentPosition() 方法来获得用户的位置。</p>
+
+<p>下例是一个简单的地理定位实例，可返回用户位置的经度和纬度。</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;script&gt;
+var x=document.getElementById(&quot;demo&quot;);
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.<code>getCurrentPosition(showPosition)</code>;
+    }
+  else{x.innerHTML=&quot;Geolocation is not supported by this browser.&quot;;}
+  }
+function showPosition(position)
+  {
+  x.innerHTML=&quot;Latitude: &quot; + position.coords.latitude +
+  &quot;&lt;br /&gt;Longitude: &quot; + position.coords.longitude;
+  }
+&lt;/script&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html5_geolocation.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_geolocation">亲自试一试</a></p>
+
+<p>例子解释：</p>
+
+<ul>
+<li>检测是否支持地理定位</li>
+<li>如果支持，则运行 getCurrentPosition() 方法。如果不支持，则向用户显示一段消息。</li>
+<li>如果getCurrentPosition()运行成功，则向参数showPosition中规定的函数返回一个coordinates对象</li>
+<li>showPosition() 函数获得并显示经度和纬度</li>
+</ul>
+
+<p>上面的例子是一个非常基础的地理定位脚本，不含错误处理。</p>
+</div>
+
+
+<div>
+<h2>处理错误和拒绝</h2>
+
+<p>getCurrentPosition() 方法的第二个参数用于处理错误。它规定当获取用户位置失败时运行的函数：</p>
+
+<h3>实例</h3>
+
+<pre>
+function showError(error)
+  {
+  switch(error.code)
+    {
+    case error.PERMISSION_DENIED:
+      x.innerHTML=&quot;User denied the request for Geolocation.&quot;
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML=&quot;Location information is unavailable.&quot;
+      break;
+    case error.TIMEOUT:
+      x.innerHTML=&quot;The request to get user location timed out.&quot;
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML=&quot;An unknown error occurred.&quot;
+      break;
+    }
+  }
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html5_geolocation_error.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_geolocation_error">亲自试一试</a></p>
+
+<p>错误代码：</p>
+
+<ul>
+<li>Permission denied - 用户不允许地理定位</li>
+<li>Position unavailable - 无法获取当前位置</li>
+<li>Timeout - 操作超时</li>
+</ul>
+</div>
+
+
+<div>
+<h2>在地图中显示结果</h2>
+
+<p>如需在地图中显示结果，您需要访问可使用经纬度的地图服务，比如谷歌地图或百度地图：</p>
+
+<h3>实例</h3>
+
+<pre>
+function showPosition(position)
+{
+var latlon=position.coords.latitude+&quot;,&quot;+position.coords.longitude;
+
+var img_url=&quot;http://maps.googleapis.com/maps/api/staticmap?center=&quot;
++latlon+&quot;&amp;zoom=14&amp;size=400x300&amp;sensor=false&quot;;
+
+document.getElementById(&quot;mapholder&quot;).innerHTML=&quot;&lt;img src='&quot;+img_url+&quot;' /&gt;&quot;;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html5_geolocation_map.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_geolocation_map">亲自试一试</a></p>
+
+<p>在上例中，我们使用返回的经纬度数据在谷歌地图中显示位置（使用静态图像）。</p>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html5_geolocation_map_script.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_geolocation_map_script">谷歌地图脚本</a></p>
+
+<p>上面的链接向您演示如何使用脚本来显示带有标记、缩放和拖曳选项的交互式地图。</p>
+</div>
+
+<div>
+<h2>给定位置的信息</h2>
+
+<p>本页演示的是如何在地图上显示用户的位置。不过，地理定位对于给定位置的信息同样很有用处。</p>
+
+<p>案例：</p>
+
+<ul>
+<li>更新本地信息</li>
+<li>显示用户周围的兴趣点</li>
+<li>交互式车载导航系统 (GPS)</li>
+</ul>
+</div>
+
+
+<div>
+<h2>getCurrentPosition() 方法 - 返回数据</h2>
+
+<p>若成功，则 getCurrentPosition() 方法返回对象。始终会返回 latitude、longitude 以及 accuracy 属性。如果可用，则会返回其他下面的属性。</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:40%;">属性</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>coords.latitude</td>
+<td>十进制数的纬度</td>
+</tr>
+
+<tr>
+<td>coords.longitude</td>
+<td>十进制数的经度</td>
+</tr>
+
+<tr>
+<td>coords.accuracy</td>
+<td>位置精度</td>
+</tr>
+
+<tr>
+<td>coords.altitude</td>
+<td>海拔，海平面以上以米计</td>
+</tr>
+
+<tr>
+<td>coords.altitudeAccuracy</td>
+<td>位置的海拔精度</td>
+</tr>
+
+<tr>
+<td>coords.heading</td>
+<td>方向，从正北开始以度计</td>
+</tr>
+
+<tr>
+<td>coords.speed</td>
+<td>速度，以米/每秒计</td>
+</tr>
+
+<tr>
+<td>timestamp</td>
+<td>响应的日期/时间</td>
+</tr>
+</table>
+</div>
+
+
+<div>
+<h2>Geolocation 对象 - 其他有趣的方法</h2>
+
+<p>watchPosition() - 返回用户的当前位置，并继续返回用户移动时的更新位置（就像汽车上的 GPS）。</p>
+
+<p>clearWatch() - 停止 watchPosition() 方法</p>
+
+<p>下面的例子展示 watchPosition() 方法。您需要一台精确的 GPS 设备来测试该例（比如 iPhone）：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;script&gt;
+var x=document.getElementById(&quot;demo&quot;);
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.<code>watchPosition(showPosition)</code>;
+    }
+  else{x.innerHTML=&quot;Geolocation is not supported by this browser.&quot;;}
+  }
+function showPosition(position)
+  {
+  x.innerHTML=&quot;Latitude: &quot; + position.coords.latitude +
+  &quot;&lt;br /&gt;Longitude: &quot; + position.coords.longitude;
+  }
+&lt;/script&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html5_geolocation_watchposition.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_geolocation_watchposition">亲自试一试</a></p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="html_video.asp.htm" tppabs="http://www.w3school.com.cn/html/html_video.asp" title="HTML 视频">HTML 视频</a></li>
+<li class="next"><a href="html5_draganddrop.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_draganddrop.asp" title="HTML5 拖放">HTML5 拖放</a></li>
+</ul>
+</div>
+
+
+<div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- W3School 正文底部广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="9384069314"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp">HTML 参考手册</a></h5>
+<h5 id="tools_example"><a href="../example/html_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/html_examples.asp">HTML 实例</a></h5>
+<h5 id="tools_quiz"><a href="html_quiz.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quiz.asp">HTML 测验</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

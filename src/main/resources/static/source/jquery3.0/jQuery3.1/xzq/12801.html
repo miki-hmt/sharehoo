@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>element</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">element</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;element selector
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a>&lt;Element(s)&gt;</code> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>根据给定（html）标记名称选择所有的元素。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( "element" )
+			</h4>
+			<p class="argument">
+				<strong>element: </strong>一个用来搜索的元素。 指DOM节点的标签名。
+			</p>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			调用JavaScript的 <code>getElementsByTagName()</code>函数，当该表达式使用时返回相应的元素。
+		</p>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		查找一个 DIV 元素。
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;div&gt;DIV1&lt;/div&gt;
+&lt;div&gt;DIV2&lt;/div&gt;
+&lt;span&gt;SPAN&lt;/span&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("div");</code></pre>
+	<h5>
+		结果:
+	</h5>
+[ &lt;div&gt;DIV1&lt;/div&gt;, &lt;div&gt;DIV2&lt;/div&gt; ]<br />
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	寻找每一个DIV元素。
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;element demo&lt;/title&gt;
+  &lt;style&gt;
+  div, span {
+    width: 60px;
+    height: 60px;
+    float: left;
+    padding: 10px;
+    margin: 10px;
+    background-color: #eee;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;DIV1&lt;/div&gt;
+&lt;div&gt;DIV2&lt;/div&gt;
+&lt;span&gt;SPAN&lt;/span&gt;
+ 
+&lt;script&gt;
+$( "div" ).css( "border", "9px solid red" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7897" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

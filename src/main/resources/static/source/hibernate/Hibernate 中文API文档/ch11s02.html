@@ -1,0 +1,263 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>11.2.&#160;数据库事务声明</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch11.html" title="第&#160;11&#160;章&#160;事务和并发">
+<link rel="prev" href="ch11.html" title="第&#160;11&#160;章&#160;事务和并发">
+<link rel="next" href="ch11s03.html" title="11.3.&#160;乐观并发控制(Optimistic concurrency control)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="transactions-demarcation"></a>11.2.&#160;数据库事务声明</h2></div></div></div>
+<p>
+						数据库（或者系统）事务的声明总是必须的。在数据库事务之外，就无法和数据库通讯（这可能会让那些习惯于
+						自动提交事务模式的开发人员感到迷惑）。永远使用清晰的事务声明，即使只读操作也是如此。进行
+						显式的事务声明并不总是需要的，这取决于你的事务隔离级别和数据库的能力，但不管怎么说，声明事务总归有益无害。当然，一个单独的数据库事务总是比很多琐碎的事务性能更好，即时对读数据而言也是一样。
+        </p>
+<p>
+						一个Hibernate应用程序可以运行在非托管环境中（也就是独立运行的应用程序，简单Web应用程序，
+						或者Swing图形桌面应用程序），也可以运行在托管的J2EE环境中。在一个非托管环境中，Hibernate
+						通常自己负责管理数据库连接池。应用程序开发人员必须手工设置事务声明，换句话说，就是手工启
+						动，提交，或者回滚数据库事务。一个托管的环境通常提供了容器管理事务(CMT)，例如事务装配通过可声
+						明的方式定义在EJB session beans的部署描述符中。可编程式事务声明不再需要，即使是
+						<code class="literal">Session</code> 的同步也可以自动完成。
+        </p>
+<p>
+						让持久层具备可移植性是人们的理想,这种移植发生在非托管的本地资源环境，与依赖JTA但是使用BMT而非CMT的系统之间。在两种情况下你都可以使用编程式的事务管理。Hibernate提供了一套称为<code class="literal">Transaction</code>的封装API，
+						用来把你的部署环境中的本地事务管理系统转换到Hibernate事务上。这个API是可选的，但是我们强烈
+						推荐你使用，除非你用CMT session bean。
+        </p>
+<p>
+            通常情况下，结束 <code class="literal">Session</code> 包含了四个不同的阶段:
+        </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                    同步session(flush,刷出到磁盘）
+                </p></li>
+<li><p>
+                    提交事务
+                </p></li>
+<li><p>
+                   关闭session
+                </p></li>
+<li><p>
+                    处理异常
+                </p></li>
+</ul></div>
+<p>
+						session的同步(flush,刷出）前面已经讨论过了，我们现在进一步考察在托管和非托管环境下的事务声明和异常处理。
+        </p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-demarcation-nonmanaged"></a>11.2.1.&#160;非托管环境</h3></div></div></div>
+<p>
+                如果Hibernat持久层运行在一个非托管环境中，数据库连接通常由Hibernate的简单（即非DataSource)连接池机制
+                来处理。session/transaction处理方式如下所示：
+            </p>
+<pre class="programlisting">//Non-managed environment idiom
+Session sess = factory.openSession();
+Transaction tx = null;
+try {
+    tx = sess.beginTransaction();
+
+    // do some work
+    ...
+
+    tx.commit();
+}
+catch (RuntimeException e) {
+    if (tx != null) tx.rollback();
+    throw e; // or display error message
+}
+finally {
+    sess.close();
+}</pre>
+<p>
+                你不需要显式<code class="literal">flush()</code>  <code class="literal">Session</code>  -  
+                对<code class="literal">commit()</code>的调用会自动触发session的同步(取决于session的<a href="ch10s10.html" title="10.10.&#160;Session刷出(flush)">第&#160;10.10&#160;节 “Session刷出(flush)”</a>)。调用 <code class="literal">close()</code> 标志session的结束。<code class="literal">close()</code>方法重要的暗示是，<code class="literal">session</code>释放了JDBC连接。这段Java代码在非托管环境下和JTA环境下都可以运行。
+            </p>
+<p>
+                更加灵活的方案是Hibernate内置的"current session"上下文管理，前文已经讲过：
+            </p>
+<pre class="programlisting">// Non-managed environment idiom with getCurrentSession()
+try {
+    factory.getCurrentSession().beginTransaction();
+
+    // do some work
+    ...
+
+    factory.getCurrentSession().getTransaction().commit();
+}
+catch (RuntimeException e) {
+    factory.getCurrentSession().getTransaction().rollback();
+    throw e; // or display error message
+}</pre>
+<p>
+                你很可能从未在一个通常的应用程序的业务代码中见过这样的代码片断：致命的（系统）异常应该总是
+                在应用程序“顶层”被捕获。换句话说，执行Hibernate调用的代码（在持久层）和处理
+                <code class="literal">RuntimeException</code>异常的代码（通常只能清理和退出应用程序）应该在不同
+                的应用程序逻辑层。Hibernate的当前上下文管理可以极大地简化这一设计，你所有的一切就是<code class="literal">SessionFactory</code>。              异常处理将在本章稍后进行讨论。
+            </p>
+<p>
+                请注意，你应该选择 <code class="literal">org.hibernate.transaction.JDBCTransactionFactory</code>
+                (这是默认选项)，对第二个例子来说，<code class="literal">hibernate.current_session_context_class</code>应该是<code class="literal">"thread"</code>
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-demarcation-jta"></a>11.2.2.&#160;使用JTA</h3></div></div></div>
+<p>
+               	如果你的持久层运行在一个应用服务器中（例如，在EJB session beans的后面），Hibernate获取
+               	的每个数据源连接将自动成为全局JTA事务的一部分。
+                你可以安装一个独立的JTA实现，使用它而不使用EJB。Hibernate提供了两种策略进行JTA集成。
+            </p>
+<p>
+                如果你使用bean管理事务（BMT），可以通过使用Hibernate的 <code class="literal">Transaction</code> API来告诉
+                应用服务器启动和结束BMT事务。因此，事务管理代码和在非托管环境下是一样的。
+            </p>
+<pre class="programlisting">// BMT idiom
+Session sess = factory.openSession();
+Transaction tx = null;
+try {
+    tx = sess.beginTransaction();
+
+    // do some work
+    ...
+
+    tx.commit();
+}
+catch (RuntimeException e) {
+    if (tx != null) tx.rollback();
+    throw e; // or display error message
+}
+finally {
+    sess.close();
+}</pre>
+<p>
+               如果你希望使用与事务绑定的<code class="literal">Session</code>，也就是使用<code class="literal">getCurrentSession()</code>来简化上下文管理，你将不得不直接使用JTA <code class="literal">UserTransaction</code>API。
+            </p>
+<pre class="programlisting">// BMT idiom with getCurrentSession()
+try {
+    UserTransaction tx = (UserTransaction)new InitialContext()
+                            .lookup("java:comp/UserTransaction");
+
+    tx.begin();
+
+    // Do some work on Session bound to transaction
+    factory.getCurrentSession().load(...);
+    factory.getCurrentSession().persist(...);
+
+    tx.commit();
+}
+catch (RuntimeException e) {
+    tx.rollback();
+    throw e; // or display error message
+}</pre>
+<p>
+               在CMT方式下，事务声明是在session bean的部署描述符中，而不需要编程。
+               因此，代码被简化为:
+			</p>
+<pre class="programlisting">// CMT idiom
+Session sess = factory.getCurrentSession();
+
+// do some work
+...
+
+</pre>
+<p>
+                在CMT/EJB中甚至会自动rollback，因为假若有未捕获的<code class="literal">RuntimeException</code>从session bean方法中抛出，这就会通知容器把全局事务回滚。<span class="emphasis"><em>这就意味着，在BMT或者CMT中，你根本就不需要使用Hibernate <code class="literal">Transaction</code> API ，你自动得到了绑定到事务的“当前”Session。
+                </em></span>
+            </p>
+<p>
+                注意，当你配置Hibernate的transaction factory的时候，在直接使用JTA的时候（BMT），你应该选择<code class="literal">org.hibernate.transaction.JTATransactionFactory</code>,在CMT session bean中选择<code class="literal">org.hibernate.transaction.CMTTransactionFactory</code>。记得也要设置<code class="literal">hibernate.transaction.manager_lookup_class</code>。还有，确认你的<code class="literal">hibernate.current_session_context_class</code>未设置（为了向下兼容），或者设置为<code class="literal">"jta"</code>。
+            </p>
+<p>
+                <code class="literal">getCurrentSession()</code>在JTA环境中有一个弊端。对<code class="literal">after_statement</code>连接释放方式有一个警告，这是被默认使用的。因为JTA规范的一个很愚蠢的限制，Hibernate不可能自动清理任何未关闭的<code class="literal">ScrollableResults</code> 或者<code class="literal">Iterator</code>，它们是由<code class="literal">scroll()</code>或<code class="literal">iterate()</code>产生的。你<span class="emphasis"><em>must</em></span>通过在<code class="literal">finally</code>块中，显式调用<code class="literal">ScrollableResults.close()</code>或者<code class="literal">Hibernate.close(Iterator)</code>方法来释放底层数据库游标。(当然，大部分程序完全可以很容易的避免在JTA或CMT代码中出现<code class="literal">scroll()</code>或<code class="literal">iterate()</code>。)
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-demarcation-exceptions"></a>11.2.3.&#160;异常处理</h3></div></div></div>
+<p>
+                如果 <code class="literal">Session</code> 抛出异常 (包括任何<code class="literal">SQLException</code>), 
+                你应该立即回滚数据库事务，调用 <code class="literal">Session.close()</code> ，丢弃该
+                <code class="literal">Session</code>实例。<code class="literal">Session</code>的某些方法可能会导致session
+                处于不一致的状态。所有由Hibernate抛出的异常都视为不可以恢复的。确保在
+                <code class="literal">finally</code> 代码块中调用<code class="literal">close()</code>方法，以关闭掉
+                <code class="literal">Session</code>。
+            </p>
+<p>
+								<code class="literal">HibernateException</code>是一个非检查期异常（这不同于Hibernate老的版本），
+								它封装了Hibernate持久层可能出现的大多数错误。我们的观点是，不应该强迫应用程序开发人员
+								在底层捕获无法恢复的异常。在大多数软件系统中，非检查期异常和致命异常都是在相应方法调用
+								的堆栈的顶层被处理的（也就是说，在软件上面的逻辑层），并且提供一个错误信息给应用软件的用户
+								（或者采取其他某些相应的操作）。请注意，Hibernate也有可能抛出其他并不属于
+								<code class="literal">HibernateException</code>的非检查期异常。这些异常同样也是无法恢复的，应该
+								采取某些相应的操作去处理。
+            </p>
+<p>
+								在和数据库进行交互时，Hibernate把捕获的<code class="literal">SQLException</code>封装为Hibernate的
+								<code class="literal">JDBCException</code>。事实上，Hibernate尝试把异常转换为更有实际含义
+								的<code class="literal">JDBCException</code>异常的子类。底层的<code class="literal">SQLException</code>可以
+								通过<code class="literal">JDBCException.getCause()</code>来得到。Hibernate通过使用关联到
+								<code class="literal">SessionFactory</code>上的<code class="literal">SQLExceptionConverter</code>来
+								把<code class="literal">SQLException</code>转换为一个对应的<code class="literal">JDBCException</code>
+								异常的子类。默认情况下，<code class="literal">SQLExceptionConverter</code>可以通过配置dialect
+								选项指定；此外，也可以使用用户自定义的实现类（参考javadocs
+								 <code class="literal">SQLExceptionConverterFactory</code>类来了解详情）。标准的
+								 <code class="literal">JDBCException</code>子类型是：
+            </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                        <code class="literal">JDBCConnectionException</code> - 指明底层的JDBC通讯出现错误
+                    </p></li>
+<li><p>
+                        <code class="literal">SQLGrammarException</code> - 指明发送的SQL语句的语法或者格式错误
+                    </p></li>
+<li><p>
+                        <code class="literal">ConstraintViolationException</code> - 指明某种类型的约束违例错误
+                    </p></li>
+<li><p>
+                        <code class="literal">LockAcquisitionException</code> - 指明了在执行请求操作时，获取
+                        所需的锁级别时出现的错误。
+                        
+                    </p></li>
+<li><p>
+                        <code class="literal">GenericJDBCException</code> - 不属于任何其他种类的原生异常
+                    </p></li>
+</ul></div>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-demarcation-timeout"></a>11.2.4.&#160;事务超时</h3></div></div></div>
+<p>
+                EJB这样的托管环境有一项极为重要的特性，而它从未在非托管环境中提供过，那就是事务超时。在出现错误的事务行为的时候，超时可以确保不会无限挂起资源、对用户没有交代。在托管(JTA)环境之外，Hibernate无法完全提供这一功能。但是，Hiberante至少可以控制数据访问，确保数据库级别的死锁，和返回巨大结果集的查询被限定在一个规定的时间内。在托管环境中，Hibernate会把事务超时转交给JTA。这一功能通过Hibernate <code class="literal">Transaction</code>对象进行抽象。
+            </p>
+<pre class="programlisting">
+Session sess = factory.openSession();
+try {
+    //set transaction timeout to 3 seconds
+    sess.getTransaction().setTimeout(3);
+    sess.getTransaction().begin();
+
+    // do some work
+    ...
+
+    sess.getTransaction().commit()
+}
+catch (RuntimeException e) {
+    sess.getTransaction().rollback();
+    throw e; // or display error message
+}
+finally {
+    sess.close();
+}</pre>
+<p>
+                注意<code class="literal">setTimeout()</code>不应该在CMT bean中调用，此时事务超时值应该是被声明式定义的。
+            </p>
+</div>
+</div></body>
+</html>

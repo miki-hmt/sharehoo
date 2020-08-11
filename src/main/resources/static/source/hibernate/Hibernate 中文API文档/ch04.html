@@ -1,0 +1,211 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;4&#160;章&#160;持久化类(Persistent Classes)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch03s08.html" title="3.8.&#160; J2EE应用程序服务器的集成">
+<link rel="next" href="ch04s02.html" title="4.2.&#160;实现继承（Inheritance）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="persistent-classes"></a>第&#160;4&#160;章&#160;持久化类(Persistent Classes)</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch04.html#persistent-classes-pojo">4.1. 一个简单的POJO例子</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch04.html#persistent-classes-pojo-constructor">4.1.1. 实现一个默认的（即无参数的）构造方法（constructor）</a></span></dt>
+<dt><span class="sect2"><a href="ch04.html#persistent-classes-pojo-identifier">4.1.2. 提供一个标识属性（identifier property）（可选） </a></span></dt>
+<dt><span class="sect2"><a href="ch04.html#persistent-classes-pojo-final">4.1.3. 使用非final的类 (可选)</a></span></dt>
+<dt><span class="sect2"><a href="ch04.html#persistent-classes-pojo-accessors">4.1.4. 为持久化字段声明访问器(accessors)和是否可变的标志(mutators)(可选)</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch04s02.html">4.2. 实现继承（Inheritance）</a></span></dt>
+<dt><span class="sect1"><a href="ch04s03.html">4.3. 实现<code class="literal">equals()</code>和<code class="literal">hashCode()</code></a></span></dt>
+<dt><span class="sect1"><a href="ch04s04.html">4.4. 动态模型(Dynamic models)</a></span></dt>
+<dt><span class="sect1"><a href="ch04s05.html">4.5. 元组片断映射(Tuplizers)</a></span></dt>
+</dl>
+</div>
+<p>
+        在应用程序中，用来实现业务问题实体的（如，在电子商务应用程序中的Customer和Order）
+        类就是持久化类。不能认为所有的持久化类的实例都是持久的状态——一个实例的状态也可能
+        是瞬时的或脱管的。
+   </p>
+<p>
+        如果这些持久化类遵循一些简单的规则，Hibernate能够工作得更好，这些规则也被称作
+        简单传统Java对象(POJO:Plain Old Java Object)编程模型。但是这些规则并不是必需的。
+        实际上，Hibernate3对于你的持久化类几乎不做任何设想。你可以用其他的方法来表达领域模型：
+        比如，使用<code class="literal">Map</code>实例的树型结构。
+    </p>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="persistent-classes-pojo"></a>4.1.&#160;一个简单的POJO例子</h2></div></div></div>
+<p>
+            大多数Java程序需要用一个持久化类来表示猫科动物。
+        </p>
+<pre class="programlisting">package eg;
+import java.util.Set;
+import java.util.Date;
+
+public class Cat {
+    private Long id; // identifier
+
+    private Date birthdate;
+    private Color color;
+    private char sex;
+    private float weight;
+    private int litterId;
+
+    private Cat mother;
+    private Set kittens = new HashSet();
+
+    private void setId(Long id) {
+        this.id=id;
+    }
+    public Long getId() {
+        return id;
+    }
+
+    void setBirthdate(Date date) {
+        birthdate = date;
+    }
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    void setWeight(float weight) {
+        this.weight = weight;
+    }
+    public float getWeight() {
+        return weight;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+    void setColor(Color color) {
+        this.color = color;
+    }
+
+    void setSex(char sex) {
+        this.sex=sex;
+    }
+    public char getSex() {
+        return sex;
+    }
+
+    void setLitterId(int id) {
+        this.litterId = id;
+    }
+    public int getLitterId() {
+        return litterId;
+    }
+
+    void setMother(Cat mother) {
+        this.mother = mother;
+    }
+    public Cat getMother() {
+        return mother;
+    }
+    void setKittens(Set kittens) {
+        this.kittens = kittens;
+    }
+    public Set getKittens() {
+        return kittens;
+    }
+    
+    // addKitten not needed by Hibernate
+    public void addKitten(Cat kitten) {
+    	kitten.setMother(this);
+	kitten.setLitterId( kittens.size() ); 
+        kittens.add(kitten);
+    }
+}</pre>
+<p>
+            这里要遵循四条主要的规则：
+        </p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="persistent-classes-pojo-constructor"></a>4.1.1.&#160;实现一个默认的（即无参数的）构造方法（constructor）</h3></div></div></div>
+<p>
+                <code class="literal">Cat</code>有一个无参数的构造方法。所有的持久化类都必须有一个
+                默认的构造方法（可以不是public的），这样的话Hibernate就可以使用
+                <code class="literal">Constructor.newInstance()</code>来实例化它们。
+                我们强烈建议，在Hibernate中，为了运行期代理的生成，构造方法至少是
+                <span class="emphasis"><em>包(package)</em></span>内可见的。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="persistent-classes-pojo-identifier"></a>4.1.2.&#160;提供一个标识属性（identifier property）（可选） </h3></div></div></div>
+<p>
+                <code class="literal">Cat</code>有一个属性叫做<code class="literal">id</code>。这个属性映射数据库表的主
+                键字段。这个属性可以叫任何名字，其类型可以是任何的原始类型、原始类型的包装类型、
+                <code class="literal">java.lang.String</code> 或者是 <code class="literal">java.util.Date</code>。
+                （如果你的遗留数据库表有联合主键，你甚至可以用一个用户自定义的类，该类拥有这些类型
+                的属性。参见后面的关于联合标识符的章节。）
+            </p>
+<p>
+                标识符属性是可选的。可以不用管它，让Hibernate内部来追踪对象的识别。
+                但是我们并不推荐这样做。
+            </p>
+<p>
+                实际上，一些功能只对那些声明了标识符属性的类起作用：
+            </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                        托管对象的传播性再连接（级联更新或级联合并）
+                        ——参阅 <a href="ch10s11.html" title="10.11.&#160;传播性持久化(transitive persistence)">第&#160;10.11&#160;节 “传播性持久化(transitive persistence)”</a>
+                    </p></li>
+<li><p>
+                        <code class="literal">Session.saveOrUpdate()</code>
+                    </p></li>
+<li><p>
+                        <code class="literal">Session.merge()</code>
+                    </p></li>
+</ul></div>
+<p>
+            	我们建议你对持久化类声明命名一致的标识属性。我们还建议你使用一
+            	个可以为空（也就是说，不是原始类型）的类型。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="persistent-classes-pojo-final"></a>4.1.3.&#160;使用非final的类 (可选)</h3></div></div></div>
+<p>
+            	<span class="emphasis"><em>代理（proxies）</em></span>是Hibernate的一个重要的功能，它依赖的条件是，持久
+            	化类或者是非final的，或者是实现了一个所有方法都声明为public的接口。
+            </p>
+<p>
+            	你可以用Hibernate持久化一个没有实现任何接口的<code class="literal">final</code>类，但是你
+            	不能使用代理来延迟关联加载，这会限制你进行性能优化的选择。
+            </p>
+<p> 
+            	你也应该避免在非final类中声明 <code class="literal">public final</code>的方法。如果你想使用一
+            	个有<code class="literal">public final</code>方法的类，你必须通过设置<code class="literal">lazy="false"</code>
+            	来明确地禁用代理。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="persistent-classes-pojo-accessors"></a>4.1.4.&#160;为持久化字段声明访问器(accessors)和是否可变的标志(mutators)(可选)</h3></div></div></div>
+<p>
+                <code class="literal">Cat</code>为它的所有持久化字段声明了访问方法。很多其他ORM工具直接对
+                实例变量进行持久化。我们相信，在关系数据库schema和类的内部数据结构之间引入间接层(原文为"非直接"，indirection)会好一些。默认情况下Hibernate持久化JavaBeans风格的属性，认可
+                <code class="literal">getFoo</code>，<code class="literal">isFoo</code> 和 <code class="literal">setFoo</code>这种形式的方法名。
+                如果需要，你可以对某些特定属性实行直接字段访问。
+            </p>
+<p>
+                属性<span class="emphasis"><em>不需要</em></span>要声明为public的。Hibernate可以持久化一个有
+                <code class="literal">default</code>、<code class="literal">protected</code>或<code class="literal">private</code>的get/set方法对
+                的属性进行持久化。
+            </p>
+</div>
+</div>
+<p>
+    		TODO：property和proxy包里的用户扩展框架文档。
+    </p>
+</div></body>
+</html>

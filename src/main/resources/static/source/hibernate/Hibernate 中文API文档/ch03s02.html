@@ -1,0 +1,28 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>3.2.&#160; 获得SessionFactory</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch03.html" title="第&#160;3&#160;章&#160; 配置">
+<link rel="prev" href="ch03.html" title="第&#160;3&#160;章&#160; 配置">
+<link rel="next" href="ch03s03.html" title="3.3.&#160; JDBC连接">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="configuration-sessionfactory"></a>3.2.&#160;
+            获得SessionFactory
+        </h2></div></div></div>
+<p>
+            当所有映射定义被<code class="literal">Configuration</code>解析后, 
+            应用程序必须获得一个用于构造<code class="literal">Session</code>实例的工厂. 
+            这个工厂将被应用程序的所有线程共享:
+        </p>
+<pre class="programlisting">SessionFactory sessions = cfg.buildSessionFactory();</pre>
+<p>
+            Hibernate允许你的应用程序创建多个<code class="literal">SessionFactory</code>实例. 这对
+            使用多个数据库的应用来说很有用.
+        </p>
+</div></body>
+</html>

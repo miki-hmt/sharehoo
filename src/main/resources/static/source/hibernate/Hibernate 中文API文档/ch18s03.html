@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>18.3.&#160;操作XML数据</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch18.html" title="第&#160;18&#160;章&#160;XML映射">
+<link rel="prev" href="ch18s02.html" title="18.2.&#160;XML映射元数据">
+<link rel="next" href="ch19.html" title="第&#160;19&#160;章&#160;提升性能">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="xml-manipulation"></a>18.3.&#160;操作XML数据</h2></div></div></div>
+<p>
+            让我们来读入和更新应用程序中的XML文档。通过获取一个dom4j会话可以做到这一点：
+        </p>
+<pre class="programlisting">Document doc = ....;
+       
+Session session = factory.openSession();
+Session dom4jSession = session.getSession(EntityMode.DOM4J);
+Transaction tx = session.beginTransaction();
+
+List results = dom4jSession
+    .createQuery("from Customer c left join fetch c.accounts where c.lastName like :lastName")
+    .list();
+for ( int i=0; i&lt;results.size(); i++ ) {
+    //add the customer data to the XML document
+    Element customer = (Element) results.get(i);
+    doc.add(customer);
+}
+
+tx.commit();
+session.close();</pre>
+<pre class="programlisting">Session session = factory.openSession();
+Session dom4jSession = session.getSession(EntityMode.DOM4J);
+Transaction tx = session.beginTransaction();
+
+Element cust = (Element) dom4jSession.get("Customer", customerId);
+for ( int i=0; i&lt;results.size(); i++ ) {
+    Element customer = (Element) results.get(i);
+    //change the customer name in the XML and database
+    Element name = customer.element("name");
+    name.element("first-name").setText(firstName);
+    name.element("initial").setText(initial);
+    name.element("last-name").setText(lastName);
+}
+
+tx.commit();
+session.close();</pre>
+<p>
+            将这一特色与Hibernate的<code class="literal">replicate()</code>操作结合起来对于实现的基于XML的数据导入/导出将非常有用.
+        </p>
+</div></body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>15.8.&#160;离线(detached)查询和子查询</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch15.html" title="第&#160;15&#160;章&#160; 条件查询(Criteria Queries)">
+<link rel="prev" href="ch15s07.html" title="15.7.&#160;投影(Projections)、聚合（aggregation）和分组（grouping）">
+<link rel="next" href="ch15s09.html" title="15.9.&#160;根据自然标识查询(Queries by natural identifier)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="querycriteria-detachedqueries"></a>15.8.&#160;离线(detached)查询和子查询</h2></div></div></div>
+<p>
+    		<code class="literal">DetachedCriteria</code>类使你在一个session范围之外创建一个查询，并且可以使用任意的
+    		 <code class="literal">Session</code>来执行它。
+    	</p>
+<pre class="programlisting">DetachedCriteria query = DetachedCriteria.forClass(Cat.class)
+    .add( Property.forName("sex").eq('F') );
+    
+Session session = ....;
+Transaction txn = session.beginTransaction();
+List results = query.getExecutableCriteria(session).setMaxResults(100).list();
+txn.commit();
+session.close();</pre>
+<p>
+			<code class="literal">DetachedCriteria</code>也可以用以表示子查询。条件实例包含子查询可以通过
+			<code class="literal">Subqueries</code>或者<code class="literal">Property</code>获得。
+		</p>
+<pre class="programlisting">DetachedCriteria avgWeight = DetachedCriteria.forClass(Cat.class)
+	.setProjection( Property.forName("weight").avg() );
+session.createCriteria(Cat.class)
+	.add( Property.forName("weight).gt(avgWeight) )
+	.list();</pre>
+<pre class="programlisting">DetachedCriteria weights = DetachedCriteria.forClass(Cat.class)
+	.setProjection( Property.forName("weight") );
+session.createCriteria(Cat.class)
+	.add( Subqueries.geAll("weight", weights) )
+	.list();</pre>
+<p>
+			甚至相互关联的子查询也是有可能的：
+		</p>
+<pre class="programlisting">DetachedCriteria avgWeightForSex = DetachedCriteria.forClass(Cat.class, "cat2")
+	.setProjection( Property.forName("weight").avg() )
+	.add( Property.forName("cat2.sex").eqProperty("cat.sex") );
+session.createCriteria(Cat.class, "cat")
+	.add( Property.forName("weight).gt(avgWeightForSex) )
+	.list();</pre>
+</div></body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>map()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">map()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.map( callback(index, domElement) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>通过一个函数匹配当前集合中的每个元素,产生一个包含新的jQuery对象。
+</p>
+<ul class="signatures">
+	<li class="signature" id="map-callbackindex--domElement">
+		<h4 class="name">
+			<span class="version-details">V : 1.2</span>.map( callback(index, domElement) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>callback(index, domElement)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					一个函数对象，会在处理集合中的每个元素时被调用。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		如果你想处理一个简单的数组或对象中，使用jQuery.map()代替。
+	</p>
+	<p>
+		由于返回值是一个jQuery包裹的数组，所以通常会使用<code>get()</code>方法将其转换成普通的数组。
+	</p>
+	<p>
+		<code>.map()</code>方法特别适用于获取或设置元素集合中的值。例如，如下的表单中包含一组 checkbox 框：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;form method="post" action=""&gt;
+  &lt;fieldset&gt;
+    &lt;div&gt;
+      &lt;label for="two"&gt;2&lt;/label&gt;
+      &lt;input type="checkbox" value="2" id="two" name="number[]"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label for="four"&gt;4&lt;/label&gt;
+      &lt;input type="checkbox" value="4" id="four" name="number[]"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label for="six"&gt;6&lt;/label&gt;
+      &lt;input type="checkbox" value="6" id="six" name="number[]"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;label for="eight"&gt;8&lt;/label&gt;
+      &lt;input type="checkbox" value="8" id="eight" name="number[]"&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;</pre>
+	</div>
+	<p>
+		我们可以得到一个用逗号分隔的复选框 <code>ID</code>:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$(':checkbox').map(function() {
+      return this.id;
+ }).get().join();</pre>
+	</div>
+	<p>
+		此调用的结果是字符串， <code>"two,four,six,eight"</code>.
+	</p>
+	<p>
+		在回调函数中，<code>this</code>指向每次迭代中的当前DOM元素。该函数可以返回一个单独的数据或数据数组，并在结果集合中插入。如果数组返回，数组中的元素插入到集合。如果函数返回<code>null</code>或<code>undefined</code> ，没有元素将被插入。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">获取表单中所有表单元素的值。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;&lt;b&gt;Values: &lt;/b&gt;&lt;/p&gt;
+  &lt;form&gt;
+    &lt;input type="text" name="name" value="John"/&gt;
+ 
+    &lt;input type="text" name="password" value="password"/&gt;
+    &lt;input type="text" name="url" value="http://ejohn.org/"/&gt;
+ 
+  &lt;/form&gt;
+&lt;script&gt;
+    $("p").append( $("input").map(function(){
+      return $(this).val();
+    }).get().join(", ") );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8111" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">A contrived example to show some functionality.</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { font-size:16px; }
+  ul { float:left; margin:0 30px; color:blue; }
+  #results { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;ul&gt;
+    &lt;li&gt;First&lt;/li&gt;
+    &lt;li&gt;Second&lt;/li&gt;
+    &lt;li&gt;Third&lt;/li&gt;
+ 
+    &lt;li&gt;Fourth&lt;/li&gt;
+    &lt;li&gt;Fifth&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;ul id="results"&gt;
+ 
+  &lt;/ul&gt;
+&lt;script&gt;
+var mappedItems = $("li").map(function (index) {
+  var replacement = $("&lt;li&gt;").text($(this).text()).get(0);
+  if (index == 0) {
+    /* make the first item all caps */
+    $(replacement).text($(replacement).text().toUpperCase());
+  } else if (index == 1 || index == 3) {
+    /* delete the second and fourth items */
+    replacement = null;
+  } else if (index == 2) {
+    /* make two of the third item and add some text */
+    replacement = [replacement,$("&lt;li&gt;").get(0)];
+    $(replacement[0]).append("&lt;b&gt; - A&lt;/b&gt;");
+    $(replacement[1]).append("Extra &lt;b&gt; - B&lt;/b&gt;");
+  }
+ 
+  /* replacement will be a dom element, null,
+     or an array of dom elements */
+  return replacement;
+});
+$("#results").append(mappedItems);
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8110" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">Equalize the heights of the divs.</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { width: 40px; float:left; }
+input { clear:left}
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+ 
+&lt;input type="button" value="equalize div heights"&gt;
+ 
+&lt;div style="background:red; height: 40px; "&gt;&lt;/div&gt;
+&lt;div style="background:green; height: 70px;"&gt;&lt;/div&gt;
+&lt;div style="background:blue; height: 50px; "&gt;&lt;/div&gt;
+ 
+ 
+&lt;script&gt;
+$.fn.equalizeHeights = function() {
+  var maxHeight = this.map(function(i,e) {
+    return $(e).height();
+  }).get();
+ 
+  return this.height( Math.max.apply(this, maxHeight) );
+};
+ 
+$('input').click(function(){
+  $('div').equalizeHeights();
+});
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8109" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

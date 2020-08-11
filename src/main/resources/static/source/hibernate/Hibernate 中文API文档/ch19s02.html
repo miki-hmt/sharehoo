@@ -1,0 +1,264 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>19.2.&#160;二级缓存（The Second Level Cache）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch19.html" title="第&#160;19&#160;章&#160;提升性能">
+<link rel="prev" href="ch19.html" title="第&#160;19&#160;章&#160;提升性能">
+<link rel="next" href="ch19s03.html" title="19.3.&#160; 管理缓存（Managing the caches）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="performance-cache"></a>19.2.&#160;二级缓存（The Second Level Cache）
+		</h2></div></div></div>
+<p>
+			Hibernate的<code class="literal">Session</code>在事务级别进行持久化数据的缓存操作。
+   		    当然，也有可能分别为每个类（或集合)，配置集群、或JVM级别(<code class="literal">SessionFactory级别</code>)的缓存。
+			你甚至可以为之插入一个集群的缓存。注意，缓存永远不知道其他应用程序对持久化仓库（数据库）可能进行的修改
+			（即使可以将缓存数据设定为定期失效）。 
+        </p>
+<p>
+            通过在<code class="literal">hibernate.cache.provider_class</code>属性中指定<code class="literal">org.hibernate.cache.CacheProvider</code>的某个实现的类名,你可以选择让Hibernate使用哪个缓存实现。Hibernate打包一些开源缓存实现，提供对它们的内置支持（见下表）。除此之外，你也可以实现你自己的实现，将它们插入到系统中。注意，在3.2版本之前，默认使用EhCache 作为缓存实现，但从3.2起就不再这样了。
+		</p>
+<div class="table">
+<a name="cacheproviders"></a><p class="title"><b>表&#160;19.1.&#160;
+				缓存策略提供商（Cache Providers）
+			</b></p>
+<div class="table-contents"><table summary="
+				缓存策略提供商（Cache Providers）
+			" border="1">
+<colgroup>
+<col align="left">
+<col align="left">
+<col align="left">
+<col align="left">
+<col align="left">
+</colgroup>
+<thead><tr>
+<th align="left">Cache</th>
+<th align="left">Provider class</th>
+<th align="left">Type</th>
+<th align="left">Cluster Safe</th>
+<th align="left">Query Cache Supported</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="left">Hashtable (not intended for production use)</td>
+<td align="left"><code class="literal">org.hibernate.cache.HashtableCacheProvider</code></td>
+<td align="left">memory</td>
+<td align="left">&#160;</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left">EHCache</td>
+<td align="left"><code class="literal">org.hibernate.cache.EhCacheProvider</code></td>
+<td align="left">memory, disk</td>
+<td align="left">&#160;</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left">OSCache</td>
+<td align="left"><code class="literal">org.hibernate.cache.OSCacheProvider</code></td>
+<td align="left">memory, disk</td>
+<td align="left">&#160;</td>
+<td align="left">yes</td>
+</tr>
+<tr>
+<td align="left">SwarmCache</td>
+<td align="left"><code class="literal">org.hibernate.cache.SwarmCacheProvider</code></td>
+<td align="left">clustered (ip multicast)</td>
+<td align="left">yes (clustered invalidation)</td>
+<td align="left">&#160;</td>
+</tr>
+<tr>
+<td align="left">JBoss TreeCache</td>
+<td align="left"><code class="literal">org.hibernate.cache.TreeCacheProvider</code></td>
+<td align="left">clustered (ip multicast), transactional</td>
+<td align="left">yes (replication)</td>
+<td align="left">yes (clock sync req.)</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break"><div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-cache-mapping"></a>19.2.1.&#160;缓存映射（Cache mappings）
+			</h3></div></div></div>
+<p>
+				类或者集合映射的“<code class="literal">&lt;cache&gt;</code>元素”可以有下列形式： 
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;cache 
+    usage="transactional|read-write|nonstrict-read-write|read-only"
+    region="RegionName"
+    include="all|non-lazy"
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+						   
+						    <code class="literal">usage</code>(必须)说明了缓存的策略:
+                            <code class="literal">transactional</code>、
+                            <code class="literal">read-write</code>、
+                            <code class="literal">nonstrict-read-write</code>或 
+                            <code class="literal">read-only</code>。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">region</code> (可选, 默认为类或者集合的名字(class or
+                            collection role name)) 指定第二级缓存的区域名(name of the second level cache 
+                            region)
+                            
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">include</code> (可选,默认为 <code class="literal">all</code>) 
+                            <code class="literal">non-lazy</code> 当属性级延迟抓取打开时, 标记为<code class="literal">lazy="true"</code>的实体的属性可能无法被缓存
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+				另外(首选?), 你可以在hibernate.cfg.xml中指定<code class="literal">&lt;class-cache&gt;</code>和
+				<code class="literal">&lt;collection-cache&gt;</code> 元素。 				
+            </p>
+<p>
+                
+				这里的<code class="literal">usage</code> 属性指明了<span class="emphasis"><em>缓存并发策略（cache concurrency strategy）</em></span>。
+			</p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-cache-readonly"></a>19.2.2.&#160;策略：只读缓存（Strategy: read only）
+			</h3></div></div></div>
+<p>
+				如果你的应用程序只需读取一个持久化类的实例，而无需对其修改，
+				那么就可以对其进行<code class="literal">只读</code> 缓存。这是最简单，也是实用性最好的方法。甚至在集群中，它也能完美地运作。 
+            </p>
+<pre class="programlisting">&lt;class name="eg.Immutable" mutable="false"&gt;
+    &lt;cache usage="read-only"/&gt;
+    ....
+&lt;/class&gt;</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-cache-readwrite"></a>19.2.3.&#160;
+				策略:读/写缓存（Strategy: read/write）
+			</h3></div></div></div>
+<p>
+				
+				如果应用程序需要更新数据，那么使用<code class="literal">读/写缓存</code> 比较合适。
+				如果应用程序要求“序列化事务”的隔离级别（serializable transaction isolation level），那么就决不能使用这种缓存策略。
+				如果在JTA环境中使用缓存，你必须指定<code class="literal">hibernate.transaction.manager_lookup_class</code>属性的值，
+				通过它，Hibernate才能知道该应用程序中JTA的<code class="literal">TransactionManager</code>的具体策略。				
+				在其它环境中，你必须保证在<code class="literal">Session.close()</code>、或<code class="literal">Session.disconnect()</code>调用前，
+				整个事务已经结束。 如果你想在集群环境中使用此策略，你必须保证底层的缓存实现支持锁定(locking)。Hibernate内置的缓存策略并不支持锁定功能。 
+            </p>
+<pre class="programlisting">&lt;class name="eg.Cat" .... &gt;
+    &lt;cache usage="read-write"/&gt;
+    ....
+    &lt;set name="kittens" ... &gt;
+        &lt;cache usage="read-write"/&gt;
+        ....
+    &lt;/set&gt;
+&lt;/class&gt;</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-cache-nonstrict"></a>19.2.4.&#160;
+				策略:非严格读/写缓存（Strategy: nonstrict read/write）				
+			</h3></div></div></div>
+<p>
+				
+				如果应用程序只偶尔需要更新数据（也就是说，两个事务同时更新同一记录的情况很不常见），也不需要十分严格的事务隔离，
+				那么比较适合使用<code class="literal">非严格读/写缓存</code>策略。如果在JTA环境中使用该策略，
+				你必须为其指定<code class="literal">hibernate.transaction.manager_lookup_class</code>属性的值，
+				在其它环境中，你必须保证在<code class="literal">Session.close()</code>、或<code class="literal">Session.disconnect()</code>调用前，
+				整个事务已经结束。				
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-cache-transactional"></a>19.2.5.&#160;
+				
+				策略:事务缓存（transactional）				
+			</h3></div></div></div>
+<p>
+				Hibernate的<code class="literal">事务缓存</code>策略提供了全事务的缓存支持，
+				例如对JBoss TreeCache的支持。这样的缓存只能用于JTA环境中，你必须指定
+			    为其<code class="literal">hibernate.transaction.manager_lookup_class</code>属性。 				
+            </p>
+</div>
+<p>
+			没有一种缓存提供商能够支持上列的所有缓存并发策略。下表中列出了各种提供器、及其各自适用的并发策略。 			
+        </p>
+<div class="table">
+<a name="id538045"></a><p class="title"><b>表&#160;19.2.&#160;
+			各种缓存提供商对缓存并发策略的支持情况（Cache Concurrency Strategy Support）
+			</b></p>
+<div class="table-contents"><table summary="
+			各种缓存提供商对缓存并发策略的支持情况（Cache Concurrency Strategy Support）
+			" border="1">
+<colgroup>
+<col align="left">
+<col align="left">
+<col align="left">
+<col align="left">
+<col align="left">
+</colgroup>
+<thead><tr>
+<th align="left">Cache</th>
+<th align="left">read-only</th>
+<th align="left">nonstrict-read-write</th>
+<th align="left">read-write</th>
+<th align="left">transactional</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="left">Hashtable (not intended for production use)</td>
+<td align="left">yes</td>
+<td align="left">yes</td>
+<td align="left">yes</td>
+<td align="left">&#160;</td>
+</tr>
+<tr>
+<td align="left">EHCache</td>
+<td align="left">yes</td>
+<td align="left">yes</td>
+<td align="left">yes</td>
+<td align="left">&#160;</td>
+</tr>
+<tr>
+<td align="left">OSCache</td>
+<td align="left">yes</td>
+<td align="left">yes</td>
+<td align="left">yes</td>
+<td align="left">&#160;</td>
+</tr>
+<tr>
+<td align="left">SwarmCache</td>
+<td align="left">yes</td>
+<td align="left">yes</td>
+<td align="left">&#160;</td>
+<td align="left">&#160;</td>
+</tr>
+<tr>
+<td align="left">JBoss TreeCache</td>
+<td align="left">yes</td>
+<td align="left">&#160;</td>
+<td align="left">&#160;</td>
+<td align="left">yes</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<br class="table-break">
+</div></body>
+</html>

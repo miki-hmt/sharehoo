@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<style> 
+.animated_div
+	{
+	width:65px;
+	height:40px;
+	background:#92B901;
+	color:#ffffff;
+	position:absolute;
+	font-weight:bold;
+	font:12px '微软雅黑', Verdana, Arial, Helvetica, sans-serif;
+	padding:20px 10px 0px 10px;
+	float:left;
+	margin:5px;
+	-webkit-transition:-webkit-transform 1s,opacity 1s,background 1s,width 1s,height 1s,font-size 1s;
+	-webkit-border-radius:5px;
+	-o-transition-property:width,height,-o-transform,background,font-size,opacity;
+	-o-transition-duration:1s,1s,1s,1s,1s,1s;
+	-moz-transition-property:width,height,-o-transform,background,font-size,opacity;
+	-moz-transition-duration:1s,1s,1s,1s,1s,1s;
+	transition-property:width,height,transform,background,font-size,opacity;
+	transition-duration:1s,1s,1s,1s,1s,1s;
+	border-radius:5px;
+	opacity:0.4;
+	}
+
+.animated_div:hover
+	{
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+	transform: rotate(360deg);
+	opacity:1;
+	background:#1ec7e6;
+	width:90px;
+	height:60px;
+	font-size:16px;
+	}
+</style>
+
+<title>CSS3 过渡</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS3 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/css3/index.asp" title="CSS3 教程">CSS3 教程</a></li>
+<li><a href="css3_intro.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_intro.asp" title="CSS3 简介">CSS3 简介</a></li>
+<li><a href="css3_border.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_border.asp" title="CSS3 边框">CSS3 边框</a></li>
+<li><a href="css3_background.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_background.asp" title="CSS3 背景">CSS3 背景</a></li>
+<li><a href="css3_text_effect.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_text_effect.asp" title="CSS3 文本效果">CSS3 文本效果</a></li>
+<li><a href="css3_font.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_font.asp" title="CSS3 字体">CSS3 字体</a></li>
+<li><a href="css3_2dtransform.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_2dtransform.asp" title="CSS3 2D 转换">CSS3 2D 转换</a></li>
+<li><a href="css3_3dtransform.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_3dtransform.asp" title="CSS3 3D 转换">CSS3 3D 转换</a></li>
+<li class="currentLink"><a href="css3_transition.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_transition.asp" title="CSS3 过渡">CSS3 过渡</a></li>
+<li><a href="css3_animation.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_animation.asp" title="CSS3 动画">CSS3 动画</a></li>
+<li><a href="css3_multiple_columns.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_multiple_columns.asp" title="CSS3 多列">CSS3 多列</a></li>
+<li><a href="css3_user_interface.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_user_interface.asp" title="CSS3 用户界面">CSS3 用户界面</a></li>
+</ul>
+<h2>CSS3 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.asp.htm" tppabs="http://www.w3school.com.cn/cssref/index.asp" title="CSS3 参考手册">CSS3 参考手册</a></li>
+<li><a href="../css/css_ref_print.asp.htm" tppabs="http://www.w3school.com.cn/css/css_ref_print.asp" title="CSS 打印">CSS 打印</a></li>
+<li><a href="../css/css_ref_aural.asp.htm" tppabs="http://www.w3school.com.cn/css/css_ref_aural.asp" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../css/css_units.asp.htm" tppabs="http://www.w3school.com.cn/css/css_units.asp" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../css/css_colors_legal.asp.htm" tppabs="http://www.w3school.com.cn/css/css_colors_legal.asp" title="CSS 颜色值">CSS 颜色值</a></li>
+</ul>
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS3 过渡</h1>
+
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="css3_3dtransform.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_3dtransform.asp" title="CSS3 3D 转换">CSS3 3D 转换</a></li>
+<li class="next"><a href="css3_animation.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_animation.asp" title="CSS3 动画">CSS3 动画</a></li>
+</ul>
+</div>
+
+
+<div style="height:160px;">
+<h2>CSS3 过渡</h2>
+
+<p>通过 CSS3，我们可以在不使用 Flash 动画或 JavaScript 的情况下，当元素从一种样式变换为另一种样式时为元素添加效果。</p>
+
+<p>请把鼠标移动到下面的元素上：</p>
+
+<p class="animated_div">CSS3 过渡</p>
+</div>
+
+
+<div>
+<h2>浏览器支持</h2>
+
+<table class="browsersupport">
+<tr>
+<th>属性</th>
+<th colspan="5">浏览器支持</th>
+</tr>
+
+<tr>
+<td class="bsProperty">transition</td>
+<td class="bsIE"></td>						
+<td class="bsFirefox"></td>
+<td class="bsChrome"></td>
+<td class="bsPreSafari"></td>		
+<td class="bsOpera"></td>
+</tr>
+</table>
+
+<p>Internet Explorer 10、Firefox、Chrome 以及 Opera 支持 transition 属性。</p>
+
+<p>Safari 需要前缀 -webkit-。</p>
+
+<p class="note"><span>注释：</span>Internet Explorer 9 以及更早的版本，不支持 transition 属性。</p>
+
+<p class="note"><span>注释：</span>Chrome 25 以及更早的版本，需要前缀 -webkit-。</p>
+</div>
+
+
+<div>
+<h2>它如何工作？</h2>
+
+<p>CSS3 过渡是元素从一种样式逐渐改变为另一种的效果。</p>
+
+<p>要实现这一点，必须规定两项内容：</p>
+
+<ul>
+<li>规定您希望把效果添加到哪个 CSS 属性上</li>
+<li>规定效果的时长</li>
+</ul>
+
+<h3>实例</h3>
+
+<p>应用于宽度属性的过渡效果，时长为 2 秒：</p>
+
+<pre>
+div
+{
+transition: width 2s;
+-moz-transition: width 2s;	<span class="code_comment">/* Firefox 4 */</span>
+-webkit-transition: width 2s;	<span class="code_comment">/* Safari 和 Chrome */</span>
+-o-transition: width 2s;	<span class="code_comment">/* Opera */</span>
+}
+</pre>
+
+<p class="note"><span>注释：</span>如果时长未规定，则不会有过渡效果，因为默认值是 0。</p>
+
+<p>效果开始于指定的 CSS 属性改变值时。CSS 属性改变的典型时间是鼠标指针位于元素上时：</p>
+
+<h3>实例</h3>
+
+<p>规定当鼠标指针悬浮于 &lt;div&gt; 元素上时：</p>
+
+<pre>
+div:hover
+{
+width:300px;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=css3_transition1.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=css3_transition1">亲自试一试</a></p>
+
+<p class="note"><span>注释：</span>当指针移出元素时，它会逐渐变回原来的样式。</p>
+</div>
+
+
+<div>
+<h2>多项改变</h2>
+
+<p>如需向多个样式添加过渡效果，请添加多个属性，由逗号隔开：</p>
+
+<h3>实例</h3>
+
+<p>向宽度、高度和转换添加过渡效果：</p>
+
+<pre>
+div
+{
+transition: width 2s, height 2s, transform 2s;
+-moz-transition: width 2s, height 2s, -moz-transform 2s;
+-webkit-transition: width 2s, height 2s, -webkit-transform 2s;
+-o-transition: width 2s, height 2s,-o-transform 2s;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=css3_transition2.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=css3_transition2">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>过渡属性</h2>
+
+<p>下面的表格列出了所有的转换属性：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:30%;">属性</th>
+<th>描述</th>
+<th style="width:5%;">CSS</th>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_transition.asp" title="CSS3 transition 属性">transition</a></td>
+<td>简写属性，用于在一个属性中设置四个过渡属性。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition-property.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_transition-property.asp" title="CSS3 transition-property 属性">transition-property</a></td>
+<td>规定应用过渡的 CSS 属性的名称。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition-duration.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_transition-duration.asp" title="CSS3 transition-duration 属性">transition-duration</a></td>
+<td>定义过渡效果花费的时间。默认是 0。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition-timing-function.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_transition-timing-function.asp" title="CSS3 transition-timing-function 属性">transition-timing-function</a></td>
+<td>规定过渡效果的时间曲线。默认是 &quot;ease&quot;。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_transition-delay.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_transition-delay.asp" title="CSS3 transition-delay 属性">transition-delay</a></td>
+<td>规定过渡效果何时开始。默认是 0。</td>
+<td>3</td>
+</tr>
+</table>
+
+<p>下面的两个例子设置所有过渡属性：</p>
+
+<h3>实例</h3>
+
+<p>在一个例子中使用所有过渡属性：</p>
+
+<pre>
+div
+{
+transition-property: width;
+transition-duration: 1s;
+transition-timing-function: linear;
+transition-delay: 2s;
+<span class="code_comment">/* Firefox 4 */</span>
+-moz-transition-property:width;
+-moz-transition-duration:1s;
+-moz-transition-timing-function:linear;
+-moz-transition-delay:2s;
+<span class="code_comment">/* Safari 和 Chrome */</span>
+-webkit-transition-property:width;
+-webkit-transition-duration:1s;
+-webkit-transition-timing-function:linear;
+-webkit-transition-delay:2s;
+<span class="code_comment">/* Opera */</span>
+-o-transition-property:width;
+-o-transition-duration:1s;
+-o-transition-timing-function:linear;
+-o-transition-delay:2s;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=css3_transition3.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=css3_transition3">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>与上面的例子相同的过渡效果，但是使用了简写的 transition 属性：</p>
+
+<pre>
+div
+{
+transition: width 1s linear 2s;
+<span class="code_comment">/* Firefox 4 */</span>
+-moz-transition:width 1s linear 2s;
+<span class="code_comment">/* Safari and Chrome */</span>
+-webkit-transition:width 1s linear 2s;
+<span class="code_comment">/* Opera */</span>
+-o-transition:width 1s linear 2s;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=css3_transition4.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=css3_transition4">亲自试一试</a></p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="css3_3dtransform.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_3dtransform.asp" title="CSS3 3D 转换">CSS3 3D 转换</a></li>
+<li class="next"><a href="css3_animation.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_animation.asp" title="CSS3 动画">CSS3 动画</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.asp.htm" tppabs="http://www.w3school.com.cn/cssref/index.asp">CSS 参考手册</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

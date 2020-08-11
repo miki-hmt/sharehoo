@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>delay()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">delay()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.delay( duration [, queueName ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>设置一个延时来推迟执行队列中后续的项。
+</p>
+<ul class="signatures">
+	<li class="signature" id="delay-duration-queueName">
+		<h4 class="name">
+			<span class="version-details">V : 1.4</span>.delay( duration [, queueName ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>duration</strong> 
+				</div>
+				<div>
+					类型: Integer
+				</div>
+				<div>
+					一个整数，指示的毫秒数，用于设定下个队列推迟执行的时间。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>queueName</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					一个作为队列名的字符串。默认是动画队列 <code>fx</code>。标准的效果队列。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		在jQuery1.4中性增加的，<code>.delay()</code>方法允许我们将队列中的函数延时执行。它既可以推迟动画队列中函数的执行，也可以用于自定义队列。只有队列中连续的事件会延迟; 例如，不带参数的 <code>.show()</code> 或者 <code>.hide()</code><em>不</em>会延迟，因为他们没有使用效果队列
+	</p>
+	<p>
+		延时时间（duration参数）是以毫秒为单位的，数值越大，动画越慢，不是越快。字符串 <code>'fast'</code> 和 <code>'slow'</code> 分别代表200和600毫秒的延时。
+	</p>
+	<p>
+		使用标准效果列队，举个示例，我们可以在 <code>&lt;div id="foo"&gt;</code> 的 <code>.slideUp()</code> 和 <code>.fadeIn()</code> 动画之间设置800毫秒的延时:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#foo').slideUp(300).delay(800).fadeIn(400);</pre>
+	</div>
+	<p>
+		当这句语句执行的时候，这个元素会以300毫秒的卷起动画，接着暂停800毫秒，最后有400毫秒的淡入动画。
+	</p>
+	<blockquote>
+		<p>
+			<strong><code>.delay()</code>是用来在jQuery动画效果和类似队列中是最好的。但是，由于其本身的限制，比如无法取消延时——<code>.delay()</code>，它不是JavaScript的原生 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/setTimeout">setTimeout</a>函数的替代品，这可能是更适合某些使用情况。</strong> 
+		</p>
+	</blockquote>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">隐藏再显示两个div。其中绿色的div在显示之前，有800毫秒的延时。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div { position: absolute; width: 60px; height: 60px; float: left; }
+.first { background-color: #3f3; left: 0;}
+.second { background-color: #33f; left: 80px;}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p&gt;&lt;button&gt;Run&lt;/button&gt;&lt;/p&gt;
+&lt;div class="first"&gt;&lt;/div&gt;
+&lt;div class="second"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("button").click(function() {
+      $("div.first").slideUp(300).delay(800).fadeIn(400);
+      $("div.second").slideUp(300).fadeIn(400);
+    });&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8239" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

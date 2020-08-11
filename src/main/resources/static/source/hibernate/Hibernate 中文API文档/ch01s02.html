@@ -1,0 +1,528 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>1.2.&#160; 第一部分 － 第一个Hibernate应用程序</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch01.html" title="第&#160;1&#160;章&#160; Hibernate入门">
+<link rel="prev" href="ch01.html" title="第&#160;1&#160;章&#160; Hibernate入门">
+<link rel="next" href="ch01s03.html" title="1.3.&#160; 第二部分 － 关联映射">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="tutorial-firstapp"></a>1.2.&#160;
+	第一部分 － 第一个Hibernate应用程序
+	</h2></div></div></div>
+<p>
+	首先我们将创建一个简单的基于控制台的(console-based)Hibernate应用程序。由于我们使用Java数据库(HSQL DB)，所以不必安装任何数据库服务器。
+        </p>
+<p>
+	假设我们希望有一个小应用程序可以保存我们希望参加的活动（events）和这些活动主办方的相关信息。
+		（译者注：在本教程的后面部分，我们将直接使用event而不是它的中文翻译“活动”，以免混淆。）
+        </p>
+<p>
+	我们所做的第一件事就是创建我们的开发目录，并且把所有需要用到的Java库文件放进去。解压缩从Hibernate网站下载的Hibernate发布包，并把<code class="literal">/lib</code>目录下所有需要的库文件拷到我们新建开发目录下的<code class="literal">/lib</code>目录下。看起来就像这样：
+        </p>
+<pre class="programlisting">.
++lib
+  antlr.jar
+  cglib.jar
+  asm.jar
+  asm-attrs.jars
+  commons-collections.jar
+  commons-logging.jar
+  ehcache.jar
+  hibernate3.jar
+  jta.jar
+  dom4j.jar
+  log4j.jar </pre>
+<p>
+	<span class="emphasis"><em>到编写本文时为止</em></span>，这些是Hibernate运行所需要的最小库文件集合（注意我们也拷贝了	Hibernate3.jar，这个是最主要的文件）。你正使用的Hibernate版本可能需要比这更多或少一些的库文件。请参见发布包中的<code class="literal">lib/</code>目录下的<code class="literal">README.txt</code>，以获取更多关于所需和可选的第三方库文件信息（事实上，Log4j并不是必须的库文件，但被许多开发者所喜欢）。
+
+        </p>
+<p>
+	接下来我们创建一个类，用来代表那些我们希望储存在数据库里的event。
+        </p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="tutorial-firstapp-firstclass"></a>1.2.1.&#160;
+	第一个class
+           </h3></div></div></div>
+<p>
+	我们的第一个持久化类是一个带有一些属性（property）的简单JavaBean类：
+            </p>
+<pre class="programlisting">package events;
+
+import java.util.Date;
+
+public class Event {
+    private Long id;
+
+    private String title;
+    private Date date;
+
+    public Event() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    private void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+}</pre>
+<p>
+	你可以看到这个类对属性的存取方法（getter and setter method）使用了标准JavaBean命名约定，同时把类属性（field）的访问级别设成私有的（private）。这是推荐的设计，但并不是必须的。Hibernate也可以直接访问这些field，而使用访问方法（accessor method）的好处是提供了重构时的健壮性（robustness）。为了通过反射机制（Reflection）来实例化这个类的对象，我们需要提供一个无参的构造器（no-argument constructor)。
+            </p>
+<p>
+	对一特定的event, <code class="literal">id</code> 属性持有唯一的标识符（identifier）的值。如果我们希望使用Hibernate提供的所有特性，那么所有的持久化实体（persistent entity）类（这里也包括一些次要依赖类）都需要一个这样的标识符属性。而事实上，大多数应用程序（特别是web应用程序）都需要通过标识符来区别对象，所以你应该考虑使用标识符属性而不是把它当作一种限制。然而，我们通常不会操作对象的标识（identity），因此它的setter方法的访问级别应该声明private。这样当对象被保存的时候，只有Hibernate可以为它分配标识符值。你可看到Hibernate可以直接访问public，private和protected的访问方法和field。所以选择哪种方式完全取决于你，你可以使你的选择与你的应用程序设计相吻合。
+            </p>
+<p>
+	所有的持久化类（persistent classes）都要求有无参的构造器，因为Hibernate必须使用Java反射机制来为你创建对象。构造器（constructor）的访问级别可以是private，然而当生成运行时代理（runtime proxy）的时候则要求使用至少是package 级别的访问控制，这样在没有字节码指令（bytecode instrumentation）的情况下，从持久化类里获取数据会更有效率。
+            </p>
+<p>
+	把这个Java源代码文件放到开发目录下的<code class="literal">src</code>目录里，注意包位置要正确。 现在这个目录看起来应该像这样：
+            </p>
+<pre class="programlisting">.
++lib
+  &lt;Hibernate and third-party libraries&gt;
++src
+  +events
+    Event.java</pre>
+<p>
+	下一步，我们把这个持久化类的信息告诉Hibernate。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="tutorial-firstapp-mapping"></a>1.2.2.&#160;
+	映射文件
+	</h3></div></div></div>
+<p>
+	Hibernate需要知道怎样去加载（load）和存储（store）持久化类的对象。这正是Hibernate映射文件发挥作用的地方。映射文件告诉Hibernate它，应该访问数据库(database)里面的哪个表（table）及应该使用表里面的哪些字段（column）。
+
+            </p>
+<p>
+	一个映射文件的基本结构看起来像这样：
+            </p>
+<pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;
+
+&lt;hibernate-mapping&gt;
+[...]
+&lt;/hibernate-mapping&gt;</pre>
+<p>
+	注意Hibernate的DTD是非常复杂的。你的编辑器或者IDE里使用它来自动完成那些用来映射的XML元素（element）和属性（attribute）。你也可以在文本编辑器里打开DTD－这是最简单的方式来概览所有的元素和attribute，并查看它们的缺省值以及注释。注意Hibernate不会从web加载DTD文件，但它会首先在应用程序的classpath中查找。DTD文件已包括在<code class="literal">hibernate3.jar</code>里，同时也在Hibernate发布包的<code class="literal">src/</code>目录下。
+            </p>
+<p>
+	为缩短代码长度，在以后的例子里我们会省略DTD的声明。当然，在实际的应用程序中，DTD声明是必须的。
+            </p>
+<p>
+	在<code class="literal">hibernate-mapping</code>标签（tag）之间, 含有一个<code class="literal">class</code>元素。所有的持久化实体类（再次声明，或许接下来会有依赖类，就是那些次要的实体）都需要一个这样的映射，来把类对象映射到SQL数据库里的表。
+            </p>
+<pre class="programlisting">&lt;hibernate-mapping&gt;
+
+    &lt;class name="events.Event" table="EVENTS"&gt;
+
+    &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre>
+<p>
+	到目前为止，我们告诉了Hibernate怎样把<code class="literal">Events</code>类的对象持久化到数据库的<code class="literal">EVENTS</code>表里，以及怎样从<code class="literal">EVENTS</code>表加载到<code class="literal">Events</code>类的对象。每个实例对应着数据库表中的一行。现在我们将继续讨论有关唯一标识符属性到数据库表的映射。另外，由于我们不关心怎样处理这个标识符，我们就配置由Hibernate的标识符生成策略来产生代理主键字段。
+
+            </p>
+<pre class="programlisting">&lt;hibernate-mapping&gt;
+
+    &lt;class name="events.Event" table="EVENTS"&gt;
+        &lt;id name="id" column="EVENT_ID"&gt;
+            &lt;generator class="native"/&gt;
+        &lt;/id&gt;
+    &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre>
+<p>
+	<code class="literal">id</code>元素是标识符属性的声明，<code class="literal">name="id"</code> 声明了Java属性的名字 － Hibernate会使用<code class="literal">getId()</code>和<code class="literal">setId()</code>来访问它。  <code class="literal">column</code>属性则告诉Hibernate, 我们使用<code class="literal">EVENTS</code>表的哪个字段作为主键。嵌套的<code class="literal">generator</code>元素指定了标识符生成策略，在这里我们指定<code class="literal">native</code>，它根据已配置的数据库（方言）自动选择最佳的标识符生成策略。Hibernate支持由数据库生成，全局唯一性（globally unique）和应用程序指定（或者你自己为任何已有策略所写的扩展）这些策略来生成标识符。
+            </p>
+<p>
+	最后我们在映射文件里面包含需要持久化属性的声明。默认情况下，类里面的属性都被视为非持久化的：
+            </p>
+<pre class="programlisting">
+&lt;hibernate-mapping&gt;
+
+    &lt;class name="events.Event" table="EVENTS"&gt;
+        &lt;id name="id" column="EVENT_ID"&gt;
+            &lt;generator class="native"/&gt;
+        &lt;/id&gt;
+        &lt;property name="date" type="timestamp" column="EVENT_DATE"/&gt;
+        &lt;property name="title"/&gt;
+    &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre>
+<p>
+	和<code class="literal">id</code>元素一样，<code class="literal">property</code>元素的<code class="literal">name</code>属性告诉Hibernate使用哪个getter和setter方法。在此例中，Hibernate会寻找<code class="literal">getDate()/setDate()</code>, 以及<code class="literal">getTitle()/setTitle()</code>。
+            </p>
+<p>
+	为什么<code class="literal">date</code>属性的映射含有<code class="literal">column</code> attribute，而<code class="literal">title</code>却没有？当没有设定<code class="literal">column</code> attribute 的时候，Hibernate缺省地使用JavaBean的属性名作为字段名。对于<code class="literal">title</code>，这样工作得很好。然而，<code class="literal">date</code>在多数的数据库里，是一个保留关键字，所以我们最好把它映射成一个不同的名字。
+
+            </p>
+<p>
+	  另一有趣的事情是<code class="literal">title</code>属性缺少一个<code class="literal">type</code> attribute。我们在映射文件里声明并使用的类型，却不是我们期望的那样，是Java数据类型，同时也不是SQL数据库的数据类型。这些类型就是所谓的Hibernate 映射类型<span class="emphasis"><em>（mapping types）</em></span>，它们能把Java数据类型转换到SQL数据类型，反之亦然。再次重申，如果在映射文件中没有设置<code class="literal">type</code>属性的话，Hibernate会自己试着去确定正确的转换类型和它的映射类型。在某些情况下这个自动检测机制（在Java 类上使用反射机制）不会产生你所期待或需要的缺省值。<code class="literal">date</code>属性就是个很好的例子，Hibernate无法知道这个属性（<code class="literal">java.util.Date</code>类型的）应该被映射成：SQL <code class="literal">date</code>，或<code class="literal">timestamp</code>，还是<code class="literal">time</code> 字段。在此例中，把这个属性映射成<code class="literal">timestamp</code> 转换器，这样我们预留了日期和时间的全部信息。
+            </p>
+<p>
+	应该把这个映射文件保存为<code class="literal">Event.hbm.xml</code>，且就在<code class="literal">Event</code>Java类的源文件目录下。映射文件可随意地命名，但<code class="literal">hbm.xml</code>的后缀已成为Hibernate开发者社区的约定。现在目录结构看起来应该像这样：
+            </p>
+<pre class="programlisting">.
++lib
+  &lt;Hibernate and third-party libraries&gt;
++src
+ +events
+  Event.java
+  Event.hbm.xml</pre>
+<p>
+	我们继续进行Hibernate的主要配置。
+             </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="tutorial-firstapp-configuration"></a>1.2.3.&#160;
+	Hibernate配置
+		</h3></div></div></div>
+<p>
+	现在我们已经有了一个持久化类和它的映射文件，该是配置Hibernate的时候了。在此之前，我们需要一个数据库。 HSQL DB是种基于Java 的SQL数据库管理系统（DBMS），可以从HSQL DB的网站上下载。实际上，你只需下载的包中的<code class="literal">hsqldb.jar</code>文件，并把这个文件放在开发文件夹的<code class="literal">lib/</code>目录下即可。
+		
+            </p>
+<p>
+	在开发的根目录下创建一个<code class="literal">data</code>目录 － 这是HSQL DB存储数据文件的地方。此时在data目录中运行<code class="literal">java -classpath ../lib/hsqldb.jar org.hsqldb.Server</code>就可启动数据库。你可以在log中看到它的启动，及绑定到TCP/IP套结字，这正是我们的应用程序稍后会连接的地方。如果你希望在本例中运行一个全新的数据库，就在窗口中按下<code class="literal">CTRL + C</code>来关闭HSQL数据库，并删除<code class="literal">data/</code>目录下的所有文件，再重新启动HSQL数据库。
+            </p>
+<p>
+	Hibernate是你的应用程序里连接数据库的那层，所以它需要连接用的信息。连接（connection）是通过一个也由我们配置的JDBC连接池（connection pool）来完成的。Hibernate的发布包里包含了许多开源的（open source）连接池，但在我们例子中使用Hibernate内置的连接池。注意，如果你希望使用一个产品级(production-quality)的第三方连接池软件，你必须拷贝所需的库文件到你的classpath下，并使用不同的连接池设置。
+            </p>
+<p>
+	为了保存Hibernate的配置，我们可以使用一个简单的<code class="literal">hibernate.properties</code>文件，或者一个稍微复杂的<code class="literal">hibernate.cfg.xml</code>，甚至可以完全使用程序来配置Hibernate。多数用户更喜欢使用XML配置文件：
+            </p>
+<pre class="programlisting">&lt;?xml version='1.0' encoding='utf-8'?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"&gt;
+
+&lt;hibernate-configuration&gt;
+
+    &lt;session-factory&gt;
+
+        &lt;!-- Database connection settings --&gt;
+        &lt;property name="connection.driver_class"&gt;org.hsqldb.jdbcDriver&lt;/property&gt;
+        &lt;property name="connection.url"&gt;jdbc:hsqldb:hsql://localhost&lt;/property&gt;
+        &lt;property name="connection.username"&gt;sa&lt;/property&gt;
+        &lt;property name="connection.password"&gt;&lt;/property&gt;
+
+        &lt;!-- JDBC connection pool (use the built-in) --&gt;
+        &lt;property name="connection.pool_size"&gt;1&lt;/property&gt;
+
+        &lt;!-- SQL dialect --&gt;
+        &lt;property name="dialect"&gt;org.hibernate.dialect.HSQLDialect&lt;/property&gt;
+
+        &lt;!-- Enable Hibernate's automatic session context management --&gt;
+        &lt;property name="current_session_context_class"&gt;thread&lt;/property&gt;
+
+        &lt;!-- Disable the second-level cache  --&gt;
+        &lt;property name="cache.provider_class"&gt;org.hibernate.cache.NoCacheProvider&lt;/property&gt;
+
+        &lt;!-- Echo all executed SQL to stdout --&gt;
+        &lt;property name="show_sql"&gt;true&lt;/property&gt;
+
+        &lt;!-- Drop and re-create the database schema on startup --&gt;
+        &lt;property name="hbm2ddl.auto"&gt;create&lt;/property&gt;
+
+        &lt;mapping resource="events/Event.hbm.xml"/&gt;
+
+    &lt;/session-factory&gt;
+
+&lt;/hibernate-configuration&gt;</pre>
+<p>
+	注意这个XML配置使用了一个不同的DTD。在这里，我们配置了Hibernate的<code class="literal">SessionFactory</code>－一个关联于特定数据库全局的工厂（factory）。如果你要使用多个数据库，就要用多个的<code class="literal">&lt;session-factory&gt;</code>，通常把它们放在多个配置文件中（为了更容易启动）。
+            </p>
+<p>
+	最开始的4个<code class="literal">property</code>元素包含必要的JDBC连接信息。方言（dialect）的<code class="literal">property</code>元素指明Hibernate 生成的特定SQL变量。你很快会看到，Hibernate对持久化上下文的自动session管理就会派上用场。 打开<code class="literal">hbm2ddl.auto</code>选项将自动生成数据库模式（schema）－	直接加入数据库中。当然这个选项也可以被关闭（通过去除这个配置选项）或者通过Ant任务<code class="literal">SchemaExport</code>的帮助来把数据库schema重定向到文件中。最后，在配置中为持久化类加入映射文件。
+            </p>
+<p>
+	把这个文件拷贝到源代码目录下面，这样它就位于classpath的根目录的最后。Hibernate在启动时会自动在classpath的根目录查找名为<code class="literal">hibernate.cfg.xml</code>的配置文件。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="tutorial-firstapp-ant"></a>1.2.4.&#160;
+	用Ant构建
+            </h3></div></div></div>
+<p>
+	现在我们用Ant来构建应用程序。你必须先安装Ant－可以从<a href="http://ant.apache.org/bindownload.cgi" target="_top">Ant 下载页面</a>得到它。怎样安装Ant就不在这里介绍了，请参考<a href="http://ant.apache.org/manual/index.html" target="_top">Ant 用户手册</a>。当你安装完了Ant，就可以开始创建<code class="literal">build.xml</code>文件，把它直接放在开发目录下面。
+            </p>
+<p>
+	一个简单的build文件看起来像这样：
+            </p>
+<pre class="programlisting">&lt;project name="hibernate-tutorial" default="compile"&gt;
+
+    &lt;property name="sourcedir" value="${basedir}/src"/&gt;
+    &lt;property name="targetdir" value="${basedir}/bin"/&gt;
+    &lt;property name="librarydir" value="${basedir}/lib"/&gt;
+
+    &lt;path id="libraries"&gt;
+        &lt;fileset dir="${librarydir}"&gt;
+            &lt;include name="*.jar"/&gt;
+        &lt;/fileset&gt;
+    &lt;/path&gt;
+
+    &lt;target name="clean"&gt;
+        &lt;delete dir="${targetdir}"/&gt;
+        &lt;mkdir dir="${targetdir}"/&gt;
+    &lt;/target&gt;
+
+    &lt;target name="compile" depends="clean, copy-resources"&gt;
+      &lt;javac srcdir="${sourcedir}"
+             destdir="${targetdir}"
+             classpathref="libraries"/&gt;
+    &lt;/target&gt;
+
+    &lt;target name="copy-resources"&gt;
+        &lt;copy todir="${targetdir}"&gt;
+            &lt;fileset dir="${sourcedir}"&gt;
+                &lt;exclude name="**/*.java"/&gt;
+            &lt;/fileset&gt;
+        &lt;/copy&gt;
+    &lt;/target&gt;
+
+&lt;/project&gt;</pre>
+<p>
+	这将告诉Ant把所有在lib目录下以<code class="literal">.jar</code>结尾的文件拷贝到classpath中以供编译之用。它也把所有的非Java源代码文件，例如配置和Hibernate映射文件，拷贝到目标目录。如果你现在运行Ant，会得到以下输出：
+            </p>
+<pre class="programlisting">C:\hibernateTutorial\&gt;ant
+Buildfile: build.xml
+
+copy-resources:
+     [copy] Copying 2 files to C:\hibernateTutorial\bin
+
+compile:
+    [javac] Compiling 1 source file to C:\hibernateTutorial\bin
+
+BUILD SUCCESSFUL
+Total time: 1 second </pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="tutorial-firstapp-helpers"></a>1.2.5.&#160;
+	启动和辅助类
+		</h3></div></div></div>
+<p>
+	是时候来加载和储存一些<code class="literal">Event</code>对象了，但首先我们得编写一些基础的代码以完成设置。我们必须启动Hibernate，此过程包括创建一个全局的<code class="literal">SessoinFactory</code>，并把它储存在应用程序代码容易访问的地方。<code class="literal">SessionFactory</code>可以创建并打开新的<code class="literal">Session</code>。一个<code class="literal">Session</code>代表一个单线程的单元操作，<code class="literal">SessionFactory</code>则是个线程安全的全局对象，只需要被实例化一次。
+            </p>
+<p>
+	我们将创建一个<code class="literal">HibernateUtil</code>辅助类（helper class）来负责启动Hibernate和更方便地操作<code class="literal">SessionFactory</code>。让我们来看一下它的实现：
+            </p>
+<pre class="programlisting">package util;
+
+import org.hibernate.*;
+import org.hibernate.cfg.*;
+
+public class HibernateUtil {
+
+    private static final SessionFactory sessionFactory;
+
+    static {
+        try {
+            // Create the SessionFactory from hibernate.cfg.xml
+            sessionFactory = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            // Make sure you log the exception, as it might be swallowed
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+}</pre>
+<p>
+	这个类不但在它的静态初始化过程（仅当加载这个类的时候被JVM执行一次）中产生全局的<code class="literal">SessionFactory</code>，而且隐藏了它使用了静态singleton的事实。它也可能在应用程序服务器中的JNDI查找<code class="literal">SessionFactory</code>。
+            </p>
+<p>
+                如果你在配置文件中给<code class="literal">SessionFactory</code>一个名字，在<code class="literal">SessionFactory</code>创建后，Hibernate会试着把它绑定到JNDI。要完全避免这样的代码，你也可以使用JMX部署，让具有JMX能力的容器来实例化<code class="literal">HibernateService</code>并把它绑定到JNDI。这些高级可选项在后面的章节中会讨论到。
+            </p>
+<p>
+                把<code class="literal">HibernateUtil.java</code>放在开发目录的源代码路径下，与放<code class="literal">events</code>的包并列：
+            </p>
+<pre class="programlisting">.
++lib
+  &lt;Hibernate and third-party libraries&gt;
++src
+  +events
+    Event.java
+    Event.hbm.xml
+  +util
+    HibernateUtil.java
+  hibernate.cfg.xml
++data
+build.xml</pre>
+<p>
+	再次编译这个应用程序应该不会有问题。最后我们需要配置一个日志（logging)系统 － Hibernate使用通用日志接口，允许你在Log4j和JDK 1.4 日志之间进行选择。多数开发者更喜欢Log4j：从Hibernate的发布包中（它在<code class="literal">etc/</code>目录下）拷贝<code class="literal">log4j.properties</code>到你的<code class="literal">src</code>目录，与<code class="literal">hibernate.cfg.xml</code>.放在一起。看一下配置示例，如果你希望看到更加详细的输出信息，你可以修改配置。默认情况下，只有Hibernate的启动信息才会显示在标准输出上。
+            </p>
+<p>
+	示例的基本框架完成了 － 现在我们可以用Hibernate来做些真正的工作。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="tutorial-firstapp-workingpersistence"></a>1.2.6.&#160;
+	加载并存储对象
+		</h3></div></div></div>
+<p>
+	我们终于可以使用Hibernate来加载和存储对象了，编写一个带有<code class="literal">main()</code>方法的<code class="literal">EventManager</code>类：
+
+            </p>
+<pre class="programlisting">package events;
+import org.hibernate.Session;
+
+import java.util.Date;
+
+import util.HibernateUtil;
+
+public class EventManager {
+
+    public static void main(String[] args) {
+        EventManager mgr = new EventManager();
+
+        if (args[0].equals("store")) {
+            mgr.createAndStoreEvent("My Event", new Date());
+        }
+
+        HibernateUtil.getSessionFactory().close();
+    }
+
+    private void createAndStoreEvent(String title, Date theDate) {
+
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        session.beginTransaction();
+
+        Event theEvent = new Event();
+        theEvent.setTitle(title);
+        theEvent.setDate(theDate);
+
+        session.save(theEvent);
+
+        session.getTransaction().commit();
+    }
+
+}</pre>
+<p>
+	我们创建了个新的<code class="literal">Event</code>对象并把它传递给Hibernate。现在Hibernate负责与SQL打交道，并把<code class="literal">INSERT</code>命令传给数据库。在运行之前，让我们看一下处理<code class="literal">Session</code>和<code class="literal">Transaction</code>的代码。
+		
+            </p>
+<p>
+                一个<code class="literal">Session</code>就是个单一的工作单元。我们暂时让事情简单一些，并假设Hibernate<code class="literal">Session</code>和数据库事务是一一对应的。为了让我们的代码从底层的事务系统中脱离出来（此例中是JDBC，但也可能是JTA），我们使用Hibernate <code class="literal">Session</code>中的<code class="literal">Transaction</code> API。
+            </p>
+<p>
+                <code class="literal">sessionFactory.getCurrentSession()</code>是干什么的呢？首先，只要你持有<code class="literal">SessionFactory</code>（幸亏我们有<code class="literal">HibernateUtil</code>，可以随时获得），大可在任何时候、任何地点调用这个方法。<code class="literal">getCurrentSession()</code>方法总会返回“当前的”工作单元。记得我们在<code class="literal">hibernate.cfg.xml</code>中把这一配置选项调整为"thread"了吗？因此，因此，当前工作单元被绑定到当前执行我们应用程序的Java线程。但是，这并非是完全准确的,你还得考虑工作单元的生命周期范围 (scope),它何时开始,又何时结束. 
+             </p>
+<p>
+                <code class="literal">Session</code>在第一次被使用的时候,即第一次调用<code class="literal">getCurrentSession()</code>的时候,其生命周期就开始。然后它被Hibernate绑定到当前线程。当事务结束的时候，不管是提交还是回滚，Hibernate会自动把<code class="literal">Session</code>从当前线程剥离，并且关闭它。假若你再次调用<code class="literal">getCurrentSession()</code>，你会得到一个新的<code class="literal">Session</code>，并且开始一个新的工作单元。这种<span class="emphasis"><em>线程绑定(thread-bound)</em></span>的编程模型（model）是使用Hibernate的最广泛的方式,因为它支持对你的代码灵活分层(事务划分可以和你的数据访问代码分离开来,在本教程的后面部分就会这么做)。
+  
+            </p>
+<p>
+                
+                和工作单元的生命周期这个话题相关，Hibernate <code class="literal">Session</code>是否被应该用来执行多次数据库操作？上面的例子对每一次操作使用了一个<code class="literal">Session</code>，这完全是巧合，这个例子不是很复杂，无法展示其他方式。Hibernate <code class="literal">Session</code>的生命周期可以很灵活，但是你绝不要把你的应用程序设计成为<span class="emphasis"><em>每一次</em></span>数据库操作都用一个新的Hibernate <code class="literal">Session</code>。因此就算下面的例子（它们都很简单）中你可以看到这种用法，记住<span class="emphasis"><em>每次操作一个session</em></span>是一个反模式。在本教程的后面会展示一个真正的(web)程序。
+            </p>
+<p>
+                关于事务处理及事务边界界定的详细信息，请参看<a href="ch11.html" title="第&#160;11&#160;章&#160;事务和并发">第&#160;11&#160;章 <i>事务和并发</i></a>。在上面的例子中，我们也忽略了所有的错误与回滚的处理。
+            </p>
+<p>
+	为第一次运行我们的程序，我们得在Ant的build文件中增加一个可以调用得到的target。
+            </p>
+<pre class="programlisting">&lt;target name="run" depends="compile"&gt;
+    &lt;java fork="true" classname="events.EventManager" classpathref="libraries"&gt;
+        &lt;classpath path="${targetdir}"/&gt;
+        &lt;arg value="${action}"/&gt;
+    &lt;/java&gt;
+&lt;/target&gt;</pre>
+<p>
+                <code class="literal">action</code>参数（argument）的值是通过命令行调用这个target的时候设置的：
+            </p>
+<pre class="programlisting">C:\hibernateTutorial\&gt;ant run -Daction=store</pre>
+<p>
+	你应该会看到，编译以后，Hibernate根据你的配置启动，并产生一大堆的输出日志。在日志最后你会看到下面这行：
+            </p>
+<pre class="programlisting">[java] Hibernate: insert into EVENTS (EVENT_DATE, title, EVENT_ID) values (?, ?, ?)</pre>
+<p>
+	这是Hibernate执行的<code class="literal">INSERT</code>命令，问号代表JDBC的绑定参数。如果想要看到绑定参数的值或者减少日志的长度，就要调整你在<code class="literal">log4j.properties</code>文件里的设置。
+            </p>
+<p>
+	我们想要列出所有已经被存储的events，就要增加一个条件分支选项到main方法中去。
+            </p>
+<pre class="programlisting">if (args[0].equals("store")) {
+    mgr.createAndStoreEvent("My Event", new Date());
+}
+else if (args[0].equals("list")) {
+    List events = mgr.listEvents();
+    for (int i = 0; i &lt; events.size(); i++) {
+        Event theEvent = (Event) events.get(i);
+        System.out.println("Event: " + theEvent.getTitle() +
+                           " Time: " + theEvent.getDate());
+    }
+}</pre>
+<p>
+	我们也增加一个新的<code class="literal">listEvents()</code>方法:
+            </p>
+<pre class="programlisting">private List listEvents() {
+
+    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+    session.beginTransaction();
+
+    List result = session.createQuery("from Event").list();
+
+    session.getTransaction().commit();
+
+    return result;
+}</pre>
+<p>
+	我们在这里是用一个HQL（Hibernate Query Language－Hibernate查询语言）查询语句来从数据库中加载所有存在的<code class="literal">Event</code>对象。Hibernate会生成适当的SQL，把它发送到数据库，并操作从查询得到数据的<code class="literal">Event</code>对象。当然，你可以使用HQL来创建更加复杂的查询。
+            </p>
+<p>
+	现在，根据以下步骤来执行并测试以上各项：
+            </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+                        运行<code class="literal">ant run -Daction=store</code>来保存一些内容到数据库。当然，先得用hbm2ddl来生成数据库schema。
+                    </p></li>
+<li><p>
+                        现在把<code class="literal">hibernate.cfg.xml</code>文件中hbm2ddl属性注释掉，这样我们就取消了在启动时用hbm2ddl来生成数据库schema。通常只有在不断重复进行单元测试的时候才需要打开它，但再次运行hbm2ddl会把你保存的一切都删掉（<span class="emphasis"><em>drop</em></span>）——<code class="literal">create</code>配置的真实含义是：“在创建SessionFactory的时候，从schema 中drop 掉所有的表，再重新创建它们”。
+                    </p></li>
+</ul></div>
+<p>
+	如果你现在使用命令行参数<code class="literal">-Daction=list</code>运行Ant，你会看到那些至今为止我们所储存的events。当然，你也可以多调用几次<code class="literal">store</code>以保存更多的envents。
+            </p>
+<p>
+                注意，很多Hibernate新手在这一步会失败，我们不时看到关于<span class="emphasis"><em>Table not found</em></span>错误信息的提问。但是，只要你根据上面描述的步骤来执行，就不会有这个问题，因为hbm2ddl会在第一次运行的时候创建数据库schema，后继的应用程序重起后还能继续使用这个schema。假若你修改了映射，或者修改了数据库schema，你必须把hbm2ddl重新打开一次。
+            </p>
+</div>
+</div></body>
+</html>

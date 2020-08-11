@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>size()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">size()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.size()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader6" target="_blank">Number</a> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>返回的jQuery对象匹配的DOM元素的数量。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="size">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.size()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>.size()</code>方法从jQuery 1.8开始被废弃。使用<code><a href="http://www.shouce.ren/api/view/a/12786" class="book-a">.length</a></code>属性代替。
+		</p>
+		<p>
+			<code>.size()</code>方法功能上等价于<code><a href="http://www.shouce.ren/api/view/a/12786" class="book-a">.length</a></code>属性。但是<strong><code>.length</code> 属性是首选的</strong>，因为它没有函数调用时的额外开销。
+		</p>
+		<p>
+			假设页面上有下面一个简单的无序列表：
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;ul&gt;
+  &lt;li&gt;foo&lt;/li&gt;
+  &lt;li&gt;bar&lt;/li&gt;
+&lt;/ul&gt;</pre>
+		</div>
+		<p>
+			<code>.size()</code> 和 <code>.length</code> 识别的项目数：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">alert( "Size: " + $("li").size() );
+alert( "Size: " + $("li").length );</pre>
+		</div>
+		<p>
+			结果两个提示：
+		</p>
+		<p>
+			<span class="output">Size: 2</span> 
+		</p>
+		<p>
+			<span class="output">Size: 2</span> 
+		</p>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h3 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+</header>
+	<h4>
+		<span class="desc">实例</span>
+	</h4>
+	<p>
+		<span class="desc">统计 div 的个数。点击时添加一个 div。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  body { cursor:pointer; min-height: 100px; }
+  div { width:50px; height:30px; margin:5px;
+        float:left; background:blue; }
+  span { color:red; }
+ &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;span&gt;&lt;/span&gt;
+ &lt;div&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+$(document.body)
+.click(function() {
+  $(this).append( $("&lt;div&gt;") );
+  var n = $("div").size();
+  $("span").text("There are " + n + " divs. Click to add more.");
+})
+// trigger the click to start
+.click();
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8000" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

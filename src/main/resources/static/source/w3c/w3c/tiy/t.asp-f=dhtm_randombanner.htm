@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset=GB2312"gb2312" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+
+<link rel="stylesheet" type="text/css" href="tc.css" tppabs="http://www.w3school.com.cn/tiy/tc.css" />
+
+<title>W3School在线测试工具 V2</title>
+</head>
+
+<body id="editor">
+
+<div id="wrapper">
+
+<div id="header">
+<h1>W3School TIY</h1>
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, tiy_big */
+google_ad_slot = "7947784850";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<form action="http://www.w3school.com.cn/tiy/v.asp" method="post" id="tryitform" name="tryitform" onSubmit="validateForm();" target="i">
+
+<div id="butt">
+<input type="button" value="提交代码" onClick="submitTryit()">
+</div>
+
+<div id="CodeArea">
+<h2>编辑您的代码：</h2>
+<textarea id="TestCode" wrap="logical">
+<html>
+<body>
+
+<script type="text/javascript">
+image0="../i/t.asp-f=js_function3"/*tpa=http://www.w3school.com.cn/i/eg_banner_w3school.gif*/
+href0="../index.html"/*tpa=http://www.w3school.com.cn/index.html*/
+alt0="t.asp-f=js_function_return.htm"/*tpa=http://www.w3school.com.cn/tiy/t.asp?f=js_function_return*/
+
+image1="../i/pro_js_functions.asp"/*tpa=http://www.w3school.com.cn/i/eg_banner_htmlref.gif*/
+href1="../tags/index.asp.htm"/*tpa=http://www.w3school.com.cn/tags/index.asp*/
+alt1="HTML 4.01 / XHTML 1.0 参考手册"
+
+image2="../i/pro_js_functions_arguments_object.asp"/*tpa=http://www.w3school.com.cn/i/eg_banner_jsref.gif*/
+href2="http://www.w3school.com.cn/js//js/js_reference.asp"
+alt2="JavaScript 参考手册"
+
+len=3
+
+now=new Date()
+now=now.getSeconds()
+rnd=now%len
+
+image=eval("image"+rnd)
+href=eval("href"+rnd)
+alt=eval("alt"+rnd)
+
+document.write("<a href='" + href + "'>")
+document.write("<img src='" + image + "' alt='" + alt + "'></a>")
+</script>
+
+<h3>请刷新该页面，您会看到广告条的变化。</h3>
+
+</body>
+</html>
+</textarea>
+</div>
+
+<input type="hidden" id="code" name="code"  />
+<input type="hidden" id="bt" name="bt" />
+
+</form>
+
+<div id="result">
+<h2>查看结果:</h2>
+<iframe frameborder="0" name="i" src="pro_js_functions_function_object.asp" tppabs="http://www.w3school.com.cn/tiy/loadtext.asp?f=dhtm_randombanner"></iframe>
+</div>
+
+<div id="footer">
+<p>请在上面的文本框中编辑您的代码，然后单击提交按钮测试结果。<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="W3School 在线教程">w3school.com.cn</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+function submitTryit()
+{
+var t=document.getElementById("TestCode").value;
+t=t.replace(/=/gi,"w3equalsign");
+t=t.replace(/script/gi,"w3scrw3ipttag");
+
+document.getElementById("code").value=t;
+
+document.getElementById("tryitform").action="http://www.w3school.com.cn/tiy/v.asp";
+
+validateForm();
+
+document.getElementById("tryitform").submit();
+}
+
+function validateForm()
+{
+var code=document.getElementById("code").value;
+if (code.length>5000)
+	{
+	document.getElementById("code").value="<h1>Error</h1>";
+	}
+}
+</script>
+
+</body>
+</html>

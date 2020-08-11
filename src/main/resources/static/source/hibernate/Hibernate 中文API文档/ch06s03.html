@@ -1,0 +1,252 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>6.3.&#160;高级集合映射（Advanced collection mappings）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch06.html" title="第&#160;6&#160;章&#160;集合类(Collections)映射">
+<link rel="prev" href="ch06s02.html" title="6.2.&#160;集合映射（ Collection mappings ）">
+<link rel="next" href="ch06s04.html" title="6.4.&#160;集合例子（Collection example）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="collections-advancedmappings"></a>6.3.&#160;高级集合映射（Advanced collection mappings）</h2></div></div></div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="collections-sorted"></a>6.3.1.&#160;有序集合（Sorted collections）</h3></div></div></div>
+<p>
+                Hibernate支持实现<code class="literal">java.util.SortedMap</code>和<code class="literal">java.util.SortedSet</code>的集合。
+你必须在映射文件中指定一个比较器：
+            </p>
+<pre class="programlisting">&lt;set name="aliases" 
+            table="person_aliases" 
+            sort="natural"&gt;
+    &lt;key column="person"/&gt;
+    &lt;element column="name" type="string"/&gt;
+&lt;/set&gt;
+
+&lt;map name="holidays" sort="my.custom.HolidayComparator"&gt;
+    &lt;key column="year_id"/&gt;
+    &lt;map-key column="hol_name" type="string"/&gt;
+    &lt;element column="hol_date" type="date"/&gt;
+&lt;/map&gt;</pre>
+<p>
+                <code class="literal">sort</code>属性中允许的值包括<code class="literal">unsorted</code>,<code class="literal">natural</code>和某个实现了<code class="literal">java.util.Comparator</code>的类的名称。
+            </p>
+<p>
+                分类集合的行为事实上象<code class="literal">java.util.TreeSet</code>或者<code class="literal">java.util.TreeMap</code>。
+            </p>
+<p>
+                如果你希望数据库自己对集合元素排序，可以利用<code class="literal">set</code>,<code class="literal">bag</code>或者<code class="literal">map</code>映射中的<code class="literal">order-by</code>属性。这个解决方案只能在jdk1.4或者更高的jdk版本中才可以实现(通过LinkedHashSet或者
+LinkedHashMap实现)。 它是在SQL查询中完成排序，而不是在内存中。
+            </p>
+<pre class="programlisting">&lt;set name="aliases" table="person_aliases" order-by="lower(name) asc"&gt;
+    &lt;key column="person"/&gt;
+    &lt;element column="name" type="string"/&gt;
+&lt;/set&gt;
+
+&lt;map name="holidays" order-by="hol_date, hol_name"&gt;
+    &lt;key column="year_id"/&gt;
+    &lt;map-key column="hol_name" type="string"/&gt;
+    &lt;element column="hol_date" type="date"/&gt;
+&lt;/map&gt;</pre>
+<p>
+                注意: 这个<code class="literal">order-by</code>属性的值是一个SQL排序子句而不是HQL的！
+            </p>
+<p>
+                关联还可以在运行时使用集合<code class="literal">filter()</code>根据任意的条件来排序。
+            </p>
+<pre class="programlisting">sortedUsers = s.createFilter( group.getUsers(), "order by this.name" ).list();</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="collections-bidirectional"></a>6.3.2.&#160;双向关联（Bidirectional associations）</h3></div></div></div>
+<p>
+                <span class="emphasis"><em>双向关联</em></span>允许通过关联的任一端访问另外一端。在Hibernate中, 支持两种类型的双向关联:
+
+                </p>
+<div class="variablelist"><dl>
+<dt><span class="term">一对多（one-to-many）</span></dt>
+<dd><p>
+						    Set或者bag值在一端, 单独值(非集合)在另外一端
+                            </p></dd>
+<dt><span class="term">多对多（many-to-many）</span></dt>
+<dd><p>
+				        两端都是set或bag值
+                            </p></dd>
+</dl></div>
+<p>
+            
+            </p>
+<p>
+                要建立一个双向的多对多关联，只需要映射两个many-to-many关联到同一个数据库表中，并再定义其中的一端为<span class="emphasis"><em>inverse</em></span>(使用哪一端要根据你的选择，但它不能是一个索引集合)。
+            </p>
+<p>
+		这里有一个many-to-many的双向关联的例子;每一个category都可以有很多items,每一个items可以属于很多categories：
+		</p>
+<pre class="programlisting">&lt;class name="Category"&gt;
+    &lt;id name="id" column="CATEGORY_ID"/&gt;
+    ...
+    &lt;bag name="items" table="CATEGORY_ITEM"&gt;
+        &lt;key column="CATEGORY_ID"/&gt;
+        &lt;many-to-many class="Item" column="ITEM_ID"/&gt;
+    &lt;/bag&gt;
+&lt;/class&gt;
+
+&lt;class name="Item"&gt;
+    &lt;id name="id" column="CATEGORY_ID"/&gt;
+    ...
+
+    &lt;!-- inverse end --&gt;
+    &lt;bag name="categories" table="CATEGORY_ITEM" inverse="true"&gt;
+        &lt;key column="ITEM_ID"/&gt;
+        &lt;many-to-many class="Category" column="CATEGORY_ID"/&gt;
+    &lt;/bag&gt;
+&lt;/class&gt;</pre>
+<p>
+                如果只对关联的反向端进行了改变，这个改变<span class="emphasis"><em>不会</em></span>被持久化。
+            这表示Hibernate为每个双向关联在内存中存在两次表现,一个从A连接到B,另一个从B连接到A。如果你回想一下Java对象模型，我们是如何在Java中创建多对多关系的，这可以让你更容易理解：
+
+            </p>
+<pre class="programlisting">
+category.getItems().add(item);          // The category now "knows" about the relationship
+item.getCategories().add(category);     // The item now "knows" about the relationship
+
+session.persist(item);                   // The relationship won''t be saved!
+session.persist(category);               // The relationship will be saved</pre>
+<p>
+            非反向端用于把内存中的表示保存到数据库中。
+        </p>
+<p>
+                要建立一个一对多的双向关联，你可以通过把一个一对多关联，作为一个多对一关联映射到到同一张表的字段上，并且在"多"的那一端定义<code class="literal">inverse="true"</code>。
+            </p>
+<pre class="programlisting">&lt;class name="Parent"&gt;
+    &lt;id name="id" column="parent_id"/&gt;
+    ....
+    &lt;set name="children" inverse="true"&gt;
+        &lt;key column="parent_id"/&gt;
+        &lt;one-to-many class="Child"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;
+
+&lt;class name="Child"&gt;
+    &lt;id name="id" column="child_id"/&gt;
+    ....
+    &lt;many-to-one name="parent" 
+        class="Parent" 
+        column="parent_id"
+        not-null="true"/&gt;
+&lt;/class&gt;</pre>
+<p>
+                在“一”这一端定义<code class="literal">inverse="true"</code>不会影响级联操作，二者是正交的概念！
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="collections-indexedbidirectional"></a>6.3.3.&#160;双向关联，涉及有序集合类</h3></div></div></div>
+<p>
+            对于有一端是<code class="literal">&lt;list&gt;</code>或者<code class="literal">&lt;map&gt;</code>的双向关联，需要加以特别考虑。假若子类中的一个属性映射到索引字段，没问题，我们仍然可以在集合类映射上使用<code class="literal">inverse="true"</code>：
+        </p>
+<pre class="programlisting">&lt;class name="Parent"&gt;
+    &lt;id name="id" column="parent_id"/&gt;
+    ....
+    &lt;map name="children" inverse="true"&gt;
+        &lt;key column="parent_id"/&gt;
+        &lt;map-key column="name" 
+            type="string"/&gt;
+        &lt;one-to-many class="Child"/&gt;
+    &lt;/map&gt;
+&lt;/class&gt;
+
+&lt;class name="Child"&gt;
+    &lt;id name="id" column="child_id"/&gt;
+    ....
+    &lt;property name="name" 
+        not-null="true"/&gt;
+    &lt;many-to-one name="parent" 
+        class="Parent" 
+        column="parent_id"
+        not-null="true"/&gt;
+&lt;/class&gt;</pre>
+<p>
+            但是，假若子类中没有这样的属性存在，我们不能认为这个关联是真正的双向关联（信息不对称，在关联的一端有一些另外一端没有的信息）。在这种情况下，我们不能使用<code class="literal">inverse="true"</code>。我们需要这样用：
+        </p>
+<pre class="programlisting">&lt;class name="Parent"&gt;
+    &lt;id name="id" column="parent_id"/&gt;
+    ....
+    &lt;map name="children"&gt;
+        &lt;key column="parent_id"
+            not-null="true"/&gt;
+        &lt;map-key column="name" 
+            type="string"/&gt;
+        &lt;one-to-many class="Child"/&gt;
+    &lt;/map&gt;
+&lt;/class&gt;
+
+&lt;class name="Child"&gt;
+    &lt;id name="id" column="child_id"/&gt;
+    ....
+    &lt;many-to-one name="parent" 
+        class="Parent" 
+        column="parent_id"
+        insert="false"
+        update="false"
+        not-null="true"/&gt;
+&lt;/class&gt;</pre>
+<p>
+           注意在这个映射中，关联中集合类"值"一端负责来更新外键.TODO: Does this really result in some unnecessary update statements?
+       </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="collections-ternary"></a>6.3.4.&#160;三重关联（Ternary associations）</h3></div></div></div>
+<p>
+            	有三种可能的途径来映射一个三重关联。第一种是使用一个<code class="literal">Map</code>，把一个关联作为其索引：
+            </p>
+<pre class="programlisting">&lt;map name="contracts"&gt;
+    &lt;key column="employer_id" not-null="true"/&gt;
+    &lt;map-key-many-to-many column="employee_id" class="Employee"/&gt;
+    &lt;one-to-many class="Contract"/&gt;
+&lt;/map&gt;</pre>
+<pre class="programlisting">&lt;map name="connections"&gt;
+    &lt;key column="incoming_node_id"/&gt;
+    &lt;map-key-many-to-many column="outgoing_node_id" class="Node"/&gt;
+    &lt;many-to-many column="connection_id" class="Connection"/&gt;
+&lt;/map&gt;</pre>
+<p>
+        第二种方法是简单的把关联重新建模为一个实体类。这使我们最经常使用的方法。
+        </p>
+<p>
+        最后一种选择是使用复合元素，我们会在后面讨论
+        </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="collections-idbag"></a>6.3.5.&#160;<code class="literal">使用&lt;idbag&gt;</code></h3></div></div></div>
+<p>
+                如果你完全信奉我们对于“联合主键（composite keys）是个坏东西”，和“实体应该使用（无机的）自己生成的代用标识符（surrogate keys）”的观点，也许你会感到有一些奇怪，我们目前为止展示的多对多关联和值集合都是映射成为带有联合主键的表的！现在，这一点非常值得争辩；看上去一个单纯的关联表并不能从代用标识符中获得什么好处（虽然使用组合值的集合<span class="emphasis"><em>可能</em></span>会获得一点好处）。不过，Hibernate提供了一个（一点点试验性质的）功能，让你把多对多关联和值集合应得到一个使用代用标识符的表去。
+            </p>
+<p>
+                <code class="literal">&lt;idbag&gt;</code> 属性让你使用bag语义来映射一个<code class="literal">List</code> (或<code class="literal">Collection</code>)。
+            </p>
+<pre class="programlisting">&lt;idbag name="lovers" table="LOVERS"&gt;
+    &lt;collection-id column="ID" type="long"&gt;
+        &lt;generator class="sequence"/&gt;
+    &lt;/collection-id&gt;
+    &lt;key column="PERSON1"/&gt;
+    &lt;many-to-many column="PERSON2" class="Person" fetch="join"/&gt;
+&lt;/idbag&gt;</pre>
+<p>
+                你可以理解，<code class="literal">&lt;idbag&gt;</code>人工的id生成器，就好像是实体类一样！集合的每一行都有一个不同的人造关键字。但是，Hibernate没有提供任何机制来让你取得某个特定行的人造关键字。
+            </p>
+<p>
+                注意<code class="literal">&lt;idbag&gt;</code>的更新性能要比普通的<code class="literal">&lt;bag&gt;</code>高得多！Hibernate可以有效的定位到不同的行，分别进行更新或删除工作，就如同处理一个list, map或者set一样。
+                
+            </p>
+<p>
+                在目前的实现中，还不支持使用<code class="literal">identity</code>标识符生成器策略来生成<code class="literal">&lt;idbag&gt;</code>集合的标识符。
+            </p>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>scrollTop()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">scrollTop()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.scrollTop()
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Number</code> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>获取匹配的元素集合中第一个元素的当前垂直滚动条的位置或设置每个匹配元素的垂直滚动条位置。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="scrollTop">
+			<h4 class="name">
+				<span class="version-details">V : 1.2.6</span>.scrollTop()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			滚动条垂直位置和滚动区隐藏区域的顶部高度像素值是相同的。如果滚动条是在最顶部，或者这个元素没有可滚动的，那么这个数字是<code>0</code>。
+		</p>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h3 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+</header>
+	<h4>
+		<span class="desc">实例</span> 
+	</h4>
+	<p>
+		<span class="desc">获取段落的scrollTop。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { margin:10px;padding:5px;border:2px solid #666; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
+&lt;script&gt;var p = $("p:first");
+$("p:last").text( "scrollTop:" + p.scrollTop() );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8042" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<p>
+</p>
+<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.scrollTop( value )
+	</blockquote>
+</h3>
+返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+<p>
+</p>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>设置每个匹配元素的垂直滚动条位置
+</p>
+<ul class="signatures">
+	<li class="signature" id="scrollTop-value">
+		<h4 class="name">
+			<span class="version-details">V : 1.2.6</span>.scrollTop( value )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>value</strong> 
+				</div>
+				<div>
+					类型: <code>Number</code> 
+				</div>
+				<div>
+					一个用来设置滚动条垂直位置的数字。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc-1">
+	<p>
+		滚动条垂直位置和滚动区隐藏区域的顶部高度像素值是相同的。<code>scrollTop</code>为每个匹配元素设置滚动条的垂直位置。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<h4>
+	<span class="desc">设置一个div的scrollTop。</span> 
+</h4>
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div.demo {
+background:#CCCCCC none repeat scroll 0 0;
+border:3px solid #666666;
+margin:5px;
+padding:5px;
+position:relative;
+width:200px;
+height:100px;
+overflow:auto;
+}
+  p { margin:10px;padding:5px;border:2px solid #666;width:1000px;height:1000px; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="demo"&gt;&lt;h1&gt;lalala&lt;/h1&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;
+&lt;script&gt;$("div.demo").scrollTop(300);
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8043" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

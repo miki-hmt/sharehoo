@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>event.which</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">event.which</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>String</code> 
+	</p>
+	<p>
+		<strong>描述：</strong>针对键盘和鼠标事件，这个属性能确定你到底按的是哪个键。
+	</p>
+	<div class="longdesc">
+		<p>
+		</p>
+		<div class="longdesc" id="entry-longdesc">
+			<p>
+				<code>event.which</code> 将 <code>event.keyCode</code> 和 <code>event.charCode</code> 标准化了。推荐用 <code>event.which</code> 来监视键盘输入。更多细节请参阅： <a href="https://developer.mozilla.org/en/DOM/event.charCode#Notes">event.charCode on the MDN</a>.
+			</p>
+			<p>
+				<code>event.which</code>也将正常化的按钮按下(<code>mousedown</code> 和 <code>mouseup</code>events)，左键报告<code>1</code>，中间键报告<code>2</code>，右键报告<code>3</code>。使用<code>event.which</code>代替<code>event.button</code>。
+			</p>
+		</div>
+		<p>
+		</p>
+	</div>
+</div>
+<p>
+</p>
+<header>
+<h2 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h2>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">记录按键</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;input id="whichkey" value="type something"&gt;
+&lt;div id="log"&gt;&lt;/div&gt;
+&lt;script&gt;$('#whichkey').bind('keydown',function(e){
+  $('#log').html(e.type + ': ' +  e.which );
+});  &lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8256" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">Log which mouse button was depressed.</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;input id="whichkey" value="type something"&gt;
+&lt;div id="log"&gt;&lt;/div&gt;
+&lt;script&gt;
+$('#whichkey').bind('mousedown',function(e){
+  $('#log').html(e.type + ': ' +  e.which );
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8255" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

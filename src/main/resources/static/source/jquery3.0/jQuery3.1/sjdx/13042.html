@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>event.stopImmediatePropagation()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">event.stopImmediatePropagation()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Object</code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong> 阻止剩余的事件处理函数执行并且防止事件冒泡到DOM树上。
+</p>
+<ul class="signatures">
+	<li class="signature" id="event-stopImmediatePropagation">
+		<h4 class="name">
+			<span class="version-details">V : 1.3</span>event.stopImmediatePropagation()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					这个方法不接受任何参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		除了阻止元素上其它的事件处理函数的执行，这个方法还会通过在内部调用 <code>event.stopPropagation()</code> 来停止事件冒泡。如果仅仅想要停止事件冒泡到祖辈元素上，而让这个元素上的其它事件处理函数继续执行，我们可以使用 <code> event.stopPropagation() </code> 来代替。
+	</p>
+	<p>
+		使用 <code> event.isImmediatePropagationStopped() </code> 来确定这个方法是否(在那个事件对象上)调用过了。
+	</p>
+</div>
+<h3>
+	Additional Notes:（其他注意事项：）
+</h3>
+<div class="longdesc">
+	<ul>
+		自从<code>.live()</code>方法处理事件一旦传播到文档的顶部，live事件是不可能停止传播的。同样地，<code>.delegate()</code> 事件将始终传播给其中包含的被委托元素；
+元素上的事件将在被委托事件被调用的时候执行。因此，这些处理程序，可以调用<code>event.stopPropagation()</code>或者返回<code>false</code>防止委派处理程序冒泡。
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">阻止调用其它事件处理函数。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+p { height: 30px; width: 150px; background-color: #ccf; }
+div {height: 30px; width: 150px; background-color: #cfc; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;paragraph&lt;/p&gt;
+&lt;div&gt;division&lt;/div&gt;
+&lt;script&gt;
+$("p").click(function(event){
+  event.stopImmediatePropagation();
+});
+$("p").click(function(event){
+  // This function won't be executed
+  $(this).css("background-color", "#f00");
+});
+$("div").click(function(event) {
+  // This function will be executed
+    $(this).css("background-color", "#f00");
+});&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8251" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

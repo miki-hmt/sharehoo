@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.browser.version</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.browser.version<span class="g-bg-red margin-l-5">1.9-</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.browser.version
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>String</code>
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>用户的浏览器渲染引擎的版本号。
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.1.3</span>jQuery.browser.version
+		</h4>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc-1">
+	<p>
+		以下是一些典型的结果：
+	</p>
+	<ul>
+		<li>
+			Internet Explorer: 6.0, 7.0, 8.0
+		</li>
+		<li>
+			Mozilla/Firefox/Flock/Camino: 1.7.12, 1.8.1.3, 1.9
+		</li>
+		<li>
+			Opera: 10.06, 11.01
+		</li>
+		<li>
+			Safari/Webkit: 312.8, 418.9
+		</li>
+	</ul>
+	<p>
+		请注意，IE8兼容性视要求成为ie 7。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-1-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">Returns the version number of the 
+rendering engine used by the user's current browser. For example, 
+FireFox 4 returns 2.0 (the version of the Gecko rendering engine it 
+utilizes).</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:blue; margin:20px; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p&gt;&lt;/p&gt;
+ 
+&lt;script&gt;
+$("p").html( "The version number of the rendering engine your browser uses is: &lt;span&gt;" +
+                $.browser.version + "&lt;/span&gt;" );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8190" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div>
+<div class="entry-example" id="example-1-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">Alerts the version of IE's rendering engine that is being used:</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">if ( $.browser.msie ) {
+  alert( $.browser.version );
+}</pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">Often you only care about the "major number," the whole number, which you can get by using JavaScript's built-in <code>parseInt()</code> function:</span> 
+</p>
+<pre class="prettyprint lang-js">if ( $.browser.msie ) {
+  alert( parseInt($.browser.version, 10) );
+}</pre>
+<p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

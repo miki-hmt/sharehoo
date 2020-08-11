@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>jQuery 参考手册 - 事件</title>
+</head>
+
+<body class="browserscripting">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>jQuery 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/jquery/index.asp" title="jQuery 教程">jQuery 教程</a></li>
+<li><a href="jquery_intro.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_intro.asp" title="jQuery 简介">jQuery 简介</a></li>
+<li><a href="jquery_install.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_install.asp" title="jQuery 安装">jQuery 安装</a></li>
+<li><a href="jquery_syntax.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_syntax.asp" title="jQuery 语法">jQuery 语法</a></li>
+<li><a href="jquery_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_selectors.asp" title="jQuery 选择器">jQuery 选择器</a></li>
+<li><a href="jquery_events.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_events.asp" title="jQuery 事件">jQuery 事件</a></li>
+</ul>
+<h2>jQuery 效果</h2>
+<ul>
+<li><a href="jquery_hide_show.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_hide_show.asp" title="jQuery jQuery 效果 - 隐藏和显示">jQuery 隐藏/显示</a></li>
+<li><a href="jquery_fade.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_fade.asp" title="jQuery jQuery 效果 - 淡入淡出">jQuery 淡入淡出</a></li>
+<li><a href="jquery_slide.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_slide.asp" title="jQuery 效果 - 滑动">jQuery 滑动</a></li>
+<li><a href="jquery_animate.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_animate.asp" title="jQuery 效果 - 动画">jQuery 动画</a></li>
+<li><a href="jquery_stop.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_stop.asp" title="jQuery 停止动画">jQuery stop()</a></li>
+<li><a href="jquery_callback.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_callback.asp" title="jQuery 回调函数">jQuery Callback</a></li>
+<li><a href="jquery_chaining.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_chaining.asp" title="jQuery - Chaining">jQuery Chaining</a></li>
+</ul>
+<h2>jQuery HTML</h2>
+<ul>
+<li><a href="jquery_dom_get.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dom_get.asp" title="jQuery - 获取内容和属性">jQuery 获取</a></li>
+<li><a href="jquery_dom_set.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dom_set.asp" title="jQuery - 设置内容和属性">jQuery 设置</a></li>
+<li><a href="jquery_dom_add.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dom_add.asp" title="jQuery - 添加元素">jQuery 添加</a></li>
+<li><a href="jquery_dom_remove.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dom_remove.asp" title="jQuery - 删除元素">jQuery 删除</a></li>
+<li><a href="jquery_css_classes.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_css_classes.asp" title="jQuery - 获取和设置 CSS 类">jQuery CSS 类</a></li>
+<li><a href="jquery_css.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_css.asp" title="jQuery - css() 方法">jQuery css()</a></li>
+<li><a href="jquery_dimensions.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dimensions.asp" title="jQuery - 尺寸">jQuery 尺寸</a></li>
+</ul>
+<h2>jQuery 遍历</h2>
+<ul>
+<li><a href="jquery_traversing.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing.asp" title="jQuery 遍历">jQuery 遍历</a></li>
+<li><a href="jquery_traversing_ancestors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing_ancestors.asp" title="jQuery 遍历 - 祖先">jQuery 祖先</a></li>
+<li><a href="jquery_traversing_descendants.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing_descendants.asp" title="jQuery 遍历 - 后代">jQuery 后代</a></li>
+<li><a href="jquery_traversing_siblings.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing_siblings.asp" title="jQuery 遍历 - 同胞">jQuery 同胞</a></li>
+<li><a href="jquery_traversing_filtering.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing_filtering.asp" title="jQuery 遍历 - 过滤">jQuery 过滤</a></li>
+</ul>
+<h2>jQuery AJAX</h2>
+<ul>
+<li><a href="jquery_ajax_intro.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ajax_intro.asp" title="jQuery - AJAX 简介">jQuery AJAX 简介</a></li>
+<li><a href="jquery_ajax_load.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ajax_load.asp" title="jQuery - AJAX load() 方法">jQuery 加载</a></li>
+<li><a href="jquery_ajax_get_post.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ajax_get_post.asp" title="jQuery - AJAX get() 和 post() 方法">jQuery Get/Post</a></li>
+</ul>
+<h2>jQuery 杂项</h2>
+<ul>
+<li><a href="jquery_noconflict.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_noconflict.asp" title="jQuery - noConflict() 方法">jQuery noConflict()</a></li>
+</ul>
+<h2>jQuery 实例</h2>
+<ul>
+<li><a href="jquery_examples.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_examples.asp" title="jQuery 实例">jQuery 实例</a></li>
+<li><a href="jquery_quiz.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_quiz.asp" title="jQuery 测验">jQuery 测验</a></li>
+</ul>
+<h2>jQuery 参考手册</h2>
+<ul>
+<li><a href="jquery_reference.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_reference.asp" title="jQuery 参考手册">jQuery 参考手册</a></li>
+<li><a href="jquery_ref_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_selectors.asp" title="jQuery 参考手册 - 选择器">jQuery 选择器</a></li>
+<li class="currentLink"><a href="jquery_ref_events.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_events.asp" title="jQuery 参考手册 - 事件">jQuery 事件</a></li>
+<li><a href="jquery_ref_effects.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_effects.asp" title="jQuery 参考手册 - 效果">jQuery 效果</a></li>
+<li><a href="jquery_ref_manipulation.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_manipulation.asp" title="jQuery 参考手册 - 文档操作">jQuery 文档操作</a></li>
+<li><a href="jquery_ref_attributes.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_attributes.asp" title="jQuery 参考手册 - 属性操作">jQuery 属性操作</a></li>
+<li><a href="jquery_ref_css.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_css.asp" title="jQuery 参考手册 - CSS 操作">jQuery CSS 操作</a></li>
+<li><a href="jquery_ref_ajax.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_ajax.asp" title="jQuery 参考手册 - Ajax">jQuery Ajax</a></li>
+<li><a href="jquery_ref_traversing.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_traversing.asp" title="jQuery 参考手册 - 遍历">jQuery 遍历</a></li>
+<li><a href="jquery_ref_data.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_data.asp" title="jQuery 参考手册 - 数据">jQuery 数据</a></li>
+<li><a href="jquery_ref_dom_element_methods.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_dom_element_methods.asp" title="jQuery 参考手册 - DOM 元素方法">jQuery DOM 元素</a></li>
+<li><a href="jquery_ref_core.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_core.asp" title="jQuery 参考手册 - 核心">jQuery 核心</a></li>
+<li><a href="jquery_ref_prop.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_prop.asp" title="jQuery 属性">jQuery 属性</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>jQuery 参考手册 - 事件</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="jquery_ref_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_selectors.asp" title="jQuery 参考手册 - 选择器">jQuery 选择器</a></li>
+<li class="next"><a href="jquery_ref_effects.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_effects.asp" title="jQuery 参考手册 - 效果">jQuery 效果</a></li>
+</ul>
+</div>
+
+
+<div>
+<h2>jQuery 事件方法</h2>
+
+<p>事件方法会触发匹配元素的事件，或将函数绑定到所有匹配元素的某个事件。</p>
+
+<p>触发实例：</p>
+
+<pre>$(&quot;button#demo&quot;).<code>click()</code></pre>
+
+<p>上面的例子将触发 id=&quot;demo&quot; 的 button 元素的 click 事件。</p>
+
+<p>绑定实例：</p>
+
+<pre>$(&quot;button#demo&quot;).<code>click(function(){$(&quot;img&quot;).hide()})</code></pre>
+
+<p>上面的例子会在点击 id=&quot;demo&quot; 的按钮时隐藏所有图像。</p>
+
+
+<table class="dataintable">
+<tr>
+<th style="width:35%;">方法</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="event_bind.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_bind.asp" title="jQuery 事件 - bind() 方法">bind()</a></td>
+<td>向匹配元素附加一个或更多事件处理器</td>
+</tr>
+
+<tr>
+<td><a href="event_blur.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_blur.asp" title="jQuery 事件 - blur() 方法">blur()</a></td>
+<td>触发、或将函数绑定到指定元素的 blur 事件</td>
+</tr>
+
+
+<tr>
+<td><a href="event_change.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_change.asp" title="jQuery 事件 - change() 方法">change()</a></td>
+<td>触发、或将函数绑定到指定元素的 change 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_click.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_click.asp" title="jQuery 事件 - click() 方法">click()</a></td>
+<td>触发、或将函数绑定到指定元素的 click 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_dblclick.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_dblclick.asp" title="jQuery 事件 - dblclick() 方法">dblclick()</a></td>
+<td>触发、或将函数绑定到指定元素的 double click 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_delegate.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_delegate.asp" title="jQuery 事件 - delegate() 方法">delegate()</a></td>
+<td>向匹配元素的当前或未来的子元素附加一个或多个事件处理器</td>
+</tr>
+
+<tr>
+<td><a href="event_die.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_die.asp" title="jQuery 事件 - die() 方法">die()</a></td>
+<td>移除所有通过 live() 函数添加的事件处理程序。</td>
+</tr>
+
+<tr>
+<td><a href="event_error.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_error.asp" title="jQuery 事件 - error() 方法">error()</a></td>
+<td>触发、或将函数绑定到指定元素的 error 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_isdefaultprevented.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_isdefaultprevented.asp" title="jQuery 事件 - isDefaultPrevented() 方法">event.isDefaultPrevented()</a></td>
+<td>返回 event 对象上是否调用了 event.preventDefault()。</td>
+</tr>
+
+<tr>
+<td><a href="event_pagex.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_pagex.asp" title="jQuery 事件 - pageX 属性">event.pageX</a></td>
+<td>相对于文档左边缘的鼠标位置。</td>
+</tr>
+
+<tr>
+<td><a href="event_pagey.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_pagey.asp" title="jQuery 事件 - pageY 属性">event.pageY</a></td>
+<td>相对于文档上边缘的鼠标位置。</td>
+</tr>
+
+<tr>
+<td><a href="event_preventdefault.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_preventdefault.asp" title="jQuery 事件 - preventDefault() 方法">event.preventDefault()</a></td>
+<td>阻止事件的默认动作。</td>
+</tr>
+
+<tr>
+<td><a href="event_result.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_result.asp" title="jQuery 事件 - result 属性">event.result</a></td>
+<td>包含由被指定事件触发的事件处理器返回的最后一个值。</td>
+</tr>
+
+<tr>
+<td><a href="event_target.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_target.asp" title="jQuery 事件 - target 属性">event.target</a></td>
+<td>触发该事件的 DOM 元素。</td>
+</tr>
+
+<tr>
+<td><a href="event_timeStamp.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_timeStamp.asp" title="jQuery 事件 - timeStamp 属性">event.timeStamp</a></td>
+<td>该属性返回从 1970 年 1 月 1 日到事件发生时的毫秒数。</td>
+</tr>
+
+<tr>
+<td><a href="event_type.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_type.asp" title="jQuery 事件 - type 属性">event.type</a></td>
+<td>描述事件的类型。</td>
+</tr>
+
+<tr>
+<td><a href="event_which.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_which.asp" title="jQuery 事件 - which 属性">event.which</a></td>
+<td>指示按了哪个键或按钮。</td>
+</tr>
+
+<tr>
+<td><a href="event_focus.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_focus.asp" title="jQuery 事件 - focus() 方法">focus()</a></td>
+<td>触发、或将函数绑定到指定元素的 focus 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_keydown.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_keydown.asp" title="jQuery 事件 - keydown() 方法">keydown()</a></td>
+<td>触发、或将函数绑定到指定元素的 key down 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_keypress.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_keypress.asp" title="jQuery 事件 - keypress() 方法">keypress()</a></td>
+<td>触发、或将函数绑定到指定元素的 key press 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_keyup.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_keyup.asp" title="jQuery 事件 - keyup() 方法">keyup()</a></td>
+<td>触发、或将函数绑定到指定元素的 key up 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_live.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_live.asp" title="jQuery 事件 - live() 方法">live()</a></td>
+<td>为当前或未来的匹配元素添加一个或多个事件处理器</td>
+</tr>
+
+<tr>
+<td><a href="event_load.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_load.asp" title="jQuery 事件 - load() 方法">load()</a></td>
+<td>触发、或将函数绑定到指定元素的 load 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_mousedown.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_mousedown.asp" title="jQuery 事件 - mousedown() 方法">mousedown()</a></td>
+<td>触发、或将函数绑定到指定元素的 mouse down 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_mouseenter.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_mouseenter.asp" title="jQuery 事件 - mouseenter() 方法">mouseenter()</a></td>
+<td>触发、或将函数绑定到指定元素的 mouse enter 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_mouseleave.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_mouseleave.asp" title="jQuery 事件 - mouseleave() 方法">mouseleave()</a></td>
+<td>触发、或将函数绑定到指定元素的 mouse leave 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_mousemove.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_mousemove.asp" title="jQuery 事件 - mousemove() 方法">mousemove()</a></td>
+<td>触发、或将函数绑定到指定元素的 mouse move 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_mouseout.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_mouseout.asp" title="jQuery 事件 - mouseout() 方法">mouseout()</a></td>
+<td>触发、或将函数绑定到指定元素的 mouse out 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_mouseover.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_mouseover.asp" title="jQuery 事件 - mouseover() 方法">mouseover()</a></td>
+<td>触发、或将函数绑定到指定元素的 mouse over 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_mouseup.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_mouseup.asp" title="jQuery 事件 - mouseup() 方法">mouseup()</a></td>
+<td>触发、或将函数绑定到指定元素的 mouse up 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_one.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_one.asp" title="jQuery 事件 - one() 方法">one()</a></td>
+<td>向匹配元素添加事件处理器。每个元素只能触发一次该处理器。</td>
+</tr>
+
+<tr>
+<td><a href="event_ready.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_ready.asp" title="jQuery 事件 - ready() 方法">ready()</a></td>
+<td>文档就绪事件（当 HTML 文档就绪可用时）</td>
+</tr>
+
+<tr>
+<td><a href="event_resize.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_resize.asp" title="jQuery 事件 - resize() 方法">resize()</a></td>
+<td>触发、或将函数绑定到指定元素的 resize 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_scroll.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_scroll.asp" title="jQuery 事件 - scroll() 方法">scroll()</a></td>
+<td>触发、或将函数绑定到指定元素的 scroll 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_select.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_select.asp" title="jQuery 事件 - select() 方法">select()</a></td>
+<td>触发、或将函数绑定到指定元素的 select 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_submit.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_submit.asp" title="jQuery 事件 - submit() 方法">submit()</a></td>
+<td>触发、或将函数绑定到指定元素的 submit 事件</td>
+</tr>
+
+<tr>
+<td><a href="event_toggle.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_toggle.asp" title="jQuery 事件 - toggle() 方法">toggle()</a></td>
+<td>绑定两个或多个事件处理器函数，当发生轮流的 click 事件时执行。</td>
+</tr>
+
+<tr>
+<td><a href="event_trigger.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_trigger.asp" title="jQuery 事件 - trigger() 方法">trigger()</a></td>
+<td>所有匹配元素的指定事件</td>
+</tr>
+
+<tr>
+<td><a href="event_triggerhandler.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_triggerhandler.asp" title="jQuery 事件 - triggerHandler() 方法">triggerHandler()</a></td>
+<td>第一个被匹配元素的指定事件</td>
+</tr>
+
+<tr>
+<td><a href="event_unbind.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_unbind.asp" title="jQuery 事件 - unbind() 方法">unbind()</a></td>
+<td>从匹配元素移除一个被添加的事件处理器</td>
+</tr>
+
+<tr>
+<td><a href="event_undelegate.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_undelegate.asp" title="jQuery 事件 - undelegate() 方法">undelegate()</a></td>
+<td>从匹配元素移除一个被添加的事件处理器，现在或将来</td>
+</tr>
+
+<tr>
+<td><a href="event_unload.asp.htm" tppabs="http://www.w3school.com.cn/jquery/event_unload.asp" title="jQuery 事件 - unload() 方法">unload()</a></td>
+<td>触发、或将函数绑定到指定元素的 unload 事件</td>
+</tr>
+</table>
+
+</div>
+
+
+<div>
+<h2>参阅</h2>
+
+<p>教程：<a href="jquery_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_selectors.asp" title="jQuery 选择器">jQuery 元素选择器语法</a></p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="jquery_ref_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_selectors.asp" title="jQuery 参考手册 - 选择器">jQuery 选择器</a></li>
+<li class="next"><a href="jquery_ref_effects.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_effects.asp" title="jQuery 参考手册 - 效果">jQuery 效果</a></li>
+</ul>
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="jquery_reference.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_reference.asp" title="jQuery 参考手册">jQuery 参考手册</a></h5>
+<h5 id="tools_quiz"><a href="jquery_quiz.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_quiz.asp">jQuery 测验</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+</body>
+</html>

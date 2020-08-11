@@ -1,0 +1,231 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+<title>JSON 使用</title>
+</head>
+
+<body class="browserscripting">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>JSON 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/json/index.asp" title="JSON 教程">JSON 教程</a></li>
+<li><a href="json_intro.asp.htm" tppabs="http://www.w3school.com.cn/json/json_intro.asp" title="JSON 简介">JSON 简介</a></li>
+<li><a href="json_syntax.asp.htm" tppabs="http://www.w3school.com.cn/json/json_syntax.asp" title="JSON 语法">JSON 语法</a></li>
+<li class="currentLink"><a href="json_eval.asp.htm" tppabs="http://www.w3school.com.cn/json/json_eval.asp" title="JSON 使用">JSON 使用</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>JSON 使用</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="json_syntax.asp.htm" tppabs="http://www.w3school.com.cn/json/json_syntax.asp" title="JSON 语法">JSON 语法</a></li>
+<li class="next"><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/json/index.asp" title="JSON 教程">JSON 教程</a></li>
+</ul>
+</div>
+
+
+<div>
+<h2>把 JSON 文本转换为 JavaScript 对象</h2>
+
+<p>JSON 最常见的用法之一，是从 web 服务器上读取 JSON 数据（作为文件或作为 HttpRequest），将 JSON 数据转换为 JavaScript 对象，然后在网页中使用该数据。</p>
+
+<p>为了更简单地为您讲解，我们使用字符串作为输入进行演示（而不是文件）。</p>
+</div>
+
+
+<div>
+<h2>JSON 实例 - 来自字符串的对象</h2>
+
+<p>创建包含 JSON 语法的 JavaScript 字符串：</p>
+
+<pre>
+var txt = '{ &quot;employees&quot; : [' +
+'{ &quot;firstName&quot;:&quot;Bill&quot; , &quot;lastName&quot;:&quot;Gates&quot; },' +
+'{ &quot;firstName&quot;:&quot;George&quot; , &quot;lastName&quot;:&quot;Bush&quot; },' +
+'{ &quot;firstName&quot;:&quot;Thomas&quot; , &quot;lastName&quot;:&quot;Carter&quot; } ]}';
+</pre>
+
+<p>由于 JSON 语法是 JavaScript 语法的子集，JavaScript 函数 eval() 可用于将 JSON 文本转换为 JavaScript 对象。</p>
+
+<p>eval() 函数使用的是 JavaScript 编译器，可解析 JSON 文本，然后生成 JavaScript 对象。必须把文本包围在括号中，这样才能避免语法错误：</p>
+
+<pre>var obj = eval (&quot;(&quot; + txt + &quot;)&quot;);</pre>
+
+<p>在网页中使用 JavaScript 对象：</p>
+
+<h3>例子</h3>
+
+<pre>
+&lt;p&gt;
+First Name: &lt;span id=&quot;fname&quot;&gt;&lt;/span&gt;&lt;br /&gt;
+Last Name: &lt;span id=&quot;lname&quot;&gt;&lt;/span&gt;&lt;br /&gt;
+&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+document.getElementById(&quot;fname&quot;).innerHTML = obj.employees[1].firstName
+document.getElementById(&quot;lname&quot;).innerHTML = obj.employees[1].lastName
+&lt;/script&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=json_eval.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=json_eval">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>JSON 解析器</h2>
+
+<p class="tip"><span>提示：</span>eval() 函数可编译并执行任何 JavaScript 代码。这隐藏了一个潜在的安全问题。</p>
+
+<p>使用 JSON 解析器将 JSON 转换为 JavaScript 对象是更安全的做法。JSON 解析器只能识别 JSON 文本，而不会编译脚本。</p>
+
+<p>在浏览器中，这提供了原生的 JSON 支持，而且 JSON 解析器的速度更快。</p>
+
+<p>较新的浏览器和最新的 ECMAScript (JavaScript) 标准中均包含了原生的对 JSON 的支持。</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:50%; text-align:center;">Web 浏览器支持</th>
+<th style="width:50%; text-align:center;">Web 软件支持</th>
+</tr>
+
+<tr>
+<td>
+	<ul class="listintable" style="margin-left:50px;">
+	<li>Firefox (Mozilla) 3.5</li>
+	<li>Internet Explorer 8</li>
+	<li>Chrome</li>
+	<li>Opera 10</li>
+	<li>Safari 4</li>
+	</ul>
+</td>
+
+<td>
+	<ul class="listintable" style="margin-left:50px;">
+	<li>jQuery</li>
+	<li>Yahoo UI</li>
+	<li>Prototype</li>
+	<li>Dojo</li>
+	<li>ECMAScript 1.5</li>
+	</ul>
+</td>
+</tr>
+</table>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=json_parse.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=json_parse">亲自试一试</a></p>
+
+<p>对于较老的浏览器，可使用 JavaScript 库：
+<a href="javascript:if(confirm('https://github.com/douglascrockford/JSON-js  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='https://github.com/douglascrockford/JSON-js'" tppabs="https://github.com/douglascrockford/JSON-js">https://github.com/douglascrockford/JSON-js</a></p>
+
+<p>JSON 格式最初是<a href="javascript:if(confirm('http://developer.yahoo.com/yui/theater/video.php?v=crockford-json  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://developer.yahoo.com/yui/theater/video.php?v=crockford-json'" tppabs="http://developer.yahoo.com/yui/theater/video.php?v=crockford-json">由 Douglas Crockford 制定的</a>。</p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="json_syntax.asp.htm" tppabs="http://www.w3school.com.cn/json/json_syntax.asp" title="JSON 语法">JSON 语法</a></li>
+<li class="next"><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/json/index.asp" title="JSON 教程">JSON 教程</a></li>
+</ul>
+</div>
+
+</div>
+
+<div id="sidebar">
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+</body>
+</html>

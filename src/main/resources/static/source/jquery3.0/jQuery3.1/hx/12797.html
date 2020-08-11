@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.fn.extend()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.fn.extend()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.fn.extend( object )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>一个对象的内容合并到jQuery的原型，以提供新的jQuery实例方法。
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span><span class="icon-link"></span>jQuery.fn.extend( object )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>object</strong> 
+				</div>
+				<div>
+					Type: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader15">Object</a> 
+				</div>
+				<div>
+					一个对象，用来合并到jQuery的原型。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<code>jQuery.fn.extend()</code>方法继承了jQuery原型(<code>$.fn</code>)对象，以提供jQuery原型新的方法，可以链式调用<code>jQuery()</code>函数。
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<h4>
+	<span class="desc"> 实例</span>
+</h4>
+<p>
+	<span class="desc">添加两个方法到jQuery原型(<code>$.fn</code>)，并且使用他们。</span> 
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;jQuery.fn.extend demo&lt;/title&gt;
+  &lt;style&gt;
+label { display: block; margin: .5em; }
+     &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-1.9.1.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;label&gt;&lt;input type="checkbox" name="foo"&gt; Foo&lt;/label&gt;
+&lt;label&gt;&lt;input type="checkbox" name="bar"&gt; Bar&lt;/label&gt;
+ 
+&lt;script&gt;
+jQuery.fn.extend({
+  check: function() {
+    return this.each(function() { this.checked = true; });
+  },
+  uncheck: function() {
+    return this.each(function() { this.checked = false; });
+  }
+});
+ 
+// Use the newly created .check() method
+$( "input[type='checkbox']" ).check();
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8022" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

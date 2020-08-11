@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>21.2.&#160;双向的一对多关系(Bidirectional one-to-many)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch21.html" title="第&#160;21&#160;章&#160;示例：父子关系(Parent Child Relationships)">
+<link rel="prev" href="ch21.html" title="第&#160;21&#160;章&#160;示例：父子关系(Parent Child Relationships)">
+<link rel="next" href="ch21s03.html" title="21.3.&#160;级联生命周期（Cascading lifecycle）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="example-parentchild-bidir"></a>21.2.&#160;双向的一对多关系(Bidirectional one-to-many)</h2></div></div></div>
+<p>
+        假设我们要实现一个简单的从Parent到Child的&lt;one-to-many&gt;关联。
+    </p>
+<pre class="programlisting">&lt;set name="children"&gt;
+    &lt;key column="parent_id"/&gt;
+    &lt;one-to-many class="Child"/&gt;
+&lt;/set&gt;</pre>
+<p>
+        如果我们运行下面的代码
+    </p>
+<pre class="programlisting">Parent p = .....;
+Child c = new Child();
+p.getChildren().add(c);
+session.save(c);
+session.flush();</pre>
+<p>
+        Hibernate会产生两条SQL语句：
+    </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>一条<code class="literal">INSERT</code>语句，为<code class="literal">c</code>创建一条记录</p></li>
+<li><p>
+	    一条<code class="literal">UPDATE</code>语句，创建从<code class="literal">p</code>到<code class="literal">c</code>的连接
+        </p></li>
+</ul></div>
+<p>
+        这样做不仅效率低，而且违反了列<code class="literal">parent_id</code>非空的限制。我们可以通过在集合类映射上指定<code class="literal">not-null="true"</code>来解决违反非空约束的问题：
+    </p>
+<pre class="programlisting">&lt;set name="children"&gt;
+    &lt;key column="parent_id" not-null="true"/&gt;
+    &lt;one-to-many class="Child"/&gt;
+&lt;/set&gt;</pre>
+<p>
+    	然而，这并非是推荐的解决方法。
+   	</p>
+<p>        这种现象的根本原因是从<code class="literal">p</code>到<code class="literal">c</code>的连接（外键parent_id）没有被当作<code class="literal">Child</code>对象状态的一部分，因而没有在INSERT语句中被创建。因此解决的办法就是把这个连接添加到Child的映射中。
+    </p>
+<pre class="programlisting">&lt;many-to-one name="parent" column="parent_id" not-null="true"/&gt;</pre>
+<p>
+        （我们还需要为类<code class="literal">Child</code>添加<code class="literal">parent</code>属性）
+    </p>
+<p>
+        现在实体<code class="literal">Child</code>在管理连接的状态，为了使collection不更新连接，我们使用<code class="literal">inverse</code>属性。
+    </p>
+<pre class="programlisting">&lt;set name="children" inverse="true"&gt;
+    &lt;key column="parent_id"/&gt;
+    &lt;one-to-many class="Child"/&gt;
+&lt;/set&gt;</pre>
+<p>
+        下面的代码是用来添加一个新的<code class="literal">Child</code>
+    </p>
+<pre class="programlisting">Parent p = (Parent) session.load(Parent.class, pid);
+Child c = new Child();
+c.setParent(p);
+p.getChildren().add(c);
+session.save(c);
+session.flush();</pre>
+<p>
+        现在，只会有一条<code class="literal">INSERT</code>语句被执行！
+    </p>
+<p>
+        为了让事情变得井井有条，可以为<code class="literal">Parent</code>加一个<code class="literal">addChild()</code>方法。
+    </p>
+<pre class="programlisting">public void addChild(Child c) {
+    c.setParent(this);
+    children.add(c);
+}</pre>
+<p>
+        现在，添加<code class="literal">Child</code>的代码就是这样
+    </p>
+<pre class="programlisting">Parent p = (Parent) session.load(Parent.class, pid);
+Child c = new Child();
+p.addChild(c);
+session.save(c);
+session.flush();</pre>
+</div></body>
+</html>

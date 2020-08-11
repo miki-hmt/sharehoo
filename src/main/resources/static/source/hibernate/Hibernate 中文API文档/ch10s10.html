@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>10.10.&#160;Session刷出(flush)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch10.html" title="第&#160;10&#160;章&#160;与对象共事">
+<link rel="prev" href="ch10s09.html" title="10.9.&#160;在两个不同数据库间复制对象">
+<link rel="next" href="ch10s11.html" title="10.11.&#160;传播性持久化(transitive persistence)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="objectstate-flushing"></a>10.10.&#160;Session刷出(flush)</h2></div></div></div>
+<p>
+            每间隔一段时间，<code class="literal">Session</code>会执行一些必需的SQL语句来把内存中的对象的状态同步到JDBC连接中。这个过程被称为<span class="emphasis"><em>刷出(flush)</em></span>，默认会在下面的时间点执行：
+        </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                    在某些查询执行之前
+                </p></li>
+<li><p>
+                    在调用<code class="literal">org.hibernate.Transaction.commit()</code>的时候
+                </p></li>
+<li><p>
+                    在调用<code class="literal">Session.flush()</code>的时候
+                </p></li>
+</ul></div>
+<p>
+            涉及的SQL语句会按照下面的顺序发出执行：
+        </p>
+<div class="orderedlist"><ol type="1" compact>
+<li><p>
+                    所有对实体进行插入的语句，其顺序按照对象执行<code class="literal">Session.save()</code>的时间顺序
+                </p></li>
+<li><p>
+                    所有对实体进行更新的语句
+                </p></li>
+<li><p>
+                    所有进行集合删除的语句
+                </p></li>
+<li><p>
+                    所有对集合元素进行删除，更新或者插入的语句
+                </p></li>
+<li><p>
+                    所有进行集合插入的语句
+                </p></li>
+<li><p>
+                    所有对实体进行删除的语句，其顺序按照对象执行<code class="literal">Session.delete()</code>的时间顺序
+                </p></li>
+</ol></div>
+<p>
+            （有一个例外是，如果对象使用<code class="literal">native</code>方式来生成ID（持久化标识）的话，它们一执行save就会被插入。）
+        </p>
+<p>
+            除非你明确地发出了<code class="literal">flush()</code>指令，关于Session<span class="emphasis"><em>何时</em></span>会执行这些JDBC调用是完全无法保证的，只能保证它们执行的前后顺序。
+            当然，Hibernate保证，<code class="literal">Query.list(..)</code>绝对不会返回已经失效的数据，也不会返回错误数据。
+        </p>
+<p>
+            也可以改变默认的设置，来让刷出(flush)操作发生的不那么频繁。
+            <code class="literal">FlushMode</code>类定义了三种不同的方式。
+              仅在提交时刷出(仅当Hibernate的<code class="literal">Transaction</code> API被使用时有效)，
+              按照刚才说的方式刷出，
+              以及除非明确使用<code class="literal">flush()</code>否则从不刷出。
+              最后一种模式对于那些需要长时间保持<code class="literal">Session</code>为打开或者断线状态的长时间运行的工作单元很有用。
+            (参见 <a href="ch11s03.html#transactions-optimistic-longsession" title="11.3.2.&#160;扩展周期的session和自动版本化">第&#160;11.3.2&#160;节 “扩展周期的session和自动版本化”</a>).
+        </p>
+<pre class="programlisting">sess = sf.openSession();
+Transaction tx = sess.beginTransaction();
+sess.setFlushMode(FlushMode.COMMIT); // allow queries to return stale state
+
+Cat izi = (Cat) sess.load(Cat.class, id);
+izi.setName(iznizi);
+
+// might return stale data
+sess.find("from Cat as cat left outer join cat.kittens kitten");
+
+// change to izi is not flushed!
+...
+tx.commit(); // flush occurs
+sess.close();</pre>
+<p>
+        	刷出(flush)期间，可能会抛出异常。（例如一个DML操作违反了约束）
+			异常处理涉及到对Hibernate事务性行为的理解，因此我们将在<a href="ch11.html" title="第&#160;11&#160;章&#160;事务和并发">第&#160;11&#160;章 <i>事务和并发</i></a>中讨论。
+        </p>
+</div></body>
+</html>

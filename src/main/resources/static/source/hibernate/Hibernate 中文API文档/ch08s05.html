@@ -1,0 +1,29 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>8.5.&#160;动态组件 （Dynamic components）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch08.html" title="第&#160;8&#160;章&#160;组件（Component）映射">
+<link rel="prev" href="ch08s04.html" title="8.4.&#160;组件作为联合标识符(Components as composite identifiers)">
+<link rel="next" href="ch09.html" title="第&#160;9&#160;章&#160;继承映射(Inheritance Mappings)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="components-dynamic"></a>8.5.&#160;动态组件 （Dynamic components）</h2></div></div></div>
+<p>
+        你甚至可以映射<code class="literal">Map</code>类型的属性：
+    </p>
+<pre class="programlisting">&lt;dynamic-component name="userAttributes"&gt;
+    &lt;property name="foo" column="FOO" type="string"/&gt;
+    &lt;property name="bar" column="BAR" type="integer"/&gt;
+    &lt;many-to-one name="baz" class="Baz" column="BAZ_ID"/&gt;
+&lt;/dynamic-component&gt;</pre>
+<p>
+        从<code class="literal">&lt;dynamic-component&gt;</code>映射的语义上来讲，它和<code class="literal">&lt;component&gt;</code>是相同的。
+        这种映射类型的优点在于通过修改映射文件，就可以具有在部署时检测真实属性的能力。利用一个DOM解析器，也可以在程序运行时操作映射文件。
+        更好的是，你可以通过<code class="literal">Configuration</code>对象来访问（或者修改）Hibernate的运行时元模型。
+     </p>
+</div></body>
+</html>

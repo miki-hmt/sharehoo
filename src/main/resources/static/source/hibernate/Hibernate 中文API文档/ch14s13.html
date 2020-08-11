@@ -1,0 +1,114 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>14.13.&#160;HQL示例</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch14.html" title="第&#160;14&#160;章&#160;HQL: Hibernate查询语言">
+<link rel="prev" href="ch14s12.html" title="14.12.&#160;子查询">
+<link rel="next" href="ch14s14.html" title="14.14.&#160;批量的UPDATE和DELETE">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="queryhql-examples"></a>14.13.&#160;HQL示例</h2></div></div></div>
+<p>
+            Hibernate查询可以非常的强大与复杂。实际上，Hibernate的一个主要卖点就是查询语句的威力。这里有一些例子，它们与我在最近的
+            一个项目中使用的查询非常相似。注意你能用到的大多数查询比这些要简单的多！
+        </p>
+<p>
+            下面的查询对于某个特定的客户的所有未支付的账单，在给定给最小总价值的情况下，返回订单的id，条目的数量和总价值，
+            返回值按照总价值的结果进行排序。为了决定价格，查询使用了当前目录。作为转换结果的SQL查询，使用了<code class="literal">ORDER</code>, 
+            <code class="literal">ORDER_LINE</code>, <code class="literal">PRODUCT</code>, <code class="literal">CATALOG</code> 和<code class="literal">PRICE</code>
+            库表。
+        </p>
+<pre class="programlisting">select order.id, sum(price.amount), count(item)
+from Order as order
+    join order.lineItems as item
+    join item.product as product,
+    Catalog as catalog
+    join catalog.prices as price
+where order.paid = false
+    and order.customer = :customer
+    and price.product = product
+    and catalog.effectiveDate &lt; sysdate
+    and catalog.effectiveDate &gt;= all (
+        select cat.effectiveDate 
+        from Catalog as cat
+        where cat.effectiveDate &lt; sysdate
+    )
+group by order
+having sum(price.amount) &gt; :minAmount
+order by sum(price.amount) desc</pre>
+<p>
+            这简直是一个怪物！实际上，在现实生活中，我并不热衷于子查询，所以我的查询语句看起来更像这个：
+        </p>
+<pre class="programlisting">select order.id, sum(price.amount), count(item)
+from Order as order
+    join order.lineItems as item
+    join item.product as product,
+    Catalog as catalog
+    join catalog.prices as price
+where order.paid = false
+    and order.customer = :customer
+    and price.product = product
+    and catalog = :currentCatalog
+group by order
+having sum(price.amount) &gt; :minAmount
+order by sum(price.amount) desc</pre>
+<p>
+            下面一个查询计算每一种状态下的支付的数目，除去所有处于<code class="literal">AWAITING_APPROVAL</code>状态的支付，因为在该状态下
+            当前的用户作出了状态的最新改变。该查询被转换成含有两个内连接以及一个相关联的子选择的SQL查询，该查询使用了表
+            <code class="literal">PAYMENT</code>, <code class="literal">PAYMENT_STATUS</code> 以及 
+            <code class="literal">PAYMENT_STATUS_CHANGE</code>。
+        </p>
+<pre class="programlisting">select count(payment), status.name 
+from Payment as payment 
+    join payment.currentStatus as status
+    join payment.statusChanges as statusChange
+where payment.status.name &lt;&gt; PaymentStatus.AWAITING_APPROVAL
+    or (
+        statusChange.timeStamp = ( 
+            select max(change.timeStamp) 
+            from PaymentStatusChange change 
+            where change.payment = payment
+        )
+        and statusChange.user &lt;&gt; :currentUser
+    )
+group by status.name, status.sortOrder
+order by status.sortOrder</pre>
+<p>
+            如果我把<code class="literal">statusChanges</code>实例集映射为一个列表（list）而不是一个集合（set）, 
+            书写查询语句将更加简单.
+        </p>
+<pre class="programlisting">select count(payment), status.name 
+from Payment as payment
+    join payment.currentStatus as status
+where payment.status.name &lt;&gt; PaymentStatus.AWAITING_APPROVAL
+    or payment.statusChanges[ maxIndex(payment.statusChanges) ].user &lt;&gt; :currentUser
+group by status.name, status.sortOrder
+order by status.sortOrder</pre>
+<p>
+            下面一个查询使用了MS SQL Server的 <code class="literal">isNull()</code>函数用以返回当前用户所属组织的组织帐号及组织未支付的账。
+            它被转换成一个对表<code class="literal">ACCOUNT</code>, <code class="literal">PAYMENT</code>, <code class="literal">PAYMENT_STATUS</code>,
+            <code class="literal">ACCOUNT_TYPE</code>, <code class="literal">ORGANIZATION</code> 以及 <code class="literal">ORG_USER</code>进行的三个内连接，
+            一个外连接和一个子选择的SQL查询。
+        </p>
+<pre class="programlisting">select account, payment
+from Account as account
+    left outer join account.payments as payment
+where :currentUser in elements(account.holder.users)
+    and PaymentStatus.UNPAID = isNull(payment.currentStatus.name, PaymentStatus.UNPAID)
+order by account.type.sortOrder, account.accountNumber, payment.dueDate</pre>
+<p>
+            对于一些数据库，我们需要弃用（相关的）子选择。
+        </p>
+<pre class="programlisting">select account, payment
+from Account as account
+    join account.holder.users as user
+    left outer join account.payments as payment
+where :currentUser = user
+    and PaymentStatus.UNPAID = isNull(payment.currentStatus.name, PaymentStatus.UNPAID)
+order by account.type.sortOrder, account.accountNumber, payment.dueDate</pre>
+</div></body>
+</html>

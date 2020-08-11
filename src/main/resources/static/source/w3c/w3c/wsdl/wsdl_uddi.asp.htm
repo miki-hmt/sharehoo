@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>WSDL 和 UDDI</title>
+
+</head>
+
+<body class="webservices">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>WSDL 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/index.asp" title="WSDL 教程">WSDL 教程</a></li>
+<li><a href="wsdl_intro.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_intro.asp" title="WSDL 简介">WSDL 简介</a></li>
+<li><a href="wsdl_documents.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_documents.asp" title="WSDL 文档">WSDL 文档</a></li>
+<li><a href="wsdl_ports.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_ports.asp" title="WSDL 端口">WSDL 端口</a></li>
+<li><a href="wsdl_binding.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_binding.asp" title="WSDL 绑定">WSDL 绑定</a></li>
+<li class="currentLink"><a href="wsdl_uddi.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_uddi.asp" title="WSDL 和 UDDI">WSDL 和 UDDI</a></li>
+<li><a href="wsdl_syntax.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_syntax.asp" title="WSDL 语法">WSDL 语法</a></li>
+<li><a href="wsdl_summary.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_summary.asp" title="您已经学习了 WSDL，下一步呢？">WSDL 总结</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>WSDL 和 UDDI</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="wsdl_binding.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_binding.asp" title="WSDL 绑定">WSDL 绑定</a></li>
+<li class="next"><a href="wsdl_syntax.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_syntax.asp" title="WSDL 语法">WSDL 语法</a></li>
+</ul>
+</div>
+
+<div id="intro">
+<p><strong>UDDI 是一种目录服务，企业可以使用它对 Web services 进行注册和搜索。</strong></p>
+<p><strong>UDDI，英文为 &quot;Universal Description, Discovery and Integration&quot;，可译为“通用描述、发现与集成服务”。</strong></p>
+</div>
+
+<div>
+<h2>什么是 UDDI？</h2>
+<p>UDDI 是一个独立于平台的框架，用于通过使用 Internet 来描述服务，发现企业，并对企业服务进行集成。</p>
+<ul>
+<li>UDDI 指的是通用描述、发现与集成服务</li>
+<li>UDDI 是一种用于存储有关 web services 的信息的目录。</li>
+<li>UDDI 是一种由 WSDL 描述的 web services 界面的目录。</li>
+<li>UDDI 经由 SOAP 进行通信</li>
+<li>UDDI 被构建入了微软的 .NET 平台</li>
+</ul>
+</div>
+
+<div>
+<h2>UDDI 基于什么？</h2>
+<p>UDDI 使用 W3C 和 IETF* 的因特网标准，比如 XML、HTTP 和 DNS 协议。</p>
+<p>UDDI 使用 WSDL 来描述到达 web services 的界面</p>
+<p>此外，通过采用 SOAP，还可以实现跨平台的编程特性，大家知道，SOAP 是 XML 的协议通信规范，可在 W3C 的网站找到相关的信息。</p>
+<p class="note"><span>*注释：</span>IETF - Internet Engineering Task Force</p>
+</div>
+
+<div>
+<h2>UDDI 的好处</h2>
+<p>任何规模的行业或企业都能得益于 UDDI。</p>
+<p>在 UDDI 之前，还不存在一种 Internet 标准，可以供企业为它们的企业和伙伴提供有关其产品和服务的信息。也不存在一种方法，来集成到彼此的系统和进程中。</p>
+<p>UDDI 规范帮助我们解决的问题：</p>
+<ul>
+<li>使得在成百万当前在线的企业中发现正确的企业成为可能</li>
+<li>定义一旦首选的企业被发现后如何启动商业</li>
+<li>扩展新客户并增加对目前客户的访问</li>
+<li>扩展销售并延伸市场范围</li>
+<li>满足用户驱动的需要，为在全球 Internet 经济中快速合作的促进来清除障碍</li>
+</ul>
+</div>
+
+<div>
+<h2>UDDI 如何被使用</h2>
+<p>假如行业发布了一个用于航班比率检测和预订的 UDDI 标准，航空公司就可以把它们的服务注册到一个 UDDI 目录中。然后旅行社就能够搜索这个 UDDI 目录以找到航空公司预订界面。当此界面被找到后，旅行社就能够立即与此服务进行通信，这样由于它使用了一套定义良好的预订界面。</p>
+</div>
+
+<div>
+<h2>谁在支持 UDDI？</h2>
+<p>UDDI 是一个跨行业的研究项目，由所有主要的平台和软件提供商驱动，比如：Dell, Fujitsu, HP, Hitachi, IBM, Intel, Microsoft, Oracle, SAP, 以及 Sun, 它既是一个市场经营者的团体，也是一个电子商务的领导者。</p>
+<p>已有数百家公司参与了这个 UDDI 团体。</p>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="wsdl_binding.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_binding.asp" title="WSDL 绑定">WSDL 绑定</a></li>
+<li class="next"><a href="wsdl_syntax.asp.htm" tppabs="http://www.w3school.com.cn/wsdl/wsdl_syntax.asp" title="WSDL 语法">WSDL 语法</a></li>
+</ul>
+</div>
+
+<div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- W3School 正文底部广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="9384069314"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

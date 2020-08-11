@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>XML Parser</title>
+
+</head>
+
+<body class="xml">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>XML 基础</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/xml/index.asp" title="XML 教程">XML 教程</a></li>
+<li><a href="xml_intro.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_intro.asp" title="XML 简介">XML 简介</a></li>
+<li><a href="xml_usedfor.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_usedfor.asp" title="XML 的用途">XML 用途</a></li>
+<li><a href="xml_tree.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_tree.asp" title="XML 树结构">XML 树结构</a></li>
+<li><a href="xml_syntax.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_syntax.asp" title="XML 语法规则">XML 语法</a></li>
+<li><a href="xml_elements.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_elements.asp" title="XML 元素">XML 元素</a></li>
+<li><a href="xml_attributes.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_attributes.asp" title="XML 属性">XML 属性</a></li>
+<li><a href="xml_dtd.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_dtd.asp" title="XML 验证">XML 验证</a></li>
+<li><a href="xml_validator.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_validator.asp" title="XML 验证器">XML 验证器</a></li>
+<li><a href="xml_browsers.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_browsers.asp" title="XML 浏览器支持">XML 浏览器</a></li>
+<li><a href="xml_view.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_view.asp" title="查看 XML 文件">XML 查看</a></li>
+<li><a href="xml_display.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_display.asp" title="使用 CSS 显示 XML">XML CSS</a></li>
+<li><a href="xml_xsl.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_xsl.asp" title="使用 XSLT 显示 XML">XML XSLT</a></li>
+</ul>
+<h2>XML JavaScript</h2>
+<ul>
+<li><a href="xml_http.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_http.asp" title="XMLHttpRequest 对象">XML HTTP Request</a></li>
+<li class="currentLink"><a href="xml_parser.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_parser.asp" title="XML 解析器">XML 解析器</a></li>
+<li><a href="xml_dom.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_dom.asp" title="XML DOM">XML DOM</a></li>
+<li><a href="xml_to_html.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_to_html.asp" title="XML to HTML">XML to HTML</a></li>
+<li><a href="xml_applications.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_applications.asp" title="XML 应用程序">XML 应用程序</a></li>
+</ul>
+<h2>XML 高级</h2>
+<ul>
+<li><a href="xml_namespaces.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_namespaces.asp" title="XML 命名空间（XML Namespaces）">XML 命名空间</a></li>
+<li><a href="xml_cdata.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_cdata.asp" title="XML CDATA">XML CDATA</a></li>
+<li><a href="xml_encoding.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_encoding.asp" title="XML 编码">XML 编码</a></li>
+<li><a href="xml_server.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_server.asp" title="服务器上的 XML">XML 服务器</a></li>
+<li><a href="xml_dom_advanced.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_dom_advanced.asp" title="XML DOM 高级">XML DOM 高级</a></li>
+<li><a href="xml_dont.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_dont.asp" title="XML 注意事项">XML 注意事项</a></li>
+<li><a href="xml_savedata.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_savedata.asp" title="把数据存储到 XML 文件">XML 数据存储</a></li>
+<li><a href="xml_technologies.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_technologies.asp" title="XML 的相关技术">XML 技术</a></li>
+<li><a href="xml_real_life.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_real_life.asp" title="现实生活中的 XML">XML 现实案例</a></li>
+<li><a href="xml_editors.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_editors.asp" title="XML 编辑器">XML 编辑器</a></li>
+<li><a href="xml_summary.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_summary.asp" title="您已经学习了 XML，下一步学习什么内容呢？">XML 教程总结</a></li>
+</ul>
+<h2>XML 实例/测验</h2>
+<ul>
+<li><a href="../example/xmle_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/xmle_examples.asp" title="XML 实例">XML 实例</a></li>
+<li><a href="xml_quiz.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_quiz.asp" title="XML 测验">XML 测验</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>XML 解析器</h1>
+
+<div  id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="xml_http.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_http.asp" title="XMLHttpRequest 对象">XML HTTP Request</a></li>
+<li class="next"><a href="xml_dom.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_dom.asp" title="XML DOM">XML DOM</a></li>
+</ul>
+</div>
+
+
+<div id="intro">
+<p><strong>所有现代浏览器都内建了供读取和操作 XML 的 XML 解析器。</strong></p>
+<p><strong>解析器把 XML 转换为 XML DOM 对象 - 可通过 JavaScript 操作的对象。</strong></p>
+</div>
+
+
+<div class="example">
+<h2>实例</h2>
+
+<p>W3School 提供的实例是独立于浏览器和平台的。这些例子可以在所有现代浏览器中运行。</p>
+
+<dl>
+<dt><a target="_blank" href="../tiy/t.asp-f=xmle_node_parsertest_1.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=xmle_node_parsertest_1">加载并解析 XML 文件</a></dt>
+<dt><a target="_blank" href="../tiy/t.asp-f=xmle_node_parsertest_2.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=xmle_node_parsertest_2">加载并解析 XML 字符串</a></dt>
+</dl>
+</div>
+
+
+<div>
+<h2>解析 XML</h2>
+
+<p>所有现代浏览器都有读取和操作 XML 的内建 XML 解析器。</p>
+
+<p>解析器把 XML 载入内存，然后把它转换为可通过 JavaScript 访问的 <a href="../xmldom/xmldom_reference.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/xmldom_reference.asp" title="XML DOM 参考手册">XML DOM 对象</a>。</p>
+
+<p>您将在本教程的下一节中学习更多有关 XML DOM 的知识。</p>
+
+<p>微软的 XML 解析器与其他浏览器中的解析器之间，存在一些差异。微软的解析器支持 XML 文件和 XML 字符串（文本）的加载，而其他浏览器使用单独的解析器。不过，所有的解析器都包含遍历 XML 树、访问插入及删除节点（元素）及其属性的函数。</p>
+
+<p>在本教程中，我们将为您展示如何创建可同时工作于 Internet Explorer 和其他浏览器中的脚本。</p>
+
+<p class="note"><span>注释：</span>当我们谈及 XML 解析，我们常常会使用有关 XML 元素的术语：<a href="../xmldom/dom_nodes.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_nodes.asp" title="XML DOM 节点">节点</a>。</p>
+</div>
+
+
+<div>
+<h2>解析 XML 文档</h2>
+
+<p>下面的代码片段把 XML 文档解析到 XML DOM 对象中：</p>
+
+<pre>
+if (window.XMLHttpRequest)
+  {<span>// code for IE7+, Firefox, Chrome, Opera, Safari</span>
+  xmlhttp=<code>new XMLHttpRequest()</code>;
+  }
+else
+  {<span>// code for IE6, IE5</span>
+  xmlhttp=<code>new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)</code>;
+  }
+
+xmlhttp.open(&quot;GET&quot;,&quot;books.xml&quot;,false);
+xmlhttp.send();
+xmlDoc=xmlhttp.responseXML; 
+</pre>
+
+<h3>其他方法 1：通过微软的 XML 解析器来加载 XML</h3>
+
+<p>微软的 XML 解析器内建于 Internet Explorer 5 以及更高的版本中。</p>
+
+<p>下面的 JavaScript 片段把一个 XML 文档载入解析器中：</p>
+
+<pre>var xmlDoc=<code>new ActiveXObject(&quot;Microsoft.XMLDOM&quot;)</code>;
+xmlDoc.async=&quot;false&quot;;
+xmlDoc.load(&quot;note.xml&quot;);</pre>
+
+<ol>
+<li>上面代码的第一个行创建一个空的微软 XML 文档对象。</li>
+<li>第二行关闭异步加载，这样确保在文档完全加载之前解析器不会继续脚本的执行。</li>
+<li>第三行告知解析器加载名为 &quot;note.xml&quot; 的 XML 文档。</li>
+</ol>
+
+
+<h3>其他方法 2：在 Firefox 及其他浏览器中的 XML 解析器</h3>
+
+<p>下面的 JavaScript 片段把 XML 文档 (&quot;note.xml&quot;) 载入解析器：</p>
+
+<pre>var xmlDoc=<code>document.implementation.createDocument(&quot;&quot;,&quot;&quot;,null)</code>;
+xmlDoc.async=&quot;false&quot;;
+xmlDoc.load(&quot;note.xml&quot;);</pre>
+
+<ol>
+<li>上面代码的第一个行创建一个空的 XML 文档对象。</li>
+<li>第二行关闭异步加载，这样确保在文档完全加载之前解析器不会继续脚本的执行。</li>
+<li>第三行告知解析器加载名为 &quot;note.xml&quot; 的 XML 文档。</li>
+</ol>
+
+</div>
+
+
+<div>
+<h2>解析 XML 字符串</h2>
+
+<p>下面的 JavaScript 代码片段把 XML 字符串解析到 XML DOM 对象中（把字符串 txt 载入解析器）：</p>
+
+<pre>
+txt=&quot;&lt;bookstore&gt;&lt;book&gt;&quot;;
+txt=txt+&quot;&lt;title&gt;Everyday Italian&lt;/title&gt;&quot;;
+txt=txt+&quot;&lt;author&gt;Giada De Laurentiis&lt;/author&gt;&quot;;
+txt=txt+&quot;&lt;year&gt;2005&lt;/year&gt;&quot;;
+txt=txt+&quot;&lt;/book&gt;&lt;/bookstore&gt;&quot;;
+
+if (window.DOMParser)
+  {
+  parser=<code>new DOMParser()</code>;
+  xmlDoc=<span class="marked">parser.parseFromString(txt,&quot;text/xml&quot;)</span>;
+  }
+else <span>// Internet Explorer</span>
+  {
+  xmlDoc=<code>new ActiveXObject(&quot;Microsoft.XMLDOM&quot;)</code>;
+  xmlDoc.async=&quot;false&quot;;
+  xmlDoc<span class="marked">.loadXML(txt)</span>;
+  }
+</pre>
+
+<p class="note"><span>注释：</span>Internet Explorer 使用 loadXML() 方法来解析 XML 字符串，而其他浏览器使用 <a href="../xmldom/dom_domparser.asp.htm" tppabs="http://www.w3school.com.cn/xmldom/dom_domparser.asp">DOMParser 对象</a>。</p>
+
+<p class="note"><span>注释：</span><em><a href="javascript:if(confirm('http://www.w3school.com.cn/xmldom/rdf_schema.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 不可用, 或放弃了下载, 或项目即将停止。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/xmldom/rdf_schema.asp'" tppabs="http://www.w3school.com.cn/xmldom/met_document_loadxml.asp">loadXML()</a></em> 方法用于加载字符串（文本），<em>load()</em> 用于加载文件。</p>
+</div>
+
+
+<div>
+<h2>跨域访问</h2>
+
+<p>出于安全方面的原因，现代的浏览器不允许跨域的访问。</p>
+
+<p>这意味着，网页以及它试图加载的 XML 文件，都必须位于相同的服务器上。</p>
+
+<p>W3School 的实例所打开的 XML 文件位于 W3School 的域上。</p>
+
+<p>假如你打算在自己的网页上使用上面的例子，则必须把 XML 文件放到自己的服务器上。否则，xmlDoc.load() 将产生错误 &quot;Access is denied&quot;。</p>
+</div>
+
+
+<div>
+<h2>XML DOM</h2>
+
+<p>在本教程的下一章节，您将学习如何访问 XML 文档对象 (XML DOM) 并取回数据。</p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="xml_http.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_http.asp" title="XMLHttpRequest 对象">XML HTTP Request</a></li>
+<li class="next"><a href="xml_dom.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_dom.asp" title="XML DOM">XML DOM</a></li>
+</ul>
+</div>
+
+<div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- W3School 正文底部广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="9384069314"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_example"><a href="../example/xmle_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/xmle_examples.asp">XML 实例</a></h5>
+<h5 id="tools_quiz"><a href="xml_quiz.asp.htm" tppabs="http://www.w3school.com.cn/xml/xml_quiz.asp">XML 测验</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>13.2.&#160;批量更新（Batch updates）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch13.html" title="第&#160;13&#160;章&#160;批量处理（Batch processing）">
+<link rel="prev" href="ch13.html" title="第&#160;13&#160;章&#160;批量处理（Batch processing）">
+<link rel="next" href="ch13s03.html" title="13.3.&#160;StatelessSession (无状态session)接口">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="batch-update"></a>13.2.&#160;批量更新（Batch updates）</h2></div></div></div>
+<p>
+            此方法同样适用于检索和更新数据。此外，在进行会返回很多行数据的查询时，
+            你需要使用 <code class="literal">scroll()</code> 方法以便充分利用服务器端游标所带来的好处。
+        </p>
+<pre class="programlisting">Session session = sessionFactory.openSession();
+Transaction tx = session.beginTransaction();
+   
+ScrollableResults customers = session.getNamedQuery("GetCustomers")
+    .setCacheMode(CacheMode.IGNORE)
+    .scroll(ScrollMode.FORWARD_ONLY);
+int count=0;
+while ( customers.next() ) {
+    Customer customer = (Customer) customers.get(0);
+    customer.updateStuff(...);
+    if ( ++count % 20 == 0 ) {
+        //flush a batch of updates and release memory:
+        session.flush();
+        session.clear();
+    }
+}
+   
+tx.commit();
+session.close();</pre>
+</div></body>
+</html>

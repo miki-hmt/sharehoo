@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<style> 
+#animated_div
+	{
+	width:60px;
+	height:40px;
+	background:#92B901;
+	color:#ffffff;
+	position:relative;
+	font-weight:bold;
+	font:bold 12px '微软雅黑', Verdana, Arial, Helvetica, sans-serif;
+	padding:20px 10px 0px 10px;
+	animation:animated_div 5s 1;
+	-moz-animation:animated_div 5s 1;
+	-webkit-animation:animated_div 5s 1;
+	-o-animation:animated_div 5s 1;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	}
+
+@keyframes animated_div
+	{
+	0%		{transform: rotate(0deg);left:0px;}
+	25%		{transform: rotate(20deg);left:0px;}
+	50%		{transform: rotate(0deg);left:500px;}
+	55%		{transform: rotate(0deg);left:500px;}
+	70%		{transform: rotate(0deg);left:500px;background:#1ec7e6;}
+	100%	{transform: rotate(-360deg);left:0px;}
+	}
+
+@-webkit-keyframes animated_div
+	{
+	0%		{-webkit-transform: rotate(0deg);left:0px;}
+	25%		{-webkit-transform: rotate(20deg);left:0px;}
+	50%		{-webkit-transform: rotate(0deg);left:500px;}
+	55%		{-webkit-transform: rotate(0deg);left:500px;}
+	70%		{-webkit-transform: rotate(0deg);left:500px;background:#1ec7e6;}
+	100%	{-webkit-transform: rotate(-360deg);left:0px;}
+	}
+
+@-moz-keyframes animated_div
+	{
+	0%   {-moz-transform: rotate(0deg);left:0px;}
+	25%  {-moz-transform: rotate(20deg);left:0px;}
+	50%  {-moz-transform: rotate(0deg);left:500px;}
+	55%  {-moz-transform: rotate(0deg);left:500px;}
+	70%  {-moz-transform: rotate(0deg);left:500px;background:#1ec7e6;}
+	100% {-moz-transform: rotate(-360deg);left:0px;}
+	}
+
+@-o-keyframes animated_div
+	{
+	0%   {transform: rotate(0deg);left:0px;}
+	25%  {transform: rotate(20deg);left:0px;}
+	50%  {transform: rotate(0deg);left:500px;}
+	55%  {transform: rotate(0deg);left:500px;}
+	70%  {transform: rotate(0deg);left:500px;background:#1ec7e6;}
+	100% {transform: rotate(-360deg);left:0px;}
+	}
+</style>
+
+<title>CSS3 动画</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>CSS3 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/css3/index.asp" title="CSS3 教程">CSS3 教程</a></li>
+<li><a href="css3_intro.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_intro.asp" title="CSS3 简介">CSS3 简介</a></li>
+<li><a href="css3_border.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_border.asp" title="CSS3 边框">CSS3 边框</a></li>
+<li><a href="css3_background.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_background.asp" title="CSS3 背景">CSS3 背景</a></li>
+<li><a href="css3_text_effect.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_text_effect.asp" title="CSS3 文本效果">CSS3 文本效果</a></li>
+<li><a href="css3_font.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_font.asp" title="CSS3 字体">CSS3 字体</a></li>
+<li><a href="css3_2dtransform.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_2dtransform.asp" title="CSS3 2D 转换">CSS3 2D 转换</a></li>
+<li><a href="css3_3dtransform.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_3dtransform.asp" title="CSS3 3D 转换">CSS3 3D 转换</a></li>
+<li><a href="css3_transition.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_transition.asp" title="CSS3 过渡">CSS3 过渡</a></li>
+<li class="currentLink"><a href="css3_animation.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_animation.asp" title="CSS3 动画">CSS3 动画</a></li>
+<li><a href="css3_multiple_columns.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_multiple_columns.asp" title="CSS3 多列">CSS3 多列</a></li>
+<li><a href="css3_user_interface.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_user_interface.asp" title="CSS3 用户界面">CSS3 用户界面</a></li>
+</ul>
+<h2>CSS3 参考手册</h2>
+<ul>
+<li><a href="../cssref/index.asp.htm" tppabs="http://www.w3school.com.cn/cssref/index.asp" title="CSS3 参考手册">CSS3 参考手册</a></li>
+<li><a href="../css/css_ref_print.asp.htm" tppabs="http://www.w3school.com.cn/css/css_ref_print.asp" title="CSS 打印">CSS 打印</a></li>
+<li><a href="../css/css_ref_aural.asp.htm" tppabs="http://www.w3school.com.cn/css/css_ref_aural.asp" title="CSS 听觉">CSS 听觉</a></li>
+<li><a href="../css/css_units.asp.htm" tppabs="http://www.w3school.com.cn/css/css_units.asp" title="CSS 单位">CSS 单位</a></li>
+<li><a href="../css/css_colors_legal.asp.htm" tppabs="http://www.w3school.com.cn/css/css_colors_legal.asp" title="CSS 颜色值">CSS 颜色值</a></li>
+</ul>
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>CSS3 动画</h1>
+
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="css3_transition.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_transition.asp" title="CSS3 过渡">CSS3 过渡</a></li>
+<li class="next"><a href="css3_multiple_columns.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_multiple_columns.asp" title="CSS3 多列">CSS3 多列</a></li>
+</ul>
+</div>
+
+
+<div>
+<h2>CSS3 动画</h2>
+
+<p>通过 CSS3，我们能够创建动画，这可以在许多网页中取代动画图片、Flash 动画以及 JavaScript。</p>
+</div>
+
+
+<div>
+<p id="animated_div">CSS3 动画</p>
+</div>
+
+
+<div>
+<h2>CSS3 @keyframes 规则</h2>
+
+<p>如需在 CSS3 中创建动画，您需要学习 @keyframes 规则。</p>
+
+<p>@keyframes 规则用于创建动画。在 @keyframes 中规定某项 CSS 样式，就能创建由当前样式逐渐改为新样式的动画效果。</p>
+</div>
+
+
+<div>
+<h2>浏览器支持</h2>
+
+<table class="browsersupport">
+<tr>
+<th>属性</th>
+<th colspan="5">浏览器支持</th>
+</tr>
+
+<tr>
+<td class="bsProperty">@keyframes</td>
+<td class="bsIE"></td>						
+<td class="bsFirefox"></td>
+<td class="bsPreChrome"></td>
+<td class="bsPreSafari"></td>		
+<td class="bsOpera"></td>
+</tr>
+
+<tr>
+<td class="bsProperty">animation</td>
+<td class="bsIE"></td>						
+<td class="bsFirefox"></td>
+<td class="bsPreChrome"></td>
+<td class="bsPreSafari"></td>		
+<td class="bsOpera"></td>
+</tr>
+</table>
+
+<p>Internet Explorer 10、Firefox 以及 Opera 支持 @keyframes 规则和 animation 属性。</p>
+
+<p>Chrome 和 Safari 需要前缀 -webkit-。</p>
+
+<p class="note"><span>注释：</span>Internet Explorer 9，以及更早的版本，不支持 @keyframe 规则或 animation 属性。</p>
+</div>
+
+
+<div>
+<h2>实例</h2>
+
+<pre>
+@keyframes myfirst
+{
+from {background: red;}
+to {background: yellow;}
+}
+
+@-moz-keyframes myfirst <span class="code_comment">/* Firefox */</span>
+{
+from {background: red;}
+to {background: yellow;}
+}
+
+@-webkit-keyframes myfirst <span class="code_comment">/* Safari 和 Chrome */</span>
+{
+from {background: red;}
+to {background: yellow;}
+}
+
+@-o-keyframes myfirst <span class="code_comment">/* Opera */</span>
+{
+from {background: red;}
+to {background: yellow;}
+}
+</pre>
+</div>
+
+
+<div>
+<h2>CSS3 动画</h2>
+
+<p>当您在 @keyframes 中创建动画时，请把它捆绑到某个选择器，否则不会产生动画效果。</p>
+
+<p>通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：</p>
+
+<ul>
+<li>规定动画的名称</li>
+<li>规定动画的时长</li>
+</ul>
+
+<h3>实例</h3>
+
+<p>把 &quot;myfirst&quot; 动画捆绑到 div 元素，时长：5 秒：</p>
+
+<pre>
+div
+{
+animation: myfirst 5s;
+-moz-animation: myfirst 5s;	<span class="code_comment">/* Firefox */</span>
+-webkit-animation: myfirst 5s;	<span class="code_comment">/* Safari 和 Chrome */</span>
+-o-animation: myfirst 5s;	<span class="code_comment">/* Opera */</span>
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=css3_animation1.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=css3_animation1">亲自试一试</a></p>
+
+<p class="note"><span>注释：</span>您必须定义动画的名称和时长。如果忽略时长，则动画不会允许，因为默认值是 0。</p>
+</div>
+
+
+<div>
+<h2>什么是 CSS3 中的动画？</h2>
+
+<p>动画是使元素从一种样式逐渐变化为另一种样式的效果。</p>
+
+<p>您可以改变任意多的样式任意多的次数。</p>
+
+<p>请用百分比来规定变化发生的时间，或用关键词 &quot;from&quot; 和 &quot;to&quot;，等同于 0% 和 100%。</p>
+
+<p>0% 是动画的开始，100% 是动画的完成。</p>
+
+<p>为了得到最佳的浏览器支持，您应该始终定义 0% 和 100% 选择器。</p>
+
+<h3>实例</h3>
+
+<p>当动画为 25% 及 50% 时改变背景色，然后当动画 100% 完成时再次改变：</p>
+
+<pre>
+@keyframes myfirst
+{
+0%   {background: red;}
+25%  {background: yellow;}
+50%  {background: blue;}
+100% {background: green;}
+}
+
+@-moz-keyframes myfirst <span class="code_comment">/* Firefox */</span>
+{
+0%   {background: red;}
+25%  {background: yellow;}
+50%  {background: blue;}
+100% {background: green;}
+}
+
+@-webkit-keyframes myfirst <span class="code_comment">/* Safari 和 Chrome */</span>
+{
+0%   {background: red;}
+25%  {background: yellow;}
+50%  {background: blue;}
+100% {background: green;}
+}
+
+@-o-keyframes myfirst <span class="code_comment">/* Opera */</span>
+{
+0%   {background: red;}
+25%  {background: yellow;}
+50%  {background: blue;}
+100% {background: green;}
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=css3_animation2.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=css3_animation2">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>改变背景色和位置：</p>
+
+<pre>
+@keyframes myfirst
+{
+0%   {background: red; left:0px; top:0px;}
+25%  {background: yellow; left:200px; top:0px;}
+50%  {background: blue; left:200px; top:200px;}
+75%  {background: green; left:0px; top:200px;}
+100% {background: red; left:0px; top:0px;}
+}
+
+@-moz-keyframes myfirst <span class="code_comment">/* Firefox */</span>
+{
+0%   {background: red; left:0px; top:0px;}
+25%  {background: yellow; left:200px; top:0px;}
+50%  {background: blue; left:200px; top:200px;}
+75%  {background: green; left:0px; top:200px;}
+100% {background: red; left:0px; top:0px;}
+}
+
+@-webkit-keyframes myfirst <span class="code_comment">/* Safari 和 Chrome */</span>
+{
+0%   {background: red; left:0px; top:0px;}
+25%  {background: yellow; left:200px; top:0px;}
+50%  {background: blue; left:200px; top:200px;}
+75%  {background: green; left:0px; top:200px;}
+100% {background: red; left:0px; top:0px;}
+}
+
+@-o-keyframes myfirst <span class="code_comment">/* Opera */</span>
+{
+0%   {background: red; left:0px; top:0px;}
+25%  {background: yellow; left:200px; top:0px;}
+50%  {background: blue; left:200px; top:200px;}
+75%  {background: green; left:0px; top:200px;}
+100% {background: red; left:0px; top:0px;}
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=css3_animation3.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=css3_animation3">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>CSS3 动画属性</h2>
+
+<p>下面的表格列出了 @keyframes 规则和所有动画属性：</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:30%;">属性</th>
+<th>描述</th>
+<th style="width:5%;">CSS</th>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_keyframes.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_keyframes.asp" title="CSS3 @keyframes 规则">@keyframes</a></td>
+<td>规定动画。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_animation.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_animation.asp" title="CSS3 animation 属性">animation</a></td>
+<td>所有动画属性的简写属性，除了 animation-play-state 属性。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_animation-name.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_animation-name.asp" title="CSS3 animation-name 属性">animation-name</a></td>
+<td>规定 @keyframes 动画的名称。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_animation-duration.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_animation-duration.asp" title="CSS3 animation-duration 属性">animation-duration</a></td>
+<td>规定动画完成一个周期所花费的秒或毫秒。默认是 0。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_animation-timing-function.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_animation-timing-function.asp" title="CSS3 animation-timing-function 属性">animation-timing-function</a></td>
+<td>规定动画的速度曲线。默认是 &quot;ease&quot;。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_animation-delay.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_animation-delay.asp" title="CSS3 animation-delay 属性">animation-delay</a></td>
+<td>规定动画何时开始。默认是 0。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_animation-iteration-count.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_animation-iteration-count.asp" title="CSS3 animation-iteration-count 属性">animation-iteration-count</a></td>
+<td>规定动画被播放的次数。默认是 1。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_animation-direction.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_animation-direction.asp" title="CSS3 animation-direction 属性">animation-direction</a></td>
+<td>规定动画是否在下一周期逆向地播放。默认是 &quot;normal&quot;。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_animation-play-state.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_animation-play-state.asp" title="CSS3 animation-play-state 属性">animation-play-state</a></td>
+<td>规定动画是否正在运行或暂停。默认是 &quot;running&quot;。</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td><a href="../cssref/pr_animation-fill-mode.asp.htm" tppabs="http://www.w3school.com.cn/cssref/pr_animation-fill-mode.asp" title="CSS3 animation-fill-mode 属性">animation-fill-mode</a></td>
+<td>规定对象动画时间之外的状态。</td>
+<td>3</td>
+</tr>
+</table>
+
+<p>下面的两个例子设置了所有动画属性：</p>
+
+<h3>实例</h3>
+
+<p>运行名为 myfirst 的动画，其中设置了所有动画属性：</p>
+
+<pre>
+div
+{
+animation-name: myfirst;
+animation-duration: 5s;
+animation-timing-function: linear;
+animation-delay: 2s;
+animation-iteration-count: infinite;
+animation-direction: alternate;
+animation-play-state: running;
+<span class="code_comment">/* Firefox: */</span>
+-moz-animation-name: myfirst;
+-moz-animation-duration: 5s;
+-moz-animation-timing-function: linear;
+-moz-animation-delay: 2s;
+-moz-animation-iteration-count: infinite;
+-moz-animation-direction: alternate;
+-moz-animation-play-state: running;
+<span class="code_comment">/* Safari 和 Chrome: */</span>
+-webkit-animation-name: myfirst;
+-webkit-animation-duration: 5s;
+-webkit-animation-timing-function: linear;
+-webkit-animation-delay: 2s;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-direction: alternate;
+-webkit-animation-play-state: running;
+<span class="code_comment">/* Opera: */</span>
+-o-animation-name: myfirst;
+-o-animation-duration: 5s;
+-o-animation-timing-function: linear;
+-o-animation-delay: 2s;
+-o-animation-iteration-count: infinite;
+-o-animation-direction: alternate;
+-o-animation-play-state: running;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=css3_animation4.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=css3_animation4">亲自试一试</a></p>
+
+<h3>实例</h3>
+
+<p>与上面的动画相同，但是使用了简写的动画 animation 属性：</p>
+
+<pre>
+div
+{
+animation: myfirst 5s linear 2s infinite alternate;
+<span class="code_comment">/* Firefox: */</span>
+-moz-animation: myfirst 5s linear 2s infinite alternate;
+<span class="code_comment">/* Safari 和 Chrome: */</span>
+-webkit-animation: myfirst 5s linear 2s infinite alternate;
+<span class="code_comment">/* Opera: */</span>
+-o-animation: myfirst 5s linear 2s infinite alternate;
+}
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=css3_animation5.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=css3_animation5">亲自试一试</a></p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="css3_transition.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_transition.asp" title="CSS3 过渡">CSS3 过渡</a></li>
+<li class="next"><a href="css3_multiple_columns.asp.htm" tppabs="http://www.w3school.com.cn/css3/css3_multiple_columns.asp" title="CSS3 多列">CSS3 多列</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../cssref/index.asp.htm" tppabs="http://www.w3school.com.cn/cssref/index.asp">CSS 参考手册</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

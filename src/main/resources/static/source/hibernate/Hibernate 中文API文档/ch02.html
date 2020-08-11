@@ -1,0 +1,108 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;2&#160;章&#160;体系结构(Architecture)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch01s05.html" title="1.5.&#160; 总结">
+<link rel="next" href="ch02s02.html" title="2.2.&#160;实例状态">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="architecture"></a>第&#160;2&#160;章&#160;体系结构(Architecture)</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch02.html#architecture-overview">2.1. 概况(Overview)</a></span></dt>
+<dt><span class="sect1"><a href="ch02s02.html">2.2. 实例状态</a></span></dt>
+<dt><span class="sect1"><a href="ch02s03.html">2.3. JMX整合</a></span></dt>
+<dt><span class="sect1"><a href="ch02s04.html">2.4. 对JCA的支持</a></span></dt>
+<dt><span class="sect1"><a href="ch02s05.html">2.5. 上下文相关的（Contextual）Session</a></span></dt>
+</dl>
+</div>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="architecture-overview"></a>2.1.&#160;概况(Overview)</h2></div></div></div>
+<p>
+            一个非常简要的Hibernate体系结构的概要图：
+        </p>
+<div class="mediaobject" align="center"><img src="images/overview.gif" align="middle"></div>
+<p>
+            从这个图可以看出，Hibernate使用数据库和配置信息来为应用程序提供持久化服务（以及持久的对象）。
+        </p>
+<p>
+            我们来更详细地看一下Hibernate运行时体系结构。由于Hibernate非常灵活，且支持多种应用方案，
+            所以我们这只描述一下两种极端的情况。“轻型”的体系结构方案，要求应用程序提供自己的JDBC
+            连接并管理自己的事务。这种方案使用了Hibernate API的最小子集：
+        </p>
+<div class="mediaobject" align="center"><img src="images/lite.gif" align="middle"></div>
+<p>
+            “全面解决”的体系结构方案，将应用层从底层的JDBC/JTA API中抽象出来，而让Hibernate来处理这些细节。
+        </p>
+<div class="mediaobject" align="center"><img src="images/full_cream.gif" align="middle"></div>
+<p>
+            图中各个对象的定义如下：
+
+            </p>
+<div class="variablelist"><dl>
+<dt><span class="term">SessionFactory (<code class="literal">org.hibernate.SessionFactory</code>)</span></dt>
+<dd><p>
+                            针对单个数据库映射关系经过编译后的内存镜像，是线程安全的（不可变）。
+                            它是生成<code class="literal">Session</code>的工厂，本身要用到<code class="literal">ConnectionProvider</code>。
+                            该对象可以在进程或集群的级别上，为那些事务之间可以重用的数据提供可选的二级缓存。
+                        </p></dd>
+<dt><span class="term">Session (<code class="literal">org.hibernate.Session</code>)</span></dt>
+<dd><p>
+                            表示应用程序与持久储存层之间交互操作的一个单线程对象，此对象生存期很短。
+                            其隐藏了JDBC连接，也是<code class="literal">Transaction</code>的工厂。
+                            其会持有一个针对持久化对象的必选（第一级）缓存，在遍历对象图或者根据持久化标识查找对象时会用到。
+                        </p></dd>
+<dt><span class="term">持久的对象及其集合</span></dt>
+<dd><p>
+                            带有持久化状态的、具有业务功能的单线程对象，此对象生存期很短。
+                            这些对象可能是普通的JavaBeans/POJO，唯一特殊的是他们正与（仅仅一个）<code class="literal">Session</code>相关联。
+                            一旦这个<code class="literal">Session</code>被关闭，这些对象就会脱离持久化状态，这样就可被应用程序的任何层自由使用。
+                           （例如，用作跟表示层打交道的数据传输对象。）
+                        </p></dd>
+<dt><span class="term">瞬态(transient)和脱管(detached)的对象及其集合</span></dt>
+<dd><p>
+                            那些目前没有与session关联的持久化类实例。
+                            他们可能是在被应用程序实例化后，尚未进行持久化的对象。
+                            也可能是因为实例化他们的<code class="literal">Session</code>已经被关闭而脱离持久化的对象。
+                        </p></dd>
+<dt><span class="term">事务Transaction (<code class="literal">org.hibernate.Transaction</code>)</span></dt>
+<dd><p>
+                            （可选的）应用程序用来指定原子操作单元范围的对象，它是单线程的，生命周期很短。
+                            它通过抽象将应用从底层具体的JDBC、JTA以及CORBA事务隔离开。
+                            某些情况下，一个<code class="literal">Session</code>之内可能包含多个<code class="literal">Transaction</code>对象。
+                            尽管是否使用该对象是可选的，但无论是使用底层的API还是使用<code class="literal">Transaction</code>对象，事务边界的开启与关闭是必不可少的。
+                        </p></dd>
+<dt><span class="term">ConnectionProvider (<code class="literal">org.hibernate.connection.ConnectionProvider</code>)</span></dt>
+<dd><p>
+                            （可选的）生成JDBC连接的工厂（同时也起到连接池的作用）。
+                            它通过抽象将应用从底层的<code class="literal">Datasource</code>或<code class="literal">DriverManager</code>隔离开。
+                            仅供开发者扩展/实现用，并不暴露给应用程序使用。
+                        </p></dd>
+<dt><span class="term">TransactionFactory (<code class="literal">org.hibernate.TransactionFactory</code>)</span></dt>
+<dd><p>
+                           （可选的）生成<code class="literal">Transaction</code>对象实例的工厂。
+                           仅供开发者扩展/实现用，并不暴露给应用程序使用。
+                        </p></dd>
+<dt><span class="term"><span class="emphasis"><em>扩展接口</em></span></span></dt>
+<dd><p>
+                             Hibernate提供了很多可选的扩展接口，你可以通过实现它们来定制你的持久层的行为。
+                             具体请参考API文档。
+                        </p></dd>
+</dl></div>
+<p>
+        </p>
+<p>
+            在特定“轻型”的体系结构中，应用程序可能绕过
+            <code class="literal">Transaction</code>/<code class="literal">TransactionFactory</code> 以及
+            <code class="literal">ConnectionProvider</code> 等API直接跟JTA或JDBC打交道。
+        </p>
+</div>
+</div></body>
+</html>

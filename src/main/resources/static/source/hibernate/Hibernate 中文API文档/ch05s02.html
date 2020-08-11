@@ -1,0 +1,159 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>5.2.&#160;Hibernate 的类型</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch05.html" title="第&#160;5&#160;章&#160;对象/关系数据库映射基础(Basic O/R Mapping)">
+<link rel="prev" href="ch05.html" title="第&#160;5&#160;章&#160;对象/关系数据库映射基础(Basic O/R Mapping)">
+<link rel="next" href="ch05s03.html" title="5.3.&#160;多次映射同一个类">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="mapping-types"></a>5.2.&#160;Hibernate 的类型</h2></div></div></div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-types-entitiesvalues"></a>5.2.1.&#160;实体(Entities)和值(values)</h3></div></div></div>
+<p>
+                为了理解很多与持久化服务相关的Java语言级对象的行为，我们需要把它们分为两类：
+            </p>
+<p>
+                <span class="emphasis"><em>实体entity</em></span> 独立于任何持有实体引用的对象。与通常的Java模型相比，不再被引用的对象会被当作垃圾收集掉。实体必须被显式的保存和删除(除非保存和删除是从父实体向子实体引发的<span class="emphasis"><em>级联</em></span>)。这和ODMG模型中关于对象通过可触及保持持久性有一些不同——比较起来更加接近应用程序对象通常在一个大系统中的使用方法。实体支持循环引用和交叉引用，它们也可以加上版本信息。
+            </p>
+<p>
+               一个实体的持久状态包含指向其他实体和<span class="emphasis"><em>值</em></span>类型实例的引用。值可以是原始类型，集合(不是集合中的对象)，组件或者特定的不可变对象。与实体不同，值(特别是集合和组件)是通过可触及性来进行持久化和删除的。因为值对象(和原始类型数据)是随着包含他们的实体而被持久化和删除的，他们不能被独立的加上版本信息。值没有独立的标识，所以他们不能被两个实体或者集合共享。
+            </p>
+<p>
+			    直到现在，我们都一直使用术语“持久类”(persistent class)来代表实体。我们仍然会这么做。	然而严格说来，不是所有的用户自定义的，带有持久化状态的类都是实体。<span class="emphasis"><em>组件</em></span>就是用户自定义类，却是值语义的。<code class="literal">java.lang.String</code>类型的java属性也是值语义的。给了这个定义以后，我们可以说所有JDK提供的类型(类)都是值类型的语义，而用于自定义类型可能被映射为实体类型或值类型语义。采用哪种类型的语义取决于开发人员。在领域模型中，寻找实体类的一个好线索是共享引用指向这个类的单一实例，而组合或聚合通常被转化为值类型。
+            </p>
+<p>
+                我们会在本文档中重复碰到这两个概念。
+            </p>
+<p>
+                挑战在于将java类型系统(和开发者定义的实体和值类型)映射到 SQL/数据库类型系统。Hibernate提供了连接两个系统之间的桥梁：对于实体类型，我们使用<code class="literal">&lt;class&gt;</code>, <code class="literal">&lt;subclass&gt;</code>  等等。对于值类型，我们使用 <code class="literal">&lt;property&gt;</code>, <code class="literal">&lt;component&gt;</code> 及其他，通常跟随着<code class="literal">type</code>属性。这个属性的值是Hibernate 的<span class="emphasis"><em>映射类型</em></span>的名字。Hibernate提供了许多现成的映射(标准的JDK值类型)。你也可以编写自己的映射类型并实现自定义的变换策略，随后我们会看到这点。
+            </p>
+<p>
+                所有的Hibernate内建类型，除了collections以外，都支持空(null)语义。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-types-basictypes"></a>5.2.2.&#160;基本值类型</h3></div></div></div>
+<p>
+                内建的 <span class="emphasis"><em>基本映射类型</em></span>可以大致分为
+                </p>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="literal">integer, long, short, float, double, character, byte,
+                            boolean, yes_no, true_false</code></span></dt>
+<dd><p>
+                                这些类型都对应Java的原始类型或者其封装类，来符合(特定厂商的)SQL 字段类型。<code class="literal">boolean, yes_no</code> 和 <code class="literal">true_false</code>都是Java 中<code class="literal">boolean</code> 或者<code class="literal">java.lang.Boolean</code>的另外说法。
+                            </p></dd>
+<dt><span class="term"><code class="literal">string</code></span></dt>
+<dd><p>
+                                从<code class="literal">java.lang.String</code> 到
+                                <code class="literal">VARCHAR</code> (或者 Oracle的 <code class="literal">VARCHAR2</code>)的映射。
+                            </p></dd>
+<dt><span class="term"><code class="literal">date, time, timestamp</code></span></dt>
+<dd><p>
+                                从<code class="literal">java.util.Date</code>和其子类到SQL类型<code class="literal">DATE</code>, <code class="literal">TIME</code> 和<code class="literal">TIMESTAMP</code> (或等价类型)的映射。
+                            </p></dd>
+<dt><span class="term"><code class="literal">calendar, calendar_date</code></span></dt>
+<dd><p>
+                                从<code class="literal">java.util.Calendar</code> 到SQL 类型<code class="literal">TIMESTAMP</code>和 <code class="literal">DATE</code>(或等价类型)的映射。
+                            </p></dd>
+<dt><span class="term"><code class="literal">big_decimal, big_integer</code></span></dt>
+<dd><p>
+                                从<code class="literal">java.math.BigDecimal</code>和<code class="literal">java.math.BigInteger</code>到<code class="literal">NUMERIC</code> (或者 Oracle 的<code class="literal">NUMBER</code>类型)的映射。
+                            </p></dd>
+<dt><span class="term"><code class="literal">locale, timezone, currency</code></span></dt>
+<dd><p>
+                                从<code class="literal">java.util.Locale</code>,                                <code class="literal">java.util.TimeZone</code> 和<code class="literal">java.util.Currency</code> 到<code class="literal">VARCHAR</code> (或者 Oracle 的<code class="literal">VARCHAR2</code>类型)的映射.
+                                <code class="literal">Locale</code>和 <code class="literal">Currency</code> 的实例被映射为它们的ISO代码。<code class="literal">TimeZone</code>的实例被影射为它的<code class="literal">ID</code>。
+                            </p></dd>
+<dt><span class="term"><code class="literal">class</code></span></dt>
+<dd><p>
+                                从<code class="literal">java.lang.Class</code> 到
+                                <code class="literal">VARCHAR</code> (或者 Oracle 的<code class="literal">VARCHAR2</code>类型)的映射。<code class="literal">Class</code>被映射为它的全限定名。
+                            </p></dd>
+<dt><span class="term"><code class="literal">binary</code></span></dt>
+<dd><p>
+                                把字节数组(byte arrays)映射为对应的 SQL二进制类型。
+                            </p></dd>
+<dt><span class="term"><code class="literal">text</code></span></dt>
+<dd><p>
+                                把长Java字符串映射为SQL的<code class="literal">CLOB</code>或者<code class="literal">TEXT</code>类型。
+                            </p></dd>
+<dt><span class="term"><code class="literal">serializable</code></span></dt>
+<dd><p>
+                                把可序列化的Java类型映射到对应的SQL二进制类型。你也可以为一个并非默认为基本类型的可序列化Java类或者接口指定Hibernate类型<code class="literal">serializable</code>。
+                            </p></dd>
+<dt><span class="term"><code class="literal">clob, blob</code></span></dt>
+<dd><p>
+                                JDBC 类 <code class="literal">java.sql.Clob</code> 和 <code class="literal">java.sql.Blob</code>的映射。某些程序可能不适合使用这个类型，因为blob和clob对象可能在一个事务之外是无法重用的。(而且, 驱动程序对这种类型的支持充满着补丁和前后矛盾。)
+                            </p></dd>
+<dt><span class="term">
+                            <code class="literal">imm_date, imm_time, imm_timestamp, imm_calendar, imm_calendar_date,
+                            imm_serializable, imm_binary</code>
+                        </span></dt>
+<dd><p>
+                                一般来说，映射类型被假定为是可变的Java类型，只有对不可变Java类型，Hibernate会采取特定的优化措施，应用程序会把这些对象作为不可变对象处理。比如，你不应该对作为<code class="literal">imm_timestamp</code>映射的Date执行<code class="literal">Date.setTime()</code>。要改变属性的值，并且保存这一改变，应用程序必须对这一属性重新设置一个新的（不一样的）对象。
+                            </p></dd>
+</dl></div>
+<p>
+            
+            </p>
+<p>
+                实体及其集合的唯一标识可以是除了<code class="literal">binary</code>、 <code class="literal">blob</code> 和 <code class="literal">clob</code>之外的任何基础类型。(联合标识也是允许的，后面会说到。)
+            </p>
+<p>
+                在<code class="literal">org.hibernate.Hibernate</code>中，定义了基础类型对应的<code class="literal">Type</code>常量。比如，<code class="literal">Hibernate.STRING</code>代表<code class="literal">string</code> 类型。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-types-custom"></a>5.2.3.&#160;自定义值类型</h3></div></div></div>
+<p>
+                开发者创建属于他们自己的值类型也是很容易的。比如说，你可能希望持久化<code class="literal">java.lang.BigInteger</code>类型的属性，持久化成为<code class="literal">VARCHAR</code>字段。Hibernate没有内置这样一种类型。自定义类型能够映射一个属性(或集合元素)到不止一个数据库表字段。比如说，你可能有这样的Java属性：<code class="literal">getName()</code>/<code class="literal">setName()</code>，这是<code class="literal">java.lang.String</code>类型的，对应的持久化到三个字段：<code class="literal">FIRST_NAME</code>, <code class="literal">INITIAL</code>, <code class="literal">SURNAME</code>。
+            </p>
+<p>
+                要实现一个自定义类型，可以实现<code class="literal">org.hibernate.UserType</code>或<code class="literal">org.hibernate.CompositeUserType</code>中的任一个，并且使用类型的Java全限定类名来定义属性。请查看<code class="literal">org.hibernate.test.DoubleStringType</code>这个例子，看看它是怎么做的。
+            </p>
+<pre class="programlisting">&lt;property name="twoStrings" type="org.hibernate.test.DoubleStringType"&gt;
+    &lt;column name="first_string"/&gt;
+    &lt;column name="second_string"/&gt;
+&lt;/property&gt;</pre>
+<p>
+                注意使用<code class="literal">&lt;column&gt;</code>标签来把一个属性映射到多个字段的做法。
+            </p>
+<p>
+                <code class="literal">CompositeUserType</code>, <code class="literal">EnhancedUserType</code>,
+                <code class="literal">UserCollectionType</code>, 和 <code class="literal">UserVersionType</code> 接口为更特殊的使用方式提供支持。
+            </p>
+<p>
+                你甚至可以在一个映射文件中提供参数给一个<code class="literal">UserType</code>。 为了这样做，你的<code class="literal">UserType</code>必须实现<code class="literal">org.hibernate.usertype.ParameterizedType</code>接口。为了给自定义类型提供参数，你可以在映射文件中使用<code class="literal">&lt;type&gt;</code>元素。
+            </p>
+<pre class="programlisting">&lt;property name="priority"&gt;
+    &lt;type name="com.mycompany.usertypes.DefaultValueIntegerType"&gt;
+        &lt;param name="default"&gt;0&lt;/param&gt;
+    &lt;/type&gt;
+&lt;/property&gt;</pre>
+<p>
+                现在，<code class="literal">UserType</code> 可以从传入的<code class="literal">Properties</code>对象中得到<code class="literal">default</code> 参数的值。
+            </p>
+<p>
+                如果你非常频繁地使用某一<code class="literal">UserType</code>，可以为他定义一个简称。这可以通过使用 <code class="literal">&lt;typedef&gt;</code>元素来实现。Typedefs为一自定义类型赋予一个名称，并且如果此类型是参数化的，还可以包含一系列默认的参数值。
+            </p>
+<pre class="programlisting">&lt;typedef class="com.mycompany.usertypes.DefaultValueIntegerType" name="default_zero"&gt;
+    &lt;param name="default"&gt;0&lt;/param&gt;
+&lt;/typedef&gt;</pre>
+<pre class="programlisting">&lt;property name="priority" type="default_zero"/&gt;</pre>
+<p>
+                也可以根据具体案例通过属性映射中的类型参数覆盖在typedef中提供的参数。
+            </p>
+<p>
+			    尽管 Hibernate 内建的丰富的类型和对组件的支持意味着你可能很少 <span class="emphasis"><em>需要</em></span>使用自定义类型。不过，为那些在你的应用中经常出现的(非实体)类使用自定义类型也是一个好方法。例如，一个<code class="literal">MonetaryAmount</code>类使用<code class="literal">CompositeUserType</code>来映射是不错的选择，虽然他可以很容易地被映射成组件。这样做的动机之一是抽象。使用自定义类型，以后假若你改变表示金额的方法时，它可以保证映射文件不需要修改。
+            </p>
+</div>
+</div></body>
+</html>

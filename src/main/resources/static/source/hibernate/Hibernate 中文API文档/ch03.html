@@ -1,0 +1,153 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;3&#160;章&#160; 配置</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch02s05.html" title="2.5.&#160;上下文相关的（Contextual）Session">
+<link rel="next" href="ch03s02.html" title="3.2.&#160; 获得SessionFactory">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="session-configuration"></a>第&#160;3&#160;章&#160;
+        配置
+    </h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch03.html#configuration-programmatic">3.1. 
+            可编程的配置方式
+        </a></span></dt>
+<dt><span class="sect1"><a href="ch03s02.html">3.2. 
+            获得SessionFactory
+        </a></span></dt>
+<dt><span class="sect1"><a href="ch03s03.html">3.3. 
+            JDBC连接
+        </a></span></dt>
+<dt><span class="sect1"><a href="ch03s04.html">3.4. 
+            可选的配置属性
+        </a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch03s04.html#configuration-optional-dialects">3.4.1. 
+                SQL方言
+            </a></span></dt>
+<dt><span class="sect2"><a href="ch03s04.html#configuration-optional-outerjoin">3.4.2. 
+                外连接抓取(Outer Join Fetching)
+            </a></span></dt>
+<dt><span class="sect2"><a href="ch03s04.html#configuration-optional-binarystreams">3.4.3. 
+                二进制流 (Binary Streams)
+            </a></span></dt>
+<dt><span class="sect2"><a href="ch03s04.html#configuration-optional-cacheprovider">3.4.4. 
+                二级缓存与查询缓存
+            </a></span></dt>
+<dt><span class="sect2"><a href="ch03s04.html#configuration-optional-querysubstitution">3.4.5. 
+                查询语言中的替换
+            </a></span></dt>
+<dt><span class="sect2"><a href="ch03s04.html#configuration-optional-statistics">3.4.6. 
+                Hibernate的统计(statistics)机制
+            </a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch03s05.html">3.5. 
+            日志
+        </a></span></dt>
+<dt><span class="sect1"><a href="ch03s06.html">3.6. 
+            实现<code class="literal">NamingStrategy</code>
+        </a></span></dt>
+<dt><span class="sect1"><a href="ch03s07.html">3.7. 
+            XML配置文件
+        </a></span></dt>
+<dt><span class="sect1"><a href="ch03s08.html">3.8. 
+            J2EE应用程序服务器的集成
+        </a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch03s08.html#configuration-optional-transactionstrategy">3.8.1. 
+                事务策略配置
+            </a></span></dt>
+<dt><span class="sect2"><a href="ch03s08.html#configuration-optional-jndi">3.8.2. 
+                JNDI绑定的<code class="literal">SessionFactory</code>
+            </a></span></dt>
+<dt><span class="sect2"><a href="ch03s08.html#configuration-j2ee-currentsession">3.8.3. 在JTA环境下使用Current Session context (当前session上下文)管理</a></span></dt>
+<dt><span class="sect2"><a href="ch03s08.html#configuration-j2ee-jmx">3.8.4. 
+                JMX部署
+            </a></span></dt>
+</dl></dd>
+</dl>
+</div>
+<p>
+        由于Hibernate是为了能在各种不同环境下工作而设计的, 因此存在着大量的配置参数. 幸运的是多数配置参数都
+        有比较直观的默认值, 并有随Hibernate一同分发的配置样例<code class="literal">hibernate.properties</code>
+        (位于<code class="literal">etc/</code>)来展示各种配置选项. 所需做的仅仅是将这个样例文件复制到类路径
+        (classpath)下并做一些自定义的修改.
+    </p>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="configuration-programmatic"></a>3.1.&#160;
+            可编程的配置方式
+        </h2></div></div></div>
+<p>
+            一个<code class="literal">org.hibernate.cfg.Configuration</code>实例代表了一个应用程序中Java类型
+            到SQL数据库映射的完整集合. <code class="literal">Configuration</code>被用来构建一个(不可变的
+            (immutable))<code class="literal">SessionFactory</code>. 映射定义则由不同的XML映射定义文件编译而来.
+        </p>
+<p>
+            你可以直接实例化<code class="literal">Configuration</code>来获取一个实例，并为它指定XML映射定义
+            文件. 如果映射定
+            义文件在类路径(classpath)中, 请使用<code class="literal">addResource()</code>:
+        </p>
+<pre class="programlisting">Configuration cfg = new Configuration()
+    .addResource("Item.hbm.xml")
+    .addResource("Bid.hbm.xml");</pre>
+<p>
+            一个替代方法（有时是更好的选择）是，指定被映射的类，让Hibernate帮你寻找映射定义文件:
+        </p>
+<pre class="programlisting">Configuration cfg = new Configuration()
+    .addClass(org.hibernate.auction.Item.class)
+    .addClass(org.hibernate.auction.Bid.class);</pre>
+<p>
+            Hibernate将会在类路径(classpath)中寻找名字为
+            <code class="literal">/org/hibernate/auction/Item.hbm.xml</code>和
+            <code class="literal">/org/hibernate/auction/Bid.hbm.xml</code>映射定义文件.
+            这种方式消除了任何对文件名的硬编码(hardcoded).
+        </p>
+<p>
+            <code class="literal">Configuration</code>也允许你指定配置属性:
+        </p>
+<pre class="programlisting">Configuration cfg = new Configuration()
+    .addClass(org.hibernate.auction.Item.class)
+    .addClass(org.hibernate.auction.Bid.class)
+    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect")
+    .setProperty("hibernate.connection.datasource", "java:comp/env/jdbc/test")
+    .setProperty("hibernate.order_updates", "true");</pre>
+<p>
+            当然这不是唯一的传递Hibernate配置属性的方式, 其他可选方式还包括:
+        </p>
+<div class="orderedlist"><ol type="1" compact>
+<li><p>
+                    传一个<code class="literal">java.util.Properties</code>实例给
+                    <code class="literal">Configuration.setProperties()</code>.
+                </p></li>
+<li><p>
+                    将<code class="literal">hibernate.properties</code>放置在类路径(classpath)的根目录下
+                    (root directory).
+                </p></li>
+<li><p>
+                    通过<code class="literal">java -Dproperty=value</code>来设置系统
+                    (<code class="literal">System</code>)属性.
+                </p></li>
+<li><p>
+                    在<code class="literal">hibernate.cfg.xml</code>中加入元素
+                    <code class="literal">&lt;property&gt;</code> (稍后讨论).
+                </p></li>
+</ol></div>
+<p>
+            如果想尽快体验Hibernate, <code class="literal">hibernate.properties</code>是最简单的方式.
+        </p>
+<p>
+            <code class="literal">Configuration</code>实例被设计成启动期间（startup-time）对象, 
+            一旦<code class="literal">SessionFactory</code>创建完成它就被丢弃了.
+        </p>
+</div>
+</div></body>
+</html>

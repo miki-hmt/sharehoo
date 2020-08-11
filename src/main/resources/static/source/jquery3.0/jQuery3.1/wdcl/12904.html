@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>before()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">before()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.before( content [, content ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>根据参数设定，在匹配元素的前面插入内容（译者注：外部插入）
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.before(
+            content [, content ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>content</strong> 
+					</div>
+					<div>
+						类型: htmlString 或 Element 或 Array 或 jQuery
+					</div>
+					<div>
+						HTML字符串，DOM 元素，文本节点，元素和文本节点的数组，或者jQuery对象，用来插入到集合中每个匹配元素的前面（手册网注：外部插入）。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>content</strong> 
+					</div>
+					<div>
+						类型: htmlString 或 Element 或 Array 或 jQuery
+					</div>
+					<div>
+						一个或多个附加的DOM元素，文本节点，元素和文本节点的数组，HTML字符串，或jQuery对象，用来插入到集合中每个匹配元素的前面（手册网注：外部插入）。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.4</span>.before( function )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>function</strong> 
+					</div>
+					<div>
+						类型: Function( Integer index )
+                    =&gt; htmlString 或 Element 或 jQuery
+					</div>
+					<div>
+						一个返回HTML字符串，DOM元素（或多个），文本节点（或多个），或jQuery对象的函数，返回的内容用来插入到集合中每个匹配元素的前面（手册网注：外部插入）。   接收元素集合中该元素的索引位置作为一个参数（index 参数）。在函数中<code>this</code>指向元素集合中的当前元素。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.10</span><span class="icon-link"></span>.before( function-html )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>function</strong> 
+					</div>
+					<div>
+						类型: Function( Integer index, String html )
+                    =&gt; htmlString 或 Element 或 jQuery
+					</div>
+					<div>
+						一个返回HTML字符串，DOM元素（或多个），文本节点（或多个），jQuery对象的函数，返回的内容用来插入到集合中每个匹配元素的前面（手册网注：外部插入）。接收元素集合中该元素的索引位置（手册网注：index
+ 参数）和元素的原来HTML值（手册网注：html 参数）作为参数。在函数中<code>this</code>指向元素集合中的当前元素。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>.before()</code> 和.insertBefore()实现同样的功能。主要的不同是语法——内容和目标的位置不同。
+        对于<code>.before()</code>,要插入的内容来自方法的参数：<code>$(target).before(contentToBeInserted)</code> （手册网注：即，选择器表达式在方法的前面，参数是将要插入的内容）  。
+        对于<code>.insertBefore()</code>，
+        刚好相反，内容在方法前面并且插入到目标的前面，
+        而目标是传递给<code>.insertBefore()</code>方法的参数： <code>$(contentToBeInserted).insertBefore(target)</code>。
+		</p>
+		<p>
+			请看下面的HTML:
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="container"&gt;
+  &lt;h2&gt;Greetings&lt;/h2&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+		</div>
+		<p>
+			你可以创建内容然后同时插入到多个元素前面：
+		</p>
+<pre class="prettyprint lang-js">$('.inner').before('&lt;p&gt;Test&lt;/p&gt;');</pre>
+		<p>
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+		</div>
+		<p>
+			每个新的inner <code>&lt;div&gt;</code>元素会得到新的内容：
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="container"&gt;
+  &lt;h2&gt;Greetings&lt;/h2&gt;
+  &lt;p&gt;Test&lt;/p&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;p&gt;Test&lt;/p&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+		</div>
+		<p>
+			你也可以在页面上选择一个元素然后插在另一个元素前面：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('.inner').before('&lt;p&gt;Test&lt;/p&gt;');</pre>
+		</div>
+		<p>
+			如果这样，一个被选中的元素插入被到DOM中的一个别的位置，
+    它将移动到目标的前面（而不是克隆）：
+		</p>
+<pre class="prettyprint lang-js">&lt;h2&gt;Greetings&lt;/h2&gt;
+&lt;div class="container"&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+		<p>
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+		</div>
+		<p>
+			<strong> 重要提示：</strong> 如果有多个目标元素，将要为每个目标元素创建插入元素的克隆副本，除了最后一个。
+        然而，对于除了最后一个每个目标将要创建的插入元件的克隆副本。
+		</p>
+<del> 
+		<p>
+			在jQuery 1.4中, <code>.before()</code>和<code>.after()</code>同样对脱离文档的DOM节点（手册网注：脱离文档的DOM节点，即，可能时javascript动态创建的，还没被插入到html文档中）有效：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$("&lt;div/&gt;").before("&lt;p&gt;&lt;/p&gt;");</pre>
+		</div>
+		<p>
+			结果是一个jQuery集合包含一个段落和一个 div（按此顺序）。
+		</p>
+</del> 
+		<h4 id="additional-arguments">
+			Additional Arguments（额外的参数）
+		</h4>
+		<p>
+			类似的其他内容的添加方法 &nbsp;如<code>.prepend()</code> 和 <code>.after()</code> ,<code>.before()</code>还支持传递输入多个参数。支持的输入包括DOM元素，jQuery对象，HTML字符串，DOM元素的数组。
+		</p>
+		<p>
+			例如，下面将插入两个新的&lt;div&gt;和现有的&lt;div&gt;到 第一个段落：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var $newdiv1 = $("&lt;div id='object1'&gt;&lt;/div&gt;"),
+    newdiv2 = document.createElement('div'),
+    existingdiv1 = document.getElementById('foo');
+ 
+$('p').first().before($newdiv1, [newdiv2, existingdiv1]);</pre>
+		</div>
+		<p>
+			<code>.before()</code> 可以接受任何数量的额外的参数，所以上面的示例中，也可以将三个独立的 &lt;div&gt; 分别作为参数传给该方法，就像这样<code>$('p').first().before($newdiv1, newdiv2, existingdiv1)</code>。参数的类型和数量
+将在很大程度上取决于在代码中被收集的元素。
+		</p>
+	</div>
+	<h3>
+		其他注意事项:
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				在此之前的jQuery1.9，  如果该集合中的第一个节点没有在文档中， <code>.before()</code>将尝试添加 或 在当前的jQuery集合改变节点，在这种情况下返回一个新的jQuery集合，而不是原来的集合。
+        该方法可能会或可能不会返回一个新的结果，这取决于它的参数个数或参数的连贯性！
+        从jQuery1.9开始，<code>.after()</code>, <code>.before()</code>,
+                    和 <code>.replaceWith()</code>总是返回原始未修改的集合。
+            试图在一个没有父级元素的节点上使用这些方法是没有效果的，也就是说，集合和它包含的节点都不会改变。
+			</li>
+			<li>
+				设计上，任何jQuery的构造或方法，都接受一个HTML字符串（作为参数） - jQuery(), .append(), .after()等 -
+                可以潜在地执行代码。   这可能会出现注入script标签或使用HTML属性
+                &nbsp;执行的代码（例如，<code>&lt;img
+                            onload=""&gt;</code>）。
+                不要使用这些方法来插入来自不受信任的来源，如网址查询参数，Cookie或表单输入获得的字符串。
+            这样做可能会引起跨站点脚本（XSS）漏洞。
+                将内容添加到文档之前删除或避开用户任何输入内容。
+			</li>
+		</ul>
+	</div>
+	<div class="jquery-api-top">
+	</div>
+<header>
+	<h3 class="underline">
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+</header>
+	<div class="entry-example" id="example-0">
+		<h4>
+			实例
+		</h4>
+		<p>
+			<span class="desc">在所有段落前插入一些HTML。</span> 
+		</p>
+		<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;p { background:yellow; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt; is what I said...&lt;/p&gt;
+&lt;script&gt;$("p").before("&lt;b&gt;Hello&lt;/b&gt;");&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+		</div>
+		<p>
+			<a href="http://www.shouce.ren/study/api/s/8071" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+		</p>
+	</div>
+	<div class="entry-example" id="example-1">
+		<h4>
+			实例
+		</h4>
+		<p>
+			<span class="desc">在所有段落前插入一个DOM元素。</span> 
+		</p>
+		<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;p { background:yellow; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt; is what I said...&lt;/p&gt;
+&lt;script&gt;$("p").before( document.createTextNode("Hello") );&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+		</div>
+		<p>
+		</p>
+		<p>
+			<a href="http://www.shouce.ren/study/api/s/8070" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+		</p>
+		<p>
+		</p>
+	</div>
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">在所有段落前插入一个jQuery对象（类似于一个DOM元素数组）。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;p { background:yellow; }&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt; is what I said...&lt;/p&gt;&lt;b&gt;Hello&lt;/b&gt;
+&lt;script&gt;$("p").before( $("b") );&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8069" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+	<p>
+	</p>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

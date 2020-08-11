@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.inArray()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.inArray()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.inArray( value, array [, fromIndex ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Number</code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>在数组中查找指定值并返回它的索引（如果没有找到，则返回-1）。
+</p>
+<ul class="signatures">
+	<li class="signature" id="jQuery-inArray-value-array-fromIndex">
+		<h4 class="name">
+			<span class="version-details">V : 1.2</span>jQuery.inArray( value, array [, fromIndex ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>value</strong> 
+				</div>
+				<div>
+					类型: Anything
+				</div>
+				<div>
+					要查找的值。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>array</strong> 
+				</div>
+				<div>
+					类型: Array
+				</div>
+				<div>
+					一个数组，通过它来查找。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>fromIndex</strong> 
+				</div>
+				<div>
+					类型: Number
+				</div>
+				<div>
+					数组索引值，表示从哪里在开始查找。默认值是0，这将查找整个数组。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>$.inArray()</code>方法类似于JavaScript的原生<code>.indexOf()</code>方法，没有找到匹配元素时它返回-1。如果数组第一个元素匹配<code>value</code>（参数） ，那么<code>$.inArray()</code>返回0。
+	</p>
+	<p>
+		因为JavaScript将0视为false(即 0 == false, 但是 0 !== false)，要检查在<code>array</code>中是否存在<code>value</code>， 你需要检查它是否不等于（或大于）-1。
+	</p>
+	<p>
+		值之间的比较是严格比较（手册网注：即，===或!==比较）。下面这段代码返回 <code>-1</code> (没有找到) ，&nbsp;因为字符串数组中不可能找到一个数字：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.inArray( 5 + 5, [ "8", "9", "10", 10 + "" ] );</pre>
+	</div>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">返回数组中指定元素的索引值。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { color:blue; }
+  span { color:red; }
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;div&gt;"John" found at &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;4 found at &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;"Karl" not found, so &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;"Pete" is in the array, but not at or after index 2, so &lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;script&gt;var arr = [ 4, "Pete", 8, "John" ];
+var $spans = $("span");
+$spans.eq(0).text(jQuery.inArray("John", arr));
+$spans.eq(1).text(jQuery.inArray(4, arr));
+$spans.eq(2).text(jQuery.inArray("Karl", arr));
+$spans.eq(3).text(jQuery.inArray("Pete", arr, 2));
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8198" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

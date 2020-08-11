@@ -1,0 +1,508 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+<title>ASP.NET - Repeater 控件</title>
+</head>
+
+<body class="dotnet">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>ASP.NET 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/index.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li><a href="aspnet.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet.asp" title="ASP.NET 简介">ASP.NET 简介</a></li>
+</ul>
+<h2>WP 教程</h2>
+<ul>
+<li><a href="webpages_intro.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_intro.asp" title="WebPages 简介">WebPages 简介</a></li>
+<li><a href="webpages_razor.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_razor.asp" title="WebPages Razor">WebPages Razor</a></li>
+<li><a href="webpages_layout.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_layout.asp" title="WebPages 布局">WebPages 布局</a></li>
+<li><a href="webpages_folders.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_folders.asp" title="WebPages 文件夹">WebPages 文件夹</a></li>
+<li><a href="webpages_global.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_global.asp" title="WebPages 全局">WebPages 全局</a></li>
+<li><a href="webpages_forms.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_forms.asp" title="WebPages 窗体">WebPages 窗体</a></li>
+<li><a href="webpages_objects.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_objects.asp" title="WebPages 对象">WebPages 对象</a></li>
+<li><a href="webpages_files.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_files.asp" title="WebPages 文件">WebPages 文件</a></li>
+<li><a href="webpages_helpers.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_helpers.asp" title="WebPages 帮助器">WebPages 帮助器</a></li>
+<li><a href="webpages_webgrid.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_webgrid.asp" title="WebPages WebGrid">WebPages WebGrid</a></li>
+<li><a href="webpages_chart.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_chart.asp" title="WebPages 图表">WebPages 图表</a></li>
+<li><a href="webpages_email.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_email.asp" title="WebPages 电邮">WebPages 电邮</a></li>
+<li><a href="webpages_php.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_php.asp" title="WebPages PHP">WebPages PHP</a></li>
+<li><a href="webpages_publish.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_publish.asp" title="WebPages 发布">WebPages 发布</a></li>
+<li><a href="webpages_examples.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_examples.asp" title="WebPages 实例">WebPages 实例</a></li>
+</ul>
+<h2>WP 参考手册</h2>
+<ul>
+<li><a href="webpages_ref_classes.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_ref_classes.asp" title="WebPages 类">WebPages 类</a></li>
+<li><a href="webpages_ref_websecurity.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_ref_websecurity.asp" title="WebPages 安全">WebPages 安全</a></li>
+<li><a href="webpages_ref_database.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_ref_database.asp" title="WebPages 数据库">WebPages 数据库</a></li>
+<li><a href="webpages_ref_webmail.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_ref_webmail.asp" title="WebPages WebMail">WebPages WebMail</a></li>
+<li><a href="webpages_ref_helpers.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/webpages_ref_helpers.asp" title="WebPages 助手">WebPages 助手</a></li>
+</ul>
+<h2>ASP.NET Razor</h2>
+<ul>
+<li><a href="razor_intro.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/razor_intro.asp" title="Razor 简介">Razor 简介</a></li>
+<li><a href="razor_syntax.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/razor_syntax.asp" title="Razor 语法">Razor 语法</a></li>
+<li><a href="razor_cs_variables.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/razor_cs_variables.asp" title="Razor C# 变量">Razor C# 变量</a></li>
+<li><a href="razor_cs_loops.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/razor_cs_loops.asp" title="Razor C# 循环">Razor C# 循环</a></li>
+<li><a href="razor_cs_logic.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/razor_cs_logic.asp" title="Razor 外边距合并">Razor C# 逻辑</a></li>
+<li><a href="razor_vb_variables.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/razor_vb_variables.asp" title="Razor VB 变量">Razor VB 变量</a></li>
+<li><a href="razor_vb_loops.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/razor_vb_loops.asp" title="Razor VB 循环">Razor VB 循环</a></li>
+<li><a href="razor_vb_logic.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/razor_vb_logic.asp" title="Razor VB 逻辑">Razor VB 逻辑</a></li>
+</ul>
+<h2>ASP.NET MVC</h2>
+<ul>
+<li><a href="mvc_intro.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_intro.asp" title="MVC 简介">MVC 简介</a></li>
+<li><a href="mvc_app.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_app.asp" title="MVC 应用程序">MVC 应用程序</a></li>
+<li><a href="mvc_folders.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_folders.asp" title="MVC 文件夹">MVC 文件夹</a></li>
+<li><a href="mvc_layout.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_layout.asp" title="MVC 布局">MVC 布局</a></li>
+<li><a href="mvc_controllers.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_controllers.asp" title="MVC 控制器">MVC 控制器</a></li>
+<li><a href="mvc_views.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_views.asp" title="MVC 视图">MVC 视图</a></li>
+<li><a href="mvc_database.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_database.asp" title="MVC 数据库">MVC 数据库</a></li>
+<li><a href="mvc_models.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_models.asp" title="MVC 模型">MVC 模型</a></li>
+<li><a href="mvc_security.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_security.asp" title="MVC 安全">MVC 安全</a></li>
+<li><a href="mvc_htmlhelpers.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_htmlhelpers.asp" title="MVC HTML 助手">MVC HTML 助手</a></li>
+<li><a href="mvc_publish.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_publish.asp" title="MVC 发布">MVC 发布</a></li>
+<li><a href="mvc_reference.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/mvc_reference.asp" title="MVC 参考手册">MVC 参考手册</a></li>
+</ul>
+<h2>WF 教程</h2>
+<ul>
+<li><a href="aspnet_intro.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_intro.asp" title="WebForms 简介">WebForms 简介</a></li>
+<li><a href="aspnet_pages.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_pages.asp" title="WebForms Pages">WebForms Pages</a></li>
+<li><a href="aspnet_controls.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_controls.asp" title="WebForms 控件">WebForms 控件</a></li>
+<li><a href="aspnet_events.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_events.asp" title="WebForms 事件">WebForms 事件</a></li>
+<li><a href="aspnet_forms.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_forms.asp" title="WebForms 窗体">WebForms 窗体</a></li>
+<li><a href="aspnet_viewstate.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_viewstate.asp" title="WebForms ViewState">WebForms ViewState</a></li>
+<li><a href="aspnet_textbox.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_textbox.asp" title="WebForms TextBox">WebForms TextBox</a></li>
+<li><a href="aspnet_button.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_button.asp" title="WebForms Button">WebForms Button</a></li>
+<li><a href="aspnet_databinding.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_databinding.asp" title="WebForms Data Binding">WebForms 数据绑定</a></li>
+<li><a href="aspnet_arraylist.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_arraylist.asp" title="WebForms ArrayList">WebForms ArrayList</a></li>
+<li><a href="aspnet_hashtable.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_hashtable.asp" title="WebForms Hashtable">WebForms Hashtable</a></li>
+<li><a href="aspnet_sortedlist.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_sortedlist.asp" title="WebForms SortedList">WebForms SortedList</a></li>
+<li><a href="aspnet_xml.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_xml.asp" title="WebForms XML 文件">WebForms XML 文件</a></li>
+<li class="currentLink"><a href="aspnet_repeater.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_repeater.asp" title="WebForms Repeater">WebForms Repeater</a></li>
+<li><a href="aspnet_datalist.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_datalist.asp" title="WebForms DataList">WebForms DataList</a></li>
+<li><a href="aspnet_dbconnection.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_dbconnection.asp" title="WebForms DbConnection">WebForms 数据库连接</a></li>
+<li><a href="aspnet_masterpages.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_masterpages.asp" title="WebForms Master Pages">WebForms 母版页</a></li>
+<li><a href="aspnet_navigation.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_navigation.asp" title="WebForms 导航">WebForms 导航</a></li>
+<li><a href="aspnet_examples.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_examples.asp" title="WebForms 实例">WebForms 实例</a></li>
+</ul>
+<h2>WF 参考手册</h2>
+<ul>
+<li><a href="aspnet_refhtmlcontrols.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_refhtmlcontrols.asp" title="WebForms HTML">WebForms HTML</a></li>
+<li><a href="aspnet_refwebcontrols.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_refwebcontrols.asp" title="WebForms Controls">WebForms Controls</a></li>
+<li><a href="aspnet_refvalidationcontrols.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_refvalidationcontrols.asp" title="WebForms Validation">WebForms Validation</a></li>
+</ul>
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>ASP.NET - Repeater 控件</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="aspnet_xml.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_xml.asp" title="WebForms XML 文件">WebForms XML 文件</a></li>
+<li class="next"><a href="aspnet_datalist.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_datalist.asp" title="WebForms DataList">WebForms DataList</a></li>
+</ul>
+</div>
+
+
+<div id="intro">
+<p><strong>Repeater 控件用于显示重复的项目列表，这些项目被限制在该控件。</strong></p>
+</div>
+
+
+<div class="example">
+<h2>实例</h2>
+<dl>
+<dt><a target="_blank" href="javascript:if(confirm('http://www.w3school.com.cn/tiy/tag_audio.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 不可用, 或放弃了下载, 或项目即将停止。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/tiy/tag_audio.asp'" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspnet_repeater_1">Repeater 控件</a></dt>
+<dt><a target="_blank" href="javascript:if(confirm('http://www.w3school.com.cn/tiy/tag_b.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 不可用, 或放弃了下载, 或项目即将停止。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/tiy/tag_b.asp'" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspnet_repeater_2">带有 &lt;AlternatingItemTemplate&gt; 的 Repeater 控件</a></dt>
+<dt><a target="_blank" href="javascript:if(confirm('http://www.w3school.com.cn/tiy/tag_base.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 不可用, 或放弃了下载, 或项目即将停止。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/tiy/tag_base.asp'" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspnet_repeater_3">带有 &lt;SeparatorTemplate&gt; 的 Repeater 控件</a></dt>
+</dl>
+</div>
+
+
+<div>
+<h2>把 DataSet 绑定到 Repeater 控件</h2>
+
+<p>Repeater 控件用于显示重复的项目列表，这些项目被限制在该控件。Repeater 控件可被绑定到数据库表、XML 文件或者其他项目列表。这里，我们将展示如何把 XML 文件绑定到一个 Repeater 控件。</p>
+
+<p>我们将在例子中使用下面的 XML 文件(&quot;cdcatalog.xml&quot;)：</p>
+
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+
+&lt;catalog&gt;
+&lt;cd&gt;
+  &lt;title&gt;Empire Burlesque&lt;/title&gt;
+  &lt;artist&gt;Bob Dylan&lt;/artist&gt;
+  &lt;country&gt;USA&lt;/country&gt;
+  &lt;company&gt;Columbia&lt;/company&gt;
+  &lt;price&gt;10.90&lt;/price&gt;
+  &lt;year&gt;1985&lt;/year&gt;
+&lt;/cd&gt;
+&lt;cd&gt;
+  &lt;title&gt;Hide your heart&lt;/title&gt;
+  &lt;artist&gt;Bonnie Tyler&lt;/artist&gt;
+  &lt;country&gt;UK&lt;/country&gt;
+  &lt;company&gt;CBS Records&lt;/company&gt;
+  &lt;price&gt;9.90&lt;/price&gt;
+  &lt;year&gt;1988&lt;/year&gt;
+&lt;/cd&gt;
+&lt;cd&gt;
+  &lt;title&gt;Greatest Hits&lt;/title&gt;
+  &lt;artist&gt;Dolly Parton&lt;/artist&gt;
+  &lt;country&gt;USA&lt;/country&gt;
+  &lt;company&gt;RCA&lt;/company&gt;
+  &lt;price&gt;9.90&lt;/price&gt;
+  &lt;year&gt;1982&lt;/year&gt;
+&lt;/cd&gt;
+&lt;cd&gt;
+  &lt;title&gt;Still got the blues&lt;/title&gt;
+  &lt;artist&gt;Gary Moore&lt;/artist&gt;
+  &lt;country&gt;UK&lt;/country&gt;
+  &lt;company&gt;Virgin records&lt;/company&gt;
+  &lt;price&gt;10.20&lt;/price&gt;
+  &lt;year&gt;1990&lt;/year&gt;
+&lt;/cd&gt;
+&lt;cd&gt;
+  &lt;title&gt;Eros&lt;/title&gt;
+  &lt;artist&gt;Eros Ramazzotti&lt;/artist&gt;
+  &lt;country&gt;EU&lt;/country&gt;
+  &lt;company&gt;BMG&lt;/company&gt;
+  &lt;price&gt;9.90&lt;/price&gt;
+  &lt;year&gt;1997&lt;/year&gt;
+&lt;/cd&gt;
+&lt;/catalog&gt;</pre>
+
+<p>请查看该 XML 文件：<a href="javascript:if(confirm('http://www.w3school.com.cn/example/aspnet/pr_column-rule-color.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 不可用, 或放弃了下载, 或项目即将停止。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/example/aspnet/pr_column-rule-color.asp'" tppabs="http://www.w3school.com.cn/example/aspnet/cdcatalog.xml">cdcatalog.xml</a></p>
+
+<p>首先，导入 &quot;System.Data&quot; 命名空间。我们需要此命名空间与 DataSet 对象一同工作。在 .aspx 页面的顶部包含下面这条指令：</p>
+
+<pre>&lt;%@ Import Namespace=&quot;System.Data&quot; %&gt;</pre>
+
+<p>接下来，为这个 XML 文件创建一个 DataSet，并把此 XML 文件在页面首次加载时载入 DataSet：</p>
+
+<pre>&lt;script runat=&quot;server&quot;&gt;
+sub Page_Load
+if Not Page.IsPostBack then
+  <code>dim mycdcatalog=New DataSet
+  mycdcatalog.ReadXml(MapPath(&quot;cdcatalog.xml&quot;))</code>
+end if
+end sub</pre>
+
+<p>然后我们在 .aspx 页面中创建一个 Repeater 控件。&lt;HeaderTemplate&gt; 元素中的内容在输出中仅出现一次，而 &lt;ItemTemplate&gt; 元素的内容会对应 DataSet 中的 &quot;record&quot; 重复出现，最后，&lt;FooterTemplate&gt; 的内容在输出中仅出现一次：</p>
+
+<pre>&lt;html&gt;
+&lt;body&gt;
+
+&lt;form runat=&quot;server&quot;&gt;
+<code>&lt;asp:Repeater id=&quot;cdcatalog&quot; runat=&quot;server&quot;&gt;
+
+&lt;HeaderTemplate&gt;
+<span>...</span>
+&lt;/HeaderTemplate&gt;
+
+&lt;ItemTemplate&gt;
+<span>...</span>
+&lt;/ItemTemplate&gt;
+
+&lt;FooterTemplate&gt;
+<span>...</span>
+&lt;/FooterTemplate&gt;
+
+&lt;/asp:Repeater&gt;</code>
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>然后我们添加可创建 DataSet 的脚本，并把这个 mycdcatalog DataSet 绑定到 Repeater 控件。我们同样用 HTML 标签来填充这个 Repeater 控件，并通过 &lt;%#Container.DataItem(&quot;fieldname&quot;)%&gt; 方法把数据项目绑定到 &lt;ItemTemplate&gt; 部分内的单元格：</p>
+
+<pre>&lt;%@ Import Namespace=&quot;System.Data&quot; %&gt;
+
+&lt;script runat=&quot;server&quot;&gt;
+sub Page_Load
+if Not Page.IsPostBack then
+  dim mycdcatalog=New DataSet
+  mycdcatalog.ReadXml(MapPath(&quot;cdcatalog.xml&quot;))
+  cdcatalog.DataSource=mycdcatalog
+  cdcatalog.DataBind()
+end if
+end sub
+&lt;/script&gt;
+
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;form runat=&quot;server&quot;&gt;
+&lt;asp:Repeater id=&quot;cdcatalog&quot; runat=&quot;server&quot;&gt;
+
+&lt;HeaderTemplate&gt;
+&lt;table border=&quot;1&quot; width=&quot;100%&quot;&gt;
+&lt;tr&gt;
+&lt;th&gt;Title&lt;/th&gt;
+&lt;th&gt;Artist&lt;/th&gt;
+&lt;th&gt;Country&lt;/th&gt;
+&lt;th&gt;Company&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/HeaderTemplate&gt;
+
+&lt;ItemTemplate&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;title&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;artist&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;country&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;company&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;price&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;year&quot;)%&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/ItemTemplate&gt;
+
+&lt;FooterTemplate&gt;
+&lt;/table&gt;
+&lt;/FooterTemplate&gt;
+
+&lt;/asp:Repeater&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p class="tiy"><a target="_blank" href="javascript:if(confirm('http://www.w3school.com.cn/tiy/tag_audio.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 不可用, 或放弃了下载, 或项目即将停止。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/tiy/tag_audio.asp'" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspnet_repeater_1">显示这个例子</a></p>
+</div>
+
+
+<div>
+<h2>使用 &lt;AlternatingItemTemplate&gt;</h2>
+
+<p>您可以在 &lt;ItemTemplate&gt; 元素后添加 &lt;AlternatingItemTemplate&gt; 元素，这样就可以描述交替行的外观了。在下面的例子中，该表格中每隔一行就会显示为浅灰色的背景：</p>
+
+<pre>&lt;%@ Import Namespace=&quot;System.Data&quot; %&gt;
+
+&lt;script runat=&quot;server&quot;&gt;
+sub Page_Load
+if Not Page.IsPostBack then
+  dim mycdcatalog=New DataSet
+  mycdcatalog.ReadXml(MapPath(&quot;cdcatalog.xml&quot;))
+  cdcatalog.DataSource=mycdcatalog
+  cdcatalog.DataBind()
+end if
+end sub
+&lt;/script&gt;
+
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;form runat=&quot;server&quot;&gt;
+&lt;asp:Repeater id=&quot;cdcatalog&quot; runat=&quot;server&quot;&gt;
+
+&lt;HeaderTemplate&gt;
+&lt;table border=&quot;1&quot; width=&quot;100%&quot;&gt;
+&lt;tr&gt;
+&lt;th&gt;Title&lt;/th&gt;
+&lt;th&gt;Artist&lt;/th&gt;
+&lt;th&gt;Country&lt;/th&gt;
+&lt;th&gt;Company&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/HeaderTemplate&gt;
+
+&lt;ItemTemplate&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;title&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;artist&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;country&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;company&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;price&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;year&quot;)%&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/ItemTemplate&gt;
+
+<code>&lt;AlternatingItemTemplate&gt;</code>
+&lt;tr bgcolor=&quot;#e8e8e8&quot;&gt;
+
+&lt;td&gt;&lt;%#Container.DataItem(&quot;title&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;artist&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;country&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;company&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;price&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;year&quot;)%&gt;&lt;/td&gt;
+&lt;/tr&gt;
+<code>&lt;/AlternatingItemTemplate&gt;</code>
+
+&lt;FooterTemplate&gt;
+&lt;/table&gt;
+&lt;/FooterTemplate&gt;
+
+&lt;/asp:Repeater&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p class="tiy"><a target="_blank" href="javascript:if(confirm('http://www.w3school.com.cn/tiy/tag_b.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 不可用, 或放弃了下载, 或项目即将停止。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/tiy/tag_b.asp'" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspnet_repeater_2">显示这个例子</a></p>
+</div>
+
+
+<div>
+<h2>使用 &lt;SeparatorTemplate&gt;</h2>
+
+<p>&lt;SeparatorTemplate&gt; 元素能够用于描述每个记录之间的分隔符。下面的例子在每个表格行之间插入了一条水平线：</p>
+
+<pre>&lt;%@ Import Namespace=&quot;System.Data&quot; %&gt;
+
+&lt;script runat=&quot;server&quot;&gt;
+sub Page_Load
+if Not Page.IsPostBack then
+  dim mycdcatalog=New DataSet
+  mycdcatalog.ReadXml(MapPath(&quot;cdcatalog.xml&quot;))
+  cdcatalog.DataSource=mycdcatalog
+  cdcatalog.DataBind()
+end if
+end sub
+&lt;/script&gt;
+
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;form runat=&quot;server&quot;&gt;
+&lt;asp:Repeater id=&quot;cdcatalog&quot; runat=&quot;server&quot;&gt;
+
+&lt;HeaderTemplate&gt;
+&lt;table border=&quot;0&quot; width=&quot;100%&quot;&gt;
+&lt;tr&gt;
+&lt;th&gt;Title&lt;/th&gt;
+&lt;th&gt;Artist&lt;/th&gt;
+&lt;th&gt;Country&lt;/th&gt;
+&lt;th&gt;Company&lt;/th&gt;
+&lt;th&gt;Price&lt;/th&gt;
+&lt;th&gt;Year&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/HeaderTemplate&gt;
+
+&lt;ItemTemplate&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;title&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;artist&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;country&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;company&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;price&quot;)%&gt;&lt;/td&gt;
+&lt;td&gt;&lt;%#Container.DataItem(&quot;year&quot;)%&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/ItemTemplate&gt;
+
+<code>&lt;SeparatorTemplate&gt;</code>
+&lt;tr&gt;
+&lt;td colspan=&quot;6&quot;&gt;&lt;hr /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+<code>&lt;/SeparatorTemplate&gt;</code>
+
+&lt;FooterTemplate&gt;
+&lt;/table&gt;
+&lt;/FooterTemplate&gt;
+
+&lt;/asp:Repeater&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p class="tiy"><a target="_blank" href="javascript:if(confirm('http://www.w3school.com.cn/tiy/tag_base.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 不可用, 或放弃了下载, 或项目即将停止。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/tiy/tag_base.asp'" tppabs="http://www.w3school.com.cn/tiy/s.asp?f=demo_aspnet_repeater_3">显示这个例子</a></p>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="aspnet_xml.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_xml.asp" title="WebForms XML 文件">WebForms XML 文件</a></li>
+<li class="next"><a href="aspnet_datalist.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_datalist.asp" title="WebForms DataList">WebForms DataList</a></li>
+</ul>
+</div>
+</div>
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="aspnet_reference.asp.htm" tppabs="http://www.w3school.com.cn/aspnet/aspnet_reference.asp">ASP.NET 参考手册</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+</body>
+</html>

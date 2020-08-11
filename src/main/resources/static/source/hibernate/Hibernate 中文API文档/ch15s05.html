@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>15.5.&#160;动态关联抓取</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch15.html" title="第&#160;15&#160;章&#160; 条件查询(Criteria Queries)">
+<link rel="prev" href="ch15s04.html" title="15.4.&#160;关联">
+<link rel="next" href="ch15s06.html" title="15.6.&#160;查询示例">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="querycriteria-dynamicfetching"></a>15.5.&#160;动态关联抓取</h2></div></div></div>
+<p>
+            你可以使用<code class="literal">setFetchMode()</code>在运行时定义动态关联抓取的语义。
+        </p>
+<pre class="programlisting">List cats = sess.createCriteria(Cat.class)
+    .add( Restrictions.like("name", "Fritz%") )
+    .setFetchMode("mate", FetchMode.EAGER)
+    .setFetchMode("kittens", FetchMode.EAGER)
+    .list();</pre>
+<p>
+            这个查询可以通过外连接抓取<code class="literal">mate</code>和<code class="literal">kittens</code>。
+           查看<a href="ch19.html#performance-fetching" title="19.1.&#160;
+			抓取策略(Fetching strategies)
+		">第&#160;19.1&#160;节 “
+			抓取策略(Fetching strategies)
+		”</a>可以获得更多信息。
+        </p>
+</div></body>
+</html>

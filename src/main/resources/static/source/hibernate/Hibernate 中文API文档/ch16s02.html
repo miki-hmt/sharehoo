@@ -1,0 +1,210 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>16.2.&#160;命名SQL查询</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch16.html" title="第&#160;16&#160;章&#160;Native SQL查询">
+<link rel="prev" href="ch16.html" title="第&#160;16&#160;章&#160;Native SQL查询">
+<link rel="next" href="ch16s03.html" title="16.3.&#160;定制SQL用来create，update和delete">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="querysql-namedqueries"></a>16.2.&#160;命名SQL查询</h2></div></div></div>
+<p>
+			可以在映射文档中定义查询的名字,然后就可以象调用一个命名的HQL查询一样直接调用命名SQL查询.在这种情况下,我们<span class="emphasis"><em>不</em></span>
+			需要调用<code class="literal">addEntity()</code>方法.
+        </p>
+<pre class="programlisting">&lt;sql-query name="persons"&gt;
+    &lt;return alias="person" class="eg.Person"/&gt;
+    SELECT person.NAME AS {person.name},
+           person.AGE AS {person.age},
+           person.SEX AS {person.sex}
+    FROM PERSON person
+    WHERE person.NAME LIKE :namePattern
+&lt;/sql-query&gt;</pre>
+<pre class="programlisting">List people = sess.getNamedQuery("persons")
+    .setString("namePattern", namePattern)
+    .setMaxResults(50)
+    .list();</pre>
+<p><code class="literal">&lt;return-join&gt;</code>和
+    <code class="literal">&lt;load-collection&gt;</code> 元素是用来连接关联以及将查询定义为预先初始化各个集合的。</p>
+<pre class="programlisting">&lt;sql-query name="personsWith"&gt;
+    &lt;return alias="person" class="eg.Person"/&gt;
+    &lt;return-join alias="address" property="person.mailingAddress"/&gt;
+    SELECT person.NAME AS {person.name},
+           person.AGE AS {person.age},
+           person.SEX AS {person.sex},
+           adddress.STREET AS {address.street},
+           adddress.CITY AS {address.city},
+           adddress.STATE AS {address.state},
+           adddress.ZIP AS {address.zip}
+    FROM PERSON person
+    JOIN ADDRESS adddress
+        ON person.ID = address.PERSON_ID AND address.TYPE='MAILING'
+    WHERE person.NAME LIKE :namePattern
+&lt;/sql-query&gt;</pre>
+<p>
+			一个命名查询可能会返回一个标量值.你必须使用<code class="literal">&lt;return-scalar&gt;</code>元素来指定字段的别名和
+			Hibernate类型
+        </p>
+<pre class="programlisting">&lt;sql-query name="mySqlQuery"&gt;
+    &lt;return-scalar column="name" type="string"/&gt;
+    &lt;return-scalar column="age" type="long"/&gt;
+    SELECT p.NAME AS name,
+           p.AGE AS age,
+    FROM PERSON p WHERE p.NAME LIKE 'Hiber%'
+&lt;/sql-query&gt;</pre>
+<p>
+    你可以把结果集映射的信息放在外部的<code class="literal">&lt;resultset&gt;</code>元素中，这样就可以在多个命名查询间，或者通过<code class="literal">setResultSetMapping()</code>API来访问。(此处原文即存疑。原文为：You can externalize the resultset mapping informations in a
+    <code class="literal">&lt;resultset&gt;</code> element to either reuse them accross
+    several named queries or through the
+    <code class="literal">setResultSetMapping()</code> API.)
+    </p>
+<pre class="programlisting">&lt;resultset name="personAddress"&gt;
+    &lt;return alias="person" class="eg.Person"/&gt;
+    &lt;return-join alias="address" property="person.mailingAddress"/&gt;
+&lt;/resultset&gt;
+
+&lt;sql-query name="personsWith" resultset-ref="personAddress"&gt;
+    SELECT person.NAME AS {person.name},
+           person.AGE AS {person.age},
+           person.SEX AS {person.sex},
+           adddress.STREET AS {address.street},
+           adddress.CITY AS {address.city},
+           adddress.STATE AS {address.state},
+           adddress.ZIP AS {address.zip}
+    FROM PERSON person
+    JOIN ADDRESS adddress
+        ON person.ID = address.PERSON_ID AND address.TYPE='MAILING'
+    WHERE person.NAME LIKE :namePattern
+&lt;/sql-query&gt;</pre>
+<p>
+    	另外,你可以在java代码中直接使用hbm文件中的结果集定义信息。
+    </p>
+<pre class="programlisting">List cats = sess.createSQLQuery(
+        "select {cat.*}, {kitten.*} from cats cat, cats kitten where kitten.mother = cat.id"
+    )
+    .setResultSetMapping("catAndKitten")
+    .list();</pre>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="propertyresults"></a>16.2.1.&#160;使用return-property来明确地指定字段/别名</h3></div></div></div>
+<p>
+				使用<code class="literal">&lt;return-property&gt;</code>你可以明确的告诉Hibernate使用哪些字段别名,这取代了使用<code class="literal">{}</code>-语法
+				来让Hibernate注入它自己的别名.
+             </p>
+<pre class="programlisting">&lt;sql-query name="mySqlQuery"&gt;
+    &lt;return alias="person" class="eg.Person"&gt;
+      &lt;return-property name="name" column="myName"/&gt;
+      &lt;return-property name="age" column="myAge"/&gt;
+      &lt;return-property name="sex" column="mySex"/&gt;
+    &lt;/return&gt;
+    SELECT person.NAME AS myName,
+           person.AGE AS myAge,
+           person.SEX AS mySex,
+    FROM PERSON person WHERE person.NAME LIKE :name
+&lt;/sql-query&gt;
+</pre>
+<code class="literal">&lt;return-property&gt;</code>也可用于多个字段,它解决了使用<code class="literal">{}</code>-语法不能细粒度控制多个字段的限制
+             <pre class="programlisting">&lt;sql-query name="organizationCurrentEmployments"&gt;
+            &lt;return alias="emp" class="Employment"&gt;            
+             &lt;return-property name="salary"&gt; 
+               &lt;return-column name="VALUE"/&gt;
+               &lt;return-column name="CURRENCY"/&gt;            
+             &lt;/return-property&gt;
+             &lt;return-property name="endDate" column="myEndDate"/&gt;
+            &lt;/return&gt;
+            SELECT EMPLOYEE AS {emp.employee}, EMPLOYER AS {emp.employer}, 
+            STARTDATE AS {emp.startDate}, ENDDATE AS {emp.endDate},
+            REGIONCODE as {emp.regionCode}, EID AS {emp.id}, VALUE, CURRENCY
+            FROM EMPLOYMENT
+            WHERE EMPLOYER = :id AND ENDDATE IS NULL
+            ORDER BY STARTDATE ASC
+&lt;/sql-query&gt;</pre>
+<p>
+				注意在这个例子中,我们使用了<code class="literal">&lt;return-property&gt;</code>结合<code class="literal">{}</code>的注入语法.
+				允许用户来选择如何引用字段以及属性.
+            </p>
+<p>
+			 如果你映射一个识别器(discriminator),你必须使用<code class="literal">&lt;return-discriminator&gt;</code> 来指定识别器字段
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="sp_query"></a>16.2.2.&#160;使用存储过程来查询</h3></div></div></div>
+<p>
+				 Hibernate 3引入了对存储过程查询(stored procedure)和函数(function)的支持.以下的说明中，这二者一般都适用。
+				 
+				 存储过程/函数必须返回一个结果集,作为Hibernate能够使用的第一个外部参数.
+				 
+				 下面是一个Oracle9和更高版本的存储过程例子.</p>
+<pre class="programlisting">CREATE OR REPLACE FUNCTION selectAllEmployments 
+    RETURN SYS_REFCURSOR 
+AS 
+    st_cursor SYS_REFCURSOR; 
+BEGIN 
+    OPEN st_cursor FOR 
+ SELECT EMPLOYEE, EMPLOYER, 
+ STARTDATE, ENDDATE, 
+ REGIONCODE, EID, VALUE, CURRENCY 
+ FROM EMPLOYMENT; 
+      RETURN  st_cursor; 
+ END;</pre>
+<p>    
+				 在Hibernate里要要使用这个查询,你需要通过命名查询来映射它.
+			 </p>
+<pre class="programlisting">&lt;sql-query name="selectAllEmployees_SP" callable="true"&gt;
+    &lt;return alias="emp" class="Employment"&gt;
+        &lt;return-property name="employee" column="EMPLOYEE"/&gt;
+        &lt;return-property name="employer" column="EMPLOYER"/&gt;            
+        &lt;return-property name="startDate" column="STARTDATE"/&gt;
+        &lt;return-property name="endDate" column="ENDDATE"/&gt;            
+        &lt;return-property name="regionCode" column="REGIONCODE"/&gt;            
+        &lt;return-property name="id" column="EID"/&gt;                        
+        &lt;return-property name="salary"&gt; 
+            &lt;return-column name="VALUE"/&gt;
+            &lt;return-column name="CURRENCY"/&gt;            
+        &lt;/return-property&gt;
+    &lt;/return&gt;
+    { ? = call selectAllEmployments() }
+&lt;/sql-query&gt;</pre>
+<p>
+			  注意存储过程当前仅仅返回标量和实体.现在不支持<code class="literal">&lt;return-join&gt;</code>和<code class="literal">&lt;load-collection&gt;</code>
+			  
+             </p>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="querysql-limits-storedprocedures"></a>16.2.2.1.&#160;使用存储过程的规则和限制</h4></div></div></div>
+<p>
+				   为了在Hibernate中使用存储过程,你必须遵循一些规则.不遵循这些规则的存储过程将不可用.如果你仍然想要使用他们,
+				   你必须通过<code class="literal">session.connection()</code>来执行他们.这些规则针对于不同的数据库.因为数据库
+				   提供商有各种不同的存储过程语法和语义.
+               </p>
+<p>
+                   对存储过程进行的查询无法使用<code class="literal">setFirstResult()/setMaxResults()</code>进行分页。
+               </p>
+<p>建议采用的调用方式是标准SQL92: <code class="literal">{ ? = call
+        functionName(&lt;parameters&gt;) }</code> 或者 <code class="literal">{ ? = call
+        procedureName(&lt;parameters&gt;}</code>.原生调用语法不被支持。</p>
+<p>
+				   对于Oracle有如下规则:
+               </p>
+<div class="itemizedlist"><ul type="disc" compact><li><p>函数必须返回一个结果集。存储过程的第一个参数必须是<code class="literal">OUT</code>，它返回一个结果集。这是通过Oracle 9或10的<code class="literal">SYS_REFCURSOR</code>类型来完成的。在Oracle中你需要定义一个<code class="literal">REF CURSOR</code>类型，参见Oracle的手册。</p></li></ul></div>
+<p>                   
+				   对于Sybase或者MS SQL server有如下规则:
+               </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>    
+				   存储过程必须返回一个结果集。.注意这些servers可能返回多个结果集以及更新的数目.Hibernate将取出第一条结果集作为它的返回值，
+				   其他将被丢弃。
+               </p></li>
+<li><p>    
+				   如果你能够在存储过程里设定<code class="literal">SET NOCOUNT ON</code>，这可能会效率更高，但这不是必需的。
+               </p></li>
+</ul></div>
+</div>
+</div>
+</div></body>
+</html>

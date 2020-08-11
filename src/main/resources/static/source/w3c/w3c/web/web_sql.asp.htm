@@ -1,0 +1,252 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+
+<meta name="robots" content="all" />
+
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="false" />
+
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+<title>SQL 初级教程</title>
+</head>
+
+<body class="webbuilding">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>网站构建初级教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/web/index.asp" title="网站构建初级教程">网站构建初级教程</a></li>
+<li><a href="web_www.asp.htm" tppabs="http://www.w3school.com.cn/web/web_www.asp" title="WWW 初级教程">WWW</a></li>
+<li><a href="web_html.asp.htm" tppabs="http://www.w3school.com.cn/web/web_html.asp" title="HTML 初级教程">HTML</a></li>
+<li><a href="web_css.asp.htm" tppabs="http://www.w3school.com.cn/web/web_css.asp" title="CSS 初级教程">CSS</a></li>
+<li><a href="web_javascript.asp.htm" tppabs="http://www.w3school.com.cn/web/web_javascript.asp" title="Javascript 初级教程">Javascript</a></li>
+<li><a href="web_xml.asp.htm" tppabs="http://www.w3school.com.cn/web/web_xml.asp" title="XML 初级教程">XML</a></li>
+<li><a href="web_scripting.asp.htm" tppabs="http://www.w3school.com.cn/web/web_scripting.asp" title="服务器脚本 初级教程">服务器脚本</a></li>
+<li class="currentLink"><a href="web_sql.asp.htm" tppabs="http://www.w3school.com.cn/web/web_sql.asp" title="SQL 初级教程">SQL</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>SQL 初级教程</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="web_scripting.asp.htm" tppabs="http://www.w3school.com.cn/web/web_scripting.asp" title="服务器脚本 初级教程">服务器脚本</a></li>
+<li class="next"><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/web/index.asp" title="网站构建初级教程">网站构建初级教程</a></li>
+</ul>
+</div>
+
+<div id="intro">
+<p><strong>SQL 是用于访问和处理数据库的标准的计算机语言。</strong></p>
+</div>
+
+<div>
+<h2>通过 SQL 来管理数据</h2>
+
+<p>结构化查询语言 (SQL) 是用于访问数据库的标准语言，这些数据库包括 SQL Server、Oracle、MySQL、Sybase 以及 Access 等等。</p>
+
+<p>对于那些希望在数据库中存储数据并从中获取数据的人来说，SQL 的知识是价值无法衡量的。</p>
+</div>
+
+<div>
+<h2>什么是 SQL?</h2>
+<ul>
+<li>SQL 指结构化查询语言 (<em>S</em>tructured <em>Q</em>uery <em>L</em>anguage)</li>
+<li>SQL 使我们有能力访问数据库</li>
+<li>SQL 是一种 ANSI 的标准计算机语言</li>
+<li>SQL 面向数据库执行查询</li>
+<li>SQL 可从数据库取回数据</li>
+<li>SQL 可在数据库中插入新的记录</li>
+<li>SQL 可从数据库删除记录</li>
+<li>SQL 很容易学习</li>
+</ul>
+<p class="note"><span>编者注：</span>ANSI，美国国家标准化组织</p>
+</div>
+
+<div>
+<h2>SQL 是一种标准 - 但是...</h2>
+<p>SQL 是一门 ANSI 的标准计算机语言，用来访问和操作数据库系统。SQL 语句用于取回和更新数据库中的数据。SQL 可与数据库程序协同工作，比如 MS Access、DB2、Informix、MS SQL Server、Oracle、Sybase 以及其他数据库系统。</p>
+<p>不幸地是，存在着很多不同版本的 SQL 语言，但是为了与 ANSI 标准相兼容，它们必须以相似的方式共同地来支持一些主要的关键词（比如 SELECT、UPDATE、DELETE、INSERT、WHERE 等等）。</p>
+<p class="note"><span>注释：</span>除了 SQL 标准之外，大部分 SQL 数据库程序都拥有它们自己的私有扩展！</p>
+</div>
+
+<div>
+<h2>SQL 数据库表</h2>
+<p>一个数据库通常包含一个或多个表。每个表由一个名字标识（例如“客户”或者“订单”）。表包含带有数据的记录（行）。</p>
+<p>下面的例子是一个名为 &quot;Persons&quot; 的表：</p>
+<table class="dataintable">
+<tr>
+<th>LastName</th>
+<th>FirstName</th>
+<th>Address</th>
+<th>City</th>
+</tr>
+<tr>
+<td>Hansen</td>
+<td>Ola</td>
+<td>Timoteivn 10</td>
+<td>Sandnes</td>
+</tr>
+<tr>
+<td>Svendson</td>
+<td>Tove</td>
+<td>Borgvn 23</td>
+<td>Sandnes</td>
+</tr>
+<tr>
+<td>Pettersen</td>
+<td>Kari</td>
+<td>Storgt 20</td>
+<td>Stavanger</td>
+</tr>
+</table>
+<p>上面的表包含三条记录（每一条对应一个人）和四个列（姓、名、地址和城市）。</p>
+</div>
+
+<div>
+<h2>SQL 查询程序</h2>
+<p>通过 SQL，我们可以查询某个数据库，并获得返回的一个结果集。</p>
+<p>查询程序类似这样：</p>
+<pre>SELECT LastName FROM Persons</pre>
+<p>结果集类似这样：</p>
+
+<table class="dataintable" style="width:100px;">
+<tr><th>LastName</th></tr>
+<tr><td>Hansen</td></tr>
+<tr><td>Svendson</td></tr>
+<tr><td>Pettersen</td></tr>
+</table>
+
+<p class="note"><span>注释：</span>某些数据库系统要求在 SQL 命令的末端使用分号。在我们的教程中不使用分号。</p>
+</div>
+
+<div>
+<h2>SQL 数据操作语言 (DML)</h2>
+<p>SQL (结构化查询语言)是用于执行查询的语法。但是 SQL 语言也包含用于更新、插入和删除记录的语法。</p>
+<p>这些查询和更新语句都来自 SQL 的 DML 部分：</p>
+<ul>
+<li><em>SELECT</em> - 从数据库表中获取数据</li>
+<li><em>UPDATE</em> - 更新数据库表中的数据</li>
+<li><em>DELETE</em> - 从数据库表中删除数据</li>
+<li><em>INSERT INTO</em> - 向数据库表中插入数据</li>
+</ul>
+</div>
+
+<div>
+<h2>SQL 数据定义语言 (DDL)</h2>
+<p>SQL 的数据定义语言部分使我们有能力创建或删除表格。我们也可以定义索引（键），规定表之间的链接，以及施加表间的约束。</p>
+<p>SQL 中最重要的 DDL 语句: </p>
+<ul>
+<li><em>CREATE TABLE</em> - 创建新表</li>
+<li><em>ALTER TABLE</em> - 变更（改变）数据库表</li>
+<li><em>DROP TABLE</em> - 删除表</li>
+<li><em>CREATE INDEX</em> - 创建索引（搜索键）</li>
+<li><em>DROP INDEX</em> - 删除索引</li>
+</ul>
+</div>
+
+<div>
+<h2>SQL 教程</h2>
+<p>学习 W3School 提供的 <a href="../sql/index.asp.htm" tppabs="http://www.w3school.com.cn/sql/index.asp" title="SQL 教程">SQL 教程</a>。</p>
+</div>
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="web_scripting.asp.htm" tppabs="http://www.w3school.com.cn/web/web_scripting.asp" title="服务器脚本 初级教程">服务器脚本</a></li>
+<li class="next"><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/web/index.asp" title="网站构建初级教程">网站构建初级教程</a></li>
+</ul>
+</div>
+
+</div>
+
+<div id="sidebar">
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+</body>
+</html>

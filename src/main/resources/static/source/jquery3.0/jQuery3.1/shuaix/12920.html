@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>hasClass()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">hasClass()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.hasClass( className )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Boolean</code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>确定任何一个匹配元素是否有被分配给定的（样式）类。
+</p>
+<ul class="signatures">
+	<li class="signature" id="hasClass-className">
+		<h4 class="name">
+			<span class="version-details">V : 1.2</span>.hasClass( className )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>className</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					要查询的样式名。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		元素可能会有个的样式名。在 HTML 中，使用空格来分隔多个样式：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div id="mydiv" class="foo bar"&gt;&lt;/div&gt;</pre>
+	</div>
+	<p>
+		如果匹配元素上有指定的样式，那么<code>.hasClass()</code> 方法将返回 <code>true</code> ， 即使元素上可能还有其他样式。 举个示例, 给上文的HTML加上下面的代码将返回 <code>true</code>：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#mydiv').hasClass('foo')</pre>
+	</div>
+	<p>
+		也可以:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#mydiv').hasClass('bar')</pre>
+	</div>
+	<p>
+		然而这会返回<code>false</code>:
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#mydiv').hasClass('quux')</pre>
+	</div>
+	<p>
+		在 jQuery 1.12/2.2 中, 这个方法支持 XML 文档, 包括 SVG。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">在匹配的元素上寻找 'selected' 样式。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { margin: 8px; font-size:16px; }
+  .selected { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+  &lt;p&gt;This paragraph is black and is the first paragraph.&lt;/p&gt;
+  &lt;p class="selected"&gt;This paragraph is red and is the second paragraph.&lt;/p&gt;
+ 
+  &lt;div id="result1"&gt;First paragraph has selected class: &lt;/div&gt;
+  &lt;div id="result2"&gt;Second paragraph has selected class: &lt;/div&gt;
+  &lt;div id="result3"&gt;At least one paragraph has selected class: &lt;/div&gt;
+&lt;script&gt;
+$("div#result1").append($("p:first").hasClass("selected").toString());
+$("div#result2").append($("p:last").hasClass("selected").toString());
+$("div#result3").append($("p").hasClass("selected").toString());
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8101" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

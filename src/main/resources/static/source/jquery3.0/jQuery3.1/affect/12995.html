@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>finish()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">finish()<span class="g-bg-red margin-l-5">1.9+</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.finish( [queue ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>停止当前正在运行的动画，删除所有排队的动画，并完成匹配元素所有的动画。
+</p>
+<ul class="signatures">
+	<li class="signature" id="finish-queue">
+		<h4 class="name">
+			<span class="version-details">V : 1.9</span>.finish(  [queue ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>queue</strong> (默认: <code>'fx'</code>)
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					停止动画队列中的名称。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		当<code>.finish()</code>在一个元素上被调用，立即停止当前正在运行的动画和所有排队的动画（如果有的话），并且他们的CSS属性设置为它们的目标值（手册网注：就是所有动画的目标值）。所有排队的动画将被删除。
+	</p>
+	<p>
+		如果第一个参数提供，该字符串表示的队列中的动画将被停止。
+	</p>
+	<p>
+		<code>.finish()</code>方法和<code>.stop(true, true)</code>很相似，<code>.stop(true, true)</code>将清除队列，并且目前的动画跳转到其最终值。但是，不同的是，<code>.finish()</code> 会导致所有排队的动画的CSS属性跳转到他们的最终值。
+	</p>
+	<blockquote>
+		<p>
+			动画可能因为全局的<code>$.fx.off</code> 属性设置为 <code>true</code>而停止。当这样做时，所有动画方法将立即设置元素的css属性为其最终调用后的状态，而不是显示动画效果。
+		</p>
+	</blockquote>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">Click the Go button once to start the animation, 
+and then click the other buttons to see how they affect the current and 
+queued animations.</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;.box {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+  background: black;
+}
+#path {
+  height: 244px;
+  font-size: 70%;
+  border-left: 2px dashed red;
+  border-bottom: 2px dashed green;
+  border-right: 2px dashed blue;
+}
+button {
+  width: 12em;
+  display: block;
+  text-align: left;
+  margin: 0 auto;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="box"&gt;&lt;/div&gt;
+&lt;div id="path"&gt;
+  &lt;button id="go"&gt;Go&lt;/button&gt;
+  &lt;br&gt;
+  &lt;button id="bstt" class="b"&gt;.stop(true,true)&lt;/button&gt;
+  &lt;button id="bcf" class="b"&gt;.clearQueue().finish()&lt;/button&gt;
+  &lt;br&gt;
+  &lt;button id="bstf" class="b"&gt;.stop(true, false)&lt;/button&gt;
+  &lt;button id="bcs" class="b"&gt;.clearQueue().stop()&lt;/button&gt;
+  &lt;br&gt;
+  &lt;button id="bsff" class="b"&gt;.stop(false, false)&lt;/button&gt;
+  &lt;button id="bs" class="b"&gt;.stop()&lt;/button&gt;
+  &lt;br&gt;
+  &lt;button id="bsft" class="b"&gt;.stop(false, true)&lt;/button&gt;
+  &lt;br&gt;
+  &lt;button id="bf" class="b"&gt;.finish()&lt;/button&gt;
+&lt;/div&gt;
+ 
+&lt;script&gt;
+var horiz = $("#path").width() - 20,
+    vert = $("#path").height() - 20;
+ 
+var btns = {
+  bstt: function () {
+    $("div.box").stop(true, true);
+  },
+  bs: function () {
+    $("div.box").stop();
+  },
+  bsft: function () {
+    $("div.box").stop(false, true);
+  },
+  bf: function () {
+    $("div.box").finish();
+  },
+  bcf: function () {
+    $("div.box").clearQueue().finish();
+  },
+  bsff: function () {
+    $("div.box").stop(false, false);
+  },
+  bstf: function () {
+    $("div.box").stop(true, false);
+  },
+  bcs: function () {
+    $("div.box").clearQueue().stop();
+  }
+};
+ 
+ 
+$("button.b").on("click", function () {
+  btns[this.id]();
+});
+ 
+$("#go").on("click", function () {
+  $(".box")
+    .clearQueue()
+    .stop()
+    .css({
+    left: 10,
+    top: 10
+  })
+    .animate({
+    top: vert
+  }, 3000)
+    .animate({
+    left: horiz
+  }, 3000)
+    .animate({
+    top: 10
+  }, 3000);
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8240" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

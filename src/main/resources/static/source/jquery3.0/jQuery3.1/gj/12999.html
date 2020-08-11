@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.browser</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.browser<span class="g-bg-red margin-l-5">1.9-</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.browser
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader25" target="_blank">PlainObject</a>
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong> 用来获取useragent的包含标志，读取自 navigator.userAgent。<strong>这个属性在jQuery 1.9已经被删除</strong>并且只能通过的jQuery.migrate插件使用。请尝试使用特征检测代替。<del> <strong>我们不推荐使用这个属性，请尝试使用功能检测来代替（见jQuery.support）。
+  jQuery.browser在未来的版本中可能会转移到一个jQuery插件。</strong> </del> 
+</p>
+<ul class="signatures">
+	<li class="signature">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>jQuery.browser
+		</h4>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>$.browser</code>属性允许我们检测哪一个Web浏览器正在访问网页，通过浏览器本身返回。它包含四个最流行的浏览器类（在Internet Explorer，Mozilla和Webkit，和Opera）以及每个版本信息标志。
+	</p>
+	<p>
+		可用的标志有：
+	</p>
+	<ul>
+		<li>
+			webkit (从jQuery 1.4开始)
+		</li>
+		<li>
+			safari (不建议使用)
+		</li>
+		<li>
+			opera
+		</li>
+		<li>
+			msie
+		</li>
+		<li>
+			mozilla
+		</li>
+	</ul>
+	<p>
+		此属性是即刻有效的。因此，安全地使用它来判断是否要调用<code>$(document).ready()</code>。从jQuery 1.3开始，<code>$.browser</code>属性是不建议使用的，但目前还没有计划立即将其删除。
+	</p>
+	<p>
+		因为<code>$.browser</code>使用<code>navigator.userAgent</code>来确定平台，因为用户可以通过技术手段来修改该值，从而欺骗浏览器。避免该问题的最好办法就是使用<code>$.support</code>，<code>$.support</code>属性比<code>$.browser</code>提供更有效的检测特定功能的支持。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例<span class="desc"></span> 
+	</h4>
+	<p>
+		<span class="desc">显示浏览器信息。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  p { color:green; font-weight:bolder; margin:3px 0 0 10px; }
+  div { color:blue; margin-left:20px; font-size:14px; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p&gt;Browser info:&lt;/p&gt;
+ 
+&lt;script&gt;
+    jQuery.each(jQuery.browser, function(i, val) {
+      $("&lt;div&gt;" + i + " : &lt;span&gt;" + val + "&lt;/span&gt;")
+                .appendTo( document.body );
+    });&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8191" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">如果当前使用的浏览器是 Microsoft 的 Internet Explorer，那么下面的语句会返回 true。</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$.browser.msie;</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-2">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">若使用的是 WebKit 的浏览器，则弹出提示框 "this is WebKit!"。 </span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">  if ($.browser.webkit) {
+    alert( "this is webkit!" );
+  }</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-3">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">如果使用的是 Firefox 3，则弹出提示框 "Do stuff for Firefox 3"。</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">  var ua = $.browser;
+  if ( ua.mozilla &amp;&amp; ua.version.slice(0,3) == "1.9" ) {
+    alert( "Do stuff for firefox 3" );
+  }</pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">为不同的浏览器设置不同的 CSS 属性。</span> 
+</p>
+<pre class="prettyprint lang-js"> if ( $.browser.msie ) {
+    $("#div ul li").css( "display","inline" );
+ } else {
+    $("#div ul li").css( "display","inline-table" );
+ }</pre>
+<p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

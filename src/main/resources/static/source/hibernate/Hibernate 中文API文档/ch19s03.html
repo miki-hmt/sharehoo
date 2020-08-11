@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>19.3.&#160; 管理缓存（Managing the caches）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch19.html" title="第&#160;19&#160;章&#160;提升性能">
+<link rel="prev" href="ch19s02.html" title="19.2.&#160;二级缓存（The Second Level Cache）">
+<link rel="next" href="ch19s04.html" title="19.4.&#160;查询缓存（The Query Cache）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="performance-sessioncache"></a>19.3.&#160;
+			管理缓存（Managing the caches）
+    	</h2></div></div></div>
+<p>
+			无论何时，当你给<code class="literal">save()</code>、<code class="literal">update()</code>或
+            <code class="literal">saveOrUpdate()</code>方法传递一个对象时，或使用<code class="literal">load()</code>、
+			<code class="literal">get()</code>、<code class="literal">list()</code>、<code class="literal">iterate()</code>
+			或<code class="literal">scroll()</code>方法获得一个对象时,
+			该对象都将被加入到<code class="literal">Session</code>的内部缓存中。
+        </p>
+<p>
+			当随后flush()方法被调用时，对象的状态会和数据库取得同步。
+			如果你不希望此同步操作发生，或者你正处理大量对象、需要对有效管理内存时，你可以调用<code class="literal">evict()</code>
+			方法，从一级缓存中去掉这些对象及其集合。 
+        </p>
+<pre class="programlisting">ScrollableResult cats = sess.createQuery("from Cat as cat").scroll(); //a huge result set
+while ( cats.next() ) {
+    Cat cat = (Cat) cats.get(0);
+    doSomethingWithACat(cat);
+    sess.evict(cat);
+}</pre>
+<p>
+			Session还提供了一个<code class="literal">contains()</code>方法，用来判断某个实例是否处于当前session的缓存中。 
+        </p>
+<p>
+			如若要把所有的对象从session缓存中彻底清除，则需要调用<code class="literal">Session.clear()</code>。 
+        </p>
+<p>
+			对于二级缓存来说，在<code class="literal">SessionFactory</code>中定义了许多方法，
+			清除缓存中实例、整个类、集合实例或者整个集合。 			
+        </p>
+<pre class="programlisting">sessionFactory.evict(Cat.class, catId); //evict a particular Cat
+sessionFactory.evict(Cat.class);  //evict all Cats
+sessionFactory.evictCollection("Cat.kittens", catId); //evict a particular collection of kittens
+sessionFactory.evictCollection("Cat.kittens"); //evict all kitten collections</pre>
+<p>
+			<code class="literal">CacheMode</code>参数用于控制具体的Session如何与二级缓存进行交互。
+        </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+			<code class="literal">CacheMode.NORMAL</code> - 从二级缓存中读、写数据。
+        </p></li>
+<li><p>
+			<code class="literal">CacheMode.GET</code> - 从二级缓存中读取数据，仅在数据更新时对二级缓存写数据。
+        </p></li>
+<li><p>
+			<code class="literal">CacheMode.PUT</code> - 仅向二级缓存写数据，但不从二级缓存中读数据。
+        </p></li>
+<li><p>
+			<code class="literal">CacheMode.REFRESH</code> - 仅向二级缓存写数据，但不从二级缓存中读数据。通过
+			<code class="literal">hibernate.cache.use_minimal_puts</code>的设置，强制二级缓存从数据库中读取数据，刷新缓存内容。
+        </p></li>
+</ul></div>
+<p>
+			如若需要查看二级缓存或查询缓存区域的内容，你可以使用<code class="literal">统计（Statistics）</code> API。
+        </p>
+<pre class="programlisting">Map cacheEntries = sessionFactory.getStatistics()
+        .getSecondLevelCacheStatistics(regionName)
+        .getEntries();</pre>
+<p>
+			此时，你必须手工打开统计选项。可选的，你可以让Hibernate更人工可读的方式维护缓存内容。
+        </p>
+<pre class="programlisting">hibernate.generate_statistics true
+hibernate.cache.use_structured_entries true</pre>
+</div></body>
+</html>

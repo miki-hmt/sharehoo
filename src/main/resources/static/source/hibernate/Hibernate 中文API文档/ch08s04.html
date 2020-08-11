@@ -1,0 +1,108 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>8.4.&#160;组件作为联合标识符(Components as composite identifiers)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch08.html" title="第&#160;8&#160;章&#160;组件（Component）映射">
+<link rel="prev" href="ch08s03.html" title="8.3.&#160;组件作为Map的索引（Components as Map indices ）">
+<link rel="next" href="ch08s05.html" title="8.5.&#160;动态组件 （Dynamic components）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="components-compositeid"></a>8.4.&#160;组件作为联合标识符(Components as composite identifiers)</h2></div></div></div>
+<p>
+       你可以使用一个组件作为一个实体类的标识符。 你的组件类必须满足以下要求：
+    </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+            它必须实现<code class="literal">java.io.Serializable</code>接口
+        </p></li>
+<li><p>
+            它必须重新实现<code class="literal">equals()</code>和<code class="literal">hashCode()</code>方法, 始终和组合关键字在数据库中的概念保持一致
+        </p></li>
+</ul></div>
+<p>
+        <span class="emphasis"><em>注意：在Hibernate3中，第二个要求并非是Hibernate强制必须的。但最好这样做。</em></span>
+    </p>
+<p>
+        你不能使用一个<code class="literal">IdentifierGenerator</code>产生组合关键字。一个应用程序必须分配它自己的标识符。
+    </p>
+<p>
+        使用<code class="literal">&lt;composite-id&gt;</code> 标签(并且内嵌<code class="literal">&lt;key-property&gt;</code>元素)代替通常的<code class="literal">&lt;id&gt;</code>标签。比如,<code class="literal">OrderLine</code>类具有一个主键，这个主键依赖于<code class="literal">Order</code>的(联合)主键。
+    </p>
+<pre class="programlisting">&lt;class name="OrderLine"&gt;
+    
+    &lt;composite-id name="id" class="OrderLineId"&gt;
+        &lt;key-property name="lineId"/&gt;
+        &lt;key-property name="orderId"/&gt;
+        &lt;key-property name="customerId"/&gt;
+    &lt;/composite-id&gt;
+    
+    &lt;property name="name"/&gt;
+    
+    &lt;many-to-one name="order" class="Order"
+            insert="false" update="false"&gt;
+        &lt;column name="orderId"/&gt;
+        &lt;column name="customerId"/&gt;
+    &lt;/many-to-one&gt;
+    ....
+    
+&lt;/class&gt;</pre>
+<p>
+        现在，任何指向<code class="literal">OrderLine</code>的外键都是复合的。在你的映射文件中，必须为其他类也这样声明。例如，一个指向<code class="literal">OrderLine</code>的关联可能被这样映射：
+    </p>
+<pre class="programlisting">&lt;many-to-one name="orderLine" class="OrderLine"&gt;
+&lt;!-- the "class" attribute is optional, as usual --&gt;
+    &lt;column name="lineId"/&gt;
+    &lt;column name="orderId"/&gt;
+    &lt;column name="customerId"/&gt;
+&lt;/many-to-one&gt;</pre>
+<p>
+        （注意在各个地方<code class="literal">&lt;column&gt;</code>标签都是<code class="literal">column</code>属性的替代写法。）
+    </p>
+<p>
+        指向<code class="literal">OrderLine</code>的<code class="literal">多对多</code>关联也使用联合外键:
+    </p>
+<pre class="programlisting">&lt;set name="undeliveredOrderLines"&gt;
+    &lt;key column name="warehouseId"/&gt;
+    &lt;many-to-many class="OrderLine"&gt;
+        &lt;column name="lineId"/&gt;
+        &lt;column name="orderId"/&gt;
+        &lt;column name="customerId"/&gt;
+    &lt;/many-to-many&gt;
+&lt;/set&gt;</pre>
+<p>
+        在<code class="literal">Order</code>中,<code class="literal">OrderLine</code>的集合则是这样:
+    </p>
+<pre class="programlisting">&lt;set name="orderLines" inverse="true"&gt;
+    &lt;key&gt;
+        &lt;column name="orderId"/&gt;
+        &lt;column name="customerId"/&gt;
+    &lt;/key&gt;
+    &lt;one-to-many class="OrderLine"/&gt;
+&lt;/set&gt;</pre>
+<p>
+        (与通常一样,<code class="literal">&lt;one-to-many&gt;</code>元素不声明任何列.)
+    </p>
+<p>
+        假若<code class="literal">OrderLine</code>本身拥有一个集合,它也具有组合外键。
+    </p>
+<pre class="programlisting">&lt;class name="OrderLine"&gt;
+    ....
+    ....
+    &lt;list name="deliveryAttempts"&gt;
+        &lt;key&gt;   &lt;!-- a collection inherits the composite key type --&gt;
+            &lt;column name="lineId"/&gt;
+            &lt;column name="orderId"/&gt;
+            &lt;column name="customerId"/&gt;
+        &lt;/key&gt;
+        &lt;list-index column="attemptId" base="1"/&gt;
+        &lt;composite-element class="DeliveryAttempt"&gt;
+            ...
+        &lt;/composite-element&gt;
+    &lt;/set&gt;
+&lt;/class&gt;</pre>
+</div></body>
+</html>

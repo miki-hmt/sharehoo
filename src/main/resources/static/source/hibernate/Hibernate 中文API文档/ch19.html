@@ -1,0 +1,526 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;19&#160;章&#160;提升性能</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch18s03.html" title="18.3.&#160;操作XML数据">
+<link rel="next" href="ch19s02.html" title="19.2.&#160;二级缓存（The Second Level Cache）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="performance"></a>第&#160;19&#160;章&#160;提升性能
+	</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch19.html#performance-fetching">19.1. 
+			抓取策略(Fetching strategies)
+		</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch19.html#performance-fetching-lazy">19.1.1. 操作延迟加载的关联</a></span></dt>
+<dt><span class="sect2"><a href="ch19.html#performance-fetching-custom">19.1.2. 
+			
+				调整抓取策略（Tuning fetch strategies）
+    		</a></span></dt>
+<dt><span class="sect2"><a href="ch19.html#performance-fetching-proxies">19.1.3. 单端关联代理（Single-ended association proxies）
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19.html#performance-fetching-initialization">19.1.4. 实例化集合和代理（Initializing collections and proxies）
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19.html#performance-fetching-batch">19.1.5. 使用批量抓取（Using batch fetching）
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19.html#performance-fetching-subselect">19.1.6. 使用子查询抓取（Using subselect fetching）
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19.html#performance-fetching-lazyproperties">19.1.7. 使用延迟属性抓取（Using lazy property fetching）	
+			</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch19s02.html">19.2. 二级缓存（The Second Level Cache）
+		</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch19s02.html#performance-cache-mapping">19.2.1. 缓存映射（Cache mappings）
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19s02.html#performance-cache-readonly">19.2.2. 策略：只读缓存（Strategy: read only）
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19s02.html#performance-cache-readwrite">19.2.3. 
+				策略:读/写缓存（Strategy: read/write）
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19s02.html#performance-cache-nonstrict">19.2.4. 
+				策略:非严格读/写缓存（Strategy: nonstrict read/write）				
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19s02.html#performance-cache-transactional">19.2.5. 
+				
+				策略:事务缓存（transactional）				
+			</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch19s03.html">19.3. 
+			管理缓存（Managing the caches）
+    	</a></span></dt>
+<dt><span class="sect1"><a href="ch19s04.html">19.4. 查询缓存（The Query Cache）
+		</a></span></dt>
+<dt><span class="sect1"><a href="ch19s05.html">19.5. 
+		理解集合性能（Understanding Collection performance）	
+		</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch19s05.html#performance-collections-taxonomy">19.5.1. 
+
+            分类（Taxonomy）
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19s05.html#performance-collections-mostefficientupdate">19.5.2. 				
+			Lists, maps 和sets用于更新效率最高
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19s05.html#performance-collections-mostefficentinverse">19.5.3. 
+			Bag和list是反向集合类中效率最高的
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19s05.html#performance-collections-oneshotdelete">19.5.4. 
+			一次性删除（One shot delete）
+			</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch19s06.html">19.6. 
+		监测性能（Monitoring performance）
+		</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch19s06.html#performance-monitoring-sf">19.6.1. 
+			监测SessionFactory	
+			</a></span></dt>
+<dt><span class="sect2"><a href="ch19s06.html#performance-monitoring-metrics">19.6.2. 
+			数据记录（Metrics）
+			</a></span></dt>
+</dl></dd>
+</dl>
+</div>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="performance-fetching"></a>19.1.&#160;
+			抓取策略(Fetching strategies)
+		</h2></div></div></div>
+<p>
+	
+			<span class="emphasis"><em>抓取策略（fetching strategy）</em></span> 是指：当应用程序需要在（Hibernate实体对象图的）关联关系间进行导航的时候，
+			Hibernate如何获取关联对象的策略。抓取策略可以在O/R映射的元数据中声明，也可以在特定的HQL
+			或<code class="literal">条件查询（Criteria Query）</code>中重载声明。			
+        </p>
+<p>
+			Hibernate3 定义了如下几种抓取策略：
+        </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+	
+					<span class="emphasis"><em>连接抓取（Join fetching）</em></span> - Hibernate通过
+					在<code class="literal">SELECT</code>语句使用<code class="literal">OUTER JOIN</code>（外连接）来
+					获得对象的关联实例或者关联集合。
+                </p></li>
+<li><p>
+	
+				<span class="emphasis"><em>查询抓取（Select fetching）</em></span> - 另外发送一条 <code class="literal">SELECT</code>
+                    语句抓取当前对象的关联实体或集合。除非你显式的指定<code class="literal">lazy="false"</code>禁止
+				延迟抓取（lazy fetching），否则只有当你真正访问关联关系的时候，才会执行第二条select语句。           
+                </p></li>
+<li><p>
+				 <span class="emphasis"><em>子查询抓取（Subselect fetching）</em></span> - 另外发送一条<code class="literal">SELECT</code>
+				 语句抓取在前面查询到（或者抓取到）的所有实体对象的关联集合。除非你显式的指定<code class="literal">lazy="false"</code>
+				 禁止延迟抓取（lazy fetching），否则只有当你真正访问关联关系的时候，才会执行第二条select语句。
+                </p></li>
+<li><p>
+    
+	                <span class="emphasis"><em>批量抓取（Batch fetching）</em></span> - 对查询抓取的优化方案，
+				通过指定一个主键或外键列表，Hibernate使用单条<code class="literal">SELECT</code>语句获取一批对象实例或集合。
+                </p></li>
+</ul></div>
+<p>
+            Hibernate会区分下列各种情况：
+        </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+                    <span class="emphasis"><em>Immediate fetching，立即抓取</em></span> - 当宿主被加载时，关联、集合或属性被立即抓取。
+                </p></li>
+<li><p>
+                    <span class="emphasis"><em>Lazy collection fetching，延迟集合抓取</em></span>- 直到应用程序对集合进行了一次操作时，集合才被抓取。（对集合而言这是默认行为。）
+                </p></li>
+<li><p>
+                    <span class="emphasis"><em>"Extra-lazy" collection fetching,"Extra-lazy"集合抓取</em></span> -对集合类中的每个元素而言，都是直到需要时才去访问数据库。除非绝对必要，Hibernate不会试图去把整个集合都抓取到内存里来（适用于非常大的集合）。
+                </p></li>
+<li><p>
+                    <span class="emphasis"><em>Proxy fetching，代理抓取</em></span>  - 对返回单值的关联而言，当其某个方法被调用，而非对其关键字进行get操作时才抓取。
+                </p></li>
+<li><p>
+                    <span class="emphasis"><em>"No-proxy" fetching,非代理抓取</em></span> -  对返回单值的关联而言，当实例变量被访问的时候进行抓取。与上面的代理抓取相比，这种方法没有那么“延迟”得厉害(就算只访问标识符，也会导致关联抓取)但是更加透明，因为对应用程序来说，不再看到proxy。这种方法需要在编译期间进行字节码增强操作，因此很少需要用到。
+                </p></li>
+<li><p>
+                    <span class="emphasis"><em>Lazy attribute fetching，属性延迟加载</em></span> - 对属性或返回单值的关联而言，当其实例变量被访问的时候进行抓取。需要编译期字节码强化，因此这一方法很少是必要的。
+                </p></li>
+</ul></div>
+<p>
+            这里有两个正交的概念：关联<span class="emphasis"><em>何时</em></span>被抓取，以及被<span class="emphasis"><em>如何</em></span>抓取（会采用什么样的SQL语句）。不要混淆它们！我们使用<code class="literal">抓取</code>来改善性能。我们使用<code class="literal">延迟</code>来定义一些契约，对某特定类的某个脱管的实例，知道有哪些数据是可以使用的。
+        </p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-fetching-lazy"></a>19.1.1.&#160;操作延迟加载的关联</h3></div></div></div>
+<p>
+                默认情况下，Hibernate 3对集合使用延迟select抓取，对返回单值的关联使用延迟代理抓取。对几乎是所有的应用而言，其绝大多数的关联，这种策略都是有效的。
+            </p>
+<p>
+                <span class="emphasis"><em>注意:</em></span>假若你设置了<code class="literal">hibernate.default_batch_fetch_size</code>,Hibernate会对延迟加载采取批量抓取优化措施（这种优化也可能会在更细化的级别打开）。
+            </p>
+<p>
+                然而，你必须了解延迟抓取带来的一个问题。在一个打开的Hibernate session上下文之外调用延迟集合会导致一次意外。比如：
+            </p>
+<pre class="programlisting">s = sessions.openSession();
+Transaction tx = s.beginTransaction();
+            
+User u = (User) s.createQuery("from User u where u.name=:userName")
+	.setString("userName", userName).uniqueResult();
+Map permissions = u.getPermissions();
+
+tx.commit();
+s.close();
+
+Integer accessLevel = (Integer) permissions.get("accounts");  // Error!</pre>
+<p>
+		 在<code class="literal">Session</code>关闭后，permessions集合将是未实例化的、不再可用，因此无法正常载入其状态。
+            <span class="emphasis"><em>Hibernate对脱管对象不支持延迟实例化</em></span>. 这里的修改方法是：将permissions读取数据的代码
+			移到tx.commit()之前。
+        </p>
+<p>
+			除此之外，通过对关联映射指定<code class="literal">lazy="false"</code>,我们也可以使用非延迟的集合或关联。但是，
+			对绝大部分集合来说，更推荐使用延迟方式抓取数据。如果在你的对象模型中定义了太多的非延迟关联，Hibernate最终几乎需要在每个事务中载入整个数据库到内存中！
+        </p>
+<p>
+         
+		    但是，另一方面，在一些特殊的事务中，我们也经常需要使用到连接抓取（它本身上就是非延迟的），以代替查询抓取。
+			下面我们将会很快明白如何具体的定制Hibernate中的抓取策略。在Hibernate3中，具体选择哪种抓取策略的机制是和选择
+			单值关联或集合关联相一致的。
+	    </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-fetching-custom"></a>19.1.2.&#160;
+			
+				调整抓取策略（Tuning fetch strategies）
+    		</h3></div></div></div>
+<p>
+			
+				查询抓取（默认的）在N+1查询的情况下是极其脆弱的，因此我们可能会要求在映射文档中定义使用连接抓取：
+			</p>
+<pre class="programlisting">&lt;set name="permissions" 
+            fetch="join"&gt;
+    &lt;key column="userId"/&gt;
+    &lt;one-to-many class="Permission"/&gt;
+&lt;/set</pre>
+<pre class="programlisting">&lt;many-to-one name="mother" class="Cat" fetch="join"/&gt;</pre>
+<p>
+			    在映射文档中定义的<code class="literal">抓取</code>策略将会对以下列表条目产生影响：
+            </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+               
+			        通过<code class="literal">get()</code>或<code class="literal">load()</code>方法取得数据。
+			    </p></li>
+<li><p>
+				    只有在关联之间进行导航时，才会隐式的取得数据。
+                </p></li>
+<li><p>
+					<code class="literal">条件查询</code>
+                </p></li>
+<li><p>
+                    使用了<code class="literal">subselect</code>抓取的HQL查询
+                </p></li>
+</ul></div>
+<p>
+                不管你使用哪种抓取策略，定义为非延迟的类图会被保证一定装载入内存。注意这可能意味着在一条HQL查询后紧跟着一系列的查询。
+            </p>
+<p>
+			    通常情况下，我们并不使用映射文档进行抓取策略的定制。更多的是，保持其默认值，然后在特定的事务中，
+				使用HQL的<code class="literal">左连接抓取（left join fetch）</code> 对其进行重载。这将通知
+				Hibernate在第一次查询中使用外部关联（outer join），直接得到其关联数据。
+				在<code class="literal">条件查询</code> API中，应该调用 <code class="literal">setFetchMode(FetchMode.JOIN)</code>语句。
+            </p>
+<p>
+				也许你喜欢仅仅通过条件查询，就可以改变<code class="literal">get()</code> 
+				或 <code class="literal">load()</code>语句中的数据抓取策略。例如：
+            </p>
+<pre class="programlisting">User user = (User) session.createCriteria(User.class)
+            	.setFetchMode("permissions", FetchMode.JOIN)
+            	.add( Restrictions.idEq(userId) )
+            	.uniqueResult();</pre>
+<p>
+             
+			    （这就是其他ORM解决方案的“抓取计划(fetch plan)”在Hibernate中的等价物。）
+            </p>
+<p>
+				截然不同的一种避免N+1次查询的方法是，使用二级缓存。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-fetching-proxies"></a>19.1.3.&#160;单端关联代理（Single-ended association proxies）
+			</h3></div></div></div>
+<p>
+				在Hinerbate中，对集合的延迟抓取的采用了自己的实现方法。但是，对于单端关联的延迟抓取，则需要采用
+				其他不同的机制。单端关联的目标实体必须使用代理，Hihernate在运行期二进制级（通过优异的CGLIB库），
+				为持久对象实现了延迟载入代理。				
+            </p>
+<p>
+				默认的，Hibernate3将会为所有的持久对象产生代理（在启动阶段），然后使用他们实现
+				<code class="literal">多对一（many-to-one）</code>关联和<code class="literal">一对一（one-to-one）</code>
+				关联的延迟抓取。
+            </p>
+<p>
+				在映射文件中，可以通过设置<code class="literal">proxy</code>属性为目标class声明一个接口供代理接口使用。
+				默认的，Hibernate将会使用该类的一个子类。
+				<span class="emphasis"><em>注意：被代理的类必须实现一个至少包可见的默认构造函数，我们建议所有的持久类都应拥有这样的构造函数</em></span>
+            </p>
+<p>
+				在如此方式定义一个多态类的时候，有许多值得注意的常见性的问题，例如：
+            </p>
+<pre class="programlisting">&lt;class name="Cat" proxy="Cat"&gt;
+    ......
+    &lt;subclass name="DomesticCat"&gt;
+        .....
+    &lt;/subclass&gt;
+&lt;/class&gt;</pre>
+<p>
+				首先，<code class="literal">Cat</code>实例永远不可以被强制转换为<code class="literal">DomesticCat</code>,
+				即使它本身就是<code class="literal">DomesticCat</code>实例。				
+			 </p>
+<pre class="programlisting">Cat cat = (Cat) session.load(Cat.class, id);  // instantiate a proxy (does not hit the db)
+if ( cat.isDomesticCat() ) {                  // hit the db to initialize the proxy
+    DomesticCat dc = (DomesticCat) cat;       // Error!
+    ....
+}</pre>
+<p>
+				其次，代理的“<code class="literal">==</code>”可能不再成立。
+            </p>
+<pre class="programlisting">Cat cat = (Cat) session.load(Cat.class, id);            // instantiate a Cat proxy
+DomesticCat dc = 
+        (DomesticCat) session.load(DomesticCat.class, id);  // acquire new DomesticCat proxy!
+System.out.println(cat==dc);                            // false</pre>
+<p>
+				虽然如此，但实际情况并没有看上去那么糟糕。虽然我们现在有两个不同的引用，分别指向这两个不同的代理对象，
+				但实际上，其底层应该是同一个实例对象： 
+            </p>
+<pre class="programlisting">cat.setWeight(11.0);  // hit the db to initialize the proxy
+System.out.println( dc.getWeight() );  // 11.0</pre>
+<p>
+				第三，你不能对“final类”或“具有final方法的类”使用CGLIB代理。 				
+            </p>
+<p>
+				最后，如果你的持久化对象在实例化时需要某些资源（例如，在实例化方法、默认构造方法中），
+				那么代理对象也同样需要使用这些资源。实际上，代理类是持久化类的子类。 				
+            </p>
+<p>
+			
+				这些问题都源于Java的单根继承模型的天生限制。如果你希望避免这些问题，那么你的每个持久化类必须实现一个接口，
+				在此接口中已经声明了其业务方法。然后，你需要在映射文档中再指定这些接口。例如： 
+            </p>
+<pre class="programlisting">&lt;class name="CatImpl" proxy="Cat"&gt;
+    ......
+    &lt;subclass name="DomesticCatImpl" proxy="DomesticCat"&gt;
+        .....
+    &lt;/subclass&gt;
+&lt;/class&gt;</pre>
+<p>
+				
+				这里<code class="literal">CatImpl</code>实现了<code class="literal">Cat</code>接口，
+				<code class="literal">DomesticCatImpl</code>实现<code class="literal">DomesticCat</code>接口。
+				在<code class="literal">load()</code>、<code class="literal">iterate()</code>方法中就会返回
+				<code class="literal">Cat</code>和<code class="literal">DomesticCat</code>的代理对象。
+				(注意<code class="literal">list()</code>并不会返回代理对象。)		
+            </p>
+<pre class="programlisting">Cat cat = (Cat) session.load(CatImpl.class, catid);
+Iterator iter = session.iterate("from CatImpl as cat where cat.name='fritz'");
+Cat fritz = (Cat) iter.next();</pre>
+<p>
+			
+				这里，对象之间的关系也将被延迟载入。这就意味着，你应该将属性声明为<code class="literal">Cat</code>，而不是<code class="literal">CatImpl</code>。
+            </p>
+<p>
+		
+				但是，在有些方法中是<span class="emphasis"><em>不需要</em></span>使用代理的。例如：
+            </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+						<code class="literal">equals()</code>方法，如果持久类没有重载<code class="literal">equals()</code>方法。						
+                    </p></li>
+<li><p>
+						<code class="literal">hashCode()</code>方法，如果持久类没有重载<code class="literal">hashCode()</code>方法。
+                    </p></li>
+<li><p>
+						标志符的getter方法。
+                    </p></li>
+</ul></div>
+<p>
+				Hibernate将会识别出那些重载了<code class="literal">equals()</code>、或<code class="literal">hashCode()</code>方法的持久化类。
+            </p>
+<p>
+                若选择<code class="literal">lazy="no-proxy"</code>而非默认的<code class="literal">lazy="proxy"</code>，我们可以避免类型转换带来的问题。然而，这样我们就需要编译期字节码增强，并且所有的操作都会导致立刻进行代理初始化。
+                
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-fetching-initialization"></a>19.1.4.&#160;实例化集合和代理（Initializing collections and proxies）
+			</h3></div></div></div>
+<p>
+				在<code class="literal">Session</code>范围之外访问未初始化的集合或代理，Hibernate将会抛出<code class="literal">LazyInitializationException</code>异常。
+				也就是说，在分离状态下，访问一个实体所拥有的集合，或者访问其指向代理的属性时，会引发此异常。
+            </p>
+<p>
+			
+				有时候我们需要保证某个代理或者集合在Session关闭前就已经被初始化了。				
+				当然，我们可以通过强行调用<code class="literal">cat.getSex()</code>或者<code class="literal">cat.getKittens().size()</code>之类的方法来确保这一点。
+				但是这样的程序会造成读者的疑惑，也不符合通常的代码规范。				
+            </p>
+<p>
+			
+				静态方法<code class="literal">Hibernate.initialized()</code>
+				为你的应用程序提供了一个便捷的途径来延迟加载集合或代理。
+				只要它的Session处于open状态，<code class="literal">Hibernate.initialize(cat)</code> 将会为cat强制对代理实例化。
+				同样，<code class="literal">Hibernate.initialize( cat.getKittens() )</code> 对kittens的集合具有同样的功能。 
+	        </p>
+<p>
+			
+				还有另外一种选择，就是保持<code class="literal">Session</code>一直处于open状态，直到所有需要的集合或代理都被载入。
+				在某些应用架构中，特别是对于那些使用Hibernate进行数据访问的代码，以及那些在不同应用层和不同物理进程中使用Hibernate的代码。
+				在集合实例化时，如何保证<code class="literal">Session</code>处于open状态经常会是一个问题。有两种方法可以解决此问题：				
+            </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+						在一个基于Web的应用中，可以利用servlet过滤器（filter），在用户请求（request）结束、页面生成
+						结束时关闭<code class="literal">Session</code>（这里使用了<span class="emphasis"><em>在展示层保持打开Session模式（Open Session in View）</em></span>），
+						当然，这将依赖于应用框架中异常需要被正确的处理。在返回界面给用户之前，乃至在生成界面过程中发生异常的情况下，
+						正确关闭<code class="literal">Session</code>和结束事务将是非常重要的，
+                        请参见Hibernate wiki上的"Open Session in View"模式，你可以找到示例。
+                    </p></li>
+<li><p>
+					
+						在一个拥有单独业务层的应用中，业务层必须在返回之前，为web层“准备”好其所需的数据集合。这就意味着
+						业务层应该载入所有表现层/web层所需的数据，并将这些已实例化完毕的数据返回。通常，应用程序应该
+						为web层所需的每个集合调用<code class="literal">Hibernate.initialize()</code>（这个调用必须发生咱session关闭之前）；
+						或者使用带有<code class="literal">FETCH</code>从句，或<code class="literal">FetchMode.JOIN</code>的Hibernate查询，
+						事先取得所有的数据集合。如果你在应用中使用了<span class="emphasis"><em>Command</em></span>模式，代替<span class="emphasis"><em>Session Facade</em></span>						，
+						那么这项任务将会变得简单的多。
+                    </p></li>
+<li><p>
+						你也可以通过<code class="literal">merge()</code>或<code class="literal">lock()</code>方法，在访问未实例化的集合（或代理）之前，
+						为先前载入的对象绑定一个新的<code class="literal">Session</code>。
+						显然，Hibernate将不会，也不<span class="emphasis"><em>应该</em></span>自动完成这些任务，因为这将引入一个特殊的事务语义。
+                    </p></li>
+</ul></div>
+<p>
+				有时候，你并不需要完全实例化整个大的集合，仅需要了解它的部分信息（例如其大小）、或者集合的部分内容。
+            </p>
+<p>
+				
+				你可以使用集合过滤器得到其集合的大小，而不必实例化整个集合：
+            </p>
+<pre class="programlisting">( (Integer) s.createFilter( collection, "select count(*)" ).list().get(0) ).intValue()</pre>
+<p>
+				这里的<code class="literal">createFilter()</code>方法也可以被用来有效的抓取集合的部分内容，而无需实例化整个集合：
+            </p>
+<pre class="programlisting">s.createFilter( lazyCollection, "").setFirstResult(0).setMaxResults(10).list();</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-fetching-batch"></a>19.1.5.&#160;使用批量抓取（Using batch fetching）
+			</h3></div></div></div>
+<p>
+				Hibernate可以充分有效的使用批量抓取，也就是说，如果仅一个访问代理（或集合），那么Hibernate将不载入其他未实例化的代理。
+				批量抓取是延迟查询抓取的优化方案，你可以在两种批量抓取方案之间进行选择：在类级别和集合级别。				
+            </p>
+<p>
+				
+				类/实体级别的批量抓取很容易理解。假设你在运行时将需要面对下面的问题：你在一个<code class="literal">Session</code>中载入了25个
+				<code class="literal">Cat</code>实例，每个<code class="literal">Cat</code>实例都拥有一个引用成员<code class="literal">owner</code>，
+				其指向<code class="literal">Person</code>，而<code class="literal">Person</code>类是代理，同时<code class="literal">lazy="true"</code>。
+				如果你必须遍历整个cats集合，对每个元素调用<code class="literal">getOwner()</code>方法，Hibernate将会默认的执行25次<code class="literal">SELECT</code>查询，
+				得到其owner的代理对象。这时，你可以通过在映射文件的<code class="literal">Person</code>属性，显式声明<code class="literal">batch-size</code>，改变其行为：
+				
+            </p>
+<pre class="programlisting">&lt;class name="Person" batch-size="10"&gt;...&lt;/class&gt;</pre>
+<p>
+				随之，Hibernate将只需要执行三次查询，分别为10、10、	5。
+            </p>
+<p>
+				你也可以在集合级别定义批量抓取。例如，如果每个<code class="literal">Person</code>都拥有一个延迟载入的<code class="literal">Cats</code>集合，
+				现在，<code class="literal">Sesssion</code>中载入了10个person对象，遍历person集合将会引起10次<code class="literal">SELECT</code>查询，
+				每次查询都会调用<code class="literal">getCats()</code>方法。如果你在<code class="literal">Person</code>的映射定义部分，允许对<code class="literal">cats</code>批量抓取,
+				那么，Hibernate将可以预先抓取整个集合。请看例子：
+            </p>
+<pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;set name="cats" batch-size="3"&gt;
+        ...
+    &lt;/set&gt;
+&lt;/class&gt;</pre>
+<p>
+				如果整个的<code class="literal">batch-size</code>是3（笔误？），那么Hibernate将会分四次执行<code class="literal">SELECT</code>查询，
+				按照3、3、3、1的大小分别载入数据。这里的每次载入的数据量还具体依赖于当前<code class="literal">Session</code>中未实例化集合的个数。
+            </p>
+<p>
+				如果你的模型中有嵌套的树状结构，例如典型的帐单－原料结构（bill-of-materials pattern），集合的批量抓取是非常有用的。
+				（尽管在更多情况下对树进行读取时，<span class="emphasis"><em>嵌套集合（nested set）</em></span>或<span class="emphasis"><em>原料路径(materialized path)</em></span>（××）
+				 是更好的解决方法。）
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-fetching-subselect"></a>19.1.6.&#160;使用子查询抓取（Using subselect fetching）
+			</h3></div></div></div>
+<p>
+                假若一个延迟集合或单值代理需要抓取，Hibernate会使用一个subselect重新运行原来的查询，一次性读入所有的实例。这和批量抓取的实现方法是一样的，不会有破碎的加载。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="performance-fetching-lazyproperties"></a>19.1.7.&#160;使用延迟属性抓取（Using lazy property fetching）	
+			</h3></div></div></div>
+<p>
+				Hibernate3对单独的属性支持延迟抓取，这项优化技术也被称为<span class="emphasis"><em>组抓取（fetch groups）</em></span>。
+				请注意，该技术更多的属于市场特性。在实际应用中，优化行读取比优化列读取更重要。但是，仅载入类的部分属性在某些特定情况下会有用，例如在原有表中拥有几百列数据、数据模型无法改动的情况下。
+            </p>
+<p>
+				
+				可以在映射文件中对特定的属性设置<code class="literal">lazy</code>，定义该属性为延迟载入。
+            </p>
+<pre class="programlisting">&lt;class name="Document"&gt;
+       &lt;id name="id"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;property name="name" not-null="true" length="50"/&gt;
+    &lt;property name="summary" not-null="true" length="200" lazy="true"/&gt;
+    &lt;property name="text" not-null="true" length="2000" lazy="true"/&gt;
+&lt;/class&gt;</pre>
+<p>
+				
+				属性的延迟载入要求在其代码构建时加入二进制指示指令（bytecode instrumentation），如果你的持久类代码中未含有这些指令，
+				Hibernate将会忽略这些属性的延迟设置，仍然将其直接载入。
+            </p>
+<p>
+				你可以在Ant的Task中，进行如下定义，对持久类代码加入“二进制指令。”
+            </p>
+<pre class="programlisting">&lt;target name="instrument" depends="compile"&gt;
+    &lt;taskdef name="instrument" classname="org.hibernate.tool.instrument.InstrumentTask"&gt;
+        &lt;classpath path="${jar.path}"/&gt;
+        &lt;classpath path="${classes.dir}"/&gt;
+        &lt;classpath refid="lib.class.path"/&gt;
+    &lt;/taskdef&gt;
+
+    &lt;instrument verbose="true"&gt;
+        &lt;fileset dir="${testclasses.dir}/org/hibernate/auction/model"&gt;
+            &lt;include name="*.class"/&gt;
+        &lt;/fileset&gt;
+    &lt;/instrument&gt;
+&lt;/target&gt;</pre>
+<p>
+				
+				还有一种可以优化的方法，它使用HQL或条件查询的投影（projection）特性，可以避免读取非必要的列，
+				这一点至少对只读事务是非常有用的。它无需在代码构建时“二进制指令”处理，因此是一个更加值得选择的解决方法。				
+            </p>
+<p>
+				有时你需要在HQL中通过<code class="literal">抓取所有属性</code>，强行抓取所有内容。
+            </p>
+</div>
+</div>
+</div></body>
+</html>

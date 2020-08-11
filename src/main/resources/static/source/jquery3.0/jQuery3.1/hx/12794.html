@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>queue()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">queue()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.queue( [queueName ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>显示在匹配的元素上的已经执行的函数列队。
+</p>
+<ul class="signatures">
+	<li class="signature" id="queue-queueName">
+		<h4 class="name">
+			<span class="version-details">V : 1.2</span>.queue( [queueName ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>queueName</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader0" target="_blank">String</a> 
+				</div>
+				<div>
+					一个含有队列名的字符串。默认是 <code>fx</code>，标准的动画队列。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<h4>
+	<span class="desc">实例</span>
+</h4>
+<p>
+	<span class="desc">显示列队的长度。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;div { margin:3px; width:40px; height:40px;
+        position:absolute; left:0px; top:60px;
+        background:green; display:none; }
+  div.newcolor { background:blue; }
+  p { color:red; }  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+  &lt;p&gt;The queue length is: &lt;span&gt;&lt;/span&gt;&lt;/p&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;
+var div = $("div");
+ 
+function runIt() {
+  div.show("slow");
+  div.animate({left:'+=200'},2000);
+  div.slideToggle(1000);
+  div.slideToggle("fast");
+  div.animate({left:'-=200'},1500);
+  div.hide("slow");
+  div.show(1200);
+  div.slideUp("normal", runIt);
+}
+ 
+function showIt() {
+  var n = div.queue("fx");
+  $("span").text( n.length );
+  setTimeout(showIt, 100);
+}
+ 
+runIt();
+showIt();
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8017" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p>
+<p>
+</p>
+<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.queue( [queueName ], newQueue )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>在匹配元素上操作已经附加函数的列表。
+</p>
+<ul class="signatures">
+	<li class="signature" id="queue-queueName-newQueue">
+		<h4 class="name">
+			<span class="version-details">V : 1.2</span>.queue( [queueName ],
+                newQueue )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>queueName</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader0" target="_blank">String</a> 
+				</div>
+				<div>
+					一个含有队列名的字符串。默认是 <code>fx</code>，标准的动画队列。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>newQueue</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a> 
+				</div>
+				<div>
+					一个替换当前列队内容的函数数组。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="queue-queueName-callback-next-">
+		<h4 class="name">
+			<span class="version-details">V : 1.2</span>.queue( [queueName ],
+                callback( next ) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>queueName</strong> 
+				</div>
+				<div>
+					类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader0" target="_blank">String</a> 
+				</div>
+				<div>
+					一个含有队列名的字符串。默认是 <code>fx</code>，标准的动画队列。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>callback</strong> 
+				</div>
+				<div>
+					Type: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28" target="_blank">Function</a>( Function next() )
+				</div>
+				<div>
+					要添加进队列的函数。下一个动画队列执行时会调用这个函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc-1">
+	<p>
+		每个元素可以通过jQuery，包含一个或多个函数队列。在大多数应用中，只有一个列队(访问 <code>fx</code>)被使用。队列允许一个元素来异步的访问一连串的动作，而不终止程序执行。典型的示例就是在一个元素上调用多重动画的方法对一个元素。例如：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#foo').slideUp().fadeIn();</pre>
+	</div>
+	<p>
+		当这个语句被执行，这个元素开始立即做滑动动画，但渐入动画放置在 <code>fx</code> 列队在，只有当滑动动画完成后才会被执行。
+	</p>
+	<p>
+		<code>queue()</code>方法允许我们直接操纵这个函数队列。用一个回调函数访问<code>queue()</code>特别的有用；它让我们把新函数置入到队列的末端。为jQuery集合中的每个元素执行一次回调函数。
+	</p>
+	<p>
+		该函数的功能类似于在动画方法中提供了回调函数，但是不要求在动画执行时指定回调函数。
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#foo').slideUp();
+$('#foo').queue(function() {
+  alert('Animation complete.');
+  $(this).dequeue();
+});</pre>
+	</div>
+	<p>
+		这是相当于：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#foo').slideUp(function() {
+  alert('Animation complete.');
+});</pre>
+	</div>
+	<p>
+		值得注意的是，当使用<code>.queue()</code>添加一个函数的时候，我们应该保证在函数最后调用了 <code>jQuery.dequeue()</code>，这样就能让队列中的其它函数按顺序执行。
+	</p>
+	<p>
+		<strong>从jQuery 1.4开始</strong>，向队列中追加函数时，可以向该函数中传入另一个函数，作为第一个参数。当调用函数时，会自动从函数队列中弹出下一个项目，保证队列中函数的继续进行。我们可以像下面这样使用：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$("#test").queue(function(next) {
+    // Do some stuff...
+    next();
+});</pre>
+	</div>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-1-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">Queue a custom function.</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { margin:3px; width:40px; height:40px;
+        position:absolute; left:0px; top:30px;
+        background:green; display:none; }
+  div.newcolor { background:blue; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  Click here...
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;$(document.body).click(function () {
+      $("div").show("slow");
+      $("div").animate({left:'+=200'},2000);
+      $("div").queue(function () {
+        $(this).addClass("newcolor");
+        $(this).dequeue();
+      });
+      $("div").animate({left:'-=200'},500);
+      $("div").queue(function () {
+        $(this).removeClass("newcolor");
+        $(this).dequeue();
+      });
+      $("div").slideUp();
+    });&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8018" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">Set a queue array to delete the queue.</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+  div { margin:3px; width:40px; height:40px;
+        position:absolute; left:0px; top:30px;
+        background:green; display:none; }
+  div.newcolor { background:blue; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="start"&gt;Start&lt;/button&gt;
+  &lt;button id="stop"&gt;Stop&lt;/button&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;script&gt;$("#start").click(function () {
+      $("div").show("slow");
+      $("div").animate({left:'+=200'},5000);
+      $("div").queue(function () {
+        $(this).addClass("newcolor");
+        $(this).dequeue();
+      });
+      $("div").animate({left:'-=200'},1500);
+      $("div").queue(function () {
+        $(this).removeClass("newcolor");
+        $(this).dequeue();
+      });
+      $("div").slideUp();
+    });
+    $("#stop").click(function () {
+      $("div").queue("fx", []);
+      $("div").stop();
+    });&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8019" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

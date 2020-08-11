@@ -1,0 +1,129 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>7.5.&#160;使用连接表的双向关联（Bidirectional associations with join tables）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch07.html" title="第&#160;7&#160;章&#160;关联关系映射">
+<link rel="prev" href="ch07s04.html" title="7.4.&#160;双向关联（Bidirectional associations）">
+<link rel="next" href="ch07s06.html" title="7.6.&#160;更复杂的关联映射">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="assoc-bidirectional-join"></a>7.5.&#160;使用连接表的双向关联（Bidirectional associations with join tables）</h2></div></div></div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="assoc-bidirectional-join-12m"></a>7.5.1.&#160;一对多（one to many） /多对一（ many to one）</h3></div></div></div>
+<p>
+             <span class="emphasis"><em>基于连接表的双向一对多关联</em></span>。注意<code class="literal">inverse="true"</code>可以出现在关联的任意一端，即collection端或者join端。
+        </p>
+<pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="addresses" 
+        table="PersonAddress"&gt;
+        &lt;key column="personId"/&gt;
+        &lt;many-to-many column="addressId"
+            unique="true"
+            class="Address"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;join table="PersonAddress" 
+        inverse="true" 
+        optional="true"&gt;
+        &lt;key column="addressId"/&gt;
+        &lt;many-to-one name="person"
+            column="personId"
+            not-null="true"/&gt;
+    &lt;/join&gt;
+&lt;/class&gt;</pre>
+<pre class="programlisting">
+create table Person ( personId bigint not null primary key )
+create table PersonAddress ( personId bigint not null, addressId bigint not null primary key )
+create table Address ( addressId bigint not null primary key )
+        </pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="assoc-bidirectional-join-121"></a>7.5.2.&#160;一对一（one to one）</h3></div></div></div>
+<p>
+            <span class="emphasis"><em>基于连接表的双向一对一关联</em></span>极为罕见，但也是可行的。
+        </p>
+<pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;join table="PersonAddress" 
+        optional="true"&gt;
+        &lt;key column="personId" 
+            unique="true"/&gt;
+        &lt;many-to-one name="address"
+            column="addressId" 
+            not-null="true"
+            unique="true"/&gt;
+    &lt;/join&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;join table="PersonAddress" 
+        optional="true"
+        inverse="true"&gt;
+        &lt;key column="addressId" 
+            unique="true"/&gt;
+        &lt;many-to-one name="person"
+            column="personId" 
+            not-null="true"
+            unique="true"/&gt;
+    &lt;/join&gt;
+&lt;/class&gt;</pre>
+<pre class="programlisting">
+create table Person ( personId bigint not null primary key )
+create table PersonAddress ( personId bigint not null primary key, addressId bigint not null unique )
+create table Address ( addressId bigint not null primary key )
+        </pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="assoc-bidirectional-join-m2m"></a>7.5.3.&#160;多对多（many to many）</h3></div></div></div>
+<p>
+            最后，还有 <span class="emphasis"><em>双向多对多关联</em></span>.
+        </p>
+<pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="addresses"  table="PersonAddress"&gt;
+        &lt;key column="personId"/&gt;
+        &lt;many-to-many column="addressId"
+            class="Address"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="people" inverse="true"  table="PersonAddress"&gt;
+        &lt;key column="addressId"/&gt;
+        &lt;many-to-many column="personId"
+            class="Person"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;</pre>
+<pre class="programlisting">
+create table Person ( personId bigint not null primary key )
+create table PersonAddress ( personId bigint not null, addressId bigint not null, primary key (personId, addressId) )
+create table Address ( addressId bigint not null primary key )
+        </pre>
+</div>
+</div></body>
+</html>

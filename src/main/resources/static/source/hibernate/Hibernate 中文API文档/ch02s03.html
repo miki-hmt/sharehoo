@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>2.3.&#160;JMX整合</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch02.html" title="第&#160;2&#160;章&#160;体系结构(Architecture)">
+<link rel="prev" href="ch02s02.html" title="2.2.&#160;实例状态">
+<link rel="next" href="ch02s04.html" title="2.4.&#160;对JCA的支持">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="architecture-jmx"></a>2.3.&#160;JMX整合</h2></div></div></div>
+<p>
+            JMX是管理Java组件(Java components)的J2EE标准。 Hibernate 可以通过一个JMX标准服务来管理。
+            在这个发行版本中，我们提供了一个MBean接口的实现,即
+            <code class="literal">org.hibernate.jmx.HibernateService</code>。
+        </p>
+<p>
+            想要看如何在JBoss应用服务器上将Hibernate部署为一个JMX服务的例子，您可以参考JBoss用户指南。
+            我们现在说一下在Jboss应用服务器上，使用JMX来部署Hibernate的好处：
+        </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+                    <span class="emphasis"><em>Session管理：</em></span> Hibernate的<code class="literal">Session</code>对象的生命周期可以
+                    自动跟一个JTA事务边界绑定。这意味着你无需手工开关<code class="literal">Session</code>了, 这项
+                    工作会由JBoss EJB 拦截器来完成。你再也不用担心你的代码中的事务边界了(除非你想利用Hibernate提供可选
+                    的<code class="literal">Transaction</code> API来自己写一个便于移植的的持久层)。 
+                    你通过调用<code class="literal">HibernateContext</code>来访问<code class="literal">Session</code>。
+                </p></li>
+<li><p>
+                    <span class="emphasis"><em>HAR 部署:</em></span> 通常情况下，你会使用JBoss的服务部署描述符（在EAR或/和SAR文件中）来部署Hibernate JMX服务。
+                    这种部署方式支持所有常见的Hibernate <code class="literal">SessionFactory</code>的配置选项。
+                    不过，你仍需在部署描述符中，列出你所有的映射文件的名字。如果你使用HAR部署方式, JBoss 
+                    会自动探测出你的HAR文件中所有的映射文件。
+                </p></li>
+</ul></div>
+<p>
+            这些选项更多的描述，请参考JBoss 应用程序用户指南。
+        </p>
+<p>
+            将Hibernate以部署为JMX服务的另一个好处，是可以查看Hibernate的运行时统计信息。参看
+            <a href="ch03s04.html#configuration-optional-statistics" title="3.4.6.&#160;
+                Hibernate的统计(statistics)机制
+            ">第&#160;3.4.6&#160;节 “
+                Hibernate的统计(statistics)机制
+            ”</a>.
+        </p>
+</div></body>
+</html>

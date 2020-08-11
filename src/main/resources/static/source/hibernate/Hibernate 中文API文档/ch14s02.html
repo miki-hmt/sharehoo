@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>14.2.&#160;from子句</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch14.html" title="第&#160;14&#160;章&#160;HQL: Hibernate查询语言">
+<link rel="prev" href="ch14.html" title="第&#160;14&#160;章&#160;HQL: Hibernate查询语言">
+<link rel="next" href="ch14s03.html" title="14.3.&#160;关联(Association)与连接(Join)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="queryhql-from"></a>14.2.&#160;from子句</h2></div></div></div>
+<p>
+            Hibernate中最简单的查询语句的形式如下：
+        </p>
+<pre class="programlisting">from eg.Cat</pre>
+<p>
+            该子句简单的返回<code class="literal">eg.Cat</code>类的所有实例。
+            通常我们不需要使用类的全限定名, 因为 <code class="literal">auto-import</code>（自动引入）
+            是缺省的情况。 所以我们几乎只使用如下的简单写法：
+        </p>
+<pre class="programlisting">from Cat</pre>
+<p>
+            大多数情况下, 你需要指定一个<span class="emphasis"><em>别名</em></span>, 原因是你可能需要
+            在查询语句的其它部分引用到<code class="literal">Cat</code>
+        </p>
+<pre class="programlisting">from Cat as cat</pre>
+<p>
+            这个语句把别名<code class="literal">cat</code>指定给类<code class="literal">Cat</code>
+            的实例, 这样我们就可以在随后的查询中使用此别名了。 关键字<code class="literal">as</code>
+            是可选的，我们也可以这样写:
+        </p>
+<pre class="programlisting">from Cat cat</pre>
+<p>
+            子句中可以同时出现多个类, 其查询结果是产生一个笛卡儿积或产生跨表的连接。
+        </p>
+<pre class="programlisting">from Formula, Parameter</pre>
+<pre class="programlisting">from Formula as form, Parameter as param</pre>
+<p>
+            查询语句中别名的开头部分小写被认为是实践中的好习惯，
+            这样做与Java变量的命名标准保持了一致
+            (比如，<code class="literal">domesticCat</code>)。
+        </p>
+</div></body>
+</html>

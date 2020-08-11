@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery(html,[ownerDocument])</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery(html,[ownerDocument])<span class="g-bg-red margin-l-5">1.8*</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery( html [, ownerDocument ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>根据提供的原始 HTML 标记字符串，动态创建由 jQuery 对象包装的 DOM 元素。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="jQuery-html-ownerDocument">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery( html [, ownerDocument ] )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>html</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader0">String</a> 
+					</div>
+					<div>
+						用于动态创建DOM元素的HTML标记字符串，<strong>不是</strong>XML。
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>ownerDocument</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader46">document</a> 
+					</div>
+					<div>
+						一个文档的新元素将被创建。
+					</div>
+				</li>
+			</ul>
+		</li>
+		<li class="signature" id="jQuery-html-attributes">
+			<h4 class="name">
+				<span class="version-details">V : 1.4</span>jQuery( html, attributes )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>html</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader0">String</a> 
+					</div>
+					<div>
+						一个单标记的HTML 元素字符串(例如 &lt;div/&gt; or &lt;div&gt;&lt;/div&gt;).
+					</div>
+				</li>
+				<li>
+					<div>
+						<strong>attributes</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader25">PlainObject</a> 
+					</div>
+					<div>
+						访问新创建元素的属性，事件和方法。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<p>
+	</p>
+	<p>
+		根据提供的原始 HTML 标记字符串，动态创建由 jQuery 对象包装的 DOM 元素。同时设置一系列的属性、事件等。
+	</p>
+	<div class="longdesc">
+		<p>
+			你可以传递一个手写的 HTML 字符串，或者由某些模板引擎或插件创建的字符串，也可以是通过 AJAX 
+加载过来的字符串。但是在你创建 input 元素的时会有限制，可以参考第二个示例。当然这个字符串可以包含斜杠 
+(比如一个图像地址)，还有反斜杠。当你创建单个元素时，请使用闭合标签或 XHTML 格式。例如，创建一个 <code>span</code> ，可以用<code>$("&lt;span/&gt;") </code>或<code> $("&lt;span&gt;&lt;/span&gt;")</code> ，但不推荐 <code> $("&lt;span&gt;")</code>。在jQuery 中，这个语法等同于<code>$(document.createElement("span"))</code> 
+		</p>
+		<p>
+			在jQuery 1.8中，通过<code>$(html,props)</code>， 
+您可以使用任何jQuery对象的方法或插件。在此之前，你只能使用一个方法名的短名单，并有没有成文的方式添加到列表中。然而，请注意，这可能会导致你的代码的行为改变，如果插件添加后，有相同的名称作为HTML属性。
+		</p>
+	</div>
+</div>
+<h4 id="creating-new-elements">
+	Creating New Elements（创建新元素）
+</h4>
+<p>
+	如果一个字符串做为一个参数传递个<code>$()</code>, jQuery 检查这个属性是否看上去像HTML (也就是， <code>&lt;tag ... &gt;</code> 之类的元素在这个字符串中)。如果没有, 这个字符串将被解释为选择器， 作为解析上下文。 但是如果该字符串是一个 HTML 
+代码片断，那么jQuery 就会根据它尝试创建一个新的 DOM 
+元素。然后jQuery对象创建并返回引用的这些元素。我们可以在这个对象上执行一些常用的jQuery方法：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( "&lt;p id='test'&gt;My &lt;em&gt;new&lt;/em&gt; text&lt;/p&gt;" ).appendTo( "body" );</pre>
+</div>
+<p>
+	一个字符串显式解析成HTML，请使用<a href="http://www.shouce.ren/api/view/a/13082" class="book-a">$.parseHTML()</a> 方法.
+</p>
+<p>
+	默认情况下，元素会被创建到加载了jQuery库文件的那个文档的<code>.ownerDocument</code>下。
+        元素被注入到一个不同的文档应使用那个文档创建，例如：<code>$("&lt;p&gt;hello iframe&lt;/p&gt;", $("#myiframe").prop("contentWindow").document)</code>.
+</p>
+<p>
+	在上面的示例中，当一个HTML比一个没有属性的简单标签复杂的时候，实际上，创建元素的处理是利用了浏览器的 <code>.innerHTML</code> 机制。特别说明，jQuery创建一个新的<code>&lt;div&gt;</code>元素，并且设置<code>innerHTML</code>属性为传入的HTML代码片段。当参数是一个单标签，就像 <code>$( "&lt;img&nbsp;/&gt;" )</code> 或 <code>$( "&lt;img&gt;" )</code>, <code>$( "&lt;a&gt;&lt;/a&gt;" )</code> 或 <code>$( "&lt;a&gt;" )</code>，jQuery将使用javasrcipt原生的 <code>.createElement()</code>函数创建这个元素。
+</p>
+<p>
+	当传入一个复杂的html，一些浏览器可能不会产生一个完全复制HTML源代码所提供的DOM。正如前面提到的，jQuery使用的浏览器<code>.innerHTML</code>属性来解析传递的HTML并将其插入到当前文档中。在此过程中，一些浏览器过滤掉某些元素，如<code>&lt;html&gt;</code>, <code>&lt;title&gt;</code>, 或 <code>&lt;head&gt;</code>的元素。其结果是，被插入元素可能不是传入的原始的字符串。
+</p>
+<p>
+	不过，这些被过滤掉的标签有限的。有些浏览器可能不完全复制所提供的HTML源代码生成DOM。例如，Internet Explorer的版本8之前转换所有链接的<code>href</code>属性为绝对URL路径，和Internet Explorer第9版之前，不增加一个单独的<a href="http://code.google.com/p/html5shiv/">兼容层</a>的情况下，将无法正确处理HTML5元素。
+</p>
+<p>
+	为了确保跨平台的兼容性，代码片段必须是良好的。标签可以包含其他元素，但需要搭配的结束标记：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( "&lt;a href='http://jquery.com'&gt;&lt;/a&gt;" );</pre>
+</div>
+<p>
+	标签不能包含元素可能很快封闭，当然也可以不这样做：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( "&lt;img&gt;" );
+$( "&lt;input&gt;" );</pre>
+</div>
+<p>
+	当传递HTML给<code>jQuery()</code>时，注意，文本节点不被视为DOM元素。 除了一些方法（如内容<code>.content()</code>），它们一般都被忽略或删除。例如：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var el = $( "&lt;br&gt;2&lt;br&gt;3" ); // returns [&lt;br&gt;, "2", &lt;br&gt;]
+el = $( "&lt;br&gt;2&lt;br&gt;3 &gt;" ); // returns [&lt;br&gt;, "2", &lt;br&gt;, "3 &amp;gt;"]</pre>
+</div>
+<p>
+	这是预期的结果。 <strong>从jQuery1.9.0开始</strong>（除非使用<a href="https://github.com/jquery/jquery-migrate/#readme">jQuery Migrate plugin(jQuery迁移插件)</a>）, <code>jQuery()</code>方法要求的HTML字符串是以一个<code>&lt;</code>（小于号）开头的字符串（即文本节点不能出现在HTML字符串的前面）。
+</p>
+<p>
+	<strong>从jQuery 1.4开始</strong>，给<code>jQuery()</code> 的第二个参数可以接受一个简单的对象组成的一个属性集合，可以传递<a href="http://www.shouce.ren/api/view/a/12877" class="book-a">.attr()</a>方法。
+</p>
+<p>
+	<strong>重要提示：</strong> 如果第二个参数被传递，第一个参数中的HTML字符串
+必须代表一个没有任何属性简单的元素。 <strong>从 jQuery 1.4开始</strong>，一些event type（事件类型）可以传递进来，
+          而且能够调用以下jQuery方法： val, css, html, text, data, width, height, or offset。
+</p>
+<p>
+	<strong>从 jQuery 1.8开始</strong>, 任何jQuery实例方法（一个<code>jQuery.fn</code>的方法），可以被用来作为一个该对象的属性传递给第二个参数：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( "&lt;div&gt;&lt;/div&gt;", {
+"class": "my-div",
+on: {
+touchstart: function( event ) {
+// do something
+}
+}
+}).appendTo( "body" );</pre>
+</div>
+<p>
+	在这个对象中，<code>"class"</code>（类）的名称必须使用引号括起来，因为它是一个JavaScript保留字，还有不能使用<code>"className"</code>，因为它是指的DOM属性（property），不是属性（attribute）。
+</p>
+<p>
+	虽然第二个参数是方便，它的灵活性可能会导致意想不到的后果（例如<code>$("&lt;input&gt;", {size: "4"})</code>调用<code>.size()</code>方法，代替设置size属性）。上面的代码块可以被写入，代替为：
+</p>
+<pre class="prettyprint lang-js">$( "&lt;div&gt;&lt;/div&gt;" )
+.addClass( "my-div" )
+.on({
+touchstart: function( event ) {
+// do something
+}
+}).appendTo( "body" );</pre>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		动态创建一个 div 元素（以及其中的所有内容），并将它追加到 body 
+元素中。在这个函数的内部，是通过临时创建一个元素，并将这个元素的 innerHTML 属性设置为给定的标记字符串，来实现标记到 DOM 
+元素转换的。所以，这个函数既有灵活性，也有局限性。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("&lt;div&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;").appendTo("body");</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		创建一个 &lt;input&gt; 元素必须同时设定 type 属性。因为微软规定 &lt;input&gt; 元素的 type 只能写一次。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>// 在 IE 中无效:
+$("&lt;input&gt;").attr("type", "checkbox");
+// 在 IE 中有效:
+$("&lt;input type='checkbox'&gt;");</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		动态创建一个 div 元素（以及其中的所有内容），并将它追加到 body 
+元素中。在这个函数的内部，是通过临时创建一个元素，并将这个元素的 innerHTML 属性设置为给定的标记字符串，来实现标记到 DOM 
+元素转换的。所以，这个函数既有灵活性，也有局限性。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("&lt;div&gt;", {
+  "class": "test",
+  text: "Click me!",
+  click: function(){
+    $(this).toggleClass("test");
+  }
+}).appendTo("body");</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		创建一个 &lt;input&gt; 元素，同时设定 type 属性、属性值，以及一些事件。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("&lt;input&gt;", {
+  type: "text",
+  val: "Test",
+  focusin: function() {
+    $(this).addClass("active");
+  },
+  focusout: function() {
+    $(this).removeClass("active");
+  }
+}).appendTo("form");</code></pre>
+</div>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	查找文档中第一个表单中的所有单选按钮。
+</p>
+<h5>
+	jQuery 代码:
+</h5>
+<pre><code>$("input:radio", document.forms[0]); </code></pre>
+<p>
+</p>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	查找 Ajax 返回的 XML 文档中的所有 div 元素。
+</p>
+<h5>
+	jQuery 代码:
+</h5>
+<pre><code>$("div", xml.responseXML);</code></pre>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	将页面的背景色设置成黑色。
+</p>
+<h5>
+	jQuery 代码:
+</h5>
+<pre><code>$(document.body).css( "background", "black" );</code></pre>
+<p>
+</p>
+<p>
+</p>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	隐藏 myForm 表单中的所有 input 元素。
+</p>
+<h5>
+	jQuery 代码:
+</h5>
+<pre><code>$(myForm.elements).hide()</code></pre>
+<p>
+</p>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	查找所有 div 下的 p 元素，并为它们加上边框
+</p>
+<p>
+</p>
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;one&lt;/p&gt; &lt;div&gt;&lt;p&gt;two&lt;/p&gt;&lt;/div&gt; &lt;p&gt;three&lt;/p&gt;
+&lt;script&gt;
+$( "div &gt; p").css("border", "1px solid gray");
+    &lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+</p>
+<p>
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7995" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

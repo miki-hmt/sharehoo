@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>prependTo()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">prependTo()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.prependTo( target )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>将所有元素插入到目标前面（元素内）。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="prependTo-target">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.prependTo( target )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>target</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader35" target="_blank">Selector</a>, <a href="http://www.shouce.ren/api/view/a/13081#articleHeader37" target="_blank">Element</a>, <code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+					</div>
+					<div>
+						一个选择器, DOM元素，元素数组，HTML字符串，或者jQuery对象，将被插入到匹配元素前的内容。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			<code>.prepend()</code>和<code>.prependTo()</code>实现同样的功能，主要的不同是语法，插入的内容和目标的位置不同。
+对于 <code> .prepend()</code> 而言，选择器表达式写在方法的前面，作为待插入内容的容器，将要被插入的内容作为方法的参数。而 <code>.prependTo()</code> 正好相反，将要被插入的内容写在方法的前面，可以是选择器表达式或动态创建的标记，待插入内容的容器作为参数。
+		</p>
+		<p>
+			请看下面的HTML:
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;h2&gt;Greetings&lt;/h2&gt;
+&lt;div class="container"&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+		</div>
+		<p>
+			我们可以创建内容然后同时插入到好几个元素里面：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('&lt;p&gt;Test&lt;/p&gt;').prependTo('.inner');</pre>
+		</div>
+		<p>
+			每个 <code>&lt;div class="inner"&gt;</code> 元素得到新内容:
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;h2&gt;Greetings&lt;/h2&gt;
+&lt;div class="container"&gt;
+  &lt;div class="inner"&gt;
+    &lt;p&gt;Test&lt;/p&gt;
+    Hello
+  &lt;/div&gt;
+  &lt;div class="inner"&gt;
+    &lt;p&gt;Test&lt;/p&gt;
+    Goodbye
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+		</div>
+		<p>
+			我们也可以在页面上选择一个元素然后插在另一个元素里面：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('h2').prependTo($('.container'));</pre>
+		</div>
+		<p>
+			如果一个被选中的元素被插入到另外一个地方，这是移动而不是复制：
+		</p>
+		<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="container"&gt;
+  &lt;h2&gt;Greetings&lt;/h2&gt;
+  &lt;div class="inner"&gt;Hello&lt;/div&gt;
+  &lt;div class="inner"&gt;Goodbye&lt;/div&gt;
+&lt;/div&gt;</pre>
+		</div>
+		<p>
+			然而，如果有多个目标元素，插入元素的克隆副本被创建到每个目标元素，而不是只插入到最后一个目标元素
+		</p>
+	</div>
+	<h3>
+		其他注意事项：
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				设计上，任何jQuery的构造或方法，都接受一个HTML字符串（作为参数） - jQuery(),.append(), .after()等
+                            -可以潜在地执行代码。这可能会出现注入script标签或使用HTML属性执行的代码（例如，<code>&lt;img onload=""&gt;</code>）。不要使用这些方法来插入来自不受信任来源的内容，如网址查询参数，Cookie或表单输入获得的字符串。这样做可能会引起跨站点脚本（XSS）漏洞。将内容添加到文档之前删除或避免用户任何输入内容。
+			</li>
+			<li>
+				jQuery没有正式的支持SVG。在SVG文档上使用jQuery方法，除非该方法有明确的说明，否则可能会导致意外的行为。例如jQuery 3.0中支持SVG的方法有<code>addClass</code> 和 <code>removeClass</code>。
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		把所有段落追加到ID值为foo的元素中。
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;p&gt;I would like to say: &lt;/p&gt;&lt;div id="foo"&gt;&lt;/div&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("p").prependTo("#foo");</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>&lt;div id="foo"&gt;&lt;p&gt;I would like to say: &lt;/p&gt;&lt;/div&gt;</code></pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8065" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

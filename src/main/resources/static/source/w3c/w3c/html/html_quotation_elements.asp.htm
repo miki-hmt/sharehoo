@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>HTML 引用</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>HTML 基础教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/html/index.asp" title="HTML 教程">HTML 教程</a></li>
+<li><a href="html_jianjie.asp.htm" tppabs="http://www.w3school.com.cn/html/html_jianjie.asp" title="HTML 简介">HTML 简介</a></li>
+<li><a href="html_editors.asp.htm" tppabs="http://www.w3school.com.cn/html/html_editors.asp" title="HTML 编辑器">HTML 编辑器</a></li>
+<li><a href="html_basic.asp.htm" tppabs="http://www.w3school.com.cn/html/html_basic.asp" title="HTML 基础 - 四个实例">HTML 基础</a></li>
+<li><a href="html_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_elements.asp" title="HTML 元素">HTML 元素</a></li>
+<li><a href="html_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_attributes.asp" title="HTML 属性">HTML 属性</a></li>
+<li><a href="html_headings.asp.htm" tppabs="http://www.w3school.com.cn/html/html_headings.asp" title="HTML 标题">HTML 标题</a></li>
+<li><a href="html_paragraphs.asp.htm" tppabs="http://www.w3school.com.cn/html/html_paragraphs.asp" title="HTML 段落">HTML 段落</a></li>
+<li><a href="html_styles.asp.htm" tppabs="http://www.w3school.com.cn/html/html_styles.asp" title="HTML 样式 - CSS">HTML 样式</a></li>
+<li><a href="html_formatting.asp.htm" tppabs="http://www.w3school.com.cn/html/html_formatting.asp" title="HTML 文本格式化">HTML 格式化</a></li>
+<li class="currentLink"><a href="html_quotation_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quotation_elements.asp" title="HTML 链接">HTML 引用</a></li>
+<li><a href="html_computercode_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_computercode_elements.asp" title="HTML 链接">HTML 计算机代码</a></li>
+<li><a href="html_comments.asp.htm" tppabs="http://www.w3school.com.cn/html/html_comments.asp" title="HTML 链接">HTML 注释</a></li>
+<li><a href="html_css.asp.htm" tppabs="http://www.w3school.com.cn/html/html_css.asp" title="HTML 样式 - CSS">HTML CSS</a></li>
+<li><a href="html_links.asp.htm" tppabs="http://www.w3school.com.cn/html/html_links.asp" title="HTML 链接">HTML 链接</a></li>
+<li><a href="html_images.asp.htm" tppabs="http://www.w3school.com.cn/html/html_images.asp" title="HTML 图像">HTML 图像</a></li>
+<li><a href="html_tables.asp.htm" tppabs="http://www.w3school.com.cn/html/html_tables.asp" title="HTML 表格">HTML 表格</a></li>
+<li><a href="html_lists.asp.htm" tppabs="http://www.w3school.com.cn/html/html_lists.asp" title="HTML 列表">HTML 列表</a></li>
+<li><a href="html_blocks.asp.htm" tppabs="http://www.w3school.com.cn/html/html_blocks.asp" title="HTML &lt;div&gt; 和 &lt;span&gt;">HTML 块</a></li>
+<li><a href="html_classes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_classes.asp" title="HTML 布局">HTML 类</a></li>
+<li><a href="html_layout.asp.htm" tppabs="http://www.w3school.com.cn/html/html_layout.asp" title="HTML 布局">HTML 布局</a></li>
+<li><a href="html_responsive.asp.htm" tppabs="http://www.w3school.com.cn/html/html_responsive.asp" title="HTML 布局">HTML 响应式设计</a></li>
+<li><a href="html_frames.asp.htm" tppabs="http://www.w3school.com.cn/html/html_frames.asp" title="HTML 框架">HTML 框架</a></li>
+<li><a href="html_iframe.asp.htm" tppabs="http://www.w3school.com.cn/html/html_iframe.asp" title="HTML Iframe">HTML 内联框架</a></li>
+<li><a href="html_backgrounds.asp.htm" tppabs="http://www.w3school.com.cn/html/html_backgrounds.asp" title="HTML 背景">HTML 背景</a></li>
+<li><a href="html_scripts.asp.htm" tppabs="http://www.w3school.com.cn/html/html_scripts.asp" title="HTML 脚本">HTML 脚本</a></li>
+<li><a href="html_head.asp.htm" tppabs="http://www.w3school.com.cn/html/html_head.asp" title="HTML 头部元素">HTML 头部</a></li>
+<li><a href="html_entities.asp.htm" tppabs="http://www.w3school.com.cn/html/html_entities.asp" title="HTML 实体">HTML 实体</a></li>
+<li><a href="html_url.asp.htm" tppabs="http://www.w3school.com.cn/html/html_url.asp" title="HTML 统一资源定位器">HTML URL</a></li>
+<li><a href="html_urlencode.asp.htm" tppabs="http://www.w3school.com.cn/html/html_urlencode.asp" title="HTML URL 编码">HTML URL 编码</a></li>
+<li><a href="html_webserver.asp.htm" tppabs="http://www.w3school.com.cn/html/html_webserver.asp" title="HTML Web 服务器">HTML Web 服务器</a></li>
+<li><a href="html_colors.asp.htm" tppabs="http://www.w3school.com.cn/html/html_colors.asp" title="HTML 颜色">HTML 颜色</a></li>
+<li><a href="html_colornames.asp.htm" tppabs="http://www.w3school.com.cn/html/html_colornames.asp" title="HTML 颜色名">HTML 颜色名</a></li>
+<li><a href="html_doctype.asp.htm" tppabs="http://www.w3school.com.cn/html/html_doctype.asp" title="HTML &lt;!DOCTYPE&gt;">HTML 文档类型</a></li>
+<li><a href="html_quick.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quick.asp" title="HTML 4.01 速查手册">HTML 速查手册</a></li>
+</ul>
+<h2>HTML XHTML</h2>
+<ul>
+<li><a href="html_xhtml.asp.htm" tppabs="http://www.w3school.com.cn/html/html_xhtml.asp" title="XHTML 简介">XHTML 简介</a></li>
+<li><a href="html_xhtml_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_xhtml_elements.asp" title="XHTML - 元素">XHTML 元素</a></li>
+<li><a href="html_xhtml_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_xhtml_attributes.asp" title="XHTML - 属性">XHTML 属性</a></li>
+</ul>
+<h2>HTML 表单</h2>
+<ul>
+<li><a href="html_forms.asp.htm" tppabs="http://www.w3school.com.cn/html/html_forms.asp" title="HTML 表单和输入">HTML 表单</a></li>
+<li><a href="html_form_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_form_elements.asp" title="HTML 表单元素">HTML 表单元素</a></li>
+<li><a href="html_form_input_types.asp.htm" tppabs="http://www.w3school.com.cn/html/html_form_input_types.asp" title="HTML Input 类型">HTML 输入类型</a></li>
+<li><a href="html_form_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html/html_form_attributes.asp" title="HTML 输入属性">HTML 输入属性</a></li>
+</ul>
+<h2>HTML5</h2>
+<ul>
+<li><a href="html5_intro.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_intro.asp" title="HTML5 简介">HTML5 简介</a></li>
+<li><a href="html5_browsers.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_browsers.asp" title="HTML5 浏览器支持">HTML5 支持</a></li>
+<li><a href="html5_new_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_new_elements.asp" title="HTML5 视频">HTML5 元素</a></li>
+<li><a href="html5_semantic_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_semantic_elements.asp" title="HTML5 Video + DOM">HTML5 语义</a></li>
+<li><a href="html5_migration.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_migration.asp" title="HTML5 音频">HTML5 迁移</a></li>
+<li><a href="html5_syntax.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_syntax.asp" title="HTML5 拖放">HTML5 代码约定</a></li>
+</ul>
+<h2>HTML 图形</h2>
+<ul>
+<li><a href="html5_canvas.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_canvas.asp" title="HTML5 Canvas">HTML5 画布</a></li>
+<li><a href="html5_svg.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_svg.asp" title="HTML5 内联 SVG">HTML5 SVG</a></li>
+<li><a href="html5_canvas_vs_svg.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_canvas_vs_svg.asp" title="HTML5 Canvas vs. SVG">HTML5 画布 vs SVG</a></li>
+</ul>
+<h2>HTML 媒体</h2>
+<ul>
+<li><a href="html_media.asp.htm" tppabs="http://www.w3school.com.cn/html/html_media.asp" title="HTML 多媒体">HTML 媒体</a></li>
+<li><a href="html_object.asp.htm" tppabs="http://www.w3school.com.cn/html/html_object.asp" title="HTML Object 元素">HTML 对象</a></li>
+<li><a href="html_audio.asp.htm" tppabs="http://www.w3school.com.cn/html/html_audio.asp" title="HTML 音频">HTML 音频</a></li>
+<li><a href="html_video.asp.htm" tppabs="http://www.w3school.com.cn/html/html_video.asp" title="HTML 视频">HTML 视频</a></li>
+</ul>
+<h2>HTML API</h2>
+<ul>
+<li><a href="html5_geolocation.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_geolocation.asp" title="HTML5 地理定位">HTML5 地理定位</a></li>
+<li><a href="html5_draganddrop.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_draganddrop.asp" title="HTML5 拖放">HTML5 拖放</a></li>
+<li><a href="html5_webstorage.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_webstorage.asp" title="HTML5 Web 存储">HTML5 Web 存储</a></li>
+<li><a href="html5_app_cache.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_app_cache.asp" title="HTML 5 应用程序缓存">HTML5 应用缓存</a></li>
+<li><a href="html5_webworkers.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_webworkers.asp" title="HTML5 Web Workers">HTML5 Web Workers</a></li>
+<li><a href="html5_serversentevents.asp.htm" tppabs="http://www.w3school.com.cn/html/html5_serversentevents.asp" title="HTML5 服务器发送事件">HTML5 SSE</a></li>
+</ul>
+<h2>实例/测验/总结</h2>
+<ul>
+<li><a href="../example/html_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/html_examples.asp" title="HTML 实例">HTML 实例</a></li>
+<li><a href="html_quiz.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quiz.asp" title="HTML 测验">HTML 测验</a></li>
+<li><a href="html_summary.asp.htm" tppabs="http://www.w3school.com.cn/html/html_summary.asp" title="HTML 总结">HTML 总结</a></li>
+</ul>
+<h2>HTML 参考手册</h2>
+<ul>
+<li><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp" title="HTML 4.01 / XHTML 1.0 参考手册">HTML 标签列表</a></li>
+<li><a href="../tags/html_ref_standardattributes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_standardattributes.asp" title="HTML 标准属性">HTML 属性</a></li>
+<li><a href="../tags/html_ref_eventattributes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_eventattributes.asp" title="HTML 事件属性">HTML 事件</a></li>
+<li><a href="../tags/html_ref_dtd.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_dtd.asp" title="HTML 元素与合法的 Doctype">HTML 合法 DTD</a></li>
+<li><a href="../tags/html_ref_colornames.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_colornames.asp" title="HTML 颜色名">HTML 颜色名</a></li>
+<li><a href="../tags/html_ref_charactersets.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_charactersets.asp" title="HTML 字符集">HTML 字符集</a></li>
+<li><a href="../tags/html_ref_ascii.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_ascii.asp" title="HTML ASCII 参考手册">HTML ASCII</a></li>
+<li><a href="../tags/html_ref_entities.html" tppabs="http://www.w3school.com.cn/tags/html_ref_entities.html" title="HTML ISO-8859-1 参考手册">HTML ISO-8859-1</a></li>
+<li><a href="../tags/html_ref_symbols.html" tppabs="http://www.w3school.com.cn/tags/html_ref_symbols.html" title="HTML 4.01 符号实体">HTML 符号</a></li>
+<li><a href="../tags/html_ref_urlencode.html" tppabs="http://www.w3school.com.cn/tags/html_ref_urlencode.html" title="HTML URL 编码">HTML URL 编码</a></li>
+<li><a href="../tags/html_ref_language_codes.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_language_codes.asp" title="HTML 语言代码参考手册">HTML 语言代码</a></li>
+<li><a href="../tags/html_ref_httpmessages.asp.htm" tppabs="http://www.w3school.com.cn/tags/html_ref_httpmessages.asp" title="HTML 状态消息">HTML 消息</a></li>
+</ul>
+<h2>HTML5</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/html/index.asp" title="HTML5 教程">HTML5 教程</a></li>
+<li><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp" title="HTML5 参考手册">HTML5 参考手册</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+
+<h1>HTML 引用</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="html_formatting.asp.htm" tppabs="http://www.w3school.com.cn/html/html_formatting.asp" title="HTML 文本格式化">HTML 格式化</a></li>
+<li class="next"><a href="html_computercode_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_computercode_elements.asp" title="HTML 链接">HTML 计算机代码</a></li>
+</ul>
+</div>
+
+
+
+<div>
+<h2>引用（Quotation）</h2>
+
+<p>这是摘自 WWF 网站的引文：</p>
+
+<blockquote>
+五十年来，WWF 一直致力于保护自然界的未来。 世界领先的环保组织，WWF 工作于 100 个国家，并得到美国一百二十万会员及全球近五百万会员的支持。
+</blockquote>
+</div>
+
+
+
+<div>
+<h2>HTML &lt;q&gt; 用于短的引用</h2>
+
+<p>HTML <em>&lt;q&gt;</em> 元素定义<em>短的引用</em>。</p>
+
+<p>浏览器通常会为 &lt;q&gt; 元素包围<em>引号</em>。</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;p&gt;WWF 的目标是：&lt;q&gt;构建人与自然和谐共存的世界。&lt;/q&gt;&lt;/p&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_quotation_q.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_quotation_q">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>用于长引用的 HTML &lt;blockquote&gt;</h2>
+
+<p>HTML <em>&lt;blockquote&gt;</em> 元素定义被引用的节。</p>
+
+<p>浏览器通常会对 &lt;blockquote&gt; 元素进行<em>缩进</em>处理。</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;p&gt;以下内容引用自 WWF 的网站：&lt;/p&gt;
+&lt;blockquote cite=&quot;http://www.worldwildlife.org/who/index.html&quot;&gt;
+五十年来，WWF 一直致力于保护自然界的未来。
+世界领先的环保组织，WWF 工作于 100 个国家，
+并得到美国一百二十万会员及全球近五百万会员的支持。
+&lt;/blockquote&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_quotation_blockquote.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_quotation_blockquote">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>用于缩略词的 HTML &lt;abbr&gt;</h2>
+
+<p>HTML <em>&lt;abbr&gt;</em> 元素定义<em>缩写</em>或首字母缩略语。</p>
+
+<p>对缩写进行标记能够为浏览器、翻译系统以及搜索引擎提供有用的信息。</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;p&gt;&lt;abbr title=&quot;World Health Organization&quot;&gt;WHO&lt;/abbr&gt; 成立于 1948 年。&lt;/p&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_formatting_abbr.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_formatting_abbr">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>用于定义的 HTML &lt;dfn&gt;</h2>
+
+<p>HTML <em>&lt;dfn&gt;</em> 元素定义项目或缩写的<em>定义</em>。</p>
+
+<p>&lt;dfn&gt; 的用法，按照 HTML5 标准中的描述，有点复杂：</p>
+
+<p>1. 如果设置了 &lt;dfn&gt; 元素的 title 属性，则定义项目：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;p&gt;&lt;dfn title=&quot;World Health Organization&quot;&gt;WHO&lt;/dfn&gt; 成立于 1948 年。&lt;/p&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_formatting_dfn.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_formatting_dfn">亲自试一试</a></p>
+
+<p>2. 如果 &lt;dfn&gt; 元素包含具有标题的 &lt;abbr&gt; 元素，则 title 定义项目：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;p&gt;&lt;dfn&gt;&lt;abbr title=&quot;World Health Organization&quot;&gt;WHO&lt;/abbr&gt;&lt;/dfn&gt; 成立于 1948 年。&lt;/p&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_formatting_dfn_2.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_formatting_dfn_2">亲自试一试</a></p>
+
+<p>3. 否则，&lt;dfn&gt; 文本内容即是项目，并且父元素包含定义。</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;p&gt;&lt;dfn&gt;WHO&lt;/dfn&gt; World Health Organization 成立于 1948 年。&lt;/p&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_formatting_dfn_3.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_formatting_dfn_3">亲自试一试</a></p>
+
+<p class="note"><span>注释：</span>如果您希望简而化之，请使用第一条，或使用 &lt;abbr&gt; 代替。</p>
+</div>
+
+
+
+<div>
+<h2>用于联系信息的 HTML &lt;address&gt;</h2>
+
+<p>HTML <em>&lt;address&gt;</em> 元素定义文档或文章的联系信息（作者/拥有者）。</p>
+
+<p>此元素通常以<em>斜体</em>显示。大多数浏览器会在此元素前后添加折行。</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;address&gt;
+Written by Donald Duck.&lt;br&gt; 
+Visit us at:&lt;br&gt;
+Example.com&lt;br&gt;
+Box 564, Disneyland&lt;br&gt;
+USA
+&lt;/address&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_formatting_address.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_formatting_address">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>用于著作标题的 HTML &lt;cite&gt;</h2>
+
+<p>HTML <em>&lt;cite&gt;</em> 元素定义<em>著作的标题</em>。</p>
+
+<p>浏览器通常会以斜体显示 &lt;cite&gt; 元素。</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;p&gt;&lt;cite&gt;The Scream&lt;/cite&gt; by Edward Munch. Painted in 1893.&lt;/p&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_formatting_cite.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_formatting_cite">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>用于双向重写的 HTML &lt;bdo&gt;</h2>
+
+<p>HTML <em>&lt;bdo&gt;</em> 元素定义双流向覆盖（bi-directional override）。</p>
+
+<p>&lt;bdo&gt; 元素用于覆盖当前文本方向：</p>
+
+<h3>实例</h3>
+
+<pre>
+&lt;bdo dir=&quot;rtl&quot;&gt;This text will be written from right to left&lt;/bdo&gt;
+</pre>
+
+<p class="tiy"><a target="_blank" href="../tiy/t.asp-f=html_formatting_bdo.htm" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html_formatting_bdo">亲自试一试</a></p>
+</div>
+
+
+
+<div>
+<h2>HTML 引文、引用和定义元素</h2>
+
+<table class="dataintable">
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td>&lt;abbr&gt;</td>
+<td>定义缩写或首字母缩略语。</td>
+</tr>
+
+<tr>
+<td>&lt;address&gt;</td>
+<td>定义文档作者或拥有者的联系信息。</td>
+</tr>
+
+<tr>
+<td>&lt;bdo&gt;</td>
+<td>定义文本方向。</td>
+</tr>
+
+<tr>
+<td>&lt;blockquote&gt;</td>
+<td>定义从其他来源引用的节。</td>
+</tr>
+
+<tr>
+<td>&lt;dfn&gt;</td>
+<td>定义项目或缩略词的定义。</td>
+</tr>
+
+<tr>
+<td>&lt;q&gt;</td>
+<td>定义短的行内引用。</td>
+</tr>
+
+<tr>
+<td>&lt;cite&gt;</td>
+<td>定义著作的标题。</td>
+</tr>
+</table>
+</div>
+
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="html_formatting.asp.htm" tppabs="http://www.w3school.com.cn/html/html_formatting.asp" title="HTML 文本格式化">HTML 格式化</a></li>
+<li class="next"><a href="html_computercode_elements.asp.htm" tppabs="http://www.w3school.com.cn/html/html_computercode_elements.asp" title="HTML 链接">HTML 计算机代码</a></li>
+</ul>
+</div>
+
+
+<div style="background-color:#fcfdf8; padding:0;">
+<script async src="../../pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" tppabs="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- W3School 正文底部广告位 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:800px;height:250px"
+     data-ad-client="ca-pub-3381531532877742"
+     data-ad-slot="9384069314"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp">HTML 参考手册</a></h5>
+<h5 id="tools_example"><a href="../example/html_examples.asp.htm" tppabs="http://www.w3school.com.cn/example/html_examples.asp">HTML 实例</a></h5>
+<h5 id="tools_quiz"><a href="html_quiz.asp.htm" tppabs="http://www.w3school.com.cn/html/html_quiz.asp">HTML 测验</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

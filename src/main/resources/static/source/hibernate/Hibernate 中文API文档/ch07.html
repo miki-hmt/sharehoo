@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;7&#160;章&#160;关联关系映射</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch06s04.html" title="6.4.&#160;集合例子（Collection example）">
+<link rel="next" href="ch07s02.html" title="7.2.&#160;单向关联（Unidirectional associations）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="associations"></a>第&#160;7&#160;章&#160;关联关系映射</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch07.html#assoc-intro">7.1. 介绍</a></span></dt>
+<dt><span class="sect1"><a href="ch07s02.html">7.2. 单向关联（Unidirectional associations）</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s02.html#assoc-unidirectional-m21">7.2.1. 多对一(many to one)</a></span></dt>
+<dt><span class="sect2"><a href="ch07s02.html#assoc-unidirectional-121">7.2.2. 一对一（one to one）</a></span></dt>
+<dt><span class="sect2"><a href="ch07s02.html#assoc-unidirectional-12m">7.2.3. 一对多（one to many）</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch07s03.html">7.3. 使用连接表的单向关联（Unidirectional associations with join tables）</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s03.html#assoc-unidirectional-join-12m">7.3.1. 一对多(one to many)</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#assoc-unidirectional-join-m21">7.3.2. 多对一（many to one）</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#assoc-unidirectional-join-121">7.3.3. 一对一（one to one）</a></span></dt>
+<dt><span class="sect2"><a href="ch07s03.html#assoc-unidirectional-join-m2m">7.3.4. 多对多（many to many）</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch07s04.html">7.4. 双向关联（Bidirectional associations）</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s04.html#assoc-bidirectional-m21">7.4.1. 一对多（one to many) / 多对一（many to one）</a></span></dt>
+<dt><span class="sect2"><a href="ch07s04.html#assoc-bidirectional-121">7.4.2. 一对一（one to one）</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch07s05.html">7.5. 使用连接表的双向关联（Bidirectional associations with join tables）</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch07s05.html#assoc-bidirectional-join-12m">7.5.1. 一对多（one to many） /多对一（ many to one）</a></span></dt>
+<dt><span class="sect2"><a href="ch07s05.html#assoc-bidirectional-join-121">7.5.2. 一对一（one to one）</a></span></dt>
+<dt><span class="sect2"><a href="ch07s05.html#assoc-bidirectional-join-m2m">7.5.3. 多对多（many to many）</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch07s06.html">7.6. 更复杂的关联映射</a></span></dt>
+</dl>
+</div>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="assoc-intro"></a>7.1.&#160;介绍</h2></div></div></div>
+<p>
+            关联关系映射通常情况是最难配置正确的。在这个部分中，我们从单向关系映射开始，然后考虑双向关系映射，由浅至深讲述一遍典型的案例。在所有的例子中，我们都使用 <code class="literal">Person</code>和<code class="literal">Address</code>。
+        </p>
+<p>
+        	我们根据映射关系是否涉及连接表以及多样性来划分关联类型。
+        </p>
+<p>
+        	在传统的数据建模中，允许为Null值的外键被认为是一种不好的实践，因此我们所有的例子中都使用不允许为Null的外键。这并不是Hibernate的要求，即使你删除掉不允许为Null的约束，Hibernate映射一样可以工作的很好。
+        </p>
+</div>
+</div></body>
+</html>

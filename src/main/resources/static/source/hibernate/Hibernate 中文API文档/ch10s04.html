@@ -1,0 +1,304 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>10.4.&#160;查询</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch10.html" title="第&#160;10&#160;章&#160;与对象共事">
+<link rel="prev" href="ch10s03.html" title="10.3.&#160;装载对象">
+<link rel="next" href="ch10s05.html" title="10.5.&#160;修改持久对象">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="objectstate-querying"></a>10.4.&#160;查询</h2></div></div></div>
+<p>
+			如果不知道所要寻找的对象的持久化标识，那么你需要使用查询。Hibernate支持强大且易于使用的面向对象查询语言(HQL)。
+			如果希望通过编程的方式创建查询，Hibernate提供了完善的按条件(Query By Criteria, QBC)以及按样例(Query By Example, QBE)进行查询的功能。
+			你也可以用原生SQL(native SQL)描述查询，Hibernate额外提供了将结果集(result set)转化为对象的支持。
+        </p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="objectstate-querying-executing"></a>10.4.1.&#160;执行查询</h3></div></div></div>
+<p>
+                HQL和原生SQL(native SQL)查询要通过为<code class="literal">org.hibernate.Query</code>的实例来表达。
+				这个接口提供了参数绑定、结果集处理以及运行实际查询的方法。
+				你总是可以通过当前<code class="literal">Session</code>获取一个<code class="literal">Query</code>对象：
+            </p>
+<pre class="programlisting">List cats = session.createQuery(
+    "from Cat as cat where cat.birthdate &lt; ?")
+    .setDate(0, date)
+    .list();
+
+List mothers = session.createQuery(
+    "select mother from Cat as cat join cat.mother as mother where cat.name = ?")
+    .setString(0, name)
+    .list();
+
+List kittens = session.createQuery(
+    "from Cat as cat where cat.mother = ?")
+    .setEntity(0, pk)
+    .list();
+
+Cat mother = (Cat) session.createQuery(
+    "select cat.mother from Cat as cat where cat = ?")
+    .setEntity(0, izi)
+    .uniqueResult();]]
+
+Query mothersWithKittens = (Cat) session.createQuery(
+    "select mother from Cat as mother left join fetch mother.kittens");
+Set uniqueMothers = new HashSet(mothersWithKittens.list());</pre>
+<p>
+            	一个查询通常在调用<code class="literal">list()</code>时被执行，执行结果会完全装载进内存中的一个集合(collection)。
+            	查询返回的对象处于持久(persistent)状态。如果你知道的查询只会返回一个对象，可使用<code class="literal">list()</code>的快捷方式<code class="literal">uniqueResult()</code>。
+            	注意，使用集合预先抓取的查询往往会返回多次根对象（他们的集合类都被初始化了）。你可以通过一个集合来过滤这些重复对象。    	
+            </p>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="objectstate-querying-executing-iterate"></a>10.4.1.1.&#160;迭代式获取结果(Iterating results)</h4></div></div></div>
+<p>
+					某些情况下，你可以使用<code class="literal">iterate()</code>方法得到更好的性能。
+					这通常是你预期返回的结果在session，或二级缓存(second-level cache)中已经存在时的情况。
+					如若不然，<code class="literal">iterate()</code>会比<code class="literal">list()</code>慢，而且可能简单查询也需要进行多次数据库访问：
+					<code class="literal">iterate()</code>会首先使用<span class="emphasis"><em>1</em></span>条语句得到所有对象的持久化标识(identifiers)，再根据持久化标识执行<span class="emphasis"><em>n</em></span>条附加的select语句实例化实际的对象。
+                </p>
+<pre class="programlisting">// fetch ids
+Iterator iter = sess.createQuery("from eg.Qux q order by q.likeliness").iterate();
+while ( iter.hasNext() ) {
+    Qux qux = (Qux) iter.next();  // fetch the object
+    // something we couldnt express in the query
+    if ( qux.calculateComplicatedAlgorithm() ) {
+        // delete the current instance
+        iter.remove();
+        // dont need to process the rest
+        break;
+    }
+}</pre>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="objectstate-querying-executing-tuples"></a>10.4.1.2.&#160;返回元组(tuples)的查询</h4></div></div></div>
+<p>
+                （译注：元组(tuples)指一条结果行包含多个对象）
+                    Hibernate查询有时返回元组(tuples)，每个元组(tuples)以数组的形式返回:
+                </p>
+<pre class="programlisting">Iterator kittensAndMothers = sess.createQuery(
+            "select kitten, mother from Cat kitten join kitten.mother mother")
+            .list()
+            .iterator();
+
+while ( kittensAndMothers.hasNext() ) {
+    Object[] tuple = (Object[]) kittensAndMothers.next();
+    Cat kitten  = tuple[0];
+    Cat mother  = tuple[1];
+    ....
+}</pre>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="objectstate-querying-executing-scalar"></a>10.4.1.3.&#160;标量(Scalar)结果</h4></div></div></div>
+<p>
+					查询可在<code class="literal">select</code>从句中指定类的属性，甚至可以调用SQL统计(aggregate)函数。
+					属性或统计结果被认定为"标量(Scalar)"的结果（而不是持久(persistent state)的实体）。
+                </p>
+<pre class="programlisting">Iterator results = sess.createQuery(
+        "select cat.color, min(cat.birthdate), count(cat) from Cat cat " +
+        "group by cat.color")
+        .list()
+        .iterator();
+        
+while ( results.hasNext() ) {
+    Object[] row = (Object[]) results.next();
+    Color type = (Color) row[0];
+    Date oldest = (Date) row[1];
+    Integer count = (Integer) row[2];
+    .....
+}</pre>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="objectstate-querying-executing-parameters"></a>10.4.1.4.&#160;绑定参数</h4></div></div></div>
+<p>
+                    接口<code class="literal">Query</code>提供了对命名参数(named parameters)、JDBC风格的<code class="literal">问号(?)</code>参数进行绑定的方法。
+					<span class="emphasis"><em>不同于JDBC，Hibernate对参数从0开始计数。</em></span>
+                    命名参数(named parameters)在查询字符串中是形如<code class="literal">:name</code>的标识符。
+                    命名参数(named parameters)的优点是:
+                </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                            命名参数(named parameters)与其在查询串中出现的顺序无关
+                        </p></li>
+<li><p>
+                                它们可在同一查询串中多次出现
+                        </p></li>
+<li><p>
+                                它们本身是自我说明的
+                        </p></li>
+</ul></div>
+<pre class="programlisting">//named parameter (preferred)
+Query q = sess.createQuery("from DomesticCat cat where cat.name = :name");
+q.setString("name", "Fritz");
+Iterator cats = q.iterate();</pre>
+<pre class="programlisting">//positional parameter
+Query q = sess.createQuery("from DomesticCat cat where cat.name = ?");
+q.setString(0, "Izi");
+Iterator cats = q.iterate();</pre>
+<pre class="programlisting">//named parameter list
+List names = new ArrayList();
+names.add("Izi");
+names.add("Fritz");
+Query q = sess.createQuery("from DomesticCat cat where cat.name in (:namesList)");
+q.setParameterList("namesList", names);
+List cats = q.list();</pre>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="objectstate-querying-executing-pagination"></a>10.4.1.5.&#160;分页</h4></div></div></div>
+<p>
+                    如果你需要指定结果集的范围（希望返回的最大行数/或开始的行数），应该使用<code class="literal">Query</code>接口提供的方法:
+                </p>
+<pre class="programlisting">Query q = sess.createQuery("from DomesticCat cat");
+q.setFirstResult(20);
+q.setMaxResults(10);
+List cats = q.list();</pre>
+<p>
+                    Hibernate 知道如何将这个有限定条件的查询转换成你的数据库的原生SQL(native SQL)。
+                </p>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="objectstate-querying-executing-scrolling"></a>10.4.1.6.&#160;可滚动遍历(Scrollable iteration)</h4></div></div></div>
+<p>
+					如果你的JDBC驱动支持可滚动的<code class="literal">ResuleSet</code>，<code class="literal">Query</code>接口可以使用<code class="literal">ScrollableResults</code>，允许你在查询结果中灵活游走。
+				</p>
+<pre class="programlisting">Query q = sess.createQuery("select cat.name, cat from DomesticCat cat " +
+                            "order by cat.name");
+ScrollableResults cats = q.scroll();
+if ( cats.first() ) {
+
+    // find the first name on each page of an alphabetical list of cats by name
+    firstNamesOfPages = new ArrayList();
+    do {
+        String name = cats.getString(0);
+        firstNamesOfPages.add(name);
+    }
+    while ( cats.scroll(PAGE_SIZE) );
+
+    // Now get the first page of cats
+    pageOfCats = new ArrayList();
+    cats.beforeFirst();
+    int i=0;
+    while( ( PAGE_SIZE &gt; i++ ) &amp;&amp; cats.next() ) pageOfCats.add( cats.get(1) );
+
+}
+cats.close()</pre>
+<p>
+					请注意，使用此功能需要保持数据库连接（以及游标(cursor)）处于一直打开状态。
+					如果你需要断开连接使用分页功能，请使用<code class="literal">setMaxResult()</code>/<code class="literal">setFirstResult()</code>
+                </p>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="objectstate-querying-executing-named"></a>10.4.1.7.&#160;外置命名查询(Externalizing named queries)</h4></div></div></div>
+<p>
+					你可以在映射文件中定义命名查询(named queries)。
+					（如果你的查询串中包含可能被解释为XML标记(markup)的字符，别忘了用<code class="literal">CDATA</code>包裹起来。）
+                </p>
+<pre class="programlisting">&lt;query name="ByNameAndMaximumWeight"&gt;&lt;![CDATA[
+    from eg.DomesticCat as cat
+        where cat.name = ?
+        and cat.weight &gt; ?
+] ]&gt;&lt;/query&gt;</pre>
+<p>
+					参数绑定及执行以编程方式(programatically)完成：
+                </p>
+<pre class="programlisting">Query q = sess.getNamedQuery("ByNameAndMaximumWeight");
+q.setString(0, name);
+q.setInt(1, minWeight);
+List cats = q.list();</pre>
+<p>
+                	请注意实际的程序代码与所用的查询语言无关，你也可在元数据中定义原生SQL(native SQL)查询，
+                	或将原有的其他的查询语句放在配置文件中，这样就可以让Hibernate统一管理，达到迁移的目的。
+                </p>
+<p>
+
+                     也请注意在<code class="literal">&lt;hibernate-mapping&gt;</code>元素中声明的查询必须有一个全局唯一的名字,而在<code class="literal">&lt;class&gt;</code>元素中声明的查询自动具有全局名,是通过类的全名加以限定的。比如<code class="literal">eg.Cat.ByNameAndMaximumWeight</code>。
+                </p>
+</div>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="objectstate-filtering"></a>10.4.2.&#160;过滤集合</h3></div></div></div>
+<p>
+     		    集合<span class="emphasis"><em>过滤器(filter)</em></span>是一种用于一个持久化集合或者数组的特殊的查询。查询字符串中可以使用<code class="literal">"this"</code>来引用集合中的当前元素。
+	        </p>
+<pre class="programlisting">Collection blackKittens = session.createFilter(
+    pk.getKittens(), 
+    "where this.color = ?")
+    .setParameter( Color.BLACK, Hibernate.custom(ColorUserType.class) )
+    .list()
+);</pre>
+<p>
+                 返回的集合可以被认为是一个包(bag, 无顺序可重复的集合(collection))，它是所给集合的副本。
+                原来的集合不会被改动（这与“过滤器(filter)”的隐含的含义不符，不过与我们期待的行为一致）。
+            </p>
+<p>
+	         	请注意过滤器(filter)并不需要<code class="literal">from</code>子句（当然需要的话它们也可以加上）。过滤器(filter)不限定于只能返回集合元素本身。
+	        </p>
+<pre class="programlisting">Collection blackKittenMates = session.createFilter(
+    pk.getKittens(), 
+    "select this.mate where this.color = eg.Color.BLACK.intValue")
+    .list();</pre>
+<p>
+				即使无条件的过滤器(filter)也是有意义的。例如，用于加载一个大集合的子集：
+            </p>
+<pre class="programlisting">Collection tenKittens = session.createFilter(
+    mother.getKittens(), "")
+    .setFirstResult(0).setMaxResults(10)
+    .list();</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="objecstate-querying-criteria"></a>10.4.3.&#160;条件查询(Criteria queries)</h3></div></div></div>
+<p>
+	            HQL极为强大，但是有些人希望能够动态的使用一种面向对象API创建查询，而非在他们的Java代码中嵌入字符串。对于那部分人来说，Hibernate提供了直观的<code class="literal">Criteria</code>查询API。
+	        </p>
+<pre class="programlisting">Criteria crit = session.createCriteria(Cat.class);
+crit.add( Expression.eq( "color", eg.Color.BLACK ) );
+crit.setMaxResults(10);
+List cats = crit.list();</pre>
+<p>
+                <code class="literal">Criteria</code>以及相关的<code class="literal">样例(Example)</code>API将会再<a href="ch15.html" title="第&#160;15&#160;章&#160;
+    条件查询(Criteria Queries)
+    ">第&#160;15&#160;章 <i>
+    条件查询(Criteria Queries)
+    </i></a>中详细讨论。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="objectstate-querying-nativesql"></a>10.4.4.&#160;使用原生SQL的查询</h3></div></div></div>
+<p>
+				你可以使用<code class="literal">createSQLQuery()</code>方法，用SQL来描述查询，并由Hibernate将结果集转换成对象。
+				请注意，你可以在任何时候调用<code class="literal">session.connection()</code>来获得并使用JDBC <code class="literal">Connection</code>对象。
+				如果你选择使用Hibernate的API, 你必须把SQL别名用大括号包围起来:
+            </p>
+<pre class="programlisting">List cats = session.createSQLQuery(
+    "SELECT {cat.*} FROM CAT {cat} WHERE ROWNUM&lt;10",
+    "cat",
+    Cat.class
+).list();</pre>
+<pre class="programlisting">List cats = session.createSQLQuery(
+    "SELECT {cat}.ID AS {cat.id}, {cat}.SEX AS {cat.sex}, " +
+           "{cat}.MATE AS {cat.mate}, {cat}.SUBCLASS AS {cat.class}, ... " +
+    "FROM CAT {cat} WHERE ROWNUM&lt;10",
+    "cat",
+    Cat.class
+).list()</pre>
+<p>
+                和Hibernate查询一样，SQL查询也可以包含命名参数和占位参数。
+			  可以在<a href="ch16.html" title="第&#160;16&#160;章&#160;Native SQL查询">第&#160;16&#160;章 <i>Native SQL查询</i></a>找到更多关于Hibernate中原生SQL(native SQL)的信息。
+            </p>
+</div>
+</div></body>
+</html>

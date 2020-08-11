@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>jQuery 参考手册 - 遍历</title>
+</head>
+
+<body class="browserscripting">
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>jQuery 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/jquery/index.asp" title="jQuery 教程">jQuery 教程</a></li>
+<li><a href="jquery_intro.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_intro.asp" title="jQuery 简介">jQuery 简介</a></li>
+<li><a href="jquery_install.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_install.asp" title="jQuery 安装">jQuery 安装</a></li>
+<li><a href="jquery_syntax.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_syntax.asp" title="jQuery 语法">jQuery 语法</a></li>
+<li><a href="jquery_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_selectors.asp" title="jQuery 选择器">jQuery 选择器</a></li>
+<li><a href="jquery_events.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_events.asp" title="jQuery 事件">jQuery 事件</a></li>
+</ul>
+<h2>jQuery 效果</h2>
+<ul>
+<li><a href="jquery_hide_show.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_hide_show.asp" title="jQuery jQuery 效果 - 隐藏和显示">jQuery 隐藏/显示</a></li>
+<li><a href="jquery_fade.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_fade.asp" title="jQuery jQuery 效果 - 淡入淡出">jQuery 淡入淡出</a></li>
+<li><a href="jquery_slide.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_slide.asp" title="jQuery 效果 - 滑动">jQuery 滑动</a></li>
+<li><a href="jquery_animate.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_animate.asp" title="jQuery 效果 - 动画">jQuery 动画</a></li>
+<li><a href="jquery_stop.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_stop.asp" title="jQuery 停止动画">jQuery stop()</a></li>
+<li><a href="jquery_callback.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_callback.asp" title="jQuery 回调函数">jQuery Callback</a></li>
+<li><a href="jquery_chaining.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_chaining.asp" title="jQuery - Chaining">jQuery Chaining</a></li>
+</ul>
+<h2>jQuery HTML</h2>
+<ul>
+<li><a href="jquery_dom_get.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dom_get.asp" title="jQuery - 获取内容和属性">jQuery 获取</a></li>
+<li><a href="jquery_dom_set.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dom_set.asp" title="jQuery - 设置内容和属性">jQuery 设置</a></li>
+<li><a href="jquery_dom_add.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dom_add.asp" title="jQuery - 添加元素">jQuery 添加</a></li>
+<li><a href="jquery_dom_remove.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dom_remove.asp" title="jQuery - 删除元素">jQuery 删除</a></li>
+<li><a href="jquery_css_classes.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_css_classes.asp" title="jQuery - 获取和设置 CSS 类">jQuery CSS 类</a></li>
+<li><a href="jquery_css.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_css.asp" title="jQuery - css() 方法">jQuery css()</a></li>
+<li><a href="jquery_dimensions.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_dimensions.asp" title="jQuery - 尺寸">jQuery 尺寸</a></li>
+</ul>
+<h2>jQuery 遍历</h2>
+<ul>
+<li><a href="jquery_traversing.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing.asp" title="jQuery 遍历">jQuery 遍历</a></li>
+<li><a href="jquery_traversing_ancestors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing_ancestors.asp" title="jQuery 遍历 - 祖先">jQuery 祖先</a></li>
+<li><a href="jquery_traversing_descendants.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing_descendants.asp" title="jQuery 遍历 - 后代">jQuery 后代</a></li>
+<li><a href="jquery_traversing_siblings.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing_siblings.asp" title="jQuery 遍历 - 同胞">jQuery 同胞</a></li>
+<li><a href="jquery_traversing_filtering.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_traversing_filtering.asp" title="jQuery 遍历 - 过滤">jQuery 过滤</a></li>
+</ul>
+<h2>jQuery AJAX</h2>
+<ul>
+<li><a href="jquery_ajax_intro.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ajax_intro.asp" title="jQuery - AJAX 简介">jQuery AJAX 简介</a></li>
+<li><a href="jquery_ajax_load.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ajax_load.asp" title="jQuery - AJAX load() 方法">jQuery 加载</a></li>
+<li><a href="jquery_ajax_get_post.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ajax_get_post.asp" title="jQuery - AJAX get() 和 post() 方法">jQuery Get/Post</a></li>
+</ul>
+<h2>jQuery 杂项</h2>
+<ul>
+<li><a href="jquery_noconflict.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_noconflict.asp" title="jQuery - noConflict() 方法">jQuery noConflict()</a></li>
+</ul>
+<h2>jQuery 实例</h2>
+<ul>
+<li><a href="jquery_examples.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_examples.asp" title="jQuery 实例">jQuery 实例</a></li>
+<li><a href="jquery_quiz.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_quiz.asp" title="jQuery 测验">jQuery 测验</a></li>
+</ul>
+<h2>jQuery 参考手册</h2>
+<ul>
+<li><a href="jquery_reference.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_reference.asp" title="jQuery 参考手册">jQuery 参考手册</a></li>
+<li><a href="jquery_ref_selectors.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_selectors.asp" title="jQuery 参考手册 - 选择器">jQuery 选择器</a></li>
+<li><a href="jquery_ref_events.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_events.asp" title="jQuery 参考手册 - 事件">jQuery 事件</a></li>
+<li><a href="jquery_ref_effects.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_effects.asp" title="jQuery 参考手册 - 效果">jQuery 效果</a></li>
+<li><a href="jquery_ref_manipulation.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_manipulation.asp" title="jQuery 参考手册 - 文档操作">jQuery 文档操作</a></li>
+<li><a href="jquery_ref_attributes.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_attributes.asp" title="jQuery 参考手册 - 属性操作">jQuery 属性操作</a></li>
+<li><a href="jquery_ref_css.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_css.asp" title="jQuery 参考手册 - CSS 操作">jQuery CSS 操作</a></li>
+<li><a href="jquery_ref_ajax.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_ajax.asp" title="jQuery 参考手册 - Ajax">jQuery Ajax</a></li>
+<li class="currentLink"><a href="jquery_ref_traversing.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_traversing.asp" title="jQuery 参考手册 - 遍历">jQuery 遍历</a></li>
+<li><a href="jquery_ref_data.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_data.asp" title="jQuery 参考手册 - 数据">jQuery 数据</a></li>
+<li><a href="jquery_ref_dom_element_methods.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_dom_element_methods.asp" title="jQuery 参考手册 - DOM 元素方法">jQuery DOM 元素</a></li>
+<li><a href="jquery_ref_core.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_core.asp" title="jQuery 参考手册 - 核心">jQuery 核心</a></li>
+<li><a href="jquery_ref_prop.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_prop.asp" title="jQuery 属性">jQuery 属性</a></li>
+</ul>
+</div><div id="selected">
+<h2>建站手册</h2>
+<ul>
+<li><a href="../site/index.asp.htm" tppabs="http://www.w3school.com.cn/site/index.asp" title="网站构建">网站构建</a></li>
+<li><a href="../w3c/index.asp.htm" tppabs="http://www.w3school.com.cn/w3c/index.asp" title="万维网联盟 (W3C)">万维网联盟 (W3C)</a></li>
+<li><a href="../browsers/index.asp.htm" tppabs="http://www.w3school.com.cn/browsers/index.asp" title="浏览器信息">浏览器信息</a></li>
+<li><a href="../quality/index.asp.htm" tppabs="http://www.w3school.com.cn/quality/index.asp" title="网站品质">网站品质</a></li>
+<li><a href="../semweb/index.asp.htm" tppabs="http://www.w3school.com.cn/semweb/index.asp" title="语义网">语义网</a></li>
+<li><a href="../careers/index.asp.htm" tppabs="http://www.w3school.com.cn/careers/index.asp" title="职业规划">职业规划</a></li>
+<li><a href="../hosting/index.asp.htm" tppabs="http://www.w3school.com.cn/hosting/index.asp" title="网站主机">网站主机</a></li>
+</ul>
+
+<h2><a href="../about/index.asp.htm" tppabs="http://www.w3school.com.cn/about/index.asp" title="关于 W3School" id="link_about">关于 W3School</a></h2>
+<h2><a href="../about/about_helping.asp.htm" tppabs="http://www.w3school.com.cn/about/about_helping.asp" title="帮助 W3School" id="link_help">帮助 W3School</a></h2>
+
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>jQuery 参考手册 - 遍历</h1>
+
+<div id="tpn">
+<ul class="prenext">
+<li class="pre"><a href="jquery_ref_ajax.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_ajax.asp" title="jQuery 参考手册 - Ajax">jQuery Ajax</a></li>
+<li class="next"><a href="jquery_ref_data.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_data.asp" title="jQuery 参考手册 - 数据">jQuery 数据</a></li>
+</ul>
+</div>
+
+
+<div>
+<h2>jQuery 遍历函数</h2>
+
+<p>jQuery 遍历函数包括了用于筛选、查找和串联元素的方法。</p>
+
+<table class="dataintable">
+<tr>
+<th style="width:22%">函数</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><a href="traversing_add.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_add.asp" title="jQuery 遍历 - add() 方法">.add()</a></td>
+<td>将元素添加到匹配元素的集合中。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_andSelf.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_andSelf.asp" title="jQuery 遍历 - andSelf() 方法">.andSelf()</a></td>
+<td>把堆栈中之前的元素集添加到当前集合中。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_children.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_children.asp" title="jQuery 遍历 - children() 方法">.children()</a></td>
+<td>获得匹配元素集合中每个元素的所有子元素。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_closest.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_closest.asp" title="jQuery 遍历 - closest() 方法">.closest()</a></td>
+<td>从元素本身开始，逐级向上级元素匹配，并返回最先匹配的祖先元素。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_contents.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_contents.asp" title="jQuery 遍历 - contents() 方法">.contents()</a></td>
+<td>获得匹配元素集合中每个元素的子元素，包括文本和注释节点。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_each.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_each.asp" title="jQuery 遍历 - each() 方法">.each()</a></td>
+<td>对 jQuery 对象进行迭代，为每个匹配元素执行函数。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_end.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_end.asp" title="jQuery 遍历 - end() 方法">.end()</a></td>
+<td>结束当前链中最近的一次筛选操作，并将匹配元素集合返回到前一次的状态。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_eq.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_eq.asp" title="jQuery 遍历 - eq() 方法">.eq()</a></td>
+<td>将匹配元素集合缩减为位于指定索引的新元素。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_filter.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_filter.asp" title="jQuery 遍历 - filter() 方法">.filter()</a></td>
+<td>将匹配元素集合缩减为匹配选择器或匹配函数返回值的新元素。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_find.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_find.asp" title="jQuery 遍历 - find() 方法">.find()</a></td>
+<td>获得当前匹配元素集合中每个元素的后代，由选择器进行筛选。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_first.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_first.asp" title="jQuery 遍历 - first() 方法">.first()</a></td>
+<td>将匹配元素集合缩减为集合中的第一个元素。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_has.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_has.asp" title="jQuery 遍历 - has() 方法">.has()</a></td>
+<td>将匹配元素集合缩减为包含特定元素的后代的集合。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_is.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_is.asp" title="jQuery 遍历 - is() 方法">.is()</a></td>
+<td>根据选择器检查当前匹配元素集合，如果存在至少一个匹配元素，则返回 true。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_last.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_last.asp" title="jQuery 遍历 - last() 方法">.last()</a></td>
+<td>将匹配元素集合缩减为集合中的最后一个元素。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_map.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_map.asp" title="jQuery 遍历 - map() 方法">.map()</a></td>
+<td>把当前匹配集合中的每个元素传递给函数，产生包含返回值的新 jQuery 对象。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_next.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_next.asp" title="jQuery 遍历 - next() 方法">.next()</a></td>
+<td>获得匹配元素集合中每个元素紧邻的同辈元素。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_nextall.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_nextall.asp" title="jQuery 遍历 - nextAll() 方法">.nextAll()</a></td>
+<td>获得匹配元素集合中每个元素之后的所有同辈元素，由选择器进行筛选（可选）。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_nextuntil.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_nextuntil.asp" title="jQuery 遍历 - nextUntil() 方法">.nextUntil()</a></td>
+<td>获得每个元素之后所有的同辈元素，直到遇到匹配选择器的元素为止。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_not.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_not.asp" title="jQuery 遍历 - not() 方法">.not()</a></td>
+<td>从匹配元素集合中删除元素。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_offsetparent.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_offsetparent.asp" title="jQuery 遍历 - offsetParent() 方法">.offsetParent()</a></td>
+<td>获得用于定位的第一个父元素。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_parent.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_parent.asp" title="jQuery 遍历 - parent() 方法">.parent()</a></td>
+<td>获得当前匹配元素集合中每个元素的父元素，由选择器筛选（可选）。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_parents.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_parents.asp" title="jQuery 遍历 - parents() 方法">.parents()</a></td>
+<td>获得当前匹配元素集合中每个元素的祖先元素，由选择器筛选（可选）。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_parentsuntil.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_parentsuntil.asp" title="jQuery 遍历 - parentsUntil() 方法">.parentsUntil()</a></td>
+<td>获得当前匹配元素集合中每个元素的祖先元素，直到遇到匹配选择器的元素为止。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_prev.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_prev.asp" title="jQuery 遍历 - prev() 方法">.prev()</a></td>
+<td>获得匹配元素集合中每个元素紧邻的前一个同辈元素，由选择器筛选（可选）。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_prevall.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_prevall.asp" title="jQuery 遍历 - prevAll() 方法">.prevAll()</a></td>
+<td>获得匹配元素集合中每个元素之前的所有同辈元素，由选择器进行筛选（可选）。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_prevuntil.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_prevuntil.asp" title="jQuery 遍历 - prevUntil() 方法">.prevUntil()</a></td>
+<td>获得每个元素之前所有的同辈元素，直到遇到匹配选择器的元素为止。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_siblings.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_siblings.asp" title="jQuery 遍历 - siblings() 方法">.siblings()</a></td>
+<td>获得匹配元素集合中所有元素的同辈元素，由选择器筛选（可选）。</td>
+</tr>
+
+<tr>
+<td><a href="traversing_slice.asp.htm" tppabs="http://www.w3school.com.cn/jquery/traversing_slice.asp" title="jQuery 遍历 - slice() 方法">.slice()</a></td>
+<td>将匹配元素集合缩减为指定范围的子集。</td>
+</tr>
+</table>
+</div>
+
+
+<div id="bpn">
+<ul class="prenext">
+<li class="pre"><a href="jquery_ref_ajax.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_ajax.asp" title="jQuery 参考手册 - Ajax">jQuery Ajax</a></li>
+<li class="next"><a href="jquery_ref_data.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_ref_data.asp" title="jQuery 参考手册 - 数据">jQuery 数据</a></li>
+</ul>
+</div>
+
+</div>
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="jquery_reference.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_reference.asp" title="jQuery 参考手册">jQuery 参考手册</a></h5>
+<h5 id="tools_quiz"><a href="jquery_quiz.asp.htm" tppabs="http://www.w3school.com.cn/jquery/jquery_quiz.asp">jQuery 测验</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+</body>
+</html>

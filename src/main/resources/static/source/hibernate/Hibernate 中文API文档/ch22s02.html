@@ -1,0 +1,100 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>22.2.&#160;Hibernate 映射</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch22.html" title="第&#160;22&#160;章&#160;示例：Weblog 应用程序">
+<link rel="prev" href="ch22.html" title="第&#160;22&#160;章&#160;示例：Weblog 应用程序">
+<link rel="next" href="ch22s03.html" title="22.3.&#160;Hibernate 代码">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="example-weblog-mappings"></a>22.2.&#160;Hibernate 映射</h2></div></div></div>
+<p>
+            下列的XML映射应该是很直白的。
+        </p>
+<pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;
+
+&lt;hibernate-mapping package="eg"&gt;
+    &lt;class 
+        name="Blog" 
+        table="BLOGS" &gt;
+        
+        &lt;id 
+            name="id" 
+            column="BLOG_ID"&gt;
+            
+            &lt;generator class="native"/&gt;
+            
+        &lt;/id&gt;
+        
+        &lt;property 
+            name="name" 
+            column="NAME" 
+            not-null="true" 
+            unique="true"/&gt;
+            
+        &lt;bag 
+            name="items" 
+            inverse="true" 
+            order-by="DATE_TIME" 
+            cascade="all"&gt;
+            
+            &lt;key column="BLOG_ID"/&gt;
+            &lt;one-to-many class="BlogItem"/&gt;
+            
+        &lt;/bag&gt;
+        
+    &lt;/class&gt;
+    
+&lt;/hibernate-mapping&gt;</pre>
+<pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;
+
+&lt;hibernate-mapping package="eg"&gt;
+    
+    &lt;class 
+        name="BlogItem" 
+        table="BLOG_ITEMS" 
+        dynamic-update="true"&gt;
+        
+        &lt;id 
+            name="id" 
+            column="BLOG_ITEM_ID"&gt;
+            
+            &lt;generator class="native"/&gt;
+            
+        &lt;/id&gt;
+        
+        &lt;property 
+            name="title" 
+            column="TITLE" 
+            not-null="true"/&gt;
+            
+        &lt;property 
+            name="text" 
+            column="TEXT" 
+            not-null="true"/&gt;
+            
+        &lt;property 
+            name="datetime" 
+            column="DATE_TIME" 
+            not-null="true"/&gt;
+            
+        &lt;many-to-one 
+            name="blog" 
+            column="BLOG_ID" 
+            not-null="true"/&gt;
+            
+    &lt;/class&gt;
+    
+&lt;/hibernate-mapping&gt;</pre>
+</div></body>
+</html>

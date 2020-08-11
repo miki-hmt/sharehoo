@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>$.ajaxPrefilter() </title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">$.ajaxPrefilter() </h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.ajaxPrefilter( [dataTypes ], handler )<br />
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>undefined</code> 
+	</p>
+	<p>
+	</p>
+	<div class="entry-wrapper">
+		<p class="desc">
+			<strong>Description: </strong>Handle custom Ajax options or modify existing options before each request is sent and before they are processed by <code>$.ajax()</code>.
+		</p>
+		<ul class="signatures">
+			<li class="signature">
+				<h4 class="name">
+					<span class="version-details">V	: 1.5</span><span class="icon-link"></span>jQuery.ajaxPrefilter(  [dataTypes ], handler )
+				</h4>
+				<ul>
+					<li>
+						<div>
+							<strong>dataTypes</strong> 
+						</div>
+						<div>
+							Type: String
+						</div>
+						<div>
+							An optional string containing one or more space-separated dataTypes
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>handler</strong> 
+						</div>
+						<div>
+							Type: Function( PlainObject options, PlainObject originalOptions, jqXHR jqXHR )
+						</div>
+						<div>
+							A handler to set default values for future Ajax requests.
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<div class="longdesc" id="entry-longdesc">
+			<p>
+				A typical prefilter registration using <code>$.ajaxPrefilter()</code> looks like this:
+			</p>
+			<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+  // Modify options, control originalOptions, store jqXHR, etc
+});</pre>
+			</div>
+			<p>
+				where:
+			</p>
+			<ul>
+				<li>
+					<code>options</code> are the request options
+				</li>
+				<li>
+					<code>originalOptions</code> are the options as provided to the <code>$.ajax()</code> method, unmodified and, thus, without defaults from <code>ajaxSettings</code> 
+				</li>
+				<li>
+					<code>jqXHR</code> is the jqXHR object of the request
+				</li>
+			</ul>
+			<p>
+				Prefilters are a perfect fit when custom options need to be handled.  Given the following code, for example, a call to <code>$.ajax()</code> would automatically abort a request to the same URL if the custom <code>abortOnRetry</code> option is set to <code>true</code>:
+			</p>
+			<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">var currentRequests = {};
+ 
+$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+  if ( options.abortOnRetry ) {
+    if ( currentRequests[ options.url ] ) {
+      currentRequests[ options.url ].abort();
+    }
+    currentRequests[ options.url ] = jqXHR;
+  }
+});</pre>
+			</div>
+			<p>
+				Prefilters can also be used to modify existing options. For 
+example, the following proxies cross-domain requests through 
+http://mydomain.net/proxy/:
+			</p>
+			<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">$.ajaxPrefilter(function( options ) {
+  if ( options.crossDomain ) {
+    options.url = "http://mydomain.net/proxy/" + encodeURIComponent( options.url );
+    options.crossDomain = false;
+  }
+});</pre>
+			</div>
+			<p>
+				If the optional <code>dataTypes</code> argument is supplied, the 
+prefilter will be only be applied to requests with the indicated 
+dataTypes. For example, the following only applies the given prefilter 
+to JSON and script requests:
+			</p>
+			<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">$.ajaxPrefilter( "json script", function( options, originalOptions, jqXHR ) {
+  // Modify options, control originalOptions, store jqXHR, etc
+});</pre>
+			</div>
+			<p>
+				The <code>$.ajaxPrefilter()</code> method can also redirect a 
+request to another dataType by returning that dataType. For example, the
+ following sets a request as "script" if the URL has some specific 
+properties defined in a custom <code>isActuallyScript()</code> function:
+			</p>
+			<div class="syntaxhighlighter javascript">
+<pre class="prettyprint lang-js">$.ajaxPrefilter(function( options ) {
+  if ( isActuallyScript( options.url ) ) {
+    return "script";
+  }
+});</pre>
+			</div>
+			<p>
+				This would ensure not only that the request is considered 
+"script" but also that all the prefilters specifically attached to the 
+script dataType would be applied to it.
+			</p>
+		</div>
+	</div>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

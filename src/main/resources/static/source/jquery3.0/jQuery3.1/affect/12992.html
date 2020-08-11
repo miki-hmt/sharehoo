@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>animate()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">animate()<span class="g-bg-red margin-l-5">1.8*</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.animate( properties [, duration ] [, easing ] [, complete ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>根据一组 CSS 属性，执行自定义动画。
+</p>
+<ul class="signatures">
+	<li class="signature" id="animate-properties-duration-easing-complete">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.animate( properties [, duration ] [, easing ] [, complete ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>properties</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一个CSS属性和值的对象,动画将根据这组对象移动。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>duration</strong> (默认: <code>400</code>)
+				</div>
+				<div>
+					类型: Number or String
+				</div>
+				<div>
+					一个字符串或者数字决定动画将运行多久。（手册网注：默认值: "normal"， 三种预定速度的字符串("slow", "normal", 或 "fast")或表示动画时长的毫秒数值(如：1000)
+ ）
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>easing</strong> (默认: <code>swing</code>)
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					一个字符串，表示过渡使用哪种缓动函数。（译者注：jQuery自身提供"linear" 和 "swing"）
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>complete</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					在动画完成时执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="animate-properties-options">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.animate( properties, options )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>properties</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一个CSS属性和值的对象,动画将根据这组对象移动。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>options</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一组包含动画选项的值的集合。 支持的选项:
+				</div>
+				<ul>
+					<li>
+						<div>
+							<strong>duration</strong> (default: <code>400</code>)
+						</div>
+						<div>
+							Type: Number or String
+						</div>
+						<div>
+							一个字符串或者数字决定动画将运行多久。（手册网注：默认值: "normal"， 三种预定速度的字符串("slow", "normal", 或 "fast")或表示动画时长的毫秒数值(如：1000) ）
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>easing</strong> (default: <code>swing</code>)
+						</div>
+						<div>
+							Type: String
+						</div>
+						<div>
+							一个字符串，表示过渡使用哪种缓动函数。
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>queue</strong> (default: <code>true</code>)
+						</div>
+						<div>
+							Type: Boolean or String
+						</div>
+						<div>
+							一个布尔值，指示是否将动画放置在效果队列中。如果为false时，将立即开始动画。 <strong>从jQuery1.7开始</strong>，队列选项也可以接受一个字符串，在这种情况下，在动画被添加到由该字符串表示的队列中。当一个自定义的队列名称被使用，动画不会自动启动;你必须调用<code>.dequeue("queuename")</code>来启动它。
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>specialEasing</strong> 
+						</div>
+						<div>
+							Type: PlainObject
+						</div>
+						<div>
+							由此方法的第一个参数properties定义的一个或多个CSS属性，及其相应的缓动函数组成的键值对map。( 1.4 新增)
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>step</strong> 
+						</div>
+						<div>
+							Type: Function( Number now, Tween tween )
+						</div>
+						<div>
+							每个动画元素的每个动画属性将调用的函数。这个函数为修改Tween 对象提供了一个机会来改变设置中得属性值。
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>progress</strong> 
+						</div>
+						<div>
+							Type: Function( Promise animation, Number progress, Number remainingMs )
+						</div>
+						<div>
+							每一步动画完成后调用的一个函数，无论动画属性有多少，每个动画元素都执行单独的函数。<span class="version-details"> (version added: 1.8)</span> 
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>complete</strong> 
+						</div>
+						<div>
+							Type: Function()
+						</div>
+						<div>
+							在动画完成时执行的函数。
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>done</strong> 
+						</div>
+						<div>
+							Type: Function( Promise animation, Boolean jumpedToEnd )
+						</div>
+						<div>
+							在动画完成时执行的函数。 (他的Promise对象状态已完成).<span class="version-details"> (version added: 1.8)</span> 
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>fail</strong> 
+						</div>
+						<div>
+							Type: Function( Promise animation, Boolean jumpedToEnd )
+						</div>
+						<div>
+							动画失败完成时执行的函数。(他的Promise对象状态未完成)。<span class="version-details"> (version added: 1.8)</span> 
+						</div>
+					</li>
+					<li>
+						<div>
+							<strong>always</strong> 
+						</div>
+						<div>
+							Type: Function( Promise animation, Boolean jumpedToEnd )
+						</div>
+						<div>
+							在动画完成或未完成情况下停止时执行的函数。(他的Promise对象状态已完成或未完成)。<span class="version-details"> (version added: 1.8)</span> 
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>.animate()</code>方法允许我们在任意的数值的CSS属性上创建动画。唯一必要的属性就是一组CSS属性键值对。这组属性和用于设置<code>.css()</code>方法的属性键值对类似，除了属性范围做了更多限制。
+	</p>
+	<h4 id="animation-properties">
+		Animation Properties and Values(动画属性和值)
+	</h4>
+	<p>
+		所有用于动画的属性必须是数字的，除非另有说明；这些属性如果不是数字的将不能使用基本的jQuery功能。（例如，<code>width</code>, <code>height</code>或者<code>left</code>可以执行动画，但是<code>background-color</code>不能，除非使用<a href="https://github.com/jquery/jquery-color">jQuery.Color</a>插件。）属性值的单位像素（px）,除非另有说明。单位<code>em</code> 和 <code>%</code>需要指定使用。
+	</p>
+	<p>
+		除了样式属性，
+一些非样式的属性，如<code>scrollTop</code> 和 <code>scrollLeft</code>，以及自定义属性，也可应用于动画。
+	</p>
+	<p>
+		CSS简写属性（例如font, background, border）没有得到充分的支持。例如，
+如果你想边框宽度做动画呈现，至少边框样式和边框宽度必须预先设定不为"auto" 。或者，如果你想字体大小做动画，
+你可以使用<code>fontSize</code>的或相当于CSS的 <code>'font-size'</code> ，而不是简单的<code>'font'</code>。
+	</p>
+	<p>
+		除了定义数值，每个属性能使用<code>'show'</code>, <code>'hide'</code>, 和 <code>'toggle'</code>。这些快捷方式允许定制隐藏和显示动画用来控制元素的显示或隐藏。为了使用jQuery内置的切换状态跟踪，<code>'toggle'</code>关键字必须在动画开始前给定属性值。（手册网注：jquery中有两个.toggle()方法，一个是显示或隐藏匹配元素。另一个是绑定两个或多个处理程序绑定到匹配的元素，用来执行在交替的点击。哪一个被调用取决于传递的参数的设置。所以这里<code>'toggle'</code>关键字必须在动画开始前给定属性值，以确认调用哪个<code>'toggle'</code>方法。）
+	</p>
+	<p>
+		动画属性也可以是一个相对值。如果提供一个以<code>+=</code> 或 <code>-=</code>开始的值，那么目标值就是以这个属性的当前值加上或者减去给定的数字来计算的。
+	</p>
+	<blockquote>
+		<p>
+			注意<strong>:</strong> 不同于动画的简便方法，比如<code>.slideDown()</code> 和 <code>.fadeIn()</code>,<code>.animate()</code>方法不会影响隐藏元素的可见性部分的效果。例如，给定<code>$('someElement').hide().animate({height:'20px'}, 500)</code>，动画将执行，但<em>该元素将保持隐藏</em>。
+		</p>
+	</blockquote>
+	<h4 id="duration">
+		Duration（持续时间）
+	</h4>
+	<p>
+		持续时间是以毫秒为单位的；值越大表示动画执行的越慢，不是越快。还可以提供<code>'fast'</code> 和 <code>'slow'</code>字符串，分别表示持续时间为<code>200</code> 和 <code>600</code>毫秒。
+	</p>
+	<h4 id="callbacks">
+		callback Function（回调函数）
+	</h4>
+	<p>
+		如果提供回调函数，<code>start</code>, <code>step</code>, <code>progress</code>, <code>complete</code>, <code>done</code>, <code>fail</code>, and <code>always</code>回调 将在<em>每个元素</em>上执行一次; <code>this</code>会指向正在执行动画的DOM元素。如果集合中没有任何元素，没有回调将被调用。 如果多个元素执行动画，回调将在每个匹配的元素上执行一次，不是作为整个动画执行一次。
+    这是设置为DOM元素进行动画。
+    如果没有任何元素，在集合，没有回调被调用。
+    如果多个元素的动画，
+    回调执行每一次匹配的元素，
+    没有一次为动画作为一个整体。
+    使用<code>.promise()</code>方法来获得一个promise，您可以附加回调到任意元素数量的动画集合上，包括零元素，（当resolve时）来触发一次。
+	</p>
+	<p>
+		如果提供<code>complete</code>回调函数将在动画完成后被执行一次。这对于按顺序执行一系列不同动画时，特别有用。这个回调函数不设置任何参数，但是<code>this</code>会被传递到正在执行动画的DOM元素上，如果多个元素一起做动画效果，值得注意的是这个回调函数在每个匹配元素上执行一次，不是这个动画作为一个整体。
+	</p>
+	<h4 id="basic-usage">
+		Basic Usage（基本用法）
+	</h4>
+	<p>
+		我们可以为任何元素做动画，比如这样的一个简单图片：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div id="clickme"&gt;
+  Click here
+&lt;/div&gt;
+&lt;img id="book" src="book.png" alt="" width="100" height="123"
+  style="position: relative; left: 10px;" /&gt;</pre>
+	</div>
+	<p>
+		同时对透明度，左偏移值和高度应用动画：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#clickme').click(function() {
+  $('#book').animate({
+    opacity: 0.25,
+    left: '+=50',
+    height: 'toggle'
+  }, 5000, function() {
+    // Animation complete.
+  });
+});</pre>
+	</div>
+<figure>
+            <img src="../image/58a5912e25c28.jpg" alt="" /> <figcaption>图1-指定的动画效果插图</figcaption>
+          </figure>
+	<p>
+		注意我们这里给定了<code>toggle</code>作为<code>height</code>属性的目标值。由于这个图片开始是可见的，这个动画将收缩高度至0隐藏这个图片。第二次点击的时候将相反的转变：
+	</p>
+<figure>
+            <img src="../image/58a5912e5e076.jpg" alt="" /> <figcaption>图2-指定的动画效果插图</figcaption>
+          </figure>
+	<p>
+		这个图片的<code>opacity</code>已经是其目标值了，所以这个属性在第二次点击的时候不会有动画效果。由于我们给定了<code>left</code>目标值作为相对值，在第二次动画中图片将向右移动得更远。
+	</p>
+	<p>
+		如果元素的定位属性是静态的，即 <code>position</code>样式属性是<code>static</code>默认值，那么他们的定位属性（<code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>)没有明显的效果。
+	</p>
+	<div class="warning">
+		<p>
+			<strong>注意: </strong><a href="http://jqueryui.com">jQuery UI</a>项目扩展了<code>.animate()</code>方法，允许一些非数值的样式，比如颜色，应用动画。该项目还包括通过CSS classes来指定动画的机制而不是单独的属性。
+		</p>
+	</div>
+	<div class="warning">
+		<p>
+			<strong>注意:</strong> 如果试图将元素高度或宽度动画至 0px，元素的内容是可见的，可能在动画中溢出。通过固定原始元素的尺寸，隐藏内容解决。这样可以确保动画平稳运行。一个<a href="http://www.google.com/search?q=clearfix">clearfix</a> 可以用来自动修复您的主要元素的尺寸，而无需手动设置。
+		</p>
+	</div>
+	<h4 id="step">
+		Step Function
+	</h4>
+	<p>
+		第二个版本的<code>.animate()</code>提供了一个<code>step</code>选项- 每步动画执行后调用的回调函数。启用自定义动画类型或改变正在执行的动画，此功能是非常有用。它接受两个参数（<code>now</code> 和 <code>fx</code>），<code>this</code>是当前正在执行动画的DOM元素集合。
+	</p>
+	<ul>
+		<li>
+			<code>now</code>: 
+每一步动画属性的数字值
+		</li>
+		<li>
+			<code>fx</code>: <code>jQuery.fx</code> 原型对象的一个引用，其中包含了多项属性，比如<code>elem</code> 表示前正在执行动画的元素，<code>start</code>和<code>end</code>分别为动画属性的第一个和最后一个的值，<code>prop</code>为进行中的动画属性。
+		</li>
+	</ul>
+	<p>
+		需要注意的是<code>step</code>函数被每个动画元素的每个动画属性调用。例如，给定两个列表项，<code>step</code>函数会被激发四次：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('li').animate({
+  opacity: .5,
+  height: '50%'
+},
+{
+  step: function(now, fx) {
+    var data = fx.elem.id + ' ' + fx.prop + ': ' + now;
+    $('body').append('&lt;div&gt;' + data + '&lt;/div&gt;');
+  }
+});</pre>
+	</div>
+	<h4 id="easing">
+		Easing（缓动）
+	</h4>
+	<p>
+		<code>.animate()</code>还有一个参数是一个字符串命名的使用缓动函数。一个缓动函数指定用于动画进行中在不同点位的速度。 在jQuery库中是默认的时调用 <code>swing</code>。在一个恒定的速度进行动画，请调用 <code>linear</code>. 更多的缓动函数要使用的插件，最显着的是<a href="http://jqueryui.com/">jQuery UI suite</a>。
+	</p>
+	<h4 id="per-property-easing">
+		Per-property Easing
+	</h4>
+	<p>
+		从jQuery 1.4 版本开始，我们能设置per-property 缓存函数访问一个单独的<code>.animate()</code>。在<code>.animate()</code>的第一个版本中，每个属性能获取一个数组作为他的值：数组的第一个成员是CSS属性，第二成员缓冲函数。如果为某个属性指定的缓冲函数尚未被定义，那么将会使用<code>.animate()</code> 方法的 easing 参数来代替。如果 easing 参数也未被定义，那么将会使用默认的缓冲函数 <code>swing</code>。
+	</p>
+	<p>
+		例如, 我们可以同时的使用<code>swing</code>缓冲函数来做width 和 height动画，并且用<code>linear</code>缓冲函数来做opacity动画：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#clickme').click(function() {
+  $('#book').animate({
+    width: ['toggle', 'swing'],
+    height: ['toggle', 'swing'],
+    opacity: 'toggle'
+  }, 5000, 'linear', function() {
+      $(this).after('&lt;div&gt;Animation complete.&lt;/div&gt;');
+  });
+});</pre>
+	</div>
+	<p>
+		在<code>.animate()</code>的第二个版本中，选项对象能包含<code>specialEasing</code>属性，该属性本身是一组CSS属性与相应的缓冲函数。例如，我们可以同时的使用<code>linear</code>缓冲函数来做width动画，并且用<code>easeOutBounce</code>缓冲函数来做height动画：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#clickme').click(function() {
+  $('#book').animate({
+    width: 'toggle',
+    height: 'toggle'
+  }, {
+    duration: 5000,
+    specialEasing: {
+      width: 'linear',
+      height: 'easeOutBounce'
+    },
+    complete: function() {
+      $(this).after('&lt;div&gt;Animation complete.&lt;/div&gt;');
+    }
+  });
+});</pre>
+	</div>
+	<p>
+		如前所述,<code>easeOutBounce</code> 函数是一个极其必要的插件。
+	</p>
+</div>
+<h3>
+	Additional Notes:（其他注意事项：）
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			所有的jQuery效果，包括<code>.animate()</code>,能使用<code>jQuery.fx.off = true</code>来全局性关闭。更多信息请查看<code>jQuery.fx.off</code>.
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">点击按钮，根据指定的一系列属性，在 div 上应用动画。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div {
+background-color:#bca;
+width:100px;
+border:1px solid green;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="go"&gt;&amp;raquo; Run&lt;/button&gt;
+ 
+&lt;div id="block"&gt;Hello!&lt;/div&gt;
+&lt;script&gt;
+ 
+/* Using multiple unit types within one animation. */
+ 
+$("#go").click(function(){
+  $("#block").animate({
+    width: "70%",
+    opacity: 0.4,
+    marginLeft: "0.6in",
+    fontSize: "3em",
+    borderWidth: "10px"
+  }, 1500 );
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8236" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">对 div 应用动画，在 left 属性上使用相对值。执行动画多次，查看相对值的累加效果。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div {
+  position:absolute;
+  background-color:#abc;
+  left:50px;
+  width:90px;
+  height:90px;
+  margin:5px;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="left"&gt;&amp;laquo;&lt;/button&gt; &lt;button id="right"&gt;&amp;raquo;&lt;/button&gt;
+&lt;div class="block"&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+$("#right").click(function(){
+  $(".block").animate({"left": "+=50px"}, "slow");
+});
+ 
+$("#left").click(function(){
+  $(".block").animate({"left": "-=50px"}, "slow");
+});
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8235" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<div class="entry-example" id="example-2">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">第一个按钮要执行的动画中，使用了 queue: false 
+选项，该动画使元素的宽度扩大到了总宽 90%,并且 文字大小也变大了。一旦字体大小改变完了，边框的动画就会开始。 
+第二个按钮要执行的动画中，包含了一系列动画，当前一个动画完成时，后一个动画就会开始。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div {
+  background-color:#bca;
+  width:200px;
+  height:1.1em;
+  text-align:center;
+  border:2px solid green;
+  margin:3px;
+  font-size:14px;
+}
+button {
+  font-size:14px;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="go1"&gt;&amp;raquo; Animate Block1&lt;/button&gt;
+&lt;button id="go2"&gt;&amp;raquo; Animate Block2&lt;/button&gt;
+&lt;button id="go3"&gt;&amp;raquo; Animate Both&lt;/button&gt;
+ 
+&lt;button id="go4"&gt;&amp;raquo; Reset&lt;/button&gt;
+&lt;div id="block1"&gt;Block1&lt;/div&gt;
+&lt;div id="block2"&gt;Block2&lt;/div&gt;
+&lt;script&gt;
+ 
+$( "#go1" ).click(function(){
+  $( "#block1" ).animate( { width: "90%" }, { queue: false, duration: 3000 })
+     .animate({ fontSize: "24px" }, 1500 )
+     .animate({ borderRightWidth: "15px" }, 1500 );
+});
+ 
+$( "#go2" ).click(function(){
+  $( "#block2" ).animate({ width: "90%" }, 1000 )
+     .animate({ fontSize: "24px" }, 1000 )
+     .animate({ borderLeftWidth: "15px" }, 1000 );
+});
+ 
+$( "#go3" ).click(function(){
+  $( "#go1" ).add( "#go2" ).click();
+});
+ 
+$( "#go4" ).click(function(){
+  $( "div" ).css({ width: "", fontSize: "", borderWidth: "" });
+});
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8234" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<div class="entry-example" id="example-3">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">对第一个 div 的 left 属性应用动画，在动画执行的过程中，在 step 函数中改变其余 div 的 left 属性。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+div {
+   position: relative;
+   background-color: #abc;
+   width: 40px;
+   height: 40px;
+   float: left;
+   margin: 5px;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p&gt;&lt;button id="go"&gt;Run »&lt;/button&gt;&lt;/p&gt;
+&lt;div class="block"&gt;&lt;/div&gt; &lt;div class="block"&gt;&lt;/div&gt;
+&lt;div class="block"&gt;&lt;/div&gt; &lt;div class="block"&gt;&lt;/div&gt;
+&lt;div class="block"&gt;&lt;/div&gt; &lt;div class="block"&gt;&lt;/div&gt;
+ 
+&lt;script&gt;
+$( "#go" ).click(function(){
+  $( ".block:first" ).animate({
+    left: 100
+  }, {
+    duration: 1000,
+    step: function( now, fx ){
+      $( ".block:gt(0)" ).css( "left", now );
+    }
+  });
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8233" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<div class="entry-example" id="example-4">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">对所有段落的高和透明度使用 toggle 动画，用时 600 毫秒。</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$( "p" ).animate({
+  height: "toggle", opacity: "toggle"
+}, "slow" );</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-5">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">对所有段落应用动画，使其 left 属性变为 50，透明度变为 1（即，不透明，可见），用时 500 毫秒。</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$( "p" ).animate({
+  left: 50, opacity: 1
+}, 500 );</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-6">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">Animate the left and opacity style properties of all paragraphs; run the animation <em>outside</em> the queue, so that it will automatically start without waiting for its turn.</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$( "p" ).animate({
+  left: "50px", opacity: 1
+}, { duration: 500, queue: false });</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-7">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">一个使用 'easing' 缓冲函数的示例，只要当你提供的插件中包含 easing 函数即可。注意，以下代码只能在处于隐藏的元素上才会看出效果。</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$( "p" ).animate({
+  opacity: "show"
+}, "slow", "easein" );</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-8">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">对所有段落的高和透明度使用 toggle 动画，用时 600 毫秒。</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$( "p" ).animate({
+  height: "toggle", opacity: "toggle"
+}, { duration: "slow" });</pre>
+	</div>
+</div>
+<div class="entry-example" id="example-9">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">一个使用 'easing' 缓冲函数的示例，只要当你提供的插件中包含 easing 函数即可。</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$( "p" ).animate({
+  opacity: "show"
+}, { duration: "slow", easing: "easein" });</pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">一个使用回调函数的示例。第一个参数是一个 CSS 属性数组，第二个参数表示动画耗时 1000 毫秒，第三个参数说明使用的是 easing 缓冲效果, 第四个参数是一个匿名的回调函数。 </span> 
+</p>
+<pre class="prettyprint lang-js">$( "p" ).animate({
+  height: 200, width: 400, opacity: 0.5
+}, 1000, "linear", function() {
+  alert("all done");
+});</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

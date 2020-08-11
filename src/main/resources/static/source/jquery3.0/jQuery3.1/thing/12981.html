@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>submit()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">submit()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.submit( handler(eventObject) )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>为 JavaScript 的 "submit" 事件绑定一个处理函数，或者触发元素上的该事件。
+</p>
+<ul class="signatures">
+	<li class="signature" id="submit-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.submit( handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="submit-eventData-handlereventObject">
+		<h4 class="name">
+			<span class="version-details">V : 1.4.3</span>.submit(  [eventData ], handler(eventObject) )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>eventData</strong> 
+				</div>
+				<div>
+					类型: PlainObject
+				</div>
+				<div>
+					一个对象，它包含的数据键值对映射将被传递给事件处理程序。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>handler(eventObject)</strong> 
+				</div>
+				<div>
+					类型: Function()
+				</div>
+				<div>
+					每次事件触发时会执行的函数。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="submit">
+		<h4 class="name">
+			<span class="version-details">V : 1.0</span>.submit()
+		</h4>
+		<ul>
+			<li>
+				<div class="null-signature">
+					这个方法不接受任何参数。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		这个函数的前两个用法是 <code>.bind('submit', handler)</code> 的快捷方式，第3个不带参数的用法是 <code>.trigger('submit')</code> 的快捷方式。
+	</p>
+	<p>
+		当用户试图提交表单时，就会在这个表单元素上触发<code>submit</code>事件。它只能绑定在<code>&lt;form&gt;</code>元素上。以下几种情况会导致表单被提交：用户点击了<code>&lt;input type="submit"&gt;</code>, <code>&lt;input type="image"&gt;</code>, 或者 <code>&lt;button type="submit"&gt;</code>，或者当某些表单元素获取焦点时，敲击<kbd>Enter</kbd>（回车键），都可以提交。
+	</p>
+	<blockquote>
+		<p>
+			根据不同的浏览器，Enter 键可能会导致表单被提交，如果这个表单只有一个文本框或只有一个 submit 按钮的话。界面不应该依赖于这个键的特殊行为，除非已经使用了 keypress 事件来监听 Enter 键的按下。
+		</p>
+	</blockquote>
+	<p>
+		举例来说，请看下面的HTML：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;form id="target" action="destination.html"&gt;
+  &lt;input type="text" value="Hello there" /&gt;
+  &lt;input type="submit" value="Go" /&gt;
+&lt;/form&gt;
+&lt;div id="other"&gt;
+  Trigger the handler
+&lt;/div&gt;</pre>
+	</div>
+	<p>
+		这个事件处理程序可以绑定到表单
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#target').submit(function() {
+  alert('Handler for .submit() called.');
+  return false;
+});</pre>
+	</div>
+	<p>
+		现在当表单提交时，警告将被显示。出现这种情况的实际提交之前，所以我们可以通过调用事件对象的<code>.preventDefault()</code>或在处理函数中返回 <code>false</code> 来取消提交：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#other').click(function() {
+  $('#target').submit();
+});</pre>
+	</div>
+	<p>
+		这些代码执行后，点击<span class="output">Trigger the handler</span> 同样会警报显示。此外，默认的<code>submit</code>表单上的动作上会被触发，所以表格将被提交。
+	</p>
+	<p>
+		在Internet Explorer中，JavaScript的<code>submit</code>事件不会泡沫。但是，依赖 <code>submit</code> 事件代理的脚本，从 jQuery 1.4 开始，可以跨浏览器正常使用。
+	</p>
+</div>
+<h3>
+	Additional Notes（其他注意事项）:
+</h3>
+<div class="longdesc">
+	<ul>
+		<li>
+			表单及他们的子元素不应该使元素名称或ID属性冲突，比如<code>submit</code>, <code>length</code>, 或 <code>method</code>。名称冲突可能会导致混乱的失败。对于一个完整的规则列表，并检查这些问题标记。
+		</li>
+		<li>
+			<code>.submit()</code>方法只是作为<code>.on( "submit", handler )</code>的一个速记写法，移除该事件可以使用<code>.off(
+                            "submit"
+                            )</code>。
+		</li>
+	</ul>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">如果你想根据一个标识来阻止表单被提交的话，可以像下面这样做：</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;
+ 
+  p { margin:0; color:blue; }
+  div,p { margin-left:10px; }
+  span { color:red; }
+  &lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Type 'correct' to validate.&lt;/p&gt;
+  &lt;form action="javascript:alert('success!');"&gt;
+    &lt;div&gt;
+      &lt;input type="text" /&gt;
+ 
+      &lt;input type="submit" /&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+  &lt;span&gt;&lt;/span&gt;
+&lt;script&gt;
+ 
+$("form").submit(function() {
+  if ($("input:first").val() == "correct") {
+    $("span").text("Validated...").show();
+    return true;
+  }
+  $("span").text("Not valid!").show().fadeOut(1000);
+  return false;
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+	</p>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8188" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+	</p>
+	<p>
+	</p>
+</div>
+<div class="entry-example" id="example-1">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">如果你想根据一个标识来阻止表单被提交的话，可以像下面这样做：</span> 
+	</p>
+	<div class="syntaxhighlighter javascript ">
+<pre class="prettyprint lang-js">$("form").submit( function () {
+  return this.some_flag_variable;
+} );</pre>
+	</div>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">触发页面上第一个表单的提交事件：</span> 
+</p>
+<pre class="prettyprint lang-js">$("form:first").submit();</pre>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

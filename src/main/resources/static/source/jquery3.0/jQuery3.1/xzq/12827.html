@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>:hidden</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">:hidden</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;hidden selector
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+	</p>
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader21" target="_blank">Array</a>&lt;Element(s)&gt;</code> 
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>选择所有隐藏的元素。
+	</p>
+	<ul class="signatures">
+		<li class="signature">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>jQuery(
+                        ":hidden" )
+			</h4>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			元素可以被认为是隐藏的几个情况：
+		</p>
+		<ul>
+			<li>
+				他们的CSS <code>display</code>值是<code>none</code>。
+			</li>
+			<li>
+				他们是<code>type="hidden"</code>的表单元素。
+			</li>
+			<li>
+				它们的宽度和高度都显式设置为0。
+			</li>
+			<li>
+				一个祖先元素是隐藏的，因此该元素是不会在页面上显示。
+			</li>
+		</ul>
+		<p>
+			元素<code>visibility: hidden</code>或<code>opacity: 0</code>被认为是可见的，因为他们仍然占据布局空间。在动画，隐藏一个元素，该元素被认为是可见的直到动画结束。
+		</p>
+		<p>
+			不在文档中的元素是被认为是不可见的;如果当他们被插入到文档中，jQuery没有办法知道他们是否是可见的，因为元素可见性依赖于适用的样式。
+		</p>
+		<p>
+			此选择器正好与<a href="http://www.shouce.ren/api/view/a/12828" class="book-a"><code>:visible</code></a>选择器相反。
+    因此，通过<code>:hidden</code>选择的每一个元素，不能通过<code>:visible</code>选择匹配，反之亦然。
+		</p>
+		<p>
+			在动画显示的元素期间，动画一旦开始，该元素就被认为是可见的。
+		</p>
+		<p>
+			在jQuery 1.3.2中，<code>:hidden</code>判断方式做了修改。如果他或者其任何父级元素不占据布局空间，这个元素就被认为是隐藏的。CSS的能见度属性（visibility）不影响这个选择器的判断（因此<code>$(elem).css('visibility','hidden').is(':hidden') == false</code> ）。更详细的大纲的变化:<a href="http://docs.jquery.com/Release:jQuery_1.3.2#:visible.2F:hidden_Overhauled">release notes</a>。
+		</p>
+		<p>
+			jQuery 3稍微修改了<code>:hidden</code> (以及<code>:visible</code>)的含义。
+这个版本开始，如果一个元素没有任何布局盒，那么它将被视为<code>:hidden</code>。例如，<code>br</code> 元素和没有内容的内联元素将不能通过<code>:hidden</code>选择器被选择。
+		</p>
+	</div>
+	<h3>
+		Additional Notes（其他注意事项）:
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				因为 <code>:hidden()</code> 是一个 jQuery 延伸出来的一个选择器。 并且不是的CSS规范的一部分, 使用<code>:hidden()</code>查询不能充分利用原生DOM提供的<code>querySelectorAll()</code>方法来提高性能。为了在现代浏览器上获得更佳的性能，请使用<a href="http://www.shouce.ren/api/view/a/12921" class="book-a"><code>.filter(":hidden")</code></a>代替。
+			</li>
+			<li>
+				使用这个选择器很大程度上可能具有性能问题，因为它可能会迫使浏览器重新渲染页面才能够确定他的可见性。通过其他方法跟踪元素的可见性，例如使用的一样式类，能够提供更好的性能。
+			</li>
+		</ul>
+	</div>
+	<p>
+	</p>
+	<div class="longdesc">
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		查找隐藏的 tr
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;table&gt;
+  &lt;tr style="display:none"&gt;&lt;td&gt;Value 1&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Value 2&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("tr:hidden")</code></pre>
+	<h5>
+		结果:
+	</h5>
+<pre><code>[ &lt;tr style="display:none"&gt;&lt;td&gt;Value 1&lt;/td&gt;&lt;/tr&gt; ]</code></pre>
+	<h4>
+		实例
+	</h4>
+	<p>
+		匹配type为hidden的元素
+	</p>
+	<h5>
+		HTML 代码:
+	</h5>
+<pre><code>&lt;form&gt;
+  &lt;input type="text" name="email" /&gt;
+  &lt;input type="hidden" name="id" /&gt;
+&lt;/form&gt;</code></pre>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$("input:hidden")</code></pre>
+</div>
+<p>
+</p>
+<h4>
+	实例
+</h4>
+<p>
+	示所有隐藏divs和统计隐藏的inputs。
+</p>
+<pre class="prettyprint lang-js">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;hidden demo&lt;/title&gt;
+  &lt;style&gt;
+  div {
+    width: 70px;
+    height: 40px;
+    background: #e7f;
+    margin: 5px;
+    float: left;
+  }
+  span {
+    display: block;
+    clear: left;
+    color: red;
+  }
+  .starthidden {
+    display: none;
+  }
+  &lt;/style&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;span&gt;&lt;/span&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div style="display:none;"&gt;Hider!&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+ 
+&lt;div class="starthidden"&gt;Hider!&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+ 
+&lt;form&gt;
+  &lt;input type="hidden"&gt;
+  &lt;input type="hidden"&gt;
+  &lt;input type="hidden"&gt;
+&lt;/form&gt;
+ 
+&lt;span&gt;&lt;/span&gt;
+ 
+&lt;script&gt;
+// In some browsers :hidden includes head, title, script, etc...
+var hiddenElements = $( "body" ).find( ":hidden" ).not( "script" );
+ 
+$( "span:first" ).text( "Found " + hiddenElements.length + " hidden elements total." );
+$( "div:hidden" ).show( 3000 );
+$( "span:last" ).text( "Found " + $( "input:hidden" ).length + " hidden inputs." );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7923" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

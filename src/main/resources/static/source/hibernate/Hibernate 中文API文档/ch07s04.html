@@ -1,0 +1,121 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>7.4.&#160;双向关联（Bidirectional associations）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch07.html" title="第&#160;7&#160;章&#160;关联关系映射">
+<link rel="prev" href="ch07s03.html" title="7.3.&#160;使用连接表的单向关联（Unidirectional associations with join tables）">
+<link rel="next" href="ch07s05.html" title="7.5.&#160;使用连接表的双向关联（Bidirectional associations with join tables）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="assoc-bidirectional"></a>7.4.&#160;双向关联（Bidirectional associations）</h2></div></div></div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="assoc-bidirectional-m21"></a>7.4.1.&#160;一对多（one to many) / 多对一（many to one）</h3></div></div></div>
+<p>
+            <span class="emphasis"><em>双向多对一关联</em></span> 是最常见的关联关系。（这也是标准的父/子关联关系。）
+        </p>
+<pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;many-to-one name="address" 
+        column="addressId"
+        not-null="true"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="people" inverse="true"&gt;
+        &lt;key column="addressId"/&gt;
+        &lt;one-to-many class="Person"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;</pre>
+<pre class="programlisting">
+create table Person ( personId bigint not null primary key, addressId bigint not null )
+create table Address ( addressId bigint not null primary key )
+        </pre>
+<p>
+            如果你使用<code class="literal">List</code>(或者其他有序集合类)，你需要设置外键对应的<code class="literal">key</code>列为 <code class="literal">not null</code>,让Hibernate来从集合端管理关联，维护每个元素的索引（通过设置<code class="literal">update="false"</code> and <code class="literal">insert="false"</code>来对另一端反向操作）。
+        </p>
+<pre class="programlisting">&lt;class name="Person"&gt;
+   &lt;id name="id"/&gt;
+   ...
+   &lt;many-to-one name="address"
+      column="addressId"
+      not-null="true"
+      insert="false"
+      update="false"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+   &lt;id name="id"/&gt;
+   ...
+   &lt;list name="people"&gt;
+      &lt;key column="addressId" not-null="true"/&gt;
+      &lt;list-index column="peopleIdx"/&gt;
+      &lt;one-to-many class="Person"/&gt;
+   &lt;/list&gt;
+&lt;/class&gt;</pre>
+<p>
+                假若集合映射的<code class="literal">&lt;key&gt;</code>元素对应的底层外键字段是<code class="literal">NOT NULL</code>的，那么为这一key元素定义<code class="literal">not-null="true"</code>是很重要的。不要仅仅为可能的嵌套<code class="literal">&lt;column&gt;</code>元素定义<code class="literal">not-null="true"</code>，<code class="literal">&lt;key&gt;</code>元素也是需要的。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="assoc-bidirectional-121"></a>7.4.2.&#160;一对一（one to one）</h3></div></div></div>
+<p>
+           <span class="emphasis"><em>基于外键关联的双向一对一关联</em></span>也很常见。
+        </p>
+<pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;many-to-one name="address" 
+        column="addressId" 
+        unique="true"
+        not-null="true"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+   &lt;one-to-one name="person" 
+        property-ref="address"/&gt;
+&lt;/class&gt;</pre>
+<pre class="programlisting">
+create table Person ( personId bigint not null primary key, addressId bigint not null unique )
+create table Address ( addressId bigint not null primary key )
+        </pre>
+<p>
+            <span class="emphasis"><em>基于主键关联的一对一关联</em></span>需要使用特定的id生成器。
+        </p>
+<pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;one-to-one name="address"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="id" column="personId"&gt;
+        &lt;generator class="foreign"&gt;
+            &lt;param name="property"&gt;person&lt;/param&gt;
+        &lt;/generator&gt;
+    &lt;/id&gt;
+    &lt;one-to-one name="person" 
+        constrained="true"/&gt;
+&lt;/class&gt;</pre>
+<pre class="programlisting">
+create table Person ( personId bigint not null primary key )
+create table Address ( personId bigint not null primary key )
+        </pre>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,351 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;9&#160;章&#160;继承映射(Inheritance Mappings)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch08s05.html" title="8.5.&#160;动态组件 （Dynamic components）">
+<link rel="next" href="ch09s02.html" title="9.2.&#160;限制">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="inheritance"></a>第&#160;9&#160;章&#160;继承映射(Inheritance Mappings)</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch09.html#inheritance-strategies">9.1.  三种策略</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch09.html#inheritance-tableperclass">9.1.1. 每个类分层结构一张表(Table per class hierarchy)</a></span></dt>
+<dt><span class="sect2"><a href="ch09.html#inheritance-tablepersubclass">9.1.2. 每个子类一张表(Table per subclass)</a></span></dt>
+<dt><span class="sect2"><a href="ch09.html#inheritance-tablepersubclass-discriminator">9.1.3. 每个子类一张表(Table per subclass)，使用辨别标志(Discriminator)</a></span></dt>
+<dt><span class="sect2"><a href="ch09.html#inheritance-mixing-tableperclass-tablepersubclass">9.1.4. 混合使用“每个类分层结构一张表”和“每个子类一张表”</a></span></dt>
+<dt><span class="sect2"><a href="ch09.html#inheritance-tableperconcrete">9.1.5. 每个具体类一张表(Table per concrete class)</a></span></dt>
+<dt><span class="sect2"><a href="ch09.html#inheritance-tableperconcreate-polymorphism">9.1.6. Table per concrete class, using implicit polymorphism</a></span></dt>
+<dt><span class="sect2"><a href="ch09.html#inheritace-mixingpolymorphism">9.1.7. 隐式多态和其他继承映射混合使用</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch09s02.html">9.2. 限制</a></span></dt>
+</dl>
+</div>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="inheritance-strategies"></a>9.1.&#160; 三种策略</h2></div></div></div>
+<p>
+               	Hibernate支持三种基本的继承映射策略：
+            </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+                每个类分层结构一张表(table per class hierarchy)
+            </p></li>
+<li><p>
+                每个子类一张表(table per subclass)
+            </p></li>
+<li><p>
+                每个具体类一张表(table per concrete class)
+            </p></li>
+</ul></div>
+<p>
+	            此外，Hibernate还支持第四种稍有不同的多态映射策略：
+	        </p>
+<div class="itemizedlist"><ul type="disc"><li><p>
+                隐式多态(implicit polymorphism)
+            </p></li></ul></div>
+<p>
+									对于同一个继承层次内的不同分支，可以采用不同的映射策略，然后用隐式多
+									态来完成跨越整个层次的多态。但是在同一个<code class="literal">&lt;class&gt;</code>根元素
+									下，Hibernate不支持混合了元素<code class="literal">&lt;subclass&gt;</code>、
+									<code class="literal">&lt;joined-subclass&gt;</code>和<code class="literal">&lt;union-subclass&gt;</code>
+									的映射。在同一个<code class="literal">&lt;class&gt;</code>元素下，可以混合使用
+									“每个类分层结构一张表”（table per hierarchy） 和“每个子类一张表”（table per subclass）
+									这两种映射策略，这是通过结合元素<code class="literal">&lt;subclass&gt;</code>和
+									<code class="literal">&lt;join&gt;</code>来实现的（见后）。
+									
+            </p>
+<p>
+			在多个映射文件中，可以直接在<code class="literal">hibernate-mapping</code>根下定义<code class="literal">subclass</code>，<code class="literal">union-subclass</code>和<code class="literal">joined-subclass</code>。也就是说，你可以仅加入一个新的映射文件来扩展类层次。你必须在subclass的映射中指明<code class="literal">extends</code>属性，给出一个之前定义的超类的名字。注意，在以前，这一功能对映射文件的顺序有严格的要求，从Hibernate 3开始，使用extends关键字的时侯，对映射文件的顺序不再有要求；但在每个映射文件里，超类必须在子类之前定义。
+		</p>
+<pre class="programlisting">
+ &lt;hibernate-mapping&gt;
+     &lt;subclass name="DomesticCat" extends="Cat" discriminator-value="D"&gt;
+          &lt;property name="name" type="string"/&gt;
+     &lt;/subclass&gt;
+ &lt;/hibernate-mapping&gt;</pre>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="inheritance-tableperclass"></a>9.1.1.&#160;每个类分层结构一张表(Table per class hierarchy)</h3></div></div></div>
+<p>
+                假设我们有接口<code class="literal">Payment</code>和它的几个实现类：
+                <code class="literal">CreditCardPayment</code>, <code class="literal">CashPayment</code>, 
+                和<code class="literal">ChequePayment</code>。则“每个类分层结构一张表”(Table per 
+                class hierarchy)的映射代码如下所示：
+            </p>
+<pre class="programlisting">&lt;class name="Payment" table="PAYMENT"&gt;
+    &lt;id name="id" type="long" column="PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;discriminator column="PAYMENT_TYPE" type="string"/&gt;
+    &lt;property name="amount" column="AMOUNT"/&gt;
+    ...
+    &lt;subclass name="CreditCardPayment" discriminator-value="CREDIT"&gt;
+        &lt;property name="creditCardType" column="CCTYPE"/&gt;
+        ...
+    &lt;/subclass&gt;
+    &lt;subclass name="CashPayment" discriminator-value="CASH"&gt;
+        ...
+    &lt;/subclass&gt;
+    &lt;subclass name="ChequePayment" discriminator-value="CHEQUE"&gt;
+        ...
+    &lt;/subclass&gt;
+&lt;/class&gt;</pre>
+<p>
+                采用这种策略只需要一张表即可。它有一个很大的限制：要求那些由子类定义的字段，
+                如<code class="literal">CCTYPE</code>，不能有<code class="literal">非空(NOT NULL)</code>约束。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="inheritance-tablepersubclass"></a>9.1.2.&#160;每个子类一张表(Table per subclass)</h3></div></div></div>
+<p>
+                对于上例中的几个类而言，采用“每个子类一张表”的映射策略，代码如下所示：
+            </p>
+<pre class="programlisting">&lt;class name="Payment" table="PAYMENT"&gt;
+    &lt;id name="id" type="long" column="PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;property name="amount" column="AMOUNT"/&gt;
+    ...
+    &lt;joined-subclass name="CreditCardPayment" table="CREDIT_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+    &lt;joined-subclass name="CashPayment" table="CASH_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        &lt;property name="creditCardType" column="CCTYPE"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+    &lt;joined-subclass name="ChequePayment" table="CHEQUE_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+&lt;/class&gt;</pre>
+<p>
+                需要四张表。三个子类表通过主键关联到超类表(因而关系模型实际上是一对一关联)。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="inheritance-tablepersubclass-discriminator"></a>9.1.3.&#160;每个子类一张表(Table per subclass)，使用辨别标志(Discriminator)</h3></div></div></div>
+<p>
+                注意，对“每个子类一张表”的映射策略，Hibernate的实现不需要辨别字段，而其他
+                的对象/关系映射工具使用了一种不同于Hibernate的实现方法，该方法要求在超类
+                表中有一个类型辨别字段(type discriminator column)。Hibernate采用的方法更
+                难实现，但从关系（数据库）的角度来看，按理说它更正确。若你愿意使用带有辨别字
+                段的“每个子类一张表”的策略，你可以结合使用<code class="literal">&lt;subclass&gt;</code>
+                与<code class="literal">&lt;join&gt;</code>，如下所示：
+            </p>
+<pre class="programlisting">&lt;class name="Payment" table="PAYMENT"&gt;
+    &lt;id name="id" type="long" column="PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;discriminator column="PAYMENT_TYPE" type="string"/&gt;
+    &lt;property name="amount" column="AMOUNT"/&gt;
+    ...
+    &lt;subclass name="CreditCardPayment" discriminator-value="CREDIT"&gt;
+        &lt;join table="CREDIT_PAYMENT"&gt;
+            &lt;key column="PAYMENT_ID"/&gt;
+            &lt;property name="creditCardType" column="CCTYPE"/&gt;
+            ...
+        &lt;/join&gt;
+    &lt;/subclass&gt;
+    &lt;subclass name="CashPayment" discriminator-value="CASH"&gt;
+        &lt;join table="CASH_PAYMENT"&gt;
+            &lt;key column="PAYMENT_ID"/&gt;
+            ...
+        &lt;/join&gt;
+    &lt;/subclass&gt;
+    &lt;subclass name="ChequePayment" discriminator-value="CHEQUE"&gt;
+        &lt;join table="CHEQUE_PAYMENT" fetch="select"&gt;
+            &lt;key column="PAYMENT_ID"/&gt;
+            ...
+        &lt;/join&gt;
+    &lt;/subclass&gt;
+&lt;/class&gt;</pre>
+<p>
+                可选的声明<code class="literal">fetch="select"</code>，是用来告诉Hibernate，在查询超类时，
+                不要使用外部连接(outer join)来抓取子类<code class="literal">ChequePayment</code>的数据。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="inheritance-mixing-tableperclass-tablepersubclass"></a>9.1.4.&#160;混合使用“每个类分层结构一张表”和“每个子类一张表”</h3></div></div></div>
+<p>
+                你甚至可以采取如下方法混和使用“每个类分层结构一张表”和“每个子类一张表”这两种策略：
+            </p>
+<pre class="programlisting">&lt;class name="Payment" table="PAYMENT"&gt;
+    &lt;id name="id" type="long" column="PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;discriminator column="PAYMENT_TYPE" type="string"/&gt;
+    &lt;property name="amount" column="AMOUNT"/&gt;
+    ...
+    &lt;subclass name="CreditCardPayment" discriminator-value="CREDIT"&gt;
+        &lt;join table="CREDIT_PAYMENT"&gt;
+            &lt;property name="creditCardType" column="CCTYPE"/&gt;
+            ...
+        &lt;/join&gt;
+    &lt;/subclass&gt;
+    &lt;subclass name="CashPayment" discriminator-value="CASH"&gt;
+        ...
+    &lt;/subclass&gt;
+    &lt;subclass name="ChequePayment" discriminator-value="CHEQUE"&gt;
+        ...
+    &lt;/subclass&gt;
+&lt;/class&gt;</pre>
+<p>
+                对上述任何一种映射策略而言，指向根类<code class="literal">Payment</code>的
+                关联是使用<code class="literal">&lt;many-to-one&gt;</code>进行映射的。
+            </p>
+<pre class="programlisting">&lt;many-to-one name="payment" column="PAYMENT_ID" class="Payment"/&gt;</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="inheritance-tableperconcrete"></a>9.1.5.&#160;每个具体类一张表(Table per concrete class)</h3></div></div></div>
+<p>
+                对于“每个具体类一张表”的映射策略，可以采用两种方法。第一种方法是使用
+                <code class="literal">&lt;union-subclass&gt;</code>。
+            </p>
+<pre class="programlisting">&lt;class name="Payment"&gt;
+    &lt;id name="id" type="long" column="PAYMENT_ID"&gt;
+        &lt;generator class="sequence"/&gt;
+    &lt;/id&gt;
+    &lt;property name="amount" column="AMOUNT"/&gt;
+    ...
+    &lt;union-subclass name="CreditCardPayment" table="CREDIT_PAYMENT"&gt;
+        &lt;property name="creditCardType" column="CCTYPE"/&gt;
+        ...
+    &lt;/union-subclass&gt;
+    &lt;union-subclass name="CashPayment" table="CASH_PAYMENT"&gt;
+        ...
+    &lt;/union-subclass&gt;
+    &lt;union-subclass name="ChequePayment" table="CHEQUE_PAYMENT"&gt;
+        ...
+    &lt;/union-subclass&gt;
+&lt;/class&gt;</pre>
+<p>
+                这里涉及三张与子类相关的表。每张表为对应类的所有属性（包括从超类继承的属性）定义相应字段。
+            </p>
+<p>
+                这种方式的局限在于，如果一个属性在超类中做了映射，其字段名必须与所有子类
+                表中定义的相同。(我们可能会在Hibernate的后续发布版本中放宽此限制。) 
+                不允许在联合子类(union subclass)的继承层次中使用标识生成器策略(identity generator strategy), 
+                实际上, 主键的种子(primary key seed)不得不为同一继承层次中的全部被联合子类所共用.
+            </p>
+<p>
+            假若超类是抽象类，请使用<code class="literal">abstract="true"</code>。当然，假若它不是抽象的，需要一个额外的表（上面的例子中，默认是<code class="literal">PAYMENT</code>），来保存超类的实例。
+        </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div>
+<div><h3 class="title">
+<a name="inheritance-tableperconcreate-polymorphism"></a>9.1.6.&#160;Table per concrete class, using implicit polymorphism</h3></div>
+<div><h3 class="title">
+<a name="inheritance-tableperconcreate-polymorphism"></a>9.1.6.&#160;Table per concrete class, using implicit polymorphism</h3></div>
+</div></div>
+<p>
+                另一种可供选择的方法是采用隐式多态：
+            </p>
+<pre class="programlisting">&lt;class name="CreditCardPayment" table="CREDIT_PAYMENT"&gt;
+    &lt;id name="id" type="long" column="CREDIT_PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;property name="amount" column="CREDIT_AMOUNT"/&gt;
+    ...
+&lt;/class&gt;
+
+&lt;class name="CashPayment" table="CASH_PAYMENT"&gt;
+    &lt;id name="id" type="long" column="CASH_PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;property name="amount" column="CASH_AMOUNT"/&gt;
+    ...
+&lt;/class&gt;
+
+&lt;class name="ChequePayment" table="CHEQUE_PAYMENT"&gt;
+    &lt;id name="id" type="long" column="CHEQUE_PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;property name="amount" column="CHEQUE_AMOUNT"/&gt;
+    ...
+&lt;/class&gt;</pre>
+<p>
+                注意，我们没有在任何地方明确的提及接口<code class="literal">Payment</code>。同时注意
+                <code class="literal">Payment</code>的属性在每个子类中都进行了映射。如果你想避免重复，
+                可以考虑使用XML实体(例如：位于<code class="literal">DOCTYPE</code>声明内的
+                <code class="literal">[ &lt;!ENTITY allproperties SYSTEM "allproperties.xml"&gt; ]</code>
+                和映射中的<code class="literal">&amp;allproperties;</code>)。
+            </p>
+<p>
+                这种方法的缺陷在于，在Hibernate执行多态查询时(polymorphic queries)无法生成带
+                <code class="literal">UNION</code>的SQL语句。
+            </p>
+<p>
+                对于这种映射策略而言，通常用<code class="literal">&lt;any&gt;</code>来实现到
+                <code class="literal">Payment</code>的多态关联映射。
+            </p>
+<pre class="programlisting">&lt;any name="payment" meta-type="string" id-type="long"&gt;
+    &lt;meta-value value="CREDIT" class="CreditCardPayment"/&gt;
+    &lt;meta-value value="CASH" class="CashPayment"/&gt;
+    &lt;meta-value value="CHEQUE" class="ChequePayment"/&gt;
+    &lt;column name="PAYMENT_CLASS"/&gt;
+    &lt;column name="PAYMENT_ID"/&gt;
+&lt;/any&gt;</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="inheritace-mixingpolymorphism"></a>9.1.7.&#160;隐式多态和其他继承映射混合使用</h3></div></div></div>
+<p>
+                对这一映射还有一点需要注意。因为每个子类都在各自独立的元素<code class="literal">&lt;class&gt;</code>
+                中映射(并且<code class="literal">Payment</code>只是一个接口)，每个子类可以很容易的成为另一
+                个继承体系中的一部分！(你仍然可以对接口<code class="literal">Payment</code>使用多态查询。)
+            </p>
+<pre class="programlisting">&lt;class name="CreditCardPayment" table="CREDIT_PAYMENT"&gt;
+    &lt;id name="id" type="long" column="CREDIT_PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;discriminator column="CREDIT_CARD" type="string"/&gt;
+    &lt;property name="amount" column="CREDIT_AMOUNT"/&gt;
+    ...
+    &lt;subclass name="MasterCardPayment" discriminator-value="MDC"/&gt;
+    &lt;subclass name="VisaPayment" discriminator-value="VISA"/&gt;
+&lt;/class&gt;
+
+&lt;class name="NonelectronicTransaction" table="NONELECTRONIC_TXN"&gt;
+    &lt;id name="id" type="long" column="TXN_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    ...
+    &lt;joined-subclass name="CashPayment" table="CASH_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        &lt;property name="amount" column="CASH_AMOUNT"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+    &lt;joined-subclass name="ChequePayment" table="CHEQUE_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        &lt;property name="amount" column="CHEQUE_AMOUNT"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+&lt;/class&gt;</pre>
+<p>
+                我们还是没有明确的提到<code class="literal">Payment</code>。
+                如果我们针对接口<code class="literal">Payment</code>执行查询 
+                ——如<code class="literal">from Payment</code>—— Hibernate
+                自动返回<code class="literal">CreditCardPayment</code>(和它的子类，因为
+                它们也实现了接口<code class="literal">Payment</code>)、
+                <code class="literal">CashPayment</code>和<code class="literal">Chequepayment</code>的实例，
+                但不返回<code class="literal">NonelectronicTransaction</code>的实例。
+            </p>
+</div>
+</div>
+</div></body>
+</html>

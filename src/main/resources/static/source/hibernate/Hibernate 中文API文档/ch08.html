@@ -1,0 +1,134 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;8&#160;章&#160;组件（Component）映射</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch07s06.html" title="7.6.&#160;更复杂的关联映射">
+<link rel="next" href="ch08s02.html" title="8.2.&#160;在集合中出现的依赖对象 (Collections of dependent objects)">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="components"></a>第&#160;8&#160;章&#160;组件（Component）映射</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch08.html#components-dependentobjects">8.1. 依赖对象（Dependent objects）</a></span></dt>
+<dt><span class="sect1"><a href="ch08s02.html">8.2. 在集合中出现的依赖对象 (Collections of dependent objects)</a></span></dt>
+<dt><span class="sect1"><a href="ch08s03.html">8.3. 组件作为Map的索引（Components as Map indices ）</a></span></dt>
+<dt><span class="sect1"><a href="ch08s04.html">8.4. 组件作为联合标识符(Components as composite identifiers)</a></span></dt>
+<dt><span class="sect1"><a href="ch08s05.html">8.5. 动态组件 （Dynamic components）</a></span></dt>
+</dl>
+</div>
+<p>
+      <span class="emphasis"><em>组件</em></span>(Component)这个概念在Hibernate中几处不同的地方为了不同的目的被重复使用.
+  </p>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="components-dependentobjects"></a>8.1.&#160;依赖对象（Dependent objects）</h2></div></div></div>
+<p>
+        组件(Component)是一个被包含的对象，在持久化的过程中，它被当作值类型，而并非一个实体的引用。在这篇文档中，组件这一术语指的是面向对象的合成概念（而并不是系统构架层次上的组件的概念）。举个例子, 你对人(Person)这个概念可以像下面这样来建模：
+    </p>
+<pre class="programlisting">public class Person {
+    private java.util.Date birthday;
+    private Name name;
+    private String key;
+    public String getKey() {
+        return key;
+    }
+    private void setKey(String key) {
+        this.key=key;
+    }
+    public java.util.Date getBirthday() {
+        return birthday;
+    }
+    public void setBirthday(java.util.Date birthday) {
+        this.birthday = birthday;
+    }
+    public Name getName() {
+        return name;
+    }
+    public void setName(Name name) {
+        this.name = name;
+    }
+    ......
+    ......
+}</pre>
+<pre class="programlisting">public class Name {
+    char initial;
+    String first;
+    String last;
+    public String getFirst() {
+        return first;
+    }
+    void setFirst(String first) {
+        this.first = first;
+    }
+    public String getLast() {
+        return last;
+    }
+    void setLast(String last) {
+        this.last = last;
+    }
+    public char getInitial() {
+        return initial;
+    }
+    void setInitial(char initial) {
+        this.initial = initial;
+    }
+}</pre>
+<p>
+            在持久化的过程中,<code class="literal">姓名(Name)</code>可以作为<code class="literal">人(Person)</code>的一个组件。需要注意的是:你应该为<code class="literal">姓名</code>的持久化属性定义getter和setter方法,但是你不需要实现任何的接口或申明标识符字段。
+        </p>
+<p>
+            以下是这个例子的Hibernate映射文件:
+        </p>
+<pre class="programlisting">&lt;class name="eg.Person" table="person"&gt;
+    &lt;id name="Key" column="pid" type="string"&gt;
+        &lt;generator class="uuid"/&gt;
+    &lt;/id&gt;
+    &lt;property name="birthday" type="date"/&gt;
+    &lt;component name="Name" class="eg.Name"&gt; &lt;!-- class attribute optional --&gt;
+        &lt;property name="initial"/&gt;
+        &lt;property name="first"/&gt;
+        &lt;property name="last"/&gt;
+    &lt;/component&gt;
+&lt;/class&gt;</pre>
+<p>
+        人员(Person)表中将包括<code class="literal">pid</code>,
+        <code class="literal">birthday</code>,
+        <code class="literal">initial</code>,
+        <code class="literal">first</code>和
+        <code class="literal">last</code>等字段。</p>
+<p>
+        就像所有的值类型一样, 组件不支持共享引用。
+        换句话说，两个人可能重名，但是两个Person对象应该包含两个独立的Name对象，只不过这两个Name对象具有“同样”的值。
+        组件的值可以为空，其定义如下。
+        每当Hibernate重新加载一个包含组件的对象,如果该组件的所有字段为空，Hibernate将假定整个组件为空。
+        在大多数情况下,这样假定应该是没有问题的。
+    </p>
+<p>
+        组件的属性可以是任意一种Hibernate类型（包括集合, 多对多关联，
+        以及其它组件等等）。嵌套组件不应该被当作一种特殊的应用(Nested components should not be considered an
+        exotic usage)。 Hibernate倾向于支持细致的(fine-grained)对象模型。
+    </p>
+<p>
+        <code class="literal">&lt;component&gt;</code> 元素还允许有 <code class="literal">&lt;parent&gt;</code>子元素，用来表明component类中的一个属性是指向包含它的实体的引用。
+    </p>
+<pre class="programlisting">&lt;class name="eg.Person" table="person"&gt;
+    &lt;id name="Key" column="pid" type="string"&gt;
+        &lt;generator class="uuid"/&gt;
+    &lt;/id&gt;
+    &lt;property name="birthday" type="date"&gt;
+    &lt;component name="Name" class="eg.Name" unique="true"&gt;
+        &lt;parent name="namedPerson"/&gt; &lt;!-- reference back to the Person --&gt;
+        &lt;property name="initial"/&gt;
+        &lt;property name="first"/&gt;
+        &lt;property name="last"/&gt;
+    &lt;/component&amp;gt;
+&lt;/class&gt;</pre>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,102 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>10.11.&#160;传播性持久化(transitive persistence)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch10.html" title="第&#160;10&#160;章&#160;与对象共事">
+<link rel="prev" href="ch10s10.html" title="10.10.&#160;Session刷出(flush)">
+<link rel="next" href="ch10s12.html" title="10.12.&#160;使用元数据">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="objectstate-transitive"></a>10.11.&#160;传播性持久化(transitive persistence)</h2></div></div></div>
+<p>
+           	对每一个对象都要执行保存，删除或重关联操作让人感觉有点麻烦，尤其是在处理许多彼此关联的对象的时候。
+             一个常见的例子是父子关系。考虑下面的例子:
+        </p>
+<p>
+        	如果一个父子关系中的子对象是值类型(value typed)（例如，地址或字符串的集合）的，他们的生命周期会依赖于父对象，可以享受方便的级联操作(Cascading)，不需要额外的动作。
+			父对象被保存时，这些值类型(value typed)子对象也将被保存；父对象被删除时，子对象也将被删除。
+			这对将一个子对象从集合中移除是同样有效：Hibernate会检测到，并且因为值类型(value typed)的对象不可能被其他对象引用，所以Hibernate会在数据库中删除这个子对象。
+        </p>
+<p>
+        	现在考虑同样的场景，不过父子对象都是实体(entities)类型，而非值类型(value typed)（例如，类别与个体，或母猫和小猫）。
+			实体有自己的生命期，允许共享对其的引用（因此从集合中移除一个实体，不意味着它可以被删除），
+			并且实体到其他关联实体之间默认没有级联操作的设置。
+            Hibernate默认不实现所谓的<span class="emphasis"><em>可到达即持久化（persistence by reachability）</em></span>的策略。
+        </p>
+<p>
+        	每个Hibernate session的基本操作 - 包括 <code class="literal">persist(), merge(),
+            saveOrUpdate(), delete(), lock(), refresh(), evict(), replicate()</code> - 都有对应的级联风格(cascade style)。
+    		这些级联风格(cascade style)风格分别命名为 <code class="literal">create, 
+            merge, save-update, delete, lock, refresh, evict, replicate</code>。
+            如果你希望一个操作被顺着关联关系级联传播，你必须在映射文件中指出这一点。例如：
+        </p>
+<pre class="programlisting">&lt;one-to-one name="person" cascade="persist"/&gt;</pre>
+<p>
+            级联风格(cascade style)是可组合的:
+        </p>
+<pre class="programlisting">&lt;one-to-one name="person" cascade="persist,delete,lock"/&gt;</pre>
+<p>
+            你可以使用<code class="literal">cascade="all"</code>来指定<span class="emphasis"><em>全部</em></span>操作都顺着关联关系级联(cascaded)。
+			默认值是<code class="literal">cascade="none"</code>，即任何操作都不会被级联(cascaded)。
+        </p>
+<p>
+        	注意有一个特殊的级联风格(cascade style) <code class="literal">delete-orphan</code>，只应用于one-to-many关联，表明<code class="literal">delete()</code>操作
+        	应该被应用于所有从关联中删除的对象。
+        </p>
+<p>
+            建议:
+        </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                	通常在<code class="literal">&lt;many-to-one&gt;</code>或<code class="literal">&lt;many-to-many&gt;</code>关系中应用级联(cascade)没什么意义。
+					级联(cascade)通常在 <code class="literal">&lt;one-to-one&gt;</code>和<code class="literal">&lt;one-to-many&gt;</code>关系中比较有用。
+                </p></li>
+<li><p>
+                	如果子对象的寿命限定在父亲对象的寿命之内，可通过指定<code class="literal">cascade="all,delete-orphan"</code>将其变为<span class="emphasis"><em>自动生命周期管理的对象(lifecycle object)</em></span>。
+                </p></li>
+<li><p>
+                	其他情况，你可根本不需要级联(cascade)。但是如果你认为你会经常在某个事务中同时用到父对象与子对象，并且你希望少打点儿字，可以考虑使用<code class="literal">cascade="persist,merge,save-update"</code>。
+                </p></li>
+</ul></div>
+<p>
+        	可以使用<code class="literal">cascade="all"</code>将一个关联关系（无论是对值对象的关联，或者对一个集合的关联）标记为<span class="emphasis"><em>父/子</em></span>关系的关联。
+        	这样对父对象进行save/update/delete操作就会导致子对象也进行save/update/delete操作。
+        </p>
+<p>
+        	此外，一个持久的父对象对子对象的浅引用(mere reference)会导致子对象被同步save/update。
+        	不过，这个隐喻(metaphor)的说法并不完整。除非关联是<code class="literal">&lt;one-to-many&gt;</code>关联并且被标记为<code class="literal">cascade="delete-orphan"</code>，
+        	否则父对象失去对某个子对象的引用<span class="emphasis"><em>不会</em></span>导致该子对象被自动删除。
+        	父子关系的级联(cascading)操作准确语义如下：
+        </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                    如果父对象被<code class="literal">persist()</code>，那么所有子对象也会被<code class="literal">persist()</code>
+                </p></li>
+<li><p>
+                     如果父对象被<code class="literal">merge()</code>，那么所有子对象也会被<code class="literal">merge()</code>
+                </p></li>
+<li><p>
+                     如果父对象被<code class="literal">save()</code>，<code class="literal">update()</code>或
+                    <code class="literal">saveOrUpdate()</code>，那么所有子对象则会被<code class="literal">saveOrUpdate()</code>
+                </p></li>
+<li><p>
+                	如果某个持久的父对象引用了瞬时(transient)或者脱管(detached)的子对象，那么子对象将会被<code class="literal">saveOrUpdate()</code>
+                </p></li>
+<li><p>
+                    如果父对象被删除，那么所有子对象也会被<code class="literal">delete()</code>
+                </p></li>
+<li><p>
+                	除非被标记为<code class="literal">cascade="delete-orphan"</code>（删除“孤儿”模式，此时不被任何一个父对象引用的子对象会被删除），
+                	否则子对象失掉父对象对其的引用时，<span class="emphasis"><em>什么事也不会发生</em></span>。
+                	如果有特殊需要，应用程序可通过显式调用delete()删除子对象。
+                </p></li>
+</ul></div>
+<p>
+            最后，注意操作的级联可能是在<span class="emphasis"><em>调用期(call time)</em></span>或者<span class="emphasis"><em>写入期(flush time)</em></span>作用到对象图上的。所有的操作，如果允许，都在操作被执行的时候级联到可触及的关联实体上。然而，<code class="literal">save-upate</code>和<code class="literal">delete-orphan</code>是在<code class="literal">Session</code> flush的时候才作用到所有可触及的被关联对象上的。
+        </p>
+</div></body>
+</html>

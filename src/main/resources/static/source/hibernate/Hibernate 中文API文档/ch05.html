@@ -1,0 +1,2259 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;5&#160;章&#160;对象/关系数据库映射基础(Basic O/R Mapping)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch04s05.html" title="4.5.&#160;元组片断映射(Tuplizers)">
+<link rel="next" href="ch05s02.html" title="5.2.&#160;Hibernate 的类型">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="mapping"></a>第&#160;5&#160;章&#160;对象/关系数据库映射基础(Basic O/R Mapping)</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch05.html#mapping-declaration">5.1. 映射定义（Mapping declaration）</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-doctype">5.1.1. Doctype</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-mapping">5.1.2. hibernate-mapping</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-class">5.1.3. class</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-id">5.1.4. id</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-compositeid">5.1.5. composite-id</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-discriminator">5.1.6. 鉴别器（discriminator）</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-version">5.1.7. 版本（version）(可选)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-timestamp">5.1.8. timestamp (可选)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-property">5.1.9. property</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-manytoone">5.1.10. 多对一（many-to-one）</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-onetoone">5.1.11. 一对一</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-naturalid">5.1.12. 自然ID(natural-id)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-component">5.1.13. 组件(component), 动态组件(dynamic-component)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-properties">5.1.14. properties</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-subclass">5.1.15. 子类(subclass)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-joinedsubclass">5.1.16. 连接的子类(joined-subclass)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-unionsubclass">5.1.17. 联合子类(union-subclass)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-join">5.1.18. 连接(join)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-key">5.1.19. 键(key)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-column">5.1.20. 字段和规则元素（column and formula elements）</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-declaration-import">5.1.21. 引用(import)</a></span></dt>
+<dt><span class="sect2"><a href="ch05.html#mapping-types-anymapping">5.1.22. any</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s02.html">5.2. Hibernate 的类型</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s02.html#mapping-types-entitiesvalues">5.2.1. 实体(Entities)和值(values)</a></span></dt>
+<dt><span class="sect2"><a href="ch05s02.html#mapping-types-basictypes">5.2.2. 基本值类型</a></span></dt>
+<dt><span class="sect2"><a href="ch05s02.html#mapping-types-custom">5.2.3. 自定义值类型</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s03.html">5.3. 多次映射同一个类</a></span></dt>
+<dt><span class="sect1"><a href="ch05s04.html">5.4. SQL中引号包围的标识符</a></span></dt>
+<dt><span class="sect1"><a href="ch05s05.html">5.5. 其他元数据(Metadata)</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch05s05.html#mapping-xdoclet">5.5.1. 使用 XDoclet 标记</a></span></dt>
+<dt><span class="sect2"><a href="ch05s05.html#mapping-annotations">5.5.2. 使用 JDK 5.0 的注解(Annotation)</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch05s06.html">5.6. 数据库生成属性（Generated Properties）</a></span></dt>
+<dt><span class="sect1"><a href="ch05s07.html">5.7. 辅助数据库对象(Auxiliary Database Objects)</a></span></dt>
+</dl>
+</div>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="mapping-declaration"></a>5.1.&#160;映射定义（Mapping declaration）</h2></div></div></div>
+<p>
+            对象和关系数据库之间的映射通常是用一个XML文档(XML document)来定义的。这个映射文档被设计为易读的，
+            并且可以手工修改。映射语言是以Java为中心，这意味着映射文档是按照持久化类的定义来创建的，
+            而非表的定义。
+        </p>
+<p>
+            请注意，虽然很多Hibernate用户选择手写XML映射文档，但也有一些工具可以用来生成映射文档，
+            包括XDoclet,Middlegen和AndroMDA。
+        </p>
+<p>
+            让我们从一个映射的例子开始：
+        </p>
+<a name="mapping-declaration-ex1"></a><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;
+
+&lt;hibernate-mapping package="eg"&gt;
+
+        &lt;class name="Cat" 
+            table="cats"
+            discriminator-value="C"&gt;
+                
+                &lt;id name="id"&gt;
+                        &lt;generator class="native"/&gt;
+                &lt;/id&gt;
+
+                &lt;discriminator column="subclass" 
+                     type="character"/&gt;
+
+                &lt;property name="weight"/&gt;
+
+                &lt;property name="birthdate"
+                    type="date" 
+                    not-null="true" 
+                    update="false"/&gt;
+
+                &lt;property name="color"
+                    type="eg.types.ColorUserType"
+                    not-null="true"
+                    update="false"/&gt;
+
+                &lt;property name="sex"
+                    not-null="true" 
+                    update="false"/&gt;
+
+                &lt;property name="litterId"
+                    column="litterId"
+                    update="false"/&gt;
+
+                &lt;many-to-one name="mother"
+                    column="mother_id"
+                    update="false"/&gt;
+
+                &lt;set name="kittens"
+                    inverse="true"
+                    order-by="litter_id"&gt;
+                        &lt;key column="mother_id"/&gt;
+                        &lt;one-to-many class="Cat"/&gt;
+                &lt;/set&gt;
+
+                &lt;subclass name="DomesticCat"
+                    discriminator-value="D"&gt;
+
+                        &lt;property name="name" 
+                            type="string"/&gt;
+
+                &lt;/subclass&gt;
+
+        &lt;/class&gt;
+
+        &lt;class name="Dog"&gt;
+                &lt;!-- mapping for Dog could go here --&gt;
+        &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre>
+<p>
+             我们现在开始讨论映射文档的内容。我们只描述Hibernate在运行时用到的文档元素和属性。
+             映射文档还包括一些额外的可选属性和元素，它们在使用schema导出工具的时候会影响导出的数据库schema结果。
+             （比如，<code class="literal"> not-null</code> 属性。）
+        </p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-doctype"></a>5.1.1.&#160;Doctype</h3></div></div></div>
+<p>
+                所有的XML映射都需要定义如上所示的doctype。DTD可以从上述URL中获取，
+                也可以从<code class="literal">hibernate-x.x.x/src/net/sf/hibernate</code>目录中、
+                或<code class="literal">hibernate.jar</code>文件中找到。Hibernate总是会首先在它的classptah中搜索DTD文件。
+                如果你发现它是通过连接Internet查找DTD文件，就对照你的classpath目录检查XML文件里的DTD声明。
+            </p>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="mapping-declaration-entity-resolution"></a>5.1.1.1.&#160;EntityResolver</h4></div></div></div>
+<p>
+                    As mentioned previously, Hibernate will first attempt to resolve DTDs in its classpath.  The
+                    manner in which it does this is by registering a custom <code class="literal">org.xml.sax.EntityResolver</code>
+                    implementation with the SAXReader it uses to read in the xml files.  This custom
+                    <code class="literal">EntityResolver</code> recognizes two different systemId namespaces.
+                    如前所述,Hibernate首先在其classpath中查找DTD。其行为是依靠在系统中注册的<code class="literal">org.xml.sax.EntityResolver</code>的一个具体实现，SAXReader依靠它来读取xml文件。这一 <code class="literal">EntityResolver</code> 实现能辨认两种不同的 systenId命名空间。
+                </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+                            若resolver遇到了一个以<code class="literal">http://hibernate.sourceforge.net/</code>为开头的systemId，它会辨认出是<code class="literal">hibernate namespace</code>，resolver就试图通过加载Hibernate类的classloader来查找这些实体。
+                        </p></li>
+<li><p>
+
+                            若resolver遇到了一个使用<code class="literal">classpath://</code>URL协议的systemId，它会辨认出这是<code class="literal">user namespace</code>,resolver试图通过(1)当前线程上下文的classloader和(2)加载Hibernate class的classloader来查找这些实体。
+                        </p></li>
+</ul></div>
+<p>
+                    使用user namespace(用户命名空间)的例子：
+                </p>
+<pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" [
+    &lt;!ENTITY types SYSTEM "classpath://your/domain/types.xml"&gt;
+]&gt;
+
+&lt;hibernate-mapping package="your.domain"&gt;
+    &lt;class name="MyEntity"&gt;
+        &lt;id name="id" type="my-custom-id-type"&gt;
+            ...
+        &lt;/id&gt;
+    &lt;class&gt;
+    &amp;types;
+&lt;/hibernate-mapping&gt;</pre>
+<p>
+                    <code class="literal">types.xml</code>是<code class="literal">your.domain</code>包中的一个资源，它包含了一个定制的<a href="ch05s02.html#mapping-types-custom" title="5.2.3.&#160;自定义值类型">第&#160;5.2.3&#160;节 “自定义值类型”</a>。
+                </p>
+</div>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-mapping"></a>5.1.2.&#160;hibernate-mapping</h3></div></div></div>
+<p>
+                这个元素包括一些可选的属性。<code class="literal">schema</code>和<code class="literal">catalog</code>属性，
+                指明了这个映射所连接（refer）的表所在的schema和/或catalog名称。
+                假若指定了这个属性，表名会加上所指定的schema和catalog的名字扩展为全限定名。假若没有指定，表名就不会使用全限定名。
+                <code class="literal">default-cascade</code>指定了未明确注明<code class="literal">cascade</code>属性的Java属性和
+                集合类Hibernate会采取什么样的默认级联风格。<code class="literal">auto-import</code>属性默认让我们在查询语言中可以使用
+                非全限定名的类名。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;hibernate-mapping
+         schema="schemaName"
+         catalog="catalogName"
+         default-cascade="cascade_style"
+         default-access="field|property|ClassName"
+         default-lazy="true|false"
+         auto-import="true|false"
+         package="package.name"
+ /&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                             <code class="literal">schema</code> (可选): 数据库schema的名称。
+                         </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                             <code class="literal">catalog</code> (可选): 数据库catalog的名称。
+                         </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                             <code class="literal">default-cascade</code> (可选 - 默认为 <code class="literal">none</code>): 
+                             默认的级联风格。
+                         </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                             <code class="literal">default-access</code> (可选 - 默认为 <code class="literal">property</code>):
+                             Hibernate用来访问所有属性的策略。可以通过实现<code class="literal">PropertyAccessor</code>接口
+                             自定义。
+                         </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                         		 <code class="literal">default-lazy</code> (可选 - 默认为 <code class="literal">true</code>):
+                             指定了未明确注明<code class="literal">lazy</code>属性的Java属性和集合类，
+                             Hibernate会采取什么样的默认加载风格。
+                         </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                         		 <code class="literal">auto-import</code> (可选 - 默认为 <code class="literal">true</code>):
+                             指定我们是否可以在查询语言中使用非全限定的类名（仅限于本映射文件中的类）。
+                         </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/7.png" alt="7" border="0"></td>
+<td valign="top" align="left"><p>
+                             <code class="literal">package</code> (可选): 指定一个包前缀，如果在映射文档中没有指定全限定的类名，
+                             就使用这个作为包名。
+                         </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                 假若你有两个持久化类，它们的非全限定名是一样的（就是两个类的名字一样，所在的包不一样--译者注），
+                 你应该设置<code class="literal">auto-import="false"</code>。如果你把一个“import过”的名字同时对应两个类，
+                  Hibernate会抛出一个异常。
+             </p>
+<p>
+                 注意<code class="literal">hibernate-mapping</code> 元素允许你嵌套多个如上所示的
+                 <code class="literal">&lt;class&gt;</code>映射。但是最好的做法（也许一些工具需要的）是一个
+                 持久化类（或一个类的继承层次）对应一个映射文件，并以持久化的超类名称命名，例如：
+                 <code class="literal">Cat.hbm.xml</code>，
+                 <code class="literal">Dog.hbm.xml</code>，或者如果使用继承，<code class="literal">Animal.hbm.xml</code>。
+             </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-class"></a>5.1.3.&#160;class</h3></div></div></div>
+<p>
+                你可以使用<code class="literal">class</code>元素来定义一个持久化类：
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;class
+        name="ClassName"
+        table="tableName"
+        discriminator-value="discriminator_value"
+        mutable="true|false"
+        schema="owner"
+        catalog="catalog"
+        proxy="ProxyInterface"
+        dynamic-update="true|false"
+        dynamic-insert="true|false"
+        select-before-update="true|false"
+        polymorphism="implicit|explicit"
+        where="arbitrary sql where condition"
+        persister="PersisterClass"
+        batch-size="N"
+        optimistic-lock="none|version|dirty|all"
+        lazy="true|false"
+        entity-name="EntityName"
+        check="arbitrary sql check condition"
+        rowid="rowid"
+        subselect="SQL expression"
+        abstract="true|false"
+        node="element-name"
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code> (可选): 持久化类（或者接口）的Java全限定名。
+                            如果这个属性不存在，Hibernate将假定这是一个非POJO的实体映射。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">table</code> (可选 - 默认是类的非全限定名):  对应的数据库表名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">discriminator-value</code> (可选 - 默认和类名一样): 
+                            一个用于区分不同的子类的值，在多态行为时使用。它可以接受的值包括
+                            <code class="literal">null</code> 和 <code class="literal">not null</code>。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">mutable</code> (可选，默认值为<code class="literal">true</code>):
+                            表明该类的实例是可变的或者不可变的。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">schema</code> (可选):
+                            覆盖在根<code class="literal">&lt;hibernate-mapping&gt;</code>元素中指定的schema名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">catalog</code> (可选):
+                            覆盖在根<code class="literal">&lt;hibernate-mapping&gt;</code>元素中指定的catalog名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/7.png" alt="7" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">proxy</code> (可选): 指定一个接口，在延迟装载时作为代理使用。
+                            你可以在这里使用该类自己的名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/8.png" alt="8" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">dynamic-update</code> (可选, 默认为 <code class="literal">false</code>): 
+                            指定用于<code class="literal">UPDATE</code> 的SQL将会在运行时动态生成，并且只更新那些改变过的字段。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/9.png" alt="9" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">dynamic-insert</code> (可选, 默认为 <code class="literal">false</code>): 
+                            指定用于<code class="literal">INSERT</code>的 SQL 将会在运行时动态生成，并且只包含那些非空值字段。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/10.png" alt="10" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">select-before-update</code> (可选, 默认为 <code class="literal">false</code>): 
+                            指定Hibernate除非确定对象真正被修改了（如果该值为true－译注），否则<span class="emphasis"><em>不会</em></span>执行SQL
+                             <code class="literal">UPDATE</code>操作。在特定场合（实际上，它只在一个瞬时对象（transient object）关联到一个
+                             新的session中时执行的update()中生效），这说明Hibernate会在<code class="literal">UPDATE</code>
+                             之前执行一次额外的SQL <code class="literal">SELECT</code>操作，来决定是否应该执行
+                             <code class="literal">UPDATE</code>。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/11.png" alt="11" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">polymorphism（多态）</code> (可选, 默认值为 <code class="literal">implicit (隐式)
+                            </code>): 界定是隐式还是显式的使用多态查询（这只在Hibernate的具体表继承策略中用到－译注）。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/12.png" alt="12" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">where</code> (可选) 指定一个附加的SQL<code class="literal">WHERE</code> 条件，
+                            在抓取这个类的对象时会一直增加这个条件。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/13.png" alt="13" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">persister</code> (可选): 指定一个定制的<code class="literal">ClassPersister</code>。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/14.png" alt="14" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">batch-size</code> (可选,默认是<code class="literal">1</code>) 指定一个用于
+                            根据标识符（identifier）抓取实例时使用的"batch size"（批次抓取数量）。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/15.png" alt="15" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">optimistic-lock（乐观锁定）</code> 
+                            (可选，默认是<code class="literal">version</code>): 决定乐观锁定的策略。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left">(16)</td>
+<td valign="top" align="left"><p>
+                            <code class="literal">lazy</code> (可选): 通过设置<code class="literal">lazy="false"</code>，
+                            所有的延迟加载（Lazy fetching）功能将被全部禁用（disabled）。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left">(17)</td>
+<td valign="top" align="left"><p>
+                            <code class="literal">entity-name</code> (可选，默认为类名): Hibernate3允许一个类进行多次映射（
+                            前提是映射到不同的表），并且允许使用Maps或XML代替Java层次的实体映射
+                            （也就是实现动态领域模型，不用写持久化类－译注）。
+                            更多信息请看<a href="ch04s04.html" title="4.4.&#160;动态模型(Dynamic models)">第&#160;4.4&#160;节 “动态模型(Dynamic models)”</a> and <a href="ch18.html" title="第&#160;18&#160;章&#160;XML映射">第&#160;18&#160;章 <i>XML映射</i></a>。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left">(18)</td>
+<td valign="top" align="left"><p>
+                            <code class="literal">check</code> (可选): 这是一个SQL表达式，
+                            用于为自动生成的schema添加多行（multi-row）约束<span class="emphasis"><em>检查</em></span>。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left">(19)</td>
+<td valign="top" align="left"><p>
+                            <code class="literal">rowid</code> (可选): Hibernate可以使用数据库支持的所谓的ROWIDs，例如：
+                            Oracle数据库，如果你设置这个可选的<code class="literal">rowid</code>，
+                            Hibernate可以使用额外的字段<code class="literal">rowid</code>实现快速更新。ROWID是这个功能实现的重点，
+                            它代表了一个存储元组（tuple）的物理位置。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left">(20)</td>
+<td valign="top" align="left"><p>
+                            <code class="literal">subselect</code> (可选): 它将一个不可变（immutable）并且只读的实体映射到一个数据库的
+                            子查询中。当你想用视图代替一张基本表的时候，这是有用的，但最好不要这样做。更多的介绍请看下面内容。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left">(21)</td>
+<td valign="top" align="left"><p>
+                            <code class="literal">abstract</code> (可选): 用于在<code class="literal">&lt;union-subclass&gt;</code>的继承结构
+                            （hierarchies）中标识抽象超类。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                若指明的持久化类实际上是一个接口，这也是完全可以接受的。
+                之后你可以用元素<code class="literal">&lt;subclass&gt;</code>来指定该接口的实际实现类。
+                你可以持久化任何<span class="emphasis"><em>static</em></span>（静态的）内部类。
+                你应该使用标准的类名格式来指定类名，<code class="literal">比如：Foo$Bar</code>。
+            </p>
+<p>
+                不可变类，<code class="literal">mutable="false"</code>不可以被应用程序更新或者删除。
+                这可以让Hibernate做一些小小的性能优化。
+            </p>
+<p>
+                可选的<code class="literal">proxy</code>属性允许延迟加载类的持久化实例。
+                Hibernate开始会返回实现了这个命名接口的CGLIB代理。当代理的某个方法被实际调用的时候，
+                真实的持久化对象才会被装载。参见下面的“用于延迟装载的代理”。
+            </p>
+<p><span class="emphasis"><em>Implicit</em></span> (隐式)的多态是指，如果查询时给出的是任何超类、该类实现的接口或者该类的
+            名字，都会返回这个类的实例；如果查询中给出的是子类的名字，则会返回子类的实例。
+                <span class="emphasis"><em>Explicit</em></span> （显式）的多态是指，只有在查询时给出明确的该类名字时才会返回这个类的实例；
+                同时只有在这个<code class="literal">&lt;class&gt;</code>的定义中作为<code class="literal">&lt;subclass&gt;</code>
+                或者<code class="literal">&lt;joined-subclass&gt;</code>出现的子类，才会可能返回。
+                在大多数情况下，默认的<code class="literal">polymorphism="implicit"</code>都是合适的。
+                显式的多态在有两个不同的类映射到同一个表的时候很有用。（允许一个“轻型”的类，只包含部分表字段）。
+            </p>
+<p>
+                <code class="literal">persister</code>属性可以让你定制这个类使用的持久化策略。
+                你可以指定你自己实现
+                <code class="literal">org.hibernate.persister.EntityPersister</code>的子类，你甚至可以完全从头开始编写一个
+                <code class="literal">org.hibernate.persister.ClassPersister</code>接口的实现，
+                比如是用储存过程调用、序列化到文件或者LDAP数据库来实现。
+                参阅<code class="literal">org.hibernate.test.CustomPersister</code>，这是一个简单的例子
+                （“持久化”到一个<code class="literal">Hashtable</code>）。
+            </p>
+<p>
+                请注意<code class="literal">dynamic-update</code>和<code class="literal">dynamic-insert</code>的设置并不会继承到子类，
+                所以在<code class="literal">&lt;subclass&gt;</code>或者<code class="literal">&lt;joined-subclass&gt;</code>元素中可能
+                需要再次设置。这些设置是否能够提高效率要视情形而定。请用你的智慧决定是否使用。
+            </p>
+<p>
+                使用<code class="literal">select-before-update</code>通常会降低性能。如果你重新连接一个脱管（detache）对象实例
+                到一个<code class="literal">Session</code>中时，它可以防止数据库不必要的触发update。
+                这就很有用了。
+            </p>
+<p>
+            	如果你打开了<code class="literal">dynamic-update</code>，你可以选择几种乐观锁定的策略：
+            </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+            					<code class="literal">version（版本检查）</code> 检查version/timestamp字段
+            				</p></li>
+<li><p>
+            					<code class="literal">all（全部）</code> 检查全部字段
+            				</p></li>
+<li><p>
+            					<code class="literal">dirty（脏检查）</code>只检察修改过的字段
+            				</p></li>
+<li><p>
+            					<code class="literal">none（不检查）</code>不使用乐观锁定
+            				</p></li>
+</ul></div>
+<p>
+            	我们<span class="emphasis"><em>非常</em></span>强烈建议你在Hibernate中使用version/timestamp字段来进行乐观锁定。
+            	对性能来说，这是最好的选择，并且这也是唯一能够处理在session外进行操作的策略（例如：
+            	在使用<code class="literal">Session.merge()</code>的时候）。
+            </p>
+<p>
+                对Hibernate映射来说视图和表是没有区别的，这是因为它们在数据层都是透明的（
+                注意：一些数据库不支持视图属性，特别是更新的时候）。有时你想使用视图，但却不能在数据库
+                中创建它（例如：在遗留的schema中）。这样的话，你可以映射一个不可变的（immutable）并且是
+                只读的实体到一个给定的SQL子查询表达式：
+            </p>
+<pre class="programlisting">&lt;class name="Summary"&gt;
+    &lt;subselect&gt;
+        select item.name, max(bid.amount), count(*)
+        from item
+        join bid on bid.item_id = item.id
+        group by item.name
+    &lt;/subselect&gt;
+    &lt;synchronize table="item"/&gt;
+    &lt;synchronize table="bid"/&gt;
+    &lt;id name="name"/&gt;
+    ...
+&lt;/class&gt;</pre>
+<p>
+                定义这个实体用到的表为同步（synchronize），确保自动刷新（auto-flush）正确执行，
+                并且依赖原实体的查询不会返回过期数据。<code class="literal">&lt;subselect&gt;</code>在属性元素
+                和一个嵌套映射元素中都可见。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-id"></a>5.1.4.&#160;id</h3></div></div></div>
+<p>
+                被映射的类<span class="emphasis"><em>必须</em></span>定义对应数据库表主键字段。大多数类有一个JavaBeans风格的属性，
+                为每一个实例包含唯一的标识。<code class="literal">&lt;id&gt;</code> 元素定义了该属性到数据库表主键字段的映射。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;id
+        name="propertyName"
+        type="typename"
+        column="column_name"
+        unsaved-value="null|any|none|undefined|id_value"
+        access="field|property|ClassName"
+        node="element-name|@attribute-name|element/@attribute|."&gt;
+
+        &lt;generator class="generatorClass"/&gt;
+&lt;/id&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code> (可选): 标识属性的名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">type</code> (可选): 标识Hibernate类型的名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">column</code> (可选 - 默认为属性名): 主键字段的名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">unsaved-value</code> (可选 - 默认为一个切合实际（sensible）的值): 
+                            一个特定的标识属性值，用来标志该实例是刚刚创建的，尚未保存。
+                            这可以把这种实例和从以前的session中装载过（可能又做过修改--译者注）
+                            但未再次持久化的实例区分开来。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">access</code> (可选 - 默认为<code class="literal">property</code>):
+                             Hibernate用来访问属性值的策略。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                如果 <code class="literal">name</code>属性不存在，会认为这个类没有标识属性。
+            </p>
+<p>
+                <code class="literal">unsaved-value</code> 属性在Hibernate3中几乎不再需要。
+            </p>
+<p>
+                还有一个另外的<code class="literal">&lt;composite-id&gt;</code>定义可以访问旧式的多主键数据。
+                我们强烈不建议使用这种方式。
+            </p>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="mapping-declaration-id-generator"></a>5.1.4.1.&#160;Generator</h4></div></div></div>
+<p>
+                可选的<code class="literal">&lt;generator&gt;</code>子元素是一个Java类的名字，
+                用来为该持久化类的实例生成唯一的标识。如果这个生成器实例需要某些配置值或者初始化参数，
+                用<code class="literal">&lt;param&gt;</code>元素来传递。
+            		</p>
+<pre class="programlisting">&lt;id name="id" type="long" column="cat_id"&gt;
+        &lt;generator class="org.hibernate.id.TableHiLoGenerator"&gt;
+                &lt;param name="table"&gt;uid_table&lt;/param&gt;
+                &lt;param name="column"&gt;next_hi_value_column&lt;/param&gt;
+        &lt;/generator&gt;
+&lt;/id&gt;</pre>
+<p>
+                    
+                    所有的生成器都实现<code class="literal">org.hibernate.id.IdentifierGenerator</code>接口。
+                    这是一个非常简单的接口；某些应用程序可以选择提供他们自己特定的实现。当然，
+                    Hibernate提供了很多内置的实现。下面是一些内置生成器的快捷名字：
+
+                    </p>
+<div class="variablelist"><dl>
+<dt><span class="term"><code class="literal">increment</code></span></dt>
+<dd><p>
+                                用于为<code class="literal">long</code>, <code class="literal">short</code>或者<code class="literal">int</code>类型生成
+                                唯一标识。只有在没有其他进程往同一张表中插入数据时才能使用。
+                                <span class="emphasis"><em>在集群下不要使用。</em></span>
+                            </p></dd>
+<dt><span class="term"><code class="literal">identity</code></span></dt>
+<dd><p>
+                                对DB2,MySQL, MS SQL Server, Sybase和HypersonicSQL的内置标识字段提供支持。
+                                返回的标识符是<code class="literal">long</code>, <code class="literal">short</code> 或者<code class="literal">int</code>类型的。
+                            </p></dd>
+<dt><span class="term"><code class="literal">sequence</code></span></dt>
+<dd><p>
+                                在DB2,PostgreSQL, Oracle, SAP DB, McKoi中使用序列（sequence)，
+                                而在Interbase中使用生成器(generator)。返回的标识符是<code class="literal">long</code>, 
+                                <code class="literal">short</code>或者 <code class="literal">int</code>类型的。
+                            </p></dd>
+<dt><span class="term"><code class="literal">hilo</code></span></dt>
+<dd><p><a name="mapping-declaration-id-hilodescription"></a>
+                                使用一个高/低位算法高效的生成<code class="literal">long</code>, <code class="literal">short</code>
+                                或者 <code class="literal">int</code>类型的标识符。给定一个表和字段（默认分别是
+                                <code class="literal">hibernate_unique_key</code> 和<code class="literal">next_hi</code>）作为高位值的来源。
+                                高/低位算法生成的标识符只在一个特定的数据库中是唯一的。
+                            </p></dd>
+<dt><span class="term"><code class="literal">seqhilo</code></span></dt>
+<dd><p>
+                                使用一个高/低位算法来高效的生成<code class="literal">long</code>, <code class="literal">short</code>
+                                或者 <code class="literal">int</code>类型的标识符，给定一个数据库序列（sequence)的名字。
+                            </p></dd>
+<dt><span class="term"><code class="literal">uuid</code></span></dt>
+<dd><p>
+                                用一个128-bit的UUID算法生成字符串类型的标识符，
+                                这在一个网络中是唯一的（使用了IP地址）。UUID被编码为一个32位16进制数字的字符串。
+                            </p></dd>
+<dt><span class="term"><code class="literal">guid</code></span></dt>
+<dd><p>
+                                在MS SQL Server 和 MySQL 中使用数据库生成的GUID字符串。
+                            </p></dd>
+<dt><span class="term"><code class="literal">native</code></span></dt>
+<dd><p>
+                                根据底层数据库的能力选择<code class="literal">identity</code>, <code class="literal">sequence</code> 
+                                或者<code class="literal">hilo</code>中的一个。
+                            </p></dd>
+<dt><span class="term"><code class="literal">assigned</code></span></dt>
+<dd><p>
+                                让应用程序在<code class="literal">save()</code>之前为对象分配一个标示符。这是
+                                <code class="literal">&lt;generator&gt;</code>元素没有指定时的默认生成策略。
+                            </p></dd>
+<dt><span class="term"><code class="literal">select</code></span></dt>
+<dd><p>
+                                通过数据库触发器选择一些唯一主键的行并返回主键值来分配一个主键。
+                            </p></dd>
+<dt><span class="term"><code class="literal">foreign</code></span></dt>
+<dd><p>
+                                使用另外一个相关联的对象的标识符。通常和<code class="literal">&lt;one-to-one&gt;</code>联合起来使用。
+                            </p></dd>
+<dt><span class="term"><code class="literal">sequence-identity</code></span></dt>
+<dd><p>
+                                一种特别的序列生成策略,使用数据库序列来生成实际值,但将它和JDBC3的getGeneratedKeys结合在一起,使得在插入语句执行的时候就返回生成的值。目前为止只有面向JDK 1.4的Oracle 10g驱动支持这一策略。注意，因为Oracle驱动程序的一个bug，这些插入语句的注释被关闭了。（原文：Note comments on these insert statements are disabled due to a bug in the Oracle drivers.）
+                            </p></dd>
+</dl></div>
+<p>
+
+                </p>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="mapping-declaration-id-hilo"></a>5.1.4.2.&#160;高/低位算法（Hi/Lo Algorithm）</h4></div></div></div>
+<p>
+                <code class="literal">hilo</code> 和 <code class="literal">seqhilo</code>生成器给出了两种hi/lo算法的实现，
+                这是一种很令人满意的标识符生成算法。第一种实现需要一个“特殊”的数据库表来保存下一个可用的“hi”值。
+                第二种实现使用一个Oracle风格的序列（在被支持的情况下）。
+            </p>
+<pre class="programlisting">&lt;id name="id" type="long" column="cat_id"&gt;
+        &lt;generator class="hilo"&gt;
+                &lt;param name="table"&gt;hi_value&lt;/param&gt;
+                &lt;param name="column"&gt;next_value&lt;/param&gt;
+                &lt;param name="max_lo"&gt;100&lt;/param&gt;
+        &lt;/generator&gt;
+&lt;/id&gt;</pre>
+<pre class="programlisting">&lt;id name="id" type="long" column="cat_id"&gt;
+        &lt;generator class="seqhilo"&gt;
+                &lt;param name="sequence"&gt;hi_value&lt;/param&gt;
+                &lt;param name="max_lo"&gt;100&lt;/param&gt;
+        &lt;/generator&gt;
+&lt;/id&gt;</pre>
+<p>
+                很不幸，你在为Hibernate自行提供<code class="literal">Connection</code>时无法使用<code class="literal">hilo</code>。
+                当Hibernate使用JTA获取应用服务器的数据源连接时,你必须正确地配置
+                <code class="literal">hibernate.transaction.manager_lookup_class</code>。
+            </p>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="mapping-declaration-id-uuid"></a>5.1.4.3.&#160;UUID算法（UUID Algorithm ）</h4></div></div></div>
+<p>
+                UUID包含：IP地址，JVM的启动时间（精确到1/4秒），系统时间和一个计数器值（在JVM中唯一）。
+                在Java代码中不可能获得MAC地址或者内存地址，所以这已经是我们在不使用JNI的前提下的能做的最好实现了。
+            </p>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="mapping-declaration-id-sequences"></a>5.1.4.4.&#160;标识字段和序列（Identity columns and Sequences）</h4></div></div></div>
+<p>
+                	对于内部支持标识字段的数据库(DB2,MySQL,Sybase,MS SQL)，你可以使用<code class="literal">identity</code>关键字生成。
+                	对于内部支持序列的数据库（DB2,Oracle, PostgreSQL, Interbase, McKoi,SAP DB),
+                	你可以使用<code class="literal">sequence</code>风格的关键字生成。
+                	这两种方式对于插入一个新的对象都需要两次SQL查询。
+            		</p>
+<pre class="programlisting">&lt;id name="id" type="long" column="person_id"&gt;
+        &lt;generator class="sequence"&gt;
+                &lt;param name="sequence"&gt;person_id_sequence&lt;/param&gt;
+        &lt;/generator&gt;
+&lt;/id&gt;</pre>
+<pre class="programlisting">&lt;id name="id" type="long" column="person_id" unsaved-value="0"&gt;
+        &lt;generator class="identity"/&gt;
+&lt;/id&gt;</pre>
+<p>
+                对于跨平台开发，<code class="literal">native</code>策略会从<code class="literal">identity</code>,
+                 <code class="literal">sequence</code> 和<code class="literal">hilo</code>中进行选择，选择哪一个，这取决于底层数据库的支持能力。
+            </p>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="mapping-declaration-id-assigned"></a>5.1.4.5.&#160;程序分配的标识符（Assigned Identifiers）</h4></div></div></div>
+<p>
+                如果你需要应用程序分配一个标示符（而非Hibernate来生成），你可以使用<code class="literal">assigned</code>
+                生成器。这种特殊的生成器会使用已经分配给对象的标识符属性的标识符值。
+                这个生成器使用一个自然键（natural key，有商业意义的列－译注）作为主键，而不是使用一个代理键（
+                surrogate key，没有商业意义的列－译注）。这是没有指定<code class="literal">&lt;generator&gt;</code>元素时的默认行为
+            </p>
+<p>
+                    当选择<code class="literal">assigned</code>生成器时，除非有一个version或timestamp属性，或者你定义了
+                    <code class="literal">Interceptor.isUnsaved()</code>，否则需要让Hiberante使用
+                    <code class="literal">unsaved-value="undefined"</code>，强制Hibernatet查询数据库来确定一个实例是瞬时的（transient）
+                    还是脱管的（detached）。
+                </p>
+</div>
+<div class="sect3" lang="zh-cn">
+<div class="titlepage"><div><div><h4 class="title">
+<a name="mapping-declaration-id-select"></a>5.1.4.6.&#160;触发器实现的主键生成器（Primary keys assigned by triggers）</h4></div></div></div>
+<p>
+                    仅仅用于遗留的schema中 (Hibernate不能使用触发器生成DDL)。
+                </p>
+<pre class="programlisting">&lt;id name="id" type="long" column="person_id"&gt;
+        &lt;generator class="select"&gt;
+                &lt;param name="key"&gt;socialSecurityNumber&lt;/param&gt;
+        &lt;/generator&gt;
+&lt;/id&gt;</pre>
+<p>
+                    在上面的例子中，类定义了一个命名为<code class="literal">socialSecurityNumber</code>的唯一值属性，
+                    它是一个自然键（natural key），命名为<code class="literal">person_id</code>的代理键（surrogate key）
+                    的值由触发器生成。
+                </p>
+</div>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-compositeid"></a>5.1.5.&#160;composite-id</h3></div></div></div>
+<pre class="programlisting">&lt;composite-id
+        name="propertyName"
+        class="ClassName"
+        mapped="true|false"
+        access="field|property|ClassName"
+        node="element-name|."
+        &gt;
+
+        &lt;key-property name="propertyName" type="typename" column="column_name"/&gt;
+        &lt;key-many-to-one name="propertyName class="ClassName" column="column_name"/&gt;
+        ......
+&lt;/composite-id&gt;</pre>
+<p>
+                如果表使用联合主键，你可以映射类的多个属性为标识符属性。
+                <code class="literal">&lt;composite-id&gt;</code>元素接受<code class="literal">&lt;key-property&gt;</code>
+                属性映射和<code class="literal">&lt;key-many-to-one&gt;</code>属性映射作为子元素。
+            </p>
+<pre class="programlisting">&lt;composite-id&gt;
+        &lt;key-property name="medicareNumber"/&gt;
+        &lt;key-property name="dependent"/&gt;
+&lt;/composite-id&gt;</pre>
+<p>
+                你的持久化类<span class="emphasis"><em>必须</em></span>重载<code class="literal">equals()</code>和
+                <code class="literal">hashCode()</code>方法，来实现组合的标识符的相等判断。
+                实现<code class="literal">Serializable</code>接口也是必须的。
+            </p>
+<p>
+                不幸的是，这种组合关键字的方法意味着一个持久化类是它自己的标识。除了对象自己之外，
+                没有什么方便的“把手”可用。你必须初始化持久化类的实例，填充它的标识符属性，再<code class="literal">load()</code>
+                组合关键字关联的持久状态。我们把这种方法称为<span class="emphasis"><em>embedded（嵌入式）</em></span>的组合标识符，在重要的应用中不鼓励使用这种用法。
+            </p>
+<p>
+                第二种方法我们称为<span class="emphasis"><em>mapped(映射式)</em></span>组合标识符 (mapped composite identifier),<code class="literal">&lt;composite-id&gt;</code>元素中列出的标识属性不但在持久化类出现，还形成一个独立的标识符类。
+            </p>
+<pre class="programlisting">&lt;composite-id class="MedicareId" mapped="true"&gt;
+        &lt;key-property name="medicareNumber"/&gt;
+        &lt;key-property name="dependent"/&gt;
+&lt;/composite-id&gt;</pre>
+<p>
+                在这个例子中，组合标识符类<code class="literal">MedicareId</code>和实体类都含有<code class="literal">medicareNumber</code>和<code class="literal">dependent</code>属性。标识符类必须重载<code class="literal">equals()</code>和<code class="literal">hashCode()</code>并且实现<code class="literal">Serializable</code>接口。这种方法的缺点是出现了明显的代码重复。
+            </p>
+<p>
+                下面列出的属性是用来指定一个映射式组合标识符的：
+            </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                        <code class="literal">mapped</code> (可选, 默认为<code class="literal">false</code>):
+                        指明使用一个映射式组合标识符，其包含的属性映射同时在实体类和组合标识符类中出现。
+                    </p></li>
+<li><p>
+                        <code class="literal">class</code> (可选,但对映射式组合标识符必须指定): 
+                        作为组合标识符类使用的类名.
+                    </p></li>
+</ul></div>
+<p>
+                在<a href="ch08s04.html" title="8.4.&#160;组件作为联合标识符(Components as composite identifiers)">第&#160;8.4&#160;节 “组件作为联合标识符(Components as composite identifiers)”</a>一节中,我们会描述第三种方式,那就是把组合标识符实现为一个组件(component)类,这是更方便的方法。下面的属性仅对第三种方法有效：
+            </p>
+<div class="itemizedlist"><ul type="disc" compact>
+<li><p>
+                        <code class="literal">name</code> (可选,但对这种方法而言必须): 包含此组件标识符的组件类型的名字 (参阅第9章).
+                        
+                    </p></li>
+<li><p>
+                        <code class="literal">access</code> (可选 - 默认为<code class="literal">property</code>): 
+                        Hibernate应该使用的访问此属性值的策略
+                    </p></li>
+<li><p>
+                        <code class="literal">class</code> (可选 - 默认会用反射来自动判定属性类型
+                        ): 用来作为组合标识符的组件类的类名（参阅下一节）
+                        
+                    </p></li>
+</ul></div>
+<p>
+                第三种方式，被称为<span class="emphasis"><em>identifier component(标识符组件)</em></span>是我们对几乎所有应用都推荐使用的方式。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-discriminator"></a>5.1.6.&#160;鉴别器（discriminator）</h3></div></div></div>
+<p>
+                在"一棵对象继承树对应一个表"的策略中,<code class="literal">&lt;discriminator&gt;</code>元素是必需的,
+                它定义了表的鉴别器字段。鉴别器字段包含标志值，用于告知持久化层应该为某个特定的行创建哪一个子类的实例。
+                如下这些受到限制的类型可以使用： 
+                <code class="literal">string</code>, <code class="literal">character</code>, <code class="literal">integer</code>, 
+                <code class="literal">byte</code>, <code class="literal">short</code>, <code class="literal">boolean</code>, 
+                <code class="literal">yes_no</code>, <code class="literal">true_false</code>.
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;discriminator
+        column="discriminator_column"
+        type="discriminator_type"
+        force="true|false"
+        insert="true|false"
+        formula="arbitrary sql expression"
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">column</code> (可选 - 默认为 <code class="literal">class</code>) 鉴别器字段的名字
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">type</code> (可选 - 默认为 <code class="literal">string</code>) 一个Hibernate字段类型的名字
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">force(强制)</code> (可选 - 默认为 <code class="literal">false</code>) 
+                            "强制"Hibernate指定允许的鉴别器值,即使当取得的所有实例都是根类的。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">insert</code> (可选 - 默认为<code class="literal">true</code>)
+                            如果你的鉴别器字段也是映射为复合标识（composite identifier）的一部分，则需将
+                            这个值设为<code class="literal">false</code>。（告诉Hibernate在做SQL <code class="literal">INSERT</code>
+                            时不包含该列）
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">formula</code> (可选) 
+                            一个SQL表达式，在类型判断（判断是父类还是具体子类－译注）时执行。可用于基于内容的鉴别器。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                鉴别器字段的实际值是根据<code class="literal">&lt;class&gt;</code>和<code class="literal">&lt;subclass&gt;</code>元素中
+                的<code class="literal">discriminator-value</code>属性得来的。
+            </p>
+<p>
+                <code class="literal">force</code>属性仅仅在这种情况下有用的：表中包含没有被映射到持久化类的附加辨别器值。
+                这种情况不会经常遇到。          
+            </p>
+<p>
+                使用<code class="literal">formula</code>属性你可以定义一个SQL表达式，用来判断一个行数据的类型。
+            </p>
+<pre class="programlisting">&lt;discriminator
+    formula="case when CLASS_TYPE in ('a', 'b', 'c') then 0 else 1 end"
+    type="integer"/&gt;</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-version"></a>5.1.7.&#160;版本（version）(可选)</h3></div></div></div>
+<p>
+                <code class="literal">&lt;version&gt;</code>元素是可选的，表明表中包含附带版本信息的数据。
+                这在你准备使用<span class="emphasis"><em> 长事务（long transactions）</em></span>的时候特别有用。（见后）
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;version
+        column="version_column"
+        name="propertyName"
+        type="typename"
+        access="field|property|ClassName"
+        unsaved-value="null|negative|undefined"
+        generated="never|always"
+        insert="true|false"
+        node="element-name|@attribute-name|element/@attribute|."
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">column</code> (可选 - 默认为属性名): 指定持有版本号的字段名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 持久化类的属性名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">type</code> (可选 - 默认是 <code class="literal">integer</code>): 版本号的类型。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">access</code> (可选 - 默认是 <code class="literal">property</code>):  
+                            Hibernate用于访问属性值的策略。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">unsaved-value</code> (可选 - 默认是<code class="literal">undefined</code>): 
+                            用于标明某个实例时刚刚被实例化的（尚未保存）版本属性值，依靠这个值就可以把这种情况
+                            和已经在先前的session中保存或装载的脱管（detached）实例区分开来。
+                            （<code class="literal">undefined</code>指明应被使用的标识属性值。）
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">generated</code> (可选 - 默认是 <code class="literal">never</code>):
+                            表明此版本属性值是否实际上是由数据库生成的。请参阅<a href="ch05s06.html" title="5.6.&#160;数据库生成属性（Generated Properties）">第&#160;5.6&#160;节 “数据库生成属性（Generated Properties）”</a>部分的讨论。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/7.png" alt="7" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">insert</code> (可选 - 默认是 <code class="literal">true</code>):
+                            表明此版本列应该包含在SQL插入语句中。只有当数据库字段有默认值<code class="literal">0</code>的时候，才可以设置为<code class="literal">false</code>。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                版本号必须是以下类型：<code class="literal">long</code>, <code class="literal">integer</code>,
+                <code class="literal">short</code>, <code class="literal">timestamp</code>或者<code class="literal">calendar</code>。
+            </p>
+<p>
+                一个脱管（detached）实例的version或timestamp属性不能为空（null），因为Hibernate不管
+                <code class="literal">unsaved-value</code>被指定为何种策略，它将任何属性为空的version或timestamp
+                实例看作为瞬时（transient）实例。
+                <span class="emphasis"><em>避免Hibernate中的传递重附（transitive reattachment）问题的一个简单方法是
+              	定义一个不能为空的version或timestamp属性，特别是在人们使用程序分配的标识符（assigned identifiers）
+              	或复合主键时非常有用！</em></span>
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-timestamp"></a>5.1.8.&#160;timestamp (可选)</h3></div></div></div>
+<p>
+                可选的<code class="literal">&lt;timestamp&gt;</code>元素指明了表中包含时间戳数据。
+                这用来作为版本的替代。时间戳本质上是一种对乐观锁定的一种不是特别安全的实现。当然，
+                有时候应用程序可能在其他方面使用时间戳。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;timestamp
+        column="timestamp_column"
+        name="propertyName"
+        access="field|property|ClassName"
+        unsaved-value="null|undefined"
+        source="vm|db"
+        generated="never|always"
+        node="element-name|@attribute-name|element/@attribute|."
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">column</code> (可选 - 默认为属性名): 持有时间戳的字段名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 在持久化类中的JavaBeans风格的属性名，
+                            其Java类型是 <code class="literal">Date</code> 或者 <code class="literal">Timestamp</code>的。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">access</code> (可选 - 默认是 <code class="literal">property</code>): 
+                             Hibernate用于访问属性值的策略。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">unsaved-value</code> (可选 - 默认是<code class="literal">null</code>): 
+                            用于标明某个实例时刚刚被实例化的（尚未保存）版本属性值，依靠这个值就可以把这种情况和
+                            已经在先前的session中保存或装载的脱管（detached）实例区分开来。（<code class="literal">undefined</code>
+                            指明使用标识属性值进行这种判断。）
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">source</code> (可选 - 默认是 <code class="literal">vm</code>):
+                            Hibernate如何才能获取到时间戳的值呢？从数据库，还是当前JVM？从数据库获取会带来一些负担，因为Hibernate必须访问数据库来获得“下一个值”，但是在集群环境中会更安全些。还要注意，并不是所有的<code class="literal">Dialect（方言）</code>都支持获得数据库的当前时间戳的，而支持的数据库中又有一部分因为精度不足,用于锁定是不安全的（例如Oracle 8）。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">generated</code> (可选 - 默认是 <code class="literal">never</code>):
+                            指出时间戳值是否实际上是由数据库生成的.请参阅<a href="ch05s06.html" title="5.6.&#160;数据库生成属性（Generated Properties）">第&#160;5.6&#160;节 “数据库生成属性（Generated Properties）”</a>的讨论。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                注意，<code class="literal">&lt;timestamp&gt;</code> 和<code class="literal">&lt;version type="timestamp"&gt;</code>是等价的。并且<code class="literal">&lt;timestamp source="db"&gt;</code>和<code class="literal">&lt;version type="dbtimestamp"&gt;</code>是等价的。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-property"></a>5.1.9.&#160;property</h3></div></div></div>
+<p>
+                <code class="literal">&lt;property&gt;</code>元素为类定义了一个持久化的,JavaBean风格的属性。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;property
+        name="propertyName"
+        column="column_name"
+        type="typename"
+        update="true|false"
+        insert="true|false"
+        formula="arbitrary SQL expression"
+        access="field|property|ClassName"
+        lazy="true|false"
+        unique="true|false"
+        not-null="true|false"
+        optimistic-lock="true|false"
+        generated="never|insert|always"
+        node="element-name|@attribute-name|element/@attribute|."
+
+        index="index_name"
+        unique_key="unique_key_id"
+        length="L"
+        precision="P"
+        scale="S"
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 属性的名字,以小写字母开头。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">column</code> (可选 - 默认为属性名字): 对应的数据库字段名。
+                            也可以通过嵌套的<code class="literal">&lt;column&gt;</code>元素指定。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">type</code> (可选): 一个Hibernate类型的名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">update, insert</code> (可选 - 默认为 <code class="literal">true</code>) :
+                            表明用于<code class="literal">UPDATE</code> 和/或 <code class="literal">INSERT</code>
+                            的SQL语句中是否包含这个被映射了的字段。这二者如果都设置为<code class="literal">false</code>
+                            则表明这是一个“外源性（derived）”的属性，它的值来源于映射到同一个（或多个）
+                            字段的某些其他属性，或者通过一个trigger(触发器）或其他程序生成。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">formula</code> (可选): 一个SQL表达式，定义了这个<span class="emphasis"><em>计算
+                            （computed）</em></span> 属性的值。计算属性没有和它对应的数据库字段。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">access</code> (可选 - 默认值为 <code class="literal">property</code>): 
+                            Hibernate用来访问属性值的策略。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/7.png" alt="7" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">lazy</code> (可选 - 默认为 <code class="literal">false</code>): 指定
+                            指定实例变量第一次被访问时，这个属性是否延迟抓取（fetched lazily）（
+                            需要运行时字节码增强）。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/8.png" alt="8" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">unique</code> (可选): 使用DDL为该字段添加唯一的约束。
+                            同样，允许它作为<code class="literal">property-ref</code>引用的目标。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/9.png" alt="9" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">not-null</code> (可选): 使用DDL为该字段添加可否为空（nullability）的约束。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/10.png" alt="10" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">optimistic-lock</code> (可选 - 默认为 <code class="literal">true</code>): 
+                            指定这个属性在做更新时是否需要获得乐观锁定（optimistic lock）。
+                            换句话说，它决定这个属性发生脏数据时版本（version）的值是否增长。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/11.png" alt="11" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">generated</code> (可选 - 默认为 <code class="literal">never</code>):
+                            表明此属性值是否实际上是由数据库生成的。请参阅<a href="ch05s06.html" title="5.6.&#160;数据库生成属性（Generated Properties）">第&#160;5.6&#160;节 “数据库生成属性（Generated Properties）”</a>的讨论。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                <span class="emphasis"><em>typename</em></span>可以是如下几种：
+            </p>
+<div class="orderedlist"><ol type="1" compact>
+<li><p>
+                        Hibernate基本类型名（比如：<code class="literal">integer, string, character,date, timestamp,
+                         float, binary, serializable, object, blob</code>）。
+                    </p></li>
+<li><p>
+                        一个Java类的名字，这个类属于一种默认基础类型 
+                        (比如： <code class="literal">int, float,char, java.lang.String, java.util.Date, java.lang.Integer, 
+                        java.sql.Clob</code>)。
+                    </p></li>
+<li><p>
+                        一个可以序列化的Java类的名字。
+                    </p></li>
+<li><p>
+                        一个自定义类型的类的名字。（比如： <code class="literal">com.illflow.type.MyCustomType</code>)。
+                    </p></li>
+</ol></div>
+<p>
+                如果你没有指定类型，Hibernarte会使用反射来得到这个名字的属性，以此来猜测正确的Hibernate类型。
+                Hibernate会按照规则2,3,4的顺序对属性读取器(getter方法）的返回类进行解释。然而，这还不够。
+                在某些情况下你仍然需要<code class="literal">type</code>属性。（比如，为了区别<code class="literal">Hibernate.DATE</code>
+                和<code class="literal">Hibernate.TIMESTAMP</code>,或者为了指定一个自定义类型。）
+            </p>
+<p>
+            	<code class="literal">access</code>属性用来让你控制Hibernate如何在运行时访问属性。在默认情况下，
+            	Hibernate会使用属性的get/set方法对（pair）。如果你指明<code class="literal">access="field"</code>,
+            	Hibernate会忽略get/set方法对，直接使用反射来访问成员变量。你也可以指定你自己的策略，
+            	这就需要你自己实现<code class="literal">org.hibernate.property.PropertyAccessor</code>接口，
+            	再在access中设置你自定义策略类的名字。
+            </p>
+<p>
+                衍生属性（derive propertie）是一个特别强大的特征。这些属性应该定义为只读，属性值在装载时计算生成。
+                你用一个SQL表达式生成计算的结果，它会在这个实例转载时翻译成一个SQL查询的<code class="literal">SELECT</code>
+                子查询语句。
+            </p>
+<pre class="programlisting">
+&lt;property name="totalPrice"
+    formula="( SELECT SUM (li.quantity*p.price) FROM LineItem li, Product p
+                WHERE li.productId = p.productId
+                AND li.customerId = customerId
+                AND li.orderNumber = orderNumber )"/&gt;</pre>
+<p>
+                注意，你可以使用实体自己的表，而不用为这个特别的列定义别名（
+                上面例子中的<code class="literal">customerId</code>）。同时注意，如果你不喜欢使用属性，
+                你可以使用嵌套的<code class="literal">&lt;formula&gt;</code>映射元素。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-manytoone"></a>5.1.10.&#160;多对一（many-to-one）</h3></div></div></div>
+<p>
+                通过<code class="literal">many-to-one</code>元素,可以定义一种常见的与另一个持久化类的关联。
+                这种关系模型是多对一关联（实际上是一个对象引用－译注）：这个表的一个外键引用目标表的
+                主键字段。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;many-to-one
+        name="propertyName"
+        column="column_name"
+        class="ClassName"
+        cascade="cascade_style"
+        fetch="join|select"
+        update="true|false"
+        insert="true|false"
+        property-ref="propertyNameFromAssociatedClass"
+        access="field|property|ClassName"
+        unique="true|false"
+        not-null="true|false"
+        optimistic-lock="true|false"
+        lazy="proxy|no-proxy|false"
+        not-found="ignore|exception"
+        entity-name="EntityName"
+        formula="arbitrary SQL expression"
+        node="element-name|@attribute-name|element/@attribute|."
+
+        embed-xml="true|false"
+        index="index_name"
+        unique_key="unique_key_id"
+        foreign-key="foreign_key_name"
+        
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 属性名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">column</code> (可选): 外间字段名。它也可以通过嵌套的
+                            <code class="literal">&lt;column&gt;</code>元素指定。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">class</code> (可选 - 默认是通过反射得到属性类型): 关联的类的名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">cascade（级联）</code> (可选): 指明哪些操作会从父对象级联到关联的对象。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">fetch</code> (可选 - 默认为 <code class="literal">select</code>):
+			    在外连接抓取（outer-join fetching）和序列选择抓取（sequential select fetching）两者中选择其一。 
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">update, insert</code> (可选 - 默认为 <code class="literal">true</code>) 
+                            指定对应的字段是否包含在用于<code class="literal">UPDATE</code> 和/或 <code class="literal">INSERT</code>
+                            的SQL语句中。如果二者都是<code class="literal">false</code>,则这是一个纯粹的
+                            “外源性（derived）”关联，它的值是通过映射到同一个（或多个）字段的某些其他属性得到
+                            或者通过trigger(触发器）、或其他程序生成。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">property-ref</code>: (可选) 指定关联类的一个属性，这个属性将会和本外键相对应。
+                            如果没有指定，会使用对方关联类的主键。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/7.png" alt="7" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">access</code> (可选 - 默认是 <code class="literal">property</code>): 
+                            Hibernate用来访问属性的策略。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/8.png" alt="8" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">unique</code> (可选): 使用DDL为外键字段生成一个唯一约束。此外，
+                            这也可以用作<code class="literal">property-ref</code>的目标属性。这使关联同时具有
+                            一对一的效果。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/9.png" alt="9" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">not-null</code> (可选): 使用DDL为外键字段生成一个非空约束。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/10.png" alt="10" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">optimistic-lock</code> (可选 - 默认为 <code class="literal">true</code>): 
+                            指定这个属性在做更新时是否需要获得乐观锁定（optimistic lock）。
+                            换句话说，它决定这个属性发生脏数据时版本（version）的值是否增长。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/11.png" alt="11" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">lazy</code> (可选 - 默认为 <code class="literal">proxy</code>): 
+                            默认情况下，单点关联是经过代理的。<code class="literal">lazy="no-proxy"</code>指定此属性应该在实例变量第一次被访问时应该延迟抓取（fetche lazily）（需要运行时字节码的增强）。
+                            <code class="literal">lazy="false"</code>指定此关联总是被预先抓取。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/12.png" alt="12" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">not-found</code> (可选 - 默认为 <code class="literal">exception</code>): 
+                            指定外键引用的数据不存在时如何处理：
+                            <code class="literal">ignore</code>会将行数据不存在视为一个空（null）关联。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/13.png" alt="13" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">entity-name</code> (可选): 被关联的类的实体名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/14.png" alt="14" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">formula</code> (可选): 
+                            SQL表达式，用于定义<span class="emphasis"><em>computed（计算出的）</em></span>外键值。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                <code class="literal">cascade</code>属性设置为除了<code class="literal">none</code>以外任何有意义的值，
+                它将把特定的操作传递到关联对象中。这个值就代表着Hibernate基本操作的名称，
+                <code class="literal">persist, merge, delete, save-update, evict, replicate, lock, refresh</code>，
+                以及特别的值<code class="literal">delete-orphan</code>和<code class="literal">all</code>，并且可以用逗号分隔符
+                来组合这些操作，例如，<code class="literal">cascade="persist,merge,evict"</code>或
+                <code class="literal">cascade="all,delete-orphan"</code>。更全面的解释请参考<a href="ch10s11.html" title="10.11.&#160;传播性持久化(transitive persistence)">第&#160;10.11&#160;节 “传播性持久化(transitive persistence)”</a>. 注意，单值关联 (many-to-one 和 
+                one-to-one 关联) 不支持删除孤儿（orphan delete，删除不再被引用的值）.
+                
+                
+            </p>
+<p>
+                一个典型的简单<code class="literal">many-to-one</code>定义例子：
+            </p>
+<pre class="programlisting">&lt;many-to-one name="product" class="Product" column="PRODUCT_ID"/&gt;</pre>
+<p>
+                <code class="literal">property-ref</code>属性只应该用来对付遗留下来的数据库系统，
+                可能有外键指向对方关联表的是个非主键字段（但是应该是一个惟一关键字）的情况下。
+                这是一种十分丑陋的关系模型。比如说，假设<code class="literal">Product</code>类有一个惟一的序列号，
+                它并不是主键。（<code class="literal">unique</code>属性控制Hibernate通过SchemaExport工具进行的DDL生成。）
+            </p>
+<pre class="programlisting">&lt;property name="serialNumber" unique="true" type="string" column="SERIAL_NUMBER"/&gt;</pre>
+<p>
+                那么关于<code class="literal">OrderItem</code> 的映射可能是：
+            </p>
+<pre class="programlisting">&lt;many-to-one name="product" property-ref="serialNumber" column="PRODUCT_SERIAL_NUMBER"/&gt;</pre>
+<p>
+                当然，我们决不鼓励这种用法。
+            </p>
+<p>
+                如果被引用的唯一主键由关联实体的多个属性组成，你应该在名称为<code class="literal">&lt;properties&gt;</code>的元素
+                里面映射所有关联的属性。
+            </p>
+<p>
+            	假若被引用的唯一主键是组件的属性，你可以指定属性路径：
+            </p>
+<pre class="programlisting">&lt;many-to-one name="owner" property-ref="identity.ssn" column="OWNER_SSN"/&gt;</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-onetoone"></a>5.1.11.&#160;一对一</h3></div></div></div>
+<p>
+		持久化对象之间一对一的关联关系是通过<code class="literal">one-to-one</code>元素定义的。
+	     </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;one-to-one
+        name="propertyName"
+        class="ClassName"
+        cascade="cascade_style"
+        constrained="true|false"
+        fetch="join|select"
+        property-ref="propertyNameFromAssociatedClass"
+        access="field|property|ClassName"
+        formula="any SQL expression"
+        lazy="proxy|no-proxy|false"
+        entity-name="EntityName"
+        node="element-name|@attribute-name|element/@attribute|."
+
+        embed-xml="true|false"
+        foreign-key="foreign_key_name"
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 属性的名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">class</code>  (可选 - 默认是通过反射得到的属性类型)：被关联的类的名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">cascade(级联)</code> (可选) 表明操作是否从父对象级联到被关联的对象。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">constrained(约束)</code> (可选) 表明该类对应的表对应的数据库表，和被关联的对象所对应的数据库表之间，通过一个外键引用对主键进行约束。
+                           这个选项影响<code class="literal">save()</code>和<code class="literal">delete()</code>在级联执行时的先后顺序以及
+                            决定该关联能否被委托(也在schema export tool中被使用).
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">fetch</code> (可选 - 默认设置为<code class="literal">选择</code>): 
+                            在外连接抓取或者序列选择抓取选择其一.                            
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">property-ref</code>: (可选) 指定关联类的属性名，这个属性将会和本类的主键相对应。如果没有指定，会使用对方关联类的主键。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/7.png" alt="7" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">access</code>  (可选 - 默认是 <code class="literal">property</code>): Hibernate用来访问属性的策略。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/8.png" alt="8" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">formula </code> (可选):绝大多数一对一的关联都指向其实体的主键。在一些少见的情况中， 你可能会指向其他的一个或多个字段，或者是一个表达式，这些情况下，你可以用一个SQL公式来表示。 （可以在org.hibernate.test.onetooneformula找到例子）
+
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/9.png" alt="9" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">lazy</code> (可选 - 默认为 <code class="literal">proxy</code>): 
+                            默认情况下，单点关联是经过代理的。<code class="literal">lazy="no-proxy"</code>指定此属性应该在实例变量第一次被访问时应该延迟抓取（fetche lazily）（需要运行时字节码的增强）。
+                            <code class="literal">lazy="false"</code>指定此关联总是被预先抓取。<span class="emphasis"><em>注意，如果<code class="literal">constrained="false"</code>,
+                            不可能使用代理，Hibernate会采取预先抓取！</em></span>
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/10.png" alt="10" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">entity-name</code> (可选): 被关联的类的实体名。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                有两种不同的一对一关联：
+            </p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+                主键关联
+            </p></li>
+<li><p>
+                惟一外键关联
+            </p></li>
+</ul></div>
+<p>
+                主键关联不需要额外的表字段；如果两行是通过这种一对一关系相关联的，那么这两行就共享同样的主关键字值。所以如果你希望两个对象通过主键一对一关联，你必须确认它们被赋予同样的标识值！
+            </p>
+<p>
+                比如说，对下面的<code class="literal">Employee</code>和<code class="literal">Person</code>进行主键一对一关联:
+            </p>
+<pre class="programlisting">&lt;one-to-one name="person" class="Person"/&gt;</pre>
+<pre class="programlisting">&lt;one-to-one name="employee" class="Employee" constrained="true"/&gt;</pre>
+<p>
+                现在我们必须确保PERSON和EMPLOYEE中相关的字段是相等的。我们使用一个被成为<code class="literal">foreign</code>的特殊的hibernate标识符生成策略：
+            </p>
+<pre class="programlisting">&lt;class name="person" table="PERSON"&gt;
+    &lt;id name="id" column="PERSON_ID"&gt;
+        &lt;generator class="foreign"&gt;
+            &lt;param name="property"&gt;employee&lt;/param&gt;
+        &lt;/generator&gt;
+    &lt;/id&gt;
+    ...
+    &lt;one-to-one name="employee"
+        class="Employee"
+        constrained="true"/&gt;
+&lt;/class&gt;</pre>
+<p>
+                一个刚刚保存的<code class="literal">Person</code>实例被赋予和该<code class="literal">Person</code>的<code class="literal">employee</code>属性所指向的<code class="literal">Employee</code>实例同样的关键字值。
+            </p>
+<p>
+                另一种方式是一个外键和一个惟一关键字对应，上面的<code class="literal">Employee</code>和<code class="literal">Person</code>的例子，如果使用这种关联方式，可以表达成：
+            </p>
+<pre class="programlisting">&lt;many-to-one name="person" class="Person" column="PERSON_ID" unique="true"/&gt;</pre>
+<p>
+                如果在<code class="literal">Person</code>的映射加入下面几句，这种关联就是双向的：
+            </p>
+<pre class="programlisting">&lt;one-to-one name"employee" class="Employee" property-ref="person"/&gt;</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-naturalid"></a>5.1.12.&#160;自然ID(natural-id)</h3></div></div></div>
+<pre class="programlisting">&lt;natural-id mutable="true|false"/&gt;
+        &lt;property ... /&gt;
+        &lt;many-to-one ... /&gt;
+        ......
+&lt;/natural-id&gt;</pre>
+<p>
+                我们建议使用代用键（键值不具备实际意义）作为主键，我们仍然应该尝试为所有的实体采用自然的键值作为（附加——译者注）标示。自然键（natural key）是单个或组合属性，他们必须唯一且非空。如果它还是不可变的那就更理想了。在<code class="literal">&lt;natural-id&gt;</code>元素中列出自然键的属性。Hibernate会帮你生成必须的唯一键值和非空约束，你的映射会更加的明显易懂（原文是self-documenting，自我注解）。
+            </p>
+<p>
+                我们强烈建议你实现<code class="literal">equals()</code> 和<code class="literal">hashCode()</code>方法,来比较实体的自然键属性。
+            </p>
+<p>
+                这一映射不是为了把自然键作为主键而准备的。
+            </p>
+<div class="itemizedlist"><ul type="disc" compact><li><p>
+                        <code class="literal">mutable</code> (可选, 默认为<code class="literal">false</code>): 
+                        默认情况下，自然标识属性被假定为不可变的（常量）。
+                    </p></li></ul></div>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-component"></a>5.1.13.&#160;组件(component), 动态组件(dynamic-component)</h3></div></div></div>
+<p>
+                <code class="literal">&lt;component&gt;</code>元素把子对象的一些元素与父类对应的表的一些字段映射起来。 然后组件可以定义它们自己的属性、组件或者集合。参见后面的“Components”一章。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;component 
+        name="propertyName" 
+        class="className"
+        insert="true|false"
+        update="true|false"
+        access="field|property|ClassName"
+        lazy="true|false"
+        optimistic-lock="true|false"
+        unique="true|false"
+        node="element-name|."
+&gt;
+        
+        &lt;property ...../&gt;
+        &lt;many-to-one .... /&gt;
+        ........
+&lt;/component&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 属性名
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">class</code> (可选 - 默认为通过反射得到的属性类型):组件(子)类的名字。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">insert</code>: 被映射的字段是否出现在SQL的<code class="literal">INSERT</code>语句中?
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">update</code>: 被映射的字段是否出现在SQL的<code class="literal">UPDATE</code>语句中?
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">access</code> (可选 - 默认是 <code class="literal">property</code>): Hibernate用来访问属性的策略。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">lazy</code> (可选 - 默认是 <code class="literal">false</code>): 表明此组件应在实例变量第一次被访问的时候延迟加载(需要编译时字节码装置器)
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/7.png" alt="7" border="0"></td>
+<td valign="top" align="left"><p>
+                                <code class="literal">optimistic-lock</code> (可选 - 默认是 <code class="literal">true</code>):表明更新此组件是否需要获取乐观锁。换句话说，当这个属性变脏时，是否增加版本号(Version)
+                            </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/8.png" alt="8" border="0"></td>
+<td valign="top" align="left"><p>
+                                <code class="literal">unique</code> (可选 - 默认是 <code class="literal">false</code>):表明组件映射的所有字段上都有唯一性约束
+                            </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                其<code class="literal">&lt;property&gt;</code>子标签为子类的一些属性与表字段之间建立映射。 
+            </p>
+<p>
+                <code class="literal">&lt;component&gt;</code>元素允许加入一个<code class="literal">&lt;parent&gt;</code>子元素，在组件类内部就可以有一个指向其容器的实体的反向引用。
+            </p>
+<p>
+                <code class="literal">&lt;dynamic-component&gt;</code>元素允许把一个<code class="literal">Map</code>映射为组件，其属性名对应map的键值。
+                参见<a href="ch08s05.html" title="8.5.&#160;动态组件 （Dynamic components）">第&#160;8.5&#160;节 “动态组件 （Dynamic components）”</a>.
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-properties"></a>5.1.14.&#160;properties</h3></div></div></div>
+<p>
+                <code class="literal">&lt;properties&gt;</code> 元素允许定义一个命名的逻辑分组(grouping)包含一个类中的多个属性。
+                这个元素最重要的用处是允许多个属性的组合作为<code class="literal">property-ref</code>的目标(target)。
+                这也是定义多字段唯一约束的一种方便途径。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;properties 
+        name="logicalName" 
+        insert="true|false"
+        update="true|false"
+        optimistic-lock="true|false"
+        unique="true|false"
+&gt;
+        
+        &lt;property ...../&gt;
+        &lt;many-to-one .... /&gt;
+        ........
+&lt;/properties&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 分组的逻辑名称 - 
+                            <span class="emphasis"><em>不是</em></span> 实际属性的名称.
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">insert</code>: 被映射的字段是否出现在SQL的
+                            <code class="literal">INSERT</code>语句中?
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">update</code>:  被映射的字段是否出现在SQL的
+                            <code class="literal">UPDATE</code>语句中?
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                                <code class="literal">optimistic-lock</code> (可选 - 默认是 <code class="literal">true</code>):表明更新此组件是否需要获取乐观锁。换句话说，当这个属性变脏时，是否增加版本号(Version)
+                            </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                                <code class="literal">unique</code> (可选 - 默认是 <code class="literal">false</code>):表明组件映射的所有字段上都有唯一性约束
+                            </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                例如，如果我们有如下的<code class="literal">&lt;properties&gt;</code>映射:
+            </p>
+<pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="personNumber"/&gt;
+    ...
+    &lt;properties name="name" 
+            unique="true" update="false"&gt;
+        &lt;property name="firstName"/&gt;
+        &lt;property name="initial"/&gt;
+        &lt;property name="lastName"/&gt;
+    &lt;/properties&gt;
+&lt;/class&gt;</pre>
+<p>
+                然后，我们可能有一些遗留的数据关联，引用 <code class="literal">Person</code>表的这个唯一键，而不是主键。
+            </p>
+<pre class="programlisting">&lt;many-to-one name="person" 
+         class="Person" property-ref="name"&gt;
+    &lt;column name="firstName"/&gt;
+    &lt;column name="initial"/&gt;
+    &lt;column name="lastName"/&gt;
+&lt;/many-to-one&gt;</pre>
+<p>
+                我们并不推荐这样使用，除非在映射遗留数据的情况下。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-subclass"></a>5.1.15.&#160;子类(subclass)</h3></div></div></div>
+<p>
+                最后，多态持久化需要为父类的每个子类都进行定义。对于“每一棵类继承树对应一个表”的策略来说，就需要使用<code class="literal">&lt;subclass&gt;</code>定义。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;subclass
+        name="ClassName"
+        discriminator-value="discriminator_value"
+        proxy="ProxyInterface"
+        lazy="true|false"
+        dynamic-update="true|false"
+        dynamic-insert="true|false"
+        entity-name="EntityName"
+        node="element-name"
+        extends="SuperclassName"&gt;
+
+        &lt;property .... /&gt;
+        .....
+&lt;/subclass&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 子类的全限定名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">discriminator-value(辨别标志)</code> (可选 - 默认为类名):一个用于区分每个独立的子类的值。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">proxy(代理)</code> (可选): 指定一个类或者接口，在延迟装载时作为代理使用。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">lazy</code> (可选, 默认是<code class="literal">true</code>): 设置为
+                            <code class="literal">lazy="false"</code> 禁止使用延迟抓取
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                每个子类都应该定义它自己的持久化属性和子类。
+                <code class="literal">&lt;version&gt;</code> 和<code class="literal">&lt;id&gt;</code> 属性可以从根父类继承下来。在一棵继承树上的每个子类都必须定义一个唯一的<code class="literal">discriminator-value</code>。如果没有指定，就会使用Java类的全限定名。
+            </p>
+<p>
+                更多关于继承映射的信息, 参考 <a href="ch09.html" title="第&#160;9&#160;章&#160;继承映射(Inheritance Mappings)">第&#160;9&#160;章 <i>继承映射(Inheritance Mappings)</i></a>章节.
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-joinedsubclass"></a>5.1.16.&#160;连接的子类(joined-subclass)</h3></div></div></div>
+<p>
+                此外，每个子类可能被映射到他自己的表中(每个子类一个表的策略)。被继承的状态通过和超类的表关联得到。我们使用<code class="literal">&lt;joined-subclass&gt;</code>元素。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;joined-subclass
+        name="ClassName"
+        table="tablename"
+        proxy="ProxyInterface"
+        lazy="true|false"
+        dynamic-update="true|false"
+        dynamic-insert="true|false"
+        schema="schema"
+        catalog="catalog"
+        extends="SuperclassName"
+        persister="ClassName"
+        subselect="SQL expression"
+        entity-name="EntityName"
+        node="element-name"&gt;
+
+        &lt;key .... &gt;
+
+        &lt;property .... /&gt;
+        .....
+&lt;/joined-subclass&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 子类的全限定名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">table</code>: 子类的表名.
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">proxy</code> (可选): 指定一个类或者接口，在延迟装载时作为代理使用。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                             <code class="literal">lazy</code> (可选, 默认是 <code class="literal">true</code>): 设置为 
+                            <code class="literal">lazy="false"</code> 禁止使用延迟装载。
+                         </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                这种映射策略不需要指定辨别标志(discriminator)字段。但是，每一个子类都必须使用<code class="literal">&lt;key&gt;</code>元素指定一个表字段来持有对象的标识符。本章开始的映射可以被用如下方式重写：
+            </p>
+<pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;
+
+&lt;hibernate-mapping package="eg"&gt;
+
+        &lt;class name="Cat" table="CATS"&gt;
+                &lt;id name="id" column="uid" type="long"&gt;
+                        &lt;generator class="hilo"/&gt;
+                &lt;/id&gt;
+                &lt;property name="birthdate" type="date"/&gt;
+                &lt;property name="color" not-null="true"/&gt;
+                &lt;property name="sex" not-null="true"/&gt;
+                &lt;property name="weight"/&gt;
+                &lt;many-to-one name="mate"/&gt;
+                &lt;set name="kittens"&gt;
+                        &lt;key column="MOTHER"/&gt;
+                        &lt;one-to-many class="Cat"/&gt;
+                &lt;/set&gt;
+                &lt;joined-subclass name="DomesticCat" table="DOMESTIC_CATS"&gt;
+                    &lt;key column="CAT"/&gt;
+                    &lt;property name="name" type="string"/&gt;
+                &lt;/joined-subclass&gt;
+        &lt;/class&gt;
+
+        &lt;class name="eg.Dog"&gt;
+                &lt;!-- mapping for Dog could go here --&gt;
+        &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre>
+<p>
+                 更多关于继承映射的信息，参考<a href="ch09.html" title="第&#160;9&#160;章&#160;继承映射(Inheritance Mappings)">第&#160;9&#160;章 <i>继承映射(Inheritance Mappings)</i></a>。
+             </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-unionsubclass"></a>5.1.17.&#160;联合子类(union-subclass)</h3></div></div></div>
+<p>
+		       第三种选择是仅仅映射类继承树中具体类部分到表中(每个具体类一张表的策略)。其中，每张表定义了类的所有持久化状态，包括继承的状态。在 Hibernate 中，并不需要完全显式地映射这样的继承树。你可以简单地使用单独的<code class="literal">&lt;class&gt;</code>定义映射每个类。然而，如果你想使用多态关联(例如，一个对类继承树中超类的关联)，你需要使用<code class="literal">&lt;union-subclass&gt;</code>映射。
+           </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;union-subclass
+        name="ClassName"
+        table="tablename"
+        proxy="ProxyInterface"
+        lazy="true|false"
+        dynamic-update="true|false"
+        dynamic-insert="true|false"
+        schema="schema"
+        catalog="catalog"
+        extends="SuperclassName"
+        abstract="true|false"
+        persister="ClassName"
+        subselect="SQL expression"
+        entity-name="EntityName"
+        node="element-name"&gt;
+
+        &lt;property .... /&gt;
+        .....
+&lt;/union-subclass&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 子类的全限定名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">table</code>: 子类的表名
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">proxy</code> (可选): 指定一个类或者接口，在延迟装载时作为代理使用。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                             <code class="literal">lazy</code> (可选, 默认是 <code class="literal">true</code>): 设置为 
+                            <code class="literal">lazy="false"</code> 禁止使用延迟装载。
+                         </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                这种映射策略不需要指定辨别标志(discriminator)字段。
+            </p>
+<p>
+                 更多关于继承映射的信息，参考<a href="ch09.html" title="第&#160;9&#160;章&#160;继承映射(Inheritance Mappings)">第&#160;9&#160;章 <i>继承映射(Inheritance Mappings)</i></a>。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-join"></a>5.1.18.&#160;连接(join)</h3></div></div></div>
+<p>
+               使用 <code class="literal">&lt;join&gt;</code> 元素，假若在表之间存在一对一关联,可以将一个类的属性映射到多张表中。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;join
+        table="tablename"
+        schema="owner"
+        catalog="catalog"
+        fetch="join|select"
+        inverse="true|false"
+        optional="true|false"&gt;
+        
+        &lt;key ... /&gt;
+        
+        &lt;property ... /&gt;
+        ...
+&lt;/join&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">table</code>: 被连接表的名称。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">schema</code> (可选):覆盖由根<code class="literal">&lt;hibernate-mapping&gt;</code>元素指定的模式名称。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">catalog</code> (可选): 覆盖由根 <code class="literal">&lt;hibernate-mapping&gt;</code>元素指定的目录名称。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">fetch</code> (可选 - 默认是 <code class="literal">join</code>):
+                            如果设置为默认值<code class="literal">join</code>， Hibernate 将使用一个内连接来得到这个类或其超类定义的<code class="literal">&lt;join&gt;</code>，而使用一个外连接来得到其子类定义的<code class="literal">&lt;join&gt;</code>。如果设置为<code class="literal">select</code>，则 Hibernate 将为子类定义的 <code class="literal">&lt;join&gt;</code>使用顺序选择。这仅在一行数据表示一个子类的对象的时候才会发生。对这个类和其超类定义的<code class="literal">&lt;join&gt;</code>，依然会使用内连接得到。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">inverse</code> (可选 - 默认是 <code class="literal">false</code>):
+                            如果打开，Hibernate 不会插入或者更新此连接定义的属性。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">optional</code> (可选 - 默认是 <code class="literal">false</code>):
+                            如果打开，Hibernate 只会在此连接定义的属性非空时插入一行数据，并且总是使用一个外连接来得到这些属性。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                例如，一个人(person)的地址(address)信息可以被映射到单独的表中(并保留所有属性的值类型语义)：
+            </p>
+<pre class="programlisting">&lt;class name="Person"
+    table="PERSON"&gt;
+
+    &lt;id name="id" column="PERSON_ID"&gt;...&lt;/id&gt;
+
+    &lt;join table="ADDRESS"&gt;
+        &lt;key column="ADDRESS_ID"/&gt;
+        &lt;property name="address"/&gt;
+        &lt;property name="zip"/&gt;
+        &lt;property name="country"/&gt;
+    &lt;/join&gt;
+    ...</pre>
+<p>
+                此特性常常对遗留数据模型有用，我们推荐表个数比类个数少，以及细粒度的领域模型。然而，在单独的继承树上切换继承映射策略是有用的，后面会解释这点。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-key"></a>5.1.19.&#160;键(key)</h3></div></div></div>
+<p>
+               我们目前已经见到过<code class="literal">&lt;key&gt;</code>元素多次了。 这个元素在父映射元素定义了对新表的连接，并且在被连接表中定义了一个外键引用原表的主键的情况下经常使用。
+            </p>
+<div class="programlistingco">
+<pre class="programlisting">&lt;key
+        column="columnname"
+        on-delete="noaction|cascade"
+        property-ref="propertyName"
+        not-null="true|false"
+        update="true|false"
+        unique="true|false"
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">column</code> (可选): 外键字段的名称。也可以通过嵌套的 <code class="literal">&lt;column&gt;</code>指定。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">on-delete</code> (可选, 默认是 <code class="literal">noaction</code>): 
+                            表明外键关联是否打开数据库级别的级联删除。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">property-ref</code> (可选): 表明外键引用的字段不是原表的主键(提供给遗留数据)。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">not-null</code> (可选): 表明外键的字段不可为空(这意味着无论何时外键都是主键的一部分)。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">update</code> (可选): 表明外键决不应该被更新(这意味着无论何时外键都是主键的一部分)。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">unique</code> (可选): 表明外键应有唯一性约束 (这意味着无论何时外键都是主键的一部分)。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+<p>
+                对那些看重删除性能的系统，我们推荐所有的键都应该定义为<code class="literal">on-delete="cascade"</code>，这样 Hibernate 将使用数据库级的<code class="literal">ON CASCADE DELETE</code>约束，而不是多个<code class="literal">DELETE</code>语句。 注意，这个特性会绕过 Hibernate 通常对版本数据(versioned data)采用的乐观锁策略。
+            </p>
+<p>
+                <code class="literal">not-null</code> 和 <code class="literal">update</code> 属性在映射单向一对多关联的时候有用。如果你映射一个单向一对多关联到非空的(non-nullable)外键，你<span class="emphasis"><em>必须</em></span> 用<code class="literal">&lt;key not-null="true"&gt;</code>定义此键字段。
+            </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-column"></a>5.1.20.&#160;字段和规则元素（column and formula elements）</h3></div></div></div>
+<p>
+               任何接受<code class="literal">column</code>属性的映射元素都可以选择接受<code class="literal">&lt;column&gt;</code> 子元素。同样的，<code class="literal">formula</code>子元素也可以替换<code class="literal">&lt;formula&gt;</code>属性。
+           </p>
+<pre class="programlisting">&lt;column
+        name="column_name"
+        length="N"
+        precision="N"
+        scale="N"
+        not-null="true|false"
+        unique="true|false"
+        unique-key="multicolumn_unique_key_name"
+        index="index_name"
+        sql-type="sql_type_name"
+        check="SQL expression"
+        default="SQL expression"/&gt;</pre>
+<pre class="programlisting">&lt;formula&gt;SQL expression&lt;/formula&gt;</pre>
+<p>
+                <code class="literal">column</code> 和 <code class="literal">formula</code> 属性甚至可以在同一个属性或关联映射中被合并来表达，例如，一些奇异的连接条件。
+            </p>
+<pre class="programlisting">&lt;many-to-one name="homeAddress" class="Address"
+        insert="false" update="false"&gt;
+    &lt;column name="person_id" not-null="true" length="10"/&gt;
+    &lt;formula&gt;'MAILING'&lt;/formula&gt;
+&lt;/many-to-one&gt;</pre>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-declaration-import"></a>5.1.21.&#160;引用(import)</h3></div></div></div>
+<p>
+                假设你的应用程序有两个同样名字的持久化类，但是你不想在Hibernate查询中使用他们的全限定名。除了依赖<code class="literal">auto-import="true"</code>以外，类也可以被显式地“import(引用)”。你甚至可以引用没有被明确映射的类和接口。
+            </p>
+<pre class="programlisting">&lt;import class="java.lang.Object" rename="Universe"/&gt;</pre>
+<div class="programlistingco">
+<pre class="programlisting">&lt;import
+        class="ClassName"
+        rename="ShortName"
+/&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">class</code>: 任何Java类的全限定名。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">rename</code> (可选 - 默认为类的全限定名):
+                            在查询语句中可以使用的名字。
+                        </p></td>
+</tr>
+</table></div>
+</div>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="mapping-types-anymapping"></a>5.1.22.&#160;any</h3></div></div></div>
+<p>
+                这是属性映射的又一种类型。<code class="literal">&lt;any&gt;</code> 映射元素定义了一种从多个表到类的多态关联。这种类型的映射常常需要多于一个字段。第一个字段持有被关联实体的类型，其他的字段持有标识符。对这种类型的关联来说，不可能指定一个外键约束，所以这当然不是映射(多态)关联的通常的方式。你只应该在非常特殊的情况下使用它(比如，审计log，用户会话数据等等)。
+            </p>
+<p>
+                 <code class="literal">meta-type</code> 属性使得应用程序能指定一个将数据库字段的值映射到持久化类的自定义类型。这个持久化类包含有用<code class="literal">id-type</code>指定的标识符属性。
+				 你必须指定从meta-type的值到类名的映射。
+            </p>
+<pre class="programlisting">&lt;any name="being" id-type="long" meta-type="string"&gt;
+    &lt;meta-value value="TBL_ANIMAL" class="Animal"/&gt;
+    &lt;meta-value value="TBL_HUMAN" class="Human"/&gt;
+    &lt;meta-value value="TBL_ALIEN" class="Alien"/&gt;
+    &lt;column name="table_name"/&gt;
+    &lt;column name="id"/&gt;
+&lt;/any&gt;</pre>
+<div class="programlistingco">
+<pre class="programlisting">&lt;any
+        name="propertyName"
+        id-type="idtypename"
+        meta-type="metatypename"
+        cascade="cascade_style"
+        access="field|property|ClassName"
+        optimistic-lock="true|false"
+&gt;
+        &lt;meta-value ... /&gt;
+        &lt;meta-value ... /&gt;
+        .....
+        &lt;column .... /&gt;
+        &lt;column .... /&gt;
+        .....
+&lt;/any&gt;</pre>
+<div class="calloutlist"><table border="0" summary="Callout list">
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/1.png" alt="1" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">name</code>: 属性名
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/2.png" alt="2" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">id-type</code>: 标识符类型
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/3.png" alt="3" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">meta-type</code> (可选 -默认是 <code class="literal">string</code>): 
+                            允许辨别标志(discriminator)映射的任何类型
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/4.png" alt="4" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">cascade</code> (可选 -默认是<code class="literal">none</code>): 
+                            级联的类型
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/5.png" alt="5" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">access</code> (可选 -默认是 <code class="literal">property</code>): Hibernate 用来访问属性值的策略。
+                        </p></td>
+</tr>
+<tr>
+<td width="5%" valign="top" align="left"><img src="images/callouts/6.png" alt="6" border="0"></td>
+<td valign="top" align="left"><p>
+                            <code class="literal">optimistic-lock</code> (可选 -默认是 <code class="literal">true</code>): 表明更新此组件是否需要获取乐观锁。换句话说，当这个属性变脏时，是否增加版本号(Version)
+							</p></td>
+</tr>
+</table></div>
+</div>
+</div>
+</div>
+</div></body>
+</html>

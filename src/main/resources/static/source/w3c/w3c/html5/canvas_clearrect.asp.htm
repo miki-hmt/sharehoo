@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="../../www.googletagmanager.com/gtag/js-id=UA-878633-1" tppabs="https://www.googletagmanager.com/gtag/js?id=UA-878633-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-878633-1');
+</script>
+
+<meta charset="gbk" />
+<meta name="robots" content="all" />
+<meta name="author" content="w3school.com.cn" />
+<link rel="stylesheet" type="text/css" href="../c5.css" tppabs="http://www.w3school.com.cn/c5.css" />
+<link rel="icon" type="image/png" sizes="16x16" href="/ui2019/w3_16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ui2019/w3_32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/ui2019/logo-48-red.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/ui2019/logo-96-red.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/ui2017/logo-180.png">
+
+
+<title>HTML5 canvas clearRect() 方法</title>
+
+</head>
+
+<body class="html">
+
+<div id="wrapper">
+
+<div id="header">
+<a href="../index.html" tppabs="http://www.w3school.com.cn/index.html" title="w3school 在线教程" style="float:left;">w3school 在线教程</a>
+<div id="ad_head">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3381531532877742";
+/* 728x90, 创建于 08-12-1 */
+google_ad_slot = "7423315034";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+
+<div id="navfirst">
+<ul id="menu">
+<li id="h"><a href="../h.asp.htm" tppabs="http://www.w3school.com.cn/h.asp" title="HTML 系列教程">HTML 系列教程</a></li>
+<li id="b"><a href="../b.asp.htm" tppabs="http://www.w3school.com.cn/b.asp" title="浏览器脚本教程">浏览器脚本</a></li>
+<li id="s"><a href="../s.asp.htm" tppabs="http://www.w3school.com.cn/s.asp" title="服务器脚本教程">服务器脚本</a></li>
+<li id="d"><a href="../d.asp.htm" tppabs="http://www.w3school.com.cn/d.asp" title="ASP.NET 教程">ASP.NET 教程</a></li>
+<li id="x"><a href="../x.asp.htm" tppabs="http://www.w3school.com.cn/x.asp" title="XML 系列教程">XML 系列教程</a></li>
+<li id="ws"><a href="../ws.asp.htm" tppabs="http://www.w3school.com.cn/ws.asp" title="Web Services 系列教程">Web Services 系列教程</a></li>
+<li id="w"><a href="../w.asp.htm" tppabs="http://www.w3school.com.cn/w.asp" title="建站手册">建站手册</a></li>
+</ul>
+</div>
+
+<div id="navsecond">
+
+<div id="course"><h2>HTML5 教程</h2>
+<ul>
+<li><a href="index.asp.htm" tppabs="http://www.w3school.com.cn/html5/index.asp" title="HTML5 教程">HTML5 教程</a></li>
+<li><a href="html_5_intro.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_intro.asp" title="HTML5 简介">HTML5 简介</a></li>
+<li><a href="html_5_video.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_video.asp" title="HTML5 视频">HTML5 视频</a></li>
+<li><a href="html_5_video_dom.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_video_dom.asp" title="HTML5 Video + DOM">HTML5 视频/DOM</a></li>
+<li><a href="html_5_audio.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_audio.asp" title="HTML5 音频">HTML5 音频</a></li>
+<li><a href="html_5_draganddrop.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_draganddrop.asp" title="HTML5 拖放">HTML5 拖放</a></li>
+<li><a href="html_5_canvas.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_canvas.asp" title="HTML5 Canvas">HTML5 画布</a></li>
+<li><a href="html_5_svg.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_svg.asp" title="HTML5 内联 SVG">HTML5 SVG</a></li>
+<li><a href="html_5_canvas_vs_svg.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_canvas_vs_svg.asp" title="HTML5 Canvas vs. SVG">HTML5 画布 vs SVG</a></li>
+<li><a href="html_5_geolocation.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_geolocation.asp" title="HTML5 地理定位">HTML5 地理定位</a></li>
+<li><a href="html_5_webstorage.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_webstorage.asp" title="HTML5 Web 存储">HTML5 Web 存储</a></li>
+<li><a href="html_5_app_cache.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_app_cache.asp" title="HTML 5 应用程序缓存">HTML5 应用缓存</a></li>
+<li><a href="html_5_webworkers.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_webworkers.asp" title="HTML5 Web Workers">HTML5 Web Workers</a></li>
+<li><a href="html_5_serversentevents.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_serversentevents.asp" title="HTML5 服务器发送事件">HTML5 服务器发送事件</a></li>
+</ul>
+<h2>HTML5 表单</h2>
+<ul>
+<li><a href="html_5_form_input_types.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_form_input_types.asp" title="HTML5 Input 类型">HTML5 输入类型</a></li>
+<li><a href="html_5_form_elements.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_form_elements.asp" title="HTML5 表单元素">HTML5 表单元素</a></li>
+<li><a href="html_5_form_attributes.asp.htm" tppabs="http://www.w3school.com.cn/html5/html_5_form_attributes.asp" title="HTML5 表单属性">HTML5 表单属性</a></li>
+</ul>
+<h2>HTML5 测验</h2>
+<ul>
+<li><a href="html5_quiz.asp.htm" tppabs="http://www.w3school.com.cn/html5/html5_quiz.asp" title="HTML5 测验">HTML5 测验</a></li>
+</ul>
+<h2>HTML5 参考手册</h2>
+<ul>
+<li><a href="html5_reference.asp.htm" tppabs="http://www.w3school.com.cn/html5/html5_reference.asp" title="HTML5 参考手册">HTML5 标签</a></li>
+<li><a href="html5_ref_standardattributes.asp.htm" tppabs="http://www.w3school.com.cn/html5/html5_ref_standardattributes.asp" title="HTML5 标准属性">HTML5 属性</a></li>
+<li><a href="html5_ref_eventattributes.asp.htm" tppabs="http://www.w3school.com.cn/html5/html5_ref_eventattributes.asp" title="HTML5 事件属性">HTML5 事件</a></li>
+<li><a href="html5_ref_audio_video_dom.asp.htm" tppabs="http://www.w3school.com.cn/html5/html5_ref_audio_video_dom.asp" title="HTML5 Audio/Video DOM 属性">HTML5 视频/音频</a></li>
+<li><a href="html5_ref_canvas.asp.htm" tppabs="http://www.w3school.com.cn/html5/html5_ref_canvas.asp" title="HTML5 Canvas 参考手册">HTML5 画布</a></li>
+<li><a href="html5_ref_dtd.asp.htm" tppabs="http://www.w3school.com.cn/html5/html5_ref_dtd.asp" title="HTML 元素和有效的 DTD">HTML 有效 DTD</a></li>
+</ul>
+</div>
+
+</div>
+
+<div id="maincontent">
+
+<h1>HTML5 canvas clearRect() 方法</h1>
+
+<div class="backtoreference">
+<p><a href="javascript:if(confirm('http://www.w3school.com.cn/tags/html5_ref_canvas.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个与它的启始地址很远的链接。如果你增大启始地址域内深度设置, 该文件将被加入下载队列。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/tags/html5_ref_canvas.asp'" tppabs="http://www.w3school.com.cn/tags/html5_ref_canvas.asp">HTML5 Canvas 参考手册</a></p>
+</div>
+
+<div>
+<h2>实例</h2>
+
+<p>在给定矩形内清空一个矩形：</p>
+
+<canvas id="myCanvas" class="canvas_example">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+var c=document.getElementById("myCanvas");
+var canvOK=1;
+try {c.getContext("2d");}
+catch (er) {canvOK=0;}
+if (canvOK==1)
+	{
+	var ctx=c.getContext("2d");
+	ctx.fillStyle="red";
+	ctx.fillRect(0,0,300,150);
+	ctx.clearRect(20,20,100,50);
+	}
+</script>
+
+<p>JavaScript:</p>
+
+<pre>
+var c=document.getElementById(&quot;myCanvas&quot;);
+var ctx=c.getContext(&quot;2d&quot;);
+ctx.fillStyle=&quot;red&quot;;
+ctx.fillRect(0,0,300,150);
+<code>ctx.clearRect(20,20,100,50);</code>
+</pre>
+
+<p><a target="_blank" href="javascript:if(confirm('http://www.w3school.com.cn/tiy/jquery_dom_get.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个与它的启始地址很远的链接。如果你增大启始地址域内深度设置, 该文件将被加入下载队列。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/tiy/jquery_dom_get.asp'" tppabs="http://www.w3school.com.cn/tiy/t.asp?f=html5_canvas_clearrect">亲自试一试</a></p>
+</div>
+
+
+<div>
+<h2>浏览器支持</h2>
+
+<p>Internet Explorer 9、Firefox、Opera、Chrome 以及 Safari 支持 clearRect() 方法。</p>
+
+<p class="note"><span>注释：</span>Internet Explorer 8 或更早的浏览器不支持 &lt;canvas&gt; 元素。</p>
+</div>
+
+
+<div>
+<h2>定义和用法</h2>
+
+<p>clearRect() 方法清空给定矩形内的指定像素。</p>
+
+<h3>JavaScript 语法：</h3>
+
+<pre>context.clearRect(<i>x</i>,<i>y</i>,<i>width</i>,<i>height</i>);</pre>
+
+<h3>参数值</h3>
+
+<table class="dataintable">
+<tr>
+<th style="width:25%;">参数</th>
+<th>描述</th>
+</tr>
+
+<tr>
+<td><i>x</i></td>
+<td>要清除的矩形左上角的 x 坐标</td>
+</tr>
+
+<tr>
+<td><i>y</i></td>
+<td>要清除的矩形左上角的 y 坐标</td>
+</tr>
+
+<tr>
+<td><i>width</i></td>
+<td>要清除的矩形的宽度，以像素计</td>
+</tr>
+
+<tr>
+<td><i>height</i></td>
+<td>要清除的矩形的高度，以像素计</td>
+</tr>
+</table>
+</div>
+
+
+<div class="backtoreference">
+<p><a href="javascript:if(confirm('http://www.w3school.com.cn/tags/html5_ref_canvas.asp  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个与它的启始地址很远的链接。如果你增大启始地址域内深度设置, 该文件将被加入下载队列。  \n\n你想在服务器上打开它?'))window.location='http://www.w3school.com.cn/tags/html5_ref_canvas.asp'" tppabs="http://www.w3school.com.cn/tags/html5_ref_canvas.asp">HTML5 Canvas 参考手册</a></p>
+</div>
+
+</div>
+<!-- maincontent end -->
+
+<div id="sidebar">
+
+<div id="tools">
+<h5 id="tools_reference"><a href="../tags/index.asp.htm" tppabs="http://www.w3school.com.cn/tags/index.asp">HTML5 参考手册</a></h5>
+<h5 id="tools_quiz"><a href="html5_quiz.asp.htm" tppabs="http://www.w3school.com.cn/html5/html5_quiz.asp">HTML5 测验</a></h5>
+</div>
+
+<div id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3381531532877742";
+/* sidebar-160x600 */
+google_ad_slot = "3772569310";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/show_ads.js" tppabs="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>
+
+<div id="footer">
+<p id="p1">
+W3School 简体中文版提供的内容仅用于培训和测试，不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关。
+</p>
+
+<p id="p2">
+使用条款和隐私条款。版权所有，保留一切权利。
+赞助商：<a href="javascript:if(confirm('http://www.ykinvestment.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.ykinvestment.com/'" tppabs="http://www.ykinvestment.com/">上海赢科投资有限公司</a>。
+蒙ICP备06004630号
+</p>
+</div>
+
+
+</div>
+<!-- wrapper end -->
+
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>event.stopPropagation()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">event.stopPropagation()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code>Object</code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>防止事件冒泡到DOM树上，也就是不触发的任何前辈元素上的事件处理函数。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="event-stopPropagation">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>event.stopPropagation()
+			</h4>
+			<ul>
+				<li>
+					<div class="null-signature">
+						这个方法不接受任何参数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			我们可以用 <code> event.isPropagationStopped() </code> 来确定这个方法是否(在那个事件对象上)调用过了。
+		</p>
+		<p>
+			这个方法对 trigger() 来自定义的事件同样有效。
+		</p>
+		<p>
+			注意，这不会阻止<em>同一个元素上</em>的其它事件处理函数的运行。
+		</p>
+	</div>
+	<h3>
+		Additional Notes:（其他注意事项：）
+	</h3>
+	<div class="longdesc">
+		<ul>
+			自从<code>.live()</code>方法处理事件一旦传播到文档的顶部，live事件是不可能停止传播的。同样地，<code>.delegate()</code> 事件将始终传播给其中包含的被委托元素；
+元素上的事件将在被委托事件被调用的时候执行。因此，这些处理程序，可以调用<code>event.stopPropagation()</code>或者返回<code>false</code>防止委派处理程序冒泡。
+		</ul>
+	</div>
+	<p>
+	</p>
+	<div class="longdesc">
+		<div>
+			<p>
+			</p>
+			<p>
+			</p>
+			<p>
+				<em></em> 
+			</p>
+		</div>
+		<p>
+		</p>
+		<p>
+		</p>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		灭掉click事件的冒泡。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre>$("p").click(function(event){
+    event.stopPropagation();    // do something
+  });  </pre>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

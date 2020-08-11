@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>ajaxStop()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">ajaxStop()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.ajaxStop( handler() )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>在AJAX 请求完成时执行一个处理函数。 这是一个 Ajax Event。
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="ajaxStop-handler">
+			<h4 class="name">
+				<span class="version-details">V : 1.0</span>.ajaxStop( handler() )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>handler()</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader28" target="_blank">Function</a>()
+					</div>
+					<div>
+						被调用的函数。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<p>
+		每当一个Ajax请求完成，jQuery检查是否有任何其他响应过程中的Ajax请求（手册网注：未完成的请求）。如果都执行完成，jQuery就会触发<code>ajaxStop</code>事件，在这个时间点所有处理函数都会使用<code>.ajaxStop()</code>方法注册并执行。如果一个未处理完成的Ajax请求用<code>beforeSend</code>回调函数返回<code>false</code>取消，<code>ajaxStop</code>事件也被触发
+	</p>
+	<p>
+	</p>
+	<p>
+		观察这种方法，建立一个基本的Ajax加载请求：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div class="trigger"&gt;Trigger&lt;/div&gt;
+&lt;div class="result"&gt;&lt;/div&gt;
+&lt;div class="log"&gt;&lt;/div&gt;</pre>
+	</div>
+	<p>
+		在document上绑定事件处理器：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$(document).ajaxSend(function() {
+  $( ".log" ).text( "Triggered ajaxSend handler." );
+});</pre>
+	</div>
+	<p>
+		现在，我们可以使用任何的jQuery方法构建一个Ajax请求：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( ".trigger" ).click(function() {
+  $( ".result" ).load( "ajax/test.html" );
+});</pre>
+	</div>
+	<p>
+		当我们点击class为 <code>trigger</code> 的元素并且Ajax请求即将开始，这个信息就会显示。
+	</p>
+	<h3>
+		其他注意事项：
+	</h3>
+	<div class="longdesc">
+		<ul>
+			<li>
+				在jQuery1.9中，jQuery全局AJAX事件的所有处理程序，
+                    包括哪些<code>.ajaxStop()</code>添加的方法，<em>必须</em> 附加到 <code>document</code>上。
+			</li>
+			<li>
+				如果 <code><a href="http://www.shouce.ren/api/view/a/12861" class="book-a">$.ajax()</a></code> 或 <code><a href="http://www.shouce.ren/api/view/a/12874" class="book-a">$.ajaxSetup()</a></code>调用时， <code>global</code> 选项设置为 <code>false</code>， <code>.ajaxStop()</code>将不会触发。
+			</li>
+		</ul>
+	</div>
+	<p>
+	</p>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		AJAX 请求结束后隐藏信息。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code> $("#loading").ajaxStop(function(){
+   $(this).hide();
+ });</code></pre>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

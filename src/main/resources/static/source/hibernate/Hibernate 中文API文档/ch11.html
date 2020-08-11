@@ -1,0 +1,264 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;11&#160;章&#160;事务和并发</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch10s12.html" title="10.12.&#160;使用元数据">
+<link rel="next" href="ch11s02.html" title="11.2.&#160;数据库事务声明">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="transactions"></a>第&#160;11&#160;章&#160;事务和并发</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch11.html#transactions-basics">11.1. Session和事务范围(transaction scope)</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch11.html#transactions-basics-uow">11.1.1. 操作单元(Unit of work)</a></span></dt>
+<dt><span class="sect2"><a href="ch11.html#transactions-basics-apptx">11.1.2. 长对话</a></span></dt>
+<dt><span class="sect2"><a href="ch11.html#transactions-basics-identity">11.1.3. 关注对象标识(Considering object identity)</a></span></dt>
+<dt><span class="sect2"><a href="ch11.html#transactions-basics-issues">11.1.4. 常见问题</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch11s02.html">11.2. 数据库事务声明</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch11s02.html#transactions-demarcation-nonmanaged">11.2.1. 非托管环境</a></span></dt>
+<dt><span class="sect2"><a href="ch11s02.html#transactions-demarcation-jta">11.2.2. 使用JTA</a></span></dt>
+<dt><span class="sect2"><a href="ch11s02.html#transactions-demarcation-exceptions">11.2.3. 异常处理</a></span></dt>
+<dt><span class="sect2"><a href="ch11s02.html#transactions-demarcation-timeout">11.2.4. 事务超时</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch11s03.html">11.3. 乐观并发控制(Optimistic concurrency control)</a></span></dt>
+<dd><dl>
+<dt><span class="sect2"><a href="ch11s03.html#transactions-optimistic-manual">11.3.1. 应用程序级别的版本检查(Application version checking)</a></span></dt>
+<dt><span class="sect2"><a href="ch11s03.html#transactions-optimistic-longsession">11.3.2. 扩展周期的session和自动版本化</a></span></dt>
+<dt><span class="sect2"><a href="ch11s03.html#transactions-optimistic-detached">11.3.3. 脱管对象(deatched object)和自动版本化</a></span></dt>
+<dt><span class="sect2"><a href="ch11s03.html#transactions-optimistic-customizing">11.3.4. 定制自动版本化行为</a></span></dt>
+</dl></dd>
+<dt><span class="sect1"><a href="ch11s04.html">11.4. 悲观锁定(Pessimistic Locking)</a></span></dt>
+<dt><span class="sect1"><a href="ch11s05.html">11.5. 连接释放模式(Connection Release Modes)</a></span></dt>
+</dl>
+</div>
+<p>
+			Hibernate的事务和并发控制很容易掌握。Hibernate直接使用JDBC连接和JTA资源，不添加任何附加锁定
+			行为。我们强烈推荐你花点时间了解JDBC编程，ANSI SQL查询语言和你使用
+			的数据库系统的事务隔离规范。
+	</p>
+<p>
+        Hibernate不锁定内存中的对象。你的应用程序会按照你的数据库事务的隔离级别规定的那样运作。幸亏有了<code class="literal">Session</code>，使得Hibernate通过标识符查找，和实体查询（不是返回标量值的报表查询）提供了可重复的读取（Repeatable reads）功能，<code class="literal">Session</code>同时也是事务范围内的缓存（cache）。
+    </p>
+<p>
+				除了对自动乐观并发控制提供版本管理，针对行级悲观锁定，Hibernate也提供了辅助的（较小的)API，它使用了
+				<code class="literal">SELECT FOR UPDATE</code>的SQL语法。本章后面会讨论乐观并发控制和这个API。
+		</p>
+<p>
+					我们从<code class="literal">Configuration</code>层、<code class="literal">SessionFactory</code>层, 和
+      		<code class="literal">Session</code>层开始讨论Hibernate的并行控制、数据库事务和应用
+        	程序的长事务。
+	</p>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="transactions-basics"></a>11.1.&#160;Session和事务范围(transaction scope)</h2></div></div></div>
+<p>
+						<code class="literal">SessionFactory</code>对象的创建代价很昂贵，它是线程安全的对象，它为所有的应用程序线程所共享。它只创建一次，通常是在应用程序启动的时候，由一个<code class="literal">Configuraion</code>的实例来创建。				
+				</p>
+<p>
+						<code class="literal">Session</code>对象的创建代价比较小，是非线程安全的，对于单个请求，单个会话、单个的
+						工作单元而言，它只被使用一次，然后就丢弃。只有在需要的时候，一个<code class="literal">Session</code>对象
+						才会获取一个JDBC的<code class="literal">Connection</code>（或一个<code class="literal">Datasource</code>）
+						对象，因此假若不使用的时候它不消费任何资源。
+				</p>
+<p>
+					此外我们还要考虑数据库事务。数据库事务应该尽可能的短，降低数据库中的锁争用。
+					数据库长事务会阻止你的应用程序扩展到高的并发负载。因此，假若在用户思考期间让数据库事务开着，直到整个工作单元完成才关闭这个事务，这绝不是一个好的设计。
+				</p>
+<p>
+				一个操作单元(Unit of work)的范围是多大？单个的Hibernate <code class="literal">Session</code>能跨越多个
+				数据库事务吗？还是一个<code class="literal">Session</code>的作用范围对应一个数据库事务的范围？应该何时打开
+				<code class="literal">Session</code>，何时关闭<code class="literal">Session</code>？，你又如何划分数据库事务的边界呢？
+		</p>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-basics-uow"></a>11.1.1.&#160;操作单元(Unit of work)</h3></div></div></div>
+<p>
+				首先，别用<span class="emphasis"><em>session-per-operation</em></span>这种反模式了，也就是说，在单个线程中，
+				不要因为一次简单的数据库调用，就打开和关闭一次<code class="literal">Session</code>！数据库事务也是如此。
+				应用程序中的数据库调用是按照计划好的次序，分组为原子的操作单元。（注意，这也意味着，应用程
+				序中，在单个的SQL语句发送之后，自动事务提交(auto-commit)模式失效了。这种模式专门为SQL控制台操作设计的。
+				Hibernate禁止立即自动事务提交模式，或者期望应用服务器禁止立即自动事务提交模式。）数据库事务绝不是可有可无的，任何与数据库之间的通讯都必须在某个事务中进行，不管你是在读还是在写数据。对读数据而言，应该避免auto-commit行为，因为很多小的事务比一个清晰定义的工作单元性能差。后者也更容易维护和扩展。
+		</p>
+<p>
+				在多用户的client/server应用程序中，最常用的模式是 <span class="emphasis"><em>每个请求一个会话(session-per-request)</em></span>。
+				在这种模式下，来自客户端的请求被发送到服务器端（即Hibernate持久化层运行的地方），一
+				个新的Hibernate <code class="literal">Session</code>被打开，并且执行这个操作单元中所有的数据库操作。
+				一旦操作完成（同时对客户端的响应也准备就绪），session被同步，然后关闭。你也可以使用单
+				个数据库事务来处理客户端请求，在你打开<code class="literal">Session</code>之后启动事务，在你关闭
+				<code class="literal">Session</code>之前提交事务。会话和请求之间的关系是一对一的关系，这种模式对
+				于大多数应用程序来说是很棒的。
+		</p>
+<p>
+                实现才是真正的挑战。Hibernate内置了对"当前session(current session)" 的管理，用于简化此模式。你要做的一切就是在服务器端要处理请求的时候，开启事务，在响应发送给客户之前结束事务。你可以用任何方式来完成这一操作，通常的方案有<code class="literal">ServletFilter</code>，在service方法中进行pointcut的AOP拦截器，或者proxy/interception容器。EJB容器是实现横切诸如EJB session bean上的事务分界，用CMT对事务进行声明等方面的标准手段。假若你决定使用编程式的事务分界，请参考本章后面讲到的Hibernate <code class="literal">Transaction</code> API，这对易用性和代码可移植性都有好处。
+            </p>
+<p>
+                在任何时间，任何地方，你的应用代码可以通过简单的调用<code class="literal">sessionFactory.getCurrentSession()</code>来访问"当前session"，用于处理请求。你总是会得到当前数据库事务范围内的<code class="literal">Session</code>。在使用本地资源或JTA环境时，必须配置它，请参见<a href="ch02s05.html" title="2.5.&#160;上下文相关的（Contextual）Session">第&#160;2.5&#160;节 “上下文相关的（Contextual）Session”</a>。
+            </p>
+<p>
+                有时，将<code class="literal">Session</code>和数据库事务的边界延伸到"展示层被渲染后"会带来便利。有些serlvet应用程序在对请求进行处理后，有个单独的渲染期，这种延伸对这种程序特别有用。假若你实现你自己的拦截器，把事务边界延伸到展示层渲染结束后非常容易。然而，假若你依赖有容器管理事务的EJB，这就不太容易了，因为事务会在EJB方法返回后结束，而那是在任何展示层渲染开始之前。请访问Hibernate网站和论坛，你可以找到<span class="emphasis"><em>Open Session in View</em></span>这一模式的提示和示例。
+             </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-basics-apptx"></a>11.1.2.&#160;长对话</h3></div></div></div>
+<p>
+							session-per-request模式不仅仅是一个可以用来设计操作单元的有用概念。很多业务处理都需
+							要一系列完整的与用户之间的交互，而这些用户是指对数据库有交叉访问的用户。在基于web的应用和企业
+							应用中，跨用户交互的数据库事务是无法接受的。考虑下面的例子：
+						</p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+												在界面的第一屏，打开对话框，用户所看到的数据是被一个特定的 <code class="literal">Session</code> 和数据
+												库事务载入(load)的。用户可以随意修改对话框中的数据对象。
+										</p></li>
+<li><p>
+						5分钟后，用户点击“保存”，期望所做出的修改被持久化；同时他也期望自己是唯一修改这个信息的人，不会出现
+						修改冲突。
+				</p></li>
+</ul></div>
+<p>
+				从用户的角度来看，我们把这个操作单元称为长时间运行的<span class="emphasis"><em>对话</em></span>（conversation）,或者(or <span class="emphasis"><em>应用事务</em></span>,application transaction)。
+				在你的应用程序中，可以有很多种方法来实现它。
+		</p>
+<p>
+				头一个幼稚的做法是，在用户思考的过程中，保持<code class="literal">Session</code>和数据库事务是打开的，
+				保持数据库锁定，以阻止并发修改，从而保证数据库事务隔离级别和原子操作。这种方式当然是一个反模式，
+				因为锁争用会导致应用程序无法扩展并发用户的数目。
+		 </p>
+<p>
+				很明显，我们必须使用多个数据库事务来实现这个对话。在这个例子中，维护业务处理的
+				事务隔离变成了应用程序层的部分责任。一个对话通常跨越多个数据库事务。如果仅仅只有一
+				个数据库事务（最后的那个事务）保存更新过的数据，而所有其他事务只是单纯的读取数据（例如在一
+				个跨越多个请求/响应周期的向导风格的对话框中），那么应用程序事务将保证其原子性。这种方式比听
+				起来还要容易实现，特别是当你使用了Hibernate的下述特性的时候：
+		</p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+										<span class="emphasis"><em>自动版本化</em></span> - Hibernate能够自动进行乐观并发控制 ，如果在用户思考
+										的过程中发生并发修改，Hibernate能够自动检测到。一般我们只在对话结束时才检查。
+				</p></li>
+<li><p>
+						<span class="emphasis"><em>脱管对象</em></span>（Detached Objects）- 如果你决定采用前面已经讨论过的 
+						<span class="emphasis"><em>session-per-request</em></span>模式，所有载入的实例在用户思考的过程
+						中都处于与Session脱离的状态。Hibernate允许你把与Session脱离的对象重新关联到Session
+						上，并且对修改进行持久化，这种模式被称为
+						<span class="emphasis"><em>session-per-request-with-detached-objects</em></span>。自动版本化被用来隔离并发修改。
+				</p></li>
+<li><p>
+						<span class="emphasis"><em>Extended (or Long) Session</em></span> - Hibernate 的<code class="literal">Session</code>
+						可以在数据库事务提交之后和底层的JDBC连接断开，当一个新的客户端请求到来的时候，它又重新连接上底层的
+						JDBC连接。这种模式被称之为<span class="emphasis"><em>session-per-conversation</em></span>，这种情况可
+						能会造成不必要的Session和JDBC连接的重新关联。自动版本化被用来隔离并发修改, <code class="literal">Session</code>通常不允许自动flush,而是明确flush。
+				</p></li>
+</ul></div>
+<p>
+			 <span class="emphasis"><em>session-per-request-with-detached-objects</em></span> 和
+			 <span class="emphasis"><em>session-per-conversation</em></span> 各有优缺点，我们在本章后面乐观并发
+			 控制那部分再进行讨论。
+		</p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-basics-identity"></a>11.1.3.&#160;关注对象标识(Considering object identity)</h3></div></div></div>
+<p>
+							应用程序可能在两个不同的<code class="literal">Session</code>中并发访问同一持久化状态，但是，
+							一个持久化类的实例无法在两个 <code class="literal">Session</code>中共享。因此有两种不同的标识语义：
+						</p>
+<p>
+            </p>
+<div class="variablelist"><dl>
+<dt><span class="term">数据库标识</span></dt>
+<dd><p>
+                            <code class="literal">foo.getId().equals( bar.getId() )</code>
+                        </p></dd>
+<dt><span class="term">JVM 标识</span></dt>
+<dd><p>
+                            <code class="literal">foo==bar</code>
+                        </p></dd>
+</dl></div>
+<p>
+
+						</p>
+<p>
+							对于那些关联到 <span class="emphasis"><em>特定</em></span><code class="literal">Session</code>
+							（也就是在单个<code class="literal">Session</code>的范围内）上的对象来说，这
+							两种标识的语义是等价的，与数据库标识对应的JVM标识是由Hibernate来保
+							证的。不过，当应用程序在两个不同的session中并发访问具有同一持久化标
+							识的业务对象实例的时候，这个业务对象的两个实例事实上是不相同的（从
+							JVM识别来看）。这种冲突可以通过在同步和提交的时候使用自动版本化和乐
+							观锁定方法来解决。
+						</p>
+<p>
+						</p>
+<p>
+								这种方式把关于并发的头疼问题留给了Hibernate和数据库；由于在单个线程内，操作单元中的对象识别不
+								需要代价昂贵的锁定或其他意义上的同步，因此它同时可以提供最好的可伸缩性。只要在单个线程只持有一个
+								<code class="literal">Session</code>，应用程序就不需要同步任何业务对象。在<code class="literal">Session</code>
+								的范围内，应用程序可以放心的使用<code class="literal">==</code>进行对象比较。
+						</p>
+<p>
+						</p>
+<p>
+								不过，应用程序在<code class="literal">Session</code>的外面使用<code class="literal">==</code>进行对象比较可能会
+								导致无法预期的结果。在一些无法预料的场合，例如，如果你把两个脱管对象实例放进同一个
+								<code class="literal">Set</code>的时候，就可能发生。这两个对象实例可能有同一个数据库标识（也就是说，
+								他们代表了表的同一行数据），从JVM标识的定义上来说，对脱管的对象而言，Hibernate无法保证他们
+								的的JVM标识一致。开发人员必须覆盖持久化类的<code class="literal">equals()</code>方法和 
+								<code class="literal">hashCode()</code> 方法，从而实现自定义的对象相等语义。警告：不要使用数据库标识
+								来实现对象相等，应该使用业务键值，由唯一的，通常不变的属性组成。当一个瞬时对象被持久化的时
+								候，它的数据库标识会发生改变。如果一个瞬时对象（通常也包括脱管对象实例）被放入一
+								个<code class="literal">Set</code>，改变它的hashcode会导致与这个<code class="literal">Set</code>的关系中断。虽
+								然业务键值的属性不象数据库主键那样稳定不变，但是你只需要保证在同一个<code class="literal">Set</code>
+								中的对象属性的稳定性就足够了。请到Hibernate网站去寻求这个问题更多的详细的讨论。请注意，这不是一
+								个有关Hibernate的问题，而仅仅是一个关于Java对象标识和判等行为如何实现的问题。
+		 				</p>
+<p>
+		 </p>
+</div>
+<div class="sect2" lang="zh-cn">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="transactions-basics-issues"></a>11.1.4.&#160;常见问题</h3></div></div></div>
+<p>
+								决不要使用反模式<span class="emphasis"><em>session-per-user-session</em></span>或者<span class="emphasis"><em>
+								session-per-application</em></span>（当然，这个规定几乎没有例外）。请注意，
+								下述一些问题可能也会出现在我们推荐的模式中，在你作出某个设计决定之前，请务必理解该模式的应用前提。
+						</p>
+<div class="itemizedlist"><ul type="disc">
+<li><p>
+                        <code class="literal">Session</code> 对象是非线程安全的。如果一个<code class="literal">Session</code>
+                        实例允许共享的话，那些支持并发运行的东东，例如HTTP request，session beans,或者是
+                        Swing workers，将会导致出现资源争用（race condition）。如果在<code class="literal">HttpSession</code>中有
+                        Hibernate 的<code class="literal">Session</code>的话（稍后讨论），你应该考虑同步访问你的Http session。
+                        否则，只要用户足够快的点击浏览器的“刷新”，就会导致两个并发运行线程使用同一个
+                         <code class="literal">Session</code>。
+                    </p></li>
+<li><p>
+					 								一个由Hibernate抛出的异常意味着你必须立即回滚数据库事务，并立即关闭<code class="literal">Session</code>
+					 								（稍后会展开讨论）。如果你的<code class="literal">Session</code>绑定到一个应用程序上，你必
+					 								须停止该应用程序。回滚数据库事务并不会把你的业务对象退回到事务启动时候的状态。这
+					 								意味着数据库状态和业务对象状态不同步。通常情况下，这不是什么问题，因为异常是不可
+					 								恢复的,你必须在回滚之后重新开始执行。
+                    </p></li>
+<li><p>
+                        <code class="literal">Session</code> 缓存了处于持久化状态的每个对象（Hibernate会监视和检查脏数据）。
+                        这意味着，如果你让<code class="literal">Session</code>打开很长一段时间，或是仅仅载入了过多的数据，
+                        <code class="literal">Session</code>占用的内存会一直增长，直到抛出OutOfMemoryException异常。这个
+                        问题的一个解决方法是调用<code class="literal">clear()</code> 和<code class="literal">evict()</code>来管理
+                        <code class="literal">Session</code>的缓存，但是如果你需要大批量数据操作的话，最好考虑
+                        使用存储过程。在<a href="ch13.html" title="第&#160;13&#160;章&#160;批量处理（Batch processing）">第&#160;13&#160;章 <i>批量处理（Batch processing）</i></a>中有一些解决方案。在用户会话期间一直保持
+                        <code class="literal">Session</code>打开也意味着出现脏数据的可能性很高。
+                    </p></li>
+</ul></div>
+</div>
+</div>
+</div></body>
+</html>

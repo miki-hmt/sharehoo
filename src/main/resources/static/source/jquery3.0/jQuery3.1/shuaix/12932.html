@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>nextUntil()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">nextUntil()<span class="g-bg-red margin-l-5">1.6*</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.nextUntil( [selector ] [, filter ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong> 通过选择器，DOM节点，或jQuery对象得到每个元素之后的所有兄弟元素，但不包括匹配的元素。
+</p>
+<ul class="signatures">
+	<li class="signature" id="nextUntil-selector-filter">
+		<h4 class="name">
+			<span class="version-details">V : 1.4</span>.nextUntil(
+                [selector ] [, filter ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>selector</strong> 
+				</div>
+				<div>
+					类型: Selector
+				</div>
+				<div>
+					一个字符串，其中包含一个表示匹配元素的选择器表达式。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>filter</strong> 
+				</div>
+				<div>
+					类型: Selector
+				</div>
+				<div>
+					一个字符串，其中包含一个选择器表达式用来匹配的元素。
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="nextUntil-element-filter">
+		<h4 class="name">
+			<span class="version-details">V : 1.6</span>.nextUntil( [element
+                ] [, filter ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>element</strong> 
+				</div>
+				<div>
+					类型: Element 或者 jQuery
+				</div>
+				<div>
+					一个DOM节点或jQuery对象说明哪里开始停止匹配接下来的同级元素。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>filter</strong> 
+				</div>
+				<div>
+					类型: Selector
+				</div>
+				<div>
+					一个字符串，其中包含一个选择器表达式用来匹配的元素。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		如果提供一个选择器表达式代表DOM元素集合，<code>.nextUntil()</code> 方法会查找这些元素所在的DOM树中跟在它们后面的元素，直到遇到了一个跟提供的参数匹配的元素的时候才会停下来。新返回的 jQuery 对象里包含了后面所有找到的兄弟元素，但不包括那个选择器匹配到的元素。
+	</p>
+	<p>
+		如果没有选择器匹配到，或者没有提供参数，那么跟在后面的所有同辈元素都会被选中。这就跟用没有提供参数的 <code>.nextAll()</code>效果一样。
+	</p>
+	<p>
+		<strong>从 jQuery 1.6 开始</strong>, 一个DOM节点或jQuery对象，而不是一个选择器，可被传递到<code>.nextUntil()</code>方法。
+	</p>
+	<p>
+		该方法的 filter 参数接受一个选择器表达式。如果提供此参数，将通过此参数提供的选择器表达式测试它们是否匹配过滤元素。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h2 class="underline">
+	示例:
+</h2>
+</header>
+<p>
+	<span class="desc">查找 &lt;dt id="term-2"&gt; 之后的所有兄弟元素，直到遇到 
+&lt;dt&gt; 为止，并将他们的背景色设为红色。同样的， 查找 &lt;dt id="term-1"&gt; 
+之后，&lt;dd&gt;的所有兄弟元素，直到遇到 &lt;dt id="term-3"&gt; 为止，并将他们的文字颜色设为绿色。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;dl&gt;
+  &lt;dt id="term-1"&gt;term 1&lt;/dt&gt;
+  &lt;dd&gt;definition 1-a&lt;/dd&gt;
+  &lt;dd&gt;definition 1-b&lt;/dd&gt;
+  &lt;dd&gt;definition 1-c&lt;/dd&gt;
+  &lt;dd&gt;definition 1-d&lt;/dd&gt;
+ 
+  &lt;dt id="term-2"&gt;term 2&lt;/dt&gt;
+  &lt;dd&gt;definition 2-a&lt;/dd&gt;
+  &lt;dd&gt;definition 2-b&lt;/dd&gt;
+  &lt;dd&gt;definition 2-c&lt;/dd&gt;
+ 
+  &lt;dt id="term-3"&gt;term 3&lt;/dt&gt;
+  &lt;dd&gt;definition 3-a&lt;/dd&gt;
+  &lt;dd&gt;definition 3-b&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;script&gt;
+$("#term-2").nextUntil("dt")
+  .css("background-color", "red");
+ 
+var term3 = document.getElementById("term-3");
+$("#term-1").nextUntil(term3, "dd")
+  .css("color", "green");
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8127" target="_blank" class="btn btn-sm btn-success">Demo:</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

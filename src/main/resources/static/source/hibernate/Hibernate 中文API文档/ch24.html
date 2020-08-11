@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;24&#160;章&#160;最佳实践(Best Practices)</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch23s04.html" title="23.4.&#160;杂例">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="best-practices"></a>第&#160;24&#160;章&#160;最佳实践(Best Practices)</h2></div></div></div>
+<div class="variablelist"><dl>
+<dt><span class="term">设计细颗粒度的持久类并且使用<code class="literal">&lt;component&gt;</code>来实现映射。</span></dt>
+<dd><p>
+                    使用一个<code class="literal">Address</code>持久类来封装 <code class="literal">street</code>,
+                    <code class="literal">suburb</code>, <code class="literal">state</code>, <code class="literal">postcode</code>.
+                    这将有利于代码重用和简化代码重构(refactoring)的工作。
+                </p></dd>
+<dt><span class="term">对持久类声明标识符属性( identifier properties)。</span></dt>
+<dd><p>
+                    Hibernate中标识符属性是可选的，不过有很多原因来说明你应该使用标识符属性。我们建议标识符应该是“人造”的(自动生成，不涉及业务含义)。
+                </p></dd>
+<dt><span class="term">使用自然键(natural keys)标识</span></dt>
+<dd><p>
+                    对所有的实体都标识出自然键，用<code class="literal">&lt;natural-id&gt;</code>进行映射。实现<code class="literal">equals()</code>和<code class="literal">hashCode()</code>，在其中用组成自然键的属性进行比较。
+                </p></dd>
+<dt><span class="term">为每个持久类写一个映射文件</span></dt>
+<dd><p>
+                     不要把所有的持久类映射都写到一个大文件中。把 <code class="literal">com.eg.Foo</code> 映射到<code class="literal">com/eg/Foo.hbm.xml</code>中， 在团队开发环境中，这一点显得特别有意义。
+                </p></dd>
+<dt><span class="term">把映射文件作为资源加载</span></dt>
+<dd><p>
+                    把映射文件和他们的映射类放在一起进行部署。
+                </p></dd>
+<dt><span class="term">考虑把查询字符串放在程序外面</span></dt>
+<dd><p>
+                    如果你的查询中调用了非ANSI标准的SQL函数，那么这条实践经验对你适用。把查询字符串放在映射文件中可以让程序具有更好的可移植性。
+                </p></dd>
+<dt><span class="term">使用绑定变量</span></dt>
+<dd><p>
+                     就像在JDBC编程中一样，应该总是用占位符"?"来替换非常量值，不要在查询中用字符串值来构造非常量值！更好的办法是在查询中使用命名参数。
+                </p></dd>
+<dt><span class="term">不要自己来管理JDBC connections</span></dt>
+<dd><p>
+                    Hibernate允许应用程序自己来管理JDBC connections，但是应该作为最后没有办法的办法。如果你不能使用Hibernate内建的connections providers，那么考虑实现自己来实现<code class="literal">org.hibernate.connection.ConnectionProvider</code>
+                </p></dd>
+<dt><span class="term">考虑使用用户自定义类型(custom type)</span></dt>
+<dd><p>
+                    假设你有一个Java类型，来自某些类库，需要被持久化，但是该类没有提供映射操作需要的存取方法。那么你应该考虑实现<code class="literal">org.hibernate.UserType</code>接口。这种办法使程序代码写起来更加自如，不再需要考虑类与Hibernate type之间的相互转换。
+                </p></dd>
+<dt><span class="term">在性能瓶颈的地方使用硬编码的JDBC</span></dt>
+<dd><p>
+                    In performance-critical areas of the system, some kinds of operations might benefit from 
+                    direct JDBC. But please, wait until you <span class="emphasis"><em>know</em></span> something is a bottleneck. 
+                    And don't assume that direct JDBC is necessarily faster. If you need to use direct JDBC, it might 
+                    be worth opening a Hibernate <code class="literal">Session</code> and using that JDBC connection. That 
+                    way you can still use the same transaction strategy and underlying connection provider.
+
+                    在系统中对性能要求很严格的一些部分，某些操作也许直接使用JDBC会更好。但是请先<span class="emphasis"><em>确认</em></span>这的确是一个瓶颈，并且不要想当然认为JDBC一定会更快。如果确实需要直接使用JDBC，那么最好打开一个
+Hibernate <code class="literal">Session</code> 然后从 <code class="literal">Session</code>获得connection，按照这种办法你仍然可以使用同样的transaction策略和底层的connection provider。
+                </p></dd>
+<dt><span class="term">理解<code class="literal">Session</code>清洗（ flushing）</span></dt>
+<dd><p>
+                    Session会不时的向数据库同步持久化状态，如果这种操作进行的过于频繁，性能会受到一定的影响。有时候你可以通过禁止自动flushing，尽量最小化非必要的flushing操作，或者更进一步，在一个特定的transaction中改变查询和其它操作的顺序。
+                </p></dd>
+<dt><span class="term">在三层结构中，考虑使用托管对象（detached object）</span></dt>
+<dd><p>
+                    当使用一个servlet / session bean 类型的架构的时候, 你可以把已加载的持久对象在session bean层和servlet / JSP 层之间来回传递。使用新的session来为每个请求服务，使用 <code class="literal">Session.merge()</code> 或者<code class="literal">Session.saveOrUpdate()</code>来与数据库同步。
+                </p></dd>
+<dt><span class="term">在两层结构中，考虑使用长持久上下文(long persistence contexts).</span></dt>
+<dd><p>
+                    为了得到最佳的可伸缩性，数据库事务(Database Transaction)应该尽可能的短。但是，程序常常需要实现长时间运行的<span class="emphasis"><em>“应用程序事务(Application Transaction)”</em></span>，包含一个从用户的观点来看的原子操作。这个应用程序事务可能跨越多次从用户请求到得到反馈的循环。用脱管对象(与session脱离的对象)来实现应用程序事务是常见的。或者，尤其在两层结构中，把Hibernate Session从JDBC连接中脱离开，下次需要用的时候再连接上。绝不要把一个Session用在多个应用程序事务(Application Transaction)中，否则你的数据可能会过期失效。
+                </p></dd>
+<dt><span class="term">不要把异常看成可恢复的</span></dt>
+<dd><p>
+                    这一点甚至比“最佳实践”还要重要，这是“必备常识”。当异常发生的时候，必须要回滚 <code class="literal">Transaction</code> ，关闭<code class="literal">Session</code>。如果你不这样做的话，Hibernate无法保证内存状态精确的反应持久状态。尤其不要使用<code class="literal">Session.load()</code>来判断一个给定标识符的对象实例在数据库中是否存在，应该使用<code class="literal">Session.get()</code>或者进行一次查询.
+                </p></dd>
+<dt><span class="term">对于关联优先考虑lazy fetching </span></dt>
+<dd><p>
+                    谨慎的使用主动抓取(eager fetching)。对于关联来说，若其目标是无法在第二级缓存中完全缓存所有实例的类，应该使用代理(proxies)与/或具有延迟加载属性的集合(lazy collections)。若目标是可以被缓存的，尤其是缓存的命中率非常高的情况下，应该使用<code class="literal">lazy="false"</code>，明确的禁止掉eager fetching。如果那些特殊的确实适合使用join fetch 的场合，请在查询中使用<code class="literal">left join fetch</code>。
+                </p></dd>
+<dt><span class="term">
+                使用<span class="emphasis"><em>open session in view</em></span>模式，或者执行严格的<span class="emphasis"><em>装配期(assembly phase)</em></span>策略来避免再次抓取数据带来的问题
+            </span></dt>
+<dd><p>
+                    
+                    Hibernate让开发者们摆脱了繁琐的<span class="emphasis"><em>Data Transfer Objects</em></span> (DTO)。在传统的EJB结构中，DTO有双重作用：首先，他们解决了entity bean无法序列化的问题；其次，他们隐含地定义了一个装配期，在此期间，所有在view层需要用到的数据，都被抓取、集中到了DTO中，然后控制才被装到表示层。Hibernate终结了第一个作用。然而，除非你做好了在整个渲染过程中都维护一个打开的持久化上下文(session)的准备，你仍然需要一个装配期（想象一下，你的业务方法与你的表示层有严格的契约，数据总是被放置到托管对象中）。这并非是Hibernate的限制！这是实现安全的事务化数据访问的基本需求。
+                </p></dd>
+<dt><span class="term">考虑把Hibernate代码从业务逻辑代码中抽象出来</span></dt>
+<dd><p>
+                    把Hibernate的数据存取代码隐藏到接口(interface)的后面，组合使用<span class="emphasis"><em>DAO</em></span>和<span class="emphasis"><em>Thread Local Session</em></span>模式。通过Hibernate的<code class="literal">UserType</code>，你甚至可以用硬编码的JDBC来持久化那些本该被Hibernate持久化的类。 (该建议更适用于规模足够大应用软件中，对于那些只有5张表的应用程序并不适合。)
+                </p></dd>
+<dt><span class="term">不要用怪异的连接映射</span></dt>
+<dd><p>
+                    多对多连接用得好的例子实际上相当少见。大多数时候你在“连接表”中需要保存额外的信息。这种情况下，用两个指向中介类的一对多的连接比较好。实际上，我们认为绝大多数的连接是一对多和多对一的，你应该谨慎使用其它连接风格，用之前问自己一句，是否真的必须这么做。
+                </p></dd>
+<dt><span class="term">偏爱双向关联</span></dt>
+<dd><p>
+                    单向关联更加难于查询。在大型应用中，几乎所有的关联必须在查询中可以双向导航。
+                </p></dd>
+</dl></div>
+</div></body>
+</html>

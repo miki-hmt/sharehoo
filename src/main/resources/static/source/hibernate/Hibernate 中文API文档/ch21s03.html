@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>21.3.&#160;级联生命周期（Cascading lifecycle）</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch21.html" title="第&#160;21&#160;章&#160;示例：父子关系(Parent Child Relationships)">
+<link rel="prev" href="ch21s02.html" title="21.2.&#160;双向的一对多关系(Bidirectional one-to-many)">
+<link rel="next" href="ch21s04.html" title="21.4.&#160;级联与未保存值（Cascades and unsaved-value）">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="example-parentchild-cascades"></a>21.3.&#160;级联生命周期（Cascading lifecycle）</h2></div></div></div>
+<p>
+	需要显式调用<code class="literal">save()</code>仍然很麻烦，我们可以用级联来解决这个问题。
+     </p>
+<pre class="programlisting">&lt;set name="children" inverse="true" cascade="all"&gt;
+    &lt;key column="parent_id"/&gt;
+    &lt;one-to-many class="Child"/&gt;
+&lt;/set&gt;</pre>
+<p>
+         这样上面的代码可以简化为：
+     </p>
+<pre class="programlisting">Parent p = (Parent) session.load(Parent.class, pid);
+Child c = new Child();
+p.addChild(c);
+session.flush();</pre>
+<p>
+         同样的，保存或删除<code class="literal">Parent</code>对象的时候并不需要遍历其子对象。
+         下面的代码会删除对象<code class="literal">p</code>及其所有子对象对应的数据库记录。
+     </p>
+<pre class="programlisting">Parent p = (Parent) session.load(Parent.class, pid);
+session.delete(p);
+session.flush();</pre>
+<p>
+         然而，这段代码
+     </p>
+<pre class="programlisting">Parent p = (Parent) session.load(Parent.class, pid);
+Child c = (Child) p.getChildren().iterator().next();
+p.getChildren().remove(c);
+c.setParent(null);
+session.flush();</pre>
+<p>
+         不会从数据库删除<code class="literal">c</code>；它只会删除与<code class="literal">p</code>之间的连接（并且会导致违反<code class="literal">NOT NULL</code>约束，在这个例子中）。你需要显式调用<code class="literal">delete()</code>来删除<code class="literal">Child</code>。 
+     </p>
+<pre class="programlisting">Parent p = (Parent) session.load(Parent.class, pid);
+Child c = (Child) p.getChildren().iterator().next();
+p.getChildren().remove(c);
+session.delete(c);
+session.flush();</pre>
+<p>
+         在我们的例子中，如果没有父对象，子对象就不应该存在，如果将子对象从collection中移除，实际上我们是想删除它。要实现这种要求，就必须使用<code class="literal">cascade="all-delete-orphan"</code>。
+     </p>
+<pre class="programlisting">&lt;set name="children" inverse="true" cascade="all-delete-orphan"&gt;
+    &lt;key column="parent_id"/&gt;
+    &lt;one-to-many class="Child"/&gt;
+&lt;/set&gt;</pre>
+<p>
+         注意：即使在collection一方的映射中指定<code class="literal">inverse="true"</code>，级联仍然是通过遍历collection中的元素来处理的。如果你想要通过级联进行子对象的插入、删除、更新操作，就必须把它加到collection中，只调用<code class="literal">setParent()</code>是不够的。
+     </p>
+</div></body>
+</html>

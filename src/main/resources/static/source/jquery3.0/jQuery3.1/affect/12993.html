@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>stop()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">stop()<span class="g-bg-red margin-l-5">1.7*</span></h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;.stop( [clearQueue ] [, jumpToEnd ] )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>停止匹配元素当前正在运行的动画。
+</p>
+<ul class="signatures">
+	<li class="signature" id="stop-clearQueue-jumpToEnd">
+		<h4 class="name">
+			<span class="version-details">V : 1.2</span>.stop( [clearQueue ]
+                [, jumpToEnd ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>clearQueue</strong> (默认: <code>false</code>)
+				</div>
+				<div>
+					类型: Boolean
+				</div>
+				<div>
+					一个布尔值，指示是否取消以列队动画。默认 <code>false</code>.
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>jumpToEnd</strong> (默认: <code>false</code>)
+				</div>
+				<div>
+					类型: Boolean
+				</div>
+				<div>
+					一个布尔值指示是否当前动画立即完成。默认<code>false</code>.
+				</div>
+			</li>
+		</ul>
+	</li>
+	<li class="signature" id="stop-queue-clearQueue-jumpToEnd">
+		<h4 class="name">
+			<span class="version-details">V : 1.7</span>.stop( [queue ] [,
+                clearQueue ] [, jumpToEnd ] )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>queue</strong> (默认: <code>false</code>)
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					停止动画队列的名称。
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>clearQueue</strong> 
+				</div>
+				<div>
+					类型: Boolean
+				</div>
+				<div>
+					一个布尔值，指示是否取消以列队动画。默认 <code>false</code>.
+				</div>
+			</li>
+			<li>
+				<div>
+					<strong>jumpToEnd</strong> (默认: <code>false</code>)
+				</div>
+				<div>
+					类型: Boolean
+				</div>
+				<div>
+					一个布尔值指示是否当前动画立即完成。默认<code>false</code>.
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		当一个元素调用<code>.stop()</code>，当前正在运行的动画（如果有的话）立即停止。如果，例如，一个元素用<code>.slideUp()</code>隐藏的时候，调用<code>.stop()</code>，该元素依然会有一部分是处于显示状态的。由于元素上的动画尚未执行完成，所以动画完成时执行的回调函数是不会被调用的。
+	</p>
+	<p>
+		如果同一元素调用多个动画方法，尚未被执行的动画被放置在元素的效果队列中。这些动画不会开始，直到第一个完成。当调用<code>.stop()</code>的时候，队列中的下一个动画立即开始。如果<code>clearQueue</code>参数提供<code>true</code>值,那么在队列中的动画其余被删除并永远不会运行。
+	</p>
+	<p>
+		如果提供<code>jumpToEnd</code>参数，并且值为<code>true</code>时，当前动画将停止，但该元素上的 CSS 属性会被立刻修改成动画的目标值。用上面的<code>.slideUp()</code>为示例,该元素将立即隐藏。如果提供回调函数将立即被调用。
+	</p>
+	<p>
+		<strong>从jQuery 1.7开始</strong>, 如果第一个参数是一个字符串， 那么只有该参数所表示的队列中的动画才会被停止。
+	</p>
+	<p>
+		当我们需要对元素做<code>mouseenter</code>和<code>mouseleave</code>动画时，<code>.stop()</code>方法明显是有效的：
+	</p>
+	<div class="syntaxhighlighter xml nogutter">
+<pre class="prettyprint lang-js">&lt;div id="hoverme"&gt;
+  Hover me
+  &lt;img id="hoverme" src="book.png" alt="" width="100" height="123" /&gt;
+&lt;/div&gt;</pre>
+	</div>
+	<p>
+		我们可以创建一个不错的淡入效果，使用<code>.stop(true, true)</code>链式调用无须排队：
+	</p>
+	<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$('#hoverme-stop-2').hover(function() {
+  $(this).find('img').stop(true, true).fadeOut();
+}, function() {
+  $(this).find('img').stop(true, true).fadeIn();
+});</pre>
+	</div>
+	<h2>
+		Toggling Animations（切换动画）
+	</h2>
+	<p>
+		<strong>jQuery的1.7 ，</strong> 用<code>.stop()</code> 过早地停止切换动画将触发jQuery的内部效果跟踪。在早先的版本中，如果在切换动画完成之前，调用了 <code>.stop()</code> 方法，会导致动画状态的丢失(如果 jumpToEnd 参数是 false 的话）。此时，任何后续动画将从状态 "half-way" 开始执行，有时这会导致元素消失。要想观察这种行为，请参阅下面最后一个示例。
+	</p>
+	<blockquote>
+		<p>
+			可以通过设置属性<code>$.fx.off</code>为<code>true</code>停止全局的动画 。当这样做，所有动画方法将立即设置元素的最终状态，而不是所谓的显示效果。
+		</p>
+	</blockquote>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<div class="entry-example" id="example-0">
+	<h4>
+		实例
+	</h4>
+	<p>
+		<span class="desc">点击 Go 按钮，立刻开始执行动画。然后点击 STOP 
+按钮，动画元素会在它所在的位置停下来。另外一种测试方法时，多次点击不同的动画按钮，此时尚未被执行的动画会被添加到动画队列中，而后再点击 STOP
+ 按钮，则会立刻停止当前的动画，继续执行队列中的其它动画。</span> 
+	</p>
+	<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;div {
+position: absolute;
+background-color: #abc;
+left: 0px;
+top:30px;
+width: 60px;
+height: 60px;
+margin: 5px;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="go"&gt;Go&lt;/button&gt;
+&lt;button id="stop"&gt;STOP!&lt;/button&gt;
+&lt;button id="back"&gt;Back&lt;/button&gt;
+&lt;div class="block"&gt;&lt;/div&gt;
+&lt;script&gt;
+/* Start animation */
+$("#go").click(function(){
+$(".block").animate({left: '+=100px'}, 2000);
+});
+ 
+/* Stop animation when button is clicked */
+$("#stop").click(function(){
+$(".block").stop();
+});
+ 
+/* Start animation in the opposite direction */
+$("#back").click(function(){
+$(".block").animate({left: '-=100px'}, 2000);
+});
+ 
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+	</div>
+	<p>
+		<a href="http://www.shouce.ren/study/api/s/8238" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+	</p>
+</div>
+<h4>
+	实例
+</h4>
+<p>
+	<span class="desc">点击 slideToggle 按钮，会开始动画。然后在动画结束前再次点击该按钮，此时，会立刻从当前位置向反方向开始动画。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;.block {
+background-color: #abc;
+border: 2px solid black;
+width: 200px;
+height: 80px;
+margin: 10px;
+}
+&lt;/style&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id="toggle"&gt;slideToggle&lt;/button&gt;
+&lt;div class="block"&gt;&lt;/div&gt;
+&lt;script&gt;
+var $block = $('.block');
+/* Toggle a sliding animation animation */
+$('#toggle').on('click', function() {
+    $block.stop().slideToggle(1000);
+});
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8237" target="_blank" class="btn btn-sm btn-success">运行一下</a>
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.ajaxSetup()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.ajaxSetup()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.ajaxSetup( options )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值：<code><a href="http://www.shouce.ren/api/view/a/13081#articleHeader38" target="_blank">jQuery</a></code> 
+	</p>
+	<p>
+	</p>
+	<p class="desc">
+		<strong>描述：</strong>为以后要用到的Ajax请求设置默认的值
+	</p>
+	<ul class="signatures">
+		<li class="signature" id="jQuery-ajaxSetup-options">
+			<h4 class="name">
+				<span class="version-details">V : 1.1</span>jQuery.ajaxSetup( options )
+			</h4>
+			<ul>
+				<li>
+					<div>
+						<strong>options</strong> 
+					</div>
+					<div>
+						类型: <a href="http://www.shouce.ren/api/view/a/13081#articleHeader25" target="_blank">PlainObject</a> 
+					</div>
+					<div>
+						一个用来配置Ajax请求的"{键:值}"对，所有的选项都是可选的。
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="longdesc" id="entry-longdesc">
+		<p>
+			用于设置<code>$.ajaxSetup()</code>的详细参数, 参见 <code><a href="http://www.shouce.ren/api/view/a/12861" class="book-a">$.ajax()</a></code>.
+		</p>
+		<p>
+			所有后面的 Ajax 调用任何函数都将使用新的设置参数,除非它们调用时设置了各自的参数重载了这个默认值。 直到下一次调用<code>$.ajaxSetup()</code>.
+		</p>
+		<p>
+			<strong>注意：</strong> 此处指定的设置会影响<em>所有</em> <code>$.ajax</code>或基于AJAX的衍生方法，如<code>$.get()</code>的调用。这可能会导致不良的行为因为其他调用（例如，插件）可能希望正常的默认设置。出于这个原因，我们强烈建议您不要使用此API。相反我们建议，在调用时明确设置选项或定义一个简单的插件。
+		</p>
+		<p>
+			举个示例,我们可以事先设置服务器重复响应的默认URL参数：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.ajaxSetup({
+  url: 'ping.php'
+});</pre>
+		</div>
+		<p>
+			现在每次Ajax请求将自动使用这个"ping.php" URL：
+		</p>
+		<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$.ajax({
+  // url not set here; uses ping.php
+  data: {'name': 'Dan'}
+});</pre>
+		</div>
+		<div class="warning">
+			<p>
+				<strong>注意</strong>: 全局回调函数应使用他们各自的全局Ajax事件处理方法-<code>.ajaxStart()</code>, <code>.ajaxStop()</code>, <code>.ajaxComplete()</code>, <code>.ajaxError()</code>, <code>.ajaxSuccess()</code>, <code>.ajaxSend()</code>-设置，而不是为 <code>$.ajaxSetup()</code> 设置 <code>options</code> 对象。
+			</p>
+		</div>
+	</div>
+</div>
+<div class="example">
+	<h3>
+		<blockquote>
+			示例
+		</blockquote>
+	</h3>
+<span id="f_ad2"></span> 
+	<h4>
+		实例
+	</h4>
+	<p>
+		设置 AJAX 请求默认地址为 "/xmlhttp/"，禁止触发全局 AJAX 事件，用 POST 代替默认 GET 方法。其后的 AJAX 请求不再设置任何选项参数。
+	</p>
+	<h5>
+		jQuery 代码:
+	</h5>
+<pre><code>$.ajaxSetup({
+  url: "/xmlhttp/",
+  global: false,
+  type: "POST"
+});
+$.ajax({ data: myData });</code></pre>
+</div></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

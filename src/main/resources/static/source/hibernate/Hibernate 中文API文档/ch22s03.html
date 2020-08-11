@@ -1,0 +1,256 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>22.3.&#160;Hibernate 代码</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="ch22.html" title="第&#160;22&#160;章&#160;示例：Weblog 应用程序">
+<link rel="prev" href="ch22s02.html" title="22.2.&#160;Hibernate 映射">
+<link rel="next" href="ch23.html" title="第&#160;23&#160;章&#160;示例：复杂映射实例">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="example-weblog-code"></a>22.3.&#160;Hibernate 代码</h2></div></div></div>
+<p>
+            下面的类演示了我们可以使用Hibernate对这些类进行的一些操作。
+        </p>
+<pre class="programlisting">package eg;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
+
+public class BlogMain {
+    
+    private SessionFactory _sessions;
+    
+    public void configure() throws HibernateException {
+        _sessions = new Configuration()
+            .addClass(Blog.class)
+            .addClass(BlogItem.class)
+            .buildSessionFactory();
+    }
+    
+    public void exportTables() throws HibernateException {
+        Configuration cfg = new Configuration()
+            .addClass(Blog.class)
+            .addClass(BlogItem.class);
+        new SchemaExport(cfg).create(true, true);
+    }
+    
+    public Blog createBlog(String name) throws HibernateException {
+        
+        Blog blog = new Blog();
+        blog.setName(name);
+        blog.setItems( new ArrayList() );
+        
+        Session session = _sessions.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.persist(blog);
+            tx.commit();
+        }
+        catch (HibernateException he) {
+            if (tx!=null) tx.rollback();
+            throw he;
+        }
+        finally {
+            session.close();
+        }
+        return blog;
+    }
+    
+    public BlogItem createBlogItem(Blog blog, String title, String text)
+                        throws HibernateException {
+        
+        BlogItem item = new BlogItem();
+        item.setTitle(title);
+        item.setText(text);
+        item.setBlog(blog);
+        item.setDatetime( Calendar.getInstance() );
+        blog.getItems().add(item);
+        
+        Session session = _sessions.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.update(blog);
+            tx.commit();
+        }
+        catch (HibernateException he) {
+            if (tx!=null) tx.rollback();
+            throw he;
+        }
+        finally {
+            session.close();
+        }
+        return item;
+    }
+    
+    public BlogItem createBlogItem(Long blogid, String title, String text)
+                        throws HibernateException {
+        
+        BlogItem item = new BlogItem();
+        item.setTitle(title);
+        item.setText(text);
+        item.setDatetime( Calendar.getInstance() );
+        
+        Session session = _sessions.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Blog blog = (Blog) session.load(Blog.class, blogid);
+            item.setBlog(blog);
+            blog.getItems().add(item);
+            tx.commit();
+        }
+        catch (HibernateException he) {
+            if (tx!=null) tx.rollback();
+            throw he;
+        }
+        finally {
+            session.close();
+        }
+        return item;
+    }
+    
+    public void updateBlogItem(BlogItem item, String text)
+                    throws HibernateException {
+        
+        item.setText(text);
+        
+        Session session = _sessions.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.update(item);
+            tx.commit();
+        }
+        catch (HibernateException he) {
+            if (tx!=null) tx.rollback();
+            throw he;
+        }
+        finally {
+            session.close();
+        }
+    }
+    
+    public void updateBlogItem(Long itemid, String text)
+                    throws HibernateException {
+    
+        Session session = _sessions.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            BlogItem item = (BlogItem) session.load(BlogItem.class, itemid);
+            item.setText(text);
+            tx.commit();
+        }
+        catch (HibernateException he) {
+            if (tx!=null) tx.rollback();
+            throw he;
+        }
+        finally {
+            session.close();
+        }
+    }
+    
+    public List listAllBlogNamesAndItemCounts(int max)
+                    throws HibernateException {
+        
+        Session session = _sessions.openSession();
+        Transaction tx = null;
+        List result = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.createQuery(
+                "select blog.id, blog.name, count(blogItem) " +
+                "from Blog as blog " +
+                "left outer join blog.items as blogItem " +
+                "group by blog.name, blog.id " +
+                "order by max(blogItem.datetime)"
+            );
+            q.setMaxResults(max);
+            result = q.list();
+            tx.commit();
+        }
+        catch (HibernateException he) {
+            if (tx!=null) tx.rollback();
+            throw he;
+        }
+        finally {
+            session.close();
+        }
+        return result;
+    }
+    
+    public Blog getBlogAndAllItems(Long blogid)
+                    throws HibernateException {
+        
+        Session session = _sessions.openSession();
+        Transaction tx = null;
+        Blog blog = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.createQuery(
+                "from Blog as blog " +
+                "left outer join fetch blog.items " +
+                "where blog.id = :blogid"
+            );
+            q.setParameter("blogid", blogid);
+            blog  = (Blog) q.uniqueResult();
+            tx.commit();
+        }
+        catch (HibernateException he) {
+            if (tx!=null) tx.rollback();
+            throw he;
+        }
+        finally {
+            session.close();
+        }
+        return blog;
+    }
+    
+    public List listBlogsAndRecentItems() throws HibernateException {
+        
+        Session session = _sessions.openSession();
+        Transaction tx = null;
+        List result = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.createQuery(
+                "from Blog as blog " +
+                "inner join blog.items as blogItem " +
+                "where blogItem.datetime &gt; :minDate"
+            );
+
+            Calendar cal = Calendar.getInstance();
+            cal.roll(Calendar.MONTH, false);
+            q.setCalendar("minDate", cal);
+            
+            result = q.list();
+            tx.commit();
+        }
+        catch (HibernateException he) {
+            if (tx!=null) tx.rollback();
+            throw he;
+        }
+        finally {
+            session.close();
+        }
+        return result;
+    }
+}</pre>
+</div></body>
+</html>

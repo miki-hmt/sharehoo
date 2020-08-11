@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>JavaScript 类型</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">JavaScript 类型</h1>
+	<hr>
+		<p>
+	JavaScript提供了多个内置的数据类型。
+    除了这些，
+    此页面文档增加了虚拟类型，如选择器，
+    增强的伪类型，如事件，和所有你想知道的一切功能。
+</p>
+<p>
+	你应该可以尝试下面大多数的示例，
+        只要将它们复制到浏览器的JavaScript控制台 (Chrome, Safari 用开发菜单激活, IE 8+) 或 <a href="http://www.getfirebug.com/">Firebug</a> 控制台 (<a href="https://www.mozilla.org/zh-CN/firefox/new/">Firefox</a>)。
+</p>
+<p>
+	每当一个示例提到一个类型默认为一个布尔值，
+        其结果是很好的了解，在布尔环境使用该类型：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var x = "";
+if ( x ) {
+console.log( "x defaulted to true" );
+} else {
+console.log( "x defaulted to false" );
+}</pre>
+</div>
+<p>
+	在这种情况下， <code>"x defaulted to false"</code> 被打印出来了.
+</p>
+<p>
+	为了保持示例间短，
+        转换（“非”）操作，
+        和
+        双重否定是用来显示一个布尔上下文：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var x = "";
+!x // true
+!!x // false (双重否定: 因为 "非 (空字符串)" 为 true,再次否定让它变成 false)</pre>
+</div>
+<p>
+	显示实际的类型。
+</p>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7992" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<h2 id="String">
+	String
+</h2>
+<p>
+	字符串在JavaScript中是一个不可变对象，
+    包含零个，一个或多个字符。
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">"I'm a String in JavaScript!"
+'So am I!'</pre>
+</div>
+<p>
+	字符串类型是"string"。
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">typeof "some string"; // "string"</pre>
+</div>
+<h3 id="Quoting">
+	Quoting
+</h3>
+<p>
+	字符串可以使用单引号或双引号来定义。
+    您可以双引号内嵌套单引号，
+    也可以单引号内嵌套双引号。
+    混合双引号与双引号（或单引号与单引号），
+    嵌套的内容必须用一个反斜杠转义。
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">"You make 'me' sad."
+'That\'s "cranking" good fun!'
+"&lt;a href=\"home\"&gt;Home&lt;/a&gt;"</pre>
+</div>
+<h3 id="Built-in_Methods">
+	Built-in Methods（内置的方法）
+</h3>
+<p>
+	JavaScript中的字符串有一些内置的方法来操作字符串，
+        &nbsp;虽然结果总是一个新的字符串 - 或其他什么东西，
+        例如：split返回一个 <a href="#articleHeader21" title="Types" class="mwb">array</a>。
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">"hello".charAt( 0 ) // "h"
+"hello".toUpperCase() // "HELLO"
+"Hello".toLowerCase() // "hello"
+"hello".replace( /e|o/g, "x" ) // "hxllx"
+"1,2,3".split( "," ) // [ "1", "2", "3" ]</pre>
+</div>
+<h3 id="Length_Property">
+	length属性
+</h3>
+<p>
+	所有字符串都有一个length属性（手册网注释：字符串长度）。
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">"Hello".length // 5
+"".length // 0</pre>
+</div>
+<h3 id="Boolean_Default">
+	Boolean 缺省
+</h3>
+<p>
+	空字符串默认为false:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">!"" // true
+!!"" // false
+!"hello" // false
+!"true" // false
+!new Boolean( false ) // false</pre>
+</div>
+<h2 id="htmlString">
+	htmlString
+</h2>
+<p>
+	当一个字符串被用于表示一个或多个DOM元素时候，那么在jQuery文档中这个字符串会被指定为<strong>htmlString</strong>，
+        通常被创建并插入到文档中。
+        当一个字符串作为参数传递给jQuery()函数时，如果该字符串以<code>&lt;tag ... &gt;</code>开始，
+        那么该字符串直到最后的<code>&gt;</code>字符会被认为 并且&nbsp;解析为HTML。
+        在jQuery1.9之前，如果一个字符串只要包含<code>&lt;tag ... &gt;</code>（手册网注：<code>&lt;tag ... &gt;</code>在字符串的任何位置），那么该字符串都会被认为是HTML。
+</p>
+<p>
+	当一个字符串作为参数传递到一个操作方法，例如， <code>.append()</code>方法，
+        它总是被认为是HTML，
+        因为jQuery对字符串的其他常见的阐释（CSS选择器） 并不适用于这些环境。
+</p>
+<p>
+	要将一个字符串明确解析为HTML，从jQuery1.8开始， <code><a href="http://www.shouce.ren/api/view/a/13082">$.parseHTML()</a></code> 方法是非常有效的。
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">// Appends &lt;b&gt;hello&lt;/b&gt;:
+$( "&lt;b&gt;hello&lt;/b&gt;" ).appendTo( "body" );
+// Appends &lt;b&gt;hello&lt;/b&gt;:
+$( "&lt;b&gt;hello&lt;/b&gt;bye" ).appendTo( "body" );
+// Syntax error, unrecognized expression: bye&lt;b&gt;hello&lt;/b&gt;
+$( "bye&lt;b&gt;hello&lt;/b&gt;" ).appendTo( "body" );
+// Appends bye&lt;b&gt;hello&lt;/b&gt;:
+$( $.parseHTML( "bye&lt;b&gt;hello&lt;/b&gt;" ) ).appendTo( "body" );
+// Appends &lt;b&gt;hello&lt;/b&gt;wait&lt;b&gt;bye&lt;/b&gt;:
+$( "&lt;b&gt;hello&lt;/b&gt;wait&lt;b&gt;bye&lt;/b&gt;" ).appendTo( "body" );</pre>
+</div>
+<h2 id="Number">
+	Number
+</h2>
+<p>
+	在JavaScript中的数字是双精度64位格式的IEEE 754（ <a href="http://zh.wikipedia.org/wiki/IEEE_754" target="_blank">二进制浮点数算术标准</a>）值。
+        就像<a href="#articleHeader0" title="" class="mwb">字符串类型</a>一样，他们是不可变的。
+        所有基于C的语言都可以有效的使用 (+, -, *, /, %, =, +=, -=, *=, /=, ++, --)操作数字。
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">12
+3.543</pre>
+</div>
+<p>
+	数字的类型是"number"。
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">typeof 12 // "number"
+typeof 3.543 // "number"</pre>
+</div>
+<h3 id="Boolean_Default_2">
+	Boolean 缺省值
+</h3>
+<p>
+	如果一个数字是0, 那么默认是 false:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">!0 // true
+!!0 // false
+!1 // false
+!-1 // false</pre>
+</div>
+<p>
+	由于数字为双精度值实现的，
+    下面的结果不是一个错误：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">0.1 + 0.2 // 0.30000000000000004</pre>
+</div>
+<p>
+</p>
+<h3 id="Math">
+	Math
+</h3>
+<p>
+	JavaScript在 在Math对象中提供了数字实用工具：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">Math.PI // 3.141592653589793
+Math.cos( Math.PI ) // -1</pre>
+</div>
+<h3 id="Parsing_Numbers">
+	解析为数字
+</h3>
+<p>
+	parseInt函数和parseFloat帮助解析字符串转换为数字。如果没有指定要解析的数字的基数，&nbsp;那么将做隐式转换：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">parseInt( "123" ) = 123 // (implicit decimal)
+parseInt( "010" ) = 8 // (implicit octal)
+parseInt( "0xCAFE" ) = 51966 // (implicit hexadecimal)
+parseInt( "010", 10 ) = 10 // (explicit decimal)
+parseInt( "11", 2 ) = 3 // (explicit binary)
+parseFloat( "10.10" ) = 10.1</pre>
+</div>
+<h3 id="Numbers_to_Strings">
+	数字转化为字符串
+</h3>
+<p>
+	当数字加上字符串时候， 结果始终是一个字符串。
+    操作是一样的，所以要小心：
+    如果你想先数字相加，那么先用括号括起来，然后将它们和一个字符串相加：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">"" + 1 + 2; // "12"
+"" + ( 1 + 2 ); // "3"
+"" + 0.0000001; // "1e-7"
+parseInt( 0.0000001 ); // 1 (!)</pre>
+</div>
+<p>
+	或者您可以使用JavaScript所提供的String类，
+    尝试将其解析一个值字符串：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">String( 1 ) + String( 2 ); // "12"
+String( 1 + 2 ); // "3"</pre>
+</div>
+<h3 id="NaN_and_Infinity">
+	NaN 和 Infinity（无穷）
+</h3>
+<p>
+	解析一些东西的时候，如果解析结果不是一个数字，那么结果为NaN。
+        可以使用isNaN来检测这些情况：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">parseInt( "hello", 10 ) // NaN
+isNaN( parseInt("hello", 10) ) // true</pre>
+</div>
+<p>
+	被零除的结果为Infinity：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">1 / 0 // Infinity</pre>
+</div>
+<p>
+	NaN的和Infinity的类型都是"number"：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">typeof NaN // "number"
+typeof Infinity // "number"</pre>
+</div>
+<p>
+	需要注意的是NaN比较是个奇葩：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">NaN == NaN // false (!)</pre>
+</div>
+<p>
+	但是：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">Infinity == Infinity // true</pre>
+</div>
+<h3 id="Integer">
+	整数
+</h3>
+<p>
+	一个整数，是一个普通的数字型，
+    但每当在API文档中明确提到，表明非浮点数的预期。
+</p>
+<h3 id="Float">
+	Float
+</h3>
+<p>
+	一个浮点数，是一个普通的数字型，就像整型一样，每当在API文档中明确提到，表明是一个浮点数的预期。
+</p>
+<p>
+</p>
+<h2 id="Boolean">
+	Boolean
+</h2>
+<p>
+	在JavaScript中一个布尔值可以是true或false：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">if ( true ) console.log( "always!" );
+if ( false ) console.log( "never!" );</pre>
+</div>
+<h2 id="Object">
+	Object
+</h2>
+<p>
+	在JavaScript中一切都是对象， 虽然有些是比较客观的（哈哈）。 
+创建一个对象的最简单方法是对象字面：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var x = {};
+var y = {
+name: "Pete",
+age: 15
+};</pre>
+</div>
+<p>
+	对象的类型是 "object":
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">typeof {} // "object"</pre>
+</div>
+<h3 id="Dot_Notation">
+	点表示法
+</h3>
+<p>
+	您可以使用点表示法写入和读取对象的属性 ：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">y.name // "Pete"
+y.age // 15
+x.name = y.name + " Pan" // "Pete Pan"
+x.age = y.age + 1 // 16</pre>
+</div>
+<h3 id="Array_Notation">
+	数字表示法
+</h3>
+<p>
+	或者你可以使用数组表示法写入和读取对象的属性， 
+它允许你动态地选择属性：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var operations = {
+increase: "++",
+decrease: "--"
+};
+var operation = "increase";
+operations[ operation ] // "++"
+operations[ "multiply" ] = "*"; // "*"</pre>
+</div>
+<h3 id="Iteration">
+	迭代
+</h3>
+<p>
+	使用 for-in-loop 循环遍历对象很容易 ：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var obj = {
+name: "Pete",
+age: 15
+};
+for( key in obj ) {
+alert( "key is " + [ key ] + ", value is " + obj[ key ] );
+}</pre>
+</div>
+<p>
+	请注意，for-in-loop可以通过扩展 Object.prototype 被损坏 ，
+（见 <a href="http://erik.eae.net/archives/2005/06/06/22.13.54/" class="external text" title="http://erik.eae.net/archives/2005/06/06/22.13.54/">Object.prototype是被禁止的</a>） 因此使用其他库时要小心。
+</p>
+<p>
+	jQuery 提供了一个常用的<a href="http://www.shouce.ren/api/view/a/12784"><em>each</em> 函数</a>来遍历对象的属性， 
+以及数组的元素：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">jQuery.each( obj, function( key, value ) {
+console.log( "key", key, "value", value );
+});</pre>
+</div>
+<p>
+	其缺点是，该方法是在每个值的上下文环境中回调函数的，（手册网注：这里要特别注意this） ，
+因此，如果应用你会丢失你拥有对象的上下文 。 
+下面将详细介绍的功能。
+</p>
+<h3 id="Boolean_default_3">
+	Boolean 缺省值
+</h3>
+<p>
+	一个对象， 
+不管它是否有属性， 
+永远默认为true：
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">!{} // false
+!!{} // true</pre>
+</div>
+<h3 id="Prototype">
+	原型
+</h3>
+<p>
+	所有对象都有一个prototype（原型）属性。 
+每当解释器会查找一个属性，如果对象上没有找到该属性， 它还将检查对象的原型。 
+&nbsp;jQuery使用原型广泛地添加方法到jQuery的实例。 
+&nbsp;在内部，<code>jQuery.fn</code>是 <code>jQuery.prototype</code>的别名，因此您可以使用任何一个 
+&nbsp;（ 
+虽然插件开发人员标准化的使用<code>fn</code> ）。
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var form = $("#myform");
+console.log( form.clearForm ); // undefined
+// jQuery.fn == jQuery.prototype
+jQuery.fn.clearForm = function() {
+return this.find( ":input" ).each(function() {
+this.value = "";
+}).end();
+};
+// works for all instances of jQuery objects, because
+// the new method was added to the prototype
+console.log( form.clearForm ); // function
+form.clearForm();</pre>
+</div>
+<h2 id="Array">
+	Array
+</h2>
+<p>
+	Arrays in JavaScript are mutable lists with a few built-in methods. You can define arrays using the array literal:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var x = [];
+var y = [ 1, 2, 3 ];</pre>
+</div>
+<p>
+	The type of an array is "object":
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">typeof []; // "object"
+typeof [ 1, 2, 3 ]; // "object"</pre>
+</div>
+<p>
+	Reading and writing elements to an array uses the array-notation:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">x[ 0 ] = 1;
+y[ 2 ] // 3</pre>
+</div>
+<h3 id="Iteration_2">
+	Iteration
+</h3>
+<p>
+	An array has a length property that is useful for iteration:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">for ( var i = 0; i &lt; a.length; i++ ) {
+// Do something with a[i]
+}</pre>
+</div>
+<p>
+	When performance is critical, reading the length property only 
+once can help to speed things up. This should be used only when a 
+performance bottleneck was discovered:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">for ( var i = 0, j = a.length; i &lt; j; i++ ) {
+// Do something with a[i]
+}</pre>
+</div>
+<p>
+	Another variation defines a variable that is filled for each 
+iteration, removing the array-notation from the loop-body. It does not 
+work when the array contains 0 or empty strings!
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">for ( var i = 0, item; item = a[i]; i++ ) {
+// Do something with item
+}</pre>
+</div>
+<p>
+	jQuery provides a generic <a href="http://www.shouce.ren/api/view/a/12784"><em>each</em> function</a> to iterate over element of arrays, as well as properties of objects:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var x = [ 1, 2, 3 ];
+jQuery.each( x, function( index, value ) {
+console.log( "index", index, "value", value );
+});</pre>
+</div>
+<p>
+	The drawback is that the callback is called in the context of 
+each value and you therefore lose the context of your own object if 
+applicable. More on this below at Functions.
+</p>
+<p>
+	The length property can also be used to add elements to the end of an array. That is equivalent to using the push-method:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var x = [];
+x.push( 1 );
+x[ x.length ] = 2;
+x // [ 1, 2 ]</pre>
+</div>
+<p>
+	You'll see both variations a lot when looking through JavaScript library code.
+</p>
+<p>
+	Other built-in methods are reverse, join, shift, unshift, pop, slice, splice and sort:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var x = [ 0, 3, 1, 2 ];
+x.reverse() // [ 2, 1, 3, 0 ]
+x.join(" – ") // "2 - 1 - 3 - 0"
+x.pop() // [ 2, 1, 3 ]
+x.unshift( -1 ) // [ -1, 2, 1, 3 ]
+x.shift() // [ 2, 1, 3 ]
+x.sort() // [ 1, 2, 3 ]
+x.splice( 1, 2 ) // [ 2, 3 ]</pre>
+</div>
+<p>
+	Note: .unshift() method does not return a length property in Internet Explorer.
+</p>
+<h3 id="Boolean_Default_4">
+	Boolean Default
+</h3>
+<p>
+	An array, no matter if it has elements or not, never defaults to false:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">![] // false
+!![] // true</pre>
+</div>
+<h3 id="Array.3CType.3E_Notation">
+	Array&lt;Type&gt; Notation
+</h3>
+<p>
+	In the jQuery API you'll often find the notation of Array&lt;Type&gt;:
+</p>
+<pre class="prettyprint lang-js">dragPrevention    Array&lt;String&gt;</pre>
+<p>
+</p>
+<p>
+	This indicates that the method doesn't only expect an array as 
+the argument, but also specifies the expected type. The notation is 
+borrowed from Java 5's generics notation (or C++ templates).
+</p>
+<h2 id="PlainObject">
+	PlainObject
+</h2>
+<p>
+	The PlainObject type is a JavaScript object containing zero or more key-value pairs. The plain object is, in other words, an <code>Object</code> object. It is designated "plain" in jQuery documentation to distinguish
+ it from other kinds of JavaScript objects: for example, <code>null</code>, user-defined arrays, and host objects such as <code>document</code>, all of which have a <code>typeof</code> value of "object." The <code><a href="http://www.shouce.ren/api/view/a/13023">jQuery.isPlainObject()</a></code> method identifies whether the passed argument is a plain object or not, as demonstrated below:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js"> var a = [];
+var d = document;
+var o = {};
+typeof a; // object
+typeof d; // object
+typeof o; // object
+jQuery.isPlainObject( a ); // false
+jQuery.isPlainObject( d ); // false
+jQuery.isPlainObject( o ); // true</pre>
+</div>
+<h2 id="Null">
+	Null
+</h2>
+<p>
+	The <code>null</code> keyword is a JavaScript literal that is commonly used to express the absence of an intentional value.
+</p>
+<h2 id="Date">
+	Date
+</h2>
+<p>
+	The Date type is a JavaScript object that represents a single 
+moment in time. Date objects are instantiated using their constructor 
+function, which by default creates an object that represents the current
+ date and time.
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">new Date();</pre>
+</div>
+<p>
+	To create a Date object for an alternative date and time, pass 
+numeric arguments in the following order: year, month, day, minute, 
+second, millisecond — although note that the month is zero-based, 
+whereas the other arguments are one-based. The following creates a Date 
+object representing January 1st, 2014, at 8:15.
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">new Date( 2014, 0, 1, 8, 15 );</pre>
+</div>
+<h2 id="Function">
+	Function
+</h2>
+<p>
+	A function in JavaScript can be either named or anonymous. Any 
+function can be assigned to a variable or passed to a method, but 
+passing member functions this way can cause them to be called in the 
+context of another object (i.e. with a different "this" object).
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">function named() {}
+var handler = function() {}</pre>
+</div>
+<p>
+	You see a lot of anonymous functions in jQuery code:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( document ).ready(function() {});
+$( "a" ).click(function() {});
+$.ajax({
+url: "someurl.php",
+success: function() {}
+});</pre>
+</div>
+<p>
+	The type of a function is "function".
+</p>
+<h3 id="Arguments">
+	Arguments
+</h3>
+<p>
+	Inside a function a special variable "arguments" is always 
+available. It's similar to an array in that it has a length property, 
+but it lacks the built-in methods of an array. The elements of the 
+pseudo-array are the argument of the function call.
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">function log( x ) {
+console.log( typeof x, arguments.length );
+}
+log(); // "undefined", 0
+log( 1 ); // "number", 1
+log( "1", "2", "3" ); // "string", 3</pre>
+</div>
+<p>
+	The arguments object also has a callee property, which refers to the function you're inside of. For instance:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">var awesome = function() { return arguments.callee; }
+awesome() == awesome // true</pre>
+</div>
+<h3 id="Context.2C_Call_and_Apply">
+	Context, Call and Apply
+</h3>
+<p>
+	In JavaScript, the variable "this" always refers to the current 
+context. By default, "this" refers to the window object. Within a 
+function this context can change, depending on how the function is 
+called.
+</p>
+<p>
+	All event handlers in jQuery are called with the handling element as the context.
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( document ).ready(function() {
+// this refers to window.document
+});
+$( "a" ).click(function() {
+// this refers to an anchor DOM element
+});</pre>
+</div>
+<p>
+	You can specify the context for a function call using the 
+function-built-in methods call and apply. The difference between them is
+ how they pass arguments. Call passes all arguments through as arguments
+ to the function, while apply accepts an array as the arguments.
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">function scope() {
+console.log( this, arguments.length );
+}
+scope() // window, 0
+scope.call( "foobar", [ 1, 2 ] ); // "foobar", 1
+scope.apply( "foobar", [ 1, 2 ] ); // "foobar", 2</pre>
+</div>
+<h3 id="Scope">
+	Scope
+</h3>
+<p>
+	In JavaScript, all variables defined inside a function are only 
+visible inside that function scope. Consider the following example:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">// global
+var x = 0;
+(function() {
+// private
+var x = 1;
+console.log( x ); // 1
+})();
+console.log( x ); // 0</pre>
+</div>
+<p>
+	It defines a variable <i>x</i> in the global scope, then defines 
+an anonymous function and executes it immediately (the additional 
+parentheses are required for immediate execution). Inside the function 
+another variable <i>x</i> is defined with a different value. It is only visible within that function and doesn't overwrite the global variable.
+</p>
+<h3 id="Closures">
+	Closures
+</h3>
+<p>
+	Closures are created whenever a variable that is defined outside 
+the current scope is accessed from within some inner scope. In the 
+following example, the variable <i>counter</i> is visible within the create, increment, and print functions, but not outside of them.
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">function create() {
+var counter = 0;
+return {
+increment: function() {
+counter++;
+},
+print: function() {
+console.log( counter );
+}
+}
+}
+var c = create();
+c.increment();
+c.print(); // 1</pre>
+</div>
+<p>
+	The pattern allows you to create objects with methods that 
+operate on data that isn't visible to the outside—the very basis of 
+object-oriented programming.
+</p>
+<h3 id="Proxy_Pattern">
+	Proxy Pattern
+</h3>
+<p>
+	Combining the above knowledge gives you as a JavaScript developer
+ quite a lot of power. One way to combine that is to implement a proxy 
+pattern in JavaScript, enabling the basics of aspect-oriented 
+programming (AOP):
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">(function() {
+// log all calls to setArray
+var proxied = jQuery.fn.setArray;
+jQuery.fn.setArray = function() {
+console.log( this, arguments );
+return proxied.apply( this, arguments );
+};
+})();</pre>
+</div>
+<p>
+	The above wraps its code in a function to hide the 
+"proxied"-variable. It saves jQuery's setArray-method in a closure and 
+overwrites it. The proxy then logs all calls to the method and delegates
+ the call to the original. Using apply(this, arguments) guarantees that 
+the caller won't be able to notice the difference between the original 
+and the proxied method.
+</p>
+<h2 id="Callback">
+	Callback
+</h2>
+<p>
+	A callback is a plain JavaScript function passed to some method 
+as an argument or option. Some callbacks are just events, called to give
+ the user a chance to react when a certain state is triggered. jQuery's 
+event system uses such callbacks everywhere:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( "body" ).click(function( event ) {
+console.log( "clicked: " + event.target );
+});</pre>
+</div>
+<p>
+	Most callbacks provide arguments and a context. In the 
+event-handler example, the callback is called with one argument, an 
+Event. The context is set to the handling element, in the above example,
+ document.body.
+</p>
+<p>
+	Some callbacks are required to return something, others make that
+ return value optional. To prevent a form submission, a submit event 
+handler can return false:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( "#myform" ).submit(function() {
+return false;
+});</pre>
+</div>
+<p>
+	Instead of always returning false, the callback could check 
+fields of the form for validity, and return false only when the form is 
+invalid.
+</p>
+<p>
+</p>
+<h2 id="Selector">
+	Selector
+</h2>
+<p>
+	A selector is used in jQuery to select DOM elements from a DOM 
+document. That document is, in most cases, the DOM document present in 
+all browsers, but can also be an XML document received via Ajax.
+</p>
+<p>
+	The selectors are a composition of CSS and custom additions. All selectors available in jQuery are documented on the <a href="http://www.shouce.ren/api/view/a/12800" target="_blank">选择器</a>.
+</p>
+<p>
+	There are lot of plugins that leverage jQuery's selectors in 
+other ways. The validation plugin accepts a selector to specify a 
+dependency, whether an input is required or not:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">emailrules: {
+required: "#email:filled"
+}</pre>
+</div>
+<p>
+	This would make a checkbox with name "emailrules" required only 
+if the user entered an email address in the email field, selected via 
+its id, filtered via a custom selector ":filled" that the validation 
+plugin provides.
+</p>
+<p>
+	If Selector is specified as the type of an argument, it accepts 
+everything that the jQuery constructor accepts, eg. Strings, Elements, 
+Lists of Elements.
+</p>
+<h2 id="Event">
+	Event
+</h2>
+<p>
+	jQuery's event system normalizes the event object according to 
+W3C standards. The event object is guaranteed to be passed to the event 
+handler (no checks for window.event required). It normalizes the target,
+ relatedTarget, which, metaKey and pageX/Y properties and provides both 
+stopPropagation() and preventDefault() methods.
+</p>
+<p>
+	Those properties are all documented, and accompanied by examples, on the <a href="http://www.shouce.ren/api/view/a/12946" title="Events">Event object</a> page.
+</p>
+<p>
+	The standard events in the Document Object Model are: <code>blur</code>, <code>focus</code>, <code> load</code>, <code>resize</code>, <code>scroll</code>, <code>unload</code>, <code>beforeunload</code>, <code>click</code>, <code>dblclick</code>, <code>mousedown</code>, <code>mouseup</code>, <code>mousemove</code>, <code>mouseover</code>, <code>mouseout</code>, <code>mouseenter</code>, <code>mouseleave</code>, <code>change</code>, <code>select</code>, <code>submit</code>, <code>keydown</code>, <code>keypress,</code> and <code>keyup</code>.
+ Since the DOM event names have predefined meanings for some elements, 
+using them for other purposes is not recommended. jQuery's event model 
+can trigger an event by any name on an element, and it is propagated up 
+the DOM tree to which that element belongs, if any.
+</p>
+<h2 id="Element">
+	Element
+</h2>
+<p>
+	An element in the Document Object Model (DOM) has attributes, 
+text and children. It provides methods to traverse the parent and 
+children and to get access to its attributes. Due to a lot of flaws in 
+DOM API specifications and implementations, those methods are no fun to 
+use. jQuery provides a wrapper around those elements to help interacting
+ with the DOM. But often enough you will be working directly with DOM 
+elements, or see methods that (also) accept DOM elements as arguments.
+</p>
+<p>
+	Whenever you use jQuery's each-method, the context of your 
+callback is set to a DOM element. That is also the case for event 
+handlers.
+</p>
+<p>
+	Some properties of DOM elements are quite consistent among browsers. Consider this example of a simple on-blur-validation:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( ":text" ).blur(function() {
+if( !this.value ) {
+alert( "Please enter some text!" );
+}
+});</pre>
+</div>
+<p>
+	You could replace this.value with $(this).val() to access the 
+value of the text input via jQuery, but in that case you don't gain 
+anything.
+</p>
+<h2 id="jQuery">
+	jQuery
+</h2>
+<p>
+	A jQuery object contains a collection of Document Object Model 
+(DOM) elements that have been created from an HTML string or selected 
+from a document. Since jQuery methods often use CSS selectors to match 
+elements from a document, the set of elements in a jQuery object is 
+often called a set of "matched elements" or "selected elements".
+</p>
+<p>
+	The jQuery object itself behaves much like an array; it has a <code>length</code> property and the elements in the object can be accessed by their numeric indices <code>[0]</code> to <code>[length-1]</code>.
+ Note that a jQuery object is not actually a Javascript Array object, so
+ it does not have all the methods of a true Array object such as <code>join()</code>.
+</p>
+<p>
+	Most frequently, you will use the jQuery() function to create a jQuery object. <code>jQuery()</code> can also be accessed by its familiar single-character alias of <code>$()</code>, unless you have called <code>jQuery.noConflict()</code> to disable this option. Many jQuery methods return the jQuery object itself, so that method calls can be chained:
+</p>
+<p>
+	In API calls that return <code>jQuery</code>, the value returned will be the original jQuery object unless otherwise documented by that API. API methods such as <code>.filter()</code> or <code>.not()</code> modify their incoming set and thus return a new jQuery object.
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( "p" ).css( "color", "red" ).find( ".special" ).css( "color", "green" );</pre>
+</div>
+<p>
+	Whenever you use a "destructive" jQuery method that potentially changes the set of elements in the jQuery object, such as <code>.filter()</code> or <code>.find()</code>,
+ that method actually returns a new jQuery object with the resulting 
+elements. To return to the previous jQuery object, you use the <code>.end()</code> method.
+</p>
+<p>
+	A jQuery object may be empty, containing no DOM elements. You can create an empty jQuery object with <code>$()</code> (that is, passing no arguments at all). A jQuery object may also be 
+empty if a selector doesn't select any elements, or if a chained method 
+filters out all the elements. It is not an error; any further methods 
+called on that jQuery object simply have no effect since they have no 
+elements to act upon. So, in this example if there are no bad entries on
+ the page then no elements will be colored red:
+</p>
+<div class="syntaxhighlighter javascript nogutter">
+<pre class="prettyprint lang-js">$( ".badEntry" ).css({ color: "red" });</pre>
+</div>
+<h2 id="XMLHttpRequest">
+	XMLHttpRequest
+</h2>
+<p>
+	Some of jQuery's Ajax functions return the native XMLHttpRequest 
+(XHR) object, or pass it as an argument to success/error/complete 
+handlers, so that you can do additional processing or monitoring on the 
+request. Note that Ajax functions only return or pass an XHR object when
+ an XHR object is actually used in the request. For example, JSONP 
+requests and cross-domain GET requests use a script element rather than 
+an XHR object.
+</p>
+<p>
+	Although the XHR object is a standard, there are variations in 
+its behavior on different browsers. Refer to the W3C site and browsers' 
+documentation for more information:
+</p>
+<ul>
+	<li>
+		<a href="http://www.w3.org/TR/XMLHttpRequest/" class="external text" title="http://www.w3.org/TR/XMLHttpRequest/">W3C standard</a> 
+	</li>
+	<li>
+		<a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" class="external text" title="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Apple (Safari)</a> 
+	</li>
+	<li>
+		<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest" class="external text" title="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest">Mozilla (Firefox)</a> 
+	</li>
+	<li>
+		<a href="http://msdn.microsoft.com/en-us/library/ms535874%28VS.85%29.aspx" class="external text" title="http://msdn.microsoft.com/en-us/library/ms535874%28VS.85%29.aspx">Microsoft (Internet Explorer)</a> 
+	</li>
+	<li>
+		<a href="http://www.opera.com/docs/specs/opera9/xhr/" class="external text" title="http://www.opera.com/docs/specs/opera9/xhr/">Opera</a> 
+	</li>
+</ul>
+<p>
+	Google does not appear to have an official page for their XHR 
+documentation for Chrome. As of version 5, Chrome does not support the 
+use of the file protocol for XHR requests.
+</p>
+<h2 id="jqXHR">
+	jqXHR
+</h2>
+<p>
+	As of jQuery 1.5, the <a href="http://www.shouce.ren/api/view/a/12861">$.ajax()</a> method returns the jqXHR object, which is a superset of the XMLHTTPRequest object. For more information, see the jqXHR section of the $.ajax entry
+</p>
+<h2 id="Deferred">
+	Deferred Object
+</h2>
+<p>
+	As of jQuery 1.5, the <a href="http://www.shouce.ren/api/view/a/13048">Deferred</a> object provides a way to register multiple callbacks into self-managed 
+callback queues, invoke callback queues as appropriate, and relay the 
+success or failure state of any synchronous or asynchronous function.
+</p>
+<h2 id="Promise">
+	Promise Object
+</h2>
+<p>
+	This object provides a subset of the methods of the Deferred object (<a href="http://www.shouce.ren/api/view/a/13056"><code>then</code></a>, <a href="http://www.shouce.ren/api/view/a/13048"><code>done</code></a>, <a href="http://www.shouce.ren/api/view/a/13049"><code>fail</code></a>, <a href="http://www.shouce.ren/api/view/a/13059"><code>always</code></a>, <a href="http://www.shouce.ren/api/view/a/13058"><code>pipe</code></a>, <a href="http://www.shouce.ren/api/view/a/13062"><code>progress</code></a>, <a href="http://www.shouce.ren/api/view/a/13063"><code>state</code></a> and <a href="http://www.shouce.ren/api/view/a/13057"><code>promise</code></a>) to prevent users from changing the state of the Deferred.
+</p>
+<h2 id="Callbacks">
+	Callbacks Object
+</h2>
+<p>
+	A multi-purpose object that provides a powerful way to manage 
+callback lists. It supports adding, removing, firing, and disabling 
+callbacks. The Callbacks object is created and returned by the <code>$.Callbacks</code> function and subsequently returned by most of that function's methods.
+</p>
+<h2 id="XMLDocument">
+	XML Document
+</h2>
+<p>
+	A document object created by the browser's XML DOM parser, 
+usually from a string representing XML. XML documents have different 
+semantics than HTML documents, but most of the traversing and 
+manipulation methods provided by jQuery will work with them.
+</p>
+<h2 id="Assert">
+	Assert
+</h2>
+<p>
+	A reference to or instance of the object holding all of QUnit's assertions.
+</p>
+<h2>
+	<span>Document</span> 
+</h2>
+<p>
+	<span>document 文挡对象 - JavaScript脚本语言描述&nbsp;<br />
+</span> 
+</p>
+<h4>
+	<span> <strong>对象属性</strong>&nbsp;</span> 
+</h4>
+<pre>    document.title              //设置文档标题等价于HTML的&lt;title&gt;标签  
+    document.bgColor            //设置页面背景色  
+    document.fgColor            //设置前景色(文本颜色)  
+    document.linkColor          //未点击过的链接颜色  
+    document.alinkColor         //激活链接(焦点在此链接上)的颜色  
+    document.vlinkColor         //已点击过的链接颜色  
+    document.URL                //设置URL属性从而在同一窗口打开另一网页  
+    document.fileCreatedDate    //文件建立日期，只读属性  
+    document.fileModifiedDate   //文件修改日期，只读属性  
+    document.fileSize           //文件大小，只读属性  
+    document.cookie             //设置和读出cookie  
+    document.charset            //设置字符集 简体中文:gb2312   </pre>
+<h4>
+	<strong>对象方法</strong>&nbsp;
+</h4>
+<pre>    document.write()                   //动态向页面写入内容  
+    document.createElement(Tag)        //创建一个html标签对象  
+    document.getElementById(ID)        //获得指定ID值的对象  
+    document.getElementsByName(Name)   //获得指定Name值的对象   </pre>
+<h4>
+	<strong>images集合(页面中的图象)</strong> <br />
+</h4>
+&nbsp; a)通过集合引用&nbsp;<br />
+<pre>    document.images              //对应页面上的&lt;img&gt;标签  
+    document.images.length       //对应页面上&lt;img&gt;标签的个数  
+    document.images[0]           //第1个&lt;img&gt;标签             
+    document.images[i]           //第i-1个&lt;img&gt;标签   </pre>
+b)通过nane属性直接引用 <br />
+<pre>    &lt;img name="oImage"&gt;  document.images.oImage       //document.images.name属性   </pre>
+c)引用图片的src属性&nbsp;&nbsp;
+<pre>document.images.oImage.src   //document.images.name属性.src</pre>
+d)创建一个图象&nbsp;<br />
+<pre>    var oImage  
+    oImage = new Image()  
+    document.images.oImage.src="/1.jpg" </pre>
+<br />
+&nbsp; 同时在页面上建立一个&lt;img&gt;标签与之对应就可以显示&nbsp;<br />
+<pre>    &lt;html&gt;  
+    &lt;img name=oImage&gt;  
+    &lt;script language="javascript"&gt;  
+        var oImage  
+        oImage = new Image()  
+        document.images.oImage.src="/1.jpg"  
+    &lt;/script&gt;  
+    &lt;/html&gt;   </pre>
+<h4>
+	<strong>forms集合(页面中的表单)</strong> <br />
+</h4>
+&nbsp; a)通过集合引用&nbsp;<br />
+<pre>    document.forms                  //对应页面上的&lt;form&gt;标签  
+    document.forms.length           //对应页面上&lt;form&gt;标签的个数  
+    document.forms[0]               //第1个&lt;form&gt;标签  
+    document.forms[i]               //第i-1个&lt;form&gt;标签  
+    document.forms[i].length        //第i-1个&lt;form&gt;中的控件数  
+    document.forms[i].elements[j]   //第i-1个&lt;form&gt;中第j-1个控件   </pre>
+&nbsp; b)通过标签name属性直接引用&nbsp;<br />
+<pre>    &lt;form name="Myform"&gt;&lt;input name="myctrl"&gt;&lt;/form&gt;  
+    document.Myform.myctrl          //document.表单名.控件名   </pre>
+<pre>&lt;html&gt;  
+	&lt;!--Text控件相关Script--&gt;  
+	&lt;form name="Myform"&gt;  
+		&lt;input type="text" name="oText"&gt;  
+		&lt;input type="password" name="oPswd"&gt;  
+	&lt;/form&gt;  
+	&lt;script language="javascript"&gt;  
+		//获取文本密码框的值  
+		document.write(document.Myform.oText.value)  
+		document.write(document.Myform.oPswd.value)  
+	&lt;/script&gt;  
+&lt;/html&gt;</pre>
+<h4>
+	实例
+</h4>
+<pre>    &lt;html&gt;  
+    &lt;!--Select控件相关Script--&gt;  
+    &lt;form name="Myform"&gt;  
+    &lt;select name="oSelect"&gt;  
+    &lt;option value="1"&gt;1&lt;/option&gt;  
+    &lt;option value="2"&gt;2&lt;/option&gt;  
+    &lt;option value="3"&gt;3&lt;/option&gt;  
+    &lt;/select&gt;  
+    &lt;/form&gt;  
+      
+    &lt;script language="javascript"&gt;  
+        //遍历select控件的option项  
+        var length  
+        length=document.Myform.oSelect.length  
+        for(i=0;i&lt;length;i++)  
+        document.write(document.Myform.oSelect[i].value)  
+    &lt;/script&gt;  
+      
+    &lt;script language="javascript"&gt;  
+        //遍历option项并且判断某个option是否被选中  
+        for(i=0;i&lt;document.Myform.oSelect.length;i++){  
+        if(document.Myform.oSelect[i].selected!=true)  
+        document.write(document.Myform.oSelect[i].value)  
+        else  
+        document.write("&lt;font color=red&gt;"+document.Myform.oSelect[i].value+"&lt;/font&gt;")     
+        }  
+    &lt;/script&gt;  
+      
+    &lt;script language="javascript"&gt;  
+        //根据SelectedIndex打印出选中的option  
+        //(0到document.Myform.oSelect.length-1)  
+        i=document.Myform.oSelect.selectedIndex  
+        document.write(document.Myform.oSelect[i].value)  
+    &lt;/script&gt;  
+      
+    &lt;script language="javascript"&gt;  
+        //动态增加select控件的option项  
+        var oOption = document.createElement("OPTION");  
+        oOption.text="4";  
+        oOption.value="4";  
+        document.Myform.oSelect.add(oOption);  
+    &lt;/script&gt;  
+    &lt;html&gt;   </pre>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/7994" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<pre>    &lt;Div id="oDiv"&gt;Text&lt;/Div&gt;  
+      document.all.oDiv                        //引用图层oDiv  
+      document.all.oDiv.style                   
+      document.all.oDiv.style.display=""       //图层设置为可视  
+      document.all.oDiv.style.display="none"   //图层设置为隐藏   </pre>
+<blockquote>
+	document.all表示document中所有对象的集合，只有ie支持此属性，因此也用来判断浏览器的种类
+</blockquote>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

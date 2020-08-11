@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, minimumscale=1.0, maximum-scale=1.0" />
+<meta name="language" content="zh-cn" />
+<meta name="renderer" content="webkit" />
+<title>jQuery.parseXML()</title>
+<link rel="stylesheet" type="text/css" href="../style/prettify.css" />
+<link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../style/love.css" />
+<script type="text/javascript" src="../style/jquery.min.js"></script>
+<script type="text/javascript" src="../style/bootstrap.min.js"></script>
+<script type="text/javascript" src="../style/prettify.js"></script>
+</head>
+<body>
+<div id="post-content" class="m-bg">
+	<h1 class="text-center">jQuery.parseXML()</h1>
+	<hr>
+		<h3>
+	<blockquote>
+		概述&nbsp;&nbsp;&nbsp;&nbsp;jQuery.parseXML( data )
+	</blockquote>
+</h3>
+<div class="desc">
+	<p>
+		返回值： <code>XMLDocument</code> 
+	</p>
+</div>
+<p>
+</p>
+<p class="desc">
+	<strong>描述：</strong>解析一个字符串到一个XML文档。
+</p>
+<ul class="signatures">
+	<li class="signature" id="jQuery-parseXML-data">
+		<h4 class="name">
+			<span class="version-details">V : 1.5</span>jQuery.parseXML( data )
+		</h4>
+		<ul>
+			<li>
+				<div>
+					<strong>data</strong> 
+				</div>
+				<div>
+					类型: String
+				</div>
+				<div>
+					用来解析的格式良好的XML字符串。
+				</div>
+			</li>
+		</ul>
+	</li>
+</ul>
+<div class="longdesc" id="entry-longdesc">
+	<p>
+		<code>jQuery.parseXML</code>使用原生解析函数浏览器创建一个有效的XML文档。这文档可以被传递给<code>jQuery</code>中，用于创建一个典型的jQuery对象，可以查询及操作。
+	</p>
+</div>
+<div class="jquery-api-top">
+</div>
+<header>
+<h3 class="underline">
+	<blockquote>
+		示例
+	</blockquote>
+</h3>
+</header>
+<p>
+	<span class="desc">创建一个jQuery对象使用一个XML字符串并得到标题节点的值。</span> 
+</p>
+<div class="syntaxhighlighter xml ">
+<pre class="prettyprint lang-js">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="http://code.jquery.com/jquery-latest.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ 
+&lt;p id="someElement"&gt;&lt;/p&gt;
+&lt;p id="anotherElement"&gt;&lt;/p&gt;
+ 
+&lt;script&gt;
+var xml = "&lt;rss version='2.0'&gt;&lt;channel&gt;&lt;title&gt;RSS Title&lt;/title&gt;&lt;/channel&gt;&lt;/rss&gt;",
+    xmlDoc = $.parseXML( xml ),
+    $xml = $( xmlDoc ),
+    $title = $xml.find( "title" );
+ 
+/* append "RSS Title" to #someElement */
+$( "#someElement" ).append( $title.text() );
+ 
+/* change the title to "XML Title" */
+$title.text( "XML Title" );
+ 
+/* append "XML Title" to #anotherElement */
+$( "#anotherElement" ).append( $title.text() );
+&lt;/script&gt;
+ 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
+	<a href="http://www.shouce.ren/study/api/s/8201" target="_blank" class="btn btn-sm btn-success">运行一下</a> 
+</p>
+<p>
+</p></div>
+<div class="m-bg text-center margin_t_1">
+	<a class="btn btn-sm btn-default" href="http://www.shouce.ren"><strong>手册网</strong></a>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("pre").addClass("prettyprint linenums");
+	//代码高亮
+	prettyPrint();
+	$("table").attr('class','table table-striped table-bordered table-condensed');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>第&#160;14&#160;章&#160;HQL: Hibernate查询语言</title>
+<link rel="stylesheet" href="styles/html.css" type="text/css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.71.0">
+<link rel="start" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="up" href="index.html" title="HIBERNATE - 符合Java习惯的关系数据库持久化">
+<link rel="prev" href="ch13s04.html" title="13.4.&#160;DML(数据操作语言)风格的操作(DML-style operations)">
+<link rel="next" href="ch14s02.html" title="14.2.&#160;from子句">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="chapter" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title">
+<a name="queryhql"></a>第&#160;14&#160;章&#160;HQL: Hibernate查询语言</h2></div></div></div>
+<div class="toc">
+<p><b>目录</b></p>
+<dl>
+<dt><span class="sect1"><a href="ch14.html#queryhql-casesensitivity">14.1. 大小写敏感性问题</a></span></dt>
+<dt><span class="sect1"><a href="ch14s02.html">14.2. from子句</a></span></dt>
+<dt><span class="sect1"><a href="ch14s03.html">14.3. 关联(Association)与连接(Join)</a></span></dt>
+<dt><span class="sect1"><a href="ch14s04.html">14.4. join 语法的形式</a></span></dt>
+<dt><span class="sect1"><a href="ch14s05.html">14.5. select子句</a></span></dt>
+<dt><span class="sect1"><a href="ch14s06.html">14.6. 聚集函数</a></span></dt>
+<dt><span class="sect1"><a href="ch14s07.html">14.7. 多态查询</a></span></dt>
+<dt><span class="sect1"><a href="ch14s08.html">14.8. where子句</a></span></dt>
+<dt><span class="sect1"><a href="ch14s09.html">14.9. 表达式</a></span></dt>
+<dt><span class="sect1"><a href="ch14s10.html">14.10. order by子句</a></span></dt>
+<dt><span class="sect1"><a href="ch14s11.html">14.11. group by子句</a></span></dt>
+<dt><span class="sect1"><a href="ch14s12.html">14.12. 子查询</a></span></dt>
+<dt><span class="sect1"><a href="ch14s13.html">14.13. HQL示例</a></span></dt>
+<dt><span class="sect1"><a href="ch14s14.html">14.14. 批量的UPDATE和DELETE</a></span></dt>
+<dt><span class="sect1"><a href="ch14s15.html">14.15. 小技巧 &amp; 小窍门</a></span></dt>
+</dl>
+</div>
+<p>
+        Hibernate配备了一种非常强大的查询语言，这种语言看上去很像SQL。但是不要被语法结构
+        上的相似所迷惑，HQL是非常有意识的被设计为完全面向对象的查询，它可以理解如继承、多态
+        和关联之类的概念。
+    </p>
+<div class="sect1" lang="zh-cn">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="queryhql-casesensitivity"></a>14.1.&#160;大小写敏感性问题</h2></div></div></div>
+<p>
+            除了Java类与属性的名称外，查询语句对大小写并不敏感。
+            所以 <code class="literal">SeLeCT</code> 与
+            <code class="literal">sELEct</code> 以及
+            <code class="literal">SELECT</code> 是相同的，但是
+            <code class="literal">org.hibernate.eg.FOO</code> 并不等价于
+            <code class="literal">org.hibernate.eg.Foo</code> 并且
+            <code class="literal">foo.barSet</code> 也不等价于
+            <code class="literal">foo.BARSET</code>。
+        </p>
+<p>
+            本手册中的HQL关键字将使用小写字母. 很多用户发现使用完全大写的关键字会使查询语句
+	     的可读性更强, 但我们发现，当把查询语句嵌入到Java语句中的时候使用大写关键字比较难看。
+        </p>
+</div>
+</div></body>
+</html>
