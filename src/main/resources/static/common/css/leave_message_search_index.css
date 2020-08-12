@@ -1,0 +1,245 @@
+
+#ad_0 {
+  MARGIN-BOTTOM: 10px;
+}
+.news-nav .container {
+  MARGIN: 0px auto;
+  width: 1170px;
+  FONT-FAMILY: "Microsoft YaHei";
+  padding: 0;
+}
+.nav-bar {
+  font-size: 16px;
+  color: #727272;
+  float: left;
+}
+.nav-bar a {
+  display: inline-block;
+  padding: 0 5px;
+  line-height: 48px;
+  margin-right: 20px;
+  color: #727272;
+  text-decoration: none;
+  font-family: "Microsoft YaHei";
+}
+.nav-bar .current,
+.nav-bar .active,
+.nav-bar a:hover {
+  border-bottom: 2px solid #dc3c00;
+  margin-bottom: -2px;
+  background: transparent;
+}
+.search-download {
+  float: right;
+  margin-top: -44px;
+}
+.search-download form {
+  float: left;
+  border: 1px solid #ddd;
+  height:31px;
+  margin-top:3px;
+}
+.search-download input {
+/*border:solid 1px #ddd;
+  border-right:none;*/
+  border: none;
+  height: 31px;
+  line-height: 22px;
+  padding: 0 10px;
+  margin-right: -4px;
+  width: 204px;
+}
+.search-download .download-search-bth {
+  background: url("../images/f_icon.png") no-repeat 0 -189px;
+  display: inline-block;
+/*border:solid 1px #ddd;
+  border-left:none;*/
+  border: none;
+  width: 22px;
+  height: 26px;
+  vertical-align: middle;
+  padding-right: 2px;
+  margin-top: -7px;
+}
+.search-download .help {
+  float: left;
+  margin: 3px 0 0 20px;
+  font-size: 14px;
+  color: #999;
+}
+.search-download .help .fa {
+  margin-right: 5px;
+}
+
+/*2018.08.23	miki 閽堝绉樺瘑澧欑殑鎼滅储妗嗕贡鐮侀棶棰�*/
+.mm-search-download {
+  float: right;
+}
+.mm-search-download form {
+  float: left;
+  border: 1px solid #ddd;
+  height:31px;
+  margin-top:11px;
+}
+.mm-search-download input {
+/*border:solid 1px #ddd;
+  border-right:none;*/
+  border: none;
+  height: 28px;
+  line-height: 22px;
+  padding: 0 9px;
+  margin-right: -4px;
+  width: 204px;
+}
+.mm-search-download .download-search-bth {
+  background: url("../images/f_icon.png") no-repeat 0 -189px;
+  display: inline-block;
+/*border:solid 1px #ddd;
+  border-left:none;*/
+  border: none;
+  width: 22px;
+  height: 26px;
+  vertical-align: middle;
+  padding-right: 2px;
+  margin-top: -7px;
+}
+
+
+.top_ad .top_ad_l {
+  float: left;
+  width: 960px;
+}
+.top_ad .top_ad_r {
+  float: right;
+  width: 200px;
+}
+.top_ad_01 {
+  margin-top: -89px;
+}
+.download_top {
+  background: #fff;
+  border: solid 1px #eee;
+  padding: 30px 20px;
+}
+.download_top .download_top_t {
+  float: left;
+}
+.download_top .download_top_t .download_dl dt {
+  width: 42px;
+  float: left;
+}
+.download_top .download_top_t .download_dl dt img {
+  width: 100%;
+  height: 100%;
+  max-width: 42px;
+  max-height: 50px;
+}
+.download_top .download_top_t .download_dl dd {
+  margin-left: 60px;
+}
+.download_top .download_top_t .download_dl dd h3 span {
+  font-size: 18px;
+  color: #333;
+}
+.download_top .download_top_t .download_dl dd h3 a {
+  display: inline-block;
+  padding: 0 10px;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #fff;
+  background: #3fa0e3;
+  margin-left: 10px;
+}
+.download_top .download_top_t .download_dl dd h3 a .fa {
+  margin-left: 7px;
+}
+.download_top .download_top_t .download_dl dd .dl_b {
+  padding: 8px 0 0;
+  font-size: 0;
+}
+.download_top .download_top_t .download_dl dd .dl_b span {
+  font-size: 14px;
+  color: #67769a;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+.download_top .download_top_t .download_dl dd .dl_b label {
+  display: inline-block;
+  vertical-align: middle;
+}
+.download_top .download_top_t .download_dl dd .dl_b label a {
+  cursor: cursor;
+  display: inline-block;
+  padding: 0 15px;
+  height: 20px;
+  line-height: 18px;
+  border: solid 1px #e33f3f;
+  font-size: 12px;
+  color: #e33f3f;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+.download_top .download_top_t .download_dl dd .dl_b label a:hover {
+  background: #e33f3f;
+  color: #fff;
+}
+.download_top .down_share {
+  float: right;
+}
+.download_top .download_b {
+  padding: 10px 0;
+  font-size: 14px;
+  color: #999;
+  word-break: break-all;
+}
+.download_top .download_b .download_b_hide {
+  display: none;
+}
+.download_top .download_b em {
+  display: inline-block;
+  margin-left: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #959db1;
+}
+.download_top .download_b .fold {
+  display: none;
+}
+.download_top .download_pdf {
+  width: 100%;
+  position: relative;
+  z-index: 0;
+/* hides the second object from all versions of IE */
+/* display the second object only for IE5 Mac */
+/* IE Mac \*/
+/*/
+/**/
+}
+.download_top .download_pdf img {
+  width: 810px;
+  height: 410px;
+}
+.download_top .download_pdf .dl_pdf_b {
+  padding: 20px 0;
+  font-size: 14px;
+  color: #666;
+}
+.download_top .download_pdf .dl_pdf_b input {
+  display: inline-block;
+  width: 590px;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 10px;
+  border: solid 1px #ccc;
+  margin-left: 10px;
+}
+.download_top .download_pdf * html object.hiddenObjectForIE {
+  display: none;
+}
+.download_top .download_pdf * html object.hiddenObjectForIE {
+  display: inline;
+}
+

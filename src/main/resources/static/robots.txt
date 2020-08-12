@@ -1,0 +1,85 @@
+User-agent: *
+
+Disallow: /admin/
+Disallow: /images
+Disallow: /image_upload
+Allow: /topic/
+Allow: /topic/detail/
+Allow: /blog/*/album
+Allow: /blog/*/critiques
+Allow: /topic/section/
+Allow: /shop/
+Allow: /shop/1
+Allow: /shop/source/categories
+Allow: /shop/rank
+Allow: /shop/source/
+Allow: /secret
+
+
+
+User-agent: Baiduspider
+Allow: /topic/detail/
+Allow: /topic/section/
+Allow: /source/
+Allow: /blog/
+Allow: /blog/*/article/
+Allow: /blog/*/album
+Allow: /blog/*/album
+Allow: /topic/section/
+Allow: /secret
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.jpg$
+Disallow: /*.png$
+Disallow: /*.gif$
+
+
+User-agent: YisouSpider
+Allow: /topic/detail/
+Allow: /topic/section/
+Allow: /source/
+Allow: /blog/
+Allow: /blog/*/article/
+Allow: /blog/*/album
+Allow: /blog/*/album
+Allow: /topic/section/
+Allow: /secret
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.jpg$
+Disallow: /*.png$
+Disallow: /*.gif$
+
+
+User-agent: HaosouSpider	360Spider
+Allow: /topic/detail/
+Allow: /topic/section/
+Allow: /source/
+Allow: /blog/
+Allow: /blog/*/article/
+Allow: /blog/*/album
+Allow: /blog/*/album
+Allow: /topic/section/
+Allow: /secret
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.jpg$
+Disallow: /*.png$
+Disallow: /*.gif$
+
+
+User-agent: Googlebot
+Allow: /topic/detail/
+Allow: /topic/section/
+Allow: /source/
+Allow: /blog/
+Allow: /blog/*/article/
+Allow: /blog/*/album
+Allow: /blog/*/album
+Allow: /topic/section/
+Allow: /secret
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.jpg$
+Disallow: /*.png$
+Disallow: /*.gif$

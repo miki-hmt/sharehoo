@@ -1,0 +1,16 @@
+
+/*============ header ========*/
+.header{
+	height: 40px;
+	line-height: 40px;
+	background: #48525E;
+}
+.header-con{
+	width: 1200px;
+	margin: 0 auto;
+}
+.header-logo{
+float: left;}
+.header-user{float: right;color: #ddd;}
+.header-user a{color: #ddd;}
+.header-user a:hover{color: #fefefe;}

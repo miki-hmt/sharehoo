@@ -1,0 +1,34 @@
+/* @import url("/zh_cn/font_color.css"); */
+.chanNav{ background:#f7f7f7; border-bottom:1px solid #d9d9d9; height:30px;font-size:12px; min-width:1000px;}
+.chanNavCon {width:1000px; margin:0 auto; *zoom:1;}
+.chanNavCon:after {display:block; overflow:hidden; clear:both; height:0; visibility:hidden; content:".";}
+.chanNav span.left{ float:left; padding-top:8px;}
+.chanNav span.left a{padding:0 1px; }
+.chanNav span.right{ float:right; padding-top:5px;}
+.chanNav span.right a{ margin-left:10px; padding:1px 4px;}
+.chanNav span.right a.cnLogin{background:#d03c4d; color:#fff; font-weight:bold;}
+.chanNav span.right a.cnLogin:hover{background:#6e0007;}
+.chanNav a{ display:inline-block;font-size:12px; color:#000; text-decoration:none;}
+.chanNav a:hover{font-size:12px; color:#b31515; text-decoration:underline;}
+#topPic { width:1000px; margin:0 auto 8px; }
+.topWZLZ00002 { width:1000px; margin:0 auto 8px; overflow:hidden; }
+#CH_SY_DH_00002, #CH_SY_DH_00002 div { display:inline; }
+.chanHead { margin:0 auto 10px; width:1000px; text-align:center; }
+/*club-nav*/
+.club-nav { width:1045px; height:45px; margin:0 auto; margin-top:10px; position:relative; }
+.club-nav .logo { position:absolute; left:20px; top:0px; width:110px; height:60px; display:inline; no-repeat; }
+.club-nav .logo a { display:block; height:55px; line-height:220px; overflow:hidden; }
+.mainnav { line-height:38px; width:875px; height:38px; padding-left:5px; position:absolute; left:120px; top:4px; background:#B6241F;z-index:200; }
+.mainnav li { display:inline-block; margin:0 4px; float:left; position:relative; z-index:10;margin-top:9px; }
+.mainnav li a { font-size:14px; color:#fff; padding:3px 4px 3px 3px;background:#B6241F; }
+.mainnav li a:hover { color:#fff; background:#820504; text-decoration:none; }
+.mainnav li .sublist { display:none; position:absolute; left:-6px; top:38px; padding:1px; border:1px solid #ddd; background:#fff; }
+.mainnav li .sublist a { display:block; width:68px; height:23px; line-height:23px; font-size:12px; font-weight:normal; color:#000; background:#F3F3F3; }
+.mainnav li .sublist a:hover { color:#b31515; }
+.mainnav li.lion .sublist { display:block; z-index:10; }
+.ch_wzl_1-7 { background:#f5f5f5; border:1px solid #ddd; margin:10px auto; width:998px; }
+.ch_wzl_1-7 ul { height:25px; overflow:hidden; padding-left:8px; }
+.ch_wzl_1-7 li { float:left; line-height:25px; font-size:12px; height:25px; width:134px; text-align:left; overflow:hidden; }
+.ch_wzl_1-7 li a { color:#333; font-size:12px; text-decoration:none; }
+.ch_wzl_1-7 li a:hover { color:#f00; font-size:12px; }
+.ch_cht_5,.ch_cht_6 {margin:5px auto; width:1000px;}

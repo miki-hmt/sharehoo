@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.6.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.cosmosource</groupId>
+	<artifactId>sharehoo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+ 
+	<name>sharehoo</name>
+	<description>sharehoo社区改版springboot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<commons-io.version>2.2</commons-io.version>
+        <commons-logging.version>1.1.1</commons-logging.version>
+        <commons-net.version>3.4</commons-net.version>
+        <commons-lang3.version>3.4</commons-lang3.version>
+        <commons-codec.version>1.11</commons-codec.version>
+        <commons-compress.version>1.10</commons-compress.version>
+        <commons-beanutils.version>1.9.2</commons-beanutils.version>
+        <commons-fileupload.version>1.3.1</commons-fileupload.version>
+        <commons-configuration.version>1.10</commons-configuration.version>
+        
+        <!-- 2020.08.12 解决springboot pom第一行报错问题 -->
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+	</properties>
+
+	<dependencies>
+	
+	<!--事务管理：原子性，一致性，隔离性，持久性  2019.07.04	miki -->
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+	</dependency>
+	
+	<!-- EHcache缓存 -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+		
+        <!-- guava缓存 -->
+        <dependency>
+        	<groupId>com.google.guava</groupId>
+        	<artifactId>guava</artifactId>
+        	<version>25.1-jre</version>
+        </dependency>
+
+		<!-- jpa集成hibernate框架	2019.07.04	miki -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			
+			<exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+                <!--- 
+                	打war包时加入此项，去除springboot自带的tomcat插件，否则无法启动		2019.06.19	miki -->
+                <exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+			   </exclusion>
+                <exclusion>
+                	<groupId>org.springframework</groupId>
+                	<artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                	<groupId>org.springframework</groupId>
+                	<artifactId>spring-beans</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+		
+		<dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- 2019.06.19	miki	cosmosource权限登录jar包依赖 -->
+		<!-- <dependency>
+			  <groupId>com.cosmosource</groupId>
+			  <artifactId>client</artifactId>
+			  <version>8.0.2.15-SNAPSHOT</version>
+		</dependency> -->
+		
+        
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+         </dependency>
+		
+		<!--ehcache依赖引入  -->
+		<dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            </dependency>
+            
+         <!-- 日志处理 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		
+		<!-- c3p0依赖-->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+		
+		<!-- common通用工具包依赖		2019.03.23	miki	General Utils -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>${commons-configuration.version}</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>commons-lang</groupId>
+            		<artifactId>commons-lang</artifactId>
+            	</exclusion>
+            	<exclusion>
+            		<groupId>commons-logging</groupId>
+            		<artifactId>commons-logging</artifactId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>${commons-compress.version}</version>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.4</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+       
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/httpclient -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jsp-api</artifactId>
+		    <version>2.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		
+	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-solr</artifactId>
+        </dependency>	
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
+	<!-- <dependency>
+	    <groupId>org.apache.solr</groupId>
+	    <artifactId>solr-solrj</artifactId>
+	    <version>4.10.3</version>
+	</dependency>
+	https://mvnrepository.com/artifact/org.apache.solr/solr-core
+	<dependency>
+	    <groupId>org.apache.solr</groupId>
+	    <artifactId>solr-core</artifactId>
+	    <version>4.10.3</version>
+	    <exclusions>  
+        <exclusion>  
+            <artifactId>jdk.tools</artifactId>  	排除jdk1.6的tool工具jar包依赖 	2019.07.08	miki
+            <groupId>jdk.tools</groupId>  
+        </exclusion>  
+        <exclusion>  
+            <artifactId>guava</artifactId>  	派除jdk1.6的tool工具jar包依赖 	2019.07.08	miki
+            <groupId>com.google.guava</groupId>  
+        </exclusion>  
+    </exclusions>
+	</dependency> -->
+	
+	<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+	<dependency>
+	    <groupId>net.sf.json-lib</groupId>
+	    <artifactId>json-lib</artifactId>
+	    <version>2.4</version>
+	</dependency>
+
+		
+	<!-- https://mvnrepository.com/artifact/org.json/json -->
+	<dependency>
+	    <groupId>org.json</groupId>
+	    <artifactId>json</artifactId>
+	    <version>20160810</version>
+	</dependency>
+	
+	<dependency>
+           <groupId>sun.jdk</groupId>
+           <artifactId>tools</artifactId>
+           <version>1.8</version>
+   	</dependency>
+   	
+	<dependency>
+           <groupId>com.miki.third.jdk</groupId>
+           <artifactId>rt</artifactId>
+           <version>1.1</version>
+   	</dependency>
+	<dependency>
+           <groupId>com.miki.third.jdk</groupId>
+           <artifactId>jce</artifactId>
+           <version>1.1</version>
+   	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+	<dependency>
+	    <groupId>redis.clients</groupId>
+	    <artifactId>jedis</artifactId>
+	    <version>2.9.0</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>fastjson</artifactId>
+	    <version>1.2.7</version>
+	</dependency>
+	<!-- 引入freemarker包 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-freemarker</artifactId>
+    </dependency>
+	<!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>druid-spring-boot-starter</artifactId>
+	    <version>1.1.10</version>
+	</dependency>
+	
+	<dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <scope>provided</scope>
+    </dependency>
+	<!--验证码-->
+    <dependency>
+        <groupId>com.github.penggle</groupId>
+        <artifactId>kaptcha</artifactId>
+        <version>2.3.2</version>
+        </dependency>
+     
+     <!-- 邮箱插件 -->
+     <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        
+     <!-- 2020.03.15 miki 增加百度云加速的网站访问量接口调用api包 -->
+     <!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
+	<dependency>
+	    <groupId>com.mashape.unirest</groupId>
+	    <artifactId>unirest-java</artifactId>
+	    <version>1.4.9</version>
+	</dependency>
+    
+    <!-- 拼音转换工具 -->
+	<dependency>
+	    <groupId>com.github.houbb</groupId>
+	    <artifactId>pinyin</artifactId>
+	    <version>0.1.2</version>
+	</dependency>
+    
+    
+   </dependencies>
+
+	<build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target> 
+          
+          <compilerArgs><arg>-XDignore.symbol.file</arg></compilerArgs>
+          <fork>true</fork>            
+        </configuration>
+      </plugin>
+      
+      
+ <!-- <plugin>
+          该插件主要用途：构建可执行的JAR	本项目采用tomcat启动方式		2019.06.19	miki
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <configuration>
+              <fork>true</fork>
+          </configuration>
+          <dependencies>
+              <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-loader-tools</artifactId>
+                  <version>2.0.0.RELEASE</version>
+              </dependency>
+          </dependencies>
+       </plugin> -->
+      
+    </plugins>
+  </build>
+	
+	<repositories>
+        <!-- Alibaba Maven Repository -->
+        <repository>
+            <id>Alibaba</id>
+            <name>Alibaba Repository</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+        
+        <!-- Maven Central Repository -->
+        <repository>
+            <id>central-repos</id>
+            <name>Central Repository</name>
+            <url>http://central.maven.org/maven2/</url>
+        </repository>
+	</repositories>
+</project>
