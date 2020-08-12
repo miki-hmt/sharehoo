@@ -227,8 +227,11 @@ function searchUserByNickName1(userNickName){
 										<td style="text-align: center;vertical-align: middle;">${section.zone.name }</td>
 										<td style="text-align: center;vertical-align: middle;">${section.master.nickName }</td>
 										<td style="text-align: center;vertical-align: middle;">
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#data" onclick="return modifySection(${section.id},'${section.name }',${section.zone.id },'${section.master.nickName }','${section.logo }')">修改
-											</button>&nbsp;&nbsp;<button class="btn btn-danger" type="button" onclick="javascript:sectionDelete(${section.id})">删除</button>
+											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#data"
+													onclick="return modifySection(${section.id},'${section.name }',${section.zone.id },'${section.master.nickName }',
+															'${section.logo }')">修改
+											</button>
+											<button class="btn btn-danger" type="button" onclick="javascript:sectionDelete(${section.id})">删除</button>
 										</td>
 									</tr>
 								</c:forEach>
@@ -336,9 +339,9 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="name">请输入小板块名称：</label>
 							</td>
 							<td>
-								<input id="sname" type="text" name="section.name" placeholder="请输入…">
-								<input id="sid" type="hidden" readonly="readonly" name="section.id">
-								<input id="smasterId" type="hidden" name="section.master.id">
+								<input id="sname" type="text" name="name" placeholder="请输入…">
+								<input id="sid" type="hidden" readonly="readonly" name="id">
+								<input id="smasterId" type="hidden" name="master.id">
 							</td>
 						</tr>
 						<tr>
@@ -353,7 +356,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="slogo">上传logo：</label>
 							</td>
 							<td>
-								<input type="file" id="slogo" name="logo">							
+								<input type="file" id="slogo" name="logoFile">
 							</td>
 						</tr>
 						<tr>
@@ -361,7 +364,7 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="zone">请选择所属大板块：</label>
 							</td>
 							<td>
-								<select id="szone" name="section.zone.id"><option value="">请选择...</option>
+								<select id="szone" name="zone.id"><option value="">请选择...</option>
 									<c:forEach var="zone" items="${zoneList }">
 										<option value="${zone.id }">${zone.name }</option>
 									</c:forEach>
@@ -373,21 +376,20 @@ function searchUserByNickName1(userNickName){
 								<label class="control-label" for="smasterNickName">版主：</label>
 							</td>
 							<td>
-								<input id="smasterNickName" type="text" name="section.master.nickName" onkeydown="javascript:searchUserByNickName1(this.value)" placeholder="请输入昵称回车">
+								<input id="smasterNickName" type="text" name="master.nickName" onkeydown="javascript:searchUserByNickName1(this.value)" placeholder="请输入昵称回车">
 								<font id="info1" style="color: red;"></font>
 							</td>
 						</tr>
 					</table>
-			</div>			
-			<div class="modal-footer">
-				<font id="error" style="color: red;"></font>
-				<button class="btn" data-dismiss="modal" aria-hidden="true"
-					onclick="return resetValue()">关闭</button>
-				<button class="btn btn-primary" type="submit">保存</button>
-				<!-- <button class="btn btn-primary" type="submit">保存</button> -->
 			</div>
-			
 		</form>
+		<div class="modal-footer">
+			<font id="serror" style="color: red;"></font>
+			<button class="btn" data-dismiss="modal" aria-hidden="true"
+					onclick="return resetValue()">关闭</button>
+			<button class="btn btn-primary" type="submit">保存</button>
+			<!-- <button class="btn btn-primary" type="submit">保存</button> -->
+		</div>
 		
 		</div>
 

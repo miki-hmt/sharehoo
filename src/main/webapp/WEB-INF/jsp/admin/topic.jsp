@@ -6,16 +6,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- 2019.09.03 自定义弹窗所需插件 -->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
+
+<script type="text/javascript" src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
+
 <title>网站后台管理</title>
 <script type="text/javascript">
+	$(function () {
+		//2019.09.04 miki 初始化ckeditor编辑器，修改上传文件地址，记得去掉class="ckeditor"
+		CKEDITOR.replace('#ucontent', {
+			filebrowserImageUploadUrl :"${host}/topic/ckupload?",
+			codeSnippet_theme: 'zenburn',
+			height:'500'
+		});
+	});
 
 
-
-function modifyTopic(topicId,topicTop,topicGood){
-	$("#topicId").val(topicId);
-	$("#topicTop").val(topicTop);
-	$("#topicGood").val(topicGood);
-}
+	function modifyTopic(topicId,topicTop,topicGood){
+		$("#topicId").val(topicId);
+		$("#topicTop").val(topicTop);
+		$("#topicGood").val(topicGood);
+	}
 // $("#fm").serialize()  {topicId:topicId,topicTop:topicTop,topicGood:topicGood}  ,"json"  2016.11.15
 
 
@@ -84,6 +99,7 @@ function deleteTopics(){
 </head>
 <body>
 	<div class="container-fluid">
+		<!--2020.08.12 miki 表头样式-->
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteTopics()">批量删除</a>
 			<form action="Topic_listAdmin.action" method="post" class="form-search">
@@ -129,6 +145,8 @@ function deleteTopics(){
 			</table>
 			</form>
 		</div>
+
+		<!--2020.08.12 miki 表数据样式-->
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="widget-box">
@@ -182,8 +200,7 @@ function deleteTopics(){
 																												
 										<!--  2016.12.16   s设计模块，button未触发的原因：button按钮里 有这几个参数data-backdrop="static" data-toggle="modal" data-target="#dlg"时，
 										      a href超链接未能跳转，删除之后，实现了跳转 -->
-						                <!-- onclick="return modifyTopic();" updateTopic.jsp?topicId=${topic.id }-->
-											<a href="Topic_update.action?topicId=${topic.id }"><button class="btn btn-info" type="button" >修改</button></a>&nbsp;&nbsp;
+											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return modifyTopic(this)">修改</button>
 											<button class="btn btn-danger" type="button" onclick="javascript:deleteTopic(${topic.id})">删除</button>
 										</td>
 									</tr>
@@ -198,6 +215,88 @@ function deleteTopics(){
 				</div>
 			</div>
 		</div>
+
+		<!--2020.08.12 miki 弹窗样式-->
+		<!-- bootstarp 隐藏版块栏2    修改 小版块 	2017.05.28		  -->
+
+		<div id="dlg" class="modal hide fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" onclick="return resetValue()">×</button>
+				<h3 id="myModalLabel1">修改小板块</h3>
+			</div>
+			<form id="fm1" action="Section_save.action" method="post" enctype="multipart/form-data">
+				<div class="modal-body">
+
+					<table>
+						<tr>
+							<td>
+								<label class="control-label" for="utitle">请输入话题名称：</label>
+							</td>
+							<td>
+								<input id="utitle" type="text" name="title" placeholder="请输入…">
+								<input id="uid" type="hidden" readonly="readonly" name="id">
+							</td>
+						</tr>
+
+						<!--2020.08.12 miki ckeditor弹窗-->
+						<tr>
+							<table>
+								<tr>
+									<td><textarea id="ucontent" name="content" style ="height:150px; width:700px;bg-color:gray;" placeholder="您的内容"></textarea>
+									</td>
+								</tr>
+							</table>
+						</tr>
+
+						<tr>
+							<td>
+								<label class="control-label" for="usection">请选择所属大板块：</label>
+							</td>
+							<td>
+								<select id="usection" name="section.id"><option value="">请选择...</option>
+									<c:forEach var="section" items="${sectionList }">
+										<option value="${section.id }">${section.name }</option>
+									</c:forEach>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label" for="utop">是否置顶：</label>
+							</td>
+							<td>
+								<select id="utop" name="top"><option value="">请选择...</option>
+									<option value="1">是</option>
+									<option value="0">否</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="control-label" for="ugood">是否精华：</label>
+							</td>
+							<td>
+								<select id="ugood" name="good"><option value="">请选择...</option>
+									<option value="1">是</option>
+									<option value="0">否</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<font id="error" style="color: red;"></font>
+					<button class="btn" data-dismiss="modal" aria-hidden="true"
+							onclick="return resetValue()">关闭</button>
+					<button class="btn btn-primary" type="submit">保存</button>
+					<!-- <button class="btn btn-primary" type="submit">保存</button> -->
+				</div>
+
+			</form>
+
+		</div>
+
 	</div>
 </body>
 </html>
