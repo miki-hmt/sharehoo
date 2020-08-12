@@ -89,6 +89,7 @@ public class SourceManageController {
 				 //获取项目的static根路径  
 		    	String staticPath = BootPathUtil.getStaticPath();	
 				String realPath = staticPath +Consts.SHOP_UPLOAD_PATH +"/file/"+Consts.SDF_YYYYMM.format(new Date());
+				
 				// 2017.08.05 miki 文件二次命名，作为下载url链接，采用uuid加密命名，并截取2-18位字符，二次加密，增加安全性
 				String[] split = upload.getOriginalFilename().split("\\.");
 				String imageName = "";
