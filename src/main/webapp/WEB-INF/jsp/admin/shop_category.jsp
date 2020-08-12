@@ -11,7 +11,7 @@
 <head>
 
 	<!-- 2017.04.15
-		author:miki
+		author: miki
 		project:后台公告页面的增删改查
  -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
