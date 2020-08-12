@@ -39,10 +39,8 @@ function sectionDelete(sectionId){
 			 function(result){
 				 var result=eval(result);
 				 if(result.success){
-					 tipOk("操作成功",function(){
-						 resetValue();
-						 location.reload(true);
-					 });
+					 tipOk("操作成功");
+                     location.reload();
 				 }else{
 					 tipError("操作失败");
 				 }
@@ -82,7 +80,7 @@ function saveSection(){
 			if(data.status==200){
 				tipOk("添加成功",function(){
 					resetValue();
-					location.reload(true);
+                    location.reload();
 				});
 			}else{
 				tipError(data.msg);
@@ -135,7 +133,7 @@ function deleteSections(){
 		$.post("Section_delete1.action",{ids:ids},function(result){
 			if(result.success){
 				alert("数据已成功删除！");
-				location.reload(true);
+                location.reload();
 			}else{
 				alert("数据删除失败！");
 			}

@@ -1,6 +1,7 @@
 package com.sharehoo.controller.forum;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -247,6 +249,99 @@ public class TopicController {
 		model.addAttribute("mainPage", mainPage);
 		return "successAdmin";
 	}
+	
+	/**
+	* @Title: getTopic  
+	* @Description: TODO(获取话题内容)  
+	* @author miki 
+	* @date 2020年8月12日 下午8:14:39   
+	* @throws
+	 */
+	@PostMapping("/admin/topic/get")
+	@ResponseBody
+	public E3Result getTopic(int topicId) {
+		Topic topic = topicService.findTopicById(topicId);
+		if(null!= topic) {
+			return E3Result.ok(topic.getContent());
+		}
+		return E3Result.build(500, "未查询到话题内容");
+	}
+	
+	/**
+	 * @throws IOException 
+	* @Title: getTopic  
+	* @Description: TODO(获取话题内容)  
+	* @author miki 
+	* @date 2020年8月12日 下午8:14:39   
+	* @throws
+	 */
+	@SuppressWarnings("deprecation")
+	@PostMapping("/admin/topic/update")
+	@ResponseBody
+	public E3Result getTopic(Topic topic, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Topic old = topicService.findTopicById(topic.getId());
+		old.setTop(topic.getTop());
+		old.setTitle(topic.getTitle());
+		old.setGood(topic.getGood());
+		old.setModifyTime(new Date());
+		
+		old.setSection(topic.getSection());
+		old.setContent(topic.getContent());
+		
+		topicService.saveTopic(old);
+		
+		//************2017.11.16 20:31 网页静态化实例
+		// 2017.05.01 回复帖子实现用户积分+1
+		HttpSession session = request.getSession();
+		User currentUser = (User) session.getAttribute(Consts.CURRENTUSER);
+		try {
+			if (currentUser == null) {
+				request.getRequestDispatcher("/errorlogin").forward(request, response);
+			}
+			
+			int size = currentUser.getSectionList().size();
+			// 创建一个数据集，Map将data封装进去
+			Map<String, Object> data = new HashMap<>();
+			data.put("user", currentUser);
+			data.put("topic", old);
+			data.put("size", size);
+			data.put("sectionList", currentUser.getSectionList());
+			data.put("id", old.getId());
+			// 加载模板对象
+			Configuration configuration = freeMarkerConfigurer.getConfiguration();
+
+			configuration.setDefaultEncoding("UTF-8");
+			
+			//************** 2019.09.07 miki 在springboot的yml文件中设置freeMarker模板文件的加载路径
+			Template template = configuration.getTemplate("topic_full.ftl");		
+
+			template.setEncoding("UTF-8");
+			// 创建一个输出流，指定目录及文件名
+			//Writer out=new FileWriter(HTML_GEN_PATH +topic.getCode()+ ".html");			
+
+			File file = new File(HTML_GEN_PATH, old.getCode() + ".html");
+			Writer out = new PrintWriter(file, "UTF-8");
+			//Writer outWriter=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
+			// 生成静态页面
+			template.process(data, out);
+			// 关闭流
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();logger.error(e);
+			return E3Result.build(401, "发表失败..", e.getMessage());
+		}
+		
+		//2020.05.05 miki 推送网站信息到百度爬虫		
+		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/"+old.getCode() + ".html");
+		Log log = new Log();
+		log.setTime(new Date());
+		log.setType("commit url");
+		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/"+old.getCode() + ".html"+"提交结果："+result);
+		log.setUser(currentUser);		
+		logService.save(log);
+		
+		return E3Result.ok();		
+	}
 
 	// 2017.04.04 前台帖子列表修改方法
 	@RequestMapping("/topic/modify/{topicId}")
@@ -403,6 +498,8 @@ public class TopicController {
 		List<Section> sectionList = sectionService.findSectionList(null, null);
 		model.addAttribute("sectionList", sectionList);
 		String mainPage = "topic.jsp";
+		String crumb1="帖子管理";
+		model.addAttribute("crumb1", crumb1);
 		model.addAttribute("mainPage", mainPage);
 		
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki

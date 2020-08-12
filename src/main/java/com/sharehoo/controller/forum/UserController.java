@@ -709,7 +709,7 @@ public class UserController {
 	@RequestMapping("/user/logout")
 	public String logout(HttpServletRequest request)throws Exception{
 		request.getSession().invalidate();
-		return "redirect:/";
+		return "redirect:admin/go";
 	}
 	
 	/**
