@@ -173,7 +173,32 @@
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<!-- <button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return openAddDlg()">添加小板块</button>&nbsp;&nbsp;&nbsp;&nbsp; -->
 			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteUsers()">批量删除</a>
-			
+			<form action="" method="post" class="form-search">
+				<table cellpadding="5px;">
+					<tr>
+						<td>用户名:</td>
+						<td><input name="nickName" value="${s_user.nickName }" type="text" class="input-medium search-query" placeholder="输入用户名..." style="width: 165px;"/></td>
+						<td>邮箱:</td>
+						<td><input name="email" value="${s_user.eamil }" type="text" class="input-medium search-query" placeholder="输入邮箱..." style="width: 165px;"/></td>
+						<td>手机号:</td>
+						<td><input name="phone" value="${s_user.phone }" type="text" class="input-medium search-query" placeholder="输入手机号..." style="width: 165px;"/></td>
+
+					</tr>
+					<tr>
+						<td>性别:</td>
+						<td>
+							<select id="section" name="sex" style="width: 165px;"><option value="0">请选择性别...</option>
+								<option value="1" }>男</option>
+								<option value="0" }>女</option>
+							</select>
+						</td>
+						<td></td>
+						<td>
+							<button type="submit" class="btn btn-primary" title="Search">查询&nbsp;<i class="icon  icon-search"></i></button>
+						</td>
+					</tr>
+				</table>
+			</form>
 			
 			
 		</div>

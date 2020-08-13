@@ -34,7 +34,7 @@
 
 function logout() {
 	if (confirm("您确定要退出系统吗？")) {
-		window.location.href="User_logout.action";
+		window.location.href="${host}/user/logout";
 	}
 }
         //用户密码修改 
@@ -57,7 +57,7 @@ $(function(){
 	var operatePage="shop_cdk.jsp";
 	var categoryPage="shop_category.jsp";
 	var sonCategoryPage="shop_menu.jsp";
-	var menuPage="shop_sourceMenu.jsp";
+	var menuPage="shop_menu.jsp";
 	var logPage="shop_log.jsp";
 	var typePage="shop_type.jsp";
 	var levelPage="shop_level.jsp";
@@ -122,6 +122,9 @@ $(function(){
 	 else if(menuPage.indexOf(curPage)>=0&&curPage!=""){
 			$("#menuLi").addClass("active");
 		}
+	else if(sonCategoryPage.indexOf(curPage)>=0&&curPage!=""){
+		$("#sonCategoryLi").addClass("active");
+	}
 	 else if(typePage.indexOf(curPage)>=0&&curPage!=""){
 			$("#typeLi").addClass("active");
 		}
@@ -148,7 +151,7 @@ $(function(){
 </head>
 <%
 if(session.getAttribute("currentUser")==null){
-	response.sendRedirect("admin/go");
+	response.sendRedirect("${host}/admin/go");
 	return;
 }
 %>
@@ -160,7 +163,7 @@ if(session.getAttribute("currentUser")==null){
 	<div id="sidebar">
 		<ul>	
 			<li id="noticeLi"><a href="${host}/admin/notices"><i class="icon icon-home"></i> <span>公告管理</span></a></li>	
-			<li id="noticeLi"><a href="${host}/admin/messages?page=1"><i class="icon icon-home"></i> <span>站内私信</span></a></li>	
+			<li id="messageLi"><a href="${host}/admin/messages?page=1"><i class="icon icon-home"></i> <span>站内私信</span></a></li>
 			<li id="userLi"><a href="${host}/admin/user/list?page=1"><i class="icon icon-home"></i> <span>用户管理</span></a></li>			
 			<li id="softSectionLi"><a href="${host}/admin/softsection/list?page=1"><i class="icon icon-home"></i> <span>软件版块列表</span></a></li>
 			<li id="softLi"><a href="${host}/admin/soft/list?page=1"><i class="icon icon-home"></i> <span>软件列表</span></a></li>
@@ -187,8 +190,8 @@ if(session.getAttribute("currentUser")==null){
 				<span>solr索引管理</span> <span class="label">3</span></a>
 				<ul id="index">
 					<li id="solrLi"><a href="${host}/admin/solr"><i class="icon icon-home"></i> <span>添加索引</span></a></li>
-					<li id="solrLi"><a href="SolrJ_show.action?ul=index"><i class="icon icon-home"></i> <span>索引删除</span></a></li>			
-					<li id="solrLi"><a href="SolrJ_show.action?ul=index"><i class="icon icon-home"></i> <span>索引统计</span></a></li>
+					<li id="solrDelLi"><a href="SolrJ_show.action?ul=index"><i class="icon icon-home"></i> <span>索引删除</span></a></li>
+					<li id="solrTotalLi"><a href="SolrJ_show.action?ul=index"><i class="icon icon-home"></i> <span>索引统计</span></a></li>
 											
 				</ul>
 			</li>
@@ -233,7 +236,7 @@ if(session.getAttribute("currentUser")==null){
 	<div id="content">
 		<div id="content-header">
 			<h1>后台管理</h1>
-			<!-- <div class="btn-group">
+			<div class="btn-group">
 				<a class="btn btn-large tip-bottom" title="Manage Files"><i
 					class="icon-file"></i></a> <a class="btn btn-large tip-bottom"
 					title="Manage Users"><i class="icon-user"></i></a> <a
@@ -241,10 +244,10 @@ if(session.getAttribute("currentUser")==null){
 					class="icon-comment"></i><span class="label label-important">5</span></a>
 				<a class="btn btn-large tip-bottom" title="Manage Orders"><i
 					class="icon-shopping-cart"></i></a>
-			</div> -->
+			</div>
 		</div>
 		<div id="breadcrumb">
-			<a href="main.jsp" title="首页" class="tip-bottom">
+			<a href="${host}/admin/ilovehmt.htm" title="首页" class="tip-bottom">
 			<i class="icon-home"></i> 首页</a> <a href="#" class="current">${crumb1 }</a>
 		</div>
 		<jsp:include page="${mainPage }"></jsp:include>

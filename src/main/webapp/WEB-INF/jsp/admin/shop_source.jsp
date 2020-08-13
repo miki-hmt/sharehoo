@@ -236,7 +236,7 @@ function resetValue(){
 				<h3 id="myModalLabel">修改店铺</h3>
 			</div>
 			<div class="modal-body">
-				<form id="fm" action="User_save.action">
+				<form id="fm" action="">
 					<table>
 						<tr>
 							<td>

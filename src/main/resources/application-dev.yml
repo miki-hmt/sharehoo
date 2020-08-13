@@ -44,7 +44,7 @@ forum:
 spring:
     #2019.09.10 miki 设置topic的freemarker模板引擎文件的路径
     freemarker:
-        HTML_GEN_PATH: C:/miki/soft/freemarker/topic/
+        HTML_GEN_PATH: D:/soft/freemarker/
         template-loader-path: classpath:/templates/
         #- /templates/
         #- file:./templates/
