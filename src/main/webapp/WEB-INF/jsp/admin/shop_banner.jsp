@@ -7,8 +7,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>后台管理</title>
+
+<!-- 2020.08.13 miki 新版bootstrap样式文件在旧的代码中不兼容，暂时不用	<link href="${host}/admin/new-version/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
+<link href="${host}/admin/new-version/css/theme.css" rel="stylesheet">
+<link href="${host}/admin/new-version/css/fonts.css" rel="stylesheet">
+
+<!--使用jquery的select2.js+select2.css插件实现下拉搜索框的五个插件（注意插件的先后顺序）	2020.08.15-->
+<script src="${host}/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" href="${host}/admin/css/select2.css" />
+<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
+<script src="${host}/admin/js/select2.min.js"></script>
+
+<!-- 引用该插件需要jQuery1.9以下的版本。否则报错方法找不到..
+	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
+<script src="${host}/admin/js/jquery.uniform.js"></script>
+<!-- checkbox样式管理  2020.08.15 miki -->
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+
+<script src="${host}/admin/new-version/js/tooltip.js"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
+<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
+<script src="${host}/admin/js/bootstrap.min.js"></script>
 
 <!-- 2019.09.11	miki 自定义弹窗 -->
 <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
@@ -126,22 +149,37 @@ function updateBanner(){
 	 $("#snotice").val(notice);
 	 $("#sImgPr").attr("src","${pageContext.request.contextPath}/"+logo);
  }
-function bannerDelete(bannerId){
-	if(confirm("确定要删除这条数据吗?")){
-		$.post("${pageContext.request.contextPath}/admin/newsBanner/delete",{bannerId:bannerId},
-				function(result){
-					var result=eval(result);
-					if(result.status == 200){
-						alert("删除成功！");
-						window.location.reload(true);
-						
+ 
+ function bannerDelete(bannerId){	
+		swal({
+			title: "确定要删除这条数据吗?", 
+			text: "拉黑之后，将永无回头之日..", 
+			type: "warning",
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是的，强行删除！",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "${host}/admin/newsBanner/delete",
+					data: {bannerId:bannerId},
+					type: "POST",
+				}).done(function(data) {
+					if(data.status==200){
+						tipOk("操作成功", function() {
+							resetValue();
+							location.reload(true);
+						});
+						//swal("操作成功!", "已成功删除数据！", "success");
 					}else{
-						alert("删除失败");
-					}
-				}
-			);
+						swal("OMG", "操作失败了!", "error");
+					}					
+				}).error(function(data) {
+					swal("OMG", "操作失败了!", "error");
+				});
+			});
 	}
-}
+ 
 function deleteSections(){
 	var selectedSpan=$(".checked").parent().parent().next("td");
 	if(selectedSpan.length==0){
@@ -189,10 +227,12 @@ function searchUserByNickName1(userNickName){
 }
 </script>
 </head>
-<body>
+<body style="background-color: #f5f6fa">
+	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.14 miki  -->
+	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
+	<div class="container-fluid" style="background-color: #ffffff;width:97%">
 
-			<!-- class="input-medium search-query"本论坛的搜索方法是"bootstrap模态框"搜索表单   2016.12.06 -->
-
+	<!-- class="input-medium search-query"本论坛的搜索方法是"bootstrap模态框"搜索表单   2016.12.06 -->
 	<div class="container-fluid">
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return openAddDlg()">添加banner</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -246,8 +286,9 @@ function searchUserByNickName1(userNickName){
 										</c:choose>
 										
 										<td style="text-align: center;vertical-align: middle;">
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#data" onclick="return modifyBanner(${banner.id},'${banner.news_name }','${banner.url }','${banner.news_img  }','${banner.type }','${banner.notice }')">修改
-											</button>&nbsp;&nbsp;<button class="btn btn-danger" type="button" onclick="javascript:bannerDelete(${banner.id})">删除</button>
+											<a class="btn btn-xs btn-default submenuitem" type="button" data-backdrop="static" data-toggle="modal" data-target="#data" onclick="return modifyBanner(${banner.id},'${banner.news_name }','${banner.url }','${banner.news_img  }','${banner.type }','${banner.notice }')">
+												<i class="ftsucai-edit-2"></i>
+											</a>&nbsp;&nbsp;<a class="btn btn-xs btn-default submenuitem" type="button" onclick="javascript:bannerDelete(${banner.id})"><i class="ftsucai-del"></i></a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -296,7 +337,6 @@ function searchUserByNickName1(userNickName){
 						</td>
 						<td>
 							<input type="file" id="image" name="image">
-
 						</td>
 					</tr>
 					<tr>

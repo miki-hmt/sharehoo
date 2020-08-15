@@ -45,13 +45,14 @@ public class LogController {
 			model.addAttribute("error", error);
 			return "admin/login";
 		}
-		String mainPage="shop_log.jsp";
+		
+		//2020.08.15 miki 移除无用的旧代码
+		/*String mainPage="shop_log.jsp";
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="网站运行日志";
-		model.addAttribute("crumb1", crumb1);
-		
+		model.addAttribute("crumb1", crumb1);		
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "download");
-		return "admin/main";
+		model.addAttribute("ul", "download");*/
+		return "admin/shop_log";
 	}
 }

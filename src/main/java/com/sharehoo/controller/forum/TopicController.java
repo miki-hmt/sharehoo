@@ -497,15 +497,16 @@ public class TopicController {
 		model.addAttribute("pageCode", pageCode);
 		List<Section> sectionList = sectionService.findSectionList(null, null);
 		model.addAttribute("sectionList", sectionList);
-		String mainPage = "topic.jsp";
+		
+		//2020.08.15 miki 旧版本代码无用
+		/*String mainPage = "topic.jsp";
 		String crumb1="帖子管理";
 		model.addAttribute("crumb1", crumb1);
-		model.addAttribute("mainPage", mainPage);
-		
+		model.addAttribute("mainPage", mainPage);		
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "forum");
+		model.addAttribute("ul", "forum");*/
 		
-		return "admin/main";
+		return "admin/topic";
 	}
 
 	/**

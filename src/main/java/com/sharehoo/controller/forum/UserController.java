@@ -699,6 +699,13 @@ public class UserController {
 		return "admin/main";
 	}
 	
+	@RequestMapping("/admin/home.htm")
+	public String adminHome(HttpServletRequest request,Model model)
+			throws Exception{
+		
+		return "admin/home";
+	}
+	
 	/**
 	* @Title: logout  
 	* @Description: TODO(重定向多层级使用)  
@@ -955,6 +962,13 @@ public class UserController {
 		mainPage="userCenter/userInfo.jsp";*/
 		return "admin/main";
 	}
+	
+	@RequestMapping("/admin/userinfo")
+	public String getInfo(HttpServletRequest request)throws Exception{
+
+		return "admin/new-version/userinfo";
+	}
+	
 	@RequestMapping("/admin/user/list")
 	public String list(HttpServletRequest request,@RequestParam("page") String page,Model model)throws Exception{
 		if (StringUtil.isEmpty(page)) {
@@ -969,15 +983,14 @@ public class UserController {
 		long total=userService.getUserCount(null);
 		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/user/list", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
-		String mainPage="user.jsp";
-		model.addAttribute("mainPage", mainPage);
-		String crumb1="用户管理";
-		model.addAttribute("crumb1", crumb1);
-		
+//		String mainPage="user.jsp";
+//		model.addAttribute("mainPage", mainPage);
+//		String crumb1="用户管理";
+//		model.addAttribute("crumb1", crumb1);		
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "forum");
+//		model.addAttribute("ul", "forum");
 		
-		return "admin/main";
+		return "admin/user";
 	}
 	
 	@RequestMapping("/admin/user/deletes")

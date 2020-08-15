@@ -229,14 +229,16 @@ public class ShopManageController {
 			model.addAttribute("error", error);
 			return "admin/login";
 		}
-		String mainPage="shoplist.jsp";
+		
+		//2020.08.15 miki 旧版本代码移除
+		/*String mainPage="shoplist.jsp";
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="店铺管理";
 		model.addAttribute("crumb1", crumb1);
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "download");	
+		model.addAttribute("ul", "download");*/	
 		
-		return "admin/main";
+		return "admin/shoplist";
 	}
 	
 	
@@ -277,14 +279,15 @@ public class ShopManageController {
 			model.addAttribute("error", error);
 			return "admin/login";
 		}
-		String mainPage="shoplist.jsp";
+		//2020.08.15 miki 旧版本代码移除
+		/*String mainPage="shoplist.jsp";
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="店铺管理";
 		model.addAttribute("crumb1", crumb1);
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "download");	
+		model.addAttribute("ul", "download");*/	
 		
-		return "admin/main";
+		return "admin/shoplist";
 	}
 	
 	/*

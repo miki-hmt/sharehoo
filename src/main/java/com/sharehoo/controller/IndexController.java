@@ -135,15 +135,15 @@ public class IndexController {
 		long total=noticeService.getNoticeCount(s_notice);
 		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/notices", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
-		String mainPage="notice.jsp";
-		model.addAttribute("mainPage", mainPage);
-		String crumb1="公告管理";
-		model.addAttribute("crumb1", crumb1);
-		
+		//旧版本bootstrap写法，移除	2020.08.14 miki
+		//String mainPage="notice.jsp";
+		//model.addAttribute("mainPage", mainPage);
+		//String crumb1="公告管理";
+		//model.addAttribute("crumb1", crumb1);		
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "forum");
+		//model.addAttribute("ul", "forum");
 		
-		return "admin/main";
+		return "admin/notice";
 		
 	}
 	

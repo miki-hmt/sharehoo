@@ -261,8 +261,89 @@
 	<dependency>
 	    <groupId>redis.clients</groupId>
 	    <artifactId>jedis</artifactId>
-	    <version>2.9.0</version>
 	</dependency>
+	<!-- 2020.08.14 miki redis starter依赖 ############################################# -->
+	<dependency>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-data-redis</artifactId>
+       <version>2.1.15.RELEASE</version>
+       <exclusions>
+           <exclusion>
+               <groupId>redis.clients</groupId>
+               <artifactId>jedis</artifactId>
+           </exclusion>
+           <exclusion>
+               <groupId>io.lettuce</groupId>
+               <artifactId>lettuce-core</artifactId>
+           </exclusion>
+           <!-- 排除低版本的spring-data-redis,解决低版本下报错 【
+           		java.lang.NoSuchMethodError: org.springframework.data.redis.core.RedisOperations.delete(Ljava/lang/Object;)V】
+           	2020.08.15 Miki -->
+           <exclusion>
+           	<groupId>org.springframework.data</groupId>
+           	<artifactId>spring-data-redis</artifactId>
+           </exclusion>
+       </exclusions>
+   </dependency>
+   <!-- 依赖高版本的spring-data-redis,解决低版本下报错 【
+           		java.lang.NoSuchMethodError: org.springframework.data.redis.core.RedisOperations.delete(Ljava/lang/Object;)V】
+           	2020.08.15 Miki -->
+   <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-redis</artifactId>
+      <version>2.1.18.RELEASE</version>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>jcl-over-slf4j</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+   
+   <dependency>
+       <groupId>org.apache.commons</groupId>
+       <artifactId>commons-pool2</artifactId>
+   </dependency>
+
+   <dependency>
+       <groupId>com.fasterxml.jackson.core</groupId>
+       <artifactId>jackson-core</artifactId>
+   </dependency>
+   <dependency>
+       <groupId>com.fasterxml.jackson.core</groupId>
+       <artifactId>jackson-databind</artifactId>
+   </dependency>
+   <dependency>
+       <groupId>com.fasterxml.jackson.core</groupId>
+       <artifactId>jackson-annotations</artifactId>
+   </dependency>
+   
+   	<!--spring session 指定高版本的session包  2020.08.15 miki -->
+	 <dependency>
+	    <groupId>org.springframework.session</groupId>
+	    <artifactId>spring-session-core</artifactId>
+	    <version>2.1.11.RELEASE</version>
+	  </dependency>
+	  
+	  <!--指定高版本的session包，与高版本spring-data-redis-2.1.18对应  2020.08.15 miki -->
+	<dependency>
+		<groupId>org.springframework.session</groupId>
+		<artifactId>spring-session-data-redis</artifactId>
+		<version>2.1.11.RELEASE</version>
+		<exclusions>
+			<!-- 排除低版本的spring-data-redis,解决低版本下报错 【
+           		java.lang.NoSuchMethodError: org.springframework.data.redis.core.RedisOperations.delete(Ljava/lang/Object;)V】
+           	2020.08.15 Miki -->
+			<exclusion>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+   
+ <!-- 2020.08.14 miki redis starter依赖 ############################################# -->	
+	
 	
 	<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 	<dependency>

@@ -118,21 +118,22 @@ public class CDKController {
 			List<Cdk> cdkList=cdkService.getCdkList(pageBean);
 			model.addAttribute("cdkList", cdkList);
 			long total=cdkService.getCdkTotal();
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/shop/cdk", total, Integer.parseInt(page), 10,null);
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/shop/cdks", total, Integer.parseInt(page), 10,null);
 			model.addAttribute("pageCode", pageCode);
 	}else {
 		error="我已经记录你的ip了，再乱来，你就死定了！";
 		model.addAttribute("error", error);
 		return "errorAdmin";
 	}
-	String mainPage="shop_cdk.jsp";
+	//2020.08.15 miki 旧版本代码移除
+	/*String mainPage="shop_cdk.jsp";
 	model.addAttribute("mainPage", mainPage);
 	String crumb1="兑换码管理";
-	model.addAttribute("crumb1", crumb1);
-	
+	model.addAttribute("crumb1", crumb1);	
 	//************** 添加父级菜单自动展开样式	2019.09.11 miki
-	model.addAttribute("ul", "download");
-	return "admin/main";
+	model.addAttribute("ul", "download");*/
+	
+	return "admin/shop_cdk";
 	}
 	
 		

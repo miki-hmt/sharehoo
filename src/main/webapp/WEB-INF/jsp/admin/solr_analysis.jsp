@@ -8,6 +8,7 @@
 	<!-- 				2018.08.20	author:miki
 						project:后台索引页面的增删改查
  -->
+ <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
  <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
 <script src="${host}/sweetalert/sweetalert.min.js"></script>	
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -148,7 +149,9 @@ function tipOk(content,callback){
   </script>
 
 </head>
-<body>
+<body style="background-color: #f5f6fa">
+	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.14 miki  -->
+	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
 	
 	<div class="main">
 	

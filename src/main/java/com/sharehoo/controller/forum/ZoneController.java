@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Zone;
 import com.sharehoo.service.forum.ZoneService;
+import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
 import com.sharehoo.util.forum.StringUtil;
 
@@ -38,24 +40,27 @@ public class ZoneController {
 		model.addAttribute("total", total);
 		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/zones", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
-		String mainPage="zone.jsp";
+		
+		//2020.08.15 miki 旧版本无效代码
+		/*String mainPage="zone.jsp";
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="大板块管理";
-		model.addAttribute("crumb1", crumb1);
-		
+		model.addAttribute("crumb1", crumb1);		
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "forum");
+		model.addAttribute("ul", "forum");*/
 		
-		return "admin/main";
+		return "admin/zone";
 	}
 
-	@RequestMapping("/admin/zone/add")
-	public String save(@RequestBody Zone zone)throws Exception{
+	@RequestMapping("/admin/zone/save")
+	@ResponseBody
+	public E3Result save(Zone zone)throws Exception{
 		zoneService.saveZone(zone);
-		return "admin/main";
+		return E3Result.ok();
 	}
 	
 	@RequestMapping("/admin/zone/delete/{zoneId}")
+	@ResponseBody
 	public JSONObject delete(@PathVariable("zoneId") int zoneId)throws Exception{
 		JSONObject result=new JSONObject();
 		Zone e=zoneService.findZoneById(zoneId);

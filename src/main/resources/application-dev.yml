@@ -92,13 +92,23 @@ spring:
         host: 127.0.0.1
         password:
         port: 6379   
-        timeout: 0
+        timeout: 50000
+        database: 0
         jedis:
           pool:
             max-active: 8
             max-idle: 8  
             min-idle: 0
             max-wait: -1
+        lettuce:
+          pool:
+            max-active: 8
+            max-wait:  -1
+            max-idle: 8
+            min-idle: 0
+    session:
+      store-type: redis
+      
     data:
         solr:
           host: http://localhost:8081/solr-topic/collection1   

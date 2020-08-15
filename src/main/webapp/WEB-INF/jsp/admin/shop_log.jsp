@@ -6,7 +6,44 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>监控管理</title>
+
+<link href="${host}/admin/new-version/css/style.css" rel="stylesheet">
+
+<!-- 2020.08.13 miki 新版bootstrap样式文件在旧的代码中不兼容，暂时不用 -->
+<!-- <link href="${host}/admin/new-version/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
+
+
+<link href="${host}/admin/new-version/css/theme.css" rel="stylesheet">
+<link href="${host}/admin/new-version/css/fonts.css" rel="stylesheet">
+
+<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
+<link rel="stylesheet" href="${host}/admin/css/select2.css" />
+<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
+
+
+<script src="${host}/js/jquery-1.7.2.min.js"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
+
+<!-- 引用该插件需要jQuery1.9以下的版本。
+	 $.browser方法已从jQuery 1.9中删除。jQuery.browser() removed
+	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
+<script src="${host}/admin/js/jquery.uniform.js"></script>
+<script src="${host}/admin/js/select2.min.js"></script>
+<!-- checkbox样式管理  2020.08.15 miki -->
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+
+<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
+<script src="${host}/admin/js/bootstrap.min.js"></script>
+<script src="${host}/admin/js/unicorn.js"></script>
+<script src="${host}/admin/js/unicorn.tables.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
+ 
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
+
 <style type="text/css">
 </style>
 <script type="text/javascript">	
@@ -99,8 +136,10 @@ function resetValue(){
 
 </script>
 </head>
-<body>
-	<div class="container-fluid">
+<body style="background-color: #f5f6fa;height:1000px">
+	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.14 miki  -->
+	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
+	<div class="container-fluid" style="background-color: #ffffff;width:97%">
 	
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">				
 			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteUsers()">批量删除</a>
@@ -129,7 +168,8 @@ function resetValue(){
 									<th>ip地址</th>
 									<th>时间</th>
 									<th>log类型</th>																		
-									<th>被访店铺</th>																										
+									<th>被访店铺</th>
+									<th>操作</th>																										
 								</tr>
 							</thead>
 							<tbody>
@@ -144,7 +184,13 @@ function resetValue(){
 										<td style="text-align: center;vertical-align: middle;"><fmt:formatDate value="${log.time }" pattern="yyyy-MM-dd HH:mm:ss "/></td>
 										
 										<td style="text-align: center;vertical-align: middle;">${log.type}</td>
-										<td style="text-alignLcenter; vertical-align:middle;">${log.shop.shop_name}</td>																							
+										<td style="text-alignLcenter; vertical-align:middle;">${log.shop.shop_name}</td>
+										<td style="text-align: center;">
+											<a class="btn btn-xs btn-default submenuitem" data-backdrop="static" data-toggle="modal" data-target="#dlg" 
+												onclick="return modifyZone(${notice.id},'${notice.name }','${notice.state }','${notice.content }')"><i class="ftsucai-edit-2"></i>
+											</a>&nbsp;&nbsp;
+											<a class="btn btn-xs btn-default submenuitem" onclick="javascript:zoneDelete(${notice.id})"><i class="ftsucai-del"></i></a>
+										</td>																							
 									</tr>
 								</c:forEach>
 							</tbody>

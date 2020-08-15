@@ -140,3 +140,5 @@ spring:
 
 logging:
   file: /../../idp/logs/dip/dip.log #${catalina.home}/../../idp/logs/dip/dip.log
+  pattern:
+    level: debug

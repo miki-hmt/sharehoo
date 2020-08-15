@@ -108,14 +108,16 @@ public class NewsBannerController {
 			long total=newsBannerService.getCount();
 			String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/newsBanner", total, Integer.parseInt(page), 6,null);
 			model.addAttribute("pageCode", pageCode);
-			String mainPage="shop_banner.jsp";
+			
+			//2020.08.15 miki 移除旧版本代码
+			/*String mainPage="shop_banner.jsp";
 			model.addAttribute("mainPage", mainPage);
 			String crumb1="小板块管理";
-			model.addAttribute("crumb1", crumb1);
-			
+			model.addAttribute("crumb1", crumb1);		
 			//************** 添加父级菜单自动展开样式	2019.09.11 miki
-			model.addAttribute("ul", "download");
-			return "admin/main";
+			model.addAttribute("ul", "download");*/
+			
+			return "admin/shop_banner";
 		}else {
 			String error="系统已记录你的ip，再乱来你就死定了！";
 			model.addAttribute("error", error);

@@ -1,261 +1,484 @@
-﻿<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>IT帮-资讯传播社区--后台管理</title>
-<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
-<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
-<link rel="stylesheet" href="${host}/admin/css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
-
-<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
-<link rel="stylesheet" href="${host}/admin/css/select2.css" />
-<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
-<link rel="stylesheet" href="${host}/admin/css/unicorn.grey.css" class="skin-color" />
-
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script> --%>
-<script src="${host}/js/jquery-1.7.2.min.js"></script>
-<script src="${host}/admin/js/jquery.ui.custom.js"></script>
-
-<!-- 引用该插件需要jQuery1.9以下的版本。
-	 $.browser方法已从jQuery 1.9中删除。jQuery.browser() removed
-	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
-<script src="${host}/admin/js/jquery.uniform.js"></script>
-<script src="${host}/admin/js/select2.min.js"></script>
-<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
-<script src="${host}/admin/js/bootstrap.min.js"></script>
-<script src="${host}/admin/js/unicorn.js"></script>
-<script src="${host}/admin/js/unicorn.tables.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript">
-
-function logout() {
-	if (confirm("您确定要退出系统吗？")) {
-		window.location.href="${host}/user/logout";
-	}
-}
-        //用户密码修改 
-function checkUserLogin(){
-	
-		window.location.href="${host}/user/center?page=1";
-}
-
-$(function(){
-	var sectionPage="section.jsp";var topicPage="topic.jsp";var userPage="user.jsp";var zonePage="zone.jsp";
-	var upLoadPage="addSoft.jsp";var softPage="soft.jsp";var softSectionPage="softSection.jsp";var noticePage="notice.jsp";
-	var articlePage="article.jsp";
-	var albumPage="album.jsp";
-	var photoPage="photo.jsp";
-	var critiquePage="critique.jsp";
-	var shopPage="shoplist.jsp";
-	var sourcePage="shop_source.jsp";
-	var commentPage="shop_comments.jsp";
-	var bannerPage="shop_banner.jsp";
-	var operatePage="shop_cdk.jsp";
-	var categoryPage="shop_category.jsp";
-	var sonCategoryPage="shop_menu.jsp";
-	var menuPage="shop_menu.jsp";
-	var logPage="shop_log.jsp";
-	var typePage="shop_type.jsp";
-	var levelPage="shop_level.jsp";
-	var messagePage="shop_message.jsp";
-
-	var solrPage="solr_analysis.jsp";
-	var curPage='${mainPage}';
-	if(sectionPage.indexOf(curPage)>=0&&curPage!=""){
-		$("#sectionLi").addClass("active");
-	} else if(topicPage.indexOf(curPage)>=0&&curPage!=""){
-		$("#topicLi").addClass("active");
-	} else if(userPage.indexOf(curPage)>=0&&curPage!=""){
-		$("#userLi").addClass("active");
-	} else if(zonePage.indexOf(curPage)>=0&&curPage!=""){
-		$("#zoneLi").addClass("active");
-	}
-	else if(softSectionPage.indexOf(curPage)>=0&&curPage!=""){
-		$("#softSectionLi").addClass("active");
-	}
-	 else if(upLoadPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#addSoftLi").addClass("active");
-		}
-	 else if(softPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#softLi").addClass("active");
-		}
-	 else if(noticePage.indexOf(curPage)>=0&&curPage!=""){
-			$("#noticeLi").addClass("active");
-		}
-	 else if(articlePage.indexOf(curPage)>=0&&curPage!=""){
-			$("#articleLi").addClass("active");
-		}
-	 else if(albumPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#albumLi").addClass("active");
-		}
-	 else if(photoPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#photoLi").addClass("active");
-		}
-	 else if(critiquePage.indexOf(curPage)>=0&&curPage!=""){
-			$("#critiqueLi").addClass("active");
-		}
-	 else if(shopPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#shopLi").addClass("active");
-		}
-	 else if(sourcePage.indexOf(curPage)>=0&&curPage!=""){
-			$("#sourceLi").addClass("active");
-		}
-	 else if(commentPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#commentLi").addClass("active");
-		}
-	 else if(bannerPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#bannerLiLi").addClass("active");
-		}
-	 else if(operatePage.indexOf(curPage)>=0&&curPage!=""){
-			$("#operateLi").addClass("active");
-		}
-	 else if(logPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#logLi").addClass("active");
-		}
-	 else if(categoryPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#categoryLi").addClass("active");
-		}
-	 else if(menuPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#menuLi").addClass("active");
-		}
-	else if(sonCategoryPage.indexOf(curPage)>=0&&curPage!=""){
-		$("#sonCategoryLi").addClass("active");
-	}
-	 else if(typePage.indexOf(curPage)>=0&&curPage!=""){
-			$("#typeLi").addClass("active");
-		}
-	 else if(levelPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#levelLi").addClass("active");
-		}
-	 else if(messagePage.indexOf(curPage)>=0&&curPage!=""){
-			$("#messageLi").addClass("active");
-		}
-	 else if(messagePage.indexOf(curPage)>=0&&curPage!=""){
-			$("#sonCategoryLi").addClass("active");
-		}
-	else if(solrPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#solrLi").addClass("active");
-		}
-	else if(upLoadPage.indexOf(curPage)>=0&&curPage!=""){
-			$("#upLoadLi").addClass("active");
-		}
-		
-	//****************** 激活已经打开的父级菜单
-	$("#${ul}").css("display","block");
-})
-</script>
-</head>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-if(session.getAttribute("currentUser")==null){
-	response.sendRedirect("${host}/admin/go");
-	return;
-}
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<body>
-	<div id="header">
-		<h1 style="margin-left: 0px;padding-left: 0px;"><a href="#">河南城建java软件工程</a></h1>	
+<!-- ############################################################################ -->
+
+<!-- 2020.08.14 miki sharehoo管理后台新版本升级  -->
+
+<!-- ############################################################################ -->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>sharehoo后台管理</title>
+	<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+	<link href="${host}/admin/new-version/css/style.css" rel="stylesheet">
+    <link href="${host}/admin/new-version/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${host}/admin/new-version/css/theme.css" rel="stylesheet">
+    <link href="${host}/admin/new-version/css/fonts.css" rel="stylesheet">
+    <script src="${host}/admin/new-version/js/jquery.min.js"></script>
+    <script src="${host}/admin/new-version/js/bootstrap.js"></script>
+    <script src="${host}/admin/new-version/js/jquery.cookie.js"></script>
+    <script src="${host}/admin/new-version/js/framework.js"></script>
+	</head>
+  
+  <body class="theme-blue-gradient pace-done" style="overflow: hidden; ">
+    <div class="pace  pace-inactive">
+      <div class="pace-progress" style="width: 100%;" data-progress-text="100%" data-progress="99">
+        <div class="pace-progress-inner"></div>
+      </div>
+      <div class="pace-activity"></div>
+    </div>
+
+    <div id="ajax-loader" style="background: rgb(255, 255, 255); left: -50%; top: -50%; width: 200%; height: 200%; overflow: hidden; display: none; position: fixed; z-index: 10000; cursor: progress;">
+    <img style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto;" src="${host}/admin/new-version/images/loader.gif">
 	</div>
 
-	<div id="sidebar">
-		<ul>	
-			<li id="noticeLi"><a href="${host}/admin/notices"><i class="icon icon-home"></i> <span>公告管理</span></a></li>	
-			<li id="messageLi"><a href="${host}/admin/messages?page=1"><i class="icon icon-home"></i> <span>站内私信</span></a></li>
-			<li id="userLi"><a href="${host}/admin/user/list?page=1"><i class="icon icon-home"></i> <span>用户管理</span></a></li>			
-			<li id="softSectionLi"><a href="${host}/admin/softsection/list?page=1"><i class="icon icon-home"></i> <span>软件版块列表</span></a></li>
-			<li id="softLi"><a href="${host}/admin/soft/list?page=1"><i class="icon icon-home"></i> <span>软件列表</span></a></li>
-			<li id="addSoftLi"><a href="${host}/admin/soft/upload"><i class="icon icon-home"></i> <span>上传软件</span></a></li>			
-			<!-- <li><a href="#"><i class="icon icon-home"></i> <span>回复管理</span></a></li> -->
-			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
-				<span>下载社区管理</span> <span class="label">11</span></a>
-				<ul id="download">
-					<li id="shopLi"><a href="${host}/admin/shop?page=1"><i class="icon icon-home"></i> <span>店铺列表</span></a></li>
-					<li id="sourceLi"><a href="${host}/admin/shop/source?page=1"><i class="icon icon-home"></i> <span>资源管理</span></a></li>			
-					<li id="commentLi"><a href="${host}/admin/shop/sourceComment?page=1"><i class="icon icon-home"></i> <span>评论列表</span></a></li>
-					<li id="bannerLi"><a href="${host}/admin/newsBanner?page=1"><i class="icon icon-home"></i> <span>banner列表</span></a></li>
-					<li id="logLi"><a href="${host}/admin/logs?page=1"><i class="icon icon-home"></i> <span>网站日志</span></a></li>
-					<li id="messageLi"><a href="${host}/admin/messages?page=1"><i class="icon icon-home"></i> <span>举报日志</span></a></li>
-					<li id="operateLi"><a href="${host}/admin/shop/cdks?page=1"><i class="icon icon-home"></i> <span>cdk管理</span></a></li>
-					<li id="categoryLi"><a href="${host}/amdin/shop/category?page=1"><i class="icon icon-home"></i> <span>大目录管理</span></a></li>
-					<li id="sonCategoryLi"><a href="${host}/admin/shop/menu?page=1"><i class="icon icon-home"></i> <span>二级菜单管理</span></a></li>
-					<li id="typeLi"><a href="${host}/admin/shop/types?page=1"><i class="icon icon-home"></i> <span>资源类型管理</span></a></li>
-					<li id="levelLi"><a href="${host}/admin/shop/levels?page=1"><i class="icon icon-home"></i> <span>等级列表</span></a></li>						
-				</ul>
-			</li>
-	
-			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
-				<span>solr索引管理</span> <span class="label">3</span></a>
-				<ul id="index">
-					<li id="solrLi"><a href="${host}/admin/solr"><i class="icon icon-home"></i> <span>添加索引</span></a></li>
-					<li id="solrDelLi"><a href="SolrJ_show.action?ul=index"><i class="icon icon-home"></i> <span>索引删除</span></a></li>
-					<li id="solrTotalLi"><a href="SolrJ_show.action?ul=index"><i class="icon icon-home"></i> <span>索引统计</span></a></li>
-											
-				</ul>
-			</li>
-			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
-					<span>博客管理</span> <span class="label">5</span></a>
-				<ul id="blog">		
-					<li id="articleLi"><a href="article.jsp?ul=blog"><i class="icon icon-home"></i> <span>文章管理</span></a></li>
-					<li id="albumLi"><a href="album.jsp?ul=blog"><i class="icon icon-home"></i> <span>相册管理</span></a></li>
-					<li id="photoLi"><a href="photo.jsp?ul=blog"><i class="icon icon-home"></i> <span>用户文件管理</span></a></li>
-					<li id="critiqueLi"><a href="critique.jsp?ul=blog"><i class="icon icon-home"></i> <span>留言管理</span></a></li>	
-				</ul>
-			</li>
-			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
-				<span>论坛管理</span> <span class="label">5</span></a>
-				<ul id="forum">
-					<li id="zoneLi"><a href="${host}/admin/zones?page=1"><i class="icon icon-home"></i> <span>空间列表</span></a></li>
-					<li id="noticeLi"><a href="${host}/admin/notices?page=1"><i class="icon icon-home"></i> <span>公告管理</span></a></li>			
-					<li id="sectionLi"><a href="${host}/admin/sections?page=1"><i class="icon icon-home"></i> <span>板块列表</span></a></li>
-					<li id="topicLi"><a href="${host}/admin/topics?page=1"><i class="icon icon-home"></i> <span>帖子列表</span></a></li>
-			
-				</ul>
-			</li>				
-			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
-				<span>系统管理</span> <span class="label">3</span></a>
-				<ul id="system">
-					<li><a href="javascript:checkUserLogin()">修改密码</a></li>
-					<li><a href="javascript:logout()">安全退出</a></li>
-					<li><a href="#">刷新系统缓存</a></li>
-				</ul>
-			</li>
-		</ul>
+    <div id="theme-wrapper">
+      <header class="navbar" id="header-navbar">
+        <div class="container" style="padding-right: 0px;">
+          <a class="navbar-brand" id="logo" href="#">后台管理系统</a>
+          <div class="clearfix">
+            <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs">
+              <ul class="nav navbar-nav pull-left">
+                <li>
+                  <a id="make-small-nav">
+					<div class="ftdms-aside-toggler">
+                      <span class="ftdms-toggler-bar"></span>
+                      <span class="ftdms-toggler-bar"></span>
+                      <span class="ftdms-toggler-bar"></span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="nav-no-collapse pull-right" id="header-nav">
+              <ul class="nav navbar-nav pull-right">
+                <li class="dropdown profile-dropdown">
+                  <a class="dropdown" href="#" data-toggle="dropdown">
+				    <!-- <img class="img-qrcode img-qrcode-46" src="images/ftsucai.png" alt="用户头像" /> -->
+                    <span class="hidden-xs">当前用户：${currentUser.nickName}&nbsp;&nbsp;&nbsp;&nbsp;角色：管理员</span></a>
+                  <ul class="dropdown-menu pull-right">
+				    <li>
+					  <a class="submenuitem" href="${host}/admin/userinfo" data-id="rofile" data-index="100"><i class="ft ftsucai-58"></i>个人信息</a>
+                    </li>
+					<li>
+					  <a class="submenuitem" href="${host }/admin/pages_edit_pwd" data-id="linkpwd" data-index="101"><i class="ft ftsucai-edit-2"></i>修改密码</a>
+                    </li>
+                    <li>
+                      <a href="${host }/admin/logout"><i class="ft ftsucai-exit2"></i>安全退出</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
 
-	</div>
+      <div class="container" id="page-wrapper">
+        <div class="row">
+          <div id="nav-col">
+            <section class="col-left-nano" id="col-left">
+              <div class="col-left-nano-content" id="col-left-inner">
+                <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
+                  <ul class="nav nav-pills nav-stacked">
+                    <li>
+                      <a class="dropdown-toggle" href="#" data-id="a1">
+                        <i class="ft ftsucai-82"></i>
+                        <span>后台首页</span>
+                        <i class="ft ftsucai-139 drop-icon"></i>
+                      </a>
+                    </li>
+                    <!--################################ 2020.08.13 miki 自定义数据管理 ####################################-->
+                      <li>
+                          <a class="submenuitem" href="${host}/admin/messages?page=1" data-id="a1" data-index="1">
+                              <i class="ft ftsucai-291"></i>
+                              <span>站内私信</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a class="submenuitem" href="${host}/admin/notices" data-id="a2" data-index="2">
+                              <i class="ft ftsucai-volume-medium"></i>
+                              <span>公告管理</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a class="submenuitem" href="${host}/admin/user/list?page=1" data-id="a3" data-index="3">
+                              <i class="ft ftsucai-user-3"></i>
+                              <span>用户管理</span>
+                          </a>
+                      </li>
 
-	<div id="style-switcher">
-		<i class="icon-arrow-left icon-white"></i> <span>颜色:</span> 
-		<a href="#grey" style="background-color: #555555; border-color: #aaaaaa;"></a> 
-		<a href="#blue" style="background-color: #2D2F57;"></a> 
-		<a href="#red" style="background-color: #673232;"></a>
-	</div>
+                      <li>
+                          <a class="dropdown-toggle" href="#" data-id="a4">
+                              <i class="ft ftsucai-appstore"></i>
+                              <span>论坛管理</span>
+                              <i class="ft ftsucai-139 drop-icon"></i>
+                          </a>
+                          <ul class="submenu">
+                              <li>
+                                  <a class="submenuitem" href="${host}/admin/topics?page=1" data-id="link1" data-index="1">
+                                      帖子管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="${host }/admin/sections?page=1" data-id="link2" data-index="2">
+                                      板块管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="${host }/admin/zones?page=1" data-id="link3" data-index="3">
+                                      空间管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link4" data-index="4">
+                                      回复管理
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a class="dropdown-toggle" href="#" data-id="a5">
+                              <i class="ft ftsucai-appstore"></i>
+                              <span>下载社区管理</span>
+                              <i class="ft ftsucai-139 drop-icon"></i>
+                          </a>
+                          <ul class="submenu">
+                              <li>
+                                  <a class="submenuitem" href="${host}/admin/shop?page=1" data-id="link1" data-index="1">
+                                      店铺管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="${host}/admin/shop/source?page=1" data-id="link2" data-index="2">
+                                      资源管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="https://www.baidu.com" data-id="link3" data-index="3">
+                                      评价管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="${host}/admin/messages?page=1" data-id="link4" data-index="4">
+                                      举报管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="${host }/admin/shop/cdks?page=1" data-id="link5" data-index="5">
+                                      兑换券管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="${host}/amdin/shop/category?page=1" data-id="link6" data-index="6">
+                                      分类管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="${host}/admin/shop/menu?page=1" data-id="link7" data-index="7">
+                                      二级分类管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="${host}/admin/shop/types?page=1" data-id="link8" data-index="8">
+                                      资源类型管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="https://www.baidu.com" data-id="link9" data-index="9">
+                                      积分等级管理
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a class="dropdown-toggle" href="#" data-id="a6">
+                              <i class="ft ftsucai-214"></i>
+                              <span>solr索引管理</span>
+                              <i class="ft ftsucai-139 drop-icon"></i>
+                          </a>
+                          <ul class="submenu">
+                              <li>
+                                  <a class="submenuitem" href="${host}/admin/solr" data-id="link1" data-index="1">
+                                      更新索引
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link2" data-index="2">
+                                      查看索引
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link3" data-index="3">
+                                      删除索引
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li>
+                          <a class="submenuitem" href="${host}/admin/newsBanner?page=1" data-id="a7" data-index="3">
+                              <i class="ft ftsucai-225"></i>
+                              <span>banner管理</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a class="submenuitem" href="${host}/admin/logs?page=1" data-id="a8" data-index="3">
+                              <i class="ft ftsucai-eye-8"></i>
+                              <span>监控管理</span>
+                          </a>
+                      </li>
 
-	<div id="content">
-		<div id="content-header">
-			<h1>后台管理</h1>
-			<div class="btn-group">
-				<a class="btn btn-large tip-bottom" title="Manage Files"><i
-					class="icon-file"></i></a> <a class="btn btn-large tip-bottom"
-					title="Manage Users"><i class="icon-user"></i></a> <a
-					class="btn btn-large tip-bottom" title="Manage Comments"><i
-					class="icon-comment"></i><span class="label label-important">5</span></a>
-				<a class="btn btn-large tip-bottom" title="Manage Orders"><i
-					class="icon-shopping-cart"></i></a>
-			</div>
-		</div>
-		<div id="breadcrumb">
-			<a href="${host}/admin/ilovehmt.htm" title="首页" class="tip-bottom">
-			<i class="icon-home"></i> 首页</a> <a href="#" class="current">${crumb1 }</a>
-		</div>
-		<jsp:include page="${mainPage }"></jsp:include>
-		<div class="row-fluid">
-			<div id="footer" class="span12">
-				2016.08.22 &copy; 河南城建Java软件工程班. 作者：miki&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://www.limi.store"></a>
-			</div>
-		</div>
+                      <li>
+                          <a class="dropdown-toggle" href="#" data-id="a9">
+                              <i class="ft ftsucai-jshezhi"></i>
+                              <span>系统管理</span>
+                              <i class="ft ftsucai-139 drop-icon"></i>
+                          </a>
+                          <ul class="submenu">
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link1" data-index="1">
+                                      清理缓存
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="${host }/admin/system" data-id="link2" data-index="2">
+                                      系统配置
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+
+                      <li>
+                          <a class="dropdown-toggle" href="#" data-id="a10">
+                              <i class="ft ftsucai-appstore"></i>
+                              <span>博客管理</span>
+                              <i class="ft ftsucai-139 drop-icon"></i>
+                          </a>
+                          <ul class="submenu">
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link1" data-index="1">
+                                      文章管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link2" data-index="2">
+                                      留言管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link3" data-index="3">
+                                      标签管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link4" data-index="4">
+                                      文章分类
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link5" data-index="5">
+                                      个人介绍
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link6" data-index="6">
+                                      相册管理
+                                  </a>
+                              </li>
+                              <li>
+                                  <a class="submenuitem" href="http://sharehoo.cn/admin/notices" data-id="link7" data-index="7">
+                                      文件管理
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+
+                    <!--################################ 2020.08.13 miki 自定义数据管理 ####################################-->
+                      <li>
+                          <a class="dropdown-toggle" href="#" data-id="a11">
+                            <i class="ft ftsucai-UI"></i>
+                            <span>设计元素</span>
+                            <i class="ft ftsucai-139 drop-icon"></i>
+                          </a>
+                          <ul class="submenu">
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/ui_buttons" data-id="link1" data-index="1">按钮</a>
+                            </li>
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/ui_cards" data-id="link2" data-index="2">卡片</a>
+                            </li>
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/ui_grid" data-id="link3" data-index="3">格栅</a>
+                            </li>
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/ui_icons" data-id="link4" data-index="4">图标</a>
+                            </li>
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/ui_tables" data-id="link5" data-index="5">表格</a>
+                            </li>
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/pagination" data-id="link5" data-index="5">分页导航</a>
+                            </li>
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/ui_progress" data-id="link6" data-index="6">进度条</a>
+                            </li>
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/ui_tabs" data-id="link7" data-index="7">选项卡</a>
+                            </li>
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/ui_step" data-id="link8" data-index="8">步骤</a>
+                            </li>
+                            <li>
+                              <a class="submenuitem" href="${host }/admin/ui_other" data-id="link9" data-index="9">其他</a>
+                            </li>
+                          </ul>
+                    </li>
+                    <li>
+                      <a class="dropdown-toggle" href="#" data-id="a12">
+                        <i class="ft ftsucai-edit-2"></i>
+                        <span>表单元素</span>
+                        <i class="ft ftsucai-139 drop-icon"></i>
+                      </a>
+                      <ul class="submenu">
+                        <li>
+                          <a class="submenuitem" href="${host }/admin/forms_elements" data-id="link21" data-index="21">基本元素</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/forms_radio" data-id="link22" data-index="22">单选框</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/forms_checkbox" data-id="link23" data-index="23">复选框</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/forms_switch" data-id="link24" data-index="24">开关</a>
+						</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a class="dropdown-toggle" href="#" data-id="a13">
+                        <i class="ft ftsucai-19"></i>
+                        <span>示例页面</span>
+                        <i class="ft ftsucai-139 drop-icon"></i>
+                      </a>
+                      <ul class="submenu">
+                        <li>
+                          <a class="submenuitem" href="${host }/admin/pages_config" data-id="link31" data-index="31">网站配置</a>
+						</li>
+                        <li>
+                          <a class="submenuitem" href="${host }/admin/pages_permission" data-id="link32" data-index="32">权限设置</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/pages_add_doc" data-id="link33" data-index="33">新增文档</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/pages_guide" data-id="link34" data-index="34">表单向导</a>
+						</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a class="dropdown-toggle" href="#" data-id="a14">
+                        <i class="ft ftsucai-table"></i>
+                        <span>常用列表</span>
+                        <i class="ft ftsucai-139 drop-icon"></i>
+                      </a>
+                      <ul class="submenu">
+                        <li>
+                          <a class="submenuitem" href="${host }/admin/pages_data" data-id="link41" data-index="41">数据列表</a>
+						</li>
+                      </ul>
+                    </li>
+					
+					<li>
+                      <a class="dropdown-toggle" href="#" data-id="a15">
+                        <i class="ft ftsucai-js"></i>
+                        <span>脚本插件</span>
+                        <i class="ft ftsucai-139 drop-icon"></i>
+                      </a>
+                      <ul class="submenu">
+                        <li>
+                          <a class="submenuitem" href="${host }/admin/js_datepicker" data-id="link51" data-index="51">日期选取</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/js_sliders" data-id="link52" data-index="52">滑块特效</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/js_colorpicker" data-id="link53" data-index="53">色码选取</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/js_msg" data-id="link54" data-index="54">对话框</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/js_tags_input" data-id="link55" data-index="55">标签插件</a>
+						</li>
+						<li>
+                          <a class="submenuitem" href="${host }/admin/js_notify" data-id="link56" data-index="56">通知消息</a>
+						</li>
+                      </ul>
+                    </li>
+					<li>
+                      <a class="dropdown-toggle" href="#" data-id="a16">
+                        <i class="ft ftsucai-315"></i>
+                        <span>统计图表</span>
+                        <i class="ft ftsucai-139 drop-icon"></i>
+                      </a>
+                      <ul class="submenu">
+                        <li>
+                          <a class="submenuitem" href="${host }/admin/js_chartjs" data-id="link61" data-index="61">Chart图表</a>
+						</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div id="content-wrapper">
+            <div class="content-tabs" style="height:44px;border-bottom:2px solid #f0f0f0;">
+              <button class="roll-nav roll-left tabLeft">
+                <i class="ft ftsucai-backward2"></i>
+              </button>
+              <nav class="page-tabs menuTabs">
+                <div class="page-tabs-content" style="margin-left: 0px;">
+                  <a class="menuTab active" href="javascript:;" data-id="home.htm">欢迎首页</a></div>
+              </nav>
+              <button class="roll-nav roll-right tabRight">
+                <i class="ft ftsucai-forward3"></i>
+              </button>
+              <div class="btn-group roll-nav roll-right">
+                <button class="dropdown tabClose" data-toggle="dropdown">页签操作
+                  <i class="ft caret" style="padding-top: 3px;"></i>
+				</button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li>
+                    <a class="tabReload" href="javascript:void(0);"><i class="ft ftsucai-spinner3"></i>刷新当前页面</a></li>
+                  <li>
+                    <a class="tabCloseCurrent" href="javascript:void(0);"><i class="ft ftsucai-close-3"></i>关闭当前页面</a></li>
+                  <li>
+                    <a class="tabCloseAll" href="javascript:void(0);"><i class="ft ftsucai-77"></i>关闭全部页面</a></li>
+                  <li>
+                    <a class="tabCloseOther" href="javascript:void(0);"><i class="ft ftsucai-120"></i>除此之外全关</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="content-iframe" style="background-color: #f9f9f9;">
+              <div class="mainContent" id="content-main" style="margin: 0px; padding: 0px; height: 1050px;">
+				<iframe name="main_iframe" width="100%" height="100%" class="main_iframe" id="default" src="${host}/admin/home.htm" frameborder="0" data-id="home.htm"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="loadingPage" style="display: none;">
+      <div class="loading-shade"></div>
+      <div class="loading-content" onClick="$.loading(false)">数据加载中，请稍后…</div>
 	</div>
-</body>
+    <script src="${host}/admin/new-version/js/index.js"></script>
+    <script src="${host}/admin/new-version/js/indextab.js"></script>
+    <script src="${host}/admin/new-version/js/pace.min.js"></script>
+  </body>
+
 </html>

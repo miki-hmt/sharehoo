@@ -6,12 +6,48 @@
 <html>
 <head>
 
-	<!-- 					2017.04.15
-						author:miki
-						project:后台公告页面的增删改查
- -->
+<!-- ############################################################################ -->
+
+<!-- 2020.08.14 miki sharehoo管理后台新版本升级  -->
+
+<!-- ############################################################################ -->
+<link href="${host}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+
+<link href="${host}/admin/new-version/css/style.css" rel="stylesheet">
+
+<!-- 2020.08.13 miki 新版bootstrap样式文件在旧的代码中不兼容，暂时不用 -->
+<!-- <link href="${host}/admin/new-version/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
+
+
+<link href="${host}/admin/new-version/css/theme.css" rel="stylesheet">
+<link href="${host}/admin/new-version/css/fonts.css" rel="stylesheet">
+
+<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
+<link rel="stylesheet" href="${host}/admin/css/select2.css" />
+<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
+
+
+<script src="${host}/js/jquery-1.7.2.min.js"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
+
+<!-- 引用该插件需要jQuery1.9以下的版本。
+	 $.browser方法已从jQuery 1.9中删除。jQuery.browser() removed
+	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
+<script src="${host}/admin/js/jquery.uniform.js"></script>
+<script src="${host}/admin/js/select2.min.js"></script>
+<!-- checkbox样式管理  2020.08.15 miki -->
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+
+<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
+<script src="${host}/admin/js/bootstrap.min.js"></script>
+<script src="${host}/admin/js/unicorn.js"></script>
+<script src="${host}/admin/js/unicorn.tables.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
+ 
 <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
-<script src="${host}/sweetalert/sweetalert.min.js"></script>	
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
 	
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
@@ -108,11 +144,14 @@
 	 $("#id").val("");
 	 $("#zoneName").val("");
 }
-
 </script>
 </head>
-<body>
-	<div class="container-fluid">
+
+<body style="background-color: #f5f6fa">
+	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.14 miki  -->
+	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
+	<div class="container-fluid" style="background-color: #ffffff;width:97%">	
+	
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return openAddDlg()">添加公告</button>(state:1表示论坛公告  0表示下载社区公告)&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
@@ -154,8 +193,10 @@
 											</c:choose>
 											</td>
 										<td style="text-align: center;">
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return modifyZone(${notice.id},'${notice.name }','${notice.state }','${notice.content }')">修改
-											</button>&nbsp;&nbsp;<button class="btn btn-danger" type="button" onclick="javascript:zoneDelete(${notice.id})">删除</button>
+											<a class="btn btn-xs btn-default submenuitem" data-backdrop="static" data-toggle="modal" data-target="#dlg" 
+												onclick="return modifyZone(${notice.id},'${notice.name }','${notice.state }','${notice.content }')"><i class="ftsucai-edit-2"></i>
+											</a>&nbsp;&nbsp;
+											<a class="btn btn-xs btn-default submenuitem" onclick="javascript:zoneDelete(${notice.id})"><i class="ftsucai-del"></i></a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -213,7 +254,7 @@
 				<button class="btn" data-dismiss="modal" aria-hidden="true"
 					onclick="return resetValue()">关闭</button>
 				<button class="btn btn-primary" id="okBtn" onclick="javascript:saveSoftSection()">保存</button>		<!--  -->
-			</div>
+			</div>		
 		</div>
 	</div>
 </body>

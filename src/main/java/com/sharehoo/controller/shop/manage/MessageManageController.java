@@ -51,14 +51,16 @@ public class MessageManageController {
 			model.addAttribute("error", error);
 			return "admin/login";
 		}
-		String mainPage="shop_message.jsp";
+		
+		//旧版本无用代码	2020.08.15 miki
+		/*String mainPage="shop_message.jsp";
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="举报管理";
-		model.addAttribute("crumb1", crumb1);
-		
+		model.addAttribute("crumb1", crumb1);		
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "download");
-		return "admin/main";
+		model.addAttribute("ul", "download");*/
+		
+		return "admin/shop_message";
 		
 	}
 

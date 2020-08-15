@@ -6,8 +6,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>后台管理</title>
+
+<!-- 2020.08.13 miki 新版bootstrap样式文件在旧的代码中不兼容，暂时不用 -->
+<!-- <link href="${host}/admin/new-version/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
+<link href="${host}/admin/new-version/css/theme.css" rel="stylesheet">
+<link href="${host}/admin/new-version/css/fonts.css" rel="stylesheet">
+
+<!--使用jquery的select2.js+select2.css插件实现下拉搜索框	2020.06.14-->
+<link rel="stylesheet" href="${host}/admin/css/select2.css" />
+<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
+
+
+<script src="${host}/js/jquery-1.7.2.min.js"></script>
+<script src="${host}/admin/new-version/js/tooltip.js"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
+
+<!-- 引用该插件需要jQuery1.9以下的版本。
+	 $.browser方法已从jQuery 1.9中删除。jQuery.browser() removed
+	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
+<script src="${host}/admin/js/jquery.uniform.js"></script>
+<script src="${host}/admin/js/select2.min.js"></script>
+<!-- checkbox样式管理  2020.08.15 miki -->
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+
+<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
+<script src="${host}/admin/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadPreview.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
 
 <!-- 2019.09.11	miki 自定义弹窗 -->
 <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
@@ -164,11 +192,12 @@ function searchUserByNickName1(userNickName){
 }
 </script>
 </head>
-<body>
+<body style="background-color: #f5f6fa;">
+	<!-- class="input-medium search-query"本论坛的搜索方法是"bootstrap模态框"搜索表单   2016.12.06 -->
 
-			<!-- class="input-medium search-query"本论坛的搜索方法是"bootstrap模态框"搜索表单   2016.12.06 -->
-
-	<div class="container-fluid">
+	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.14 miki  -->
+	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
+	<div class="container-fluid" style="background-color: #ffffff;width:97%">
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return openAddDlg()">添加小板块</button>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteSections()">批量删除</a>
@@ -220,16 +249,16 @@ function searchUserByNickName1(userNickName){
 										<td style="text-align: center;vertical-align: middle;">${section.id }</td>
 										<td style="text-align: center;vertical-align: middle;">${section.name }</td>
 										<td style="text-align: center;vertical-align: middle;width: 110px;vertical-align: middle;">
-											<img style="width: 100px;border-radius:50%;" src='${pageContext.request.contextPath}/${section.logo }'></img>
+											<img style="width: 100px;height:75px;border-radius:50%;" src='${pageContext.request.contextPath}/${section.logo }'></img>
 										</td>
 										<td style="text-align: center;vertical-align: middle;">${section.zone.name }</td>
 										<td style="text-align: center;vertical-align: middle;">${section.master.nickName }</td>
 										<td style="text-align: center;vertical-align: middle;">
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#data"
+											<a class="btn btn-xs btn-default submenuitem" data-backdrop="static" data-toggle="modal" data-target="#data"
 													onclick="return modifySection(${section.id},'${section.name }',${section.zone.id },'${section.master.nickName }',
-															'${section.logo }')">修改
-											</button>
-											<button class="btn btn-danger" type="button" onclick="javascript:sectionDelete(${section.id})">删除</button>
+															'${section.logo }')"><i class="ftsucai-edit-2"></i>
+											</a>
+											<a class="btn btn-xs btn-default submenuitem" type="button" onclick="javascript:sectionDelete(${section.id})"><i class="ftsucai-del"></i></a>
 										</td>
 									</tr>
 								</c:forEach>

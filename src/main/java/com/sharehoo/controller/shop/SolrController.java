@@ -213,14 +213,14 @@ public class SolrController {
 			model.addAttribute("error", error);
 			return "admin/login";
 		}
-		String mainPage="solr_analysis.jsp";
+		//2020.08.15 miki 移除旧版本代码
+		/*String mainPage="solr_analysis.jsp";
 		model.addAttribute("mainPage", mainPage);
 		String crumb1="solr管理";
-		model.addAttribute("crumb1", crumb1);
-		
+		model.addAttribute("crumb1", crumb1);		
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "index");
+		model.addAttribute("ul", "index");*/
 		
-		return "admin/main";
+		return "admin/solr_analysis";
 	}
 }

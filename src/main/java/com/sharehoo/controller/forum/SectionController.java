@@ -68,15 +68,16 @@ public class SectionController {
 		model.addAttribute("total", total);
 		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/sections", total, Integer.parseInt(page), 6,null);
 		model.addAttribute("pageCode", pageCode);
-		String mainPage="section.jsp";
-		model.addAttribute("mainPage", mainPage);
-		String crumb1="小板块管理";
-		model.addAttribute("crumb1", crumb1);
 		
+		//旧版本bootstrap写法，移除	2020.08.14 miki
+//		String mainPage="section.jsp";
+//		model.addAttribute("mainPage", mainPage);
+//		String crumb1="小板块管理";
+//		model.addAttribute("crumb1", crumb1);		
 		//************** 添加父级菜单自动展开样式	2019.09.11 miki
-		model.addAttribute("ul", "forum");
+//		model.addAttribute("ul", "forum");
 		
-		return "admin/main";
+		return "admin/section";
 	}
                   
 	   

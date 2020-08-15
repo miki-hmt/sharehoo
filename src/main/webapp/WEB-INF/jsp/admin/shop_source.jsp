@@ -6,7 +6,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>店铺资源管理</title>
+
+<!-- 2020.08.13 miki 新版bootstrap样式文件在旧的代码中不兼容，暂时不用	<link href="${host}/admin/new-version/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
+<link href="${host}/admin/new-version/css/theme.css" rel="stylesheet">
+<link href="${host}/admin/new-version/css/fonts.css" rel="stylesheet">
+
+<!--使用jquery的select2.js+select2.css插件实现下拉搜索框的五个插件（注意插件的先后顺序）	2020.08.15-->
+<script src="${host}/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" href="${host}/admin/css/select2.css" />
+<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
+<script src="${host}/admin/js/select2.min.js"></script>
+<script src="${host}/admin/js/unicorn.js"></script>
+<script src="${host}/admin/js/unicorn.tables.js"></script>
+
+<!-- 引用该插件需要jQuery1.9以下的版本。否则报错方法找不到..
+	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
+<script src="${host}/admin/js/jquery.uniform.js"></script>
+<!-- checkbox样式管理  2020.08.15 miki -->
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+
+<script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
+
+<script src="${host}/admin/new-version/js/tooltip.js"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
+<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
+<script src="${host}/admin/js/bootstrap.min.js"></script>
+
+<!-- 2019.09.10 增加自定义弹窗  miki-->
+<link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
+<script src="${host}/sweetalert/sweetalert.min.js"></script>
+
 <style type="text/css">
 </style>
 <script type="text/javascript">	
@@ -56,19 +87,40 @@
  			}
  		},"json");
  }
-function sourceDelete(sourceId){
-	if(confirm("店铺关联的所有信息都要删除，确定要删除吗?")){
-		$.post("${pageContext.request.contextPath}/admin/shop/sourceDelete",{sourceId:sourceId},
-				function(result){
-					var result=eval(result);
-					if(result.status == 200){
-						alert(result.msg);
-						window.location.reload(true);
-					}
+ 
+ //2020.08.15	处理功能就是后台删除店铺违法的资源
+	function sourceDelete(sourceId) {
+		swal({
+			title : "该资源关联的所有信息都要删除，确定要删除吗?",
+			text : "您确定要删除这条数据？",
+			type : "warning",
+			showCancelButton : true,
+			closeOnConfirm : false,
+			confirmButtonText : "是的，删除",
+			confirmButtonColor : "#ec6c62"
+		}, function() {
+			$.ajax({
+				url : "${host}/admin/shop/sourceDelete",
+				data : {
+					sourceId : sourceId
+				},
+				type : "POST",
+			}).done(function(data) {
+				if (data.status == 200) {
+					tipOk("删除成功", function() {
+						resetValue();
+						location.reload(true);
+					});
+				//swal("操作成功!", "已成功删除数据！", "success");
+				} else {
+					swal("OMG", "删除操作失败了!", "error");
 				}
-			);
+			}).error(function(data) {
+				swal("OMG", "删除操作失败了!", "error");
+			});
+		});
 	}
-}
+ 
 function deleteUsers(){
 	var selectedSpan=$(".checked").parent().parent().next("td");
 	if(selectedSpan.length==0){
@@ -99,8 +151,10 @@ function resetValue(){
 
 </script>
 </head>
-<body>
-	<div class="container-fluid">
+<body style="background-color: #f5f6fa;height:1300px">
+	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.14 miki  -->
+	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
+	<div class="container-fluid" style="background-color: #ffffff;width:97%">
 	
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			
@@ -123,8 +177,12 @@ function resetValue(){
 					</td>
 				</tr>
 				<tr>
-					<%-- <td>发帖时间:</td>
-					<td><input type="text" id="publishTime" class="input-medium search-query Wdate" onClick="WdatePicker()" name="s_topic.publishTime" value="<fmt:formatDate value="${s_topic.publishTime }" type="date" pattern="yyyy-MM-dd"/>" style="width: 165px;"/></td>
+					<td>上传时间:</td>
+					<td>
+						<input type="text" id="publishTime" class="input-medium search-query Wdate" onClick="WdatePicker()" 
+							name="s_topic.publishTime" value="<fmt:formatDate value="${s_topic.publishTime }" type="date" pattern="yyyy-MM-dd"/>" style="width: 165px;"/>
+					</td>
+					<%-- <td>发帖时间:</td>				
 					<td>最后修改时间:</td>
 					<td><input type="text" id="modifyTime" class="input-medium search-query Wdate" onClick="WdatePicker()" name="s_topic.modifyTime" value="<fmt:formatDate value="${s_topic.modifyTime }" type="date" pattern="yyyy-MM-dd"/>" style="width: 165px;"/></td> --%>
 					<td>所属大类:</td>
@@ -190,7 +248,9 @@ function resetValue(){
 									<tr>
 										<td><input type="checkbox" /></td>
 										<td style="text-align: center;vertical-align: middle;">${source.id }</td>
-										<td style="text-align: center;vertical-align: middle;">${source.name }</td>
+										<td style="text-align: center;vertical-align: middle;">
+											<a href="${host}/shop/source/${message.source.id}" style="color: green;text-decoration: revert;" target="_blank">${source.name}</a>
+										</td>
 										<td style="text-align: center;vertical-align: middle;">
 											<img src="${pageContext.request.contextPath}/shop/images/logo/zip.svg" alt="img">
 										</td>
@@ -211,9 +271,11 @@ function resetValue(){
 											</c:if>										
 										</td>									
 										<td style="text-align: center;vertical-align: middle;">
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg"
-											 onclick="return modifySource(${source.id},'${source.tag }','${source.name }','${source.douNum }','${source.size }','${source.good}' )">修改</button>
-											<button class="btn btn-danger" type="button" onclick="javascript:sourceDelete(${source.id})">删除</button>
+											<a class="btn btn-xs btn-default submenuitem" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg"
+											 	onclick="return modifySource(${source.id},'${source.tag }','${source.name }','${source.douNum }','${source.size }','${source.good}' )">
+											 <i class="ftsucai-edit-2"></i>
+											 </a>
+											<a class="btn btn-xs btn-default submenuitem" type="button" onclick="javascript:sourceDelete(${source.id})"><i class="ftsucai-del"></i></a>
 										</td>
 									</tr>
 								</c:forEach>

@@ -2,11 +2,35 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<!-- 2020.08.13 miki 新版bootstrap样式文件在旧的代码中不兼容，暂时不用	<link href="${host}/admin/new-version/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
+<link href="${host}/admin/new-version/css/theme.css" rel="stylesheet">
+<link href="${host}/admin/new-version/css/fonts.css" rel="stylesheet">
+
+<!--使用jquery的select2.js+select2.css插件实现下拉搜索框的五个插件（注意插件的先后顺序）	2020.08.15-->
+<script src="${host}/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" href="${host}/admin/css/select2.css" />
+<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
+<script src="${host}/admin/js/select2.min.js"></script>
+<script src="${host}/admin/js/unicorn.js"></script>
+<script src="${host}/admin/js/unicorn.tables.js"></script>
+
+<!-- 引用该插件需要jQuery1.9以下的版本。否则报错方法找不到..
+	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
+<script src="${host}/admin/js/jquery.uniform.js"></script>
+<!-- checkbox样式管理  2020.08.15 miki -->
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+
+<script src="${host}/admin/new-version/js/tooltip.js"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
+<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
+<script src="${host}/admin/js/bootstrap.min.js"></script>
+
 <!-- 2019.09.11	miki 自定义弹窗 -->
 <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
 <script src="${host}/sweetalert/sweetalert.min.js"></script>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 
@@ -136,8 +160,11 @@ function categoryDelete(categoryId){
 
 </script>
 </head>
-<body>
-	<div class="container-fluid">
+<body style="background-color: #f5f6fa;height:1080px">
+	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.14 miki  -->
+	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
+	<div class="container-fluid" style="background-color: #ffffff;width:97%">
+	
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<button class="btn btn-primary" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg" onclick="return openAddDlg()">添加模块</button>&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
@@ -167,10 +194,12 @@ function categoryDelete(categoryId){
 										<td style="text-align: center;">${category.id }</td>
 										<td style="text-align: center;">${category.name }</td>									
 										<td style="text-align: center;">
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg2" onclick="return addSonCategory(${category.id},'${category.name }')">添加子模块
-											</button>&nbsp;&nbsp;
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#update_dlg" onclick="return modifyCategory(${category.id},'${category.name }')">修改
-											</button>&nbsp;&nbsp;<button class="btn btn-danger" type="button" onclick="javascript:categoryDelete(${category.id})">删除</button>
+											<a class="btn btn-xs btn-default submenuitem" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg2" onclick="return addSonCategory(${category.id},'${category.name }')">添加子模块
+											</a>&nbsp;&nbsp;
+											<a class="btn btn-xs btn-default submenuitem" type="button" data-backdrop="static" data-toggle="modal" data-target="#update_dlg" onclick="return modifyCategory(${category.id},'${category.name }')">
+												<i class="ftsucai-edit-2"></i>
+											</a>&nbsp;&nbsp;
+											<a class="btn btn-xs btn-default submenuitem" type="button" onclick="javascript:categoryDelete(${category.id})"><i class="ftsucai-del"></i></a>
 										</td>
 									</tr>
 								</c:forEach>

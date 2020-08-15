@@ -7,11 +7,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
+<!-- 2020.08.13 miki 新版bootstrap样式文件在旧的代码中不兼容，暂时不用	<link href="${host}/admin/new-version/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
+<link href="${host}/admin/new-version/css/theme.css" rel="stylesheet">
+<link href="${host}/admin/new-version/css/fonts.css" rel="stylesheet">
+
+
+<script src="${host}/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
+
+<!-- 引用该插件需要jQuery1.9以下的版本。否则报错方法找不到..
+	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
+<script src="${host}/admin/js/jquery.uniform.js"></script>
+<!-- checkbox样式管理  2020.08.15 miki -->
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+
+<script src="${host}/admin/new-version/js/tooltip.js"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
+<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
+<script src="${host}/admin/js/bootstrap.min.js"></script>
+
 <!-- 2019.09.03 自定义弹窗所需插件 -->
 <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>
 <script src="${host}/sweetalert/sweetalert.min.js"></script>
 
+<!-- 2020.08.15 ckeditor插件 -->
 <script type="text/javascript" src="${host}/ckeditor4.12/ckeditor/ckeditor.js"></script>
 
 <title>网站后台管理</title>
@@ -154,8 +174,11 @@ function deleteTopics(){
 
 </script>
 </head>
-<body>
-	<div class="container-fluid">
+<body style="background-color: #f5f6fa;">
+	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.15 miki  -->
+	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
+	<div class="container-fluid" style="background-color: #ffffff;width:97%">
+	
 		<!--2020.08.12 miki 表头样式-->
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteTopics()">批量删除</a>
@@ -257,12 +280,12 @@ function deleteTopics(){
 																												
 										<!--  2016.12.16   s设计模块，button未触发的原因：button按钮里 有这几个参数data-backdrop="static" data-toggle="modal" data-target="#dlg"时，
 										      a href超链接未能跳转，删除之后，实现了跳转 -->
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg"
+											<a class="btn btn-xs btn-default submenuitem" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg"
 													onclick='return modifyTopic("${topic.title}", "${topic.top}", "${topic.good}", "${topic.section.id}",
 															"${topic.id}")'>
-												修改
-											</button>
-											<button class="btn btn-danger" type="button" onclick="javascript:deleteTopic(${topic.id})">删除</button>
+												<i class="ftsucai-edit-2"></i>
+											</a>
+											<a class="btn btn-xs btn-default submenuitem" type="button" onclick="javascript:deleteTopic(${topic.id})"><i class="ftsucai-del"></i></a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -284,7 +307,7 @@ function deleteTopics(){
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true" onclick="return resetValue()">×</button>
-				<h3 id="myModalLabel1">修改话题</h3>
+				<h3 id="myModalLabel1">修改话题-(左键顶部栏可以拖动)</h3>
 			</div>
 			<form id="fm1" action="" method="post" enctype="multipart/form-data">
 				<div class="modal-body">
@@ -299,6 +322,7 @@ function deleteTopics(){
 								<input id="uid" type="hidden" readonly="readonly" name="id">
 							</td>
 						</tr>
+						
 						<tr>
 							<td>
 								<label class="control-label" for="usection">所属板块：</label>
@@ -311,7 +335,8 @@ function deleteTopics(){
 								</select>
 							</td>
 						</tr>
-						<tr>
+						
+						<tr>							
 							<td>
 								<label class="control-label" for="utop">是否置顶：</label>
 							</td>
@@ -333,6 +358,7 @@ function deleteTopics(){
 								</select>
 							</td>
 						</tr>
+
 						<!--2020.08.12 miki ckeditor弹窗-->
 						<tr>
 							<table>

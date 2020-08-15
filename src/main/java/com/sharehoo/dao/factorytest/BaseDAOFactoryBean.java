@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
 import org.springframework.data.repository.core.RepositoryInformation;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
-
 import com.sharehoo.dao.impl.BaseDAOImpl;
 
 
@@ -51,6 +50,17 @@ public class BaseDAOFactoryBean<R extends JpaRepository<T, I>, T, I extends Seri
 		protected Object getTargetRepository(RepositoryInformation information) {
 			return new BaseDAOImpl<T>((Class<T>) information.getDomainType(), em);
 		}
+		
+		//2020.08.14 miki springboot2.1.15版本配置方式
+		/*@Override
+		protected JpaRepositoryImplementation<?, ?> getTargetRepository(RepositoryInformation information, EntityManager entityManager) {
+			//return new BaseDAOImpl<T>((Class<T>) information.getDomainType(), em);
+			
+			JpaEntityInformation<?, Serializable> entityInformation = this.getEntityInformation(information.getDomainType());
+            Object repository = this.getTargetRepositoryViaReflection(information, new Object[]{entityInformation, entityManager});
+            Assert.isInstanceOf(BaseDAOImpl.class, repository);
+            return (JpaRepositoryImplementation)repository;
+		}*/
  
 		// 设置具体的实现类的class
 		protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {

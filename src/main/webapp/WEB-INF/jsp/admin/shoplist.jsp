@@ -6,7 +6,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>店铺管理</title>
+
+<!-- 2020.08.13 miki 新版bootstrap样式文件在旧的代码中不兼容，暂时不用	<link href="${host}/admin/new-version/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="${host}/admin/css/bootstrap.min.css" />
+<link href="${host}/admin/new-version/css/theme.css" rel="stylesheet">
+<link href="${host}/admin/new-version/css/fonts.css" rel="stylesheet">
+
+<!--使用jquery的select2.js+select2.css插件实现下拉搜索框的五个插件（注意插件的先后顺序）	2020.08.15-->
+<script src="${host}/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" href="${host}/admin/css/select2.css" />
+<link rel="stylesheet" href="${host}/admin/css/unicorn.main.css" />
+<script src="${host}/admin/js/select2.min.js"></script>
+<script src="${host}/admin/js/unicorn.js"></script>
+<script src="${host}/admin/js/unicorn.tables.js"></script>
+
+<!-- 引用该插件需要jQuery1.9以下的版本。否则报错方法找不到..
+	 jQuery.browser()方法自jQuery 1.3以来已被取消，并在1.9中被删除。 -->
+<script src="${host}/admin/js/jquery.uniform.js"></script>
+<!-- checkbox样式管理  2020.08.15 miki -->
+<link rel="stylesheet" href="${host}/admin/css/uniform.css" />
+
+<script src="${host}/admin/new-version/js/tooltip.js"></script>
+<script src="${host}/admin/js/jquery.ui.custom.js"></script>
+<script src="${host}/admin/js/jquery.dataTables.min.js"></script>
+<script src="${host}/admin/js/bootstrap.min.js"></script>
 
 <!-- 2019.09.11	miki 自定义弹窗 -->
 <link rel="stylesheet" type="text/css" href="${host}/sweetalert/sweetalert.css"/>
@@ -98,12 +122,12 @@
  
 	function shopDelete(shopId){
 		swal({
-			title: "您确定要拉黑这家伙吗？", 
-			text: "拉黑之后，将不能行驶登录权限..", 
+			title: "您确定要关闭这家店铺吗？", 
+			text: "关闭之后，将不能行驶登录权限..", 
 			type: "warning",
 			showCancelButton: true,
 			closeOnConfirm: false,
-			confirmButtonText: "是的，强行拉黑！",
+			confirmButtonText: "是的，强行关闭！",
 			confirmButtonColor: "#ec6c62"
 			}, function() {
 				$.ajax({
@@ -167,8 +191,11 @@ function resetValue(){
 
 </script>
 </head>
-<body>
-	<div class="container-fluid">
+<body style="background-color: #f5f6fa;height:1080px">
+	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.14 miki  -->
+	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
+	<div class="container-fluid" style="background-color: #ffffff;width:97%">
+	
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<form action="${host}/admin/shop/search" method="post" class="form-search">
 			<!--cellpadding负责调节搜素框之间的高度	2020.06.14-->
@@ -230,13 +257,13 @@ function resetValue(){
 										<td style="text-align: center;vertical-align: middle;">
 											<c:choose>
 													<c:when test="${(shop.user.face==null||shop.user.face=='')&&shop.user.sex=='男'}">
-														<img alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 100px;height: 100px;border-radius:50%;">
+														<img alt="" src="${pageContext.request.contextPath}/images/user/user0.gif" style="width: 80px;height: 80px;border-radius:50%;">
 													</c:when>
 													<c:when test="${(shop.user.face==null||shop.user.face=='')&&shop.user.sex=='女'}">
-														<img alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 100px;height: 100px;border-radius:50%;">
+														<img alt="" src="${pageContext.request.contextPath}/images/user/female.gif" style="width: 80px;height: 80px;border-radius:50%;">
 													</c:when>
 													<c:otherwise>
-														<img alt="" src="${pageContext.request.contextPath}/shop/${shop.face}" style="width: 100px;height: 100px;border-radius:50%;">
+														<img alt="" src="${pageContext.request.contextPath}/shop/${shop.face}" style="width: 80px;height: 80px;border-radius:50%;">
 													</c:otherwise>
 											</c:choose>
 										</td>
@@ -257,9 +284,11 @@ function resetValue(){
 											</c:if>										
 										</td>									
 										<td style="text-align: center;vertical-align: middle;">
-											<button class="btn btn-info" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg"
-											 onclick="return modifyShop(${shop.id},'${shop.tag }','${shop.shop_name }','${shop.downNum }','${shop.douNum }','${shop.sourceNum }','${shop.maxNum }','${shop.status }' )">修改</button>
-											<button class="btn btn-danger" type="button" onclick="javascript:shopDelete(${shop.id})">删除</button>
+											<a class="btn btn-xs btn-default submenuitem" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg"
+											 	onclick="return modifyShop(${shop.id},'${shop.tag }','${shop.shop_name }','${shop.downNum }','${shop.douNum }','${shop.sourceNum }','${shop.maxNum }','${shop.status }' )">
+											<i class="ftsucai-edit-2"></i>
+											 </a>
+											<a class="btn btn-xs btn-default submenuitem" type="button" onclick="javascript:shopDelete(${shop.id})"><i class="ftsucai-del"></i></a>
 										</td>
 									</tr>
 								</c:forEach>
