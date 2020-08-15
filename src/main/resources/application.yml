@@ -47,7 +47,7 @@ forum:
 spring:
     profiles:
       active: dev
-    
+      
     #2019.09.10 miki 设置topic的freemarker模板引擎文件的路径
     freemarker:
         HTML_GEN_PATH: D:/soft/freemarker/
@@ -98,13 +98,23 @@ spring:
         host: 106.13.75.153
         password:
         port: 6379   
-        timeout: 0
+        timeout: 50000
+        database: 1
         jedis:
           pool:
             max-active: 8
             max-idle: 8  
             min-idle: 0
-            max-wait: -1
+            max-wait: -1     
+        lettuce:
+          pool:
+            max-active: 8
+            max-wait:  -1
+            max-idle: 8
+            min-idle: 0
+    session:
+      store-type: redis
+      
     data:
         solr:
           host: http://106.13.75.153:8010/solr-topic/collection1   
