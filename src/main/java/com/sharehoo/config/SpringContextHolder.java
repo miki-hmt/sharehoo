@@ -1,8 +1,3 @@
-/**
- * Copyright &copy; 2012-2013 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package com.sharehoo.config;
 
 import org.apache.commons.lang3.Validate;
@@ -59,7 +54,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
      */
     public static void clearHolder() {
         if (logger.isDebugEnabled()){
-            logger.debug("清除SpringContextHolder中的ApplicationContext:" + applicationContext);
+            logger.debug("系统关闭或重启，清除SpringContextHolder中的ApplicationContext:" + applicationContext);
         }
         applicationContext = null;
     }

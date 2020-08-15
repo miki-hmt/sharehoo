@@ -147,7 +147,7 @@
 </script>
 </head>
 
-<body style="background-color: #f5f6fa">
+<body style="background-color: #f5f6fa;height:1030px">
 	<!--保持新版本上风格的统一 上面间距15px	，左右间距15px，背景色 #f5f6fa		旧版代码都要加上这样的样式		2020.08.14 miki  -->
 	<div class="row" style="height:20px;width:100%;background-color: #f5f6fa"></div>
 	<div class="container-fluid" style="background-color: #ffffff;width:97%">	

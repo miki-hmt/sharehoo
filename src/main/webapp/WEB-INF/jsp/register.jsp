@@ -18,7 +18,22 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validate.messages_cn.js"></script>
 <link href="${pageContext.request.contextPath}/shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
 <style type="text/css">
-button{cursor:pointer;width:100%;height:44px;padding:0;background:#ef4300;border:1px solid #ff730e;border-radius:6px;font-weight:700;color:#fff;font-size:24px;letter-spacing:15px;margin-top:10px; text-shadow:0 1px 2px rgba(0,0,0,.1)}
+button{
+	cursor:pointer;
+	width:82%;
+	height:44px;
+	padding:0;
+	background:#ef4300;
+	border:1px solid #ff730e;
+	border-radius:6px;
+	font-weight:700;
+	color:#fff;
+	font-size:24px;
+	letter-spacing:15px;
+	margin-left:112px;
+	margin-top:10px; 
+	text-shadow:0 1px 2px rgba(0,0,0,.1)
+}
 span{color:Red;font-size:12px}
 .header1 {
 	margin:0px auto;
@@ -215,7 +230,7 @@ $(function () {
 				</div>
 			</div>
 			<div class="control-group" id="preDiv" style="width: 700px; height: 80px;margin-left: 305px;">
-				<img id="ImgPr" class="pull-left" style="width: 80px; height: 80px;" src="${pageContext.request.contextPath}/${user.face }" />
+				<img id="ImgPr" class="pull-left" style="width: 80px; height: 80px;" src="${pageContext.request.contextPath}/images/user/20181128030905.jpg" />
 			</div>
 			<div class="control-group">
 				<div class="controls">
