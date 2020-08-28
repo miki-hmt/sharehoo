@@ -287,7 +287,7 @@ function saveRep(){
 								&nbsp;<a href="#1" style="font-size: 9pt;text-align:right;color:gray;"onclick='replySon("${reply.user.nickName }","${reply.user.id }","${reply.id }")'>回复</a>	
 									
 								&nbsp;<a href="#1" style="font-size: 9pt;text-align:right;color:gray;"onclick='copy("<c:out value="${reply.content }" escapeXml="true"/>","${(page-1)*10+status.index+1 }")'>引用</a>&nbsp;						
-								<a href="javascript:void();" onclick='zan("${status.index+1 }","${reply.id }","${reply.good }")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
+								<a href="javascript:void(0);" onclick='zan("${status.index+1 }","${reply.id }","${reply.good }")' style="font-size: 9pt;text-align:right;color:gray;text-decoration:none;">
 									<span id="good${status.index+1 }">
 										<img alt="" src="${host}/images/icon/thumbs10.png" style="width: 16px;height: 16px;">
 											[<font id="gd${status.index+1}" style="font-weight:bold;color:red;">${reply.good }</font>]

@@ -295,6 +295,7 @@ public class ReplyController {
 	
 	//2017.12.17	miki 实现点赞功能
 	@RequestMapping("/reply/dianzan")
+	@ResponseBody
 	public JSONObject zan(@RequestParam("rid") int rid,@RequestParam("num") int num)throws Exception{
 		JSONObject result=new JSONObject();
 		if(rid>0){
@@ -311,10 +312,10 @@ public class ReplyController {
 		}
 		return result;
 	}
-	
-	//2017.12.17	miki 实现点赞功能
+
 	//2017.12.17	miki 实现点赞功能
 	@RequestMapping("/reply/cai")
+	@ResponseBody
 	public JSONObject bad(@RequestParam("rid") int rid,@RequestParam("num") int num)throws Exception{
 		JSONObject result=new JSONObject();
 		if(rid>0){
