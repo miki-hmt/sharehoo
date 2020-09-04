@@ -53,7 +53,7 @@ public class RedisConfig {
     @Value("${spring.redis.timeout}")
     private Integer timeout;
     
-    @Bean
+    @Bean(name = "redisTemplate")
     @ConditionalOnMissingBean(name = "redisTemplate")
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
@@ -65,13 +65,16 @@ public class RedisConfig {
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
         // 设置value的序列化规则和 key的序列化规则
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
 
 
-    @Bean
+    @Bean(name = "stringRedisTemplate")
     @ConditionalOnMissingBean(name = "stringRedisTemplate")
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
@@ -84,6 +87,10 @@ public class RedisConfig {
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
         // 设置value的序列化规则和 key的序列化规则
         stringRedisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        stringRedisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        
+        stringRedisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        
         stringRedisTemplate.setKeySerializer(new StringRedisSerializer());
         stringRedisTemplate.afterPropertiesSet();
         return stringRedisTemplate;

@@ -17,9 +17,17 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 //2019.07.29	miki	使用JPA注解配置映射关系
 @Entity
 @Table(name="t_user")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class,
+		  property = "id")
 public class User implements Serializable{
 
 	private int id;        		//用户id
@@ -40,8 +48,11 @@ public class User implements Serializable{
 	private int score;
 			
 	private int type;			//用户类型	1为其他用户；2管理员
+	@JsonIgnore
 	private List<Section> sectionList=new ArrayList<Section>();
+	@JsonIgnore
 	private List<Topic> topicList=new ArrayList<Topic>();
+	@JsonIgnore
 	private List<Reply> replyList=new ArrayList<Reply>();
 	
 	@Id

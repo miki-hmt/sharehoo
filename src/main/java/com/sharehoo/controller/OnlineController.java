@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sharehoo.config.lang.Consts;
+import com.sharehoo.listener.OnlineCounterListener;
 import com.sharehoo.util.BootPathUtil;
 import com.sharehoo.util.CxCacheUtil;
 import com.sharehoo.util.forum.Counter;
@@ -21,6 +23,9 @@ import com.sharehoo.util.forum.E3Result;
 
 @Controller
 public class OnlineController {
+	
+	@Autowired
+	private OnlineCounterListener sessionListener;
 	
 	@RequestMapping("/online")
 	@ResponseBody
@@ -35,10 +40,11 @@ public class OnlineController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 		
 		String staticPath = BootPathUtil.getStaticPath();
-		Object count=session.getServletContext().getAttribute(Consts.ONLINEUSER);
+		//Object count=session.getServletContext().getAttribute(Consts.ONLINEUSER);
+		Long count = sessionListener.getOnlineUserNumber();
 		Object daycount=CxCacheUtil.getIntance().getValue(Consts.DAYONLINEUSER);
 		long total = Counter.readFromFile(staticPath +"/count.txt");
 			

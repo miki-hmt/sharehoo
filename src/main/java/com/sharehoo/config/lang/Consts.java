@@ -126,4 +126,14 @@ public interface Consts {
 
 	String EMAIL_TEMPLATE_FORGOT = "forgot.vm";
 	String EMAIL_TEMPLATE_BIND = "bind.vm";
+
+	public static final String ONLINE_USERS_NUMBER = "ONLINE_USERS_NUMBER";
+
+	public static final String SESSION_USER_CODE = "sessionAttr:currentUser";
+
+	public static final String VERIFICATION = "KAPTCHA_SESSION_KEY";
+
+	public static final String ALLUSER_NUMBER = "ALLUSER_NUMBER";
+
+	public static final String ONLINE_USERS = "ONLINE_USERS";
 }

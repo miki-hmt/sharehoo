@@ -1,5 +1,9 @@
 package com.sharehoo.config;
+import javax.servlet.http.HttpSessionListener;
 
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -7,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.sharehoo.interceptor.LoginHandlerInterceptor;
+import com.sharehoo.listener.OnlineCounterListener;
 
 /**
  * <b>类名称：</b>WebMvcConfig<br>
@@ -20,6 +25,11 @@ import com.sharehoo.interceptor.LoginHandlerInterceptor;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+	
+	private static Logger logger = org.slf4j.LoggerFactory.getLogger(WebMvcConfig.class);
+	
+	@Autowired
+	private OnlineCounterListener sessionListener;
     /**
      * 自己定义的拦截器类
      */
@@ -56,5 +66,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 			.excludePathPatterns("/*.html").excludePathPatterns("/*.htm");
         
         WebMvcConfigurer.super.addInterceptors(registry);
+    }
+    
+    @Bean
+    public ServletListenerRegistrationBean<HttpSessionListener> listenerRegist() {
+        ServletListenerRegistrationBean<HttpSessionListener> srb = new ServletListenerRegistrationBean<HttpSessionListener>();
+        srb.setListener(sessionListener);
+        logger.info("注册session listener监听器...");
+        return srb;
     }
 }
