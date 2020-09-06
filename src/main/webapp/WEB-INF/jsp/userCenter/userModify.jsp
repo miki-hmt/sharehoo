@@ -26,7 +26,7 @@
     <script type="text/javascript">
 	    $(function(){
 	    	//放新浪微博表情txtAreaObj:$("#Content")
-	        $("#message_face").jqfaceedit({txtAreaObj:$("#Content"),containerObj:$('#container'),top:25,left:-27});
+	        $("#message_face").jqfaceedit({txtAreaObj:$("#Content"),containerObj:$('#container'), textareaid:'Content', top:25,left:-27});
 	    	//CKEDITOR.instances.Content.setData();
 	    	 //显示表情
 	    	$(".show_e").emotionsToHtml();
@@ -202,8 +202,10 @@
 									</span> -->
 									<h5>
 										用户信息修改：<font style="font-size:8pt;color:red;">${user.nickName }</font>
-										上次修改时间：<font style="font-size:8pt;color:red;">											
-											<fmt:formatDate value="${user.updateTime }" pattern="yyyy-MM-dd HH:mm:ss "/>											
+										上次修改时间：<font style="font-size:8pt;color:red;">
+											
+											<fmt:formatDate value="${user.updateTime }" pattern="yyyy-MM-dd HH:mm:ss "/>
+											
 											</font>
 									</h5>
 								</div>

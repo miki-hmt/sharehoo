@@ -20,7 +20,7 @@
     <script type="text/javascript">
 	    $(function(){
 	    	//放新浪微博表情txtAreaObj:$("#Content")
-	        $("#message_face").jqfaceedit({txtAreaObj:$("#Content"),containerObj:$('#container'),top:25,left:-27});
+	        $("#message_face").jqfaceedit({txtAreaObj:$("#Content"),containerObj:$('#container'), textareaid:'Content', top:25,left:-27});
 	    	//CKEDITOR.instances.Content.setData();
 	    	 //显示表情
 	    	$(".show_e").emotionsToHtml();

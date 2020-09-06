@@ -505,7 +505,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		$(function(){
-		    $("#message_face").jqfaceedit({txtAreaObj:$("#Content"),containerObj:$('#container'),top:25,left:-27});
+		    $("#message_face").jqfaceedit({txtAreaObj:$("#Content"),containerObj:$('#container'), textareaid:'Content', top:25,left:-27});
 			 //显示表情
 			$(".show_e").emotionsToHtml();
 		});

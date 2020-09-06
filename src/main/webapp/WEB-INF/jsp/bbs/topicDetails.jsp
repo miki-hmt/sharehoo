@@ -259,6 +259,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <c:choose>
                                     <c:when test="${fn:length(sonReplyList.get(reply))>0}">
                                         <div class="topic-inner-list">
+                                            <c:choose>
+                                                <c:when test="${son.get(reply)-6>0 }">
+                                                    <div class="col-auto ml-auto">
+                                                        <a href="${host}/reply/details/${reply.id }" target="_blank" class="btn btn-primary tt-offset-27">还有(${son.get(reply)-6 })条，展开更多</a>
+                                                    </div>
+                                                </c:when>
+                                            </c:choose>
+
                                             <c:forEach items="${sonReplyList.get(reply) }" var="sonReply">
 
                                                     <div class="topic-inner">
@@ -1339,18 +1347,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
     //************************ 点赞，踩功能
-    var x=0;
-    var y=0;
+    var goodLimit=0;
+    var badLimit=0;
     function zan(order,rid,num){
         debugger
         var goodx="gd" + order;
         var goody="good" + order;
         num = $("#"+goodx).text();
         num++;
-        x=x+1;
-        if(x>10){
+        goodLimit = goodLimit + 1;
+        if(goodLimit > 10){
             tipError("点赞过于频繁，歇一歇吧！");
-            x=x-1;
+            goodLimit =goodLimit - 1;
         }else{
             flyEmotions(Number(order) + 10, 'zan');
             $("#"+goodx).text(num);
@@ -1374,10 +1382,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         //此处需要重新获取，否则num自增后不会刷新
         num = $("#"+badx).text();
         num++;
-        y=y+1;
-        if(y>10){
+        badLimit = badLimit + 1;
+        if(badLimit > 10){
             tipError("你踩的过于频繁，歇一歇吧！");
-            y=y-1;
+            badLimit = badLimit - 1;
         }else{
             flyEmotions(order, 'bad');
             $("#"+badx).text(num);
@@ -1469,7 +1477,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }
 
     $(function(){
-        $("#message_face").jqfaceedit({txtAreaObj:$("#reply"),containerObj:$('#emotionContainer'),top:25,left:-27});
+        $("#message_face").jqfaceedit({txtAreaObj:$("#reply"),containerObj:$('#emotionContainer'), textareaid:'reply', top:25,left:-27});
         //显示表情
         $(".show_e").emotionsToHtml();
     });
