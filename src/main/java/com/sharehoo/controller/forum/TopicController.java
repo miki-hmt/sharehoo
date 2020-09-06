@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -78,11 +75,21 @@ public class TopicController {
 	private String HTML_GEN_PATH;
 	@Value("${forum.leavemessage.SECRET_TOPIC}")
 	private String SECRET_TOPIC;
-	
+
+	@Value("${forum.version.old:false}")
+	private String oldVersion;
+
 	//2017.12.11 19:54	网页静态化实现
 	@Autowired
 	private FreeMarkerConfigurer freeMarkerConfigurer;
-	
+
+	@RequestMapping("topic/map")
+	public String navPage(){
+
+		return "bbs/forum_description";
+	}
+
+
 	@RequestMapping("/topic/write")
 	// 发帖方法实现
 	public String preSave(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="sectionId",required=false) int sectionId) throws Exception {
@@ -114,7 +121,12 @@ public class TopicController {
 		logService.save(log);
 		
 		model.addAttribute("sectionList", sectionList);
-		return "topic/topicAdd";
+
+		//旧版本的兼容性问题	设置为true，则显示旧的页面		2020.09.06 miki
+		if("true".equals(oldVersion)){
+			return "topic/topicAdd";
+		}
+		return "bbs/create_topic";
 	}
 	
 	@RequestMapping("/topic/leftsecret")
@@ -468,8 +480,11 @@ public class TopicController {
 		log.setType("commit url");
 		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/topic/section/"+sectionId+"提交结果："+result);		
 		logService.save(log);
-		
-		return "topic/topicList";
+
+		if("true".equals(oldVersion)){
+			return "topic/topicList";
+		}
+		return "bbs/categories_single";
 	}
 
 	/**
@@ -560,7 +575,12 @@ public class TopicController {
 		
 		List<Reply> replyList = replyService.findReplyListByTopicId(topicId, pageBean);
 		model.addAttribute("replyList", replyList);
-		
+
+		//对list中的对象去重，2020.09.06 miki
+		ArrayList<Reply> uniqueLists = replyList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getUser().getId()))),
+				ArrayList::new));
+		model.addAttribute("activeList", uniqueLists);
+
 		Map<Reply, Long> son=new HashMap<Reply, Long>();
 		Map<Reply, List<Reply>> sonReplyList=new HashMap<Reply,List<Reply>>();
 		long count = 0;
@@ -584,7 +604,7 @@ public class TopicController {
 				Integer.parseInt(page), 10, param.toString());
 		model.addAttribute("pageCode", pageCode);
 		
-		return "topic/topicDetails";
+		return "bbs/topicDetails";
 	}
 
 	// 后台删除，单个操作实现

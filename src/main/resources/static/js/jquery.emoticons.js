@@ -93,10 +93,11 @@
 
     $.fn.extend({
         jqfaceedit : function(options) {
+            debugger
             var defaults = {
                 txtAreaObj : '', //TextArea对象
                 containerObj : '', //表情框父对象
-                textareaid: 'Content',//textarea元素的id
+                textareaid: 'reply',//textarea元素的id
                 popName : '', //iframe弹出框名称,containerObj为父窗体时使用
                 emotions : em, //表情信息json格式，id表情排序号 phrase表情使用的替代短语url表情文件名
                 top : 0, //相对偏移
@@ -180,8 +181,10 @@
                         e.stopPropagation();
                     });
                     var offset = $(e.target).offset();
-                    offset.top += options.top;
-                    offset.left += options.left;
+
+                    //############ 2020.09.05 miki 设置表情包显示位置
+                    offset.top = 138;   //+= options.top;
+                    offset.left = 270;  //+= options.left;
                     container.find("#face").css(offset).show();
                 });
             });
@@ -189,6 +192,7 @@
         //表情文字符号转换为html格式
         emotionsToHtml : function(options) {
             return this.each(function() {
+                debugger
                 var msgObj = $(this);
                 var rContent = msgObj.html();
 

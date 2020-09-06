@@ -5,6 +5,8 @@ server:
 forum:
    leavemessage:
         SECRET_TOPIC: 40
+   version:
+     old: false
    topic:
         #index.jsp--topics--count 2018.08.10
         NEW_TOPIC: 13

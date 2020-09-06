@@ -16,14 +16,14 @@ var EventUtil = {
         removeEvent:function(el,type,handler) {  
             return el.removeEventListener ? el.removeEventListener(type,handler,false) : el.detachEvent('on'+type,handler);  
         },  
-        getViewPort:function(w) {//»ñÈ¡ÊÓ´°¿í¶ÈºÍ¸ß¶È  
-            //Ê¹ÓÃÖ¸¶¨µÄ´°¿Ú£¬Èç¹ûÈ±Ê¡ÔòÎªµ±Ç°´°¿Ú  
+        getViewPort:function(w) {//è·å–è§†çª—å®½åº¦å’Œé«˜åº¦  
+            //ä½¿ç”¨æŒ‡å®šçš„çª—å£ï¼Œå¦‚æœç¼ºçœåˆ™ä¸ºå½“å‰çª—å£  
             w = w || window;  
             /* 
-             *µ±Ã»ÓĞ¹ö¶¯ÌõÊ±£¬document.documentElement.clientWidthºÍwindow.innerWidthµÄÖµÊÇÒ»ÑùµÄ 
-             *³öÏÖ¹ö¶¯ÌõÊ±£¬Ç°ÕßµÄÖµ±ÈºóÕßµÄĞ¡£¬²î¼´Îª¹ö¶¯ÌõËùÕ¼µÄ¿í¶È£¬×öÕÚÕÖ²ã»òµ¯³ö²ãÊ±£¬Ç°Õß¸üÎª¾«È· 
+             *å½“æ²¡æœ‰æ»šåŠ¨æ¡æ—¶ï¼Œdocument.documentElement.clientWidthå’Œwindow.innerWidthçš„å€¼æ˜¯ä¸€æ ·çš„ 
+             *å‡ºç°æ»šåŠ¨æ¡æ—¶ï¼Œå‰è€…çš„å€¼æ¯”åè€…çš„å°ï¼Œå·®å³ä¸ºæ»šåŠ¨æ¡æ‰€å çš„å®½åº¦ï¼Œåšé®ç½©å±‚æˆ–å¼¹å‡ºå±‚æ—¶ï¼Œå‰è€…æ›´ä¸ºç²¾ç¡® 
              */  
-            //IE8¼°ÒÔÏÂ°æ±¾µÄIEÏµÁĞÎ´ÊµÏÖ¸Ã·½·¨  
+            //IE8åŠä»¥ä¸‹ç‰ˆæœ¬çš„IEç³»åˆ—æœªå®ç°è¯¥æ–¹æ³•  
 //            if(w.innerWidth != null) {  
 //                return {  
 //                    w:w.innerWidth,  
@@ -31,7 +31,7 @@ var EventUtil = {
 //                };  
 //            }  
             var d = w.document;  
-            //IE±ê×¼Ä£Ê½£¬¼´ÉùÃ÷ÁËxhtml1.0Í·  
+            //IEæ ‡å‡†æ¨¡å¼ï¼Œå³å£°æ˜äº†xhtml1.0å¤´  
             if(document.compatMode == 'CSS1Compat') {  
                 return {  
                     w:d.documentElement.clientWidth,  
@@ -40,7 +40,7 @@ var EventUtil = {
                     sh:d.documentElement.scrollHeight  
                 };  
             }  
-            //¹ÖÒìÄ£Ê½(Quirks)£¬Î´ÉùÃ÷DOCTYPE  
+            //æ€ªå¼‚æ¨¡å¼(Quirks)ï¼Œæœªå£°æ˜DOCTYPE  
             return {  
                 w:d.body.clientWidth,  
                 h:d.body.clientHeight,  
@@ -48,10 +48,10 @@ var EventUtil = {
                 sh:d.body.scrollHeight  
             };  
         },  
-        getScrollOffset:function(w) {//»ñÈ¡¹ö¶¯Î»ÖÃ  
-            //Ê¹ÓÃÖ¸¶¨µÄ´°¿Ú£¬Èç¹ûÈ±Ê¡ÔòÎªµ±Ç°´°¿Ú  
+        getScrollOffset:function(w) {//è·å–æ»šåŠ¨ä½ç½®  
+            //ä½¿ç”¨æŒ‡å®šçš„çª—å£ï¼Œå¦‚æœç¼ºçœåˆ™ä¸ºå½“å‰çª—å£  
             w = w || window;  
-            //IE8¼°ÒÔÏÂ°æ±¾µÄIEÏµÁĞÎ´ÊµÏÖ¸Ã·½·¨  
+            //IE8åŠä»¥ä¸‹ç‰ˆæœ¬çš„IEç³»åˆ—æœªå®ç°è¯¥æ–¹æ³•  
             if(w.pageXOffset != null) {  
                 return {  
                     x:w.pageXOffset,  
@@ -59,14 +59,14 @@ var EventUtil = {
                 };  
             }  
             var d = w.document;  
-            //IE±ê×¼Ä£Ê½£¬¼´ÉùÃ÷ÁËxhtml1.0Í·  
+            //IEæ ‡å‡†æ¨¡å¼ï¼Œå³å£°æ˜äº†xhtml1.0å¤´  
             if(document.compatMode == 'CSS1Compat') {  
                 return {  
                     x:d.documentElement.scrollLeft,  
                     y:d.documentElement.scrollTop  
                 };  
             }  
-            //¹ÖÒìÄ£Ê½(Quirks)£¬Î´ÉùÃ÷DOCTYPE  
+            //æ€ªå¼‚æ¨¡å¼(Quirks)ï¼Œæœªå£°æ˜DOCTYPE  
             return {  
                 x:d.body.scrollLeft,  
                 y:d.body.scrollTop  
@@ -94,11 +94,11 @@ var EventUtil = {
         fadeIn:function(params) {  
             params = params || {};  
             var el = params.el || null,  
-                speed = params.speed || 20,     //µ­Èë¶¯»­½øĞĞµÄËÙ¶È  
-                level = params.level || 100,    //Èç¹ûÃ»ÓĞÖ¸¶¨£¬Ôòµ­ÈëÍ¸Ã÷¶ÈÖÁ100  
-                initOpacity = params.initOpacity || 0,  //¿ªÊ¼¶¯»­Ê±ÔªËØµÄÍ¸Ã÷¶È£¬Èç¹ûÃ»ÓĞÔòÉèÎª0  
+                speed = params.speed || 20,     //æ·¡å…¥åŠ¨ç”»è¿›è¡Œçš„é€Ÿåº¦  
+                level = params.level || 100,    //å¦‚æœæ²¡æœ‰æŒ‡å®šï¼Œåˆ™æ·¡å…¥é€æ˜åº¦è‡³100  
+                initOpacity = params.initOpacity || 0,  //å¼€å§‹åŠ¨ç”»æ—¶å…ƒç´ çš„é€æ˜åº¦ï¼Œå¦‚æœæ²¡æœ‰åˆ™è®¾ä¸º0  
                 elStyle = el.style,  
-                step = initOpacity;           //Í¸Ã÷¶ÈÃ¿´Î¸Ä±äµÄÔöÁ¿  
+                step = initOpacity;           //é€æ˜åº¦æ¯æ¬¡æ”¹å˜çš„å¢é‡  
             elStyle.display = 'block';  
             (function() {  
                 EventUtil.setOpacity(el,step);  
@@ -109,9 +109,9 @@ var EventUtil = {
         fadeOut:function(params) {  
             params = params || {};  
             var el = params.el || null,  
-                speed = params.speed || 20,       //µ­³ö¶¯»­½øĞĞµÄËÙ¶È  
-                level = params.level || 0,        //Èç¹ûÃ»ÓĞÖ¸¶¨£¬Ôòµ­³öÍ¸Ã÷¶ÈÖÁ0£¬È»ºóÒş²Ø¸ÃÔªËØ  
-                initOpacity = params.initOpacity || 100,  //¿ªÊ¼¶¯»­Ê±ÔªËØµÄÍ¸Ã÷¶È£¬Èç¹ûÃ»ÓĞÔòÉèÎª100  
+                speed = params.speed || 20,       //æ·¡å‡ºåŠ¨ç”»è¿›è¡Œçš„é€Ÿåº¦  
+                level = params.level || 0,        //å¦‚æœæ²¡æœ‰æŒ‡å®šï¼Œåˆ™æ·¡å‡ºé€æ˜åº¦è‡³0ï¼Œç„¶åéšè—è¯¥å…ƒç´   
+                initOpacity = params.initOpacity || 100,  //å¼€å§‹åŠ¨ç”»æ—¶å…ƒç´ çš„é€æ˜åº¦ï¼Œå¦‚æœæ²¡æœ‰åˆ™è®¾ä¸º100  
                 elStyle = el.style,  
                 step = initOpacity;  
             (function() {  
@@ -122,14 +122,14 @@ var EventUtil = {
         }  
     };  
   
-    //Îª»ñÈ¡¶ÔÏóIDµÄ·½·¨¶¨Òå¿ì½İ·½Ê½  
+    //ä¸ºè·å–å¯¹è±¡IDçš„æ–¹æ³•å®šä¹‰å¿«æ·æ–¹å¼  
     //var $ = EventUtil._$;  
     var isIE6 = EventUtil.getBroswersVer.isIE6,  
         isIE = EventUtil.getBroswersVer.isIE,  
         isOpera = EventUtil.getBroswersVer.isOpera;  
   
     /* 
-     * µ¯³ö¿ò¹¹Ôìº¯Êı 
+     * å¼¹å‡ºæ¡†æ„é€ å‡½æ•° 
      */  
     function PopUp() {  
         return this.init.apply(this,arguments);  
@@ -137,24 +137,24 @@ var EventUtil = {
     PopUp.prototype = {  
         init:function(params) {  
             params = params || {};  
-            //»ñÈ¡µ¯³ö¿ò¶ÔÏó£¬Èç¹ûÃ»ÓĞÖ¸¶¨ÔòÊ¹ÓÃÄ¬ÈÏ  
+            //è·å–å¼¹å‡ºæ¡†å¯¹è±¡ï¼Œå¦‚æœæ²¡æœ‰æŒ‡å®šåˆ™ä½¿ç”¨é»˜è®¤  
             this.pop = EventUtil._$(params.id) || EventUtil._$('popBox');  
-            //»ñÈ¡ÍÏ¶¯ÊÖ±ú£¬ÈçÎ´Ö¸¶¨Ôò½«ÆäÉèÖÃÎªÕû¸öµ¯³ö¿ò  
+            //è·å–æ‹–åŠ¨æ‰‹æŸ„ï¼Œå¦‚æœªæŒ‡å®šåˆ™å°†å…¶è®¾ç½®ä¸ºæ•´ä¸ªå¼¹å‡ºæ¡†  
             this.handle = this.pop.getElementsByClassName('popBoxHandle')[0] || this.pop;  
             var pStyle = this.pop.style;  
-            //µ¯³ö¿òÊÇ·ñ¸úËæ¹ö¶¯Ìõ¹ö¶¯£¬Ä¬ÈÏÎªÔÊĞí  
+            //å¼¹å‡ºæ¡†æ˜¯å¦è·Ÿéšæ»šåŠ¨æ¡æ»šåŠ¨ï¼Œé»˜è®¤ä¸ºå…è®¸  
             this.isScroll = params.isScroll || 'enabled';  
-            //¸úËæ´°¿Ú¹ö¶¯Ê±·ÇIE6ä¯ÀÀÆ÷¿ÉÒÔÓÃfixed£¬²»¸úËæÔòĞèÒªÉèÎªabsolute  
-            //OperaÊÇÒ»¸öÌØÊâÇé¿ö£¬ËüÔÚÉèÖÃÎªfixedÊ±ºÍFirefox¡¢Chromeä¯ÀÀÆ÷µÄĞĞÎª²»Ò»ÖÂ  
-            //¾ßÌåÎªff¡¢chromeÔÚfixed¼ÆËã×ø±ê¶¼ÊÇÏà¶Ô´°¿ÚµÄ£¬µ«OperaĞèÒª¿¼ÂÇ¹ö¶¯Ìõ  
-            //ÎªÁË·½·¨Í¨ÓÃ£¬¹Ê½«OperaÓëIE6¹éÎªÒ»Àà  
+            //è·Ÿéšçª—å£æ»šåŠ¨æ—¶éIE6æµè§ˆå™¨å¯ä»¥ç”¨fixedï¼Œä¸è·Ÿéšåˆ™éœ€è¦è®¾ä¸ºabsolute  
+            //Operaæ˜¯ä¸€ä¸ªç‰¹æ®Šæƒ…å†µï¼Œå®ƒåœ¨è®¾ç½®ä¸ºfixedæ—¶å’ŒFirefoxã€Chromeæµè§ˆå™¨çš„è¡Œä¸ºä¸ä¸€è‡´  
+            //å…·ä½“ä¸ºffã€chromeåœ¨fixedè®¡ç®—åæ ‡éƒ½æ˜¯ç›¸å¯¹çª—å£çš„ï¼Œä½†Operaéœ€è¦è€ƒè™‘æ»šåŠ¨æ¡  
+            //ä¸ºäº†æ–¹æ³•é€šç”¨ï¼Œæ•…å°†Operaä¸IE6å½’ä¸ºä¸€ç±»  
             this.isScroll == 'enabled' ?  
                     ((isIE6 || isOpera) ? pStyle.position = 'absolute' : pStyle.position = 'fixed') :  
                     pStyle.position ='absolute';  
   
-            //ÊÇ·ñĞèÒª´´½¨ÕÚÕÖ²ã£¬Ä¬ÈÏÎª´´½¨  
+            //æ˜¯å¦éœ€è¦åˆ›å»ºé®ç½©å±‚ï¼Œé»˜è®¤ä¸ºåˆ›å»º  
             this.enableShadow = params.enableShadow == 'disabled' ? false : new Shadow();  
-            //ÊÇ·ñÆôÓÃÍÏ·Å£¬Ä¬ÈÏÎªÆôÓÃ  
+            //æ˜¯å¦å¯ç”¨æ‹–æ”¾ï¼Œé»˜è®¤ä¸ºå¯ç”¨  
             this.enableDrag = params.enableDrag == 'disabled' ? false : new  
                     Drag({  
                         target:this.pop,  
@@ -167,12 +167,12 @@ var EventUtil = {
 //                            maxTop:EventUtil._$('range').getBoundingClientRect().bottom - this.pop.offsetHeight  
 //                        }  
                     });  
-            //Èç¹û½ûÓÃÍÏ·ÅĞèÒª°ÑÍÏ¶¯ÊÖ±úµÄÊó±êÑùÊ½ÉèÎªÄ¬ÈÏ  
+            //å¦‚æœç¦ç”¨æ‹–æ”¾éœ€è¦æŠŠæ‹–åŠ¨æ‰‹æŸ„çš„é¼ æ ‡æ ·å¼è®¾ä¸ºé»˜è®¤  
             if(this.enableDrag == false) this.handle.style.cursor = 'default';  
               
-            //»ñÈ¡µ¯³ö¿òµÄ¿í¶ÈºÍ¸ß¶È  
+            //è·å–å¼¹å‡ºæ¡†çš„å®½åº¦å’Œé«˜åº¦  
             var s = this.pop.getBoundingClientRect();  
-            //ÓÉÓÚIEµÄgetBoundingClientRect()·½·¨Ã»ÓĞwidthºÍheightÊôĞÔ£¬¹ÊÈ¡ÓÒ±ß¾àºÍ×ó±ß¾àÖ®²îÀ´´úÌæwidth£¬¸ß¶ÈÒ²Ò»Ñù  
+            //ç”±äºIEçš„getBoundingClientRect()æ–¹æ³•æ²¡æœ‰widthå’Œheightå±æ€§ï¼Œæ•…å–å³è¾¹è·å’Œå·¦è¾¹è·ä¹‹å·®æ¥ä»£æ›¿widthï¼Œé«˜åº¦ä¹Ÿä¸€æ ·  
             this.w = s.width || s.right - s.left;  
             this.h = s.height || s.bottom - s.top;  
             pStyle.display = 'none';  
@@ -181,14 +181,14 @@ var EventUtil = {
             params = params || {};  
             var pStyle = this.pop.style;  
   
-            //Èç¹û´«ÈëµÄ²ÎÊıÖĞÖ¸¶¨ÁË×ø±êÎ»ÖÃ£¬Ôò½«Öµ¸³¸øµ¯³ö¿ò  
+            //å¦‚æœä¼ å…¥çš„å‚æ•°ä¸­æŒ‡å®šäº†åæ ‡ä½ç½®ï¼Œåˆ™å°†å€¼èµ‹ç»™å¼¹å‡ºæ¡†  
             if(params.x != undefined && params.y != undefined) {  
                 pStyle.left = params.x + 'px';  
                 pStyle.top = params.y + 'px';  
-                return;  //·µ»Ø  
+                return;  //è¿”å›  
             }  
-            //Èç¹ûÎ´Ö¸¶¨×ø±ê£¬Ôòµ¯³ö¿òÆÁÄ»¾ÓÖĞÏÔÊ¾  
-            //IE6¡¢OperaÒÔ¼°µ¯³ö¿ò½ûÖ¹¸úËæ¹ö¶¯ÌõÊ±Ê¹ÓÃµÄ¶¨Î»·½Ê½ÊÇabsolute£¬ĞèÒª¼ÓÉÏ¹ö¶¯¾àÀë  
+            //å¦‚æœæœªæŒ‡å®šåæ ‡ï¼Œåˆ™å¼¹å‡ºæ¡†å±å¹•å±…ä¸­æ˜¾ç¤º  
+            //IE6ã€Operaä»¥åŠå¼¹å‡ºæ¡†ç¦æ­¢è·Ÿéšæ»šåŠ¨æ¡æ—¶ä½¿ç”¨çš„å®šä½æ–¹å¼æ˜¯absoluteï¼Œéœ€è¦åŠ ä¸Šæ»šåŠ¨è·ç¦»  
             var x = (EventUtil.getViewPort().w - this.w) / 2 + (isIE6 || isOpera || this.isScroll == 'disabled' ?  
                     EventUtil.getScrollOffset().x : 0);  
                 y = (EventUtil.getViewPort().h - this.h) / 2 + (isIE6 || isOpera || this.isScroll == 'disabled' ?  
@@ -198,11 +198,11 @@ var EventUtil = {
         },  
         show:function(params) {  
             params = params || {};  
-            //µ­Èëµ¯³ö¿ò  
+            //æ·¡å…¥å¼¹å‡ºæ¡†  
             EventUtil.fadeIn({el:this.pop});  
-            //ÏÔÊ¾ÕÚÕÖ²ã  
+            //æ˜¾ç¤ºé®ç½©å±‚  
             this.enableShadow && this.enableShadow.show();  
-            //µ¯³ö¿ò¶¨Î»  
+            //å¼¹å‡ºæ¡†å®šä½  
             this.setPosition(params);  
         },  
         hide:function() {  
@@ -212,7 +212,7 @@ var EventUtil = {
     };  
   
     /* 
-     * ÍÏ·Å¹¹Ôìº¯Êı 
+     * æ‹–æ”¾æ„é€ å‡½æ•° 
      */  
     function Drag() {  
         return this.init.apply(this,arguments);  
@@ -221,77 +221,77 @@ var EventUtil = {
         init:function(params) {  
             params = params || {};  
             var _self = this;  
-            //»ñÈ¡ÍÏ·ÅÔªËØ  
+            //è·å–æ‹–æ”¾å…ƒç´   
             this.dragTarget = params.target || EventUtil._$('popBox');  
-            //ÍÏ¶¯ÊÖ±ú  
+            //æ‹–åŠ¨æ‰‹æŸ„  
             this.handle = this.dragTarget.getElementsByClassName('popBoxHandle')[0];  
-            //·¶Î§ÏŞ¶¨£¬Èç¹û´«Èë¸Ã²ÎÊıÔòµ¯³ö¿ò½«ÔÚÖ¸¶¨·¶Î§ÄÚ¿ÉÍÏ¶¯  
+            //èŒƒå›´é™å®šï¼Œå¦‚æœä¼ å…¥è¯¥å‚æ•°åˆ™å¼¹å‡ºæ¡†å°†åœ¨æŒ‡å®šèŒƒå›´å†…å¯æ‹–åŠ¨  
             this.range = params.range || {};  
-            //ÊÇ·ñ¸úËæ¹ö¶¯Ìõ¹ö¶¯  
+            //æ˜¯å¦è·Ÿéšæ»šåŠ¨æ¡æ»šåŠ¨  
             this.isScroll = params.isScroll || 'enabled';  
             var s = this.dragTarget.getBoundingClientRect();  
             this.w = s.width || s.right - s.left;  
             this.h = s.height || s.bottom - s.top;  
-            //Ë®Æ½Ëø¶¨»ò´¹Ö±Ëø¶¨  
+            //æ°´å¹³é”å®šæˆ–å‚ç›´é”å®š  
             this.sMode = params.sMode || null;  
-            //ÔªËØÔÚÒÆ¶¯Ê±´¥·¢µÄÊÂ¼ş  
+            //å…ƒç´ åœ¨ç§»åŠ¨æ—¶è§¦å‘çš„äº‹ä»¶  
             this.moveHandler = function(e) {  
                 _self.move(e);  
             };  
-            //ÔÚÊÍ·ÅÊó±êÊ±´¥·¢µÄÊÂ¼ş  
+            //åœ¨é‡Šæ”¾é¼ æ ‡æ—¶è§¦å‘çš„äº‹ä»¶  
             this.upHandler = function() {  
                 _self.dragStop();  
             };  
-            //°´ÏÂÊó±êÊ±ÍÏ·Å¿ªÊ¼  
+            //æŒ‰ä¸‹é¼ æ ‡æ—¶æ‹–æ”¾å¼€å§‹  
             EventUtil.addEvent(this.handle,'mousedown',function(e) {  
                 _self.dragStart(e);  
             });  
         },  
-        dragStart:function(e) {//¿ªÊ¼ÍÏ·Å  
+        dragStart:function(e) {//å¼€å§‹æ‹–æ”¾  
             e = e || window.event;  
             var _self = this,  
                 target = this.dragTarget,  
                 isPosAbs = target.style.position == 'absolute';  
             EventUtil.preventDefault(e);  
-            //ÍÏ·Å¿ªÊ¼Ê±ÉèÖÃÍ¸Ã÷¶ÈÎª50  
+            //æ‹–æ”¾å¼€å§‹æ—¶è®¾ç½®é€æ˜åº¦ä¸º50  
             EventUtil.setOpacity(this.dragTarget,50);  
   
-            //µ±Êó±êÒÆ³ö´°¿Ú»òÇĞ»»ÊÓ´°Ê±ÈÔÄÜ²¶»ñÊÂ¼ş  
+            //å½“é¼ æ ‡ç§»å‡ºçª—å£æˆ–åˆ‡æ¢è§†çª—æ—¶ä»èƒ½æ•è·äº‹ä»¶  
             (target.setCapture && isIE) && target.setCapture(true);  
   
-            //Çå³ıÑ¡ÖĞÎÄ±¾£¬Ç°ÃæÊÇIEÌØÓĞµÄ·½·¨  
+            //æ¸…é™¤é€‰ä¸­æ–‡æœ¬ï¼Œå‰é¢æ˜¯IEç‰¹æœ‰çš„æ–¹æ³•  
             (document.selection && document.selection.empty) ? document.selection.empty() :  
                     window.getSelection().removeAllRanges();  
   
-            //±£´æÊó±êÏà¶ÔÍÏ·ÅÔªËØµÄ×ø±êºÍµ±Ç°ÔªËØ¿ÉÒÆ¶¯µÄ×î´ó¿í¸ß¶È  
-            this.offset = {//layerX(Firefox)¡¢offsetX(IE¡¢Opera)  
+            //ä¿å­˜é¼ æ ‡ç›¸å¯¹æ‹–æ”¾å…ƒç´ çš„åæ ‡å’Œå½“å‰å…ƒç´ å¯ç§»åŠ¨çš„æœ€å¤§å®½é«˜åº¦  
+            this.offset = {//layerX(Firefox)ã€offsetX(IEã€Opera)  
                 x:e.clientX - target.getBoundingClientRect().left,  
                 y:e.clientY - target.getBoundingClientRect().top,  
-                //fixed¶¨Î»È¡µÄÊÇÏà¶ÔÓÚµ±Ç°´°¿ÚµÄÎ»ÒÆ£¬²»ĞèÒª¼ÓÉÏ¹ö¶¯Öµ£¬¶øabsolute¶¨Î»ĞèÒª¼ÓÉÏ¹ö¶¯µÄÖµ  
+                //fixedå®šä½å–çš„æ˜¯ç›¸å¯¹äºå½“å‰çª—å£çš„ä½ç§»ï¼Œä¸éœ€è¦åŠ ä¸Šæ»šåŠ¨å€¼ï¼Œè€Œabsoluteå®šä½éœ€è¦åŠ ä¸Šæ»šåŠ¨çš„å€¼  
                 maxX:this.range.maxLeft - (isPosAbs ? 0 : EventUtil.getScrollOffset().x) || EventUtil.getViewPort().w -  
                     this.w + (target.style.position == 'absolute' ? EventUtil.getScrollOffset().x : 0),  
                 maxY:this.range.maxTop - (isPosAbs ? 0 : EventUtil.getScrollOffset().y) || EventUtil.getViewPort().h -  
                         this.h + ((target.style.position == 'absolute') ? EventUtil.getScrollOffset().y : 0)  
             };  
-            //×¢²áÊó±êÒÆ¶¯ºÍÊÍ·ÅÊó±êÊÂ¼ş  
+            //æ³¨å†Œé¼ æ ‡ç§»åŠ¨å’Œé‡Šæ”¾é¼ æ ‡äº‹ä»¶  
             EventUtil.addEvent(document,'mousemove',this.moveHandler);  
             EventUtil.addEvent(document,'mouseup',this.upHandler);  
         },  
         move:function(e) {  
             e = e || window.event;  
-            //×èÖ¹ä¯ÀÀÆ÷Ä¬ÈÏÊÂ¼ş£¬IE8ÓĞ¹ö¶¯ÌõËæÍÏ·Å¹ö¶¯ºÍÄ¬ÈÏÑ¡ÖĞÎÄ×ÖµÄÄ¬ÈÏĞĞÎª  
+            //é˜»æ­¢æµè§ˆå™¨é»˜è®¤äº‹ä»¶ï¼ŒIE8æœ‰æ»šåŠ¨æ¡éšæ‹–æ”¾æ»šåŠ¨å’Œé»˜è®¤é€‰ä¸­æ–‡å­—çš„é»˜è®¤è¡Œä¸º  
             EventUtil.preventDefault(e);  
-            //Í¨¹ıÊó±êµ±Ç°Î»ÖÃ×ø±ê¼õÈ¥Ïà¶ÔÎ»ÖÃ×ø±ê»ñµÃÔªËØµÄleftºÍtopÖµ  
-            var sx = EventUtil.getScrollOffset().x,     //±£´æµ±Ç°¹ö¶¯¿í¶È  
-                sy = EventUtil.getScrollOffset().y,     //±£´æµ±Ç°¹ö¶¯¸ß¶È  
-                //±£´æÔªËØÔÚÒ³ÃæÄÚµÄ×ø±ê  
+            //é€šè¿‡é¼ æ ‡å½“å‰ä½ç½®åæ ‡å‡å»ç›¸å¯¹ä½ç½®åæ ‡è·å¾—å…ƒç´ çš„leftå’Œtopå€¼  
+            var sx = EventUtil.getScrollOffset().x,     //ä¿å­˜å½“å‰æ»šåŠ¨å®½åº¦  
+                sy = EventUtil.getScrollOffset().y,     //ä¿å­˜å½“å‰æ»šåŠ¨é«˜åº¦  
+                //ä¿å­˜å…ƒç´ åœ¨é¡µé¢å†…çš„åæ ‡  
                 x = e.clientX - this.offset.x + (isIE6 || isOpera || this.isScroll == 'disabled' ? sx : 0),  
                 y = e.clientY - this.offset.y + (isIE6 || isOpera || this.isScroll == 'disabled' ? sy : 0),  
-                //±£´æÔªËØ¿ÉÒÔÒÆ¶¯µÄ×î´óºá×ø±êºÍ×İ×ø±ê  
+                //ä¿å­˜å…ƒç´ å¯ä»¥ç§»åŠ¨çš„æœ€å¤§æ¨ªåæ ‡å’Œçºµåæ ‡  
                 maxX = this.offset.maxX,  
                 maxY = this.offset.maxY;  
-            //ÉèÖÃÔªËØµÄ×ø±ê²¢·ÀÖ¹µ¯³ö¿òÎ»ÖÃ³¬³öÖ¸¶¨·¶Î§  
-            if(isIE6 || isOpera || this.isScroll == 'disabled') {//Èç¹ûÊÇIE6¡¢Opera»òÕßÉèÖÃÁË½ûÖ¹¸úËæä¯ÀÀÆ÷¹ö¶¯  
+            //è®¾ç½®å…ƒç´ çš„åæ ‡å¹¶é˜²æ­¢å¼¹å‡ºæ¡†ä½ç½®è¶…å‡ºæŒ‡å®šèŒƒå›´  
+            if(isIE6 || isOpera || this.isScroll == 'disabled') {//å¦‚æœæ˜¯IE6ã€Operaæˆ–è€…è®¾ç½®äº†ç¦æ­¢è·Ÿéšæµè§ˆå™¨æ»šåŠ¨  
                 (this.sMode == 'horizontal' || this.sMode == null) && (this.dragTarget.style.left = Math.min(maxX, x  
                         <= (this.range.minLeft || sx) ? (this.range.minLeft || sx) : x) +'px');  
                 (this.sMode == 'vertical' || this.sMode == null) && (this.dragTarget.style.top = Math.min(maxY, y <=  
@@ -305,9 +305,9 @@ var EventUtil = {
                     (this.range.minTop-sy || 0) ? (this.range.minTop-sy || 0) : y) + 'px');  
   
         },  
-        dragStop:function() {//Í£Ö¹ÍÏ·Å  
+        dragStop:function() {//åœæ­¢æ‹–æ”¾  
             EventUtil.setOpacity(this.dragTarget,100);  
-            //Í£Ö¹´°¿Ú²¶»ñ  
+            //åœæ­¢çª—å£æ•è·  
             (this.dragTarget.releaseCapture && isIE) && this.dragTarget.releaseCapture();  
             EventUtil.removeEvent(document,'mousemove',this.moveHandler);  
             EventUtil.removeEvent(document,'mouseup',this.upHandler);  
@@ -315,33 +315,33 @@ var EventUtil = {
     };  
   
     /* 
-     * ÕÚÕÖ²ã¹¹Ôìº¯Êı 
+     * é®ç½©å±‚æ„é€ å‡½æ•° 
      */  
     function Shadow() {  
         return this.init.apply(this,arguments);  
     }  
     Shadow.prototype = {  
         init:function() {},  
-        create:function(params) {//´´½¨ÕÚÕÖ²ã  
+        create:function(params) {//åˆ›å»ºé®ç½©å±‚  
             params = params || {};  
-            //Èç¹ûÕÚÕÖ²ãÒÑ´æÔÚ£¬·µ»Ø  
+            //å¦‚æœé®ç½©å±‚å·²å­˜åœ¨ï¼Œè¿”å›  
             if(this.shadow) return;  
             var c = document.createElement('div'),  
                 s = c.style;  
-            //ÎªÕÚÕÖ²ã¶¨ÒåÑùÊ½  
+            //ä¸ºé®ç½©å±‚å®šä¹‰æ ·å¼  
             c.id = 'shadow';  
             s.backgroundColor = params.bgColor || '#000';  
             s.position = isIE6 ? 'absolute' : 'fixed';  
             s.left = s.top = 0;  
-            //ÉèÖÃÕÚÕÖ²ãµÄ¿í¸ß  
+            //è®¾ç½®é®ç½©å±‚çš„å®½é«˜  
             this.setProperty(c);  
             s.zIndex = 100;  
             s.display = 'none';  
-            //Îª·ÀÖ¹IE6ÖĞÖ¹²Ù×÷µÄÎÊÌâ£¬ÓÃinsertBefore´úÌæappendChild·½·¨  
+            //ä¸ºé˜²æ­¢IE6ä¸­æ­¢æ“ä½œçš„é—®é¢˜ï¼Œç”¨insertBeforeä»£æ›¿appendChildæ–¹æ³•  
             document.body.insertBefore(c,document.body.childNodes[0]);  
-            //½«ÕÚÕÖ²ã±£´æµ½this.shadow  
+            //å°†é®ç½©å±‚ä¿å­˜åˆ°this.shadow  
             this.shadow = c;  
-            //IE6ÏÂÓĞÕÚÕÖ²ã²»ÄÜÕÚ¸ÇselectÔªËØµÄbug,Í¨¹ı´´½¨Ò»¸öiframeÀ´½â¾ö  
+            //IE6ä¸‹æœ‰é®ç½©å±‚ä¸èƒ½é®ç›–selectå…ƒç´ çš„bug,é€šè¿‡åˆ›å»ºä¸€ä¸ªiframeæ¥è§£å†³  
             if(isIE6 && !this.fixedIframe) {  
                 var iframe = document.createElement('iframe'),  
                     iStyle = iframe.style;  
@@ -350,27 +350,27 @@ var EventUtil = {
                 iStyle.zIndex = 1;  
                 iStyle.src = 'about:blank';  
                 iStyle.filter = 'alpha(opacity=0)';  
-                //ÉèÖÃiframeµÄ¿í¸ß  
+                //è®¾ç½®iframeçš„å®½é«˜  
                 this.setProperty(iframe);  
                 document.body.insertBefore(iframe,document.body.childNodes[0]);  
                 this.fixedIframe = iframe;  
             }  
-            //·µ»Ø´´½¨µÄÕÚÕÖ²ã  
+            //è¿”å›åˆ›å»ºçš„é®ç½©å±‚  
             return c;  
         },  
         setProperty:function(el) {  
             var s = el.style;  
-            //±È½ÏclientWidth(clientHeight)ÓëscrollWidth(scrollHeight)µÄ´óĞ¡£¬È¡ÆäÖĞ½Ï´óµÄÒ»¸ö×÷Îª¿í¸ß¶È  
+            //æ¯”è¾ƒclientWidth(clientHeight)ä¸scrollWidth(scrollHeight)çš„å¤§å°ï¼Œå–å…¶ä¸­è¾ƒå¤§çš„ä¸€ä¸ªä½œä¸ºå®½é«˜åº¦  
             s.width = Math.max(EventUtil.getViewPort().w,EventUtil.getViewPort().sw) + 'px';  
             s.height = Math.max(EventUtil.getViewPort().h,EventUtil.getViewPort().sh) + 'px';  
         },  
         show:function(params) {  
             params = params || {};  
             EventUtil.fadeIn({  
-                el:this.shadow || this.create(params), //Èç¹û²»´æÔÚÔò´´½¨  
-                level:30    //µ­Èëµ½30µÄÍ¸Ã÷¶È  
+                el:this.shadow || this.create(params), //å¦‚æœä¸å­˜åœ¨åˆ™åˆ›å»º  
+                level:30    //æ·¡å…¥åˆ°30çš„é€æ˜åº¦  
             });  
-            //Èç¹û´æÔÚiframe£¬ÓëÕÚÕÖ²ãÒ»²¢ÏÔÊ¾  
+            //å¦‚æœå­˜åœ¨iframeï¼Œä¸é®ç½©å±‚ä¸€å¹¶æ˜¾ç¤º  
             this.fixedIframe && (this.fixedIframe.style.display = 'block');  
         },  
         hide:function() {  
@@ -378,7 +378,7 @@ var EventUtil = {
                 el:this.shadow || this.create(),  
                 initOpacity:30  
             });  
-            //Èç¹û´æÔÚiframe£¬ÓëÕÚÕÖ²ãÒ»²¢Òş²Ø  
+            //å¦‚æœå­˜åœ¨iframeï¼Œä¸é®ç½©å±‚ä¸€å¹¶éšè—  
             this.fixedIframe && (this.fixedIframe.style.display = 'none');  
         }  
     };  

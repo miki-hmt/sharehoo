@@ -8,6 +8,9 @@ shop:
 forum:
    leavemessage:
         SECRET_TOPIC: 40
+   # 旧版本论坛页面的兼容问题，设置true，则默认使用旧页面样式   2020.09.06 miki
+   version:
+     old: true
    topic:
         #index.jsp--topics--count 2018.08.10
         NEW_TOPIC: 13

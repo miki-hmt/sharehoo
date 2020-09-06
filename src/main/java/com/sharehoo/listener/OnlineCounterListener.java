@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -18,7 +17,6 @@ import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.User;
@@ -29,7 +27,9 @@ import com.sharehoo.util.forum.Counter;
 /**
  * @author miki
  * 2017.03.25,此类的创建是实现监听网站在线人数的功能 ，创建session对象时，调用函数使人数+1
- * 再然后，把这个HttpSessionListener实现类注册到网站应用中，也就是在网站应用的web.xml中加入如下内容：         
+ * 再然后，把这个HttpSessionListener实现类注册到网站应用中，也就是在网站应用的web.xml中加入如下内容：
+ * 二次改造：2020.09.05 miki 不需要再加@webListener注解    
+ * 参考链接：https://www.cnblogs.com/even247/articles/9134895.html    
  */
 @Component
 public class OnlineCounterListener implements HttpSessionListener {
@@ -107,7 +107,7 @@ public class OnlineCounterListener implements HttpSessionListener {
        boolean flag = true;
        HttpSession session = event.getSession();
        Set<String> keys = redisTemplate.keys("*" + session.getId() + "*");
-       ArrayList removelist = new ArrayList(keys);
+       ArrayList<Object> removelist = new ArrayList<>(keys);
        for (int i = 0; i < removelist.size(); i++) {
            String key = removelist.get(i).toString();
            //判断是否hash类型 并且判断是否是有效的用户session
@@ -125,8 +125,8 @@ public class OnlineCounterListener implements HttpSessionListener {
            }
        }
        redisTemplate.delete(keys);
-       Set set = redisTemplate.keys("spring:session:ianbase:expirations*");
-       ArrayList list = new ArrayList(set);
+       Set<Object> set = redisTemplate.keys("spring:session:ianbase:expirations*");
+       ArrayList<Object> list = new ArrayList<>(set);
        for (int i = 0; i < list.size(); i++) {
            String key = String.valueOf(list.get(i));
            //删除set

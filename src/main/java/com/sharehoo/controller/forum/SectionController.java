@@ -79,6 +79,33 @@ public class SectionController {
 		
 		return "admin/section";
 	}
+	
+	/**
+	* @Title: sections  
+	* @Description: TODO(获取所有的板块列表)  
+	* @author miki 
+	* @date 2020年9月6日 下午3:34:28  
+	* @throws
+	 */
+	@RequestMapping("/topic/sections")
+	public String sections(HttpServletRequest request,@RequestParam(value="page") String page,Model model)throws Exception{
+		if (StringUtil.isEmpty(page)) {
+			page="1";
+		}
+		
+		Section s_section = new Section();
+		model.addAttribute("s_section", s_section);
+		
+		PageBean pageBean=new PageBean(Integer.parseInt(page), 30);
+		List<Section> sectionList=sectionService.findSectionList(null, pageBean);
+		model.addAttribute("sectionList", sectionList);
+		long total=sectionService.getSectionCount(null);
+		model.addAttribute("total", total);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/admin/sections", total, Integer.parseInt(page), 6,null);
+		model.addAttribute("pageCode", pageCode);
+		
+		return "bbs/categories";
+	}
                   
 	   
 	
