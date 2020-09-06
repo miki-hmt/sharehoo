@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.util.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -58,10 +59,6 @@ import com.sharehoo.service.forum.ReplyService;
 import com.sharehoo.service.forum.SectionService;
 import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.UserService;
-import com.sharehoo.util.BootPathUtil;
-import com.sharehoo.util.CxCacheUtil;
-import com.sharehoo.util.PinyinUtil;
-import com.sharehoo.util.StringEx;
 import com.sharehoo.util.forum.DateUtil;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.GaoDeUtil;
@@ -379,8 +376,12 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login")
-	public String toLogin()throws Exception{
-		
+	public String toLogin(HttpServletRequest request)throws Exception{
+
+		Boolean mobileBrowser = BrowserTypeJudge.isMobileBrowser(request);
+		if(mobileBrowser){
+			return "bbs/mobile_login";
+		}
 		return "login";
 	}
 	
