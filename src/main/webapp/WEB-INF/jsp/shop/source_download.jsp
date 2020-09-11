@@ -107,12 +107,13 @@
 	$(document).ready(function() {
 		swal({   
 			title: "天王盖地虎",   
-			text: "输入暗号:",   
+			text: "输入下载暗号:",
 			type: "input",   
 			showCancelButton: true,   
 			closeOnConfirm: false,   
 			animation: "slide-from-top",   
-			inputPlaceholder: "填点东西到这里面吧" 
+			inputPlaceholder: "还差最后一步就得到我了呀..",
+			confirmButtonColor: "#ec6c62"
 		}, function(inputValue){   
 			if (inputValue === false) return false;      
 			if (inputValue === "") {     

@@ -4,12 +4,15 @@ import java.io.FileInputStream;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,7 +86,7 @@ public class SourceController {
 	private MenuService menuService;
 	@Autowired
 	private SearchService searchService;
-	
+	private final static Logger logger = LoggerFactory.getLogger(SourceController.class);
 	
 	@RequestMapping("/shop/source/{sourceId}")
 	public String detail(HttpServletRequest request,@PathVariable("sourceId") int source_id,Model model,
@@ -182,7 +185,7 @@ public class SourceController {
 	 */
 	@RequestMapping("/shop/score/change")
 	@ResponseBody
-	public E3Result download(HttpServletRequest request,@RequestParam("sourceId") int sourceId)throws Exception {
+	public E3Result download(HttpServletRequest request, @RequestParam("sourceId") int sourceId)throws Exception {
 
 		HttpSession session=request.getSession();
 		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);
@@ -192,9 +195,16 @@ public class SourceController {
 			if(source!=null){
 				User user=source.getUser();
 				//*********** 自己下载自己的东西不扣除积分，只有别人下载才扣除
-				if(user.getId()!=currentUser.getId()){	
+				if(!Objects.equals(user.getId(), currentUser.getId())){
 					Shop currentShop=source.getShop();
 					Shop shop=shopService.getShopByuserId(currentUser.getId());	//买家店铺	;
+
+					if(null== shop){
+						//新用户首次下载，直接默认注册	2020.09.11 miki
+						logger.info("新用户首次下载，直接默认注册...{}", currentUser.getNickName());
+						shop = active(request);
+					}
+
 					Operate operate = null;
 					Operate sell = null;
 					try {																							
@@ -223,6 +233,35 @@ public class SourceController {
 		}
 		return E3Result.build(401, "请先登录...");
 	}
+
+
+	private Shop active(HttpServletRequest request)throws Exception{
+
+		HttpSession session=request.getSession();
+		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		//********** 防止非法操作，先判断用户存在不存在，用户存在的话，判断该用户是否已经激活过，激活过就不能二次激活，没激活，执行激活操作
+		if(user!=null){
+			Shop shop=shopService.getShopByuserId(user.getId());
+			if(shop == null){
+				Shop shop1=new Shop();
+				shop1.setDouNum(5);
+				shop1.setDownNum(0);
+				shop1.setRegisterTime(new Date());
+				shop1.setStatus(1);
+				shop1.setUser(user);
+				shop1.setShop_name(user.getNickName());
+				shop1.setFace("images/user/mo.jpg");
+				shop1.setTag("javaweb");
+				shopService.save(shop1);
+				return shop1;
+			}
+
+			return shop;
+		}
+		return null;
+	}
+
 	
 	/*
 	 * 2017.08.06	miki 二次下载验证，防止不法分子盗窃会员信息，此页面先验证用户是否登录，登录之后，是否执行了扣豆操作，如果没执行
@@ -268,7 +307,7 @@ public class SourceController {
 					model.addAttribute("commentList", commentList);
 					long commentTotal=commentService.getCommentCountBysourceId(source_id);
 					model.addAttribute("commentTotal", commentTotal);
-					String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/Source_kiss.action", commentTotal, Integer.parseInt(page), 6,null);	
+					String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/"+source_id+"/download", commentTotal, Integer.parseInt(page), 6,null);
 					model.addAttribute("pageCode", pageCode);
 				}
 			}

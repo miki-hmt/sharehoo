@@ -292,7 +292,7 @@ function Login(){
 				
 		<c:when test="${currentShop==null }">
               	<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
-              		<a href="javascript:void(0)">未激活店铺，无法下载</a>            
+              		<a href="javascript:check(${source.id})">下载</a>
 	              </span>
 	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >
 	              	<!-- <a href="/vip_code" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a> -->
@@ -418,7 +418,7 @@ function Login(){
 	function check(sourceId){
 		swal({
 			title: "${source.name}", 
-			text: '<table align=center width=100%><tr><td>资源所需虎豆</td><td>当前拥有虎豆</td><td>当前拥有积分</td></tr><tr style="color:red"><td>${source.douNum}</td><td>${currentShop.douNum}</td><td>${currentUser.score}</td></tr></table><br>来自<span style="color:red;">sharehoo社区</span>、<a href="#">温馨提示</a>：<br/><span style="font-size:9pt">资源一经售出，概不退货哦..</span>',   
+			text: '<table align=center width=100%><tr><td>资源所需虎豆</td><td>当前拥有虎豆</td><td>当前拥有积分</td></tr><tr style="color:red"><td>${source.douNum}</td><td>${empty currentShop ? 5 : currentShop.douNum}</td><td>${currentUser.score}</td></tr></table><br>来自<span style="color:red;">sharehoo社区</span>、<a href="#">温馨提示</a>：<br/><span style="font-size:9pt">资源一经售出，概不退货哦..</span>',
 			imageUrl: "${pageContext.request.contextPath}/shop/images/logo/zip.svg",
 			html: true,
 			showCancelButton: true,

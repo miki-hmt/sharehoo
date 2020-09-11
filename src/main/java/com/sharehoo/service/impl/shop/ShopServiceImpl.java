@@ -58,7 +58,7 @@ public class ShopServiceImpl implements ShopService {
 		List<Object> param=new LinkedList<Object>();
 		StringBuffer hql=new StringBuffer("from Shop");
 		if(userId>0){
-			hql.append(" and user_id = ?");
+			hql.append(" and user_id = ? and status = 1");
 			param.add(userId);
 		}
 		return baseDAO.get(hql.toString().replaceFirst("and", "where"), param);
