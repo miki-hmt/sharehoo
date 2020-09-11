@@ -182,7 +182,7 @@ function Login(){
         </div>
 		<div class="container clearfix csdn_dl_bread">
 			<div class="row">
-            	<div class="col-md-12"><a href="/">下载</a>&nbsp;>&nbsp;<a href="/search">店铺检索</a>&nbsp;>&nbsp;<a href="/search/16">${source.shop.shop_name }的小铺子</a>&nbsp;>&nbsp;<a href="/search/16010">${source.tag }</a>&nbsp;>&nbsp;${source.name }</div>
+            	<div class="col-md-12"><a href="${host}/shop/index.htm">下载</a>&nbsp;>&nbsp;<a href="${host}/shop/rank">店铺检索</a>&nbsp;>&nbsp;<a href="${host}/shop/${source.shop.id }">${source.shop.shop_name }的小铺子</a>&nbsp;>&nbsp;<a href="${host}/shop/${source.shop.id }">${source.tag }</a>&nbsp;>&nbsp;${source.name }</div>
 			</div>
 		</div>
       <div class="download_new clearfix">
@@ -725,8 +725,8 @@ function Login(){
       <div class="download_r fr">
          <div class="mod_personal">
            <dl class="personal_wrap" id="personal_wrap">
-             <dt><a href="/user/szstudy"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img" class="head"></a></dt>
-              <dd><a href="/user/szstudy" target="_blank" class="name">${shop.shop_name }</a>
+             <dt><a href="${host}/shop/${source.shop.id }"><img src="${pageContext.request.contextPath}/shop/${shop.face}" alt="img" class="head"></a></dt>
+              <dd><a href="${host}/shop/${source.shop.id }" target="_blank" class="name">${shop.shop_name }</a>
                 	<p>                
 	                <c:choose>
 	                  	<c:when test="${focus!=null }">

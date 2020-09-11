@@ -152,9 +152,9 @@ public class ShopController {
 				page="1";
 			}
 			PageBean pageBean=new PageBean(Integer.parseInt(page), 6);
-			List<Source> sourceList=sourceService.getSourcesByShopId(shop.getId(), pageBean);
+			List<Source> sourceList=sourceService.getSourcesByShopId(shop.getId(), null, pageBean);
 			model.addAttribute("sourceList", sourceList);
-			long total=sourceService.getSourceCountByuserId(user.getId());
+			long total=sourceService.getSourceCountByuserId(user.getId(), null);
 			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/center", total, Integer.parseInt(page), 6,null);
 			model.addAttribute("pageCode", pageCode);
 			List<Message> messageList=messageService.getAdminMesList(shop.getId());
@@ -251,17 +251,23 @@ public class ShopController {
 		}
 	}
 	
-	/*
-	 * 2017.08.09 miki 访问者店铺首页得到相关数据
+	/**
+	 *@Author miki
+	 *@Description //TODO 重构店铺列表访问
+	 *@Date 2020/9/11 22:23
+	 *@Param [request, model, shopId, type, page] type:all 全部资源  new：最新7天的	activity：下载最多或新活动
+	 *@Return java.lang.String
+	 *@Version 1.0
 	 */
 	@RequestMapping("/shop/{shopId}")
-	public String view(HttpServletRequest request,Model model,@PathVariable("shopId") int shopId,
+	public String view(HttpServletRequest request,Model model,@PathVariable("shopId") int shopId,@RequestParam(value="type", required = false) String type,
 			@RequestParam(value="page",required=false) String page)throws Exception{
 
 		HttpSession session=request.getSession();
 		Focus focus = null;
 		User user=(User) session.getAttribute(Consts.CURRENTUSER);	//关注者，
 		model.addAttribute("user", user);
+		model.addAttribute("type", type);
 		if(shopId>0){
 			Shop shop=shopService.getShopById(shopId);			//	关注对象店铺
 			model.addAttribute("shop", shop);
@@ -270,6 +276,7 @@ public class ShopController {
 			}
 			if(user!=null){
 				focus=focusService.getFocusByShopId(shopId,user.getId());
+
 				Log log1=new Log();
 				String ip=IpGet.getIp2(request);
 				String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
@@ -285,26 +292,30 @@ public class ShopController {
 				log1.setIp(ip);
 				log1.setTime(new Date());
 				log1.setType("visitor");
-				log1.setOperation_log("店铺访问");
+				log1.setOperation_log("店铺主页访问");
 				log1.setUser(user);
 				log1.setShop(shop);
 				logService.save(log1);
 			}
 			model.addAttribute("focus", focus);
 			
-			PageBean pageBean=new PageBean(Integer.parseInt(page), 6);
-			List<Source> sourceList=sourceService.getSourcesByShopId(shop.getId(), pageBean);
+			PageBean pageBean = new PageBean(Integer.parseInt(page), 6);
+			List<Source> sourceList = sourceService.getSourcesByShopId(shop.getId(), type, pageBean);
 			model.addAttribute("sourceList", sourceList);
 			
 			//获取标签列表
 			List<String> tags = sourceService.getSourceTagsByShop(shopId);
 			model.addAttribute("tagsByShop", tags);
 			
-			long total=sourceService.getSourceCountByuserId(shop.getUser().getId());
-			StringBuffer param=new StringBuffer();	
+			long total = sourceService.getSourceCountByuserId(shop.getUser().getId(), type);
+			StringBuffer param = new StringBuffer();
 			param.append("shopId="+shopId);
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/"+shopId, 
-					total, Integer.parseInt(page), 6,param.toString());
+			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/"+ shopId +"?type="+type,
+					total, Integer.parseInt(page), 6, param.toString());
+
+			if("未查询到数据".equals(pageCode)){
+				pageCode = "本周还未上新品哦，敬请期待";
+			}
 			model.addAttribute("pageCode", pageCode);
 		}
 			return "shop/shop_home";

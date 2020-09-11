@@ -1,14 +1,11 @@
 package com.sharehoo.service.impl.shop;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+
+import com.sharehoo.util.forum.Getweekutils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +19,8 @@ import com.sharehoo.entity.shop.Source;
 import com.sharehoo.service.shop.SourceService;
 import com.sharehoo.util.Const;
 import com.sharehoo.util.forum.StringUtil;
+import org.springframework.util.ObjectUtils;
+
 @Transactional
 @Service("sourceService")
 public class SourceServiceImpl implements SourceService {
@@ -52,28 +51,74 @@ public class SourceServiceImpl implements SourceService {
 	}
 
 	@Override
-	public Long getSourceCountByuserId(int userId) {
+	public Long getSourceCountByuserId(int userId, String type) {
 		// TODO Auto-generated method stub
+		String date= Getweekutils.getFirstDayOfWeek(new Date());
+
 		List<Object> param=new LinkedList<Object>();
 		StringBuffer hql=new StringBuffer("select count(*) from Source");
 		if(userId>0){
 			hql.append(" and user_id = ?");
 			param.add(userId);
 		}
-		
+
+		//店铺tab切换	2020.09.11 miki
+		if(null == type){
+			type = "";
+		}
+		switch (type){
+			case "new":
+				hql.append(" and upload_time > str_to_date(?, '%Y-%m-%d %H')");
+				param.add(date);
+
+				break;
+			case "activity":
+				hql.append(" and douNum = 0");
+				break;
+
+			case "downloadest":
+			default:
+				break;
+		}
 		return baseDAO.count(hql.toString().replaceFirst("and", "where"), param);
 	}
 
 	@Override
-	public List<Source> getSourcesByShopId(int shopId, PageBean pageBean) {
+	public List<Source> getSourcesByShopId(int shopId, String type, PageBean pageBean) {
 		// TODO Auto-generated method stub
+		String date= Getweekutils.getFirstDayOfWeek(new Date());
+
 		List<Object> param=new LinkedList<Object>();
 		StringBuffer hql=new StringBuffer("from Source");
 		if(shopId>0){
 			hql.append(" and shop_id = ?");
 			param.add(shopId);
 		}
-		hql.append(" order by upload_time desc");
+
+		//店铺tab切换	2020.09.11 miki
+		if(null == type){
+			type = "";
+		}
+		switch (type){
+			case "new":
+				hql.append(" and upload_time > str_to_date(?, '%Y-%m-%d %H')");
+				hql.append(" order by upload_time desc");
+				param.add(date);
+
+				break;
+			case "activity":
+				hql.append(" and douNum = 0");
+				hql.append(" order by upload_time desc");
+				break;
+
+			case "downloadest":
+				hql.append(" order by downNum DESC");
+				break;
+			default:
+				hql.append(" order by upload_time desc");
+				break;
+		}
+
 		if (pageBean!=null) {
 			return baseDAO.find(hql.toString().replaceFirst("and", "where"), param, pageBean);
 		}else {

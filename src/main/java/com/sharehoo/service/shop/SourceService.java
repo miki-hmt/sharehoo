@@ -21,10 +21,10 @@ public interface SourceService {
 	
 	public Source getSourceById(int id);
 	
-	public Long getSourceCountByuserId(int userId);
+	public Long getSourceCountByuserId(int userId, String type);
 	
 	//得到店铺内所有资源	2017.08.15 miki
-	public List<Source> getSourcesByShopId(int shopId,PageBean pageBean);
+	public List<Source> getSourcesByShopId(int shopId, String type, PageBean pageBean);
 
 	public Source getSourceByshopId(int shopId);
 	

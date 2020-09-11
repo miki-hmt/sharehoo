@@ -108,74 +108,76 @@ public class SourceController {
 		model.addAttribute("collectSources", collectSources);
 		
 		if(source_id>0){
-		Source source=sourceService.getSourceById(source_id);	//资源
-		model.addAttribute("source", source);
-		
-		User user=source.getUser();	//资源上传者
-		model.addAttribute("user", user);
-		
-		Shop shop=source.getShop();	//资源店铺
-		model.addAttribute("shop", shop);
-		
-		List<Source> ohterSources=sourceService.getSourcesByshopId(shop.getId());
-		model.addAttribute("ohterSources", ohterSources);
-		
-		List<String> tagsByShop = sourceService.getSourceTagsByShop(shop.getId());
-		model.addAttribute("tags", tagsByShop);
-		
-		if(currentUser!=null){
-			model.addAttribute("currentUser", currentUser);
-			
-			Focus focus=focusService.getFocusByShopId(shop.getId(),currentUser.getId());
-			model.addAttribute("focus", focus);
-			
-			Collect collect=collectService.getCollectByuserId(currentUser.getId(), source_id);
-			model.addAttribute("collect", collect);
-			
-			Shop currentShop=shopService.getShopByuserId(currentUser.getId());	//下载者店铺
-			model.addAttribute("currentShop", currentShop);
-			
-			//执行访问操作，必须要有用户登录才行 	2017.08.25 miki
-			String ip=IpGet.getIp2(request);
-			String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
-			if(address.equals("[]")){
-				String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-				address = provence+">>"+"手机IP访问";
-			}else{
-				String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-				if(address!=null && address!=""){
-					address = provence+">"+address;
-				}
-			}
-			Log log1 = new Log(ip, new Date(), "visitor", "店铺访问", currentUser, shop,address);		
-			logService.save(log1);
-		}	
-		String signature=RadomUtil.getUUID();	//产生伪下载令牌，迷惑盗链者
-		model.addAttribute("signal", signature);
-				
-		if (StringUtil.isEmpty(page)) {
-			page="1";
-		}
-		PageBean pageBean=new PageBean(Integer.parseInt(page), 7);
-		List<Comment> commentList=commentService.getCommentsBySourceId(source_id, pageBean);
-		model.addAttribute("commentList", commentList);
-			
-		long commentTotal=commentService.getCommentCountBysourceId(source_id);
-		
-		//************** 计算资源的平均分  2019.09.20	miki
-		DecimalFormat df = new DecimalFormat("0.0");		//格式化小数
-		model.addAttribute("average", 0.0);
-		if(commentTotal>0) {
-			long commentScores=commentService.getCommentTotalScoreBysourceId(source_id);
-			String average = df.format((float)commentScores / commentTotal);
-			model.addAttribute("average", average);
-		}
-		
-		model.addAttribute("commentTotal", commentTotal);
-	
-		String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/"+source_id, commentTotal, Integer.parseInt(page), 6,null);
-		model.addAttribute("pageCode", pageCode);
-	}
+            Source source=sourceService.getSourceById(source_id);	//资源
+            model.addAttribute("source", source);
+
+            User user=source.getUser();	//资源上传者
+            model.addAttribute("user", user);
+
+            Shop shop=source.getShop();	//资源店铺
+            model.addAttribute("shop", shop);
+
+            List<Source> ohterSources=sourceService.getSourcesByshopId(shop.getId());
+            model.addAttribute("ohterSources", ohterSources);
+
+            List<String> tagsByShop = sourceService.getSourceTagsByShop(shop.getId());
+            model.addAttribute("tags", tagsByShop);
+
+            if(currentUser!=null){
+                model.addAttribute("currentUser", currentUser);
+
+                Focus focus=focusService.getFocusByShopId(shop.getId(),currentUser.getId());
+                model.addAttribute("focus", focus);
+
+                Collect collect=collectService.getCollectByuserId(currentUser.getId(), source_id);
+                model.addAttribute("collect", collect);
+
+                Shop currentShop=shopService.getShopByuserId(currentUser.getId());	//下载者店铺
+                model.addAttribute("currentShop", currentShop);
+
+                //执行访问操作，必须要有用户登录才行 	2017.08.25 miki
+                String ip=IpGet.getIp2(request);
+                String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
+                if(address.equals("[]")){
+                    String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
+                    address = provence+">>"+"手机IP访问";
+                }else{
+                    String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
+                    if(address!=null && address!=""){
+                        address = provence+">"+address;
+                    }
+                }
+
+                Log log1 = new Log(ip, new Date(), "visitor", "店铺访问资源：【"+source.getName(), currentUser, shop, address);
+                logService.save(log1);
+            }
+
+            String signature=RadomUtil.getUUID();	//产生伪下载令牌，迷惑盗链者
+            model.addAttribute("signal", signature);
+
+            if (StringUtil.isEmpty(page)) {
+                page="1";
+            }
+            PageBean pageBean=new PageBean(Integer.parseInt(page), 7);
+            List<Comment> commentList=commentService.getCommentsBySourceId(source_id, pageBean);
+            model.addAttribute("commentList", commentList);
+
+            long commentTotal=commentService.getCommentCountBysourceId(source_id);
+
+            //************** 计算资源的平均分  2019.09.20	miki
+            DecimalFormat df = new DecimalFormat("0.0");		//格式化小数
+            model.addAttribute("average", 0.0);
+            if(commentTotal>0) {
+                long commentScores=commentService.getCommentTotalScoreBysourceId(source_id);
+                String average = df.format((float)commentScores / commentTotal);
+                model.addAttribute("average", average);
+            }
+            model.addAttribute("commentTotal", commentTotal);
+
+            String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/"+source_id, commentTotal, Integer.parseInt(page), 6,null);
+            model.addAttribute("pageCode", pageCode);
+	    }
+
 		return "shop/source_detail";
 	}
 	

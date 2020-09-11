@@ -26,11 +26,14 @@ public class SearchController {
 	 */
 	@RequestMapping("/shop/download/rank")
 	public String rank(Model model)throws Exception{
+
 		String date=Getweekutils.getFirstDayOfWeek(new Date());
 		List<Source> userweeklist=searchService.getSRankByWeek(date);
 		model.addAttribute("userweeklist", userweeklist);
+
 		List<Shop> shopweekList=searchService.getURankByWeek(date);
 		model.addAttribute("shopweekList", shopweekList);
+
 		List<Source> uploadrankweekList=searchService.getUploadRankByWeek(date);
 		model.addAttribute("uploadrankweekList", uploadrankweekList);
 		
@@ -45,15 +48,19 @@ public class SearchController {
 		 DateFormat dFormat = new SimpleDateFormat("yyyy-MM"); //HH表示24小时制；  
          List<Source> userMonthList=searchService.getSRankByMonth(dFormat.format(new Date()));
          model.addAttribute("userMonthList", userMonthList);
+
          List<Shop> shopmonthList=searchService.getURankByMonth(dFormat.format(new Date()));
          model.addAttribute("shopmonthList", shopmonthList);
+
          List<Source> uploadrankmonthList=searchService.getUploadRankByMonth(dFormat.format(new Date()));
          model.addAttribute("uploadrankmonthList", uploadrankmonthList);
+
          for(Source source : uploadrankmonthList){
  			Long count=searchService.getMonthCount(dFormat.format(new Date()), source.getShop().getId());
  			monthUploadCount.put(source, count);
  		}
-         model.addAttribute("monthUploadCount", monthUploadCount);
+
+        model.addAttribute("monthUploadCount", monthUploadCount);
 		return "shop/source_rank"; 
 	}
 }

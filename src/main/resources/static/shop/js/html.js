@@ -98,7 +98,8 @@ var userAgent = navigator.userAgent.toLowerCase();
 		} else {
 			window.location.href="shop/center";
 		}	
-}
+    }
+
 	
   function Login(){	
 	  if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
@@ -107,7 +108,7 @@ var userAgent = navigator.userAgent.toLowerCase();
 	  }else{
 		  swal("您已经登录！");
 	  }
-}
+    }
   /*
   * init pord logo
   */
