@@ -185,7 +185,7 @@ a:hover{text-decoration:none;}
           		<a href="${host}/topic/detail/${topic.id }" title="${topic.title }" target="_blank">${topic.title }</a>
           		<span class="newslistSubTitle">
               		<a href="${host}/topic/detail/${topic.id }" title="香焦叶" target="_blank">
-				<span class="time${status.count}" title="2018-10-30 00:02:32"><fmt:formatDate value="${topic.publishTime }" pattern="yy-MM-dd HH:mm:ss"/></span></a>
+				<span class="time${status.count}" title="2018-10-30 00:02:32"><fmt:formatDate value="${topic.publishTime }" pattern="yyyy-MM-dd HH:mm:ss"/></span></a>
             	</span>
           	</c:when>
           	<c:otherwise>
@@ -936,6 +936,7 @@ a:hover{text-decoration:none;}
     <div id="layout_m_1489390164607" class="layout_m clearfix" style=""><div id="layout_t_1489390164607_1" class="layout_sub ui-droppable ui-sortable" style="width:500px;"></div><div id="layout_t_1489390164607_2" class="layout_sub ui-droppable ui-sortable" style="margin-left:10px; width:490px;"></div></div><script src="topic/files/bootstrap-tab.js"></script>
 <script src="topic/files/base.js"></script>
 
+<!--2020.09.12 计算时间转“一天前”，一周前等等称呼-->
 <script type="text/javascript" src="js/timer.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){

@@ -252,10 +252,11 @@
         <div class="tt-topic-list">
             <div class="tt-list-header">
                 <div class="tt-col-topic">话题</div>
+                <div class="tt-col-value hide-mobile">发布时间</div>
                 <div class="tt-col-value hide-mobile">喜欢</div>
                 <div class="tt-col-value hide-mobile">回复</div>
                 <div class="tt-col-value hide-mobile">浏览</div>
-                <div class="tt-col-value">活跃</div>
+                <div class="tt-col-value">最近回复</div>
                 <div class="tt-col-category">&nbsp;&nbsp;&nbsp;&nbsp;管理帖子</div>
             </div>
 
@@ -302,6 +303,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="tt-col-value hide-mobile"><fmt:formatDate value="${topic.publishTime }" pattern="yy/MM/dd HH:mm:ss "/></div>
                     <div class="tt-col-value hide-mobile">985</div>
                     <div class="tt-col-value tt-color-select hide-mobile">${topicReplyCount.get(topic) }</div>
                     <div class="tt-col-value hide-mobile">15.1k</div>
@@ -360,6 +362,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="tt-col-value hide-mobile">20/12/12 12:12:12</div>
                 <div class="tt-col-value  hide-mobile">401</div>
                 <div class="tt-col-value tt-color-select  hide-mobile">975</div>
                 <div class="tt-col-value  hide-mobile">12.6k</div>
@@ -394,6 +397,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="tt-col-value hide-mobile"><fmt:formatDate value="${topic.publishTime }" pattern="yy/MM/dd HH:mm:ss "/></div>
                     <div class="tt-col-value  hide-mobile">308</div>
                     <div class="tt-col-value tt-color-select  hide-mobile">${topicReplyCount.get(topic) }</div>
                     <div class="tt-col-value  hide-mobile">8.3k</div>
@@ -450,6 +454,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="tt-col-value hide-mobile">20/12/12 12:12:12</div>
                 <div class="tt-col-value hide-mobile">358</div>
                 <div class="tt-col-value tt-color-select hide-mobile">68</div>
                 <div class="tt-col-value hide-mobile">8.3k</div>
