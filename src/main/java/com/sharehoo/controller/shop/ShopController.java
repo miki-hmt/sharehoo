@@ -318,7 +318,7 @@ public class ShopController {
 			}
 			model.addAttribute("pageCode", pageCode);
 		}
-			return "shop/shop_home";
+		return "shop/shop_home";
 	}
 	
 	/*
