@@ -182,7 +182,7 @@ public class SourceController {
 	}
 	
 	/*
-	 * 2017.08.05	用户下载资源方法，当前用户下载豆数减少，资源店铺增加豆数，
+	 * 2020.09.14	用户下载资源方法，当前用户下载豆数减少，资源店铺增加豆数，
 	 * bug》》》暂时没能解决同一用户注册多个小号，为自己店铺增加豆数
 	 */
 	@RequestMapping("/shop/score/change")
@@ -191,50 +191,55 @@ public class SourceController {
 
 		HttpSession session=request.getSession();
 		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);
-		if(currentUser!=null){
-		if(sourceId>0){
+		if(null != currentUser && sourceId>0){
 			Source source=sourceService.getSourceById(sourceId);
 			if(source!=null){
 				User user=source.getUser();
 				//*********** 自己下载自己的东西不扣除积分，只有别人下载才扣除
 				if(!Objects.equals(user.getId(), currentUser.getId())){
-					Shop currentShop=source.getShop();
-					Shop shop=shopService.getShopByuserId(currentUser.getId());	//买家店铺	;
+					//卖家店铺
+					Shop sellerShop=source.getShop();
+					//买家店铺
+					Shop buyershop=shopService.getShopByuserId(currentUser.getId());	//买家店铺	;
 
-					if(null== shop){
+					if(null== buyershop){
 						//新用户首次下载，直接默认注册	2020.09.11 miki
 						logger.info("新用户首次下载，直接默认注册...{}", currentUser.getNickName());
-						shop = active(request);
-					}
-
-					Operate operate = null;
-					Operate sell = null;
-					try {																							
-						currentShop.setDouNum(currentShop.getDouNum()+source.getDouNum());	//卖家店铺	
-						shop.setDouNum(shop.getDouNum()-source.getDouNum());
-						currentShop.setDownNum(currentShop.getDownNum()+1);
+						//激活店铺
+						active(request);
 						
+						//查询新创建的店铺
+						buyershop = shopService.getShopByuserId(currentUser.getId());
+					}
+					try {
+						//卖家收益
+						sellerShop.setDouNum(sellerShop.getDouNum()+source.getDouNum());	//卖家店铺	
+						sellerShop.setDownNum(sellerShop.getDownNum()+1);
+						
+						//买家付款
+						buyershop.setDouNum(buyershop.getDouNum()-source.getDouNum());
 						 // 2017.08.11 miki 保存下载者操作记录				
-						operate=new Operate("download", shop, currentUser, source, "下载（"+source.getName()+"）扣除虎豆", new Date());
+						Operate operate=new Operate("download", buyershop, currentUser, source, "下载（"+source.getName()+"）扣除虎豆", new Date());
 						operateService.save(operate);
 						
 						 // 2017.08.11 miki 保存出售者出售记录		   
-						sell=new Operate("sell", source.getShop(), currentUser, source, "出售（"+source.getName()+"）获得虎豆", new Date());			
-						operateService.save(sell);					
-					} catch (Exception e) {}
-					shopService.save(currentShop);
-					shopService.save(shop);
-				}
-				
+						Operate sell=new Operate("sell", source.getShop(), currentUser, source, "出售（"+source.getName()+"）获得虎豆", new Date());			
+						operateService.save(sell);
+						
+						//更新账户
+						shopService.save(sellerShop);
+						shopService.save(buyershop);
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+					}
+				}				
 				String signature=RadomUtil.getUUID();	// 2017.08.06  miki	扣豆成功，产生一个真正的随机下载令牌，
 				session.setAttribute("signal", signature);	//并存到session中，下载的时候，取session中的令牌，如果取到，证明扣豆成功，执行下载
 				return E3Result.ok();
-				}
 			}
-		
 		}
-		return E3Result.build(401, "请先登录...");
-	}
+	return E3Result.build(401, "请先登录...");
+}
 
 
 	private Shop active(HttpServletRequest request)throws Exception{
@@ -244,21 +249,16 @@ public class SourceController {
 
 		//********** 防止非法操作，先判断用户存在不存在，用户存在的话，判断该用户是否已经激活过，激活过就不能二次激活，没激活，执行激活操作
 		if(user!=null){
-			Shop shop=shopService.getShopByuserId(user.getId());
-			if(shop == null){
-				Shop shop1=new Shop();
-				shop1.setDouNum(5);
-				shop1.setDownNum(0);
-				shop1.setRegisterTime(new Date());
-				shop1.setStatus(1);
-				shop1.setUser(user);
-				shop1.setShop_name(user.getNickName());
-				shop1.setFace("images/user/mo.jpg");
-				shop1.setTag("javaweb");
-				shopService.save(shop1);
-				return shop1;
-			}
-
+			Shop shop=new Shop();
+			shop.setDouNum(5);
+			shop.setDownNum(0);
+			shop.setRegisterTime(new Date());
+			shop.setStatus(1);
+			shop.setUser(user);
+			shop.setShop_name(user.getNickName());
+			shop.setFace("images/user/mo.jpg");
+			shop.setTag("javaweb");
+			shopService.save(shop);
 			return shop;
 		}
 		return null;

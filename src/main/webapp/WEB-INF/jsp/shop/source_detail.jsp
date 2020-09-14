@@ -289,7 +289,7 @@ function Login(){
 	               <!-- 2017.08.05	当前用户与店铺店主不同一人，积分足够，扣除积分下载 -->
               </c:when>
              
-				
+		<!-- 未开通店铺的，默认直接开通店铺  2020.09.14 miki -->		
 		<c:when test="${currentShop==null }">
               	<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
               		<a href="javascript:check(${source.id})">下载</a>
@@ -302,7 +302,7 @@ function Login(){
 				
               	<c:when test="${currentShop.id==shop.id }">
               		<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
-              		<a target="_blank" href="javascript:void(0)" onclick="javascript:check(${source.id})">进入下载页</a>             	
+              		<a href="javascript:void(0)" onclick="javascript:check(${source.id})">进入下载页</a>             	
               </span>
               <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >            	
               		<a href="javascript:;" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a>
