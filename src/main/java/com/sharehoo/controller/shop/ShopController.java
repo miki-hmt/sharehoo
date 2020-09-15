@@ -42,6 +42,7 @@ import com.sharehoo.service.shop.FocusService;
 import com.sharehoo.service.shop.ShopService;
 import com.sharehoo.service.shop.SourceService;
 import com.sharehoo.util.CxCacheUtil;
+import com.sharehoo.util.PostUrlsToBaidu;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.GaoDeUtil;
 import com.sharehoo.util.forum.PageUtil;
@@ -84,6 +85,16 @@ public class ShopController {
 		model.addAttribute("newSources", newSources);
 		List<Shop> richList=shopService.getRichShops();
 		model.addAttribute("richList", richList);
+		
+		//2020.05.05 miki 推送网站信息到百度爬虫		
+		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/index.htm");
+		Log log = new Log();
+		log.setTime(new Date());
+		log.setType("commit url");
+		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/index.htm【提交结果："+result);
+		log.setUser(null);		
+		logService.save(log);
+		
 		return "shop/home";
 	}
 	
@@ -317,6 +328,15 @@ public class ShopController {
 				pageCode = "本周还未上新品哦，敬请期待";
 			}
 			model.addAttribute("pageCode", pageCode);
+			
+			//2020.05.05 miki 推送网站信息到百度爬虫		
+    		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/"+shopId);
+    		Log log = new Log();
+    		log.setTime(new Date());
+    		log.setType("commit url");
+    		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/"+shopId +"【提交结果："+result);
+    		log.setUser(null);		
+    		logService.save(log);
 		}
 		return "shop/shop_home";
 	}

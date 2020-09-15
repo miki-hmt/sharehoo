@@ -1,5 +1,6 @@
 package com.sharehoo.controller.shop;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,16 +19,19 @@ import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.User;
 import com.sharehoo.entity.shop.Category;
+import com.sharehoo.entity.shop.Log;
 import com.sharehoo.entity.shop.Menu;
 import com.sharehoo.entity.shop.SearchItem;
 import com.sharehoo.entity.shop.SearchResult;
 import com.sharehoo.entity.shop.Source;
 import com.sharehoo.entity.shop.Type;
+import com.sharehoo.service.LogService;
 import com.sharehoo.service.MenuService;
 import com.sharehoo.service.SolrJService;
 import com.sharehoo.service.TypeService;
 import com.sharehoo.service.forum.CategoryService;
 import com.sharehoo.service.shop.SourceService;
+import com.sharehoo.util.PostUrlsToBaidu;
 import com.sharehoo.util.StringEx;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.PageUtil;
@@ -49,7 +53,8 @@ public class SolrController {
 	private MenuService menuService;
 	@Autowired
 	private SourceService sourceService;
-
+	@Autowired
+	private LogService logService;
 	
 	@RequestMapping("shop/source/serach")
 	public String searchItemList(Model model,@RequestParam(value="keyword",required=false) String keyword,
@@ -188,6 +193,15 @@ public class SolrController {
 			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/categories", total, Integer.parseInt(page), 10,param.toString());
 			model.addAttribute("pageCode", pageCode);
 		}
+		
+		//2020.05.05 miki 推送网站信息到百度爬虫		
+		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/source/categories");
+		Log log = new Log();
+		log.setTime(new Date());
+		log.setType("commit url");
+		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/source/categories【提交结果："+result);
+		log.setUser(null);		
+		logService.save(log);
 		
 		return "shop/solrJ_search_result";
 	}

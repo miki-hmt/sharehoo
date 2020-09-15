@@ -54,6 +54,7 @@ import com.sharehoo.service.shop.SearchService;
 import com.sharehoo.service.shop.ShopService;
 import com.sharehoo.service.shop.SourceService;
 import com.sharehoo.util.BootPathUtil;
+import com.sharehoo.util.PostUrlsToBaidu;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.GaoDeUtil;
 import com.sharehoo.util.forum.PageUtil;
@@ -176,6 +177,15 @@ public class SourceController {
 
             String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/"+source_id, commentTotal, Integer.parseInt(page), 6,null);
             model.addAttribute("pageCode", pageCode);
+            
+            //2020.05.05 miki 推送网站信息到百度爬虫		
+    		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/source/"+source_id);
+    		Log log = new Log();
+    		log.setTime(new Date());
+    		log.setType("commit url");
+    		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/source/"+source_id +"【提交结果："+result);
+    		log.setUser(currentUser);		
+    		logService.save(log);
 	    }
 
 		return "shop/source_detail";
