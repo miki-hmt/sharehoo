@@ -359,74 +359,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="tt-item-header pt-noborder">
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-k"></use></svg></i>
+                                <i class="tt-icon"><img alt="" src="http://processflow.sharehoo.cn/img/face.png" style="width: 40px;height: 40px;border-radius:50%;"></i>
                             </div>
                             <div class="tt-avatar-title">
-                               <a href="#">kolis27</a>
+                               <a href="#">小射管理</a>
                             </div>
                             <a href="#" class="tt-info-time">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>6 Jan,2019
+                                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>6 Jan,2020
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
                         <p>
-                            It’s too big preview image, it should be smaller even five in row. On one page there are 30 items to 60 pages it is 1800 items in
-                        categories eg in Add-Ons category have 22749 items, why not see all of them but only those 1800 items? This is a bad thing.
+                            给大家安利一款免费的在线流程图设计软件：贼好用
+                            ProcessFlow — 免费在线作图、实时协作
+                            ProcessFlow是一个在线作图工具的聚合平台， 它可以在线画流程图、思维导图、UI原型图、UML、网络拓扑图、组织结构图等等， 您无需担心下载和更新的问题，
+                            不管Mac还是Windows，一个浏览器就可以随时随地的发挥创意，规划工作，解放您的双手，让您腾出双手去成就别人的梦想。
                         </p>
-                        <p>
-                            <img class="tt-offset-11" src="${host}/bbs/images/single-topic-img01.jpg" alt="">
-                        </p>
-                    </div>
-                    <div class="tt-item-info info-bottom">
-                        <a href="#" class="tt-icon-btn">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
-                            <span class="tt-text">671</span>
-                        </a>
-                        <a href="#" class="tt-icon-btn">
-                             <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
-                            <span class="tt-text">39</span>
-                        </a>
-                        <a href="#" class="tt-icon-btn">
-                             <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
-                            <span class="tt-text">12</span>
-                        </a>
-                        <div class="col-separator"></div>
-                        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-share"></use></svg></i>
-                        </a>
-                        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-flag"></use></svg></i>
-                        </a>
-                        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                             <i class="tt-icon"><svg><use xlink:href="#icon-reply"></use></svg></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="tt-item">
-                 <div class="tt-single-topic">
-                    <div class="tt-item-header pt-noborder">
-                        <div class="tt-item-info info-top">
-                            <div class="tt-avatar-icon">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-k"></use></svg></i>
+
+                        <div class="row tt-offset-11">
+                            <div class="tt-item">
+                                访问链接：
+                                <a href="http://processflow.sharehoo.cn/">http://processflow.sharehoo.cn/.</a>
                             </div>
-                            <div class="tt-avatar-title">
-                               <a href="#">kolis27</a>
-                            </div>
-                            <a href="#" class="tt-info-time">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>6 Jan,2019
-                            </a>
                         </div>
-                    </div>
-                    <div class="tt-item-description">
-                        <p>
-                           I do not like. Choosing a template has become more difficult.<br>Small thumbnails 80x80px were better.
-                        </p>
-                        <div class="video-container">
+                        <%--<div class="video-container">
                             <!--展示视频播放列表... 后期可以完善一下    2020.09.05 miki-->
-                            <%--<iframe title="YouTube video player" src="https://www.youtube.com/embed/BbW8djS7kI4" allowfullscreen></iframe>--%>
-                        </div>
+                            &lt;%&ndash;<iframe title="YouTube video player" src="https://www.youtube.com/embed/BbW8djS7kI4" allowfullscreen></iframe>&ndash;%&gt;
+                        </div>--%>
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn">
@@ -471,7 +431,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="tt-item-description">
                         Finally!<br>
-                        Are there any special recommendations for design or an updated guide that includes new preview sizes, including retina displays?
+                        有没有特别的设计建议或更新的指南?
                         <div class="topic-inner-list">
                             <div class="topic-inner">
                                 <div class="topic-inner-title">
@@ -482,7 +442,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                                 <div class="topic-inner-description">
                                     Finally!<br>
-                                    Are there any special recommendations for design or an updated guide that includes new preview sizes, including retina displays?
+                                    您好，这边没有的。
                                 </div>
                             </div>
                         </div>
@@ -531,7 +491,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="tt-item-description">
                         Finally!<br>
-                        Are there any special recommendations for design or an updated guide that includes new preview sizes, including retina displays?
+                        有没有特别的设计建议或更新的指南?
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn">
@@ -609,8 +569,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="tt-item-description">
                        <p>
-                            It’s too big preview image, it should be smaller even five in row. On one page there are 30 items to 60 pages it is 1800 items in
-                                categories eg in Add-Ons category have 22749 items, why not see all of them but only those 1800 items? This is a bad thing.
+                           这是太大的预览图像，它应该更小，甚至五行。在一个页面上有30到60个页面，它是1800个项目
+                           类别例如在附加组件类别有22749个项目，为什么不看到所有的项目，但只有那1800个项目？这是件坏事。
                        </p>
                        <div class="row tt-offset-37">
                            <div class="col-lg-10">
