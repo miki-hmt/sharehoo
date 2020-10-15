@@ -67,12 +67,17 @@
         <param name="Append" value="true"/>
         <!--设置日志备份频率，默认：为每天一个日志文件-->
         <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
-
-        <!--每分钟一个备份-->
-        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm'.log'" />
+		
+		<!--每天一个备份 -->
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%p][%d{HH:mm:ss SSS}][%c]-[%m]%n"/>
         </layout>
+        <!--每分钟一个备份
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm'.log'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%p][%d{HH:mm:ss SSS}][%c]-[%m]%n"/>
+        </layout>-->
     </appender>
 
 
