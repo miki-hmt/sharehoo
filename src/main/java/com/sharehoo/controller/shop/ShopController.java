@@ -2,6 +2,7 @@ package com.sharehoo.controller.shop;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,9 +10,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.Banner;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.code.kaptcha.Constants;
 import com.sharehoo.base.ipseek.IpGet;
 import com.sharehoo.base.ipseek.IpSeekUtils;
+import com.sharehoo.config.RedisUtil;
 import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.Notice;
 import com.sharehoo.entity.forum.PageBean;
@@ -70,6 +75,8 @@ public class ShopController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	@Autowired
+    private RedisUtil redisTemplate8;      //redis 8号库  2020.08.28 miki
 	
 	@RequestMapping("/shop/index.htm")
 	public String home(Model model)throws Exception{
@@ -329,14 +336,20 @@ public class ShopController {
 			}
 			model.addAttribute("pageCode", pageCode);
 			
-			//2020.05.05 miki 推送网站信息到百度爬虫		
-    		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/"+shopId);
-    		Log log = new Log();
-    		log.setTime(new Date());
-    		log.setType("commit url");
-    		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/"+shopId +"【提交结果："+result);
-    		log.setUser(null);		
-    		logService.save(log);
+			
+			//2020.10.26 miki 防止过度提交百度爬虫，造成每天几千条的数据日志垃圾
+			Long date = redisTemplate8.getExpire(""+shopId);
+			if(date <= -1) {
+				//2020.05.05 miki 推送网站信息到百度爬虫		
+	    		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/"+shopId);
+	    		Log log = new Log();
+	    		log.setTime(new Date());
+	    		log.setType("commit url");
+	    		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/"+shopId +"【提交结果："+result);
+	    		log.setUser(null);		
+	    		logService.save(log);
+	    		redisTemplate8.setEx(""+shopId, shop.getShop_name(), 12, TimeUnit.HOURS);
+			}
 		}
 		return "shop/shop_home";
 	}

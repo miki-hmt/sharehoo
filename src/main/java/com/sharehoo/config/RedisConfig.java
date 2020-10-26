@@ -72,8 +72,29 @@ public class RedisConfig {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
+    
+    
+    @Bean("redisTemplate8")
+    public RedisTemplate<Object, Object> redisTemplate8(@Qualifier("factory2") RedisConnectionFactory connectionFactory) {
+        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(connectionFactory);
 
+        //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值（默认使用JDK的序列化方式）
+        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
 
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        serializer.setObjectMapper(mapper);
+
+        template.setValueSerializer(serializer);
+        //使用StringRedisSerializer来序列化和反序列化redis的key值
+        template.setKeySerializer(new StringRedisSerializer());
+        template.afterPropertiesSet();
+        return template;
+    }
+    
+    
     @Bean(name = "stringRedisTemplate")
     @ConditionalOnMissingBean(name = "stringRedisTemplate")
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
@@ -125,7 +146,27 @@ public class RedisConfig {
         return factory;
     }
 
-
+    
+    @Bean("factory2")
+    public RedisConnectionFactory redisConnectionFactory8(@Qualifier("jedisPool") JedisPoolConfig jedisPoolConfig) {
+        //单机模式
+        RedisStandaloneConfiguration redisStandaloneConfiguration =
+                new RedisStandaloneConfiguration();
+        redisStandaloneConfiguration.setHostName(host);
+        redisStandaloneConfiguration.setDatabase(8);
+        //密码解密
+        redisStandaloneConfiguration.setPassword(password);
+        redisStandaloneConfiguration.setPort(port);
+        //坑壁，竟然是个内部类,pool配置
+        JedisClientConfiguration.DefaultJedisClientConfigurationBuilder clientConfigBuilder =
+                (JedisClientConfiguration.DefaultJedisClientConfigurationBuilder) JedisClientConfiguration.builder();
+        clientConfigBuilder.readTimeout(Duration.ofSeconds(50l)).connectTimeout(Duration.ofSeconds(50l));
+        JedisClientConfiguration clientConfiguration = clientConfigBuilder.usePooling().poolConfig(jedisPoolConfig).build();
+        
+        JedisConnectionFactory factory = new JedisConnectionFactory(redisStandaloneConfiguration, clientConfiguration);
+        factory.afterPropertiesSet();
+        return factory;
+    }
 
     @Bean
     public CacheManager cacheManagerBuilder(RedisConnectionFactory connectionFactory) {

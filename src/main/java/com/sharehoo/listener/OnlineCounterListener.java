@@ -157,7 +157,6 @@ public class OnlineCounterListener implements HttpSessionListener {
        Long number = getAllUserNumber() + n;
        if (number >= 0) {
 //           logger.info("用户数：" + number);
-           logger.info("用户数：" + number);
            stringRedisTemplate.opsForValue().set(Consts.ALLUSER_NUMBER, String.valueOf(number));
        }
    }
@@ -165,7 +164,6 @@ public class OnlineCounterListener implements HttpSessionListener {
    private void setOnlineUserNumber(int number) {
        if (number >= 0) {
 //           logger.info("用户数：" + number);
-           logger.info("用户数：" + number);
            stringRedisTemplate.opsForValue().set(Consts.ONLINE_USERS_NUMBER, String.valueOf(number));
        }
    }
