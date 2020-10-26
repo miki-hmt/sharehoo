@@ -62,12 +62,18 @@
         <div class="tt-categories-list">
             <div class="row">
 
-                <c:forEach var="section" items="${sectionList }">
+                <c:forEach var="section" items="${sectionList }" varStatus = "status">
                     <div class="col-md-6 col-lg-4">
                         <div class="tt-item">
                             <div class="tt-item-header">
                                 <ul class="tt-list-badge">
-                                    <li><a href="${host}/topic/section/${section.id}"><span class="tt-color01 tt-badge">${section.name}</span></a></li>
+                                	<!-- 2020.10.27 miki 设置板块主题颜色 -->
+                                	<c:if test="${status.count >= 10 }">
+                                		<li><a href="${host}/topic/section/${section.id}"><span class="tt-color${status.count} tt-badge">${section.name}</span></a></li>
+					                </c:if>
+					                <c:if test="${status.count < 10 }">
+					                	<li><a href="${host}/topic/section/${section.id}"><span class="tt-color0${status.count} tt-badge">${section.name}</span></a></li>
+					                </c:if>                                    
                                 </ul>
                                 <h6 class="tt-title"><a href="${host}/topic/section/${section.id}">帖子数 - ${fn:length(section.topicList)}</a></h6>
                             </div>
@@ -78,11 +84,11 @@
                                 <div class="innerwrapper">
                                         <h6 class="tt-title">标签集</h6>
                                     <ul class="tt-list-badge">
-                                        <li><a href="#"><span class="tt-badge">world politics</span></a></li>
-                                        <li><a href="#"><span class="tt-badge">human rights</span></a></li>
-                                        <li><a href="#"><span class="tt-badge">trump</span></a></li>
-                                        <li><a href="#"><span class="tt-badge">climate change</span></a></li>
-                                        <li><a href="#"><span class="tt-badge">foreign policy</span></a></li>
+                                        <li><a href="#"><span class="tt-badge">世界政治</span></a></li>
+                                    <li><a href="#"><span class="tt-badge">人类主权</span></a></li>
+                                    <li><a href="#"><span class="tt-badge">trump</span></a></li>
+                                    <li><a href="#"><span class="tt-badge">climate change</span></a></li>
+                                    <li><a href="#"><span class="tt-badge">国外政策</span></a></li>
                                     </ul>
                                 </div>
                                 <a href="#" class="tt-btn-icon">
@@ -108,11 +114,11 @@
                             <div class="innerwrapper">
                                 <h6 class="tt-title">Similar TAGS</h6>
                                 <ul class="tt-list-badge">
-                                    <li><a href="#"><span class="tt-badge">world politics</span></a></li>
-                                    <li><a href="#"><span class="tt-badge">human rights</span></a></li>
+                                    <li><a href="#"><span class="tt-badge">世界政治</span></a></li>
+                                    <li><a href="#"><span class="tt-badge">人类主权</span></a></li>
                                     <li><a href="#"><span class="tt-badge">trump</span></a></li>
                                     <li><a href="#"><span class="tt-badge">climate change</span></a></li>
-                                    <li><a href="#"><span class="tt-badge">foreign policy</span></a></li>
+                                    <li><a href="#"><span class="tt-badge">国外政策</span></a></li>
                                 </ul>
                             </div>
                             <a href="#" class="tt-btn-icon">

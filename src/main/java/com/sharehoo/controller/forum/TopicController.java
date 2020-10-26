@@ -121,7 +121,14 @@ public class TopicController {
 		logService.save(log);
 		
 		model.addAttribute("sectionList", sectionList);
-
+		
+		/** 2020.10.26
+		 * miki
+		 * 得到回版主推荐的帖子列表
+		 */
+		List<Topic> tjTopicList=topicService.findGoodTopicList(null, new PageBean(1, 10));
+		model.addAttribute("tjTopicList", tjTopicList);
+		
 		//旧版本的兼容性问题	设置为true，则显示旧的页面		2020.09.06 miki
 		if("true".equals(oldVersion)){
 			return "topic/topicAdd";
@@ -603,6 +610,13 @@ public class TopicController {
 		String pageCode = PageUtil.genPagination(request.getContextPath() + "/topic/detail/"+topicId, total,
 				Integer.parseInt(page), 10, param.toString());
 		model.addAttribute("pageCode", pageCode);
+		
+		/** 2017.05.04
+		 * miki
+		 * 得到回版主推荐的帖子列表
+		 */
+		List<Topic> tjTopicList=topicService.findGoodTopicList(null, new PageBean(1, 10));
+		model.addAttribute("tjTopicList", tjTopicList);
 		
 		return "bbs/topicDetails";
 	}

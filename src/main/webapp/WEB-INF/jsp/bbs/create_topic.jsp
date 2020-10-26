@@ -171,7 +171,7 @@
         </div>
         <div class="tt-topic-list tt-offset-top-30">
             <div class="tt-list-search">
-                <div class="tt-title">Suggested Topics</div>
+                <div class="tt-title">热门话题</div>
                 <!-- tt-search -->
                 <div class="tt-search">
                     <form class="search-wrapper">
@@ -193,40 +193,62 @@
                 <!-- /tt-search -->
             </div>
             <div class="tt-list-header tt-border-bottom">
-                <div class="tt-col-topic">Topic</div>
-                <div class="tt-col-category">Category</div>
-                <div class="tt-col-value hide-mobile">Likes</div>
-                <div class="tt-col-value hide-mobile">Replies</div>
-                <div class="tt-col-value hide-mobile">Views</div>
-                <div class="tt-col-value">Activity</div>
-            </div>
-            <div class="tt-item">
-                <div class="tt-col-avatar">
-                    <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-n"></use>
-                    </svg>
-                </div>
-                <div class="tt-col-description">
-                    <h6 class="tt-title"><a href="#">
-                        Does Envato act against the authors of Envato markets?
-                    </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
-                        <div class="col-auto">
-                            <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">music</span></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-auto ml-auto show-mobile">
-                            <div class="tt-value">1d</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tt-col-category"><span class="tt-color05 tt-badge">music</span></div>
-                <div class="tt-col-value hide-mobile">358</div>
-                <div class="tt-col-value tt-color-select hide-mobile">68</div>
-                <div class="tt-col-value hide-mobile">8.3k</div>
-                <div class="tt-col-value hide-mobile">1d</div>
-            </div>
+                <div class="tt-col-topic">话题</div>
+                <div class="tt-col-category">分类</div>
+                <div class="tt-col-value hide-mobile">喜欢</div>
+                <div class="tt-col-value hide-mobile">回复</div>
+                <div class="tt-col-value hide-mobile">浏览</div>
+                <div class="tt-col-value">活跃</div>
+            </div>          
+            
+            <c:forEach items="${tjTopicList }" var="topic" varStatus="status">
+	            <div class="tt-item">
+	                <div class="tt-col-avatar">
+	                	<img alt="" src="${host}/${topic.user.face}" style="width: 40px;height: 40px;border-radius:50%;">
+	                    <!-- <svg class="tt-icon">
+	                      <use xlink:href="#icon-ava-n"></use>
+	                    </svg> -->
+	                </div>
+	                <div class="tt-col-description">
+	                    <h6 class="tt-title"><a href="${host}/topic/detail/${topic.id}" target="_blank">
+                            <svg class="tt-icon">
+                                <use xlink:href="#icon-pinned"></use>
+                            </svg>
+                            ${topic.title}
+                        </a></h6>
+	                    <div class="row align-items-center no-gutters">
+	                        <div class="col-11">
+	                            <ul class="tt-list-badge">
+                                    <li class="show-mobile">
+                                        <a href="#"><span class="tt-color0${status.count } tt-badge">${topic.section.name}</span></a>
+                                    </li>
+                                    <!-- hide-desktope控制用户名是否在web端可见	2020.10.26 miki -->                                
+                                    <li><a href="#"><span class="tt-badge">${topic.user.nickName}</span></a></li>
+                                </ul>
+	                        </div>
+	                        <div class="col-1 ml-auto show-mobile">
+	                           <div class="tt-value">1天前</div>
+	                        </div>
+	                    </div>
+	                </div>
+	                
+	                
+	                <c:if test="${status.count >= 10 }">
+	                	<div class="tt-col-category"><span class="tt-color${status.count} tt-badge">${topic.section.name}</span></div>
+	                </c:if>
+	                <c:if test="${status.count < 10 }">
+	                	<div class="tt-col-category"><span class="tt-color0${status.count} tt-badge">${topic.section.name}</span></div>
+	                </c:if>
+                    <div class="tt-col-value hide-mobile">985</div>
+                    <div class="tt-col-value tt-color-select hide-mobile">${fn:length(topic.replyList)}</div>                 
+                    <div class="tt-col-value hide-mobile">1.5k</div>
+                    
+                    <!-- 2020.10.26 miki c:set传值，记得索引是从0开始，取length的话，要减去1 -->
+                    <c:set var="function" value="${fn:length(topic.replyList)}"/>
+                    <div class="tt-col-value hide-mobile"><fmt:formatDate value="${topic.replyList[function-1 ].publishTime}" pattern="yy/MM/dd HH:mm:ss "/></div>
+	            </div>
+	        </c:forEach>
+	        
             <div class="tt-item">
                 <div class="tt-col-avatar">
                     <svg class="tt-icon">

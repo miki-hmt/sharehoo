@@ -521,7 +521,7 @@
         </div>
     </form>
 </div>
-<a href="page-create-topic.html" class="tt-btn-create-topic">
+<a href="${host}/topic/write?sectionId=${empty section.id ? 0 : section.id}" class="tt-btn-create-topic">
     <span class="tt-icon">
         <svg>
           <use xlink:href="#icon-create_new"></use>
