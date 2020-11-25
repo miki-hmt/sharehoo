@@ -31,11 +31,19 @@
 
 	<dependencies>
 	
-	<!--事务管理：原子性，一致性，隔离性，持久性  2019.07.04	miki -->
-	<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-	</dependency>
+		<!--2020.11.25 miki rocketmq-->
+        <!-- https://mvnrepository.com/artifact/org.apache.rocketmq/rocketmq-spring-boot-starter -->
+		<dependency>
+		    <groupId>org.apache.rocketmq</groupId>
+		    <artifactId>rocketmq-spring-boot-starter</artifactId>
+		    <version>2.1.0</version>
+        </dependency>
+	
+		<!--事务管理：原子性，一致性，隔离性，持久性  2019.07.04	miki -->
+		<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
 	
 	<!-- EHcache缓存 -->
         <dependency>

@@ -2,6 +2,20 @@
     port: 8080
     servlet:
       context-path: /sharehoo
+
+rocketmq:
+    name-server: 127.0.0.1:9876
+    producer:
+      group: article-group
+      topic: article-topic
+      tag_article: article-toSharehoo
+      callcenter_topic: call-center-topic
+      callcenter_group: call-center-group
+    consumer:
+        group: article-group
+        topic: article-topic
+        tag_report: article-toSharehoo     
+      
 shop:
    solr-host: http://106.13.75.153:8010/solr/collection1
    
