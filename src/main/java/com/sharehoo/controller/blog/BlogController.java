@@ -3,6 +3,7 @@ package com.sharehoo.controller.blog;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,9 +45,13 @@ public class BlogController {
 	 * 前台显示主页内容
 	 */
 	@RequestMapping("/blog/{nicknameId}")
-	public String show(@PathVariable("nicknameId") String nicknameId,@RequestParam(value="page",required=false) String page,Model model,HttpServletRequest request)throws Exception{
+	public String show(@PathVariable("nicknameId") String nicknameId,@RequestParam(value="page",required=false) String page,
+			Model model,HttpServletRequest request, HttpServletResponse response)throws Exception{
 		
 			User user=userService.getUserByNickNameId(nicknameId);
+			if(user == null) {
+				request.getRequestDispatcher("/errorlogin").forward(request, response);
+			}
 			model.addAttribute("user", user);
 			if (StringUtil.isEmpty(page)) {
 				page="1";
@@ -76,9 +81,12 @@ public class BlogController {
 	 * 得到前台自我介绍
 	 */
 	@RequestMapping("/blog/{nicknameId}/about")
-	public String about(@PathVariable("nicknameId") String nicknameId,Model model)throws Exception{
+	public String about(@PathVariable("nicknameId") String nicknameId,Model model, HttpServletRequest request, HttpServletResponse response)throws Exception{
 		if(StringUtil.isNotEmpty(nicknameId)){
 			User user=userService.getUserByNickNameId(nicknameId);
+			if(user == null) {
+				request.getRequestDispatcher("/errorlogin").forward(request, response);
+			}
 			model.addAttribute("user", user);
 			List<Me> aboutList=meService.getMeListByUserId(user.getId(), null);
 			model.addAttribute("aboutList", aboutList);
@@ -92,9 +100,13 @@ public class BlogController {
 	 * 慢生活版块
 	 */
 	@RequestMapping("/blog/{nicknameId}/article")
-	public String article(@PathVariable("nicknameId") String nicknameId,Model model,@RequestParam(value="page",required=false) String page,HttpServletRequest request)throws Exception{
+	public String article(@PathVariable("nicknameId") String nicknameId,Model model,@RequestParam(value="page",required=false) String page,
+			HttpServletRequest request, HttpServletResponse response)throws Exception{
 		if(StringUtil.isNotEmpty(nicknameId)){
 			User user=userService.getUserByNickNameId(nicknameId);
+			if(user == null) {
+				request.getRequestDispatcher("/errorlogin").forward(request, response);
+			}
 			model.addAttribute("user", user);
 			if (StringUtil.isEmpty(page)) {
 				page="1";
@@ -131,9 +143,12 @@ public class BlogController {
 	 */
 	@RequestMapping("/blog/{nicknameId}/article/category/{type}")
 	public String articleByCategory(@PathVariable("nicknameId") String nicknameId,Model model,@RequestParam(value="page",required=false) String page,
-			HttpServletRequest request,@PathVariable(value="type",required=false) String type)throws Exception{
+			HttpServletRequest request, HttpServletResponse response, @PathVariable(value="type",required=false) String type)throws Exception{
 		if(StringUtil.isNotEmpty(nicknameId)){
 			User user=userService.getUserByNickNameId(nicknameId);
+			if(user == null) {
+				request.getRequestDispatcher("/errorlogin").forward(request, response);
+			}
 			model.addAttribute("user", user);
 			if (StringUtil.isEmpty(page)) {
 				page="1";

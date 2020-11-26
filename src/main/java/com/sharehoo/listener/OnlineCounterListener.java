@@ -60,7 +60,6 @@ public class OnlineCounterListener implements HttpSessionListener {
                 Map<String, Object> map = redisTemplate.opsForHash().entries(key);
                 if (map.containsKey(Consts.SESSION_USER_CODE)) {
                 	number++;
-                	logger.info("用户登录后产生的session增加用户数");
                     //存储用户hash
                     //saveUserOnlineHash((User) map.get(Consts.SESSION_USER_CODE));
                 }
@@ -97,51 +96,19 @@ public class OnlineCounterListener implements HttpSessionListener {
 			CxCacheUtil.getIntance().setValue(Consts.DAYONLINEUSER,1);
 		}
 		
-	}/**
-     * session销毁
+	}
+	
+  /**
+    * session销毁
     *
     * @param event
     */
+   @SuppressWarnings("unchecked")
    @Override
    public void sessionDestroyed(HttpSessionEvent event) {
        boolean flag = true;
        HttpSession session = event.getSession();
-       Set<String> keys = redisTemplate.keys("*" + session.getId() + "*");
-       ArrayList<Object> removelist = new ArrayList<>(keys);
-       for (int i = 0; i < removelist.size(); i++) {
-           String key = removelist.get(i).toString();
-           //判断是否hash类型 并且判断是否是有效的用户session
-           if (redisTemplate.type(key) == DataType.HASH) {
-               Map<String, Object> map = redisTemplate.opsForHash().entries(key);
-               List<String> mapKeys = new ArrayList<String>(map.keySet());
-               for (int j = 0; j < mapKeys.size(); j++) {
-
-                   if (mapKeys.get(j).indexOf(Consts.VERIFICATION) != -1) {
-                	   logger.info("验证码产生的session不减用户数");
-                       flag = false;
-                       break;
-                   }
-               }
-           }
-       }
-       redisTemplate.delete(keys);
-       Set<Object> set = redisTemplate.keys("spring:session:ianbase:expirations*");
-       ArrayList<Object> list = new ArrayList<>(set);
-       for (int i = 0; i < list.size(); i++) {
-           String key = String.valueOf(list.get(i));
-           //删除set
-           if (redisTemplate.type(key) == DataType.SET) {
-               SetOperations<String, String> vo = redisTemplate.opsForSet();
-               Iterator<String> it = vo.members(key).iterator();
-               while (it.hasNext()) {
-                   if (it.next().indexOf(session.getId().toString()) != -1) {
-                       System.out.println(key+"................");
-                       redisTemplate.delete(key);
-                       logger.info("删除成功了");
-                   }
-               }
-           }
-       }
+       
        System.out.println("销毁了一个Session连接:[" + session.getId() + "]");
        if (getAllUserNumber() > 0 && flag) {
            removeOnlineHashBySessionId(session.getId().toString());

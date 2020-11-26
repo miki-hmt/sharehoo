@@ -4,7 +4,7 @@
       context-path: /sharehoo
 
 rocketmq:
-    name-server: 127.0.0.1:9876
+    name-server: 106.13.75.153:9876   #产线环境：106.13.75.153
     producer:
       group: article-group
       topic: article-topic
@@ -24,7 +24,7 @@ forum:
         SECRET_TOPIC: 40
    # 旧版本论坛页面的兼容问题，设置true，则默认使用旧页面样式   2020.09.06 miki
    version:
-     old: true
+     old: false
    topic:
         #index.jsp--topics--count 2018.08.10
         NEW_TOPIC: 13
@@ -62,8 +62,8 @@ forum:
    WATER_NARK_CONTENT: sharehoo社区
    
 spring:
-    profiles:
-      active: dev
+#    profiles:
+#      active: dev
       
     #2019.09.10 miki 设置topic的freemarker模板引擎文件的路径
     freemarker:
@@ -112,11 +112,11 @@ spring:
         open-in-view: true
     #2019.09.13 miki 社区首页数据缓存
     redis: 
-        host: 106.13.75.153
+        host: 127.0.0.1   #产线环境：106.13.75.153
         password:
         port: 6379   
         timeout: 50000
-        database: 1
+        database: 0
         jedis:
           pool:
             max-active: 8

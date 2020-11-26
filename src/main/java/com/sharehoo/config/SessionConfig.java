@@ -38,7 +38,8 @@ public class SessionConfig {
         return valueSerializer();
     }
  
-    private RedisSerializer<Object> valueSerializer() {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	private RedisSerializer<Object> valueSerializer() {
     	
     	Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(
                 Object.class);

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--修改日期格式只显示年月日  -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -50,7 +51,16 @@
           </span></div>
           <div class="content">${article.content }</div><a href="${host}/blog/${user.nickNameId}/article/${article.id}"  class="readmore" style="display:inline-block;"  target="_blank">全文</a>
         </ul>
-        <figure><img src="${host}/${article.image}" width="200" height="100" /></figure>
+        <figure>
+        	<c:choose>
+	     		<c:when test="${fn:contains(article.image,'http') == true}">
+	     			<img src="${article.image}" width="200" height="100">
+	     		</c:when>
+	     		<c:otherwise>
+	     			<img src="${host }/${article.image}" width="200" height="100">
+	     		</c:otherwise>
+        	</c:choose>
+        </figure>
         <div class="dateview"><fmt:formatDate value="${article.time }" pattern="yyyy-MM-dd HH:mm:ss "/></div>
       </div>
      </c:forEach>

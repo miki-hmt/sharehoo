@@ -1,6 +1,7 @@
 package com.sharehoo.manager.mq;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
@@ -10,13 +11,17 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sharehoo.entity.forum.Article;
+import com.sharehoo.entity.forum.User;
+import com.sharehoo.manager.mq.dto.Blog;
+import com.sharehoo.service.forum.ArticleService;
+import com.sharehoo.service.forum.UserService;
 
 /**
 * @ClassName: ArticleConsumer  
@@ -38,7 +43,12 @@ public class ArticleConsumer {
     public String ROCKETMQ_CONSUMER_TOPIC;
     @Value("${rocketmq.consumer.tag_report}")
     public String ROCKETMQ_CONSUMER_TAG_REPORT;
-
+    
+    @Autowired
+    private ArticleService articleService;
+    @Autowired
+    private UserService userService;
+    
     /**
      * @Description //TODO callservice模块的消费者，用来消费smartcall Reporter.java上报的会话消息*
      * @Param []
@@ -62,8 +72,8 @@ public class ArticleConsumer {
                 try {
                     for (MessageExt messageExt : list) {
                         String messageBody = new String(messageExt.getBody(), StandardCharsets.UTF_8);
-                        JSONObject message = JSON.parseObject(messageBody);
-                        dispatch(message);
+                        
+                        dispatch(messageBody);
                     }
                 } catch (Exception e) {
                     log.error("消费消息失败", e);
@@ -78,21 +88,39 @@ public class ArticleConsumer {
         }
     }
 
-    private void dispatch(JSONObject message) {
-        if (message == null) {
+    private void dispatch(String  message) {
+    	
+    	if (message == null) {
             return;
         }
-        String object = message.getString("object");
-        String type = message.getString("type");
-        String operation = message.getString("operation");
-        String callee = message.getString("callee");
-
+    	Blog blog = JSONObject.parseObject(message, Blog.class);
+    	Assert.notNull(blog, "命令不能为空");
+    	
         // 打日志需要 added by hxy
-        log.info("MQ接收消息体[" + object + "][" + type + "][" + operation + "]" + message.toJSONString());
-
+        log.info("MQ接收消息体[" + blog.getTitle());
+        System.out.println("接收到MQ消息体["+blog.getTitle());
         // 重新写入
-        message.put("callee", callee);
-
-        Assert.notNull(callee, "呼叫命令不能为空");
+        Article article = new Article();
+        Long userCount = userService.getUserCount(null);
+        //随机生成用户id
+        int randNum = 1 + (int)(Math.random() * ((userCount - 1) + 1));
+        User user = userService.getUserById(randNum);
+        while(user == null) {
+        	randNum = 1 + (int)(Math.random() * ((userCount - 1) + 1));
+            user = userService.getUserById(randNum);
+        }
+        
+        article.setUser(user);
+        article.setImage(blog.getHeaderImg());
+        article.setKeywords("java#转载#编码");
+        article.setContent(blog.getContent());
+        article.setCount(0);
+        article.setEditer(user.getNickName());
+        article.setType("javaEE");
+        article.setNotice("recommendArticles");
+        article.setTime(new Date());
+        article.setTitle(blog.getTitle());
+        
+        articleService.saveArticle(article);
     }
 }

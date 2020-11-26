@@ -3,7 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--修改日期格式只显示年月日  -->
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -87,7 +88,16 @@
       <c:forEach items="${articleList }" var="article">
 	      <div class="blogs">
 	        <h3><a href="${host}/blog/${user.nickNameId}/article/${article.id}" target="_blank">${article.title }</a></h3>
-	        <figure><img src="${host }/${article.image}" ></figure>
+	        <figure>
+	        	<c:choose>
+	        		<c:when test="${fn:contains(article.image,'http') == true}">
+	        			<img src="${article.image}" >
+	        		</c:when>
+	        		<c:otherwise>
+	        			<img src="${host }/${article.image}" >
+	        		</c:otherwise>
+	        	</c:choose>	        	
+	        </figure>
 	        <ul>
 	        <div class="content" style="height:12em;clear:both;" >${article.content }</div>
 	          <a href="${host}/blog/${user.nickNameId}/article/${article.id}" target="_blank" class="readmore" style="color:white;">阅读全文&gt;&gt;</a>
