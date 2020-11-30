@@ -12,9 +12,9 @@ import java.lang.annotation.Target;
  * @author ruoyi
  *
  */
-@Target(ElementType.METHOD)
+@Target({ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface HasLogin {
-
+    String value() default "";
 }

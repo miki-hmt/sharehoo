@@ -3,6 +3,7 @@ package com.sharehoo.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sharehoo.config.annotation.HasLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -51,6 +52,7 @@ public class TestController {
 	* @date 2019年8月19日 下午4:17:26   
 	* @throws
 	 */
+	@HasLogin(value="测试")
 	@RequestMapping("/test-redirect")
 	public String redirect(HttpServletRequest request,HttpServletResponse response,Model model) {
 		model.addAttribute("root",root);
@@ -59,7 +61,8 @@ public class TestController {
 		System.out.println(root);
 		return "redirect:test2";		
 	}
-	
+
+	@HasLogin(value="测试")
 	@RequestMapping("/test/{id}")
 	public String find(HttpServletRequest request,HttpServletResponse response,Model model,@PathVariable("id") int id) {
 		model.addAttribute("root",root);
@@ -70,13 +73,14 @@ public class TestController {
 		System.out.println(root);
 		return "test";		
 	}
-	
+
+	@HasLogin(value="测试")
 	@GetMapping("/excel/get")
 	@ResponseBody
-	public String find(HttpServletRequest request,HttpServletResponse response) {
+	public String getUser(HttpServletRequest request,HttpServletResponse response) {
 		Object user = request.getSession().getAttribute("currentUser");
 		
-		return new Gson().toJson(user);		
+		return new Gson().toJson(user);
 	}
 	
 }
