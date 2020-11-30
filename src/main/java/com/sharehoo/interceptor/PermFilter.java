@@ -18,6 +18,9 @@ import org.apache.log4j.Logger;
 
 import com.sharehoo.config.lang.Consts;
 import com.sharehoo.util.forum.StringUtil;
+
+
+
 @WebFilter(urlPatterns = "/login/*", filterName = "permFilter")
 public class PermFilter implements Filter{
 	

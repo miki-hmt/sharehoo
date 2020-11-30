@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.sharehoo.interceptor.LoginHandlerInterceptor;
+import com.sharehoo.interceptor.AdminHandlerInterceptor;
 import com.sharehoo.listener.OnlineCounterListener;
 
 /**
@@ -30,17 +30,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private OnlineCounterListener sessionListener;
-    /**
-     * 自己定义的拦截器类
-     */
-    @Bean
-    LoginHandlerInterceptor loginInterceptor() {
-        return new LoginHandlerInterceptor();
-    }
+	@Autowired
+	private AdminHandlerInterceptor adminHandlerInterceptor;
+	
 
     /******************
-     * 配置静态资源	2019.07.04	miki
-     * 以独立的tomcat方式启动的项目，必须要手动指定资源文件加载路径，application.yml文件中配置的路径会无效
+     * 1.配置静态资源	2019.07.04	miki
+     * 2.以独立的tomcat方式启动的项目，必须要手动指定资源文件加载路径，application.yml文件中配置的路径会无效
      *********************************************************************************************/
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -53,17 +49,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 添加拦截器
+     *1. 添加拦截器
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加拦截器
-        registry.addInterceptor(loginInterceptor())
-                /// 添加拦截规则
-	        .addPathPatterns("/admin/**")					//只拦截.html结尾的请求	2019.04.11	miki
-	        .addPathPatterns("**/login")						//只拦截.html结尾的请求	2019.04.11	miki
+        registry.addInterceptor(adminHandlerInterceptor)
+            // 添加拦截规则
+	        .addPathPatterns("/admin/ilovehmt.htm")
 	        // 排除拦截
-			.excludePathPatterns("/*.html").excludePathPatterns("/*.htm");
+			.excludePathPatterns("/*.html").excludePathPatterns("/*.htm").excludePathPatterns("/*.css").excludePathPatterns("/*.js").excludePathPatterns("/admin/go");
         
         WebMvcConfigurer.super.addInterceptors(registry);
     }

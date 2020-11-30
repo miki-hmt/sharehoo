@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.session.data.redis.config.ConfigureRedisAction;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
@@ -48,6 +49,21 @@ public class SessionConfig {
         objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
         return jackson2JsonRedisSerializer; //new GenericJackson2JsonRedisSerializer();
+    }
+    
+    /**
+     * 用于spring session，防止每次创建一个线程，造成oom
+     * @return
+     */
+    @Bean
+    public ThreadPoolTaskExecutor springSessionRedisTaskExecutor(){
+        ThreadPoolTaskExecutor springSessionRedisTaskExecutor = new ThreadPoolTaskExecutor();
+        springSessionRedisTaskExecutor.setCorePoolSize(8);
+        springSessionRedisTaskExecutor.setMaxPoolSize(16);
+        springSessionRedisTaskExecutor.setKeepAliveSeconds(10);
+        springSessionRedisTaskExecutor.setQueueCapacity(1000);
+        springSessionRedisTaskExecutor.setThreadNamePrefix("Spring session redis executor thread: ");
+        return springSessionRedisTaskExecutor;
     }
 
 }

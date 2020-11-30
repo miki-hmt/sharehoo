@@ -161,7 +161,7 @@ spring:
 
             # ---------------------------------
             # 资源域名, resource.domain = true 是有效
-            # 配置域名, 将域名的根目录指向 store.root 配置的地址
+            # 配置域名, 将域名的根目录指向 store.root 配置的地址    sharehoo.cn
             # ---------------------------------
             host: http://sharehoo.cn
 
