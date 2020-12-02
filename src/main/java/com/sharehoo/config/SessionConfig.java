@@ -51,7 +51,8 @@ public class SessionConfig {
         return jackson2JsonRedisSerializer; //new GenericJackson2JsonRedisSerializer();
     }
     
-    /**
+    /**2020.12.02 miki
+     * 对spring session的redisMessageListenerContailner线程做线程池管理，解决系统内存飞涨的问题
      * 用于spring session，防止每次创建一个线程，造成oom
      * @return
      */
