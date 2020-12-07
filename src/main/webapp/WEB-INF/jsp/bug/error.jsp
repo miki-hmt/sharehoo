@@ -691,7 +691,7 @@ body {
       </div>
     </div>
     <div class="brains-comic-box">
-      <h1 class="brains__text">404！用户不存在</h1>
+      <h1 class="brains__text">页面不存在</h1>
     </div>
   </div>
 </div>
