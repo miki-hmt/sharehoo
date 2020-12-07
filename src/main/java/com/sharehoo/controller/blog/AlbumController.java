@@ -50,6 +50,7 @@ public class AlbumController {
 			User user=userService.getUserByNickNameId(nicknameId);
 			if(user == null) {
 				request.getRequestDispatcher("/errorlogin").forward(request, response);
+				return null;
 			}
 
 			model.addAttribute("user", user);
@@ -97,6 +98,7 @@ public class AlbumController {
 
 			if(user == null) {
 				request.getRequestDispatcher("/errorlogin").forward(request, response);
+				return null;
 			}
 			model.addAttribute("user",user);
 			if(StringUtil.isEmpty(page)){

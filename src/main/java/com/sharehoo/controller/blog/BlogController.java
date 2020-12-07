@@ -51,6 +51,7 @@ public class BlogController {
 			User user=userService.getUserByNickNameId(nicknameId);
 			if(user == null) {
 				request.getRequestDispatcher("/errorlogin").forward(request, response);
+				return null;
 			}
 			model.addAttribute("user", user);
 			if (StringUtil.isEmpty(page)) {
@@ -86,6 +87,7 @@ public class BlogController {
 			User user=userService.getUserByNickNameId(nicknameId);
 			if(user == null) {
 				request.getRequestDispatcher("/errorlogin").forward(request, response);
+				return null;
 			}
 			model.addAttribute("user", user);
 			List<Me> aboutList=meService.getMeListByUserId(user.getId(), null);
@@ -106,6 +108,7 @@ public class BlogController {
 			User user=userService.getUserByNickNameId(nicknameId);
 			if(user == null) {
 				request.getRequestDispatcher("/errorlogin").forward(request, response);
+				return null;
 			}
 			model.addAttribute("user", user);
 			if (StringUtil.isEmpty(page)) {
@@ -148,6 +151,7 @@ public class BlogController {
 			User user=userService.getUserByNickNameId(nicknameId);
 			if(user == null) {
 				request.getRequestDispatcher("/errorlogin").forward(request, response);
+				return null;
 			}
 			model.addAttribute("user", user);
 			if (StringUtil.isEmpty(page)) {

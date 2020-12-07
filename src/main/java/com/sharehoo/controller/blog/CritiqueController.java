@@ -112,6 +112,7 @@ public class CritiqueController {
 			User user=userService.getUserByNickNameId(nicknameId);
 			if(user == null) {
 				request.getRequestDispatcher("/errorlogin").forward(request, response);
+				return null;
 			}
 			model.addAttribute("user", user);
 			List<Critique> critiqueList=critiqueService.getListByUserId(user.getId());
