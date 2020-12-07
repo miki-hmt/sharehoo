@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -89,17 +91,13 @@ public class TopicController {
 		return "bbs/forum_description";
 	}
 
-
+	@HasLogin
 	@RequestMapping("/topic/write")
 	// 发帖方法实现
 	public String preSave(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="sectionId",required=false) int sectionId) throws Exception {
-		HttpSession session = request.getSession();
-		User currentUser = (User) session.getAttribute(Consts.CURRENTUSER);
 
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
-		if (currentUser == null) {
-			request.getRequestDispatcher("/errorlogin").forward(request, response);
-		}
+		User currentUser = SessionUtil.getUser();
 		if(sectionId==0) {
 			sectionId = 21;
 		}
@@ -135,17 +133,13 @@ public class TopicController {
 		}
 		return "bbs/create_topic";
 	}
-	
+
+	@HasLogin(value="发布秘密墙")
 	@RequestMapping("/topic/leftsecret")
 	public String preSave2(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception {
-		HttpSession session = request.getSession();
-		User currentUser = (User) session.getAttribute(Consts.CURRENTUSER);
-		
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
-		if (currentUser == null) {
-			// response.sendRedirect(request.getContextPath()+"/login.jsp");
-			request.getRequestDispatcher("/errorlogin").forward(request, response);
-		}
+		SessionUtil.getUser();
+
 		List<Section> sectionList = sectionService.findSectionList(null, null);
 		model.addAttribute("sectionList", sectionList);
 		return "topic/leavem";
@@ -202,11 +196,8 @@ public class TopicController {
 		topic.setModifyTime(new Date());
 
 		// 2017.05.01 回复帖子实现用户积分+1
-		HttpSession session = request.getSession();
-		User currentUser = (User) session.getAttribute(Consts.CURRENTUSER);
-		if (currentUser == null) {
-			request.getRequestDispatcher("/errorlogin").forward(request, response);
-		}
+		User currentUser = SessionUtil.getUser();
+
 		topicService.saveTopic(topic);
 		// 2017.05.01 发帖子实现用户积分+1
 		currentUser.setScore(currentUser.getScore() + 3);
@@ -311,13 +302,9 @@ public class TopicController {
 		
 		//************2017.11.16 20:31 网页静态化实例
 		// 2017.05.01 回复帖子实现用户积分+1
-		HttpSession session = request.getSession();
-		User currentUser = (User) session.getAttribute(Consts.CURRENTUSER);
+		User currentUser = SessionUtil.getUser();
+
 		try {
-			if (currentUser == null) {
-				request.getRequestDispatcher("/errorlogin").forward(request, response);
-			}
-			
 			int size = currentUser.getSectionList().size();
 			// 创建一个数据集，Map将data封装进去
 			Map<String, Object> data = new HashMap<>();

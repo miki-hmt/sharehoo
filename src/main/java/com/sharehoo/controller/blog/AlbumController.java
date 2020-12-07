@@ -3,6 +3,7 @@ package com.sharehoo.controller.blog;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,9 +44,14 @@ public class AlbumController {
 	 * 得到相册列表
 	 */
 	@RequestMapping("/blog/{nicknameId}/album")
-	public String list(@PathVariable(value="nicknameId",required=true)String nicknameId,@RequestParam(value="page",required=false) String page,Model model)throws Exception{
+	public String list(@PathVariable(value="nicknameId",required=true)String nicknameId, @RequestParam(value="page",required=false) String page, Model model,
+					   HttpServletRequest request, HttpServletResponse response)throws Exception{
 		if(StringUtil.isNotEmpty(nicknameId)){
 			User user=userService.getUserByNickNameId(nicknameId);
+			if(user == null) {
+				request.getRequestDispatcher("/errorlogin").forward(request, response);
+			}
+
 			model.addAttribute("user", user);
 			if(StringUtil.isEmpty(page)){
 				page="1";
@@ -85,9 +91,13 @@ public class AlbumController {
 	 * */
 	@RequestMapping("/blog/{nicknameId}/file")
 	public String file(@PathVariable(value="nicknameId",required=true)String nicknameId,Model model,@RequestParam(value="page",required=false)String page,
-			HttpServletRequest request)throws Exception{
+			HttpServletRequest request, HttpServletResponse response)throws Exception{
 		if(StringUtil.isNotEmpty(nicknameId)){
 			User user=userService.getUserByNickNameId(nicknameId);
+
+			if(user == null) {
+				request.getRequestDispatcher("/errorlogin").forward(request, response);
+			}
 			model.addAttribute("user",user);
 			if(StringUtil.isEmpty(page)){
 				page="1";

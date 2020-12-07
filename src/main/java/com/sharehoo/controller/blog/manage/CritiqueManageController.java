@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,29 +32,29 @@ public class CritiqueManageController {
 	private ArticleService articleService;
 	@Autowired
 	private CritiqueService critiqueService;
-	
+
+	@HasLogin
 	@RequestMapping("/blog/manage/critique")
 	public String list(HttpServletRequest request,@RequestParam(value="page",required=false) String page,Model model)throws Exception{
-			
-			HttpSession session=request.getSession();
-			User user=(User) session.getAttribute(Consts.CURRENTUSER);
-			model.addAttribute("user", user);
-				if(StringUtil.isEmpty(page)){
-					page="1";
-				}
-				List<Article> recommendList=articleService.getRecommendsByUserId(user.getId());
-				model.addAttribute("recommendList", recommendList);
-				List<Article> countList=articleService.getHotByUserId(user.getId());
-				model.addAttribute("countList", countList);
-				long total=critiqueService.getCountByUserId(user.getId());
-				PageBean pageBean=new PageBean(Integer.parseInt(page), 10);
-				List<Critique> critiques=critiqueService.getAllListByUserId(user.getId(), pageBean);//换个分页留言
-				model.addAttribute("critiques", critiques);
-				String pageCode=PageUtil.genPagination(request.getContextPath()+"/blog/manage/critique", total, Integer.parseInt(page), 12,null);
-				model.addAttribute("pageCode", pageCode);
-				
-			return "blog/manage/critique";
+
+		User user = SessionUtil.getUser();
+		model.addAttribute("user", user);
+		if(StringUtil.isEmpty(page)){
+			page="1";
 		}
+		List<Article> recommendList=articleService.getRecommendsByUserId(user.getId());
+		model.addAttribute("recommendList", recommendList);
+		List<Article> countList=articleService.getHotByUserId(user.getId());
+		model.addAttribute("countList", countList);
+		long total=critiqueService.getCountByUserId(user.getId());
+		PageBean pageBean=new PageBean(Integer.parseInt(page), 10);
+		List<Critique> critiques=critiqueService.getAllListByUserId(user.getId(), pageBean);//换个分页留言
+		model.addAttribute("critiques", critiques);
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/blog/manage/critique", total, Integer.parseInt(page), 12,null);
+		model.addAttribute("pageCode", pageCode);
+				
+		return "blog/manage/critique";
+	}
 	
 	/**
 	* @Title: deletePhc  
@@ -64,9 +66,8 @@ public class CritiqueManageController {
 	@RequestMapping("/blog/manage/pc/delete")
 	@ResponseBody
 	public E3Result deletePhc(HttpServletRequest request,@RequestParam(value="id",required=false) int id)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(null==user) {
 			return E3Result.build(401, "登录超时..");
 		}
@@ -87,9 +88,8 @@ public class CritiqueManageController {
 	@RequestMapping("/blog/manage/ac/delete")
 	@ResponseBody
 	public E3Result deleteArc(HttpServletRequest request,@RequestParam(value="id",required=false) int id)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(null==user) {
 			return E3Result.build(401, "登录超时..");
 		}
@@ -110,9 +110,8 @@ public class CritiqueManageController {
 	@RequestMapping("/blog/manage/critique/delete")
 	@ResponseBody
 	public E3Result delete(HttpServletRequest request,@RequestParam(value="id",required=false) int id)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(null==user) {
 			return E3Result.build(401, "登录超时..");
 		}
@@ -133,8 +132,8 @@ public class CritiqueManageController {
 	@RequestMapping("/blog/manage/ar/reply")
 	@ResponseBody
 	public E3Result saveAr(HttpServletRequest request,@RequestParam(value="id",required=false) int id,Critique critique)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(null==user) {
 			return E3Result.build(401, "登录超时..");
 		}

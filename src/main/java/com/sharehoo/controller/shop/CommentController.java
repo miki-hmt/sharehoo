@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,22 +30,17 @@ public class CommentController {
 	@RequestMapping("shop/comment/{sourceId}")
 	@ResponseBody
 	public E3Result save(HttpServletRequest request,@PathVariable("sourceId") int sourceId,Comment comment)throws Exception{
-		HttpSession session=request.getSession();
-		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);
 
-		if(currentUser!=null){		
-			//查询数据库的该用户资源是否评论已存在
-			Comment exitComment=commentService.getCommentByUserSourceId(sourceId, currentUser.getId());
-			if(exitComment!=null){		
-				
-				return E3Result.build(401, "您已经参与过评论了");
-			}else{
-				comment.setPublishTime(new Date());
-				commentService.save(comment);
-				return E3Result.ok();
-			}
+		User currentUser = SessionUtil.getUser();
+		//查询数据库的该用户资源是否评论已存在
+		Comment exitComment=commentService.getCommentByUserSourceId(sourceId, currentUser.getId());
+		if(exitComment!=null){
+			return E3Result.build(401, "您已经参与过评论了");
+		}else{
+			comment.setPublishTime(new Date());
+			commentService.save(comment);
+			return E3Result.ok();
 		}
-		return E3Result.build(401, "您尚未登录..");
 	}
 	
 }

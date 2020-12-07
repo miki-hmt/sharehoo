@@ -1,37 +1,69 @@
 package com.sharehoo.base.exception;
 
+import com.sharehoo.util.forum.E3Result;
+
 /**
- * 用户业务异常
- * @author miki
- * 2017.05.04
- *
+ * @ClassName UserException
+ * @Description TODO
+ * @Author miki
+ * @Date 2020/12/7 14:33
+ * @Version 1.0
  */
-public class UserException extends Exception {
+public class UserException extends RuntimeException{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * 异常编码
+     */
+    private Integer code;
 
-	public UserException() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * 异常内容
+     */
+    private String message;
 
-	public UserException(String message, Throwable cause) {
-		super(message, cause);
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * 数据
+     */
+    private Object data;
 
-	public UserException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
-	}
+    public UserException() {
+        super();
+    }
 
-	public UserException(Throwable cause) {
-		super(cause);
-		// TODO Auto-generated constructor stub
-	}
+    public UserException(E3Result result){
+        this.code = result.getStatus();
+        this.message = result.getMsg();
+    }
+
+    public UserException(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public UserException(Integer code, String message, Object data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
+    public UserException(Throwable cause) {
+        super(cause);
+    }
+
+    public UserException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    public Object getData() {
+        return data;
+    }
 }
-
-

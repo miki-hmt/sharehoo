@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -92,10 +94,9 @@ public class SourceController {
 	@RequestMapping("/shop/source/{sourceId}")
 	public String detail(HttpServletRequest request,@PathVariable("sourceId") int source_id,Model model,
 			@RequestParam(value="page",required=false) String page)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);	//下载者
-		
+
+		User currentUser = SessionUtil.getUserNoThrowException();	//下载者
+
 		long totalCollect=collectService.getCollectCountBySourceId(source_id);
 		model.addAttribute("collectTotal", totalCollect);
 		
@@ -198,80 +199,72 @@ public class SourceController {
 	@RequestMapping("/shop/score/change")
 	@ResponseBody
 	public E3Result download(HttpServletRequest request, @RequestParam("sourceId") int sourceId)throws Exception {
+		HttpSession session = request.getSession();
 
-		HttpSession session=request.getSession();
-		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);
-		if(null != currentUser && sourceId>0){
-			Source source=sourceService.getSourceById(sourceId);
-			if(source!=null){
-				User user=source.getUser();
-				//*********** 自己下载自己的东西不扣除积分，只有别人下载才扣除
-				if(!Objects.equals(user.getId(), currentUser.getId())){
-					//卖家店铺
-					Shop sellerShop=source.getShop();
-					//买家店铺
-					Shop buyershop=shopService.getShopByuserId(currentUser.getId());	//买家店铺	;
+		User currentUser = SessionUtil.getUser();
+		Source source=sourceService.getSourceById(sourceId);
+		if(source!=null){
+			User user = source.getUser();
+			//*********** 自己下载自己的东西不扣除积分，只有别人下载才扣除
+			if(!Objects.equals(user.getId(), currentUser.getId())){
+				//卖家店铺
+				Shop sellerShop=source.getShop();
+				//买家店铺
+				Shop buyershop=shopService.getShopByuserId(currentUser.getId());	//买家店铺	;
 
-					if(null== buyershop){
-						//新用户首次下载，直接默认注册	2020.09.11 miki
-						logger.info("新用户首次下载，直接默认注册...{}", currentUser.getNickName());
-						//激活店铺
-						active(request);
-						
-						//查询新创建的店铺
-						buyershop = shopService.getShopByuserId(currentUser.getId());
-					}
-					try {
-						//卖家收益
-						sellerShop.setDouNum(sellerShop.getDouNum()+source.getDouNum());	//卖家店铺	
-						sellerShop.setDownNum(sellerShop.getDownNum()+1);
-						
-						//买家付款
-						buyershop.setDouNum(buyershop.getDouNum()-source.getDouNum());
-						 // 2017.08.11 miki 保存下载者操作记录				
-						Operate operate=new Operate("download", buyershop, currentUser, source, "下载（"+source.getName()+"）扣除虎豆", new Date());
-						operateService.save(operate);
-						
-						 // 2017.08.11 miki 保存出售者出售记录		   
-						Operate sell=new Operate("sell", source.getShop(), currentUser, source, "出售（"+source.getName()+"）获得虎豆", new Date());			
-						operateService.save(sell);
-						
-						//更新账户
-						shopService.save(sellerShop);
-						shopService.save(buyershop);
-					} catch (Exception e) {
-						logger.error(e.getMessage());
-					}
-				}				
-				String signature=RadomUtil.getUUID();	// 2017.08.06  miki	扣豆成功，产生一个真正的随机下载令牌，
-				session.setAttribute("signal", signature);	//并存到session中，下载的时候，取session中的令牌，如果取到，证明扣豆成功，执行下载
-				return E3Result.ok();
+				if(null== buyershop){
+					//新用户首次下载，直接默认注册	2020.09.11 miki
+					logger.info("新用户首次下载，直接默认注册...{}", currentUser.getNickName());
+					//激活店铺
+					active(request);
+
+					//查询新创建的店铺
+					buyershop = shopService.getShopByuserId(currentUser.getId());
+				}
+				try {
+					//卖家收益
+					sellerShop.setDouNum(sellerShop.getDouNum()+source.getDouNum());	//卖家店铺
+					sellerShop.setDownNum(sellerShop.getDownNum()+1);
+
+					//买家付款
+					buyershop.setDouNum(buyershop.getDouNum()-source.getDouNum());
+					// 2017.08.11 miki 保存下载者操作记录
+					Operate operate=new Operate("download", buyershop, currentUser, source, "下载（"+source.getName()+"）扣除虎豆", new Date());
+					operateService.save(operate);
+
+					// 2017.08.11 miki 保存出售者出售记录
+					Operate sell=new Operate("sell", source.getShop(), currentUser, source, "出售（"+source.getName()+"）获得虎豆", new Date());
+					operateService.save(sell);
+
+					//更新账户
+					shopService.save(sellerShop);
+					shopService.save(buyershop);
+				} catch (Exception e) {
+					logger.error(e.getMessage());
+				}
 			}
+			String signature=RadomUtil.getUUID();	// 2017.08.06  miki	扣豆成功，产生一个真正的随机下载令牌，
+			session.setAttribute("signal", signature);	//并存到session中，下载的时候，取session中的令牌，如果取到，证明扣豆成功，执行下载
+			return E3Result.ok();
 		}
-	return E3Result.build(401, "请先登录...");
-}
+		return E3Result.build(401, "资源不存在");
+	}
 
 
-	private Shop active(HttpServletRequest request)throws Exception{
-
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-
+	private void active(HttpServletRequest request)throws Exception{
 		//********** 防止非法操作，先判断用户存在不存在，用户存在的话，判断该用户是否已经激活过，激活过就不能二次激活，没激活，执行激活操作
-		if(user!=null){
-			Shop shop=new Shop();
-			shop.setDouNum(5);
-			shop.setDownNum(0);
-			shop.setRegisterTime(new Date());
-			shop.setStatus(1);
-			shop.setUser(user);
-			shop.setShop_name(user.getNickName());
-			shop.setFace("images/user/mo.jpg");
-			shop.setTag("javaweb");
-			shopService.save(shop);
-			return shop;
-		}
-		return null;
+		User user = SessionUtil.getUser();
+
+		Shop shop=new Shop();
+		shop.setDouNum(5);
+		shop.setDownNum(0);
+		shop.setRegisterTime(new Date());
+		shop.setStatus(1);
+		shop.setUser(user);
+		shop.setShop_name(user.getNickName());
+		shop.setFace("images/user/mo.jpg");
+		shop.setTag("javaweb");
+		shopService.save(shop);
 	}
 
 	
@@ -283,9 +276,8 @@ public class SourceController {
 	public String kiss(HttpServletRequest request,Model model,@PathVariable("source_id") int source_id,
 			@RequestParam(value="page",required=false) String page)throws Exception{
 		HttpSession session=request.getSession();
-		User currentUser=(User) session.getAttribute(Consts.CURRENTUSER);
-		model.addAttribute(Consts.CURRENTUSER, currentUser);
 
+		User currentUser = SessionUtil.getUserNoThrowException();
 		long totalCollect=collectService.getCollectCountBySourceId(source_id);
 		List<Shop> newShopList=shopService.getNewShops();
 		model.addAttribute("newShopList", newShopList);
@@ -331,7 +323,7 @@ public class SourceController {
 	* @Title: downKiss  
 	* @Description: TODO(最终的下载功能)  
 	* @author miki 
-	* @date 2019年9月20日 下午4:17:22   
+	* @date 2019年9月20日 下午4:17:22
 	* @throws
 	 */
 	@RequestMapping("/shop/source/download")
@@ -339,51 +331,42 @@ public class SourceController {
 		HttpSession session=request.getSession();
         String sign=(String)session.getAttribute("signal");  
         if(sign!=null){
-        	if(source_id>0){
-	        	Source source=sourceService.getSourceById(source_id);
-	        	
-	        	// CKEditor提交的很重要的一个参数    
-	        	String staticPath = BootPathUtil.getStaticPath();
-	        	//这样能够组织一个文件流  
-	            String filePath= staticPath +Consts.SHOP_UPLOAD_PATH +"/file/"+ source.getPath();		////"\\image_upload\\source_upload\\file\\"
-	            
-	            //下载的文件携带这个名称
-	            response.setHeader("Content-Disposition", "attachment;filename=" + source.getPath());
-	            //文件下载类型--二进制文件
-	            response.setContentType("application/octet-stream");        
-	            //result= ServletActionContext.getServletContext().getResourceAsStream(filePath);
-	            
-	            try {
-	                FileInputStream fis = new FileInputStream(filePath);
-	                byte[] content = new byte[fis.available()];
-	                fis.read(content);
-	                fis.close();
-	         
-	                ServletOutputStream sos = response.getOutputStream();
-	                sos.write(content);
-	         
-	                sos.flush();
-	                sos.close();
-	                long fileLength=MikiUtil.GetFileSize(filePath);
-	                model.addAttribute("fileLength", fileLength);
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	                return "error";
-	            }
-	
-	            /*
-	             *  2017.08.11 miki	用于浏览器弹出框显示文件大小，要使用绝对路径，不然会报错，找不到文件
-	             *  这是本地测试路径E:\\eclipse与项目文件\\Soft\\apache-tomcat-7.0.55\\webapps\\Forum\\image_upload\\source_upload\\file\\
-	             *  代码里的是服务器路径，本地测试需要改为本地路径		2017.08.26 miki
-	             */   
-	            source.setDownNum(source.getDownNum()+1);
-	            sourceService.save(source);	                    	
-	            //下载完，移除下载令牌，防止二次下载	2017.08.10 miki
-	            //session.removeAttribute("signal");
-	            return null;  
-        	}else{
-        		return "error";
-        	}
+			Source source=sourceService.getSourceById(source_id);
+			if(ObjectUtils.isEmpty(source)){
+				return "error";
+			}
+			// CKEditor提交的很重要的一个参数
+			String staticPath = BootPathUtil.getStaticPath();
+			//这样能够组织一个文件流
+			String filePath= staticPath +Consts.SHOP_UPLOAD_PATH +"/file/"+ source.getPath();		////"\\image_upload\\source_upload\\file\\"
+
+			//下载的文件携带这个名称
+			response.setHeader("Content-Disposition", "attachment;filename=" + source.getPath());
+			//文件下载类型--二进制文件
+			response.setContentType("application/octet-stream");
+			//result= ServletActionContext.getServletContext().getResourceAsStream(filePath);
+
+			try {
+				FileInputStream fis = new FileInputStream(filePath);
+				byte[] content = new byte[fis.available()];
+				fis.read(content);
+				fis.close();
+
+				ServletOutputStream sos = response.getOutputStream();
+				sos.write(content);
+
+				sos.flush();
+				sos.close();
+				long fileLength=MikiUtil.GetFileSize(filePath);
+				model.addAttribute("fileLength", fileLength);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "error";
+			}
+
+			source.setDownNum(source.getDownNum()+1);
+			sourceService.save(source);
+			return null;
         } else{  
             //不符合要求，返回一个跳转到error.jsp的地址给用户，不返回文件流  
             return "error";  

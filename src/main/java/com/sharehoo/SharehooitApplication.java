@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.sharehoo.dao.impl.BaseDAOImpl;
 
@@ -18,7 +19,7 @@ import com.sharehoo.dao.impl.BaseDAOImpl;
 * 会先走默认的文件处理流程并修改request对象，再执行我们定义的文件处理类。（这只是个人推测）
 * exclude表示自动配置时不包括Multipart配置
 */
-
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @ServletComponentScan
 @EnableJpaRepositories(repositoryBaseClass = BaseDAOImpl.class)
 @SpringBootApplication(exclude = {MailSenderAutoConfiguration.class})

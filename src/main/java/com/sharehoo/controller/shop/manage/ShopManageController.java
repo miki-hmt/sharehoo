@@ -13,6 +13,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,12 +65,12 @@ public class ShopManageController {
 	private FocusService focusService;
 	@Autowired
 	private SourceService sourceService;
-	
+
+	@HasLogin
 	@RequestMapping("/shop/admin/log")
 	public String operatelog(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
-		HttpSession session=request.getSession();
 
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		if(user!=null){
 			Shop shop=shopService.getShopByuserId(user.getId());
@@ -95,46 +97,45 @@ public class ShopManageController {
 		}
 		return "shop/manage/shop_huDou";
 	}
-	
+
+	@HasLogin
 	//店铺评价 	2017.08.11 miik
 	@RequestMapping("/shop/admin/comment")
 	public String comment(HttpServletRequest request,Model model)throws Exception{
-		HttpSession session=request.getSession();
-		
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
-		if(user!=null){
-			Shop shop=shopService.getShopByuserId(user.getId());
-			if(shop==null){
-				return "bug";
-			}
-			long dayVisit=logService.getLogCountByShopId(shop.getId());
-			long allVisit=logService.getAllLogCountByShopId(shop.getId());
-			model.addAttribute("DV", dayVisit);
-			model.addAttribute("AV", allVisit);
-			long downTotal=commentService.getCountByShopId(shop.getId());	//店铺总评论数
-			long goodComment=commentService.getGoodCommentCountByshopId(shop.getId());
-			double percent=(double)goodComment/(double)downTotal;
-			
-			//精确小数位类，精确到两位小数
-			 BigDecimal b = new BigDecimal(percent);  
-		     double per = b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
-			//System.out.print("总评价："+downTotal+"好评人数"+goodComment+"好评率："+per);
-		     model.addAttribute("totalComment", downTotal);
-		     model.addAttribute("percent", per);
-		     model.addAttribute("goodComment", goodComment);
-			List<Message> messageList=messageService.getAdminMesList(shop.getId());
-			model.addAttribute("messageList", messageList);
+		Shop shop=shopService.getShopByuserId(user.getId());
+		if(shop==null){
+			return "bug";
 		}
+		long dayVisit=logService.getLogCountByShopId(shop.getId());
+		long allVisit=logService.getAllLogCountByShopId(shop.getId());
+		model.addAttribute("DV", dayVisit);
+		model.addAttribute("AV", allVisit);
+		long downTotal=commentService.getCountByShopId(shop.getId());	//店铺总评论数
+		long goodComment=commentService.getGoodCommentCountByshopId(shop.getId());
+		double percent=(double)goodComment/(double)downTotal;
+
+		//精确小数位类，精确到两位小数
+		BigDecimal b = new BigDecimal(percent);
+		double per = b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+		//System.out.print("总评价："+downTotal+"好评人数"+goodComment+"好评率："+per);
+		model.addAttribute("totalComment", downTotal);
+		model.addAttribute("percent", per);
+		model.addAttribute("goodComment", goodComment);
+		List<Message> messageList=messageService.getAdminMesList(shop.getId());
+		model.addAttribute("messageList", messageList);
 		
 		return "shop/manage/shop_comment";
 	}
-	
+
+	@HasLogin
 	//店铺收藏列表	2017.08.12 miki
 	@RequestMapping("/shop/admin/collect")
 	public String collect(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		if(user!=null){
 			Shop shop=shopService.getShopByuserId(user.getId());
@@ -161,57 +162,59 @@ public class ShopManageController {
 		}
 		return "shop/manage/shop_collect";
 	}
-	
+
+
 	//店铺关注列表 2017.08.12 miki
+	@HasLogin
 	@RequestMapping("/shop/admin/focus")
 	public String focus(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
-		HttpSession session=request.getSession();
 
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-		if(user!=null){
-			model.addAttribute("user", user);
-			Shop shop=shopService.getShopByuserId(user.getId());
-			if(shop==null){
-				return "shop/5bug";
-			}
-			model.addAttribute("shop", shop);
-			long dayVisit=logService.getLogCountByShopId(shop.getId());
-			long allVisit=logService.getAllLogCountByShopId(shop.getId());
-			model.addAttribute("DV", dayVisit);
-			model.addAttribute("AV", allVisit);
-			if (StringUtil.isEmpty(page)) {
-				page="1";
-			}
-			PageBean pageBean=new PageBean(Integer.parseInt(page), 6);
-			List<Focus> focusList=focusService.getFocusesByUserId(user.getId(), pageBean);
-			model.addAttribute("focusList", focusList);
-			/*
-			 * 2017.08.12 miki 遍历focusList列表，分别选出每一个店铺的最新上架资源
-			 */
-			Source source = null;
-			Map<Focus, Source> good=new HashMap<Focus, Source>();
-			for (Focus focus : focusList) {
-				//要用Source类new一个新的对象	  2017.08.12 miki
-				source =sourceService.getnewSourceByShopId(focus.getShop().getId());
-				good.put(focus, source);
-			}
-			model.addAttribute("good", good);
-			long total=focusService.getFocusCountByUserId(user.getId());
-			String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/admin/focus",
-					total, Integer.parseInt(page), 6,null);
-			model.addAttribute("pageCode", pageCode);
-			List<Message> messageList=messageService.getAdminMesList(shop.getId());
-			model.addAttribute("messageList", messageList);
-		}	
+		User user = SessionUtil.getUser();
+		model.addAttribute("user", user);
+		Shop shop=shopService.getShopByuserId(user.getId());
+		if(shop==null){
+			return "shop/5bug";
+		}
+		model.addAttribute("shop", shop);
+		long dayVisit=logService.getLogCountByShopId(shop.getId());
+		long allVisit=logService.getAllLogCountByShopId(shop.getId());
+		model.addAttribute("DV", dayVisit);
+		model.addAttribute("AV", allVisit);
+		if (StringUtil.isEmpty(page)) {
+			page="1";
+		}
+		PageBean pageBean=new PageBean(Integer.parseInt(page), 6);
+		List<Focus> focusList=focusService.getFocusesByUserId(user.getId(), pageBean);
+		model.addAttribute("focusList", focusList);
+		/*
+		 * 2017.08.12 miki 遍历focusList列表，分别选出每一个店铺的最新上架资源
+		 */
+		Source source = null;
+		Map<Focus, Source> good=new HashMap<Focus, Source>();
+		for (Focus focus : focusList) {
+			//要用Source类new一个新的对象	  2017.08.12 miki
+			source =sourceService.getnewSourceByShopId(focus.getShop().getId());
+			good.put(focus, source);
+		}
+		model.addAttribute("good", good);
+		long total=focusService.getFocusCountByUserId(user.getId());
+		String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/admin/focus",
+				total, Integer.parseInt(page), 6,null);
+		model.addAttribute("pageCode", pageCode);
+		List<Message> messageList=messageService.getAdminMesList(shop.getId());
+		model.addAttribute("messageList", messageList);
+
 		return "shop/manage/shop_focus";
 	}
-	
+
+
+	@HasLogin
 	@RequestMapping("/admin/shop")
 	public String list(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
-		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
-		if (user!=null&&user.getType()==2) {
+		if (user.getType()==2) {
 			if (StringUtil.isEmpty(page)) {
 				page="1";
 			}
@@ -249,10 +252,13 @@ public class ShopManageController {
 	* @date 2020年6月14日 下午2:07:36   
 	* @throws
 	 */
+	@HasLogin
 	@RequestMapping("/admin/shop/search")
 	public String searchList(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page,Shop s_shop)throws Exception{
+
 		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		if (user!=null&&user.getType()==2) {
 			if (StringUtil.isEmpty(page)) {
@@ -296,9 +302,9 @@ public class ShopManageController {
 	@RequestMapping("/admin/shop/update")
 	@ResponseBody
 	public E3Result saveShop(HttpServletRequest request,@RequestParam(value="shopId",required=false) int shopId,Shop shop)throws Exception{
-		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
-		if (user!=null&&user.getType()==2) {			
+
+		User user = SessionUtil.getUser();
+		if (user.getType()==2) {
 			if(shopId>0){
 				Shop shop1=shopService.getShopById(shopId);
 				shop.setFace(shop1.getFace());	//防止图片路径丢失，重新赋值
@@ -308,7 +314,7 @@ public class ShopManageController {
 				return E3Result.ok();
 			}
 		}
-		return E3Result.build(401, "请登录后，操作");
+		return E3Result.build(401, "不具备该操作的权限..");
 	}
 	
 	/*
@@ -317,8 +323,8 @@ public class ShopManageController {
 	@RequestMapping("/admin/shop/delete")
 	@ResponseBody
 	public E3Result delete(HttpServletRequest request,@RequestParam(value="shopId",required=false) int shopId)throws Exception{
-		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if (user!=null&&user.getType()==2) {
 			if(shopId>0){
 				Shop shop=shopService.getShopById(shopId);
@@ -328,11 +334,12 @@ public class ShopManageController {
 		}
 		return E3Result.build(401, "请登录后，操作");
 	}
-	
+
+	@HasLogin
 	@RequestMapping("/shop/admin/update/go")
 	public String update(HttpServletRequest request,Model model)throws Exception{
-		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			model.addAttribute("user", user);
 			Shop shop=shopService.getShopByuserId(user.getId());

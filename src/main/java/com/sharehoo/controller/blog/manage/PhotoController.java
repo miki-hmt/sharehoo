@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,14 +51,13 @@ public class PhotoController {
 	* @date 2019年9月2日 下午6:43:31   
 	* @throws
 	 */
+	@HasLogin(value="相册管理")
 	@RequestMapping("/blog/manage/ablum/go")
 	public String add(HttpServletRequest request,Model model,@RequestParam("aid") int aid)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
-		if(user==null) {
-			return "error";
-		}
+
 		if(aid>0){
 			Album album=albumService.getAlbumById(aid);
 			model.addAttribute("album", album);
@@ -71,8 +72,8 @@ public class PhotoController {
 	@ResponseBody
 	public E3Result save(HttpServletRequest request,@RequestParam(value="photoImage",required=false) MultipartFile image,
 			@RequestParam("faceFileName") String faceFileName,Photo photo)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(null==user) {
 			return E3Result.build(401, "请登录后，再保存..");
 		}
@@ -118,10 +119,11 @@ public class PhotoController {
 	/*
 	 * miki	2017.06.05	后台显示照片列表
 	 */
+	@HasLogin(value="相片管理")
 	@RequestMapping("/blog/manage/photo/list")
 	public String list(HttpServletRequest request,Model model,@RequestParam("aid") int aid)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		if(aid>0){
 			List<Photo> photoList=photoService.getPhotosByAlbumId(aid);
@@ -133,14 +135,13 @@ public class PhotoController {
 	/*
 	 * miki	2017.06.05	文件列表 跳转到file_list.jsp
 	  */
+	@HasLogin
 	@RequestMapping("/blog/manage/file")
 	public String file(HttpServletRequest request,Model model,
 			@RequestParam(value="page",required=false) String page)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-		
-			if(StringUtil.isEmpty(page)){
+
+		User user = SessionUtil.getUser();
+		if(StringUtil.isEmpty(page)){
 				page="1";
 			}
 			PageBean pageBean=new PageBean(Integer.parseInt(page), 16);
@@ -156,10 +157,10 @@ public class PhotoController {
 	/*
 	 * miki	2017.06.05	添加文件 跳转到file_list.jsp
 	  */
+	@HasLogin
 	@RequestMapping("/blog/manage/file/go")
 	public String addFile(HttpServletRequest request,Model model)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+		User user = SessionUtil.getUser();
 		if(null==user) {
 			return "error";
 		}
@@ -171,8 +172,8 @@ public class PhotoController {
 	@ResponseBody
 	public E3Result saveFile(HttpServletRequest request,@RequestParam("aid") int aid,@RequestParam(value="photoFile",required=false) MultipartFile file,
 			@RequestParam("faceFileName") String faceFileName,Photo photo){
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		try {
 			if(null!=file && file.getSize()>0) {
 				//获取项目的static根路径  
@@ -213,7 +214,8 @@ public class PhotoController {
 		
 		return E3Result.ok();
 	}
-	
+
+	@HasLogin
 	@RequestMapping("/blog/manage/file/delete")
 	@ResponseBody
 	public E3Result deleteFile(@RequestParam("id") int id)throws Exception{

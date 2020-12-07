@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,35 +98,32 @@ public class AlbumManageController {
 	 * 2017.06.03
 	 * 得到相册列表
 	 */
+	@HasLogin(value="相册列表")
 	@RequestMapping("/blog/manage/album/list")
 	public String list(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-		if(user!=null) {
-			model.addAttribute("user", user);
-			if(StringUtil.isEmpty(page)){
-				page="1";
-			}
-			PageBean pageBean=new PageBean(Integer.parseInt(page), 20);
-			List<Album> albumList=albumService.getAlbumListByUserId(user.getId(), pageBean);
-			model.addAttribute("albumList", albumList);
-			List<Article> countList=articleService.getHotByUserId(user.getId());
-			model.addAttribute("countList", countList);
-			List<Article> recommendList=articleService.getRecommendsByUserId(user.getId());
-			model.addAttribute("recommendList", recommendList);
-			List<Critique> critiques=critiqueService.getPhListByUserId(user.getId());
-			model.addAttribute("critiques", critiques);
-			return "blog/manage/album_manage";
+
+		User user = SessionUtil.getUser();
+		model.addAttribute("user", user);
+		if(StringUtil.isEmpty(page)){
+			page="1";
 		}
-		return "error";
+		PageBean pageBean=new PageBean(Integer.parseInt(page), 20);
+		List<Album> albumList=albumService.getAlbumListByUserId(user.getId(), pageBean);
+		model.addAttribute("albumList", albumList);
+		List<Article> countList=articleService.getHotByUserId(user.getId());
+		model.addAttribute("countList", countList);
+		List<Article> recommendList=articleService.getRecommendsByUserId(user.getId());
+		model.addAttribute("recommendList", recommendList);
+		List<Critique> critiques=critiqueService.getPhListByUserId(user.getId());
+		model.addAttribute("critiques", critiques);
+		return "blog/manage/album_manage";
 	}
 	
 	@RequestMapping("/blog/manage/album/delete")
 	@ResponseBody
 	public E3Result delete(HttpServletRequest request,@RequestParam(value="aid",required=false) int aid)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(user==null) {
 			return E3Result.build(401, "请先登录再删除..");
 		}
@@ -138,12 +137,12 @@ public class AlbumManageController {
 		}
 		return E3Result.ok();
 	}
-	
+
+	@HasLogin(value="相册管理")
 	@RequestMapping("/blog/manage/album/detail")
 	public String detail(HttpServletRequest request,@RequestParam(value="aid",required=false) int aid,Model model)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);	
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		if(aid>0){
 		Album album=albumService.getAlbumById(aid);
@@ -153,11 +152,12 @@ public class AlbumManageController {
 		}
 		return "blog/manage/album_detail";
 	}
-	
+
+	@HasLogin(value="添加相册页面")
 	@RequestMapping("/blog/manage/album/go")
 	public String add(HttpServletRequest request,Model model)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		return "blog/manage/album_add";
 	}

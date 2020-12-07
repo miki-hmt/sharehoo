@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +24,12 @@ public class MeController {
 	
 	@Autowired
 	private MeService meService;
-	
+
+	@HasLogin(value="修改自我介绍")
 	@RequestMapping("/blog/manage/about")
 	public String list(HttpServletRequest request,Model model)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);		
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		List<Me> listByUer=meService.getMeListByUserId(user.getId(), null);
 		model.addAttribute("me", listByUer.get(0));
@@ -36,8 +39,8 @@ public class MeController {
 	@RequestMapping("/blog/manage/about/save")
 	@ResponseBody
 	public E3Result save(HttpServletRequest request,Me me)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(null==user) {
 			return E3Result.build(401, "请登录后，再添加");
 		}

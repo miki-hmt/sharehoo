@@ -76,7 +76,6 @@ public class TestController {
 
 	@HasLogin(value="测试")
 	@GetMapping("/excel/get")
-	@ResponseBody
 	public String getUser(HttpServletRequest request,HttpServletResponse response) {
 		Object user = request.getSession().getAttribute("currentUser");
 		

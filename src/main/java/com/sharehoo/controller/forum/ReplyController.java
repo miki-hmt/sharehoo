@@ -21,6 +21,8 @@ import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -253,8 +255,7 @@ public class ReplyController {
 	@ResponseBody
 	public E3Result delete(HttpServletRequest request,@RequestParam("replyId") int replyId)throws Exception{
 
-		HttpSession session=request.getSession();
-		User user = (User)session.getAttribute(Consts.CURRENTUSER);
+		User user = SessionUtil.getUser();
 		if("2".equals(user.getType()) || user.getSectionList().size()>0){
 			Reply reply=replyService.findReplyById(replyId);
 			replyService.deleteReply(reply);
@@ -262,7 +263,8 @@ public class ReplyController {
 		}
 		return E3Result.build(401, "删除失败..");
 	}
-	
+
+	@HasLogin
 	@RequestMapping("/admin/reply/update/{replyId}")
 	public String update(@PathVariable("replyId") int replyId)throws Exception{
 		Reply reply=replyService.findReplyById(replyId);
@@ -270,7 +272,8 @@ public class ReplyController {
 		replyService.saveReply(reply);
 		return "redirect:/user/reply";
 	}
-	
+
+
 	@RequestMapping("/reply/details/{rid}")
 	public String details(HttpServletRequest request, @PathVariable("rid") int rid,@RequestParam(value="page",required=false) String page,
 			Model model)throws Exception{

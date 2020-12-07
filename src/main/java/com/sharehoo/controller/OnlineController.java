@@ -28,10 +28,9 @@ public class OnlineController {
 	@Autowired
 	private OnlineCounterListener sessionListener;
 
-	@HasLogin(value="测试")
 	@RequestMapping("/online")
 	@ResponseBody
-	private E3Result getOnline(HttpServletRequest request,HttpServletResponse response) {
+	public E3Result getOnline(HttpServletRequest request,HttpServletResponse response) {
 		
 		try { // 把sessionId记录在浏览器
 			Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(request.getSession().getId(), "utf-8"));
@@ -42,10 +41,9 @@ public class OnlineController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//HttpSession session = request.getSession();
 		
 		String staticPath = BootPathUtil.getStaticPath();
-		//Object count=session.getServletContext().getAttribute(Consts.ONLINEUSER);
+
 		Long count = sessionListener.getOnlineUserNumber();
 		Object daycount=CxCacheUtil.getIntance().getValue(Consts.DAYONLINEUSER);
 		long total = Counter.readFromFile(staticPath +"/count.txt");

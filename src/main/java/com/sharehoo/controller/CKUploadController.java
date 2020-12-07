@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -52,16 +54,16 @@ public class CKUploadController {
      * 图片上传 
      * @return 
      * @throws Exception 
-     */  
+     */
+    @HasLogin(value="文件上传权限校验")
     @RequestMapping("/topic/ckupload")
     public String execute(HttpServletRequest request,HttpServletResponse response,@RequestParam(value="uploadFileName",required=false) String uploadFileName,
     		@RequestParam("upload") MultipartFile upload,@RequestParam(value="uploadContentType",required=false) String uploadContentType,
     		@RequestParam(value="CKEditorFuncNum",required=false) String CKEditorFuncNum) throws Exception{
-    	JSONObject result=new JSONObject(); 
-    	
-    	HttpSession session=request.getSession();
-		User currentUser = (User)session.getAttribute(Consts.CURRENTUSER);
-    	
+    	JSONObject result=new JSONObject();
+
+        User currentUser = SessionUtil.getUser();
+
         // CKEditor提交的很重要的一个参数    
     	String staticPath = BootPathUtil.getStaticPath();
     	

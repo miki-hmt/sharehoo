@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import com.sharehoo.util.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -254,8 +256,8 @@ public class UserController {
 		user=userService.findUserByActivationCode(activationCode);
 		user.setId(user.getId());
 
-		if(user == null) throw new UserException("无效的激活码！");
-		if(user.isStatus()) throw new UserException("您已经激活过了，不要二次激活！");
+		if(user == null) throw new UserException(401, "无效的激活码！");
+		if(user.isStatus()) throw new UserException(401, "您已经激活过了，不要二次激活！");
 		user.setStatus(true);
 		userService.saveUser(user);
 		request.setAttribute("code", "success");//通知msg.jsp显示对号
@@ -688,8 +690,8 @@ public class UserController {
 	@RequestMapping("/admin/ilovehmt.htm")
 	public String adminIndex(HttpServletRequest request,Model model,@RequestParam(value="error",required=false) String error)
 			throws Exception{
-		HttpSession session=request.getSession();
-		User currentUser = (User)session.getAttribute(Consts.CURRENTUSER);
+
+		User currentUser = SessionUtil.getUser();
 		if (currentUser!=null&&currentUser.getType()==2) {
 			model.addAttribute("user", currentUser);
 		}else {
@@ -745,11 +747,12 @@ public class UserController {
 		request.getSession().invalidate();
 		return "redirect:login";
 	}
-	
+
+	@HasLogin
 	@RequestMapping("/user/modify")
 	public String preSave(HttpServletRequest request,Model model)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(user==null) {
 			return "error";
 		}
@@ -769,12 +772,12 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
+	@HasLogin
 	@RequestMapping("/user/center")
 	public String userCenter(HttpServletRequest request,Model model)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-		
+
+		User user = SessionUtil.getUser();
+
 		/*
 		 * 2017.05.29
 		 * miki
@@ -815,10 +818,11 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
+	@HasLogin
 	@RequestMapping("/user/main")
 	public String center(HttpServletRequest request,Model model)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		String navCode=NavUtil.genNavCode("个人中心");
 		model.addAttribute("navCode", navCode);
@@ -831,10 +835,11 @@ public class UserController {
 	 * 2017.05.12
 	 * 更新个人中心  模帖子版块
 	 */
+	@HasLogin
 	@RequestMapping("/user/topic")
 	public String topic(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		if(user.getId()>0){
 		System.out.println("用户："+user.getId());
@@ -877,10 +882,11 @@ public class UserController {
 	 * 2017.05.12
 	 * 更新个人中心  我的问答版块
 	 */
+	@HasLogin
 	@RequestMapping("/user/answer")
 	public String answer(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		if (StringUtil.isEmpty(page)) {
 			page="1";
@@ -914,10 +920,11 @@ public class UserController {
 	 * 2017.05.29
 	 * 用户未读信息列表
 	 */
+	@HasLogin
 	@RequestMapping("/user/reply")
 	public String unReply(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		/*
 		 * 2017.05.29

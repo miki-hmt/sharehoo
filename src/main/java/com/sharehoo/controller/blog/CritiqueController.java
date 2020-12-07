@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.sharehoo.config.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,8 +49,8 @@ public class CritiqueController {
 	 */
 	@RequestMapping("/blog/{nicknameId}/critique/add")
 	@ResponseBody
-	public E3Result save(HttpServletRequest req,@PathVariable("nicknameId") String nicknameId,Model model,Critique critique,
-			@RequestParam(value="imageCode",required = true)String code)throws Exception{
+	public E3Result save(HttpServletRequest req, @PathVariable("nicknameId") String nicknameId, Model model, Critique critique,
+			@RequestParam(value="imageCode", required = true)String code)throws Exception{
 		if(StringUtil.isNotEmpty(nicknameId)){
 			Object imageCode = req.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
 			if(code.equals(String.valueOf(imageCode))) {
@@ -87,15 +89,12 @@ public class CritiqueController {
 	
 	@RequestMapping("/blog/{nicknameId}/critique/delete")
 	@ResponseBody
-	public E3Result delete(HttpServletRequest req,@RequestParam("id") int id)throws Exception{
-		User user = (User)req.getSession().getAttribute(Consts.CURRENTUSER);
-		if(null!=user) {
-			if(id>0){
-				Critique critique=critiqueService.getCritiqueById(id);
-				critiqueService.delete(critique);
-				}
-		}else {
-			//***** 无权限删除
+	public E3Result delete(@PathVariable("nicknameId") String nicknameId, HttpServletRequest req,@RequestParam("id") int id)throws Exception{
+
+		SessionUtil.getUser();
+		if(id>0){
+			Critique critique=critiqueService.getCritiqueById(id);
+			critiqueService.delete(critique);
 		}
 		
 		return E3Result.ok();
@@ -107,9 +106,13 @@ public class CritiqueController {
 	 * 根据用户Id得到留言列表
 	 */
 	@RequestMapping("/blog/{nicknameId}/critiques")
-	public String list(@PathVariable("nicknameId") String nicknameId,Model model)throws Exception{
+	public String list(@PathVariable("nicknameId") String nicknameId, Model model,
+					   HttpServletRequest request, HttpServletResponse response)throws Exception{
 		if(StringUtil.isNotEmpty(nicknameId)){  
 			User user=userService.getUserByNickNameId(nicknameId);
+			if(user == null) {
+				request.getRequestDispatcher("/errorlogin").forward(request, response);
+			}
 			model.addAttribute("user", user);
 			List<Critique> critiqueList=critiqueService.getListByUserId(user.getId());
 			model.addAttribute("critiqueList", critiqueList);
@@ -124,10 +127,11 @@ public class CritiqueController {
 	 */
 	@RequestMapping("/blog/article/{id}/critiqueAdd")
 	@ResponseBody
-	public E3Result saveAr(@PathVariable("id") int id,@RequestParam(value="imageCode",required = true)String code, Model model,Critique critique,HttpServletRequest request)throws Exception{
+	public E3Result saveAr(@PathVariable("id") int id,@RequestParam(value="imageCode",required = true)String code, Model model,
+						   Critique critique,HttpServletRequest request)throws Exception{
 		if(id>0){
 			Object imageCode = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-			if(code.equals(String.valueOf(imageCode))) {
+			if(code.equals(imageCode)) {
 				Article article=articleService.getArticleById(id);
 				article.setCount1(article.getCount1()+1);
 				model.addAttribute("article", article);
@@ -149,9 +153,10 @@ public class CritiqueController {
 	 */
 	@RequestMapping("/blog/{nicknameId}/photo/critique")
 	@ResponseBody
-	public E3Result savePh(Critique critique,@RequestParam(value="imageCode",required = true)String code,HttpServletRequest request)throws Exception{
+	public E3Result savePh(Critique critique, @PathVariable("nicknameId") String nicknameId,
+						   @RequestParam(value="imageCode",required = true)String code,HttpServletRequest request)throws Exception{
 		Object imageCode = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-		if(code.equals(String.valueOf(imageCode))) {
+		if(code.equals(imageCode)) {
 			critique.setTime(new Date());
 			critique.setNotice("3");
 			critiqueService.save(critique);

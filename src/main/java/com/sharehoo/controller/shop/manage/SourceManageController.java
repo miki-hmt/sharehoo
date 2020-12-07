@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,17 +74,11 @@ public class SourceManageController {
 	public E3Result upload(HttpServletRequest request,HttpServletResponse response,Source source,
 			@RequestParam(value="upload",required=false) MultipartFile upload){
 
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute(Consts.CURRENTUSER);
+		User user = SessionUtil.getUser();
 		try {
-			if (user == null) {
-				request.getRequestDispatcher("error.jsp").forward(request, response);
-			}
 			Shop shop = shopService.getShopByuserId(user.getId());
 			source.setUpload_time(new Date());
 			if(null!=upload) {
-				
-				//long total = upload.getSize();
 				//*************** 记录上传文件的总大小
 				//CxCacheUtil.getIntance().setValue("total_"+shop.getId(), total);
 				logegr.info("开始统计文件总大小："+upload.getSize()+"---开始时间："+System.currentTimeMillis());
@@ -180,12 +176,13 @@ public class SourceManageController {
 	/*
 	 * 2017.08.21 miki 后台管理资源列表
 	 */
+	@HasLogin
 	@RequestMapping("/admin/shop/source")
 	public String list(HttpServletRequest request,@RequestParam(value="page",required=false) String page,Model model)throws Exception{
-		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
-		if (user!=null&&user.getType()==2) {
+		if (user.getType()==2) {
 			if (StringUtil.isEmpty(page)) {
 				page="1";
 			}
@@ -223,12 +220,14 @@ public class SourceManageController {
 	/*
 	 * 2017.08.21 miki 后台管理搜索资源列表
 	 */
+	@HasLogin
 	@RequestMapping("/admin/shop/sourceSearch")
 	public String searchList(HttpServletRequest request,@RequestParam(value="page",required=false) String page,Model model,Source s_source)throws Exception{
 		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
-		if (user!=null&&user.getType()==2) {
+		if (user.getType()==2) {
 			if (StringUtil.isEmpty(page)) {
 				page="1";
 				
@@ -278,9 +277,8 @@ public class SourceManageController {
 	@ResponseBody
 	public E3Result saveSource(HttpServletRequest request,@RequestParam(value="sourceId",required=false) int sourceId,Source source)throws Exception{
 
-		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
-		if (user!=null&&user.getType()==2) {
+		User user = SessionUtil.getUser();
+		if (user.getType()==2) {
 			if(sourceId>0){
 				Source source1=sourceService.getSourceById(sourceId);
 				source.setUpload_time(source1.getUpload_time());
@@ -307,9 +305,8 @@ public class SourceManageController {
 	@ResponseBody
 	public E3Result delete(HttpServletRequest request,@RequestParam(value="sourceId",required=false) int sourceId)throws Exception{
 
-		HttpSession sessiom=request.getSession();
-		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
-		if (user!=null&&user.getType()==2) {		
+		User user = SessionUtil.getUser();
+		if (user.getType()==2) {
 			if(sourceId>0){
 				Source source=sourceService.getSourceById(sourceId);
 				sourceService.delete(source);

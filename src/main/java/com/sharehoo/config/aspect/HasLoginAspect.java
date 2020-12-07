@@ -1,9 +1,9 @@
 package com.sharehoo.config.aspect;
+import com.alibaba.fastjson.JSONObject;
 import com.sharehoo.config.lang.Consts;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * @return
  **/
 
-@EnableAspectJAutoProxy(proxyTargetClass=true)
+
 @Component
 @Aspect
 @SuppressWarnings({"unused"})
@@ -37,14 +37,21 @@ public class HasLoginAspect {
 	    logger.info("创建aop切面拦截...");
     }
 
-    @Pointcut("@annotation(com.sharehoo.config.annotation.HasLogin) && execution(public * com.sharehoo.controller.TestController.find*(..))")
-    public void annotationPointcut() {
+    /**
+     * 参数处理
+     *
+     * @param point
+     */
+    @Before("@annotation(com.sharehoo.config.annotation.HasLogin)")
+    public void beforeProReq(JoinPoint point) {
+        logger.info("前置拦截-开始");
 
+        logger.info("前置拦截-结束");
     }
 
 
-    @Around("annotationPointcut()")
-    public void checkRequestHead(JoinPoint joinPoint) throws Throwable {
+    @Around("@annotation(com.sharehoo.config.annotation.HasLogin)")
+    public Object checkRequestHead(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.debug("===>check access token start:{}", joinPoint.getArgs());
         long begin = System.nanoTime();
 
@@ -69,7 +76,22 @@ public class HasLoginAspect {
                 joinPoint.getTarget().getClass() + "." + joinPoint.getSignature().getName(),
                 (end - begin) / 1000000);
         if(ObjectUtils.isEmpty(user)){
-            response.sendRedirect("http://sharehoo.cn/login?prePage=http://sharehoo.cn/");
+            response.sendRedirect("http://sharehoo.cn/login?prePage=http://sharehoo.cn" + requestUri);
+            return null;
         }
+
+        return joinPoint.proceed();
+    }
+
+
+    /**
+     * 参数处理
+     *
+     * @param point
+     */
+    @After("@annotation(com.sharehoo.config.annotation.HasLogin)")
+    public void afterProReq(JoinPoint point) {
+
+        logger.info("登录校验拦截-结束");
     }
 }

@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,12 +46,11 @@ public class OperateController {
 	@ResponseBody
 	public E3Result focus(HttpServletRequest request,@RequestParam("shopId") int shopId)throws Exception {
 
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			if(shopId>0){
 				Shop shop=shopService.getShopById(shopId);
-				
+
 				Focus focus=new Focus("关注店铺", new Date(), user, shop);
 				focusService.save(focus);
 				return E3Result.ok();
@@ -67,8 +68,8 @@ public class OperateController {
 	@RequestMapping("/shop/collect")
 	@ResponseBody
 	public E3Result collect(HttpServletRequest request,@RequestParam("sourceId") int sourceId)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			if(sourceId>0){
 				Source source=sourceService.getSourceById(sourceId);
@@ -88,8 +89,8 @@ public class OperateController {
 	@RequestMapping("/shop/source/cancelFocus")
 	@ResponseBody
 	public E3Result cancelCollect(HttpServletRequest request,@RequestParam("sourceId") int sourceId)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			if(sourceId>0){
 				Collect collect=collectService.getCollectByuserId(user.getId(), sourceId);
@@ -109,9 +110,8 @@ public class OperateController {
 	@RequestMapping("/shop/cancelFocus")
 	@ResponseBody
 	public E3Result cancelFocus(HttpServletRequest request,@RequestParam("shopId") int shopId)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			if(shopId>0){
 				Focus focus=focusService.getFocusByShopId(shopId, user.getId());
@@ -127,8 +127,7 @@ public class OperateController {
 	@ResponseBody
 	public E3Result operate(HttpServletRequest request,@RequestParam("sourceId") int sourceId,Message message)throws Exception{
 
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			if(sourceId>0){
 				message.setTime(new Date());
@@ -147,8 +146,7 @@ public class OperateController {
 	@RequestMapping("/shop/message/report")
 	@ResponseBody
 	public E3Result report(HttpServletRequest request,@RequestParam("sourceId") int sourceId,Message message)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			if(sourceId>0){
 				message.setTime(new Date());

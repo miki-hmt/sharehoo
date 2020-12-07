@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,11 +55,12 @@ public class ArticleController {
 	@ResponseBody
 	public E3Result save(HttpServletRequest request,@RequestParam(value="articleImage",required=false) MultipartFile articleImage,@RequestParam(value="faceFileName",required=false) String faceFileName,
 			Article article){
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(user==null) {
 			return E3Result.build(401, "请登录后再发表...");
 		}
+
 		try {
 			if (articleImage!=null && articleImage.getSize()>0) {
 				//获取项目的static根路径  
@@ -115,10 +118,8 @@ public class ArticleController {
 	@ResponseBody
 	public E3Result delete(@RequestParam("articleId")int articleId,Model model,HttpServletRequest request)throws Exception{
 
-		User user=(User) request.getSession().getAttribute(Consts.CURRENTUSER);
-		if(user==null) {
-			return E3Result.build(401, "请登录后再发表...");
-		}
+		SessionUtil.getUser();
+
 		if(articleId>0){
 		Article article=articleService.getArticleById(articleId);
 		List<Critique> replyList=critiqueService.getArticleCritiquesByAid(articleId);
@@ -135,14 +136,12 @@ public class ArticleController {
 	 * 2017.05.17
 	 * 根据用户id得到文章列表
 	 */
+	@HasLogin
 	@RequestMapping("blog/manage/article/list")
 	public String list(HttpServletRequest request,@RequestParam(value="page",required=false) String page,Model model)throws Exception{
-		
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-		if(null==user) {
-			return "error";
-		}
+
+		User user = SessionUtil.getUser();
+
 		model.addAttribute("user", user);
 		if (StringUtil.isEmpty(page)) {
 			page="1";
@@ -180,13 +179,11 @@ public class ArticleController {
 	 * 2017.05.24
 	 * 根据用户Id添加博客
 	 */
+	@HasLogin
 	@RequestMapping("blog/manage/article/go")
 	public String add(HttpServletRequest request,Model model)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-		if(user==null) {
-			return "error";
-		}
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		
 		Tag tag = tagService.getTagByUserId(user.getId());
@@ -202,13 +199,11 @@ public class ArticleController {
 	 * 2017.05.24
 	 * 根据文章id更新文章
 	 */
+	@HasLogin
 	@RequestMapping("blog/manage/article/preview")
 	public String update(HttpServletRequest request,Model model,@RequestParam("articleId") int articleId)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-		if(user==null) {
-			return "error";
-		}
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		if(articleId>0){
 			Article article=articleService.getArticleById(articleId);
@@ -222,17 +217,14 @@ public class ArticleController {
 		}	
 		return "blog/manage/article_update";
 	}
-	
+
+
 	@RequestMapping("blog/manage/article/update")
 	@ResponseBody
 	public E3Result modify(HttpServletRequest request,@RequestParam(value="articleImage",required=false) MultipartFile image,@RequestParam(value="faceFileName",required=false) String faceFileName,
 			Article article){
-		
-		User user=(User) request.getSession().getAttribute(Consts.CURRENTUSER);
-		if(user==null) {
-			return E3Result.build(401, "请登录后再发表...");
-		}
-		
+		//进行登录验证，没登录会抛出异常	2020.12.07 miki
+		SessionUtil.getUser();
 		if(null!=article){
 			Article updateArticle=articleService.getArticleById(article.getId());
 			
@@ -309,11 +301,9 @@ public class ArticleController {
 	@RequestMapping("blog/manage/article/recommend")
 	@ResponseBody
 	public E3Result recommend(@RequestParam("articleId")int articleId,HttpServletRequest request)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-		if(user==null) {
-			return E3Result.build(401, "请登录后再发表...");
-		}
+
+		//进行登录验证，没登录会抛出异常	2020.12.07 miki
+		SessionUtil.getUser();
 		if(articleId>0){
 			Article article=articleService.getArticleById(articleId);
 			article.setNotice("recommendArticles");
@@ -331,11 +321,9 @@ public class ArticleController {
 	@RequestMapping("blog/manage/article/unRecommend")
 	@ResponseBody
 	public E3Result unRecommend(@RequestParam("articleId")int articleId,Model model,HttpServletRequest request)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
-		if(user==null) {
-			return E3Result.build(401, "请登录后再发表...");
-		}
+
+		//进行登录验证，没登录会抛出异常	2020.12.07 miki
+		SessionUtil.getUser();
 		if(articleId>0){
 			Article article=articleService.getArticleById(articleId);
 			article.setNotice("recommendArticles");
@@ -346,8 +334,10 @@ public class ArticleController {
 	
 	/*
 	 */
+	@HasLogin
 	@RequestMapping("blog/manage/article/details")
 	public String detail(@RequestParam("id")int id,Model model,HttpServletRequest request)throws Exception{
+
 		if(id>0){
 			Article article=articleService.getArticleById(id);
 			model.addAttribute("article", article);

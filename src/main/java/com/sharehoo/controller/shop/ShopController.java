@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -148,11 +150,11 @@ public class ShopController {
 	/*
 	 * 2017.08.02 miki 完善店铺中心模块功能
 	 */
+	@HasLogin(value="店铺中心")
 	@RequestMapping("/shop/center")
 	public String userCenter(HttpServletRequest request,Model model,@RequestParam(value="page",required=false) String page)throws Exception{
-		HttpSession session=request.getSession();
-		
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		model.addAttribute("user", user);
 		if(user!=null){
 			Shop shop=shopService.getShopByuserId(user.getId());
@@ -188,18 +190,16 @@ public class ShopController {
 	@ResponseBody
 	public E3Result active(HttpServletRequest request)throws Exception{
 
-		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+		User user= SessionUtil.getUser();
 		if(user==null) {
 			return E3Result.build(401, "您尚未登录...");
 		}
 		
 		//********** 防止非法操作，先判断用户存在不存在，用户存在的话，判断该用户是否已经激活过，激活过就不能二次激活，没激活，执行激活操作
-		if(user!=null){
-			Shop shop=shopService.getShopByuserId(user.getId());
-			if(shop!=null){
-				return E3Result.build(401, "店铺已经激活过了哦");
-			}else{
+		Shop shop=shopService.getShopByuserId(user.getId());
+		if(shop!=null){
+			return E3Result.build(401, "店铺已经激活过了哦");
+		}else{
 			Shop shop1=new Shop();
 			shop1.setDouNum(5);
 			shop1.setDownNum(0);
@@ -210,17 +210,16 @@ public class ShopController {
 			shop1.setFace("images/user/mo.jpg");
 			shop1.setTag("javaweb");
 			shopService.save(shop1);
-			}
 		}
+
 		return E3Result.ok();
 	}
 	
 	@RequestMapping("/shop/validate")
 	@ResponseBody
 	public E3Result validateStatus(HttpServletRequest request)throws Exception{
-			
-			HttpSession session=request.getSession();
-			User user=(User) session.getAttribute(Consts.CURRENTUSER);
+
+			User user= SessionUtil.getUser();
 			if(user==null) {
 				return E3Result.build(401, "您尚未登录...");
 			}
@@ -236,9 +235,7 @@ public class ShopController {
 	 */
 	@RequestMapping("/shop/upload.htm")
 	public String upload(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception{
-		HttpSession session=request.getSession();
-
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);
+		User user= SessionUtil.getUser();
 		if (user==null) {
 			//response.sendRedirect(request.getContextPath()+"/login.jsp");
 			request.getRequestDispatcher("${pageContext.request.contextPath}/bug/error.jsp").forward(request, response);
@@ -281,9 +278,8 @@ public class ShopController {
 	public String view(HttpServletRequest request,Model model,@PathVariable("shopId") int shopId,@RequestParam(value="type", required = false) String type,
 			@RequestParam(value="page",required=false) String page)throws Exception{
 
-		HttpSession session=request.getSession();
 		Focus focus = null;
-		User user=(User) session.getAttribute(Consts.CURRENTUSER);	//关注者，
+		User user = SessionUtil.getUser();	//关注者，
 		model.addAttribute("user", user);
 		model.addAttribute("type", type);
 		if(shopId>0){

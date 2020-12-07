@@ -3,6 +3,7 @@ package com.sharehoo.controller.forum;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,18 +25,14 @@ public class MessController {
 	@ResponseBody
 	public JSONObject getNews(HttpServletRequest request)throws Exception{
 		JSONObject result=new JSONObject();
-		HttpSession session=request.getSession();
-		User user = (User)session.getAttribute(Consts.CURRENTUSER);
-		if(user!=null){
-			Long count=replyService.getUnReplyCountByUserId(user.getId());
-			if(count>0){
-				result.put("mes", true);
-			}else{
-				result.put("mes", false);
-			}
+
+		Integer userId = SessionUtil.getUserId();
+		Long count=replyService.getUnReplyCountByUserId(userId);
+		if(count>0){
+			result.put("mes", true);
 		}else{
 			result.put("mes", false);
-		}		
+		}
 		return result;
 		
 	}
@@ -44,15 +41,11 @@ public class MessController {
 	@ResponseBody
 	public JSONObject getNewsCount(HttpServletRequest request)throws Exception{
 		JSONObject result=new JSONObject();
-		HttpSession session=request.getSession();
-		User user = (User)session.getAttribute(Consts.CURRENTUSER);
-		if(user!=null){
-			Long count=replyService.getUnReplyCountByUserId(user.getId());
-			if(count>0){
-				result.put("count", count);
-			}else{
-				result.put("mes", false);
-			}
+
+		Integer userId = SessionUtil.getUserId();
+		Long count=replyService.getUnReplyCountByUserId(userId);
+		if(count>0){
+			result.put("count", count);
 		}else{
 			result.put("mes", false);
 		}

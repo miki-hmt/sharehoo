@@ -8,6 +8,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.config.SessionUtil;
+import com.sharehoo.config.annotation.HasLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,8 +45,8 @@ public class SignController {
 	@RequestMapping("/shop/sign")
 	@ResponseBody
 	public E3Result save(HttpServletRequest request)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		Operate operate=new Operate();
 		String msg = "";
 		if(user!=null){
@@ -113,11 +115,12 @@ public class SignController {
 		}
 		return E3Result.build(200, msg);
 	}
-	
+
+	@HasLogin(value="签到页")
 	@RequestMapping("/sign/daydayup")
 	public String go(HttpServletRequest request,Model model)throws Exception{
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			Shop shop = shopService.getShopByuserId(user.getId());
 			Sign sign = signService.getSignByShopId(shop.getId());
@@ -148,8 +151,8 @@ public class SignController {
 	@ResponseBody
 	public E3Result getSign(HttpServletRequest request)throws Exception{
 		JSONObject result=new JSONObject();
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			Shop shop = shopService.getShopByuserId(user.getId());
 			Sign sign = signService.getSignByShopId(shop.getId());
@@ -166,14 +169,13 @@ public class SignController {
 			return E3Result.build(401, "签到信息获取异常");
 		}		
 	}
-		
+
 	//2018.02.07 显示本月签到日历
 	@RequestMapping("/shop/sign/show")
 	@ResponseBody
 	public JSONArray show(HttpServletRequest request)throws Exception{
 		JSONArray sign=new JSONArray();
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute(Consts.CURRENTUSER);
+		User user = SessionUtil.getUser();
 		if(user!=null){
 			SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM"); //设置时间格式为天
 			SimpleDateFormat sdf=new SimpleDateFormat("dd"); //设置时间格式为天
