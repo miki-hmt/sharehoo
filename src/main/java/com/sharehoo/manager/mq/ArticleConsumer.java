@@ -5,6 +5,9 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
+import com.sharehoo.entity.forum.Section;
+import com.sharehoo.entity.forum.Topic;
+import com.sharehoo.service.forum.TopicService;
 import org.apache.log4j.Logger;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -48,7 +51,9 @@ public class ArticleConsumer {
     private ArticleService articleService;
     @Autowired
     private UserService userService;
-    
+    @Autowired
+    private TopicService topicService;
+
     /**
      * @Description //TODO callservice模块的消费者，用来消费smartcall Reporter.java上报的会话消息*
      * @Param []
@@ -109,7 +114,8 @@ public class ArticleConsumer {
         	randNum = 1 + (int)(Math.random() * ((userCount - 1) + 1));
             user = userService.getUserById(randNum);
         }
-        
+
+        //发布为博客
         article.setUser(user);
         article.setImage(blog.getHeaderImg());
         article.setKeywords("java#转载#编码");
@@ -122,5 +128,23 @@ public class ArticleConsumer {
         article.setTitle(blog.getTitle());
         
         articleService.saveArticle(article);
+
+        //发布为帖子
+        Topic topic = new Topic();
+        topic.setGood(0);
+        topic.setTop(0);
+        topic.setPublishTime(new Date());
+
+        Section section = new Section();
+        section.setId(21);
+        topic.setSection(section);
+        topic.setContent(blog.getContent());
+        topic.setTitle(blog.getTitle());
+        topic.setUser(user);
+        topicService.saveTopic(topic);
+
+        int score = user.getScore() + 6;
+        user.setScore(score);
+        userService.saveUser(user);
     }
 }
