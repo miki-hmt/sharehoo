@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sharehoo.base.download.MikiUtil;
+import com.sharehoo.base.exception.BusinessException;
 import com.sharehoo.base.fencisys.CnUtil;
 import com.sharehoo.base.fencisys.EnUtil;
 import com.sharehoo.base.ipseek.IpGet;
@@ -92,7 +93,7 @@ public class SourceController {
 	private final static Logger logger = LoggerFactory.getLogger(SourceController.class);
 	
 	@RequestMapping("/shop/source/{sourceId}")
-	public String detail(HttpServletRequest request,@PathVariable("sourceId") int source_id,Model model,
+	public String detail(HttpServletRequest request, HttpServletResponse response, @PathVariable("sourceId") int source_id,Model model,
 			@RequestParam(value="page",required=false) String page)throws Exception{
 
 		User currentUser = SessionUtil.getUserNoThrowException();	//下载者
@@ -111,6 +112,9 @@ public class SourceController {
 		
 		if(source_id>0){
             Source source=sourceService.getSourceById(source_id);	//资源
+            if(ObjectUtils.isEmpty(source)) {
+            	throw new BusinessException("资源不存在..");
+            }
             model.addAttribute("source", source);
 
             User user=source.getUser();	//资源上传者
