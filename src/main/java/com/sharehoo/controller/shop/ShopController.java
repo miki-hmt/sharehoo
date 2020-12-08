@@ -279,7 +279,7 @@ public class ShopController {
 			@RequestParam(value="page",required=false) String page)throws Exception{
 
 		Focus focus = null;
-		User user = SessionUtil.getUser();	//关注者，
+		User user = SessionUtil.getUserNoThrowException();	//关注者，
 		model.addAttribute("user", user);
 		model.addAttribute("type", type);
 		if(shopId>0){

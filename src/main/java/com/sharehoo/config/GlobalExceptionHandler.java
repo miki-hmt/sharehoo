@@ -18,7 +18,7 @@ import com.sharehoo.util.forum.E3Result;
 
 /**
  * @ClassName GlobalExceptionHandler
- * @Description controller全局异常处理类
+ * @Description controller层全局异常处理类
  * @Author miki
  * @Date 2020/12/7 14:30
  * @Version 1.0
