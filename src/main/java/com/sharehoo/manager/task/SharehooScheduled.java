@@ -34,7 +34,7 @@ public class SharehooScheduled {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @Scheduled(cron = "0 0/2 * * * ?")
+    @Scheduled(cron = "0 0/30 * * * ?")
     public void updateOnlineUser() throws BusinessException {
         int number = 0;
 
