@@ -48,8 +48,7 @@ public class CKUploadController {
     
     @Value("${forum.WATER_NARK_CONTENT}")
 	private String WATER_NARK_CONTENT;
-	@Value("${forum.WATER_MARK_PATH}")
-	private String WATER_MARK_PATH;
+
     /** 
      * 图片上传 
      * @return 
@@ -127,8 +126,7 @@ public class CKUploadController {
            * 服务器图片上传路径E:/eclipse与项目文件/Soft/apache-tomcat-7.0.55/webapps/Forum/images/topicImage/	
          */
         
-        String content=WATER_NARK_CONTENT+"/"+currentUser.getNickName();
-        String water_path=WATER_MARK_PATH;
+        String content= WATER_NARK_CONTENT + "/"+currentUser.getNickName();
         
         WaterMark.pressText(content,uploadPath+"/"+fileName,"宋体",1,2,40, 400, 30);
                

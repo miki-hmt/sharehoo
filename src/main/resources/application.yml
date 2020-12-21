@@ -58,7 +58,6 @@ forum:
         GAMEDEV: GAMEDEV
         
    #sharehoo---water marker 2018.08.21
-   WATER_MARK_PATH: C:/apache-tomcat-7.0.55/webapps/Forum/images/topicImage/
    WATER_NARK_CONTENT: sharehoo社区
    
 spring:
