@@ -423,19 +423,20 @@ public class TopicController {
 	 */
 	@RequestMapping("/topic/section/{sectionId}")
 	public String list(@PathVariable("sectionId") int sectionId,@RequestParam(value="page",required = false) String page,Model model) throws Exception {
-		
+
+		if (StringUtil.isEmpty(page)) {
+			page = "1";
+		}
 		List<NewsBanner> bannerList = nbsBannerService.findSectionTopicBannerListByType();
 		model.addAttribute("bannerList", bannerList);
 		
 		Section section = sectionService.findSectionById(sectionId);
 		model.addAttribute("section", section);
 
-		List<Topic> zdTopicList = topicService.findZdTopicListBySectionId(sectionId, null);
+		PageBean zdPageBean = new PageBean(Integer.parseInt(page), 10);
+		List<Topic> zdTopicList = topicService.findZdTopicListBySectionId(sectionId, zdPageBean);
 		model.addAttribute("zdTopicList", zdTopicList);
-		
-		if (StringUtil.isEmpty(page)) {
-			page = "1";
-		}
+
 		PageBean pageBean = new PageBean(Integer.parseInt(page), 20);
 		List<Topic> ptTopicList = topicService.findPtTopicListBySectionId(sectionId, pageBean);
 		model.addAttribute("ptTopicList", ptTopicList);

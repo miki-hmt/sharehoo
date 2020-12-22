@@ -132,8 +132,9 @@ public class ArticleConsumer {
         //发布为帖子
         Topic topic = new Topic();
         topic.setGood(0);
-        topic.setTop(0);
+        topic.setTop(1);
         topic.setPublishTime(new Date());
+        topic.setModifyTime(new Date());
 
         Section section = new Section();
         section.setId(21);
