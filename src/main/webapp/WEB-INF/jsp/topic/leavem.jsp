@@ -32,12 +32,7 @@
 </div>	
 <div style="width: 1200px; margin: 0 auto;">
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 8;width: 1200px;" align="center">
-		<tr height="30" style="background:#AC3839">
-			<td style="text-indent:5;">
-				<b><font color="white">■ 秘密墙</font></b>
-			</td>
-			<td></td>
-		</tr>
+
 		<tr>
 			<td style="width: 213px;" valign="top">
 				<table style="margin-top: 10;margin-left: 20px;" class="">
