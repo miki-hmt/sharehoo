@@ -131,7 +131,7 @@ public class SolrController {
 		if (null != category_name) {
 			param.append("category_name=" + category_name);
 		}if (null != type) {
-			param.append("&type==" + type);
+			param.append("&type=" + type);
 		}if (null != keyword) {
 			param.append("&keyword=" + keyword);
 		}
