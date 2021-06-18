@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sharehoo.config.SessionUtil;
 import com.sharehoo.config.annotation.HasLogin;
+import com.sharehoo.manager.UserOperateManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +58,9 @@ public class ReplyController {
 	private ReplyService replyService;
 	@Autowired
 	private TopicService topicService;
+
+	@Autowired
+	private UserOperateManager userOperateManager;
 	
 
 	@RequestMapping("/reply/save")
@@ -247,7 +251,11 @@ public class ReplyController {
             Transport.send(message);
             
         }catch(Exception e){ logger.error("回复邮件发送失败.."+e.getMessage());}}
-		
+
+
+		//记录日志
+		userOperateManager.asyncOperateReplyLog(topic);
+
 		return E3Result.ok();
 	}
 	

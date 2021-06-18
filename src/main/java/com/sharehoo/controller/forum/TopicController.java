@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import com.sharehoo.config.SessionUtil;
 import com.sharehoo.config.annotation.HasLogin;
+import com.sharehoo.manager.AsyncManager;
+import com.sharehoo.manager.BaiduSpiderManager;
+import com.sharehoo.manager.factory.AsyncFactory;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -84,6 +87,8 @@ public class TopicController {
 	//2017.12.11 19:54	网页静态化实现
 	@Autowired
 	private FreeMarkerConfigurer freeMarkerConfigurer;
+	@Autowired
+	private BaiduSpiderManager spiderManager;
 
 	@RequestMapping("topic/map")
 	public String navPage(){
@@ -97,28 +102,17 @@ public class TopicController {
 	public String preSave(HttpServletRequest request,HttpServletResponse response,Model model,@RequestParam(value="sectionId",required=false) int sectionId) throws Exception {
 
 		// 验证发帖时，用户是否登录，如果没登录，自动跳转到指定页面2016.10.06
-		User currentUser = SessionUtil.getUser();
+		SessionUtil.getUser();
 		if(sectionId==0) {
 			sectionId = 21;
 		}
 		Section curSection = sectionService.findSectionById(sectionId);
 		model.addAttribute("curSection", curSection);
 		List<Section> sectionList = sectionService.findSectionList(null, null);
-		List<String> urls = new ArrayList<String>();
-		
-		//2020.05.05 miki 推送网站信息到百度爬虫
-		for (Section section : sectionList) {
-			urls.add("http://sharehoo.cn/topic/section/"+section.getId());
-		}
-		String result = PostUrlsToBaidu.postUrl(urls);
-		Log log = new Log();
-		log.setTime(new Date());
-		log.setType("commit url");
-		log.setOperation_log("向百度提交17个版本的链接："+result);
-		log.setUser(currentUser);		
-		logService.save(log);
-		
 		model.addAttribute("sectionList", sectionList);
+
+		//异步向百度提交链接信息
+		spiderManager.asyncCommitSections(sectionList);
 		
 		/** 2020.10.26
 		 * miki
@@ -239,13 +233,7 @@ public class TopicController {
 		}
 		
 		//2020.05.05 miki 推送网站信息到百度爬虫		
-		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/"+topic.getCode() + ".html");
-		Log log = new Log();
-		log.setTime(new Date());
-		log.setType("commit url");
-		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/"+topic.getCode() + ".html"+"提交结果："+result);
-		log.setUser(currentUser);		
-		logService.save(log);
+		spiderManager.asyncCommitTopicInfoLog(topic);
 		
 		return E3Result.ok();
 	}
@@ -333,18 +321,9 @@ public class TopicController {
 			// 关闭流
 			out.close();
 		} catch (Exception e) {
-			e.printStackTrace();logger.error(e);
+			logger.error(e);
 			return E3Result.build(401, "发表失败..", e.getMessage());
 		}
-		
-		//2020.05.05 miki 推送网站信息到百度爬虫		
-		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/"+old.getCode() + ".html");
-		Log log = new Log();
-		log.setTime(new Date());
-		log.setType("commit url");
-		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/"+old.getCode() + ".html"+"提交结果："+result);
-		log.setUser(currentUser);		
-		logService.save(log);
 		
 		return E3Result.ok();		
 	}
@@ -469,12 +448,7 @@ public class TopicController {
 		model.addAttribute("topicReplyCount", topicReplyCount);
 		
 		//2020.05.05 miki 推送网站信息到百度爬虫		
-		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/topic/section/"+sectionId);
-		Log log = new Log();
-		log.setTime(new Date());
-		log.setType("commit url");
-		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/topic/section/"+sectionId+"提交结果："+result);		
-		logService.save(log);
+		spiderManager.asyncCommitSectionInfoLog(section);
 
 		if("true".equals(oldVersion)){
 			return "topic/topicList";

@@ -18,12 +18,17 @@ import org.json.JSONObject;
  * 为使用方便首选淘宝api
  */
 public class IpSeekUtils {
+
+	private final static String API = "http://api.map.baidu.com/location/ip";
+	private final static String AK = "F454f8a5efe5e577997931cc01de3974";
+
 	/**
 	 * 查询ip所在省份，返回空值ip在国外或者发生错误
 	 * @param ip
 	 * @return
 	 */
 	public static String getIpProvinceByTaobao(String ip){
+		//String api=PropertiesLoader.getTaobaoApi();
 		String api=PropertiesLoader.getTaobaoApi();
 		String result=getIpAddress(api,ip,null);
 		JSONObject json;
@@ -45,9 +50,9 @@ public class IpSeekUtils {
 	}
 	
 	public static String getIpProvinceByBaidu(String ip){
-		String api=PropertiesLoader.getBaiduApi();
-		String ak=PropertiesLoader.getBaiduApiAk();
-		String result=getIpAddress(api,ip,ak);
+//		String api=PropertiesLoader.getBaiduApi();
+//		String ak=PropertiesLoader.getBaiduApiAk();
+		String result=getIpAddress(API,ip,AK);
 		JSONObject json;
 		String province="";
 		if(StringUtils.isNotBlank(result)){
@@ -93,7 +98,7 @@ public class IpSeekUtils {
 		//北京ip
 	//	String result=getIpAddress("218.30.64.194");
 	//	String result=getIpAddress("59.53.63.18");
-		String ip="120.25.78.31";
+		String ip="221.231.165.147";
 		System.out.println("baidu--->"+getIpProvinceByBaidu(ip));
 	}
 

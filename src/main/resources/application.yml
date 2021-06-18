@@ -4,7 +4,7 @@
       context-path: /sharehoo
 
 rocketmq:
-    name-server: 106.13.75.153:9876   #产线环境：106.13.75.153
+    name-server: 127.0.0.1:9876   #产线环境：106.13.75.153
     producer:
       group: article-group
       topic: article-topic

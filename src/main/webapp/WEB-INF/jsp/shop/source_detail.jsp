@@ -277,27 +277,26 @@ function Login(){
                <!-- 2017.08.05	当前用户与店铺店主同一人时，免费下载 -->
                
               <c:choose>
-             
-             <c:when test="${currentUser==null }">
-	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
-	              		<a target="_blank" href="javascript:Login()">尚未登录，无法下载</a>
-	              </span>
-	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >              
-	              		<a href="javascript:;" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a>
-	              </span>
-	              
-	               <!-- 2017.08.05	当前用户与店铺店主不同一人，积分足够，扣除积分下载 -->
-              </c:when>
-             
-		<!-- 未开通店铺的，默认直接开通店铺  2020.09.14 miki -->		
-		<c:when test="${currentShop==null }">
-              	<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
-              		<a href="javascript:check(${source.id})">下载</a>
-	              </span>
-	              <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >
-	              	<!-- <a href="/vip_code" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a> -->
-	              	<a href="${host}/shop/center?激活说明=点击墓碑下方的激活按钮进行激活" target="_blank">激活店铺</a>
-	              </span>
+				 <c:when test="${currentUser==null }">
+					  <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
+							<a target="_blank" href="javascript:Login()">尚未登录，无法下载</a>
+					  </span>
+					  <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >
+							<a href="javascript:;" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a>
+					  </span>
+
+					   <!-- 2017.08.05	当前用户与店铺店主不同一人，积分足够，扣除积分下载 -->
+				  </c:when>
+
+				<c:when test="${currentShop==null }">
+					<!--未开通店铺的，默认直接开通店铺  2020.09.14 miki -->
+					<span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_20" >
+						<a href="javascript:check(${source.id})">下载</a>
+					  </span>
+					  <span class="csdn-tracking-statistics o_vip_btn" data-mod="popu_336" >
+						<!-- <a href="/vip_code" class="dredge_vip" target="_blank">开通vip会员 免积分下载</a> -->
+						<a href="${host}/shop/center?激活说明=点击墓碑下方的激活按钮进行激活" target="_blank">激活店铺</a>
+					  </span>
               	</c:when>
 				
               	<c:when test="${currentShop.id==shop.id }">

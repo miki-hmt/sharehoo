@@ -10,6 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import com.sharehoo.config.SessionUtil;
 import com.sharehoo.config.annotation.HasLogin;
+import com.sharehoo.config.lang.BusinessType;
+import com.sharehoo.config.lang.OperatorType;
+import com.sharehoo.manager.BaiduSpiderManager;
+import com.sharehoo.manager.UserOperateManager;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -79,6 +83,10 @@ public class ShopController {
 	
 	@Autowired
     private RedisUtil redisTemplate8;      //redis 8号库  2020.08.28 miki
+	@Autowired
+	private UserOperateManager userOperateManager;
+	@Autowired
+	private BaiduSpiderManager baiduSpiderManager;
 	
 	@RequestMapping("/shop/index.htm")
 	public String home(Model model)throws Exception{
@@ -94,15 +102,6 @@ public class ShopController {
 		model.addAttribute("newSources", newSources);
 		List<Shop> richList=shopService.getRichShops();
 		model.addAttribute("richList", richList);
-		
-		//2020.05.05 miki 推送网站信息到百度爬虫		
-		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/index.htm");
-		Log log = new Log();
-		log.setTime(new Date());
-		log.setType("commit url");
-		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/index.htm【提交结果："+result);
-		log.setUser(null);		
-		logService.save(log);
 		
 		return "shop/home";
 	}
@@ -290,26 +289,8 @@ public class ShopController {
 			}
 			if(user!=null){
 				focus=focusService.getFocusByShopId(shopId,user.getId());
-
-				Log log1=new Log();
-				String ip=IpGet.getIp2(request);
-				String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
-				if(address.equals("[]")){
-					String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-					log1.setAddress(provence+">>"+"手机IP访问");
-				}else{
-					String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-					if(address!=null && address!=""){
-						log1.setAddress(provence+">>"+address);
-					}
-				}	
-				log1.setIp(ip);
-				log1.setTime(new Date());
-				log1.setType("visitor");
-				log1.setOperation_log("店铺主页访问");
-				log1.setUser(user);
-				log1.setShop(shop);
-				logService.save(log1);
+				//异步记录日志
+				userOperateManager.asyncOperateShopInfoLog(shop);
 			}
 			model.addAttribute("focus", focus);
 			
@@ -334,18 +315,7 @@ public class ShopController {
 			
 			
 			//2020.10.26 miki 防止过度提交百度爬虫，造成每天几千条的数据日志垃圾
-			Long date = redisTemplate8.getExpire(""+shopId);
-			if(date <= -1) {
-				//2020.05.05 miki 推送网站信息到百度爬虫		
-	    		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/"+shopId);
-	    		Log log = new Log();
-	    		log.setTime(new Date());
-	    		log.setType("commit url");
-	    		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/"+shopId +"【提交结果："+result);
-	    		log.setUser(null);		
-	    		logService.save(log);
-	    		redisTemplate8.setEx(""+shopId, shop.getShop_name(), 12, TimeUnit.HOURS);
-			}
+			baiduSpiderManager.asyncCommitShopInfoLog(shop);
 		}
 		return "shop/shop_home";
 	}

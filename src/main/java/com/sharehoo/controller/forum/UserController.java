@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sharehoo.config.SessionUtil;
 import com.sharehoo.config.annotation.HasLogin;
+import com.sharehoo.manager.UserOperateManager;
 import com.sharehoo.util.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -88,6 +89,9 @@ public class UserController {
 	private TopicService topicService;
 	@Autowired
 	private SectionService sectionService;
+
+	@Autowired
+	private UserOperateManager userOperateManager;
 	
 	@RequestMapping("/register")
 	public String toRegister() {
@@ -579,29 +583,10 @@ public class UserController {
 		}else{
 			session.setAttribute(Consts.CURRENTUSER, currentUser);
 			session.removeAttribute("error");		
-			Log log1=new Log();
-			String ip=IpGet.getIp2(request);
-			String address = "[]";
-			try {
-				address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
-			} catch (Exception e) {}
-			
-			if(address.equals("[]")){
-				String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-				log1.setAddress(provence+">>"+"手机IP访问");
-			}else{
-				String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-				if(address!=null && address!=""){
-					log1.setAddress(provence+">>"+address);
-				}
-			}	
-			
-			log1.setIp(ip);
-			log1.setTime(new Date());
-			log1.setType("userLogin");
-			log1.setOperation_log("用户登录");
-			log1.setUser(currentUser);
-			logService.save(log1);
+
+			//记录登录日志	2021.06.08
+			userOperateManager.asyncOperateUserLoginLog();
+
 			//********** 统计未登录的信息			
 			Long count2=replyService.getUnReplyCountByUserId(currentUser.getId());
 			session.setAttribute("count", count2);
@@ -660,25 +645,8 @@ public class UserController {
 		if (currentUser!=null&&currentUser.getType()==2) {
 			session.setAttribute(Consts.CURRENTUSER, currentUser);
 			
-			Log log1=new Log();
-			String ip=IpGet.getIp2(request);
-			String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
-			if(address.equals("[]")){
-				String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-				log1.setAddress(provence+">"+"手机Ip访问");
-			}else{
-				String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-				if(address!=null && address!=""){
-					log1.setAddress(provence+">"+address);
-				}
-			}	
-			log1.setIp(ip);
-			log1.setTime(new Date());
-			log1.setType("adminLogin");
-			log1.setOperation_log("管理员登录");
-			logService.save(log1);
-			
-			
+			//日志记录
+			userOperateManager.asyncOperateAdminLoginLog();
 		}else {
 			error="用户名或密码错误！";
 			return "admin/login";

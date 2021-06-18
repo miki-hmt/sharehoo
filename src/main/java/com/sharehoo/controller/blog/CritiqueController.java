@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sharehoo.config.SessionUtil;
+import com.sharehoo.manager.UserOperateManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +43,7 @@ public class CritiqueController {
 	@Autowired
 	private CritiqueService critiqueService;
 	@Autowired
-	private LogService logService;
+	private UserOperateManager userOperateManager;
 	
 	/*
 	 * miik 2017.06.07	保存留言
@@ -56,25 +57,10 @@ public class CritiqueController {
 			if(code.equals(String.valueOf(imageCode))) {
 				User user=userService.getUserByNickNameId(nicknameId);
 				model.addAttribute("user", user);
-				Log log1=new Log();
-				String ip=IpGet.getIp2(req);
-				
-				String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
-				if(address.equals("[]")){
-					String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-					log1.setAddress(provence+">>"+"手机IP访问");
-				}else{
-					String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-					if(address!=null && address!=""){
-						log1.setAddress(provence+">>"+address);
-					}
-				}					
-				log1.setIp(ip);
-				log1.setTime(new Date());
-				log1.setType("Blog_Critique");
-				log1.setOperation_log("博客留言");
-				logService.save(log1);
-								
+
+				//日志审计
+				userOperateManager.asyncOperateCritiqueLog();
+
 				if(user!=null){
 					critique.setTime(new Date());
 					critique.setNotice("1");

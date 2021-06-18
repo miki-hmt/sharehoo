@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sharehoo.config.SessionUtil;
+import com.sharehoo.manager.BaiduSpiderManager;
+import com.sharehoo.manager.UserOperateManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,10 +92,16 @@ public class SourceController {
 	private MenuService menuService;
 	@Autowired
 	private SearchService searchService;
+
+	@Autowired
+	private BaiduSpiderManager spiderManager;
+	@Autowired
+	private UserOperateManager userOperateManager;
+
 	private final static Logger logger = LoggerFactory.getLogger(SourceController.class);
 	
 	@RequestMapping("/shop/source/{sourceId}")
-	public String detail(HttpServletRequest request, HttpServletResponse response, @PathVariable("sourceId") int source_id,Model model,
+	public String detail(HttpServletRequest request, @PathVariable("sourceId") int source_id,Model model,
 			@RequestParam(value="page",required=false) String page)throws Exception{
 
 		User currentUser = SessionUtil.getUserNoThrowException();	//下载者
@@ -142,20 +150,7 @@ public class SourceController {
                 model.addAttribute("currentShop", currentShop);
 
                 //执行访问操作，必须要有用户登录才行 	2017.08.25 miki
-                String ip=IpGet.getIp2(request);
-                String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
-                if(address.equals("[]")){
-                    String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-                    address = provence+">>"+"手机IP访问";
-                }else{
-                    String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-                    if(address!=null && address!=""){
-                        address = provence+">"+address;
-                    }
-                }
-
-                Log log1 = new Log(ip, new Date(), "visitor", "店铺访问资源：【"+source.getName(), currentUser, shop, address);
-                logService.save(log1);
+				userOperateManager.asyncOperateShopViewLog(source, shop);
             }
 
             String signature=RadomUtil.getUUID();	//产生伪下载令牌，迷惑盗链者
@@ -183,14 +178,8 @@ public class SourceController {
             String pageCode=PageUtil.genPagination(request.getContextPath()+"/shop/source/"+source_id, commentTotal, Integer.parseInt(page), 6,null);
             model.addAttribute("pageCode", pageCode);
             
-            //2020.05.05 miki 推送网站信息到百度爬虫		
-    		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/source/"+source_id);
-    		Log log = new Log();
-    		log.setTime(new Date());
-    		log.setType("commit url");
-    		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/source/"+source_id +"【提交结果："+result);
-    		log.setUser(currentUser);		
-    		logService.save(log);
+            //2020.05.05 miki 推送网站信息到百度爬虫
+			spiderManager.asyncCommitDownloadSourceInfo(source_id);
 	    }
 
 		return "shop/source_detail";
@@ -415,19 +404,7 @@ public class SourceController {
 		
 		//HttpServletRequest req=ServletActionContext.getRequest();	//新建request对象，action中属性，因为为null
 		//执行访问操作，必须要有用户登录才行 	2017.08.25 miki		
-		String ip=IpGet.getIp2(request);
-		String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
-		if(address.equals("[]")){
-			String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-			address = provence+">>"+"手机IP访问";
-		}else{
-			String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-			if(address!=null && address!=""){
-				address = provence+">"+address;
-			}
-		}
-		Log log = new Log(ip, new Date(), "search", "搜索资源", null, null, address);
-		logService.save(log);
+		userOperateManager.asyncOperateSearchLog();
 		
 		return "shop/source_search";
 	}
@@ -488,20 +465,7 @@ public class SourceController {
 		}
 		//2017.12.28 miki 判断是否二次保存同一个搜索操作
 		//执行访问操作，必须要有用户登录才行 	2017.08.25 miki
-		
-		String ip=IpGet.getIp2(request);
-		String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
-		if(address.equals("[]")){
-			String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-			address = provence+">>"+"手机IP访问";
-		}else{
-			String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-			if(address!=null && address!=""){
-				address = provence+">"+address;
-			}
-		}
-		Log log1=new Log(ip, new Date(), "search", "搜索资源", null, null, address);
-		logService.save(log1);
+		userOperateManager.asyncOperateSearchLog();
 		
 		return "shop/solrJ_search_result";
 	}
@@ -583,19 +547,7 @@ public class SourceController {
 	}
 	
 		//执行访问操作，必须要有用户登录才行 	2017.08.25 miki		
-		String ip=IpGet.getIp2(request);
-		String address=GaoDeUtil.getAddress(ip);	//2018.01.27运用高德api得到当前地址
-		if(address.equals("[]")){
-			String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-			address = provence+">>"+"手机IP访问";
-		}else{
-			String provence=IpSeekUtils.getIpProvinceByBaidu(ip);
-			if(address!=null && address!=""){
-				address = provence+">"+address;
-			}
-		}
-		Log log1=new Log(ip, new Date(), "search", "搜索资源", null, null, address);
-		logService.save(log1);
+		userOperateManager.asyncOperateSearchLog();
 	
 	
 	return "shop/source_search";

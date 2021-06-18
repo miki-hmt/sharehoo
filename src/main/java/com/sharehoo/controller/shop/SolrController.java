@@ -6,6 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.manager.AsyncManager;
+import com.sharehoo.manager.BaiduSpiderManager;
+import com.sharehoo.manager.factory.AsyncFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -53,8 +56,9 @@ public class SolrController {
 	private MenuService menuService;
 	@Autowired
 	private SourceService sourceService;
+
 	@Autowired
-	private LogService logService;
+	private BaiduSpiderManager spiderManager;
 	
 	@RequestMapping("shop/source/serach")
 	public String searchItemList(Model model,@RequestParam(value="keyword",required=false) String keyword,
@@ -194,14 +198,8 @@ public class SolrController {
 			model.addAttribute("pageCode", pageCode);
 		}
 		
-		//2020.05.05 miki 推送网站信息到百度爬虫		
-		String result = PostUrlsToBaidu.postUrl("http://sharehoo.cn/shop/source/categories");
-		Log log = new Log();
-		log.setTime(new Date());
-		log.setType("commit url");
-		log.setOperation_log("向百度爬虫提交了该链接：http://sharehoo.cn/shop/source/categories【提交结果："+result);
-		log.setUser(null);		
-		logService.save(log);
+		//2021.06.08 miki 推送网站信息到百度爬虫
+		spiderManager.asyncCommitDownloadCategories();
 		
 		return "shop/solrJ_search_result";
 	}

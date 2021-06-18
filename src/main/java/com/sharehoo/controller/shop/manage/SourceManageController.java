@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sharehoo.config.SessionUtil;
 import com.sharehoo.config.annotation.HasLogin;
+import com.sharehoo.manager.BaiduSpiderManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,6 +68,9 @@ public class SourceManageController {
 	private CategoryService categoryService;
 	@Autowired
 	private MenuService menuService;
+
+	@Autowired
+	private BaiduSpiderManager baiduSpiderManager;
 	
 	
 	@RequestMapping("/shop/source/upload")
@@ -93,7 +97,7 @@ public class SourceManageController {
 					imageName = "file_" + DateUtil.getCurrentDateStr() +"."+ split[split.length-1];
 				}else {
 					imageName = "file_" + DateUtil.getCurrentDateStr() +"."+ split[1];
-				}			
+				}
 				File savePath=new File(realPath);
 				if(!savePath.exists()) {
 					savePath.mkdirs();
@@ -128,18 +132,7 @@ public class SourceManageController {
 			
 			//提交索引到百度
 			//2020.06.13 miki 推送网站信息到百度爬虫
-			List<String> urls = new ArrayList<String>();
-			
-			urls.add("http://sharehoo.cn/shop/source/"+source.getId());
-			urls.add("http://sharehoo.cn/shop/"+shop.getId());
-			String result = PostUrlsToBaidu.postUrl(urls);
-			Log log = new Log();
-			log.setTime(new Date());
-			
-			log.setType("commit url");		
-			log.setOperation_log("向百度爬虫提交了新增资源链接以及店铺更新链接：提交结果："+result);
-			log.setUser(user);					
-			logService.save(log);
+			baiduSpiderManager.asyncCommitSourceUploadInfoLog(source.getId(), shop.getId());
 			
 		} catch (Exception e) {
 			return E3Result.build(401, "资源发布失败..",e.getMessage());
