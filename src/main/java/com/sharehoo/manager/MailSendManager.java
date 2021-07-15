@@ -1,6 +1,4 @@
 package com.sharehoo.manager;
-
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -86,7 +84,7 @@ public class MailSendManager {
             transport.close();
         } catch (Exception e) {
             //邮件发送失败，可以忽略
-            logger.error("帖子回复邮件发送失败.." + e.getMessage());
+            logger.error("评论回复邮件发送失败.." + e.getMessage());
         }
     }
 

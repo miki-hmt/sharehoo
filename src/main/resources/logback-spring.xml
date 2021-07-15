@@ -59,7 +59,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
         </rollingPolicy>
 	<!-- 此日志文档只记录ERROR级别的 -->
 	        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-	            <level>ERROR</level>
+	            <level>INFO</level>
 	            <onMatch>ACCEPT</onMatch>
 	            <onMismatch>DENY</onMismatch>
 	        </filter>
@@ -78,9 +78,9 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
 		表示当前logger的appender-ref和rootLogger的appender-ref都有效
     -->
     <!-- hibernate logger -->
-    <logger name="com.sharehoo" level="debug" />
+    <logger name="com.sharehoo" level="info" />
     <!-- Spring framework logger -->
-    <logger name="org.springframework" level="debug" additivity="false"></logger>
+    <logger name="org.springframework" level="info" additivity="false"></logger>
 
 
 

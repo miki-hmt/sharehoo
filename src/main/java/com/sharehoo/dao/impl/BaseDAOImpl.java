@@ -4,12 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
-import org.hibernate.transform.Transformers;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 

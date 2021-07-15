@@ -1439,7 +1439,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		str = str.replace(/\n/g,"<br>");
  
 		//替换所有的空格（中文空格、英文空格都会被替换）
-		str = str.replace(/\s/g,"&nbsp;");
+		//str = str.replace(/\s/g,"&nbsp;");
 		return str;
 	}
 

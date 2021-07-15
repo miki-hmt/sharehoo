@@ -67,7 +67,7 @@ public class OnlineCounterListener implements HttpSessionListener {
         }
         if(number > 0) {
         	setOnlineUserNumber(number);
-            logger.info("创建了一个Session连接:[" + session.getId() + "]");
+            //logger.info("创建了一个Session连接:[" + session.getId() + "]");
         }
         		
   		//################################old 旧的获取在线人数的方式########################################################################################
