@@ -3,6 +3,7 @@ import com.sharehoo.base.ipseek.IpGet;
 import com.sharehoo.base.ipseek.IpSeekUtils;
 import com.sharehoo.config.SessionUtil;
 import com.sharehoo.entity.shop.Log;
+import com.sharehoo.manager.MailSendManager;
 import com.sharehoo.manager.UserOperateManager;
 import com.sharehoo.util.LogUtils;
 import com.sharehoo.util.PostUrlsToBaidu;
@@ -105,10 +106,7 @@ public class AsyncFactory {
 	/**
 	 * 提交版块信息到百度爬虫
 	 *
-	 * @param username 用户名
-	 * @param status   状态
-	 * @param message  消息
-	 * @param args     列表
+	 * @param urls 用户名
 	 * @return 任务task
 	 */
 	public static TimerTask commitSections(final List<String> urls) {
@@ -134,11 +132,6 @@ public class AsyncFactory {
 
 	/**
 	 * 提交下载社区分类信息到百度爬虫
-	 *
-	 * @param username 用户名
-	 * @param status   状态
-	 * @param message  消息
-	 * @param args     列表
 	 * @return 任务task
 	 */
 	public static TimerTask asyncCommitDownloadCategories() {
@@ -164,10 +157,7 @@ public class AsyncFactory {
 	/**
 	 * 提交下载社区资源详细信息到百度爬虫
 	 *
-	 * @param username 用户名
-	 * @param status   状态
-	 * @param message  消息
-	 * @param args     列表
+	 * @param sourceId 用户名
 	 * @return 任务task
 	 */
 	public static TimerTask asyncCommitDownloadSourceInfo(final Integer sourceId) {
@@ -194,10 +184,7 @@ public class AsyncFactory {
 	/**
 	 * 提交下载社区资源详细信息到百度爬虫
 	 *
-	 * @param username 用户名
-	 * @param status   状态
-	 * @param message  消息
-	 * @param args     列表
+	 * @param shopId 用户名
 	 * @return 任务task
 	 */
 	public static TimerTask asyncCommitShopInfo(final Integer shopId) {
@@ -224,10 +211,7 @@ public class AsyncFactory {
 	/**
 	 * 提交下载社区资源详细信息到百度爬虫
 	 *
-	 * @param username 用户名
-	 * @param status   状态
-	 * @param message  消息
-	 * @param args     列表
+	 * @param topicCode 用户名
 	 * @return 任务task
 	 */
 	public static TimerTask asyncCommitTopicInfo(final String topicCode) {
@@ -254,10 +238,7 @@ public class AsyncFactory {
 	/**
 	 * 提交下载社区资源详细信息到百度爬虫
 	 *
-	 * @param username 用户名
-	 * @param status   状态
-	 * @param message  消息
-	 * @param args     列表
+	 * @param sectionId 用户名
 	 * @return 任务task
 	 */
 	public static TimerTask asyncCommitSectionInfo(final Integer sectionId) {
@@ -284,10 +265,8 @@ public class AsyncFactory {
 	/**
 	 * 提交下载社区资源详细信息到百度爬虫
 	 *
-	 * @param username 用户名
-	 * @param status   状态
-	 * @param message  消息
-	 * @param args     列表
+	 * @param sourceId 用户名
+	 * @param shopId   状态
 	 * @return 任务task
 	 */
 	public static TimerTask asyncCommitSourceUploadInfoLog(final Integer sourceId, final Integer shopId) {
@@ -312,6 +291,35 @@ public class AsyncFactory {
 				} catch (IOException e) {
 					sys_user_logger.error("向百度爬虫提交请求，异常：{}", e.getMessage());
 				}
+			}
+		};
+	}
+
+
+	/**
+	 * 异步发送帖子回复邮件
+	 * 2021.07.15 miki
+	 */
+	public static TimerTask asyncSendReplyToTopic(String receiver, Integer topicId, String topicTitle ){
+		return new TimerTask() {
+			@Override
+			public void run() {
+				MailSendManager mailSendManager = SpringUtils.getBean(MailSendManager.class);
+				mailSendManager.sendReplyToTopic(receiver, topicId, topicTitle);
+			}
+		};
+	}
+
+	/**
+	 * 异步发送帖子回复邮件
+	 * 2021.07.15 miki
+	 */
+	public static TimerTask asyncSendReplyToComment(String receiver, Integer replyId, String replyContent ){
+		return new TimerTask() {
+			@Override
+			public void run() {
+				MailSendManager mailSendManager = SpringUtils.getBean(MailSendManager.class);
+				mailSendManager.sendReplyToComment(receiver, replyId, replyContent);
 			}
 		};
 	}

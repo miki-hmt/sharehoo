@@ -33,9 +33,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class CDKController {
-	
-	@Autowired
-	private HttpServletRequest request;
+
 	@Autowired
 	private CdkService cdkService;
 	@Autowired
@@ -53,7 +51,7 @@ public class CDKController {
 	 */
 	@RequestMapping("/shop/cdk/batchAdd")
 	@ResponseBody
-	public E3Result addCdk(@RequestParam("total") int total,@RequestParam("num") int num)throws Exception{
+	public E3Result addCdk(@RequestParam("total") int total,@RequestParam("num") int num, HttpServletRequest request)throws Exception{
 
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
@@ -81,7 +79,7 @@ public class CDKController {
 	 */
 	@RequestMapping("/shop/cdk/update")
 	@ResponseBody
-	public E3Result update(@RequestParam("cdkId") int cdkId,Cdk cdk)throws Exception{
+	public E3Result update(@RequestParam("cdkId") int cdkId,Cdk cdk, HttpServletRequest request)throws Exception{
 		JSONObject result=new JSONObject();
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
@@ -106,7 +104,8 @@ public class CDKController {
 	* @throws
 	 */
 	@RequestMapping("/admin/shop/cdks")
-	public String list(@RequestParam("page") String page,Model model,@RequestParam(value="error",required=false) String error)throws Exception{
+	public String list(@RequestParam("page") String page,Model model,@RequestParam(value="error",required=false) String error,
+					   HttpServletRequest request)throws Exception{
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
@@ -146,7 +145,7 @@ public class CDKController {
 	 */
 	@RequestMapping("/shop/cdk/delete")
 	@ResponseBody	
-	public E3Result delete(@RequestParam("cdkId") int cdkId,Cdk cdk)throws Exception{
+	public E3Result delete(@RequestParam("cdkId") int cdkId,Cdk cdk, HttpServletRequest request)throws Exception{
 		JSONObject result=new JSONObject();
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
@@ -166,7 +165,7 @@ public class CDKController {
 	
 	@RequestMapping("/shop/cdk/exchange")
 	@ResponseBody
-	public E3Result exchange(@RequestParam("code") String code)throws Exception{
+	public E3Result exchange(@RequestParam("code") String code, HttpServletRequest request)throws Exception{
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		Shop shop=shopService.getShopByuserId(user.getId());
@@ -203,7 +202,7 @@ public class CDKController {
 	}
 	
 	@RequestMapping("/shop/cdk/buy")
-	public String buy(Model model)throws Exception{
+	public String buy(Model model, HttpServletRequest request)throws Exception{
 		HttpSession sessiom=request.getSession();
 		User user=(User)sessiom.getAttribute(Consts.CURRENTUSER);
 		model.addAttribute("user", user);
@@ -212,7 +211,7 @@ public class CDKController {
 		if (shop!=null) {
 			return "shop/pay";
 		}else{
-			return "errorAdmin";
+			return "bug/error";
 		}		
 	}
 }

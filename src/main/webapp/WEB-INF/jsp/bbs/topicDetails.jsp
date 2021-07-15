@@ -1426,11 +1426,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         debugger
         var text4 ="引用【 ";
         var text5="】楼：";
-        var text6="：";
-        document.getElementById("reply").value = text4+d+text5+c+text6;
+        var text6="######：<br/>";
+        document.getElementById("reply").value = text4 + d + text5 + c + text6;
         document.getElementById('reply').focus();
 
     }
+	
+	//格式化textArea文本
+	function formatContent(str){
+		//替换所有的换行符
+		str = str.replace(/\r\n/g,"<br>")
+		str = str.replace(/\n/g,"<br>");
+ 
+		//替换所有的空格（中文空格、英文空格都会被替换）
+		str = str.replace(/\s/g,"&nbsp;");
+		return str;
+	}
 
     //简单的 敏感词汇验证  2016.12.13 ....时间允许，可以建一个数据库表，存储相关词汇
     //定义敏感字符
@@ -1455,7 +1466,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             return true;
         }
     }
-
+	
+	
     $(function(){
         $("#message_face").jqfaceedit({txtAreaObj:$("#reply"),containerObj:$('#emotionContainer'), textareaid:'reply', top:25,left:-27});
         //显示表情
@@ -1478,6 +1490,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             tipError("最多输入1000个字符！");
             return false;
         }
+		
+		//格式化文本
+		var text = formatContent($("#reply").val());
 
         //敏感词汇判断   2016.12.13@miki
 
@@ -1487,6 +1502,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 sonId = "0";
             }
             var formData = new FormData($("#replyForm")[0]);
+			//替换格式化后的文本
+			formData.set("content", text);
             $.ajax({
                 type : "POST",
                 url : "${host}/reply/save?sonId="+sonId,

@@ -10,13 +10,9 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.sharehoo.config.SessionUtil;
 import com.sharehoo.config.annotation.HasLogin;
-import com.sharehoo.manager.AsyncManager;
 import com.sharehoo.manager.BaiduSpiderManager;
-import com.sharehoo.manager.factory.AsyncFactory;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,14 +26,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-
-import com.sharehoo.config.lang.Consts;
 import com.sharehoo.entity.forum.PageBean;
 import com.sharehoo.entity.forum.Reply;
 import com.sharehoo.entity.forum.Section;
 import com.sharehoo.entity.forum.Topic;
 import com.sharehoo.entity.forum.User;
-import com.sharehoo.entity.shop.Log;
 import com.sharehoo.entity.shop.NewsBanner;
 import com.sharehoo.service.LogService;
 import com.sharehoo.service.forum.NewsBannerService;
@@ -45,24 +38,18 @@ import com.sharehoo.service.forum.ReplyService;
 import com.sharehoo.service.forum.SectionService;
 import com.sharehoo.service.forum.TopicService;
 import com.sharehoo.service.forum.UserService;
-import com.sharehoo.util.PostUrlsToBaidu;
 import com.sharehoo.util.forum.E3Result;
 import com.sharehoo.util.forum.IDUtils;
 import com.sharehoo.util.forum.PageUtil;
-import com.sharehoo.util.forum.ResponseUtil;
 import com.sharehoo.util.forum.StringUtil;
-
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import net.sf.json.JSONObject;
 
 @Controller
 public class TopicController {
 	
 	private Logger logger = Logger.getLogger(TopicController.class);
 	private static final long serialVersionUID = 1L;
-	@Autowired
-	private HttpServletRequest request;	
 	@Resource
 	private TopicService topicService;
 	@Resource
@@ -379,7 +366,7 @@ public class TopicController {
 	 * 2017.05.04 留言板显示列表
 	 */
 	@RequestMapping("/secret")
-	public String leaveList(@RequestParam(value="page",required = false) String page,Model model) throws Exception {
+	public String leaveList(@RequestParam(value="page",required = false) String page,Model model, HttpServletRequest request) throws Exception {
 		if (StringUtil.isEmpty(page)) {
 			page = "1";
 		}
@@ -401,7 +388,8 @@ public class TopicController {
 	* @throws
 	 */
 	@RequestMapping("/topic/section/{sectionId}")
-	public String list(@PathVariable("sectionId") int sectionId,@RequestParam(value="page",required = false) String page,Model model) throws Exception {
+	public String list(@PathVariable("sectionId") int sectionId,@RequestParam(value="page",required = false) String page,
+					   Model model, HttpServletRequest request) throws Exception {
 
 		if (StringUtil.isEmpty(page)) {
 			page = "1";
@@ -427,23 +415,16 @@ public class TopicController {
 		
 		Map<Topic, Reply> topicLastReply=new HashMap<Topic, Reply>();
 		Map<Topic, Long> topicReplyCount=new HashMap<Topic, Long>();
+
+		//统计每个帖子的回复数和最近回复数
+
 		for (Topic topic : zdTopicList) {
-			Reply reply = replyService.findLastReplyByTopicId(topic.getId());
-			Long replyCount = replyService.getReplyCountByTopicId(topic.getId());
-			if (reply != null) {
-				topicLastReply.put(topic, reply);
-			}
-			topicReplyCount.put(topic, replyCount);
+			totalTopicReplyCount(topicLastReply, topicReplyCount, topic);
 		}
-		
 		for (Topic topic : ptTopicList) {
-			Reply reply = replyService.findLastReplyByTopicId(topic.getId());
-			Long replyCount = replyService.getReplyCountByTopicId(topic.getId());
-			if (reply != null) {
-				topicLastReply.put(topic, reply);
-			}
-			topicReplyCount.put(topic, replyCount);
+			totalTopicReplyCount(topicLastReply, topicReplyCount, topic);
 		}
+
 		model.addAttribute("topicLastReply", topicLastReply);
 		model.addAttribute("topicReplyCount", topicReplyCount);
 		
@@ -456,6 +437,15 @@ public class TopicController {
 		return "bbs/categories_single";
 	}
 
+	private void totalTopicReplyCount(Map<Topic, Reply> topicLastReply, Map<Topic, Long> topicReplyCount, Topic topic){
+		Reply reply = replyService.findLastReplyByTopicId(topic.getId());
+		Long replyCount = replyService.getReplyCountByTopicId(topic.getId());
+		if (reply != null) {
+			topicLastReply.put(topic, reply);
+		}
+		topicReplyCount.put(topic, replyCount);
+	}
+
 	/**
 	 * 2017.04.13 后台显示所有帖子列表
 	 * 
@@ -463,7 +453,7 @@ public class TopicController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/admin/topics")
-	public String listAdmin(@RequestParam(value="page",required = false) String page,Model model) throws Exception {
+	public String listAdmin(@RequestParam(value="page",required = false) String page,Model model, HttpServletRequest request) throws Exception {
 		if (StringUtil.isEmpty(page)) {
 			page = "1";
 		}
