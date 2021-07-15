@@ -233,7 +233,8 @@
             <artifactId>spring-boot-starter-data-solr</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+        <!-- 为什么是：jdk15？人家包就是15，没有16，17，18。去官方主页看了一下，
+            的确最后更新停在2010年，最后一个包就是json-lib-2.4-jdk15.jar -->
         <dependency>
             <groupId>net.sf.json-lib</groupId>
             <artifactId>json-lib</artifactId>

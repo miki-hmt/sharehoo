@@ -1,148 +1,187 @@
 server:
-    port: 8080
-    servlet:
-      context-path: /sharehoo
+  port: 8080
+  servlet:
+    context-path: /sharehoo
+
+rocketmq:
+  name-server: 106.13.75.153:9876   #产线环境：106.13.75.153
+  producer:
+    group: article-group
+    topic: article-topic
+    tag_article: article-toSharehoo
+    callcenter_topic: call-center-topic
+    callcenter_group: call-center-group
+  consumer:
+    group: article-group
+    topic: article-topic
+    tag_report: article-toSharehoo
+
+shop:
+  solr-host: http://106.13.75.153:8010/solr/collection1
+
 forum:
-   leavemessage:
-        SECRET_TOPIC: 40
-   version:
-     old: false
-   topic:
-        #index.jsp--topics--count 2018.08.10
-        NEW_TOPIC: 13
-        YUAN_TOPIC: 15
-        CHU_TOPIC: 15
-        RECOMMEND: 15
-        
-        #topic--secret--count 2018.11.29
-        SECRET_TOPIC: 40
-        #solr_search.jsp--source--count 2018.08.17
-        SEARCH_RESULT_ROWS: 10
-        SEARCH_TOPIC_RESULT_ROWS: 15
-        
-        #redis
-        YUAN_CHUANG: YUAN_CHUANG
-        ADVICE: ADVICE
-        JAVAWEB: JAVAWEB
-        ERSHOU: ERSHOU
-        MONEY: MONEY
-        JOB_INTERVIEW: JOB_INTERVIEW
-        CODE: CODE
-        SAY: SAY
-        WEB: WEB
-        GAME: GAME
-        SERVERDEV: SERVERDEV
-        MUSIC: MUSIC
-        FRIEND: FRIEND
-        BIGDATA: BIGDATA
-        WECHAT: WECHAT
-        FOOD: FOOD
-        GAMEDEV: GAMEDEV
-        
-   #sharehoo---water marker 2018.08.21
-   WATER_MARK_PATH: C:/apache-tomcat-7.0.55/webapps/Forum/images/topicImage/
-   WATER_NARK_CONTENT: sharehoo社区
-   
+  leavemessage:
+    SECRET_TOPIC: 40
+  # 旧版本论坛页面的兼容问题，设置true，则默认使用旧页面样式   2020.09.06 miki
+  version:
+    old: false
+  topic:
+    #index.jsp--topics--count 2018.08.10
+    NEW_TOPIC: 13
+    YUAN_TOPIC: 15
+    CHU_TOPIC: 15
+    RECOMMEND: 15
+
+    #topic--secret--count 2018.11.29
+    SECRET_TOPIC: 40
+    #solr_search.jsp--source--count 2018.08.17
+    SEARCH_RESULT_ROWS: 10
+    SEARCH_TOPIC_RESULT_ROWS: 15
+
+    #redis
+    YUAN_CHUANG: YUAN_CHUANG
+    ADVICE: ADVICE
+    JAVAWEB: JAVAWEB
+    ERSHOU: ERSHOU
+    MONEY: MONEY
+    JOB_INTERVIEW: JOB_INTERVIEW
+    CODE: CODE
+    SAY: SAY
+    WEB: WEB
+    GAME: GAME
+    SERVERDEV: SERVERDEV
+    MUSIC: MUSIC
+    FRIEND: FRIEND
+    BIGDATA: BIGDATA
+    WECHAT: WECHAT
+    FOOD: FOOD
+    GAMEDEV: GAMEDEV
+
+  #sharehoo---water marker 2018.08.21
+  WATER_NARK_CONTENT: sharehoo社区
+
 spring:
-    #2019.09.10 miki 设置topic的freemarker模板引擎文件的路径
-    freemarker:
-        HTML_GEN_PATH: D:/soft/freemarker/
-        template-loader-path: classpath:/templates/
-        #- /templates/
-        #- file:./templates/
-        cache: false
-        settings:
-            classic_compatible: true #处理空值
-            template_update_delay: 0
-            datetime_format: yyyy-MM-dd HH:mm
-            number_format: 0.##
-    datasource:
-        url: jdbc:mysql://127.0.0.1:3306/db_forum?useSSL=false&characterEncoding=utf8
-        username: root
-        password: root
-        #type: mysql
-        # 采购信息库
-        dbtype: mysql
-        dbuser: root
-        dbpwd: root
-        dbip: 127.0.0.1   # 10.192.0.190     #
-        dbport: 3306
-        dbname: db_forum
-        #pid: 5899
-        path: project/reports/wechat
-        fid:
-        
-    #springboot 集成hibernate 2019.07.04  miki
-    jpa:
-        database: mysql
-        show-sql: false
-        hibernate:
-            ddl-auto: none   #暂时用不到
-            naming: 
-              physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   #2019.08.14 驼峰命名字段时，不让jpa大写转小写字段      
-        properties:
-            hibernate.format_sql: true
-            hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-            hibernate.cache.use_second_level_cache: false
-            hibernate.search.default.directory_provider: filesystem
-            hibernate.search.default.indexBase: ./indexes
-            hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
-            current_session_context_class: org.springframework.orm.hibernate4.SpringSessionContext
-        open-in-view: true
-    #2019.09.13 miki 社区首页数据缓存
-    redis: 
-        host: 127.0.0.1
-        password:
-        port: 6379   
-        timeout: 50000
-        database: 0
-        jedis:
-          pool:
-            max-active: 8
-            max-idle: 8  
-            min-idle: 0
-            max-wait: -1
-        lettuce:
-          pool:
-            max-active: 8
-            max-wait:  -1
-            max-idle: 8
-            min-idle: 0
-    session:
-      store-type: redis
-      
-    data:
-        solr:
-          host: http://localhost:8081/solr-topic/collection1   
-              
-    servlet:
-        multipart:
-            enabled: true
-            file-size-threshold: 0
-            max-file-size: 100MB     #2019.09.08 miki 配置店铺上传资源的最大值
-            max-request-size: 100MB   #2019.09.08 miki 配置文件最大下载大小 
-    
-            
-    # 2019.07.04  miki  配置springboot访问jsp页面
-    mvc:
-        view:
-          prefix: /WEB-INF/jsp/
-          suffix: .jsp
-    
-    site:
-        store:
-            root: /data/sharehoo
-            # 存储模式, 可选值 absolute / relative
-            repo: relative
+  #    profiles:
+  #      active: dev
 
-            # 是否开启资源域名
-            domain: false
+  #2019.09.10 miki 设置topic的freemarker模板引擎文件的路径
+  freemarker:
+    HTML_GEN_PATH: D:/soft/freemarker/
+    template-loader-path: classpath:/templates/
+    #- /templates/
+    #- file:./templates/
+    cache: false
+    settings:
+      classic_compatible: true #处理空值
+      template_update_delay: 0
+      datetime_format: yyyy-MM-dd HH:mm
+      number_format: 0.##
 
-            # ---------------------------------
-            # 资源域名, resource.domain = true 是有效
-            # 配置域名, 将域名的根目录指向 store.root 配置的地址
-            # ---------------------------------
-            host: http://localhost:8088/sharehoo
+  #springboot 集成hibernate 2019.07.04  miki
+  jpa:
+    database: mysql
+    show-sql: false
+    hibernate:
+      ddl-auto: none   #暂时用不到
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   #2019.08.14 驼峰命名字段时，不让jpa大写转小写字段
+    properties:
+      hibernate.format_sql: true
+      hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      hibernate.cache.use_second_level_cache: false
+      hibernate.search.default.directory_provider: filesystem
+      hibernate.search.default.indexBase: ./indexes
+      hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+      current_session_context_class: org.springframework.orm.hibernate4.SpringSessionContext
+    open-in-view: true
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/db_forum?useSSL=false&characterEncoding=utf8
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 下面为连接池的补充设置，应用到上面所有数据源中
+      # 初始化大小，最小，最大
+      initialSize: 1
+      minIdle: 3
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,log4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      web-stat-filter:
+        session-stat-enable: false
+
+  #2019.09.13 miki 社区首页数据缓存
+  redis:
+    host: 127.0.0.1   #产线环境：106.13.75.153
+    password:
+    port: 6379
+    timeout: 50000
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait:  -1
+        max-idle: 8
+        min-idle: 0
+  session:
+    store-type: redis
+
+  data:
+    solr:
+      host: http://106.13.75.153:8010/solr-topic/collection1
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 100MB     #2019.09.08 miki 配置店铺上传资源的最大值
+      max-request-size: 100MB   #2019.09.08 miki 配置文件最大下载大小
+
+
+  # 2019.07.04  miki  配置springboot访问jsp页面
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+  site:
+    store:
+      root: /data/sharehoo
+      # 存储模式, 可选值 absolute / relative
+      repo: relative
+
+      # 是否开启资源域名
+      domain: false
+
+      # ---------------------------------
+      # 资源域名, resource.domain = true 是有效
+      # 配置域名, 将域名的根目录指向 store.root 配置的地址    sharehoo.cn
+      # ---------------------------------
+      host: http://localhost:8080/sharehoo
 
 logging:
-  file: /../../idp/logs/dip/dip.log #${catalina.home}/../../idp/logs/dip/dip.log
+  file: /../../idp/logs/sharehoo/sharehoo.log #${catalina.home}/../../idp/logs/dip/dip.log
+  pattern:
+    level: debug
