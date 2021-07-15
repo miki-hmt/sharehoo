@@ -55,7 +55,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>25.1-jre</version>
+            <version>29.0-jre</version>
         </dependency>
 
         <!-- jpa集成hibernate框架	2019.07.04	miki -->
