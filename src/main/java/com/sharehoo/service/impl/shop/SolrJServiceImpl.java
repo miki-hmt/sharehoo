@@ -69,12 +69,8 @@ public class SolrJServiceImpl implements SolrJService {
 				shopSolrClient.commit();
 					//返回提交成功
 				} catch (SolrServerException e) {
-					
-					e.printStackTrace();
 					return E3Result.build(500, "数据导入异常");
 				} catch (IOException e) {
-					
-					e.printStackTrace();
 					return E3Result.build(500, "数据导入异常");
 				}
 			return E3Result.ok();

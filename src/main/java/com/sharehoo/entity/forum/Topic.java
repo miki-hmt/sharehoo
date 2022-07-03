@@ -33,7 +33,10 @@ public class Topic implements Serializable{
 	private Date modifyTime;			//修改时间
 	private int good=0;					//是否精华	0为普通；1为精华
 	private int top=0;					//是否置顶	0为普通；1为置顶
-	
+
+	//2021.12.26 增加帖子状态审核（防止不法之人对帖子进行胡乱写）
+	private Integer status;
+
 	private String code;
 	private List<Reply> replyList=new ArrayList<Reply>();
 	
@@ -125,4 +128,11 @@ public class Topic implements Serializable{
 		this.code = code;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 }

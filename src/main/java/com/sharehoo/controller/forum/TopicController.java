@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -136,6 +137,10 @@ public class TopicController {
 	@RequestMapping(value="/secret/publish",method = RequestMethod.POST)
 	@ResponseBody
 	public E3Result secretTopicSave(HttpServletRequest request,HttpServletResponse response,Topic topic) throws Exception {
+
+		//feature(2021.12.26): 校验帖子每日发布数量上限
+		topicService.checkPublishLimit();
+
 		topic.setPublishTime(new Date());
 		topic.setModifyTime(new Date());
 		topicService.saveTopic(topic);
@@ -169,6 +174,9 @@ public class TopicController {
 	@RequestMapping("/topic/publish")
 	@ResponseBody
 	public E3Result save(HttpServletRequest request,HttpServletResponse response,Topic topic) throws Exception {
+
+		//feature(2021.12.26): 校验帖子每日发布数量上限
+		topicService.checkPublishLimit();
 
 		String code = IDUtils.genTopicCode();
 		topic.setCode("topics/"+code);
@@ -216,7 +224,8 @@ public class TopicController {
 			// 关闭流
 			out.close();
 		} catch (Exception e) {
-			e.printStackTrace();logger.error(e);return E3Result.build(401, "发表失败..", e.getMessage());
+			logger.error(e);
+			return E3Result.build(401, "发表失败..", e.getMessage());
 		}
 		
 		//2020.05.05 miki 推送网站信息到百度爬虫		
@@ -272,7 +281,11 @@ public class TopicController {
 		
 		old.setSection(topic.getSection());
 		old.setContent(topic.getContent());
-		
+		//feature(2021.12.26): 增加状态审核
+		if(!ObjectUtils.isEmpty(topic.getStatus())){
+			old.setStatus(topic.getStatus());
+		}
+
 		topicService.saveTopic(old);
 		
 		//************2017.11.16 20:31 网页静态化实例
@@ -460,6 +473,13 @@ public class TopicController {
 		Topic s_topic = new Topic();
 		s_topic.setTop(2);
 		s_topic.setGood(2);
+
+		//2021.12.26 模糊搜索
+		String title = request.getParameter("s_topic.title");
+		if(!ObjectUtils.isEmpty(title)){
+			s_topic.setTitle(title);
+		}
+
 		PageBean pageBean = new PageBean(Integer.parseInt(page), 10);
 		List<Topic> topicList = topicService.findTopicList(s_topic, pageBean);
 		model.addAttribute("topicList", topicList);

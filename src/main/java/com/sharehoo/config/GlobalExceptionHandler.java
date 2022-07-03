@@ -24,7 +24,8 @@ import com.sharehoo.util.forum.E3Result;
  * @Version 1.0
  */
 
-@ControllerAdvice(value = {"com.sharehoo.controller"})
+//@ControllerAdvice(value = {"com.sharehoo.controller"})
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class.getName());
@@ -33,7 +34,7 @@ public class GlobalExceptionHandler {
      * 1.处理自定义业务异常\底层的微服务业务异常
      */
     @ExceptionHandler(value = {UserException.class})
-    @ResponseStatus(code = HttpStatus.CONFLICT)
+    //@ResponseStatus(code = HttpStatus.CONFLICT)	（2021.12.26）去掉该注释，否则会返回409状态码
     @ResponseBody
     public E3Result handleBusinessException(UserException ex) {
         logger.warn("请求异常-{}:{}", ex.getCode(), ex.getMessage());
@@ -44,7 +45,7 @@ public class GlobalExceptionHandler {
      * 2.顶级异常捕获处理
      */
     @ExceptionHandler(value = {Exception.class})
-    @ResponseStatus(code = HttpStatus.CONFLICT)
+    //@ResponseStatus(code = HttpStatus.CONFLICT)
     @ResponseBody
     public E3Result handleException(Exception ex) {
     	if(ex instanceof NullPointerException) {

@@ -62,7 +62,6 @@ public class TopicSolrJServiceImpl implements TopicSolrJService {
 			topicSolrServer.commit();
 			
 			} catch (Exception e) {
-				e.printStackTrace();
 				return E3Result.build(500, "数据导入异常");
 			} 	
 		return E3Result.ok();

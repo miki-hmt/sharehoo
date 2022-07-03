@@ -57,13 +57,14 @@
 	});
 
 
-	function modifyTopic(title, top, good, section, topicId){
+	function modifyTopic(title, top, good, section, topicId, status){
 		debugger
 		$("#utitle").val(title);
 		$("#uid").val(topicId);
 		$("#utop").val(top);
 		$("#ugood").val(good);
 		$("#usection").val(section);
+		$("#ustatus").val(status);
 
 		$.post("${host}/admin/topic/get",{topicId:topicId},function(result){
 			if (result.status == 200) {
@@ -182,7 +183,7 @@ function deleteTopics(){
 		<!--2020.08.12 miki 表头样式-->
 		<div id="tooBar" style="padding: 10px 0px 0px 10px;">
 			<a href="#" role="button" class="btn btn-danger" onclick="javascrip:deleteTopics()">批量删除</a>
-			<form action="Topic_listAdmin.action" method="post" class="form-search">
+			<form action="${host}/admin/topics" method="post" class="form-search">
 			<table cellpadding="5px;">
 				<tr>
 					<td>帖子标题:</td>
@@ -249,6 +250,7 @@ function deleteTopics(){
 									<th>最后修改时间</th>
 									<th>是否置顶</th>
 									<th>是否精华</th>
+									<th>审核状态</th>
 									<th>操作</th>
 								</tr>
 							</thead>
@@ -276,13 +278,19 @@ function deleteTopics(){
 												<c:otherwise>非精华</c:otherwise>
 											</c:choose>
 										</td>
+										<td style="text-align: center;vertical-align: middle;">
+											<c:choose>
+												<c:when test="${topic.status==1 }"><font style="color: red;">通过</font></c:when>
+												<c:otherwise>待审核</c:otherwise>
+											</c:choose>
+										</td>
 										<td style="text-align: center;vertical-align: middle;">    
 																												
 										<!--  2016.12.16   s设计模块，button未触发的原因：button按钮里 有这几个参数data-backdrop="static" data-toggle="modal" data-target="#dlg"时，
 										      a href超链接未能跳转，删除之后，实现了跳转 -->
 											<a class="btn btn-xs btn-default submenuitem" type="button" data-backdrop="static" data-toggle="modal" data-target="#dlg"
 													onclick='return modifyTopic("${topic.title}", "${topic.top}", "${topic.good}", "${topic.section.id}",
-															"${topic.id}")'>
+															"${topic.id}","${topic.status}")'>
 												<i class="ftsucai-edit-2"></i>
 											</a>
 											<a class="btn btn-xs btn-default submenuitem" type="button" onclick="javascript:deleteTopic(${topic.id})"><i class="ftsucai-del"></i></a>
@@ -358,7 +366,17 @@ function deleteTopics(){
 								</select>
 							</td>
 						</tr>
-
+						<tr>
+							<td>
+								<label class="control-label" for="ustatus">审核发布：</label>
+							</td>
+							<td>
+								<select id="ustatus" name="status"><option value="">请选择...</option>
+									<option value="1">是</option>
+									<option value="0">否</option>
+								</select>
+							</td>
+						</tr>
 						<!--2020.08.12 miki ckeditor弹窗-->
 						<tr>
 							<table>

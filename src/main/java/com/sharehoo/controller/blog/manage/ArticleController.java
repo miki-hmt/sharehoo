@@ -6,16 +6,22 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.sharehoo.base.exception.UserException;
+import com.sharehoo.config.RedisLock;
+import com.sharehoo.config.RedisUtil;
 import com.sharehoo.config.SessionUtil;
 import com.sharehoo.config.annotation.HasLogin;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +54,16 @@ public class ArticleController {
 	private CritiqueService critiqueService;
 	@Autowired
 	private TagService tagService;
+
+	@Resource
+	private RedisUtil redisUtil;
+	@Resource
+	private RedisLock redisLock;
+
+	private static final String ARTICLE_PREFIX = "lock:article:";
+	private static final int TIMEOUT = 5 * 1000;
+
+
 	/*
 	 * 前台用户文章保存方法  2017.04.25
 	 */
@@ -61,6 +77,7 @@ public class ArticleController {
 			return E3Result.build(401, "请登录后再发表...");
 		}
 
+		checkPublishLimit();
 		try {
 			if (articleImage!=null && articleImage.getSize()>0) {
 				//获取项目的static根路径  
@@ -108,6 +125,47 @@ public class ArticleController {
 		}
 
 		return E3Result.ok();
+	}
+
+
+	public void checkPublishLimit() {
+		Integer userId = SessionUtil.getUser().getId();
+		Object publicCount = redisUtil.get(ARTICLE_PREFIX + userId);
+		long time = System.currentTimeMillis() + TIMEOUT;
+
+		if (ObjectUtils.isEmpty(publicCount)) {
+			//上锁
+			if (!redisLock.lock(userId.toString(), String.valueOf(time))) {
+				//获取锁失败，不执行操作
+				throw new UserException(402, "发布失败，请稍后重试...");
+			}
+			redisUtil.set(ARTICLE_PREFIX + userId, "1");
+			return;
+		}
+
+		//获取发布的数量
+		int count = Integer.parseInt(String.valueOf(publicCount));
+		Long expire = redisUtil.getExpire(ARTICLE_PREFIX + userId);
+		//没过期，且发布数量超过5
+		if (expire > -1 && count > 3) {
+			throw new UserException(403, "狗东西，操你老婆，再搞我网站出门被车撞死，你儿子生了没鸡巴，你女儿代代为奴，为鸡被操；你老婆天天被野男人搞，赶紧去验dna吧，看看你孩子是不是百家姓干出来的");
+		}
+
+		//上锁
+		if (!redisLock.lock(userId.toString(), String.valueOf(time))) {
+			//获取锁失败，不执行操作
+			throw new UserException(402, "操作太频繁，发布失败，请稍后重试...");
+		}
+
+		//更新发布数量
+		redisUtil.setEx(ARTICLE_PREFIX + userId, count + 1, 1, TimeUnit.DAYS);
+		if (expire <= -1) {
+			redisUtil.setEx(ARTICLE_PREFIX + userId, 1, 1, TimeUnit.DAYS);
+		}
+
+		//释放锁
+		redisLock.release(userId.toString(), String.valueOf(time));
+		//logger.info("####### 释放锁成功....");
 	}
 	
 	/*
@@ -225,6 +283,9 @@ public class ArticleController {
 			Article article){
 		//进行登录验证，没登录会抛出异常	2020.12.07 miki
 		SessionUtil.getUser();
+
+		checkPublishLimit();
+
 		if(null!=article){
 			Article updateArticle=articleService.getArticleById(article.getId());
 			

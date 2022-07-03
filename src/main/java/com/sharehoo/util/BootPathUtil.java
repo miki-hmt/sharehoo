@@ -23,7 +23,6 @@ public class BootPathUtil {
 			return path;
 		} catch (FileNotFoundException e) {
 			logger.error(e);
-			e.printStackTrace();
 		}
 		return "";
 	}

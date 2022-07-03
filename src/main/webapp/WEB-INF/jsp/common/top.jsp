@@ -41,6 +41,20 @@ function logout() {
 	});
 }
 
+function tipOk(content,callback){
+	swal({
+		title: content,
+		text: '来自<span style="color:red">sharehoo社区</span>、<a href="#">温馨提示</a>。<br/>2秒后自动关闭..',
+		html: true,
+		type: "error",
+		timer: 2000
+	},function(){
+		if (callback) {
+			callback();
+		}
+	});
+};
+
 function tipError(content) {
 	swal("操作失败", content, "error");
 }
@@ -204,7 +218,7 @@ function check_up(thisform){
 		<div class="home_banner">
         		<div id="header-wrapper">
 				
-		            <!--黑色背景块上面加入logo块  
+		            黑色背景块上面加入logo块
 					<div id="logo">	 		
 						<h1><a href="#"><font size=5px>IT帮-资讯传播社区</font></a></h1>
 						<p> <a href="#" rel="nofollow"><font style="font-size:7pt;"></font></a></p>

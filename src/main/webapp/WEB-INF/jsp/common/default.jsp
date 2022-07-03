@@ -134,14 +134,11 @@ a:hover{text-decoration:none;}
 			 <ul>
 				<li><a href="topic/section/11" target="_blank" title="HTML">发帖求助
 				</a></li>
-				<li><a href="javascript:void(0);" onclick="writeBlog()"
-					target="_blank" title="日有一计，必有所获">去写博客 </a></li>
-				<li><a href="javascript:void(0);" onclick="writeTopic()"
-					target="_blank" title="正则表达式">去写帖子 </a></li>
-				<li><a href="javascript:void(0);" onclick="writeAnswer()"
-					target="_blank" title="更多资源">去提问题 </a></li>
+				<li><a href="javascript:void(0);" onclick="writeBlog()" title="日有一计，必有所获">去写博客 </a></li>
+				<li><a href="javascript:void(0);" onclick="writeTopic()" title="正则表达式">去写帖子 </a></li>
+				<li><a href="javascript:void(0);" onclick="writeAnswer()" title="更多资源">去提问题 </a></li>
 			</ul></li>
-	    <li><a target="_blank" title="" href=""></a></li>	         
+	    <li><a target="_blank" title="" href=""></a></li>
 	</ul>
 </div>
 
@@ -980,7 +977,9 @@ a:hover{text-decoration:none;}
 <script>
 	function writeTopic(){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-			$.alert("您还未登陆！");
+			tipOk("请登录后操作...", function (){
+				window.location.href="${host}/sharehoo/login";
+			})
 		} else {
 			window.location.href="topic/write?sectionId=11";
 		}	
@@ -990,7 +989,9 @@ a:hover{text-decoration:none;}
 <script>
 	function writeBlog(){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-			$.alert("您还未登陆！");
+			tipOk("请登录后操作...", function (){
+				window.location.href="${host}/sharehoo/login";
+			})
 		} else {
 			window.location.href="${host}/blog/manage/article/go";
 		}	
@@ -1000,7 +1001,9 @@ a:hover{text-decoration:none;}
 <script>
 	function writeAnswer(){
 		if ('${currentUser.nickName}'==null||'${currentUser.nickName}'=="") {
-			$.alert("您还未登陆！");
+			tipOk("请登录后操作...", function (){
+				window.location.href="${host}/sharehoo/login";
+			})
 		} else {
 			window.location.href="topic/section/11";
 		}	

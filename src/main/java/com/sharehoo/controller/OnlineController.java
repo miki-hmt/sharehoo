@@ -39,7 +39,6 @@ public class OnlineController {
 			c.setMaxAge(48 * 60 * 60);
 			response.addCookie(c);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 		String staticPath = BootPathUtil.getStaticPath();

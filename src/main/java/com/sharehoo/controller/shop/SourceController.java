@@ -353,7 +353,6 @@ public class SourceController {
 				long fileLength=MikiUtil.GetFileSize(filePath);
 				model.addAttribute("fileLength", fileLength);
 			} catch (Exception e) {
-				e.printStackTrace();
 				return "error";
 			}
 

@@ -7,6 +7,15 @@ import com.sharehoo.entity.forum.Topic;
 
 public interface TopicService {
 
+	/**
+	 * @desc 发布上限设置，新用户一天只能发布一条，半年以上的老用户一天可以发布5条， 一年以上的用户一天十条
+	 */
+	public void checkPublishLimit();
+	/**
+	 * @desc 注册邮件上限设置，一个ip一天只能发3次注册邮件
+	 */
+	public void checkRegisterLimit();
+
 	public void saveTopic(Topic topic);
 	
 	public void deleteTopic(Topic topic);
@@ -14,7 +23,7 @@ public interface TopicService {
 	public List<Topic> findTopicList(Topic s_topic,PageBean pageBean);
 	/**
 	 * 
-	 * @param s_topic查询全部版块的帖子数目
+	 * @param s_topic 查询全部版块的帖子数目
 	 * @return
 	 */
 	public Long getTopicCount(Topic s_topic);

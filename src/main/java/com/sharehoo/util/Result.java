@@ -47,7 +47,6 @@ public class Result {
 
     public Result(Exception e) {
         logger.error("", e);
-        e.printStackTrace();
         this.status = STATUS.ERROR.getValue();
         StackTraceElement ste = e.getStackTrace()[0];
         this.msg = "错误:[" + e.getMessage() + "]发生于[" + ste.getClassName() + "]类[" + ste.getMethodName() + "]方法[" + ste.getLineNumber() + "]行";
@@ -75,7 +74,6 @@ public class Result {
 
     public void setError(Exception e) {
         logger.error("", e);
-        e.printStackTrace();
         this.status = STATUS.ERROR.getValue();
         StackTraceElement ste = e.getStackTrace()[0];
         this.msg = "错误:[" + e.getMessage() + "]发生于[" + ste.getClassName() + "]类[" + ste.getMethodName() + "]方法[" + ste.getLineNumber() + "]行";

@@ -135,6 +135,7 @@ public class ArticleConsumer {
         topic.setTop(1);
         topic.setPublishTime(new Date());
         topic.setModifyTime(new Date());
+        topic.setStatus(1);
 
         Section section = new Section();
         section.setId(21);

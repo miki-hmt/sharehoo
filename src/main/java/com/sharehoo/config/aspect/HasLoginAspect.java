@@ -76,7 +76,7 @@ public class HasLoginAspect {
                 (end - begin) / 1000000);
         if(ObjectUtils.isEmpty(user)){
             response.sendRedirect("http://sharehoo.cn/login?prePage=http://sharehoo.cn" + requestUri);
-            return null;
+            return "login";
         }
 
         return joinPoint.proceed();

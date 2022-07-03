@@ -36,6 +36,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -92,7 +93,11 @@ public class UserController {
 
 	@Autowired
 	private UserOperateManager userOperateManager;
-	
+
+	@Value("${user.auto.active:false}")
+	private Boolean active;
+
+
 	@RequestMapping("/register")
 	public String toRegister() {
 		
@@ -110,7 +115,10 @@ public class UserController {
 	@ResponseBody
 	public E3Result register(@RequestParam(value="facelogo",required=false) MultipartFile facelogo,@RequestParam(value="faceFileName",required=false) String faceFileName,
 			User user)throws Exception{
-		
+
+		//2021.12.26 miki 每日注册邮件上限，限制
+		topicService.checkRegisterLimit();
+
 		//2020.06.12 miki 防止重复提交注册
 		boolean email = userService.existUserWithEmail(user.getEmail());
 		if(email) {
@@ -164,12 +172,12 @@ public class UserController {
 			props.put("mail.smtp.timeout", 10000);
 			props.put("mail.smtp.connectiontimeout", 10000);
 			props.put("mail.smtp.writetimeout", 10000);
-	        props.put("mail.debug", "true");
-			//登录邮件服务器，得到session   	
+	        props.put("mail.debug", "false");
+			//登录邮件服务器，得到session
 	        //设置SSL连接、邮件环境
-	        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());                      
+	        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 
-	        //建立邮件会话        
+	        //建立邮件会话
 	        final String userName=props.getProperty("username");
 	        final String password=props.getProperty("password");
 	        
@@ -256,25 +264,31 @@ public class UserController {
 	public String active(HttpServletRequest request,@RequestParam("activationCode") String activationCode)throws Exception{
 		User user = null;
 		try {
-		
-		user=userService.findUserByActivationCode(activationCode);
-		user.setId(user.getId());
+			//2022.07.03 关闭自动激活账号功能，防止一些傻逼破坏网站安全
+			if(!active){
+				throw new UserException(401, "网站已关闭自动激活功能，如需使用，请联系管理员：QQ1329289117！");
+			}
 
-		if(user == null) throw new UserException(401, "无效的激活码！");
-		if(user.isStatus()) throw new UserException(401, "您已经激活过了，不要二次激活！");
-		user.setStatus(true);
-		userService.saveUser(user);
-		request.setAttribute("code", "success");//通知msg.jsp显示对号
-		request.setAttribute("msg", "恭喜，激活成功，请马上登录！");
-	} catch (UserException e) {
-		// 说明service抛出了异常
-		request.setAttribute("msg", e.getMessage());
-		request.setAttribute("code", "error");//通知msg.jsp显示X
-	}
-		User currentUser=userService.getUserByNickName(user.getNickName()); //定义一个当前对象赋给刚注册成功的用户
-		request.getSession().setAttribute(Consts.CURRENTUSER, currentUser);
+			user = userService.findUserByActivationCode(activationCode);
+			if(user == null)
+				throw new UserException(401, "无效的激活码！");
+			if(user.isStatus())
+				throw new UserException(401, "您已经激活过了，不要二次激活！");
 
-		return "msg";		
+			user.setStatus(true);
+			userService.saveUser(user);
+			request.setAttribute("code", "success");//通知msg.jsp显示对号
+			request.setAttribute("msg", "恭喜，激活成功，请马上登录！");
+
+			//定义一个当前对象赋给刚注册成功的用户
+			request.getSession().setAttribute(Consts.CURRENTUSER, user);
+		} catch (UserException e) {
+			// 说明service抛出了异常
+			request.setAttribute("msg", e.getMessage());
+			request.setAttribute("code", "error");//通知msg.jsp显示X
+		}
+
+		return "msg";
 	}
 	
 	
@@ -455,8 +469,7 @@ public class UserController {
 		
 		if(trueName!=null){
 		User user=userService.findUserByTrueName(trueName);
-		String sa="miki";
-		sa="miki"+RadomUtil.getRandNum(1, 999999);
+		String sa ="miki"+RadomUtil.getRandNum(1, 999999);
 		
 		/*
 		 * miki
@@ -577,7 +590,7 @@ public class UserController {
 			session.setAttribute("error", error);
 		}
 		else 
-			if(currentUser.isStatus()==false){
+			if(!currentUser.isStatus()){
 			error="您尚未激活，或已被管理员拉进小黑屋！";
 			session.setAttribute("error", error);
 		}else{
